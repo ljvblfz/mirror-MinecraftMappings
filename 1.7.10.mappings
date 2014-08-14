@@ -1,0 +1,28 @@
+CLASS bsx bsx
+	METHOD a loadLevel (Ljava/lang/String;Ljava/lang/String;JLahm;Ljava/lang/String;)V (Ljava/lang/String;Ljava/lang/String;JLahm;Ljava/lang/String;)V
+	METHOD o stopServer ()V ()V
+CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
+	FIELD T authService
+	FIELD U sessionService
+	FIELD W profileRepository
+	FIELD d proxy
+	FIELD i logger
+	FIELD j server
+	FIELD r random
+	METHOD <init> <init> (Ljava/io/File;Ljava/net/Proxy;)V (Ljava/io/File;Ljava/net/Proxy;)V
+		ARG 0 file
+		ARG 1 proxy
+	METHOD B getVersion ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD I getInstance ()Lnet/minecraft/server/MinecraftServer; ()Lnet/minecraft/server/MinecraftServer;
+	METHOD a logInfo (Lfj;)V (Lfj;)V
+	METHOD a convertLevel (Ljava/lang/String;)V (Ljava/lang/String;)V
+	METHOD a saveLevel (Z)V (Z)V
+	METHOD a loadLevel (Ljava/lang/String;Ljava/lang/String;JLahm;Ljava/lang/String;)V (Ljava/lang/String;Ljava/lang/String;JLahm;Ljava/lang/String;)V
+	METHOD aA getLogger ()Lorg/apache/logging/log4j/Logger; ()Lorg/apache/logging/log4j/Logger;
+	METHOD av getSessionService ()Lcom/mojang/authlib/minecraft/MinecraftSessionService; ()Lcom/mojang/authlib/minecraft/MinecraftSessionService;
+	METHOD aw getProfileRepository ()Lcom/mojang/authlib/GameProfileRepository; ()Lcom/mojang/authlib/GameProfileRepository;
+	METHOD f logWarn (Ljava/lang/String;)V (Ljava/lang/String;)V
+	METHOD g generateTerrain ()V ()V
+	METHOD o stopServer ()V ()V
+	METHOD x startServerThread ()V ()V
+CLASS qi net/minecraft/Profiler
