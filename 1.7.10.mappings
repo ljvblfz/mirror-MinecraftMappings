@@ -1,10 +1,640 @@
+CLASS ahb Dimension
+	FIELD C profiler
+	FIELD J calendar
+	FIELD l staticRandomNum
+	FIELD s random
+	FIELD x dimensionInfo
+	METHOD <init> <init> (Lazc;Ljava/lang/String;Lahj;Laqo;Lqi;)V (Lazc;Ljava/lang/String;LDimensionSettings;Laqo;Lnet/minecraft/Profiler;)V
+		ARG 1 levelName
+		ARG 2 dimensionSettings
+		ARG 4 profiler
+	METHOD <init> <init> (Lazc;Ljava/lang/String;Laqo;Lahj;Lqi;)V (Lazc;Ljava/lang/String;Laqo;LDimensionSettings;Lnet/minecraft/Profiler;)V
+		ARG 1 levelName
+		ARG 3 dimensionSettings
+		ARG 4 profiler
+	METHOD N getDimensionInfo ()Lays; ()LDimensionInfo;
+	METHOD a a (Lahj;)V (LDimensionSettings;)V
+		ARG 0 dimensionSettings
+CLASS ahj DimensionSettings
+	FIELD a seed
+	FIELD b gameModeType
+	FIELD c hasMapFeatures
+	FIELD d isHardCore
+	FIELD e dimensionGenerationType
+	FIELD f allowCommands
+	FIELD h generatorOptions
+	METHOD <init> <init> (Lays;)V (LDimensionInfo;)V
+		ARG 0 dimensionInfo
+	METHOD <init> <init> (JLahk;ZZLahm;)V (JLGameModeType;ZZLDimensionGenerationType;)V
+		ARG 0 seed
+		ARG 1 gameModeType
+		ARG 2 hasMapFeatures
+		ARG 3 isHardCore
+		ARG 4 dimensionGenerationType
+	METHOD a getGameModeTypeById (I)Lahk; (I)LGameModeType;
+		ARG 0 gameModeTypeId
+	METHOD a a (Ljava/lang/String;)Lahj; (Ljava/lang/String;)LDimensionSettings;
+		ARG 0 generatorOptions
+	METHOD d getSeed ()J ()J
+	METHOD e getGameModeType ()Lahk; ()LGameModeType;
+	METHOD f IsHardcore ()Z ()Z
+	METHOD g HasMapFeatures ()Z ()Z
+	METHOD h getDimensionGenerationType ()Lahm; ()LDimensionGenerationType;
+	METHOD i AllowCommands ()Z ()Z
+	METHOD j getGeneratorOptions ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS ahk GameModeType
+	FIELD a notSet
+	FIELD b survival
+	FIELD c creative
+	FIELD d adventure
+	FIELD e gameModeType
+	FIELD f gameModeTypeName
+	FIELD g gameModeTypeArray
+	METHOD <init> <init> (Ljava/lang/String;IILjava/lang/String;)V (Ljava/lang/String;IILjava/lang/String;)V
+		ARG 0 gameModeTypeName
+		ARG 2 gameModeType
+	METHOD a getGameModeTypeByID (I)Lahk; (I)LGameModeType;
+		ARG 0 gameModeTypeId
+	METHOD a getGameModeType ()I ()I
+	METHOD a getGameModeTypeByName (Ljava/lang/String;)Lahk; (Ljava/lang/String;)LGameModeType;
+		ARG 0 gameModeTypeName
+	METHOD b getGameModeTypeName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD c IsAdventure ()Z ()Z
+	METHOD d IsCreative ()Z ()Z
+	METHOD e IsSurvivalOrAdventure ()Z ()Z
+	METHOD valueOf valueOf (Ljava/lang/String;)Lahk; (Ljava/lang/String;)LGameModeType;
+		ARG 0 gameModeTypeName
+	METHOD values getGameModeTypes ()[Lahk; ()[LGameModeType;
+CLASS ahm DimensionGenerationType
+	FIELD a dimensionGenerationTypeArray
+	FIELD b defaultDemensionGenerationType
+	FIELD c flatDementionGenerationType
+	FIELD d largeBiomesDementionGenerationType
+	FIELD e amplifiedDimensionGenerationType
+	FIELD f default_1_1DimensionGenerationType
+	FIELD g id
+	FIELD h generatorName
+	FIELD i generatorVersion
+	METHOD <init> <init> (ILjava/lang/String;)V (ILjava/lang/String;)V
+		ARG 0 id
+		ARG 1 generatorName
+	METHOD <init> <init> (ILjava/lang/String;I)V (ILjava/lang/String;I)V
+		ARG 0 id
+		ARG 1 generatorName
+		ARG 2 generatorVersion
+	METHOD a getDefaultBasedOnGeneratorVersion (I)Lahm; (I)LDimensionGenerationType;
+		ARG 0 generatorVersion
+	METHOD a getGeneratorName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD a getDimensionGenerationType (Ljava/lang/String;)Lahm; (Ljava/lang/String;)LDimensionGenerationType;
+		ARG 0 generatorName
+	METHOD d getGeneratorVersion ()I ()I
+	METHOD g getId ()I ()I
+CLASS ayp ayp
+	METHOD a setSpawnX (I)V (I)V
+	METHOD a setLevelName (Ljava/lang/String;)V (Ljava/lang/String;)V
+	METHOD a setIsThundering (Z)V (Z)V
+	METHOD a setDimensionGenerationType (Lahm;)V (LDimensionGenerationType;)V
+	METHOD a setSpawnPoint (III)V (III)V
+	METHOD a a (Ldh;)Ldh; (LNbtMap;)LNbtMap;
+		ARG 0 nbtMap
+	METHOD b setSpawnY (I)V (I)V
+	METHOD b getSeed ()J ()J
+	METHOD b setTime (J)V (J)V
+	METHOD b setIsRaining (Z)V (Z)V
+	METHOD c setDayTime (J)V (J)V
+	METHOD c getSpawnX ()I ()I
+	METHOD c setSpawnZ (I)V (I)V
+	METHOD d getSpawnY ()I ()I
+	METHOD d setIsInitialized (Z)V (Z)V
+	METHOD e getSpawnZ ()I ()I
+	METHOD e setVersion (I)V (I)V
+	METHOD f getTime ()J ()J
+	METHOD f setThunderTime (I)V (I)V
+	METHOD g setRainTime (I)V (I)V
+	METHOD g getDayTime ()J ()J
+	METHOD h getSizeOnDisk ()J ()J
+	METHOD i getPlayerMap ()Ldh; ()LNbtMap;
+	METHOD j getDimensionId ()I ()I
+	METHOD k getLevelName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD l getVersion ()I ()I
+	METHOD m getLastPlayed ()J ()J
+	METHOD n IsThundering ()Z ()Z
+	METHOD o getThunderTime ()I ()I
+	METHOD p IsRaining ()Z ()Z
+	METHOD q getRainTime ()I ()I
+	METHOD r getGameModeType ()Lahk; ()LGameModeType;
+	METHOD s HasMapFeatures ()Z ()Z
+	METHOD t IsHardcore ()Z ()Z
+	METHOD u getDimensionGenerationType ()Lahm; ()LDimensionGenerationType;
+	METHOD v AllowCommands ()Z ()Z
+	METHOD w IsInitialized ()Z ()Z
+CLASS ays DimensionInfo
+	FIELD a seed
+	FIELD b dimensionGenerationType
+	FIELD c generatorOptions
+	FIELD d spawnX
+	FIELD e spawnY
+	FIELD f spawnZ
+	FIELD g time
+	FIELD h dayTime
+	FIELD i lastPlayed
+	FIELD j sizeOnDisk
+	FIELD k playerMap
+	FIELD l dimensionId
+	FIELD m levelName
+	FIELD n version
+	FIELD o isRaining
+	FIELD p rainTime
+	FIELD q isThundering
+	FIELD r thunderTime
+	FIELD s gameModeType
+	FIELD t hasMapFeatures
+	FIELD u isHardcore
+	FIELD v allowCommands
+	FIELD w isInitialized
+	METHOD <init> <init> (Lahj;Ljava/lang/String;)V (LDimensionSettings;Ljava/lang/String;)V
+		ARG 0 dimensionSettings
+		ARG 1 levelName
+	METHOD <init> <init> (Ldh;)V (LNbtMap;)V
+		ARG 0 nbtMap
+	METHOD <init> <init> (Lays;)V (LDimensionInfo;)V
+		ARG 0 dimensionInfo
+	METHOD a setSpawnX (I)V (I)V
+		ARG 0 spawnX
+	METHOD a setLevelName (Ljava/lang/String;)V (Ljava/lang/String;)V
+		ARG 0 levelName
+	METHOD a setDimensionGenerationType (Lahm;)V (LDimensionGenerationType;)V
+		ARG 0 dimensionGenerationType
+	METHOD a a (Ldh;Ldh;)V (LNbtMap;LNbtMap;)V
+		ARG 0 nbtMap
+		ARG 1 nbt
+	METHOD a setSpawnPoint (III)V (III)V
+		ARG 0 spawnX
+		ARG 1 spawnY
+		ARG 2 spawnZ
+	METHOD a setIsThundering (Z)V (Z)V
+		ARG 0 isThundering
+	METHOD a setGameModeType (Lahk;)V (LGameModeType;)V
+		ARG 0 gameModeType
+	METHOD a getDimensionGenerationType (Lays;)Lahm; (LDimensionInfo;)LDimensionGenerationType;
+		ARG 0 dimensionInfo
+	METHOD a a (Ldh;)Ldh; (LNbtMap;)LNbtMap;
+		ARG 0 nbtMap
+	METHOD b getSeed ()J ()J
+	METHOD b setIsRaining (Z)V (Z)V
+		ARG 0 isRaining
+	METHOD b setSpawnY (I)V (I)V
+		ARG 0 spawnY
+	METHOD b setTime (J)V (J)V
+		ARG 0 time
+	METHOD b HasMapFeatures (Lays;)Z (LDimensionInfo;)Z
+		ARG 0 dimensionInfo
+	METHOD c setDayTime (J)V (J)V
+		ARG 0 dayTime
+	METHOD c getSpawnX ()I ()I
+	METHOD c getGeneratorOptions (Lays;)Ljava/lang/String; (LDimensionInfo;)Ljava/lang/String;
+		ARG 0 dimensionInfo
+	METHOD c setSpawnZ (I)V (I)V
+		ARG 0 spawnZ
+	METHOD d getSpawnX (Lays;)I (LDimensionInfo;)I
+		ARG 0 dimensionInfo
+	METHOD d getSpawnY ()I ()I
+	METHOD d setIsInitialized (Z)V (Z)V
+		ARG 0 isInitialized
+	METHOD e setVersion (I)V (I)V
+		ARG 0 version
+	METHOD e getSpawnZ ()I ()I
+	METHOD e getSpawnY (Lays;)I (LDimensionInfo;)I
+		ARG 0 dimensionInfo
+	METHOD f getSpawnZ (Lays;)I (LDimensionInfo;)I
+		ARG 0 dimensionInfo
+	METHOD f setThunderTime (I)V (I)V
+		ARG 0 thunderTIme
+	METHOD f getTime ()J ()J
+	METHOD g setRainTime (I)V (I)V
+		ARG 0 rainTime
+	METHOD g Time (Lays;)J (LDimensionInfo;)J
+		ARG 0 dimensionInfo
+	METHOD g getDayTime ()J ()J
+	METHOD h DayTime (Lays;)J (LDimensionInfo;)J
+		ARG 0 dimensionInfo
+	METHOD h getSizeOnDisk ()J ()J
+	METHOD i getPlayerMap ()Ldh; ()LNbtMap;
+	METHOD i DimensionId (Lays;)I (LDimensionInfo;)I
+		ARG 0 dimensionInfo
+	METHOD j DimensionVersion (Lays;)I (LDimensionInfo;)I
+		ARG 0 dimensionInfo
+	METHOD j getDimensionId ()I ()I
+	METHOD k RainTime (Lays;)I (LDimensionInfo;)I
+		ARG 0 dimensionInfo
+	METHOD k getLevelName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD l getVersion ()I ()I
+	METHOD l IsRaining (Lays;)Z (LDimensionInfo;)Z
+		ARG 0 dimensionInfo
+	METHOD m ThunderTime (Lays;)I (LDimensionInfo;)I
+		ARG 0 dimensionInfo
+	METHOD m getLastPlayed ()J ()J
+	METHOD n IsThundering (Lays;)Z (LDimensionInfo;)Z
+		ARG 0 dimensionInfo
+	METHOD n IsThundering ()Z ()Z
+	METHOD o getThunderTime ()I ()I
+	METHOD o getGameModeType (Lays;)Lahk; (LDimensionInfo;)LGameModeType;
+		ARG 0 dimensionInfo
+	METHOD p IsHardCore (Lays;)Z (LDimensionInfo;)Z
+		ARG 0 dimensionInfo
+	METHOD p IsRaining ()Z ()Z
+	METHOD q AllowCommands (Lays;)Z (LDimensionInfo;)Z
+		ARG 0 dimensionInfo
+	METHOD q getRainTime ()I ()I
+	METHOD r getGameModeType ()Lahk; ()LGameModeType;
+	METHOD s HasMapFeatures ()Z ()Z
+	METHOD t IsHardcore ()Z ()Z
+	METHOD u getDimensionGenerationType ()Lahm; ()LDimensionGenerationType;
+	METHOD v AllowCommands ()Z ()Z
+	METHOD w IsInitialized ()Z ()Z
+	METHOD y getGeneratorOptions ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS ayt CallableSeedInfo
+	FIELD a dimensionInfo
+	METHOD <init> <init> (Lays;)V (LDimensionInfo;)V
+		ARG 0 dimensionInfo
+	METHOD a getSeedValue ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS ayu CallableGeneratorInfo
+	FIELD a dimensionInfo
+	METHOD <init> <init> (Lays;)V (LDimensionInfo;)V
+		ARG 0 dimensionInfo
+	METHOD a getGeneratorInfo ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS ayv CallableGeneratorOptionsInfo
+	FIELD a dimensionInfo
+	METHOD <init> <init> (Lays;)V (LDimensionInfo;)V
+		ARG 0 dimensionInfo
+	METHOD a getGeneratorOptionsInfo ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS ayw CallableSpawnPointInfo
+	FIELD a dimensionInfo
+	METHOD <init> <init> (Lays;)V (LDimensionInfo;)V
+		ARG 0 dimensionInfo
+	METHOD a getSpawnPointInfo ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS ayx CallableTimeInfo
+	FIELD a dimensionInfo
+	METHOD <init> <init> (Lays;)V (LDimensionInfo;)V
+		ARG 0 dimensionInfo
+	METHOD a getTimeInfo ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS ayy CallableDimensionIdInfo
+	FIELD a dimensionInfo
+	METHOD <init> <init> (Lays;)V (LDimensionInfo;)V
+		ARG 0 dimensionInfo
+	METHOD a getDimensionIdInfo ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS ayz CallableStorageVersion
+	FIELD a dimensionInfo
+	METHOD <init> <init> (Lays;)V (LDimensionInfo;)V
+		ARG 0 dimensionInfo
+	METHOD a getStorageVersionInfo ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS aza CallableWeatherInfo
+	FIELD a dimensionInfo
+	METHOD <init> <init> (Lays;)V (LDimensionInfo;)V
+		ARG 0 dimensionInfo
+	METHOD a getWeatherInfo ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS azb CallableGameModeInfo
+	FIELD a dimensionInfo
+	METHOD <init> <init> (Lays;)V (Lays;)V
+		ARG 0 dimensionInfo
+	METHOD a getGameModeInfo ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS azc azc
+	METHOD a a (Lays;)V (Lays;)V
+		ARG 0 dimensionInfo
+	METHOD a a (Lays;Ldh;)V (Lays;Ldh;)V
+		ARG 0 dimensionInfo
+		ARG 1 nbtMap
+	METHOD d getDimensionInfo ()Lays; ()LDimensionInfo;
 CLASS bsx bsx
-	METHOD a loadLevel (Ljava/lang/String;Ljava/lang/String;JLahm;Ljava/lang/String;)V (Ljava/lang/String;Ljava/lang/String;JLahm;Ljava/lang/String;)V
+	FIELD j bao
+	METHOD X isDedicated ()Z ()Z
+	METHOD a loadLevel (Ljava/lang/String;Ljava/lang/String;JLahm;Ljava/lang/String;)V (Ljava/lang/String;Ljava/lang/String;JLDimensionGenerationType;Ljava/lang/String;)V
+	METHOD i getGameModeType ()Lahk; ()LGameModeType;
 	METHOD o stopServer ()V ()V
+CLASS df NbtByteArray
+	FIELD b byteArrayData
+	METHOD <init> <init> ([B)V ([B)V
+		ARG 0 byteArrayData
+	METHOD a input (Ljava/io/DataInput;ILds;)V (Ljava/io/DataInput;ILds;)V
+		ARG 0 dataInput
+		ARG 1 depth
+	METHOD a getNbtId ()B ()B
+	METHOD a output (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD b getCopy ()Ldy; ()LNbt;
+	METHOD c getByteArrayData ()[B ()[B
+	METHOD toString toString ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS dg NbtByte
+	FIELD b byteData
+	METHOD <init> <init> (B)V (B)V
+		ARG 0 byteData
+	METHOD a input (Ljava/io/DataInput;ILds;)V (Ljava/io/DataInput;ILds;)V
+		ARG 0 dataInput
+		ARG 1 depth
+	METHOD a getNbtId ()B ()B
+	METHOD a output (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD b getCopy ()Ldy; ()LNbt;
+	METHOD c getAsLong ()J ()J
+	METHOD d getAsInt ()I ()I
+	METHOD e getAsShort ()S ()S
+	METHOD f getAsByte ()B ()B
+	METHOD g getAsDouble ()D ()D
+	METHOD h getAsFloat ()F ()F
+	METHOD toString toString ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS dh NbtMap
+	FIELD b logger
+	FIELD c map
+	METHOD a put (Ljava/lang/String;Z)V (Ljava/lang/String;Z)V
+		ARG 0 tagName
+		ARG 1 byteData
+	METHOD a outputItem (Ljava/lang/String;Ldy;Ljava/io/DataOutput;)V (Ljava/lang/String;LNbt;Ljava/io/DataOutput;)V
+		ARG 0 tagName
+		ARG 1 nbt
+		ARG 2 dataOutput
+	METHOD a getNbtId ()B ()B
+	METHOD a a (Ldh;)Ljava/util/Map; (LNbtMap;)Ljava/util/Map;
+		ARG 0 nbtMap
+	METHOD a createNbt (BLjava/lang/String;Ljava/io/DataInput;ILds;)Ldy; (BLjava/lang/String;Ljava/io/DataInput;ILds;)LNbt;
+		ARG 0 nbtId
+		ARG 1 tagName
+		ARG 2 dataInput
+		ARG 3 depth
+	METHOD a put (Ljava/lang/String;I)V (Ljava/lang/String;I)V
+		ARG 0 tagName
+		ARG 1 intData
+	METHOD a put (Ljava/lang/String;J)V (Ljava/lang/String;J)V
+		ARG 0 tagName
+		ARG 1 longData
+	METHOD a put (Ljava/lang/String;B)V (Ljava/lang/String;B)V
+		ARG 0 tagName
+		ARG 1 byteData
+	METHOD a put (Ljava/lang/String;[B)V (Ljava/lang/String;[B)V
+		ARG 0 tagName
+		ARG 1 byteArrayData
+	METHOD a put (Ljava/lang/String;Ldy;)V (Ljava/lang/String;LNbt;)V
+		ARG 0 tagName
+		ARG 1 nbt
+	METHOD a getNbt (Ljava/lang/String;)Ldy; (Ljava/lang/String;)LNbt;
+		ARG 0 tagName
+	METHOD a put (Ljava/lang/String;F)V (Ljava/lang/String;F)V
+		ARG 0 tagName
+		ARG 1 floatData
+	METHOD a put (Ljava/lang/String;S)V (Ljava/lang/String;S)V
+		ARG 0 tagName
+		ARG 1 shortData
+	METHOD a put (Ljava/lang/String;Ljava/lang/String;)V (Ljava/lang/String;Ljava/lang/String;)V
+		ARG 0 tagName
+		ARG 1 stringData
+	METHOD a put (Ljava/lang/String;D)V (Ljava/lang/String;D)V
+		ARG 0 tagName
+		ARG 1 doubleData
+	METHOD a input (Ljava/io/DataInput;ILds;)V (Ljava/io/DataInput;ILds;)V
+		ARG 0 dataInput
+		ARG 1 depth
+	METHOD a output (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD a put (Ljava/lang/String;[I)V (Ljava/lang/String;[I)V
+		ARG 0 tagName
+		ARG 1 intArrayData
+	METHOD a inputReadByte (Ljava/io/DataInput;Lds;)B (Ljava/io/DataInput;Lds;)B
+		ARG 0 dataInput
+	METHOD b inputReadString (Ljava/io/DataInput;Lds;)Ljava/lang/String; (Ljava/io/DataInput;Lds;)Ljava/lang/String;
+		ARG 0 dataInput
+	METHOD b itemExistsAsNbtId (Ljava/lang/String;I)Z (Ljava/lang/String;I)Z
+		ARG 0 tagName
+		ARG 1 nbtId
+	METHOD b getCopy ()Ldy; ()LNbt;
+	METHOD b getNbtIdOfItem (Ljava/lang/String;)B (Ljava/lang/String;)B
+		ARG 0 tagName
+	METHOD c getKeySet ()Ljava/util/Set; ()Ljava/util/Set;
+	METHOD c getItemAsListOfNbtType (Ljava/lang/String;I)Ldq; (Ljava/lang/String;I)LNbtList;
+		ARG 0 tagName
+		ARG 1 nbtTypeId
+	METHOD c containsKey (Ljava/lang/String;)Z (Ljava/lang/String;)Z
+		ARG 0 tagName
+	METHOD d getItemAsByte (Ljava/lang/String;)B (Ljava/lang/String;)B
+		ARG 0 tagName
+	METHOD d IsEmpty ()Z ()Z
+	METHOD e getItemAsShort (Ljava/lang/String;)S (Ljava/lang/String;)S
+		ARG 0 tagName
+	METHOD f getItemAsInt (Ljava/lang/String;)I (Ljava/lang/String;)I
+		ARG 0 tagName
+	METHOD g getItemAsLong (Ljava/lang/String;)J (Ljava/lang/String;)J
+		ARG 0 tagName
+	METHOD h getItemAsFloat (Ljava/lang/String;)F (Ljava/lang/String;)F
+		ARG 0 tagName
+	METHOD i getItemAsDouble (Ljava/lang/String;)D (Ljava/lang/String;)D
+		ARG 0 tagName
+	METHOD j getItemAsString (Ljava/lang/String;)Ljava/lang/String; (Ljava/lang/String;)Ljava/lang/String;
+		ARG 0 tagName
+	METHOD k getItemAsByteArray (Ljava/lang/String;)[B (Ljava/lang/String;)[B
+		ARG 0 tagName
+	METHOD l getItemAsIntArray (Ljava/lang/String;)[I (Ljava/lang/String;)[I
+		ARG 0 tagName
+	METHOD m getItemAsNbtMap (Ljava/lang/String;)Ldh; (Ljava/lang/String;)LNbtMap;
+		ARG 0 tagName
+	METHOD n getItemAsBoolean (Ljava/lang/String;)Z (Ljava/lang/String;)Z
+		ARG 0 tagName
+	METHOD o remove (Ljava/lang/String;)V (Ljava/lang/String;)V
+		ARG 0 tagName
+	METHOD toString toString ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS dk NbtDouble
+	FIELD b doubleData
+	METHOD <init> <init> (D)V (D)V
+		ARG 0 doubleData
+	METHOD a input (Ljava/io/DataInput;ILds;)V (Ljava/io/DataInput;ILds;)V
+		ARG 0 dataInput
+		ARG 1 depth
+	METHOD a getNbtId ()B ()B
+	METHOD a output (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD b getCopy ()Ldy; ()LNbt;
+	METHOD c getAsLong ()J ()J
+	METHOD d getAsInt ()I ()I
+	METHOD e getAsShort ()S ()S
+	METHOD f getAsByte ()B ()B
+	METHOD g getAsDouble ()D ()D
+	METHOD h getAsFloat ()F ()F
+	METHOD toString toString ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS dl NbtEnd
+	METHOD a input (Ljava/io/DataInput;ILds;)V (Ljava/io/DataInput;ILds;)V
+		ARG 0 dataInput
+		ARG 1 depth
+	METHOD a getNbtId ()B ()B
+	METHOD a output (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD b getCopy ()Ldy; ()LNbt;
+	METHOD toString toString ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS dm NbtFloat
+	FIELD b floatData
+	METHOD <init> <init> (F)V (F)V
+		ARG 0 floatData
+	METHOD a input (Ljava/io/DataInput;ILds;)V (Ljava/io/DataInput;ILds;)V
+		ARG 0 dataInput
+		ARG 1 depth
+	METHOD a getNbtId ()B ()B
+	METHOD a output (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD b getCopy ()Ldy; ()LNbt;
+	METHOD c getAsLong ()J ()J
+	METHOD d getAsInt ()I ()I
+	METHOD e getAsShort ()S ()S
+	METHOD f getAsByte ()B ()B
+	METHOD g getAsDouble ()D ()D
+	METHOD h getAsFloat ()F ()F
+	METHOD toString toString ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS dn NbtIntArray
+	FIELD b intArrayData
+	METHOD <init> <init> ([I)V ([I)V
+		ARG 0 intArrayData
+	METHOD a input (Ljava/io/DataInput;ILds;)V (Ljava/io/DataInput;ILds;)V
+		ARG 0 dataInput
+		ARG 1 depth
+	METHOD a getNbtId ()B ()B
+	METHOD a output (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD b getCopy ()Ldy; ()LNbt;
+	METHOD c getIntArrayData ()[I ()[I
+	METHOD toString toString ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS dp NbtInt
+	FIELD b intData
+	METHOD <init> <init> (I)V (I)V
+		ARG 0 intData
+	METHOD a input (Ljava/io/DataInput;ILds;)V (Ljava/io/DataInput;ILds;)V
+		ARG 0 dataInput
+		ARG 1 depth
+	METHOD a getNbtId ()B ()B
+	METHOD a output (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD b getCopy ()Ldy; ()LNbt;
+	METHOD c getAsLong ()J ()J
+	METHOD d getAsInt ()I ()I
+	METHOD e getAsShort ()S ()S
+	METHOD f getAsByte ()B ()B
+	METHOD g getAsDouble ()D ()D
+	METHOD h getAsFloat ()F ()F
+	METHOD toString toString ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS dq NbtList
+	FIELD b listData
+	FIELD c listOfNbtTypeId
+	METHOD a add (Ldy;)V (LNbt;)V
+		ARG 0 nbt
+	METHOD a getNbtId ()B ()B
+	METHOD a input (Ljava/io/DataInput;ILds;)V (Ljava/io/DataInput;ILds;)V
+		ARG 0 dataInput
+		ARG 1 depth
+	METHOD a get (I)Ldy; (I)LNbt;
+		ARG 0 index
+	METHOD a set (ILdy;)V (ILNbt;)V
+		ARG 0 index
+		ARG 1 nbt
+	METHOD a output (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD b getAsNbtMap (I)Ldh; (I)LNbtMap;
+		ARG 0 index
+	METHOD b getCopy ()Ldy; ()LNbt;
+	METHOD c getListSize ()I ()I
+	METHOD c getAsIntArray (I)[I (I)[I
+		ARG 0 index
+	METHOD d getListOfNbtTypeId ()I ()I
+	METHOD d getAsDouble (I)D (I)D
+		ARG 0 index
+	METHOD e getAsFloat (I)F (I)F
+		ARG 0 index
+	METHOD f getAsString (I)Ljava/lang/String; (I)Ljava/lang/String;
+		ARG 0 index
+	METHOD toString toString ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS dr NbtLong
+	FIELD b longData
+	METHOD <init> <init> (J)V (J)V
+		ARG 0 longData
+	METHOD a input (Ljava/io/DataInput;ILds;)V (Ljava/io/DataInput;ILds;)V
+		ARG 0 dataInput
+		ARG 1 depth
+	METHOD a getNbtId ()B ()B
+	METHOD a output (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD b getCopy ()Ldy; ()LNbt;
+	METHOD c getAsLong ()J ()J
+	METHOD d getAsInt ()I ()I
+	METHOD e getAsShort ()S ()S
+	METHOD f getAsByte ()B ()B
+	METHOD g getAsDouble ()D ()D
+	METHOD h getAsFloat ()F ()F
+	METHOD toString toString ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS dw NbtShort
+	FIELD b shortData
+	METHOD <init> <init> (S)V (S)V
+		ARG 0 shortData
+	METHOD a input (Ljava/io/DataInput;ILds;)V (Ljava/io/DataInput;ILds;)V
+		ARG 0 dataInput
+		ARG 1 depth
+	METHOD a getNbtId ()B ()B
+	METHOD a output (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD b getCopy ()Ldy; ()LNbt;
+	METHOD c getAsLong ()J ()J
+	METHOD d getAsInt ()I ()I
+	METHOD e getAsShort ()S ()S
+	METHOD f getAsByte ()B ()B
+	METHOD g getAsDouble ()D ()D
+	METHOD h getAsFloat ()F ()F
+	METHOD toString toString ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS dx NbtString
+	FIELD b stringData
+	METHOD <init> <init> (Ljava/lang/String;)V (Ljava/lang/String;)V
+		ARG 0 stringData
+	METHOD a input (Ljava/io/DataInput;ILds;)V (Ljava/io/DataInput;ILds;)V
+		ARG 0 dataInput
+		ARG 1 depth
+	METHOD a getNbtId ()B ()B
+	METHOD a output (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD a_ getStringData ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD b getCopy ()Ldy; ()LNbt;
+	METHOD toString toString ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS dy Nbt
+	FIELD a NbtDataTypes
+	METHOD a input (Ljava/io/DataInput;ILds;)V (Ljava/io/DataInput;ILds;)V
+		ARG 0 dataInput
+		ARG 1 depth
+	METHOD a getNbtId ()B ()B
+	METHOD a output (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD a getNbtById (B)Ldy; (B)LNbt;
+		ARG 0 nbtId
+	METHOD a_ getStringData ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD b getCopy ()Ldy; ()LNbt;
+	METHOD equals equals (Ljava/lang/Object;)Z (Ljava/lang/Object;)Z
+		ARG 0 obj
+	METHOD toString toString ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS dz NbtNumeric
+	METHOD c getAsLong ()J ()J
+	METHOD d getAsInt ()I ()I
+	METHOD e getAsShort ()S ()S
+	METHOD f getAsByte ()B ()B
+	METHOD g getAsDouble ()D ()D
+	METHOD h getAsFloat ()F ()F
+CLASS mt DimensionServer
+	FIELD J minecraftServer
+	FIELD a logger
+	METHOD <init> <init> (Lnet/minecraft/server/MinecraftServer;Lazc;Ljava/lang/String;ILahj;Lqi;)V (Lnet/minecraft/server/MinecraftServer;Lazc;Ljava/lang/String;ILDimensionSettings;Lnet/minecraft/Profiler;)V
+		ARG 0 minecraftServer
+		ARG 2 levelName
+		ARG 4 dimensionSettings
+		ARG 5 profiler
+	METHOD Y TurnWeatherOff ()V ()V
+	METHOD b b (Lahj;)V (Lahj;)V
+		ARG 0 dimensionSettings
+	METHOD q getMinecraftServer ()Lnet/minecraft/server/MinecraftServer; ()Lnet/minecraft/server/MinecraftServer;
 CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
+	FIELD Q screenInfoMessage
 	FIELD T authService
 	FIELD U sessionService
 	FIELD W profileRepository
+	FIELD b profiler
+	FIELD c dimensionServerArray
 	FIELD d proxy
 	FIELD i logger
 	FIELD j server
@@ -14,15 +644,64 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 		ARG 1 proxy
 	METHOD B getVersion ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD I getInstance ()Lnet/minecraft/server/MinecraftServer; ()Lnet/minecraft/server/MinecraftServer;
+	METHOD N isSinglePlayer ()Z ()Z
+	METHOD X isDedicated ()Z ()Z
 	METHOD a logInfo (Lfj;)V (Lfj;)V
 	METHOD a convertLevel (Ljava/lang/String;)V (Ljava/lang/String;)V
 	METHOD a saveLevel (Z)V (Z)V
-	METHOD a loadLevel (Ljava/lang/String;Ljava/lang/String;JLahm;Ljava/lang/String;)V (Ljava/lang/String;Ljava/lang/String;JLahm;Ljava/lang/String;)V
+	METHOD a loadLevel (Ljava/lang/String;Ljava/lang/String;JLahm;Ljava/lang/String;)V (Ljava/lang/String;Ljava/lang/String;JLDimensionGenerationType;Ljava/lang/String;)V
 	METHOD aA getLogger ()Lorg/apache/logging/log4j/Logger; ()Lorg/apache/logging/log4j/Logger;
+	METHOD aq getProxy ()Ljava/net/Proxy; ()Ljava/net/Proxy;
+	METHOD ar getCurrentTImeMillis ()J ()J
 	METHOD av getSessionService ()Lcom/mojang/authlib/minecraft/MinecraftSessionService; ()Lcom/mojang/authlib/minecraft/MinecraftSessionService;
 	METHOD aw getProfileRepository ()Lcom/mojang/authlib/GameProfileRepository; ()Lcom/mojang/authlib/GameProfileRepository;
+	METHOD b setScreenInfoMessage (Ljava/lang/String;)V (Ljava/lang/String;)V
 	METHOD f logWarn (Ljava/lang/String;)V (Ljava/lang/String;)V
+	METHOD f getScreenInfoMessage ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD g generateTerrain ()V ()V
+	METHOD i getGameModeType ()Lahk; ()LGameModeType;
+	METHOD loadLevel loadLevel (Ljava/lang/String;Ljava/lang/String;JLahm;Ljava/lang/String;)V (Ljava/lang/String;Ljava/lang/String;JLDimensionGenerationType;Ljava/lang/String;)V
+		ARG 3 worldGenerationType
 	METHOD o stopServer ()V ()V
 	METHOD x startServerThread ()V ()V
 CLASS qi net/minecraft/Profiler
+	FIELD b logger
+CLASS r Point3D
+	FIELD a x
+	FIELD b y
+	FIELD c z
+	METHOD <init> <init> (Lr;)V (LPoint3D;)V
+		ARG 0 point3D
+	METHOD <init> <init> (III)V (III)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD a compareTo (Lr;)I (LPoint3D;)I
+		ARG 0 point3D
+	METHOD b setPoint (III)V (III)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD compareTo compareTo (Ljava/lang/Object;)I (Ljava/lang/Object;)I
+		ARG 0 obj
+	METHOD e getPointDifferenceSquaredSum (III)F (III)F
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD e getPointDifferenceSquaredSum (Lr;)F (LPoint3D;)F
+		ARG 0 point3D
+	METHOD equals equals (Ljava/lang/Object;)Z (Ljava/lang/Object;)Z
+		ARG 0 obj
+	METHOD toString toString ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS wc wc
+	FIELD a dimension
+	METHOD <init> <init> (Lahb;)V (Lahb;)V
+		ARG 0 dimension
+	METHOD a a (Lr;)V (Lr;)V
+		ARG 0 point3D
+	METHOD a a (Ldh;)V (Ldh;)V
+		ARG 0 nbtMap
+	METHOD a a (Lahb;)V (Lahb;)V
+		ARG 0 dimension
+	METHOD b b (Ldh;)V (Ldh;)V
+		ARG 0 nbtMap
