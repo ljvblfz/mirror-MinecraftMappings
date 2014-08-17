@@ -1,3 +1,32 @@
+CLASS agy WorldOptions
+	FIELD a treeMap
+	METHOD a getWorldOptionsAsNbtMap ()Ldh; ()LNbtMap;
+	METHOD a copyOptionsFrom (Ldh;)V (LNbtMap;)V
+		ARG 0 nbtMap
+	METHOD a getOptionStringValue (Ljava/lang/String;)Ljava/lang/String; (Ljava/lang/String;)Ljava/lang/String;
+		ARG 0 optionName
+	METHOD a addOption (Ljava/lang/String;Ljava/lang/String;)V (Ljava/lang/String;Ljava/lang/String;)V
+		ARG 0 optionName
+		ARG 1 optionValue
+	METHOD b getKeys ()[Ljava/lang/String; ()[Ljava/lang/String;
+	METHOD b setOption (Ljava/lang/String;Ljava/lang/String;)V (Ljava/lang/String;Ljava/lang/String;)V
+		ARG 0 optionName
+		ARG 1 optionValue
+	METHOD b getOptionBooleanValue (Ljava/lang/String;)Z (Ljava/lang/String;)Z
+		ARG 0 optionName
+	METHOD e containsKey (Ljava/lang/String;)Z (Ljava/lang/String;)Z
+		ARG 0 optionName
+CLASS agz WorldOption
+	FIELD a stringValue
+	FIELD b booleanValue
+	FIELD c intValue
+	FIELD d doubleValue
+	METHOD <init> <init> (Ljava/lang/String;)V (Ljava/lang/String;)V
+		ARG 0 stringValue
+	METHOD a getStringValue ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD a setValue (Ljava/lang/String;)V (Ljava/lang/String;)V
+		ARG 0 stringValue
+	METHOD b getBooleanValue ()Z ()Z
 CLASS ahb Dimension
 	FIELD C profiler
 	FIELD J calendar
@@ -13,8 +42,22 @@ CLASS ahb Dimension
 		ARG 3 dimensionSettings
 		ARG 4 profiler
 	METHOD N getDimensionInfo ()Lays; ()LDimensionInfo;
+	METHOD a getBiomeGenerationAtPosition (II)Lahu; (II)LBiomeGenerator;
+		ARG 0 x
+		ARG 1 z
 	METHOD a a (Lahj;)V (LDimensionSettings;)V
 		ARG 0 dimensionSettings
+	METHOD a getBlockType (III)Laji; (III)LBlock;
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD d getChunkAtPosition (II)Lapx; (II)LChunk;
+		ARG 0 x
+		ARG 1 z
+	METHOD d doesBlockExist (III)Z (III)Z
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
 CLASS ahj DimensionSettings
 	FIELD a seed
 	FIELD b gameModeType
@@ -22,6 +65,7 @@ CLASS ahj DimensionSettings
 	FIELD d isHardCore
 	FIELD e dimensionGenerationType
 	FIELD f allowCommands
+	FIELD g startWithBonusChest
 	FIELD h generatorOptions
 	METHOD <init> <init> (Lays;)V (LDimensionInfo;)V
 		ARG 0 dimensionInfo
@@ -31,10 +75,13 @@ CLASS ahj DimensionSettings
 		ARG 2 hasMapFeatures
 		ARG 3 isHardCore
 		ARG 4 dimensionGenerationType
+	METHOD a setGeneratorOptions (Ljava/lang/String;)Lahj; (Ljava/lang/String;)LDimensionSettings;
+		ARG 0 generatorOptions
 	METHOD a getGameModeTypeById (I)Lahk; (I)LGameModeType;
 		ARG 0 gameModeTypeId
-	METHOD a a (Ljava/lang/String;)Lahj; (Ljava/lang/String;)LDimensionSettings;
-		ARG 0 generatorOptions
+	METHOD a enableStartWithBonusChest ()Lahj; ()LDimensionSettings;
+	METHOD b enableAllowCommands ()Lahj; ()LDimensionSettings;
+	METHOD c IsStartWithBonusChestEnabled ()Z ()Z
 	METHOD d getSeed ()J ()J
 	METHOD e getGameModeType ()Lahk; ()LGameModeType;
 	METHOD f IsHardcore ()Z ()Z
@@ -75,6 +122,8 @@ CLASS ahm DimensionGenerationType
 	FIELD g id
 	FIELD h generatorName
 	FIELD i generatorVersion
+	FIELD j isCreatable
+	FIELD k hasMultipulVersions
 	METHOD <init> <init> (ILjava/lang/String;)V (ILjava/lang/String;)V
 		ARG 0 id
 		ARG 1 generatorName
@@ -82,20 +131,332 @@ CLASS ahm DimensionGenerationType
 		ARG 0 id
 		ARG 1 generatorName
 		ARG 2 generatorVersion
+	METHOD a setIsCreatable (Z)Lahm; (Z)LDimensionGenerationType;
+		ARG 0 isCreatable
 	METHOD a getDefaultBasedOnGeneratorVersion (I)Lahm; (I)LDimensionGenerationType;
 		ARG 0 generatorVersion
 	METHOD a getGeneratorName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD a getDimensionGenerationType (Ljava/lang/String;)Lahm; (Ljava/lang/String;)LDimensionGenerationType;
 		ARG 0 generatorName
+	METHOD b getTranslationName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD c getTranslationFileName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD d getGeneratorVersion ()I ()I
+	METHOD e IsCreatable ()Z ()Z
+	METHOD f HasMultipleVersions ()Z ()Z
 	METHOD g getId ()I ()I
+	METHOD i setHasMultipleVersionsTrue ()Lahm; ()LDimensionGenerationType;
+CLASS ahu BiomeGenerator
+	FIELD aC logger
+	METHOD a a (Lahb;Ljava/util/Random;II)V (LDimension;Ljava/util/Random;II)V
+		ARG 0 dimension
+		ARG 1 random
+	METHOD a a (Ljava/util/Random;III)Ljava/lang/String; (Ljava/util/Random;III)Ljava/lang/String;
+		ARG 0 random
+	METHOD a a (Ljava/util/Random;)Larc; (Ljava/util/Random;)Larc;
+		ARG 0 random
+	METHOD a a (Lahb;Ljava/util/Random;[Laji;[BIID)V (LDimension;Ljava/util/Random;[LBlock;[BIID)V
+		ARG 0 dimension
+		ARG 1 random
+	METHOD b b (Ljava/util/Random;)Larn; (Ljava/util/Random;)Larn;
+		ARG 0 random
+	METHOD b b (Lahb;Ljava/util/Random;[Laji;[BIID)V (LDimension;Ljava/util/Random;[LBlock;[BIID)V
+		ARG 0 dimension
+		ARG 1 random
+CLASS aib aib
+	METHOD <init> <init> (Lahb;)V (LDimension;)V
+		ARG 0 dimension
+	METHOD <init> <init> (JLahm;)V (JLDimensionGenerationType;)V
+		ARG 1 dimensionGenerationType
+CLASS aji Block
+	FIELD c blockNameDataMap
+	METHOD a a (Lahb;IIILaji;)V (LDimension;IIILBlock;)V
+		ARG 0 dimension
+	METHOD a a (ILjava/util/Random;I)Ladb; (ILjava/util/Random;I)Ladb;
+		ARG 1 random
+	METHOD a a (Lahb;IIIII)Z (LDimension;IIIII)Z
+		ARG 0 dimension
+	METHOD a a (Lahb;IIIIFI)V (LDimension;IIIIFI)V
+		ARG 0 dimension
+	METHOD a a (Lahb;IIILjava/util/Random;)V (LDimension;IIILjava/util/Random;)V
+		ARG 0 dimension
+	METHOD a a (Lahb;IIILsa;)V (LDimension;IIILsa;)V
+		ARG 0 dimension
+	METHOD a a (Lahb;IIILazw;Lazw;)Lazu; (LDimension;IIILazw;Lazw;)Lazu;
+		ARG 0 dimension
+	METHOD a a (Lahb;IIILagw;)V (LDimension;IIILagw;)V
+		ARG 0 dimension
+	METHOD a a (Lahb;IIILsv;Ladd;)V (LDimension;IIILsv;Ladd;)V
+		ARG 0 dimension
+	METHOD a a (Lahb;IIILyz;)V (LDimension;IIILyz;)V
+		ARG 0 dimension
+	METHOD a a (ILjava/util/Random;)I (ILjava/util/Random;)I
+		ARG 1 random
+	METHOD a a (Lahb;IIILsa;F)V (LDimension;IIILsa;F)V
+		ARG 0 dimension
+	METHOD a a (Lahb;IIILyz;IFFF)Z (LDimension;IIILyz;IFFF)Z
+		ARG 0 dimension
+	METHOD a a (Lyz;Lahb;III)F (Lyz;LDimension;III)F
+		ARG 1 dimension
+	METHOD a a (Lahb;IIIILadd;)Z (LDimension;IIIILadd;)Z
+		ARG 0 dimension
+	METHOD a a (Lahb;IIILsa;Lazw;)V (LDimension;IIILsa;Lazw;)V
+		ARG 0 dimension
+	METHOD a a (Ljava/util/Random;)I (Ljava/util/Random;)I
+		ARG 0 random
+	METHOD a a (Lahb;Lyz;IIII)V (LDimension;Lyz;IIII)V
+		ARG 0 dimension
+	METHOD a a (Lahb;IIILaji;I)V (LDimension;IIILBlock;I)V
+		ARG 0 dimension
+	METHOD a a (Lahb;)I (LDimension;)I
+		ARG 0 dimension
+	METHOD a a (Lahb;IIILadd;)V (LDimension;IIILadd;)V
+		ARG 0 dimension
+	METHOD a a (Lahb;IIILazt;Ljava/util/List;Lsa;)V (LDimension;IIILazt;Ljava/util/List;Lsa;)V
+		ARG 0 dimension
+	METHOD a a (Lahb;IIIIFFFI)I (LDimension;IIIIFFFI)I
+		ARG 0 dimension
+	METHOD a a (Lahb;III)Lazt; (LDimension;III)Lazt;
+		ARG 0 dimension
+	METHOD b b (Lahb;IIII)V (LDimension;IIII)V
+		ARG 0 dimension
+	METHOD b b (Lahb;IIIII)V (LDimension;IIIII)V
+		ARG 0 dimension
+	METHOD b b (Lahb;IIILsa;)V (LDimension;IIILsa;)V
+		ARG 0 dimension
+	METHOD b getBlockId (Laji;)I (LBlock;)I
+		ARG 0 blockData
+	METHOD b getBlockByName (Ljava/lang/String;)Laji; (Ljava/lang/String;)LBlock;
+		ARG 0 blockName
+	METHOD b b (Lahb;IIILjava/util/Random;)V (LDimension;IIILjava/util/Random;)V
+		ARG 0 dimension
+	METHOD b b (Lahb;III)V (LDimension;III)V
+		ARG 0 dimension
+	METHOD c c (Lahb;IIII)V (LDimension;IIII)V
+		ARG 0 dimension
+	METHOD c c (Lahb;III)Z (LDimension;III)Z
+		ARG 0 dimension
+	METHOD d d (Lahb;IIII)Z (LDimension;IIII)Z
+		ARG 0 dimension
+	METHOD d d (Lahb;III)Ladb; (LDimension;III)Ladb;
+		ARG 0 dimension
+	METHOD e getBlockById (I)Laji; (I)LBlock;
+		ARG 0 blockId
+	METHOD e e (Lahb;IIII)V (LDimension;IIII)V
+		ARG 0 dimension
+	METHOD f f (Lahb;III)F (LDimension;III)F
+		ARG 0 dimension
+	METHOD g g (Lahb;IIII)I (LDimension;IIII)I
+		ARG 0 dimension
+	METHOD g g (Lahb;III)Lazt; (LDimension;III)Lazt;
+		ARG 0 dimension
+	METHOD j j (Lahb;III)Z (LDimension;III)Z
+		ARG 0 dimension
+	METHOD k k (Lahb;III)I (LDimension;III)I
+		ARG 0 dimension
+CLASS ajn Blocks
+	FIELD A sandstone
+	FIELD B note_block
+	FIELD C bed
+	FIELD D golden_rail
+	FIELD E detector_rail
+	FIELD F sticky_piston
+	FIELD G web
+	FIELD H tallgrass
+	FIELD I deadbush
+	FIELD J piston
+	FIELD K piston_head
+	FIELD L wool
+	FIELD M piston_extension
+	FIELD N yellow_flower
+	FIELD O red_flower
+	FIELD P brown_mushroom
+	FIELD Q red_mushroom
+	FIELD R gold_block
+	FIELD S iron_block
+	FIELD T double_stone_slab
+	FIELD U stone_slab
+	FIELD V brick_block
+	FIELD W tnt
+	FIELD X bookshelf
+	FIELD Y mossy_cobblestone
+	FIELD Z obsidian
+	FIELD a air
+	FIELD aA redstone_torch
+	FIELD aB stone_button
+	FIELD aC snow_layer
+	FIELD aD ice
+	FIELD aE snow
+	FIELD aF cactus
+	FIELD aG clay
+	FIELD aH reeds
+	FIELD aI jutebox
+	FIELD aJ fence
+	FIELD aK pumpkin
+	FIELD aL netherrack
+	FIELD aM soul_sand
+	FIELD aN glowstone
+	FIELD aO portal
+	FIELD aP lit_pumpkin
+	FIELD aQ cake
+	FIELD aR unpowered_repeater
+	FIELD aS powered_repeater
+	FIELD aT trapdoor
+	FIELD aU monster_egg
+	FIELD aV stonebrick
+	FIELD aW brown_mushroom_block
+	FIELD aX red_mushroom_block
+	FIELD aY iron_bars
+	FIELD aZ glass_pane
+	FIELD aa torch
+	FIELD ab fire
+	FIELD ac mob_spawner
+	FIELD ad oak_stairs
+	FIELD ae chest
+	FIELD af redstone_wire
+	FIELD ag diamond_ore
+	FIELD ah diamond_block
+	FIELD ai crafting_table
+	FIELD aj wheat
+	FIELD ak farmland
+	FIELD al furnace
+	FIELD am lit_furnace
+	FIELD an standing_sign
+	FIELD ao wooden_door
+	FIELD ap ladder
+	FIELD aq rail
+	FIELD ar stone_stairs
+	FIELD as wall_sign
+	FIELD at lever
+	FIELD au stone_pressure_plate
+	FIELD av iron_door
+	FIELD aw wooden_pressure_plate
+	FIELD ax redstone_ore
+	FIELD ay lit_redstone_ore
+	FIELD az unlit_redstone_torch
+	FIELD b stone
+	FIELD bA emerald_ore
+	FIELD bB ender_chest
+	FIELD bC tripwire_hook
+	FIELD bD tripwire
+	FIELD bE emerald_block
+	FIELD bF spruce_stairs
+	FIELD bG birch_stairs
+	FIELD bH jungle_stairs
+	FIELD bI command_block
+	FIELD bJ beacon
+	FIELD bK cobblestone_wall
+	FIELD bL flower_pot
+	FIELD bM carrots
+	FIELD bN potatoes
+	FIELD bO wooden_button
+	FIELD bP skull
+	FIELD bQ anvil
+	FIELD bR trapped_chest
+	FIELD bS light_weighted_pressure_plate
+	FIELD bT heavy_weighted_pressure_plate
+	FIELD bU unpowered_comparator
+	FIELD bV powered_comparator
+	FIELD bW daylight_detector
+	FIELD bX redstone_block
+	FIELD bY quartz_ore
+	FIELD bZ hopper
+	FIELD ba melon_block
+	FIELD bb pumpkin_stem
+	FIELD bc melon_stem
+	FIELD bd vine
+	FIELD be fence_gate
+	FIELD bf brick_stairs
+	FIELD bg stone_brick_stairs
+	FIELD bh mycelium
+	FIELD bi waterlily
+	FIELD bj nether_brick
+	FIELD bk nether_brick_fence
+	FIELD bl nether_brick_stairs
+	FIELD bm nether_wart
+	FIELD bn enchanting_table
+	FIELD bo brewing_stand
+	FIELD bp cauldron
+	FIELD bq end_portal
+	FIELD br end_portal_frame
+	FIELD bs end_stone
+	FIELD bt dragon_egg
+	FIELD bu redstone_lamp
+	FIELD bv lit_redstone_lamp
+	FIELD bw double_wooden_slab
+	FIELD bx wooden_slab
+	FIELD by cocoa
+	FIELD bz sandstone_stairs
+	FIELD c grass
+	FIELD ca quartz_block
+	FIELD cb quartz_stairs
+	FIELD cc activator_rail
+	FIELD cd dropper
+	FIELD ce stained_hardened_clay
+	FIELD cf hay_block
+	FIELD cg carpet
+	FIELD ch hardened_clay
+	FIELD ci coal_block
+	FIELD cj packed_ice
+	FIELD ck acacia_stairs
+	FIELD cl dark_oak_stairs
+	FIELD cm double_plant
+	FIELD cn stained_glass
+	FIELD co stained_glass_pane
+	FIELD d dirt
+	FIELD e cobblestone
+	FIELD f planks
+	FIELD g sapling
+	FIELD h bedrock
+	FIELD i flowing_water
+	FIELD j water
+	FIELD k flowing_lava
+	FIELD l lava
+	FIELD m sand
+	FIELD n gravel
+	FIELD o gold_ore
+	FIELD p iron_ore
+	FIELD q coal_ore
+	FIELD r log
+	FIELD s log2
+	FIELD t leaves
+	FIELD u leaves2
+	FIELD v sponge
+	FIELD w glass
+	FIELD x lapis_ore
+	FIELD y lapis_block
+	FIELD z dispenser
+CLASS alh alh
+	FIELD a logger
+	METHOD a a (Lahb;Ljava/util/Random;III)Z (LDimension;Ljava/util/Random;III)Z
+		ARG 0 dimension
+		ARG 1 random
+	METHOD a a (Lahb;IIIZ)Z (LDimension;IIIZ)Z
+		ARG 0 dimension
+	METHOD b b (Lahb;Ljava/util/Random;III)V (LDimension;Ljava/util/Random;III)V
+		ARG 0 dimension
+		ARG 1 random
+CLASS alw alw
+	METHOD m m (Lahb;III)V (LDimension;III)V
+		ARG 0 dimension
+	METHOD n n (Lahb;III)V (LDimension;III)V
+		ARG 0 dimension
+CLASS apx Chunk
+	METHOD <init> <init> (Lahb;[Laji;II)V (LDimension;[LBlock;II)V
+		ARG 0 dimension
+	METHOD <init> <init> (Lahb;[Laji;[BII)V (LDimension;[LBlock;[BII)V
+		ARG 0 dimension
+CLASS aqo aqo
+	FIELD b dimension
+	METHOD a a (Lahb;)V (LDimension;)V
+		ARG 0 dimension
 CLASS ayp ayp
 	METHOD a setSpawnX (I)V (I)V
 	METHOD a setLevelName (Ljava/lang/String;)V (Ljava/lang/String;)V
 	METHOD a setIsThundering (Z)V (Z)V
+	METHOD a getDimensionInfoAsNbtMap ()Ldh; ()LNbtMap;
 	METHOD a setDimensionGenerationType (Lahm;)V (LDimensionGenerationType;)V
 	METHOD a setSpawnPoint (III)V (III)V
-	METHOD a a (Ldh;)Ldh; (LNbtMap;)LNbtMap;
+	METHOD a copyNbtMap (Ldh;)Ldh; (LNbtMap;)LNbtMap;
 		ARG 0 nbtMap
 	METHOD b setSpawnY (I)V (I)V
 	METHOD b getSeed ()J ()J
@@ -128,6 +489,7 @@ CLASS ayp ayp
 	METHOD u getDimensionGenerationType ()Lahm; ()LDimensionGenerationType;
 	METHOD v AllowCommands ()Z ()Z
 	METHOD w IsInitialized ()Z ()Z
+	METHOD x getWorldOptions ()Lagy; ()LWorldOptions;
 CLASS ays DimensionInfo
 	FIELD a seed
 	FIELD b dimensionGenerationType
@@ -152,6 +514,7 @@ CLASS ays DimensionInfo
 	FIELD u isHardcore
 	FIELD v allowCommands
 	FIELD w isInitialized
+	FIELD x worldOptions
 	METHOD <init> <init> (Lahj;Ljava/lang/String;)V (LDimensionSettings;Ljava/lang/String;)V
 		ARG 0 dimensionSettings
 		ARG 1 levelName
@@ -163,11 +526,12 @@ CLASS ays DimensionInfo
 		ARG 0 spawnX
 	METHOD a setLevelName (Ljava/lang/String;)V (Ljava/lang/String;)V
 		ARG 0 levelName
+	METHOD a getDimensionInfoAsNbtMap ()Ldh; ()LNbtMap;
 	METHOD a setDimensionGenerationType (Lahm;)V (LDimensionGenerationType;)V
 		ARG 0 dimensionGenerationType
-	METHOD a a (Ldh;Ldh;)V (LNbtMap;LNbtMap;)V
-		ARG 0 nbtMap
-		ARG 1 nbt
+	METHOD a updateNbtMap1WithNbtMap2 (Ldh;Ldh;)V (LNbtMap;LNbtMap;)V
+		ARG 0 nbtMap1
+		ARG 1 nbtMap2
 	METHOD a setSpawnPoint (III)V (III)V
 		ARG 0 spawnX
 		ARG 1 spawnY
@@ -178,7 +542,7 @@ CLASS ays DimensionInfo
 		ARG 0 gameModeType
 	METHOD a getDimensionGenerationType (Lays;)Lahm; (LDimensionInfo;)LDimensionGenerationType;
 		ARG 0 dimensionInfo
-	METHOD a a (Ldh;)Ldh; (LNbtMap;)LNbtMap;
+	METHOD a copyNbtMap (Ldh;)Ldh; (LNbtMap;)LNbtMap;
 		ARG 0 nbtMap
 	METHOD b getSeed ()J ()J
 	METHOD b setIsRaining (Z)V (Z)V
@@ -252,6 +616,7 @@ CLASS ays DimensionInfo
 	METHOD u getDimensionGenerationType ()Lahm; ()LDimensionGenerationType;
 	METHOD v AllowCommands ()Z ()Z
 	METHOD w IsInitialized ()Z ()Z
+	METHOD x getWorldOptions ()Lagy; ()LWorldOptions;
 	METHOD y getGeneratorOptions ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS ayt CallableSeedInfo
 	FIELD a dimensionInfo
@@ -295,13 +660,13 @@ CLASS aza CallableWeatherInfo
 	METHOD a getWeatherInfo ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS azb CallableGameModeInfo
 	FIELD a dimensionInfo
-	METHOD <init> <init> (Lays;)V (Lays;)V
+	METHOD <init> <init> (Lays;)V (LDimensionInfo;)V
 		ARG 0 dimensionInfo
 	METHOD a getGameModeInfo ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS azc azc
-	METHOD a a (Lays;)V (Lays;)V
+	METHOD a a (Lays;)V (LDimensionInfo;)V
 		ARG 0 dimensionInfo
-	METHOD a a (Lays;Ldh;)V (Lays;Ldh;)V
+	METHOD a a (Lays;Ldh;)V (LDimensionInfo;LNbtMap;)V
 		ARG 0 dimensionInfo
 		ARG 1 nbtMap
 	METHOD d getDimensionInfo ()Lays; ()LDimensionInfo;
@@ -311,14 +676,90 @@ CLASS bsx bsx
 	METHOD a loadLevel (Ljava/lang/String;Ljava/lang/String;JLahm;Ljava/lang/String;)V (Ljava/lang/String;Ljava/lang/String;JLDimensionGenerationType;Ljava/lang/String;)V
 	METHOD i getGameModeType ()Lahk; ()LGameModeType;
 	METHOD o stopServer ()V ()V
+CLASS btt btt
+	METHOD a createMap ()Ljava/util/Map; ()Ljava/util/Map;
+CLASS cn BlockDefaultMap
+	FIELD d blockName
+	FIELD e blockData
+	METHOD <init> <init> (Ljava/lang/String;)V (Ljava/lang/String;)V
+		ARG 0 blockName
+	METHOD a get (Ljava/lang/Object;)Ljava/lang/Object; (Ljava/lang/Object;)Ljava/lang/Object;
+		ARG 0 blockName
+	METHOD a get (Ljava/lang/String;)Ljava/lang/Object; (Ljava/lang/String;)Ljava/lang/Object;
+		ARG 0 blockName
+	METHOD a getBlockData (I)Ljava/lang/Object; (I)Ljava/lang/Object;
+		ARG 0 blockId
+	METHOD a addBlock (ILjava/lang/String;Ljava/lang/Object;)V (ILjava/lang/String;Ljava/lang/Object;)V
+		ARG 0 blockId
+		ARG 1 blockName
+		ARG 2 blockData
+CLASS co co
+	METHOD a get (Ljava/lang/Object;)Ljava/lang/Object; (Ljava/lang/Object;)Ljava/lang/Object;
+CLASS cs IterableInterface
+CLASS ct BlockIdDataMap
+	FIELD a idHashMap
+	FIELD b list
+	METHOD a getBlockData (I)Ljava/lang/Object; (I)Ljava/lang/Object;
+		ARG 0 blockId
+	METHOD a add (Ljava/lang/Object;I)V (Ljava/lang/Object;I)V
+		ARG 0 blockData
+		ARG 1 blockId
+	METHOD b IsBlockDataNull (I)Z (I)Z
+		ARG 0 blockId
+	METHOD b getBlockId (Ljava/lang/Object;)I (Ljava/lang/Object;)I
+		ARG 0 blockData
+CLASS cw BlockNameDataMap
+	FIELD a blockIdDataMap
+	FIELD b map
+	METHOD a get (Ljava/lang/Object;)Ljava/lang/Object; (Ljava/lang/Object;)Ljava/lang/Object;
+		ARG 0 blockName
+	METHOD a get (Ljava/lang/String;)Ljava/lang/Object; (Ljava/lang/String;)Ljava/lang/Object;
+		ARG 0 blockName
+	METHOD a createMap ()Ljava/util/Map; ()Ljava/util/Map;
+	METHOD a getBlockData (I)Ljava/lang/Object; (I)Ljava/lang/Object;
+		ARG 0 index
+	METHOD a addBlock (ILjava/lang/String;Ljava/lang/Object;)V (ILjava/lang/String;Ljava/lang/Object;)V
+		ARG 0 blockId
+		ARG 1 blockName
+		ARG 2 blockData
+	METHOD b containsBlockName (Ljava/lang/String;)Z (Ljava/lang/String;)Z
+		ARG 0 blockName
+	METHOD b IsBlockDataNull (I)Z (I)Z
+		ARG 0 blockId
+	METHOD b getBlockId (Ljava/lang/Object;)I (Ljava/lang/Object;)I
+		ARG 0 blockData
+	METHOD c getBlockName (Ljava/lang/Object;)Ljava/lang/String; (Ljava/lang/Object;)Ljava/lang/String;
+		ARG 0 blockData
+	METHOD c convertToBlockName (Ljava/lang/String;)Ljava/lang/String; (Ljava/lang/String;)Ljava/lang/String;
+		ARG 0 blockName
+	METHOD d containsKey (Ljava/lang/Object;)Z (Ljava/lang/Object;)Z
+		ARG 0 blockName
+CLASS cz BlockMapInterface
+	METHOD a get (Ljava/lang/Object;)Ljava/lang/Object; (Ljava/lang/Object;)Ljava/lang/Object;
+		ARG 0 key
+	METHOD a add (Ljava/lang/Object;Ljava/lang/Object;)V (Ljava/lang/Object;Ljava/lang/Object;)V
+		ARG 0 key
+		ARG 1 item
+CLASS da BlockMap
+	FIELD a logger
+	FIELD c map
+	METHOD a get (Ljava/lang/Object;)Ljava/lang/Object; (Ljava/lang/Object;)Ljava/lang/Object;
+		ARG 0 key
+	METHOD a createMap ()Ljava/util/Map; ()Ljava/util/Map;
+	METHOD a add (Ljava/lang/Object;Ljava/lang/Object;)V (Ljava/lang/Object;Ljava/lang/Object;)V
+		ARG 0 key
+		ARG 1 item
+	METHOD b getKeys ()Ljava/util/Set; ()Ljava/util/Set;
+	METHOD d containsKey (Ljava/lang/Object;)Z (Ljava/lang/Object;)Z
+		ARG 0 key
 CLASS df NbtByteArray
 	FIELD b byteArrayData
 	METHOD <init> <init> ([B)V ([B)V
 		ARG 0 byteArrayData
+	METHOD a getNbtId ()B ()B
 	METHOD a input (Ljava/io/DataInput;ILds;)V (Ljava/io/DataInput;ILds;)V
 		ARG 0 dataInput
 		ARG 1 depth
-	METHOD a getNbtId ()B ()B
 	METHOD a output (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
 		ARG 0 dataOutput
 	METHOD b getCopy ()Ldy; ()LNbt;
@@ -328,10 +769,10 @@ CLASS dg NbtByte
 	FIELD b byteData
 	METHOD <init> <init> (B)V (B)V
 		ARG 0 byteData
+	METHOD a getNbtId ()B ()B
 	METHOD a input (Ljava/io/DataInput;ILds;)V (Ljava/io/DataInput;ILds;)V
 		ARG 0 dataInput
 		ARG 1 depth
-	METHOD a getNbtId ()B ()B
 	METHOD a output (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
 		ARG 0 dataOutput
 	METHOD b getCopy ()Ldy; ()LNbt;
@@ -366,12 +807,12 @@ CLASS dh NbtMap
 	METHOD a put (Ljava/lang/String;J)V (Ljava/lang/String;J)V
 		ARG 0 tagName
 		ARG 1 longData
-	METHOD a put (Ljava/lang/String;B)V (Ljava/lang/String;B)V
-		ARG 0 tagName
-		ARG 1 byteData
 	METHOD a put (Ljava/lang/String;[B)V (Ljava/lang/String;[B)V
 		ARG 0 tagName
 		ARG 1 byteArrayData
+	METHOD a put (Ljava/lang/String;B)V (Ljava/lang/String;B)V
+		ARG 0 tagName
+		ARG 1 byteData
 	METHOD a put (Ljava/lang/String;Ldy;)V (Ljava/lang/String;LNbt;)V
 		ARG 0 tagName
 		ARG 1 nbt
@@ -443,10 +884,10 @@ CLASS dk NbtDouble
 	FIELD b doubleData
 	METHOD <init> <init> (D)V (D)V
 		ARG 0 doubleData
+	METHOD a getNbtId ()B ()B
 	METHOD a input (Ljava/io/DataInput;ILds;)V (Ljava/io/DataInput;ILds;)V
 		ARG 0 dataInput
 		ARG 1 depth
-	METHOD a getNbtId ()B ()B
 	METHOD a output (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
 		ARG 0 dataOutput
 	METHOD b getCopy ()Ldy; ()LNbt;
@@ -458,10 +899,10 @@ CLASS dk NbtDouble
 	METHOD h getAsFloat ()F ()F
 	METHOD toString toString ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS dl NbtEnd
+	METHOD a getNbtId ()B ()B
 	METHOD a input (Ljava/io/DataInput;ILds;)V (Ljava/io/DataInput;ILds;)V
 		ARG 0 dataInput
 		ARG 1 depth
-	METHOD a getNbtId ()B ()B
 	METHOD a output (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
 		ARG 0 dataOutput
 	METHOD b getCopy ()Ldy; ()LNbt;
@@ -470,10 +911,10 @@ CLASS dm NbtFloat
 	FIELD b floatData
 	METHOD <init> <init> (F)V (F)V
 		ARG 0 floatData
+	METHOD a getNbtId ()B ()B
 	METHOD a input (Ljava/io/DataInput;ILds;)V (Ljava/io/DataInput;ILds;)V
 		ARG 0 dataInput
 		ARG 1 depth
-	METHOD a getNbtId ()B ()B
 	METHOD a output (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
 		ARG 0 dataOutput
 	METHOD b getCopy ()Ldy; ()LNbt;
@@ -488,10 +929,10 @@ CLASS dn NbtIntArray
 	FIELD b intArrayData
 	METHOD <init> <init> ([I)V ([I)V
 		ARG 0 intArrayData
+	METHOD a getNbtId ()B ()B
 	METHOD a input (Ljava/io/DataInput;ILds;)V (Ljava/io/DataInput;ILds;)V
 		ARG 0 dataInput
 		ARG 1 depth
-	METHOD a getNbtId ()B ()B
 	METHOD a output (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
 		ARG 0 dataOutput
 	METHOD b getCopy ()Ldy; ()LNbt;
@@ -501,10 +942,10 @@ CLASS dp NbtInt
 	FIELD b intData
 	METHOD <init> <init> (I)V (I)V
 		ARG 0 intData
+	METHOD a getNbtId ()B ()B
 	METHOD a input (Ljava/io/DataInput;ILds;)V (Ljava/io/DataInput;ILds;)V
 		ARG 0 dataInput
 		ARG 1 depth
-	METHOD a getNbtId ()B ()B
 	METHOD a output (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
 		ARG 0 dataOutput
 	METHOD b getCopy ()Ldy; ()LNbt;
@@ -549,10 +990,10 @@ CLASS dr NbtLong
 	FIELD b longData
 	METHOD <init> <init> (J)V (J)V
 		ARG 0 longData
+	METHOD a getNbtId ()B ()B
 	METHOD a input (Ljava/io/DataInput;ILds;)V (Ljava/io/DataInput;ILds;)V
 		ARG 0 dataInput
 		ARG 1 depth
-	METHOD a getNbtId ()B ()B
 	METHOD a output (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
 		ARG 0 dataOutput
 	METHOD b getCopy ()Ldy; ()LNbt;
@@ -567,10 +1008,10 @@ CLASS dw NbtShort
 	FIELD b shortData
 	METHOD <init> <init> (S)V (S)V
 		ARG 0 shortData
+	METHOD a getNbtId ()B ()B
 	METHOD a input (Ljava/io/DataInput;ILds;)V (Ljava/io/DataInput;ILds;)V
 		ARG 0 dataInput
 		ARG 1 depth
-	METHOD a getNbtId ()B ()B
 	METHOD a output (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
 		ARG 0 dataOutput
 	METHOD b getCopy ()Ldy; ()LNbt;
@@ -585,10 +1026,10 @@ CLASS dx NbtString
 	FIELD b stringData
 	METHOD <init> <init> (Ljava/lang/String;)V (Ljava/lang/String;)V
 		ARG 0 stringData
+	METHOD a getNbtId ()B ()B
 	METHOD a input (Ljava/io/DataInput;ILds;)V (Ljava/io/DataInput;ILds;)V
 		ARG 0 dataInput
 		ARG 1 depth
-	METHOD a getNbtId ()B ()B
 	METHOD a output (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
 		ARG 0 dataOutput
 	METHOD a_ getStringData ()Ljava/lang/String; ()Ljava/lang/String;
@@ -596,10 +1037,10 @@ CLASS dx NbtString
 	METHOD toString toString ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS dy Nbt
 	FIELD a NbtDataTypes
+	METHOD a getNbtId ()B ()B
 	METHOD a input (Ljava/io/DataInput;ILds;)V (Ljava/io/DataInput;ILds;)V
 		ARG 0 dataInput
 		ARG 1 depth
-	METHOD a getNbtId ()B ()B
 	METHOD a output (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
 		ARG 0 dataOutput
 	METHOD a getNbtById (B)Ldy; (B)LNbt;
@@ -625,7 +1066,7 @@ CLASS mt DimensionServer
 		ARG 4 dimensionSettings
 		ARG 5 profiler
 	METHOD Y TurnWeatherOff ()V ()V
-	METHOD b b (Lahj;)V (Lahj;)V
+	METHOD b b (Lahj;)V (LDimensionSettings;)V
 		ARG 0 dimensionSettings
 	METHOD q getMinecraftServer ()Lnet/minecraft/server/MinecraftServer; ()Lnet/minecraft/server/MinecraftServer;
 CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
@@ -695,13 +1136,13 @@ CLASS r Point3D
 	METHOD toString toString ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS wc wc
 	FIELD a dimension
-	METHOD <init> <init> (Lahb;)V (Lahb;)V
+	METHOD <init> <init> (Lahb;)V (LDimension;)V
 		ARG 0 dimension
-	METHOD a a (Lr;)V (Lr;)V
+	METHOD a a (Lr;)V (LPoint3D;)V
 		ARG 0 point3D
-	METHOD a a (Ldh;)V (Ldh;)V
+	METHOD a a (Ldh;)V (LNbtMap;)V
 		ARG 0 nbtMap
-	METHOD a a (Lahb;)V (Lahb;)V
+	METHOD a a (Lahb;)V (LDimension;)V
 		ARG 0 dimension
-	METHOD b b (Ldh;)V (Ldh;)V
+	METHOD b b (Ldh;)V (LNbtMap;)V
 		ARG 0 nbtMap
