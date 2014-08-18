@@ -42,6 +42,7 @@ CLASS ahb Dimension
 		ARG 3 dimensionSettings
 		ARG 4 profiler
 	METHOD N getDimensionInfo ()Lays; ()LDimensionInfo;
+	METHOD O getWorldOptions ()Lagy; ()LWorldOptions;
 	METHOD a getBiomeGenerationAtPosition (II)Lahu; (II)LBiomeGenerator;
 		ARG 0 x
 		ARG 1 z
@@ -167,19 +168,36 @@ CLASS aib aib
 		ARG 0 dimension
 	METHOD <init> <init> (JLahm;)V (JLDimensionGenerationType;)V
 		ARG 1 dimensionGenerationType
-CLASS aji Block
-	FIELD c blockNameDataMap
-	METHOD a a (Lahb;IIILaji;)V (LDimension;IIILBlock;)V
+CLASS ajc ajc
+	METHOD a a (Lahb;IIILaji;I)V (LDimension;IIILBlock;I)V
+		ARG 4 block
+CLASS ajg BlockBeacon
+	METHOD a a (Lahb;I)Laor; (LDimension;I)Laor;
 		ARG 0 dimension
+CLASS aji Block
+	FIELD H blockSoundInfo
+	FIELD b blockName
+	FIELD blockTitle blockName
+	FIELD c blockNameDataMap
+	FIELD d blockIconName
+	FIELD e dustSoundInfo
+	FIELD f woodSoundInfo
+	FIELD g gravelSoundInfo
+	FIELD h grassSoundInfo
+	FIELD i stoneSoundInfo
+	FIELD j metalSoundInfo
+	FIELD k glassSoundInfo
+	FIELD l clothSoundInfo
+	FIELD m sandSoundInfo
+	FIELD n snowSoundInfo
+	FIELD o ladderSoundInfo
+	FIELD p anvilSoundInfo
+	FIELD v hardness
+	FIELD w resistance
+	METHOD F getLocalizedBlockName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD a a (ILjava/util/Random;I)Ladb; (ILjava/util/Random;I)Ladb;
 		ARG 1 random
 	METHOD a a (Lahb;IIIII)Z (LDimension;IIIII)Z
-		ARG 0 dimension
-	METHOD a a (Lahb;IIIIFI)V (LDimension;IIIIFI)V
-		ARG 0 dimension
-	METHOD a a (Lahb;IIILjava/util/Random;)V (LDimension;IIILjava/util/Random;)V
-		ARG 0 dimension
-	METHOD a a (Lahb;IIILsa;)V (LDimension;IIILsa;)V
 		ARG 0 dimension
 	METHOD a a (Lahb;IIILazw;Lazw;)Lazu; (LDimension;IIILazw;Lazw;)Lazu;
 		ARG 0 dimension
@@ -187,35 +205,48 @@ CLASS aji Block
 		ARG 0 dimension
 	METHOD a a (Lahb;IIILsv;Ladd;)V (LDimension;IIILsv;Ladd;)V
 		ARG 0 dimension
-	METHOD a a (Lahb;IIILyz;)V (LDimension;IIILyz;)V
-		ARG 0 dimension
-	METHOD a a (ILjava/util/Random;)I (ILjava/util/Random;)I
-		ARG 1 random
-	METHOD a a (Lahb;IIILsa;F)V (LDimension;IIILsa;F)V
-		ARG 0 dimension
 	METHOD a a (Lahb;IIILyz;IFFF)Z (LDimension;IIILyz;IFFF)Z
 		ARG 0 dimension
 	METHOD a a (Lyz;Lahb;III)F (Lyz;LDimension;III)F
 		ARG 1 dimension
-	METHOD a a (Lahb;IIIILadd;)Z (LDimension;IIIILadd;)Z
-		ARG 0 dimension
-	METHOD a a (Lahb;IIILsa;Lazw;)V (LDimension;IIILsa;Lazw;)V
-		ARG 0 dimension
-	METHOD a a (Ljava/util/Random;)I (Ljava/util/Random;)I
-		ARG 0 random
 	METHOD a a (Lahb;Lyz;IIII)V (LDimension;Lyz;IIII)V
 		ARG 0 dimension
 	METHOD a a (Lahb;IIILaji;I)V (LDimension;IIILBlock;I)V
 		ARG 0 dimension
 	METHOD a a (Lahb;)I (LDimension;)I
 		ARG 0 dimension
-	METHOD a a (Lahb;IIILadd;)V (LDimension;IIILadd;)V
-		ARG 0 dimension
-	METHOD a a (Lahb;IIILazt;Ljava/util/List;Lsa;)V (LDimension;IIILazt;Ljava/util/List;Lsa;)V
-		ARG 0 dimension
 	METHOD a a (Lahb;IIIIFFFI)I (LDimension;IIIIFFFI)I
 		ARG 0 dimension
 	METHOD a a (Lahb;III)Lazt; (LDimension;III)Lazt;
+		ARG 0 dimension
+	METHOD a a (Lahb;IIILaji;)V (LDimension;IIILBlock;)V
+		ARG 0 dimension
+	METHOD a a (Lahb;IIIIFI)V (LDimension;IIIIFI)V
+		ARG 0 dimension
+	METHOD a a (Lahb;IIILjava/util/Random;)V (LDimension;IIILjava/util/Random;)V
+		ARG 0 dimension
+	METHOD a a (Lahb;IIILsa;)V (LDimension;IIILsa;)V
+		ARG 0 dimension
+	METHOD a setBlockSoundInfo (Lajm;)Laji; (LBlockSoundInfo;)LBlock;
+		ARG 0 blockSoundInfo
+	METHOD a a (Lahb;IIILyz;)V (LDimension;IIILyz;)V
+		ARG 0 dimension
+	METHOD a a (ILjava/util/Random;)I (ILjava/util/Random;)I
+		ARG 1 random
+	METHOD a getBlockTileName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD a a (Lahb;IIILsa;F)V (LDimension;IIILsa;F)V
+		ARG 0 dimension
+	METHOD a a (Lahb;IIIILadd;)Z (LDimension;IIIILadd;)Z
+		ARG 0 dimension
+	METHOD a a (Lahb;IIILsa;Lazw;)V (LDimension;IIILsa;Lazw;)V
+		ARG 0 dimension
+	METHOD a a (Ljava/util/Random;)I (Ljava/util/Random;)I
+		ARG 0 random
+	METHOD a a (Lahb;IIIILyz;)V (LDimension;IIIILyz;)V
+		ARG 0 dimension
+	METHOD a a (Lahb;IIILadd;)V (LDimension;IIILadd;)V
+		ARG 0 dimension
+	METHOD a a (Lahb;IIILazt;Ljava/util/List;Lsa;)V (LDimension;IIILazt;Ljava/util/List;Lsa;)V
 		ARG 0 dimension
 	METHOD b b (Lahb;IIII)V (LDimension;IIII)V
 		ARG 0 dimension
@@ -225,25 +256,37 @@ CLASS aji Block
 		ARG 0 dimension
 	METHOD b getBlockId (Laji;)I (LBlock;)I
 		ARG 0 blockData
-	METHOD b getBlockByName (Ljava/lang/String;)Laji; (Ljava/lang/String;)LBlock;
-		ARG 0 blockName
+	METHOD b setResistance (F)Laji; (F)LBlock;
+		ARG 0 resistance
 	METHOD b b (Lahb;IIILjava/util/Random;)V (LDimension;IIILjava/util/Random;)V
 		ARG 0 dimension
+	METHOD b getBlockByName (Ljava/lang/String;)Laji; (Ljava/lang/String;)LBlock;
+		ARG 0 blockName
 	METHOD b b (Lahb;III)V (LDimension;III)V
 		ARG 0 dimension
 	METHOD c c (Lahb;IIII)V (LDimension;IIII)V
 		ARG 0 dimension
+	METHOD c setBlockName (Ljava/lang/String;)Laji; (Ljava/lang/String;)LBlock;
+		ARG 0 blockName
+	METHOD c c (Laji;)Z (LBlock;)Z
+		ARG 0 block
+	METHOD c setHardness (F)Laji; (F)LBlock;
+		ARG 0 hardness
 	METHOD c c (Lahb;III)Z (LDimension;III)Z
 		ARG 0 dimension
 	METHOD d d (Lahb;IIII)Z (LDimension;IIII)Z
 		ARG 0 dimension
 	METHOD d d (Lahb;III)Ladb; (LDimension;III)Ladb;
 		ARG 0 dimension
+	METHOD d setBlockIconName (Ljava/lang/String;)Laji; (Ljava/lang/String;)LBlock;
+		ARG 0 blockIconName
 	METHOD e getBlockById (I)Laji; (I)LBlock;
 		ARG 0 blockId
 	METHOD e e (Lahb;IIII)V (LDimension;IIII)V
 		ARG 0 dimension
 	METHOD f f (Lahb;III)F (LDimension;III)F
+		ARG 0 dimension
+	METHOD f f (Lahb;IIII)V (LDimension;IIII)V
 		ARG 0 dimension
 	METHOD g g (Lahb;IIII)I (LDimension;IIII)I
 		ARG 0 dimension
@@ -253,6 +296,29 @@ CLASS aji Block
 		ARG 0 dimension
 	METHOD k k (Lahb;III)I (LDimension;III)I
 		ARG 0 dimension
+	METHOD l l (Lahb;III)V (LDimension;III)V
+		ARG 0 dimension
+CLASS ajj BlockSoundInfoGlass
+	METHOD a getDigSound ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD b getPlacedSound ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS ajk BlockSoundInfoLadder
+	METHOD a getDigSound ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS ajl BlockSoundInfoAnvil
+	METHOD a getDigSound ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD b getPlacedSound ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS ajm BlockSoundInfo
+	FIELD a soundName
+	FIELD b soundVolume
+	FIELD c soundPitch
+	METHOD <init> <init> (Ljava/lang/String;FF)V (Ljava/lang/String;FF)V
+		ARG 0 soundName
+		ARG 1 soundVolume
+		ARG 2 soundPitch
+	METHOD a getDigSound ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD b getPlacedSound ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD c getSoundVolume ()F ()F
+	METHOD d getSoundPitch ()F ()F
+	METHOD e getStepSound ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS ajn Blocks
 	FIELD A sandstone
 	FIELD B note_block
@@ -425,8 +491,34 @@ CLASS ajn Blocks
 	FIELD x lapis_ore
 	FIELD y lapis_block
 	FIELD z dispenser
-CLASS alh alh
+CLASS ajr BlockPlant
+	METHOD a a (Laji;)Z (LBlock;)Z
+		ARG 0 block
+	METHOD a a (Lahb;IIILaji;)V (LDimension;IIILBlock;)V
+		ARG 0 dimension
+		ARG 4 block
+	METHOD a a (Lahb;IIILjava/util/Random;)V (LDimension;IIILjava/util/Random;)V
+		ARG 0 dimension
+		ARG 4 random
+	METHOD e e (Lahb;III)V (LDimension;III)V
+		ARG 0 dimension
+CLASS ajw BlockCauldron
+CLASS ajx BlockChest
+CLASS akc BlockComparator
+CLASS akg BlockDaylightDetector
+CLASS akh BlockDeadBush
+CLASS akl BlockDirt
+CLASS ako BlockDoublePlant
+	METHOD e e (Lahb;III)V (LDimension;III)V
+		ARG 0 dimension
+CLASS akr BlockLiquidFlowing
+CLASS alb BlockFire
+CLASS alc BlockFlower
+CLASS alh BlockGrass
 	FIELD a logger
+	METHOD a a (Lahb;IIILjava/util/Random;)V (LDimension;IIILjava/util/Random;)V
+		ARG 0 dimension
+		ARG 4 random
 	METHOD a a (Lahb;Ljava/util/Random;III)Z (LDimension;Ljava/util/Random;III)Z
 		ARG 0 dimension
 		ARG 1 random
@@ -435,11 +527,51 @@ CLASS alh alh
 	METHOD b b (Lahb;Ljava/util/Random;III)V (LDimension;Ljava/util/Random;III)V
 		ARG 0 dimension
 		ARG 1 random
-CLASS alw alw
+CLASS alj BlockSlab
+CLASS aln BlockHopper
+CLASS alt BlockLeaves
+CLASS alw BlockLiquid
+	METHOD a a (Lahb;IIILaji;)V (LDimension;IIILBlock;)V
+		ARG 4 block
+	METHOD b b (Lahb;IIILjava/util/Random;)V (LDimension;IIILjava/util/Random;)V
+		ARG 0 dimension
+		ARG 4 random
+	METHOD e e (Lahb;III)I (LDimension;III)I
+		ARG 0 dimension
 	METHOD m m (Lahb;III)V (LDimension;III)V
 		ARG 0 dimension
 	METHOD n n (Lahb;III)V (LDimension;III)V
 		ARG 0 dimension
+CLASS amd BlockMycelium
+CLASS amn BlockOre
+CLASS amp BlockPortal
+CLASS ana BlockRedstoneWire
+CLASS anf BlockRepeater
+	METHOD a a (Laji;)Z (LBlock;)Z
+		ARG 0 block
+	METHOD a a (Lahb;IIILaji;I)V (LDimension;IIILBlock;I)V
+		ARG 0 dimension
+		ARG 4 block
+	METHOD b b (Lahb;IIILjava/util/Random;)V (LDimension;IIILjava/util/Random;)V
+		ARG 0 dimension
+		ARG 4 random
+CLASS anh BlockSand
+CLASS anj BlockSapling
+CLASS anq BlockStainedGlass
+CLASS anr BlockStainedGlassPane
+CLASS ans BlockStairs
+	FIELD b block
+	METHOD <init> <init> (Laji;I)V (LBlock;I)V
+		ARG 0 block
+	METHOD a a (Laji;)Z (LBlock;)Z
+		ARG 0 block
+CLASS ant BlockLiquidStill
+CLASS anv BlockStone
+CLASS anz BlockTallGrass
+CLASS aog BlockTripwireHook
+CLASS app BlockPiston
+CLASS apq BlockPistonHead
+CLASS apr BlockPistonExtension
 CLASS apx Chunk
 	METHOD <init> <init> (Lahb;[Laji;II)V (LDimension;[LBlock;II)V
 		ARG 0 dimension
@@ -447,6 +579,7 @@ CLASS apx Chunk
 		ARG 0 dimension
 CLASS aqo aqo
 	FIELD b dimension
+	FIELD i dimensionId
 	METHOD a a (Lahb;)V (LDimension;)V
 		ARG 0 dimension
 CLASS ayp ayp
@@ -1134,6 +1267,28 @@ CLASS r Point3D
 	METHOD equals equals (Ljava/lang/Object;)Z (Ljava/lang/Object;)Z
 		ARG 0 obj
 	METHOD toString toString ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS sa sa
+	FIELD D isOnGround
+	FIELD R fallDistance
+	FIELD Z random
+	FIELD am portalCooldown
+	FIELD ap dimensionId
+	FIELD ar uuid
+	FIELD e fire
+	FIELD i isInvulnerable
+	FIELD o dimension
+	METHOD <init> <init> (Lahb;)V (LDimension;)V
+		ARG 0 dimension
+	METHOD a a (IIILaji;)V (IIILBlock;)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+		ARG 3 block
+	METHOD a createNbtList ([D)Ldq; ([D)LNbtList;
+	METHOD a createNbtList ([F)Ldq; ([F)LNbtList;
+	METHOD a a (Lahb;)V (LDimension;)V
+		ARG 0 dimension
+	METHOD aB getUUID ()Ljava/util/UUID; ()Ljava/util/UUID;
 CLASS wc wc
 	FIELD a dimension
 	METHOD <init> <init> (Lahb;)V (LDimension;)V
