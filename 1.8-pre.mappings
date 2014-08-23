@@ -432,6 +432,27 @@ CLASS bf ServerCommandDefaultGameMode
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS bfe bfe
+	METHOD a getBlockAt (Ldt;)Latp; (LBlockCoords;)LBlock;
+CLASS bff Chunk
+	FIELD c logger
+	FIELD d chunkCubes
+	METHOD a getBlockAt (Ldt;)Latp; (LBlockCoords;)LBlock;
+		ARG 0 location
+	METHOD a getBlockAt (III)Latp; (III)LBlock;
+		ARG 0 worldX
+		ARG 1 worldY
+		ARG 2 worldZ
+	METHOD f getBlockAtLocalCoords (III)Latp; (III)LBlock;
+		ARG 0 localX
+		ARG 1 localY
+		ARG 2 localZ
+	METHOD h getCubeArray ()[Lbfk; ()[LChunkCube;
+CLASS bfk ChunkCube
+	FIELD a yLocation
+	FIELD d blockIDArray
+	METHOD <init> <init> (IZ)V (IZ)V
+		ARG 0 yLocation
 CLASS bg ServerCommandEffect
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
