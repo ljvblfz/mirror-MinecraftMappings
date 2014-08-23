@@ -32,16 +32,16 @@ CLASS ab _ab_ServerCommand_something
 		ARG 0 serverCommandUser
 	METHOD a a (Lac;)Lac; (LIServerCommand;)LIServerCommand;
 		ARG 0 serverCommand
-	METHOD a a (Lae;Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;Ljava/lang/String;L_dt_location_ext_fd;)Ljava/util/List;
-		ARG 0 serverCommandUser
 	METHOD a a (Lae;Ljava/lang/String;)I (LIServerCommandUser;Ljava/lang/String;)I
+		ARG 0 serverCommandUser
+	METHOD a a (Lae;Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;Ljava/lang/String;LBlockCoords;)Ljava/util/List;
 		ARG 0 serverCommandUser
 CLASS ac IServerCommand
 	METHOD a a (Lae;)Z (LIServerCommandUser;)Z
 		ARG 0 serverCommandUser
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
-	METHOD a a (Lae;[Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;[Ljava/lang/String;L_dt_location_ext_fd;)Ljava/util/List;
+	METHOD a a (Lae;[Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;[Ljava/lang/String;LBlockCoords;)Ljava/util/List;
 		ARG 0 serverCommandUser
 	METHOD c c (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
@@ -49,9 +49,9 @@ CLASS ac IServerCommand
 CLASS ad _ad_IServerCommand_something
 	METHOD a a (Lae;)Ljava/util/List; (LIServerCommandUser;)Ljava/util/List;
 		ARG 0 serverCommandUser
-	METHOD a a (Lae;Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;Ljava/lang/String;L_dt_location_ext_fd;)Ljava/util/List;
-		ARG 0 serverCommandUser
 	METHOD a a (Lae;Ljava/lang/String;)I (LIServerCommandUser;Ljava/lang/String;)I
+		ARG 0 serverCommandUser
+	METHOD a a (Lae;Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;Ljava/lang/String;LBlockCoords;)Ljava/util/List;
 		ARG 0 serverCommandUser
 CLASS ae IServerCommandUser
 CLASS af af
@@ -100,7 +100,7 @@ CLASS ah ah
 			ARG 0 entity
 	METHOD a a (Lae;Ljava/lang/String;Ljava/lang/Class;)Lwv; (LIServerCommandUser;Ljava/lang/String;Ljava/lang/Class;)LEntity;
 		ARG 0 serverCommandUser
-	METHOD a a (Ljava/util/List;Ljava/util/Map;Lae;Ljava/lang/Class;Ljava/lang/String;Ldt;)Ljava/util/List; (Ljava/util/List;Ljava/util/Map;LIServerCommandUser;Ljava/lang/Class;Ljava/lang/String;L_dt_location_ext_fd;)Ljava/util/List;
+	METHOD a a (Ljava/util/List;Ljava/util/Map;Lae;Ljava/lang/Class;Ljava/lang/String;Ldt;)Ljava/util/List; (Ljava/util/List;Ljava/util/Map;LIServerCommandUser;Ljava/lang/Class;Ljava/lang/String;LBlockCoords;)Ljava/util/List;
 		ARG 2 serverCommandUser
 	METHOD a a (Lae;Ljava/lang/String;)Lqw; (LIServerCommandUser;Ljava/lang/String;)Lqw;
 		ARG 0 serverCommandUser
@@ -119,7 +119,7 @@ CLASS am am
 	METHOD apply apply (Lwv;)Z (LEntity;)Z
 		ARG 0 entity
 CLASS aqs Dimension
-	METHOD b getBiomeAt (Ldt;)Lark; (L_dt_location_ext_fd;)LBiomeGenerator;
+	METHOD b getBiomeAt (Ldt;)Lark; (LBlockCoords;)LBiomeGenerator;
 		ARG 0 location
 CLASS arj BiomeBeach
 CLASS ark BiomeGenerator
@@ -184,11 +184,13 @@ CLASS asr BiomeSwampland
 CLASS ass BiomeTaiga
 CLASS ast BiomeTheEnd
 CLASS asw BlockAir
+CLASS atg BlockAbstractRail
 CLASS atn BlockBed
 CLASS atp Block
 	METHOD a registerBlock (ILjava/lang/String;Latp;)V (ILjava/lang/String;LBlock;)V
 	METHOD a registerBlock (ILoa;Latp;)V (ILoa;LBlock;)V
 CLASS aty BlockBookshelf
+CLASS atz BlockBrewingStand
 CLASS au ServerCommandAchievement
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -197,6 +199,7 @@ CLASS au ServerCommandAchievement
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS aud BlockCactus
 CLASS aue BlockCake
+CLASS aug BlockCauldron
 CLASS auh BlockChest
 CLASS aui BlockClay
 CLASS aul BlockWool
@@ -207,9 +210,14 @@ CLASS auv BlockDetectorRail
 CLASS ava BlockDirt
 CLASS avc BlockDispenser
 CLASS avd BlockDoor
+CLASS avj BlockDragonEgg
 CLASS avl BlockLiquidFlowing
+CLASS avm BlockEnchantingTable
+CLASS avn BlockEndPortal
+CLASS avo BlockEndPortalFrame
 CLASS avs BlockFarmland
 CLASS avt BlockFence
+CLASS avu BlockFenceGate
 CLASS avv BlockFire
 CLASS aw ServerCommandBanIp
 	FIELD a IPRegexPatern
@@ -220,13 +228,14 @@ CLASS aw ServerCommandBanIp
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-CLASS awf BlockDoubleSlab
+CLASS awf BlockStoneDoubleSlab
+CLASS awg BlockWoodenDoubleSlab
 CLASS awh BlockFurnace
 CLASS awj BlockGlass
 CLASS awk BlockGlowstone
 CLASS awl BlockGrass
 CLASS awm BlockGravel
-CLASS awq BlockSlab
+CLASS awq BlockStoneSlab
 CLASS awx BlockMushroom
 CLASS awz BlockIce
 CLASS ax ServerCommandBan
@@ -249,6 +258,9 @@ CLASS ay ServerCommandBlockData
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS aya BlockMycelium
+CLASS ayb BlockNetherBrick
+CLASS ayc BlockNetherWart
 CLASS ayd BlockNetherrack
 CLASS ayl BlockNoteBlock
 CLASS aym BlockObsidian
@@ -263,13 +275,14 @@ CLASS az ServerCommandClear
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-CLASS aza _aza_BlockRail_something
+CLASS aza BlockRedstoneRail
 CLASS azd BlockPressurePlate
 CLASS azi BlockPumpkin
 CLASS azm BlockRail
 CLASS azn BlockRedFlower
 CLASS azq BlockRedstoneOre
 CLASS azr BlockRedstoneWire
+CLASS azt BlockRedstoneLamp
 CLASS azu BlockRedstoneTorch
 CLASS azw BlockReeds
 CLASS azx BlockRepeater
@@ -321,6 +334,7 @@ CLASS bap BlockStainedGlass
 CLASS bar BlockStairs
 CLASS bau BlockStandingSign
 CLASS bav BlockLiquidStill
+CLASS baw BlockPlantStem
 CLASS bay BlockStone
 CLASS bba BlockStonebrick
 CLASS bbc BlockButton
@@ -329,7 +343,9 @@ CLASS bbh BlockWindow
 CLASS bbi BlockTNT
 CLASS bbj BlockTorch
 CLASS bbn BlockTrapdoor
+CLASS bbt BlockVine
 CLASS bbx BlockWallSign
+CLASS bbz BlockWaterlily
 CLASS bc ServerCommandTestForBlocks
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -617,10 +633,10 @@ CLASS cq ServerCommandSeed
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS cr ServerCommandSpreadPlayers
-	METHOD a a (Ljava/util/Random;IDDDD)[Lcs; (Ljava/util/Random;IDDDD)[Lcs;
-		ARG 0 random
 	METHOD a a (Lae;Ljava/util/List;Lcs;DDLaqs;Z)V (LIServerCommandUser;Ljava/util/List;Lcs;DDLDimension;Z)V
 		ARG 0 serverCommandUser
+	METHOD a a (Ljava/util/Random;IDDDD)[Lcs; (Ljava/util/Random;IDDDD)[Lcs;
+		ARG 0 random
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
@@ -725,12 +741,54 @@ CLASS dk ServerCommandInvalidNumberException
 CLASS dl ServerCommandSyntaxException
 CLASS dm ServerCommandPlayerNotFoundException
 CLASS dn ServerCommandNotFoundException
-CLASS dt _dt_location_ext_fd
+CLASS dt BlockCoords
 	FIELD a zeroed
+	FIELD b BITS_X
+	FIELD c BITS_Z
+	FIELD d BITS_Y
+	FIELD f BITSHIFT_Y
+	FIELD g BITSHIFT_X
+	FIELD h X_BITMASK
+	FIELD i Y_BITMASK
+	FIELD j Z_BITMASK
+	METHOD <init> <init> (Lwv;)V (LEntity;)V
+		ARG 0 entity
+	METHOD <init> <init> (Lfd;)V (LBlockCoordsBase;)V
+		ARG 0 location
 	METHOD <init> <init> (III)V (III)V
 		ARG 0 x
 		ARG 1 y
 		ARG 2 z
+	METHOD a add (DDD)Ldt; (DDD)LBlockCoords;
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD a addDirection (Lel;)Ldt; (Lel;)LBlockCoords;
+	METHOD a scale (I)Ldt; (I)LBlockCoords;
+		ARG 0 factor
+	METHOD a fromLong (J)Ldt; (J)LBlockCoords;
+		ARG 0 l
+	METHOD a add (Lfd;)Ldt; (LBlockCoordsBase;)LBlockCoords;
+		ARG 0 location
+	METHOD a add (III)Ldt; (III)LBlockCoords;
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD a above ()Ldt; ()LBlockCoords;
+	METHOD a addDirection (Lel;I)Ldt; (Lel;I)LBlockCoords;
+	METHOD b below ()Ldt; ()LBlockCoords;
+	METHOD b above (I)Ldt; (I)LBlockCoords;
+	METHOD b substract (Lfd;)Ldt; (LBlockCoordsBase;)LBlockCoords;
+	METHOD c north ()Ldt; ()LBlockCoords;
+	METHOD c below (I)Ldt; (I)LBlockCoords;
+	METHOD d north (I)Ldt; (I)LBlockCoords;
+	METHOD d south ()Ldt; ()LBlockCoords;
+	METHOD e south (I)Ldt; (I)LBlockCoords;
+	METHOD e west ()Ldt; ()LBlockCoords;
+	METHOD f east ()Ldt; ()LBlockCoords;
+	METHOD f west (I)Ldt; (I)LBlockCoords;
+	METHOD g east (I)Ldt; (I)LBlockCoords;
+	METHOD g asLong ()J ()J
 CLASS dy dy
 	METHOD n getX ()I ()I
 	METHOD o getY ()I ()I
@@ -832,7 +890,7 @@ CLASS fb Registry
 	METHOD d containsKey (Ljava/lang/Object;)Z (Ljava/lang/Object;)Z
 		ARG 0 registryItemKey
 	METHOD iterator iterator ()Ljava/util/Iterator; ()Ljava/util/Iterator;
-CLASS fd _fd_location
+CLASS fd BlockCoordsBase
 	FIELD a x
 	FIELD b y
 	FIELD c z
@@ -849,11 +907,11 @@ CLASS fd _fd_location
 		ARG 0 x
 		ARG 1 y
 		ARG 2 z
-	METHOD d d (DDD)D (DDD)D
+	METHOD d distanceSquared2 (DDD)D (DDD)D
 		ARG 0 x
 		ARG 1 y
 		ARG 2 z
-	METHOD i distanceSquared (Lfd;)D (L_fd_location;)D
+	METHOD i distanceSquared (Lfd;)D (LBlockCoordsBase;)D
 		ARG 0 location
 	METHOD n getX ()I ()I
 	METHOD o getY ()I ()I
@@ -916,13 +974,13 @@ CLASS fn NbtMap
 	METHOD a put (Ljava/lang/String;I)V (Ljava/lang/String;I)V
 		ARG 0 nbtMapKey
 		ARG 1 dataValue
-	METHOD a put (Ljava/lang/String;J)V (Ljava/lang/String;J)V
-		ARG 0 nbtMapKey
-		ARG 1 dataValue
 	METHOD a a (Ljava/lang/String;Lgd;Ljava/io/DataOutput;)V (Ljava/lang/String;LNbt;Ljava/io/DataOutput;)V
 		ARG 0 nbtMapKey
 		ARG 1 nbt
 		ARG 2 dataOutput
+	METHOD a put (Ljava/lang/String;J)V (Ljava/lang/String;J)V
+		ARG 0 nbtMapKey
+		ARG 1 dataValue
 	METHOD a put (Ljava/lang/String;[B)V (Ljava/lang/String;[B)V
 		ARG 0 nbtMapKey
 		ARG 1 dataValue
@@ -1120,21 +1178,21 @@ CLASS fy NbtSizeUtilDefault
 CLASS fz StreamCompressUtil
 	METHOD a readCompressedInputStream (Ljava/io/InputStream;)Lfn; (Ljava/io/InputStream;)LNbtMap;
 		ARG 0 inputStream
-	METHOD a readDataInputStreamToNbtMap (Ljava/io/DataInputStream;)Lfn; (Ljava/io/DataInputStream;)LNbtMap;
-		ARG 0 dataInputStream
 	METHOD a readDataInputToNbtMap (Ljava/io/DataInput;Lfx;)Lfn; (Ljava/io/DataInput;LNbtSizeUtil;)LNbtMap;
 		ARG 0 dataInput
 		ARG 1 nbtSizeUtil
+	METHOD a readDataInputStreamToNbtMap (Ljava/io/DataInputStream;)Lfn; (Ljava/io/DataInputStream;)LNbtMap;
+		ARG 0 dataInputStream
 	METHOD a writeNbtToDataOutput (Lgd;Ljava/io/DataOutput;)V (LNbt;Ljava/io/DataOutput;)V
 		ARG 0 nbt
 		ARG 1 dataOutput
-	METHOD a writeSafelyNbtMapToFile (Lfn;Ljava/io/File;)V (LNbtMap;Ljava/io/File;)V
-		ARG 0 nbtMap
-		ARG 1 file
 	METHOD a readDataInputToNbt (Ljava/io/DataInput;ILfx;)Lgd; (Ljava/io/DataInput;ILNbtSizeUtil;)LNbt;
 		ARG 0 dataInput
 		ARG 1 depth
 		ARG 2 nbtSizeUtil
+	METHOD a writeSafelyNbtMapToFile (Lfn;Ljava/io/File;)V (LNbtMap;Ljava/io/File;)V
+		ARG 0 nbtMap
+		ARG 1 file
 	METHOD a writeNbtMapToDataOutput (Lfn;Ljava/io/DataOutput;)V (LNbtMap;Ljava/io/DataOutput;)V
 		ARG 0 nbtMap
 		ARG 1 dataOutput
@@ -1259,10 +1317,10 @@ CLASS gr gr
 	FIELD h queue
 	FIELD i channel
 	FIELD j socketAddress
-	METHOD a a (Lid;Lio/netty/util/concurrent/GenericFutureListener;[Lio/netty/util/concurrent/GenericFutureListener;)V (Lid;Lio/netty/util/concurrent/GenericFutureListener;[Lio/netty/util/concurrent/GenericFutureListener;)V
-		ARG 1 genericFutureListener
 	METHOD a a (Ljava/net/InetAddress;I)Lgr; (Ljava/net/InetAddress;I)Lgr;
 		ARG 0 inetAddress
+	METHOD a a (Lid;Lio/netty/util/concurrent/GenericFutureListener;[Lio/netty/util/concurrent/GenericFutureListener;)V (Lid;Lio/netty/util/concurrent/GenericFutureListener;[Lio/netty/util/concurrent/GenericFutureListener;)V
+		ARG 1 genericFutureListener
 	METHOD a a (Ljava/net/SocketAddress;)Lgr; (Ljava/net/SocketAddress;)Lgr;
 		ARG 0 socketAddress
 	METHOD a a (Ljavax/crypto/SecretKey;)V (Ljavax/crypto/SecretKey;)V
@@ -1434,27 +1492,27 @@ CLASS ij ij
 	FIELD d YRotation
 	FIELD e XRotation
 CLASS il il
-	METHOD <init> <init> (Lwv;I)V (Lwv;I)V
+	METHOD <init> <init> (Lwv;I)V (LEntity;I)V
 		ARG 0 entity
-	METHOD <init> <init> (Lwv;II)V (Lwv;II)V
+	METHOD <init> <init> (Lwv;II)V (LEntity;II)V
 		ARG 0 entity
 CLASS in in
-	METHOD <init> <init> (Lwv;)V (Lwv;)V
+	METHOD <init> <init> (Lwv;)V (LEntity;)V
 		ARG 0 entity
 CLASS ir ir
-	METHOD <init> <init> (Lwv;I)V (Lwv;I)V
+	METHOD <init> <init> (Lwv;I)V (LEntity;I)V
 		ARG 0 entity
 CLASS iu iu
 	FIELD c nbtMap
-	METHOD <init> <init> (Ldt;ILfn;)V (Ldt;ILfn;)V
+	METHOD <init> <init> (Ldt;ILfn;)V (LBlockCoords;ILNbtMap;)V
 		ARG 2 nbtMap
 CLASS iv iv
 	FIELD d block
-	METHOD <init> <init> (Ldt;Latp;II)V (Ldt;Latp;II)V
+	METHOD <init> <init> (Ldt;Latp;II)V (LBlockCoords;LBlock;II)V
 		ARG 1 block
 	METHOD d getBlock ()Latp; ()LBlock;
 CLASS iw iw
-	METHOD <init> <init> (Laqs;Ldt;)V (Laqs;Ldt;)V
+	METHOD <init> <init> (Laqs;Ldt;)V (LDimension;LBlockCoords;)V
 		ARG 0 dimension
 CLASS j CrashLogInfo
 	FIELD a crashLogger
@@ -1467,7 +1525,7 @@ CLASS j CrashLogInfo
 	METHOD a a (Ljava/lang/StackTraceElement;Ljava/lang/StackTraceElement;)Z (Ljava/lang/StackTraceElement;Ljava/lang/StackTraceElement;)Z
 		ARG 0 stackTraceElement1
 		ARG 1 stackTraceElement2
-	METHOD a a (Lj;Ldt;Latp;I)V (LCrashLogInfo;L_dt_location_ext_fd;LBlock;I)V
+	METHOD a a (Lj;Ldt;Latp;I)V (LCrashLogInfo;LBlockCoords;LBlock;I)V
 		ARG 0 crashLogInfo
 	METHOD a addCrashInfo (Ljava/lang/String;Ljava/lang/Throwable;)V (Ljava/lang/String;Ljava/lang/Throwable;)V
 		ARG 0 elementName
@@ -1475,7 +1533,7 @@ CLASS j CrashLogInfo
 	METHOD a addCallable (Ljava/lang/String;Ljava/util/concurrent/Callable;)V (Ljava/lang/String;Ljava/util/concurrent/Callable;)V
 		ARG 0 elementName
 		ARG 1 callable
-	METHOD a a (Lj;Ldt;Lbea;)V (LCrashLogInfo;L_dt_location_ext_fd;Lbea;)V
+	METHOD a a (Lj;Ldt;Lbea;)V (LCrashLogInfo;LBlockCoords;Lbea;)V
 		ARG 0 crashLogInfo
 	METHOD a getDetailsReport (Ljava/lang/StringBuilder;)V (Ljava/lang/StringBuilder;)V
 		ARG 0 reportStringBuilder
@@ -1484,18 +1542,18 @@ CLASS j CrashLogInfo
 		ARG 1 elementValue
 	METHOD a getStackTraceElementsArray ()[Ljava/lang/StackTraceElement; ()[Ljava/lang/StackTraceElement;
 CLASS jk jk
-	METHOD <init> <init> (Lwv;B)V (Lwv;B)V
+	METHOD <init> <init> (Lwv;B)V (LEntity;B)V
 		ARG 0 entity
-	METHOD a a (Laqs;)Lwv; (Laqs;)Lwv;
+	METHOD a a (Laqs;)Lwv; (LDimension;)LEntity;
 		ARG 0 dimension
 CLASS jl jl
 	FIELD b nbtMap
-	METHOD <init> <init> (ILfn;)V (ILfn;)V
+	METHOD <init> <init> (ILfn;)V (ILNbtMap;)V
 		ARG 1 nbtMap
-	METHOD a a (Laqs;)Lwv; (Laqs;)Lwv;
+	METHOD a a (Laqs;)Lwv; (LDimension;)LEntity;
 		ARG 0 dimension
 CLASS jy jy
-	METHOD a a (Laqs;)Lwv; (Laqs;)Lwv;
+	METHOD a a (Laqs;)Lwv; (LDimension;)LEntity;
 		ARG 0 dimension
 CLASS kg kg
 	FIELD a EnterCombat
@@ -1508,12 +1566,12 @@ CLASS kj kj
 	FIELD d UpdateDisplayName
 	FIELD e RemovePlayer
 CLASS kl kl
-	METHOD a a (Laqs;)Lahb; (Laqs;)Lahb;
+	METHOD a a (Laqs;)Lahb; (LDimension;)Lahb;
 		ARG 0 dimension
 CLASS kq kq
-	METHOD <init> <init> (Lwv;B)V (Lwv;B)V
+	METHOD <init> <init> (Lwv;B)V (LEntity;B)V
 		ARG 0 entity
-	METHOD a a (Laqs;)Lwv; (Laqs;)Lwv;
+	METHOD a a (Laqs;)Lwv; (LDimension;)LEntity;
 		ARG 0 dimension
 CLASS kt kt
 	FIELD a SetSize
@@ -1523,16 +1581,16 @@ CLASS kt kt
 	FIELD e SetWarningTime
 	FIELD f SetWarningBlocks
 CLASS ku ku
-	METHOD <init> <init> (Lwv;)V (Lwv;)V
+	METHOD <init> <init> (Lwv;)V (LEntity;)V
 		ARG 0 entity
-	METHOD a a (Laqs;)Lwv; (Laqs;)Lwv;
+	METHOD a a (Laqs;)Lwv; (LDimension;)LEntity;
 		ARG 0 dimension
 CLASS ky ky
-	METHOD <init> <init> (ILwv;Lwv;)V (ILwv;Lwv;)V
+	METHOD <init> <init> (ILwv;Lwv;)V (ILEntity;LEntity;)V
 		ARG 1 entity1
 		ARG 2 entity2
 CLASS kz kz
-	METHOD <init> <init> (Lwv;)V (Lwv;)V
+	METHOD <init> <init> (Lwv;)V (LEntity;)V
 		ARG 0 entity
 CLASS lg lg
 	FIELD a Change
@@ -1545,21 +1603,21 @@ CLASS lk lk
 	FIELD e Reset
 CLASS ll ll
 	FIELD a dimension
-	METHOD <init> <init> (Laqs;Ldt;[Lho;)V (Laqs;Ldt;[Lho;)V
+	METHOD <init> <init> (Laqs;Ldt;[Lho;)V (LDimension;LBlockCoords;[Lho;)V
 		ARG 0 dimension
 CLASS lo lo
-	METHOD <init> <init> (Lwv;)V (Lwv;)V
+	METHOD <init> <init> (Lwv;)V (LEntity;)V
 		ARG 0 entity
 CLASS lw lw
 	FIELD a PerformRespawn
 	FIELD b RequestStats
 	FIELD c OpenInventoryAchivement
 CLASS md md
-	METHOD <init> <init> (Lwv;Lbru;)V (Lwv;Lbru;)V
+	METHOD <init> <init> (Lwv;Lbru;)V (LEntity;Lbru;)V
 		ARG 0 entity
-	METHOD <init> <init> (Lwv;Lme;)V (Lwv;Lme;)V
+	METHOD <init> <init> (Lwv;Lme;)V (LEntity;Lme;)V
 		ARG 0 entity
-	METHOD a a (Laqs;)Lwv; (Laqs;)Lwv;
+	METHOD a a (Laqs;)Lwv; (LDimension;)LEntity;
 		ARG 0 dimension
 CLASS me me
 	FIELD a Interact
@@ -1573,9 +1631,9 @@ CLASS mm mm
 	FIELD e DropItem
 	FIELD f ReleaseUseItem
 CLASS mn mn
-	METHOD <init> <init> (Lwv;Lmo;I)V (Lwv;Lmo;I)V
+	METHOD <init> <init> (Lwv;Lmo;I)V (LEntity;Lmo;I)V
 		ARG 0 entity
-	METHOD <init> <init> (Lwv;Lmo;)V (Lwv;Lmo;)V
+	METHOD <init> <init> (Lwv;Lmo;)V (LEntity;Lmo;)V
 		ARG 0 entity
 CLASS mo mo
 	FIELD a StartSneaking
@@ -1591,7 +1649,7 @@ CLASS mr mr
 	FIELD c FailedDownload
 	FIELD d Accepted
 CLASS mw mw
-	METHOD a a (Lqt;)Lwv; (Lqt;)Lwv;
+	METHOD a a (Lqt;)Lwv; (LDimensionServer;)LEntity;
 		ARG 0 dimensionServer
 CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 CLASS ni ni
@@ -1634,16 +1692,16 @@ CLASS od od
 	FIELD a printStream
 	FIELD c logger
 CLASS oe oe
-	METHOD a a (Laqs;Lex;)Lahm; (Laqs;Lex;)Lahm;
+	METHOD a a (Laqs;Lex;)Lahm; (LDimension;Lex;)Lahm;
 		ARG 0 dimension
 CLASS on on
-	METHOD a a (Laqs;Lex;)Lahm; (Laqs;Lex;)Lahm;
+	METHOD a a (Laqs;Lex;)Lahm; (LDimension;Lex;)Lahm;
 		ARG 0 dimension
 CLASS oo oo
-	METHOD a a (Laqs;Lex;)Lahm; (Laqs;Lex;)Lahm;
+	METHOD a a (Laqs;Lex;)Lahm; (LDimension;Lex;)Lahm;
 		ARG 0 dimension
 CLASS op op
-	METHOD a a (Laqs;Lex;)Lahm; (Laqs;Lex;)Lahm;
+	METHOD a a (Laqs;Lex;)Lahm; (LDimension;Lex;)Lahm;
 		ARG 0 dimension
 CLASS oq oq
 	CLASS or or
@@ -1654,91 +1712,91 @@ CLASS pc pc
 	METHOD <init> <init> (Ljava/lang/String;Ljava/io/OutputStream;)V (Ljava/lang/String;Ljava/io/OutputStream;)V
 		ARG 1 outputStream
 CLASS qk qk
-	METHOD <init> <init> (Laqs;)V (Laqs;)V
+	METHOD <init> <init> (Laqs;)V (LDimension;)V
 		ARG 0 dimension
-	METHOD a a (Lahb;Laqs;Lamh;Ldt;Lel;FFF)Z (Lahb;Laqs;Lamh;Ldt;Lel;FFF)Z
+	METHOD a a (Lahb;Laqs;Lamh;Ldt;Lel;FFF)Z (Lahb;LDimension;Lamh;LBlockCoords;Lel;FFF)Z
 		ARG 1 dimension
-	METHOD a a (Lahb;Laqs;Lamh;)Z (Lahb;Laqs;Lamh;)Z
+	METHOD a a (Lahb;Laqs;Lamh;)Z (Lahb;LDimension;Lamh;)Z
 		ARG 1 dimension
 CLASS ql ql
 	FIELD a dimensionServer
-	METHOD <init> <init> (Lnet/minecraft/server/MinecraftServer;Lbqw;ILqt;Luw;)V (Lnet/minecraft/server/MinecraftServer;Lbqw;ILqt;Luw;)V
+	METHOD <init> <init> (Lnet/minecraft/server/MinecraftServer;Lbqw;ILqt;Luw;)V (Lnet/minecraft/server/MinecraftServer;Lbqw;ILDimensionServer;Luw;)V
 		ARG 3 dimensionServer
 CLASS qn qn
 	FIELD a logger
 	FIELD b dimensionServer
-	METHOD <init> <init> (Lqt;)V (Lqt;)V
+	METHOD <init> <init> (Lqt;)V (LDimensionServer;)V
 		ARG 0 dimensionServer
-	METHOD a a (Lwv;II)V (Lwv;II)V
+	METHOD a a (Lwv;II)V (LEntity;II)V
 		ARG 0 entity
-	METHOD a a (Lwv;IIZ)V (Lwv;IIZ)V
+	METHOD a a (Lwv;IIZ)V (LEntity;IIZ)V
 		ARG 0 entity
-	METHOD a a (Lwv;)V (Lwv;)V
+	METHOD a a (Lwv;)V (LEntity;)V
 		ARG 0 entity
-	METHOD a a (Lwv;Lid;)V (Lwv;Lid;)V
+	METHOD a a (Lwv;Lid;)V (LEntity;Lid;)V
 		ARG 0 entity
-	METHOD b b (Lwv;Lid;)V (Lwv;Lid;)V
+	METHOD b b (Lwv;Lid;)V (LEntity;Lid;)V
 		ARG 0 entity
-	METHOD b b (Lwv;)V (Lwv;)V
+	METHOD b b (Lwv;)V (LEntity;)V
 		ARG 0 entity
 CLASS qp qp
 	FIELD a minecraftServer
 	FIELD b dimensionServer
-	METHOD <init> <init> (Lnet/minecraft/server/MinecraftServer;Lqt;)V (Lnet/minecraft/server/MinecraftServer;Lqt;)V
+	METHOD <init> <init> (Lnet/minecraft/server/MinecraftServer;Lqt;)V (Lnet/minecraft/server/MinecraftServer;LDimensionServer;)V
 		ARG 0 minecraftServer
 		ARG 1 dimensionServer
-	METHOD a a (Lwv;)V (Lwv;)V
+	METHOD a a (Lwv;)V (LEntity;)V
 		ARG 0 entity
-	METHOD b b (Lwv;)V (Lwv;)V
+	METHOD b b (Lwv;)V (LEntity;)V
 		ARG 0 entity
 CLASS qq qq
 	FIELD a logger
 	FIELD b dimensionServer
-	METHOD <init> <init> (Lqt;)V (Lqt;)V
+	METHOD <init> <init> (Lqt;)V (LDimensionServer;)V
 		ARG 0 dimensionServer
 CLASS qs qs
 	FIELD b logger
 	FIELD i dimensionServer
-	METHOD <init> <init> (Lqt;Lbfo;Lbfc;)V (Lqt;Lbfo;Lbfc;)V
+	METHOD <init> <init> (Lqt;Lbfo;Lbfc;)V (LDimensionServer;Lbfo;Lbfc;)V
 		ARG 0 dimensionServer
-	METHOD a a (Laqs;Ljava/lang/String;Ldt;)Ldt; (Laqs;Ljava/lang/String;Ldt;)Ldt;
+	METHOD a a (Laqs;Ljava/lang/String;Ldt;)Ldt; (LDimension;Ljava/lang/String;LBlockCoords;)LBlockCoords;
 		ARG 0 dimension
 CLASS qt DimensionServer
 CLASS qw qw
 	FIELD b minecraftServer
 	FIELD bF logger
 	FIELD bS entity
-	METHOD <init> <init> (Lnet/minecraft/server/MinecraftServer;Lqt;Lcom/mojang/authlib/GameProfile;Lqx;)V (Lnet/minecraft/server/MinecraftServer;Lqt;Lcom/mojang/authlib/GameProfile;Lqx;)V
+	METHOD <init> <init> (Lnet/minecraft/server/MinecraftServer;Lqt;Lcom/mojang/authlib/GameProfile;Lqx;)V (Lnet/minecraft/server/MinecraftServer;LDimensionServer;Lcom/mojang/authlib/GameProfile;Lqx;)V
 		ARG 0 minecraftServer
 		ARG 1 dimensionServer
 		ARG 2 gameProfile
-	METHOD a a (DZLatp;Ldt;)V (DZLatp;Ldt;)V
+	METHOD a a (DZLatp;Ldt;)V (DZLBlock;LBlockCoords;)V
 		ARG 2 block
-	METHOD a a (Lfn;)V (Lfn;)V
+	METHOD a a (Lfn;)V (LNbtMap;)V
 		ARG 0 nbtMap
-	METHOD a a (Lwv;)V (Lwv;)V
+	METHOD a a (Lwv;)V (LEntity;)V
 		ARG 0 entity
-	METHOD a a (Lwv;I)V (Lwv;I)V
+	METHOD a a (Lwv;I)V (LEntity;I)V
 		ARG 0 entity
-	METHOD b b (Lwv;)V (Lwv;)V
-		ARG 0 entity
-	METHOD b b (Lfn;)V (Lfn;)V
+	METHOD b b (Lfn;)V (LNbtMap;)V
 		ARG 0 nbtMap
-	METHOD c c (Lwv;)V (Lwv;)V
+	METHOD b b (Lwv;)V (LEntity;)V
 		ARG 0 entity
-	METHOD e e (Lwv;)V (Lwv;)V
+	METHOD c c (Lwv;)V (LEntity;)V
 		ARG 0 entity
-	METHOD f f (Lwv;)V (Lwv;)V
+	METHOD e e (Lwv;)V (LEntity;)V
+		ARG 0 entity
+	METHOD f f (Lwv;)V (LEntity;)V
 		ARG 0 entity
 CLASS qx qx
 	FIELD a dimension
-	METHOD <init> <init> (Laqs;)V (Laqs;)V
+	METHOD <init> <init> (Laqs;)V (LDimension;)V
 		ARG 0 dimension
-	METHOD a a (Lahb;Laqs;Lamh;Ldt;Lel;FFF)Z (Lahb;Laqs;Lamh;Ldt;Lel;FFF)Z
+	METHOD a a (Lahb;Laqs;Lamh;Ldt;Lel;FFF)Z (Lahb;LDimension;Lamh;LBlockCoords;Lel;FFF)Z
 		ARG 1 dimension
-	METHOD a a (Lqt;)V (Lqt;)V
+	METHOD a a (Lqt;)V (LDimensionServer;)V
 		ARG 0 dimension
-	METHOD a a (Lahb;Laqs;Lamh;)Z (Lahb;Laqs;Lamh;)Z
+	METHOD a a (Lahb;Laqs;Lamh;)Z (Lahb;LDimension;Lamh;)Z
 		ARG 1 dimension
 CLASS qy qy
 	FIELD a entity1
@@ -1882,7 +1940,7 @@ CLASS y _y_IServerCommand_something
 CLASS z ServerCommand
 	METHOD a a (Lae;[Ljava/lang/String;I)Lho; (LIServerCommandUser;[Ljava/lang/String;I)Lho;
 		ARG 0 serverCommandUser
-	METHOD a a (Lae;[Ljava/lang/String;IZ)Ldt; (LIServerCommandUser;[Ljava/lang/String;IZ)L_dt_location_ext_fd;
+	METHOD a a (Lae;[Ljava/lang/String;IZ)Ldt; (LIServerCommandUser;[Ljava/lang/String;IZ)LBlockCoords;
 		ARG 0 serverCommandUser
 	METHOD a a (Lae;Ljava/lang/String;Ljava/lang/Class;)Lwv; (LIServerCommandUser;Ljava/lang/String;Ljava/lang/Class;)LEntity;
 		ARG 0 serverCommandUser
@@ -1896,7 +1954,7 @@ CLASS z ServerCommand
 	METHOD a a (Lae;Lac;Ljava/lang/String;[Ljava/lang/Object;)V (LIServerCommandUser;LIServerCommand;Ljava/lang/String;[Ljava/lang/Object;)V
 		ARG 0 serverCommandUser
 		ARG 1 serverCommand
-	METHOD a a (Lae;[Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;[Ljava/lang/String;L_dt_location_ext_fd;)Ljava/util/List;
+	METHOD a a (Lae;[Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;[Ljava/lang/String;LBlockCoords;)Ljava/util/List;
 		ARG 0 serverCommandUser
 	METHOD b b (Lae;Ljava/lang/String;)Lwv; (LIServerCommandUser;Ljava/lang/String;)LEntity;
 		ARG 0 serverCommandUser
