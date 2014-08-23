@@ -9,9 +9,9 @@ CLASS ab _ab_ServerCommand_something
 		ARG 0 serverCommandUser
 	METHOD a a (Lac;)Lac; (LIServerCommand;)LIServerCommand;
 		ARG 0 serverCommand
-	METHOD a a (Lae;Ljava/lang/String;)I (LIServerCommandUser;Ljava/lang/String;)I
-		ARG 0 serverCommandUser
 	METHOD a a (Lae;Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;Ljava/lang/String;L_dt_location_ext_fd;)Ljava/util/List;
+		ARG 0 serverCommandUser
+	METHOD a a (Lae;Ljava/lang/String;)I (LIServerCommandUser;Ljava/lang/String;)I
 		ARG 0 serverCommandUser
 CLASS ac IServerCommand
 	METHOD a a (Lae;)Z (LIServerCommandUser;)Z
@@ -26,9 +26,9 @@ CLASS ac IServerCommand
 CLASS ad _ad_IServerCommand_something
 	METHOD a a (Lae;)Ljava/util/List; (LIServerCommandUser;)Ljava/util/List;
 		ARG 0 serverCommandUser
-	METHOD a a (Lae;Ljava/lang/String;)I (LIServerCommandUser;Ljava/lang/String;)I
-		ARG 0 serverCommandUser
 	METHOD a a (Lae;Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;Ljava/lang/String;L_dt_location_ext_fd;)Ljava/util/List;
+		ARG 0 serverCommandUser
+	METHOD a a (Lae;Ljava/lang/String;)I (LIServerCommandUser;Ljava/lang/String;)I
 		ARG 0 serverCommandUser
 CLASS ae IServerCommandUser
 CLASS af af
@@ -95,6 +95,10 @@ CLASS ah ah
 CLASS am am
 	METHOD apply apply (Lwv;)Z (LEntity;)Z
 		ARG 0 entity
+CLASS aqs Dimension
+	METHOD b getBiomeAt (Ldt;)Lark; (L_dt_location_ext_fd;)LBiomeGenerator;
+		ARG 0 location
+CLASS ark BiomeGenerator
 CLASS au ServerCommandAchievement
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -339,6 +343,7 @@ CLASS ce ServerCommandPublish
 	METHOD c c (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS cej DimensionClient
 CLASS cf ServerCommandReplaceItem
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -446,10 +451,10 @@ CLASS cq ServerCommandSeed
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS cr ServerCommandSpreadPlayers
-	METHOD a a (Lae;Ljava/util/List;Lcs;DDLaqs;Z)V (LIServerCommandUser;Ljava/util/List;Lcs;DDLaqs;Z)V
-		ARG 0 serverCommandUser
 	METHOD a a (Ljava/util/Random;IDDDD)[Lcs; (Ljava/util/Random;IDDDD)[Lcs;
 		ARG 0 random
+	METHOD a a (Lae;Ljava/util/List;Lcs;DDLaqs;Z)V (LIServerCommandUser;Ljava/util/List;Lcs;DDLDimension;Z)V
+		ARG 0 serverCommandUser
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
@@ -555,6 +560,10 @@ CLASS dl ServerCommandSyntaxException
 CLASS dm ServerCommandPlayerNotFoundException
 CLASS dn ServerCommandNotFoundException
 CLASS dt _dt_location_ext_fd
+	METHOD <init> <init> (III)V (III)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
 CLASS dy dy
 	METHOD n getX ()I ()I
 	METHOD o getY ()I ()I
@@ -710,15 +719,15 @@ CLASS fm NbtByte
 CLASS fn NbtMap
 	FIELD b logger
 	FIELD c dataMap
-	METHOD a a (Ljava/io/DataInput;Lfx;)B (Ljava/io/DataInput;Lfx;)B
+	METHOD a a (Ljava/io/DataInput;Lfx;)B (Ljava/io/DataInput;LNbtSizeUtil;)B
 		ARG 0 dataInput
 		ARG 1 nbtSzieUtil
 	METHOD a put (Ljava/lang/String;Z)V (Ljava/lang/String;Z)V
 		ARG 0 nbtMapKey
 		ARG 1 dataValue
-	METHOD a a (Lfn;)V (Lfn;)V
+	METHOD a a (Lfn;)V (LNbtMap;)V
 		ARG 0 nbtMap
-	METHOD a a (BLjava/lang/String;Ljava/io/DataInput;ILfx;)Lgd; (BLjava/lang/String;Ljava/io/DataInput;ILfx;)Lgd;
+	METHOD a a (BLjava/lang/String;Ljava/io/DataInput;ILfx;)Lgd; (BLjava/lang/String;Ljava/io/DataInput;ILNbtSizeUtil;)LNbt;
 		ARG 0 nbtTypeId
 		ARG 1 elementValue
 		ARG 2 dataInput
@@ -729,19 +738,19 @@ CLASS fn NbtMap
 	METHOD a put (Ljava/lang/String;Lgd;)V (Ljava/lang/String;LNbt;)V
 		ARG 0 nbtMapKey
 		ARG 1 nbt
-	METHOD a a (Ljava/lang/String;ILjava/lang/ClassCastException;)Lb; (Ljava/lang/String;ILjava/lang/ClassCastException;)Lb;
+	METHOD a a (Ljava/lang/String;ILjava/lang/ClassCastException;)Lb; (Ljava/lang/String;ILjava/lang/ClassCastException;)LCrashLogger;
 		ARG 0 elementValue
 		ARG 2 cause
 	METHOD a put (Ljava/lang/String;I)V (Ljava/lang/String;I)V
 		ARG 0 nbtMapKey
 		ARG 1 dataValue
-	METHOD a a (Ljava/lang/String;Lgd;Ljava/io/DataOutput;)V (Ljava/lang/String;Lgd;Ljava/io/DataOutput;)V
-		ARG 0 nbtMapKey
-		ARG 1 nbt
-		ARG 2 dataOutput
 	METHOD a put (Ljava/lang/String;J)V (Ljava/lang/String;J)V
 		ARG 0 nbtMapKey
 		ARG 1 dataValue
+	METHOD a a (Ljava/lang/String;Lgd;Ljava/io/DataOutput;)V (Ljava/lang/String;LNbt;Ljava/io/DataOutput;)V
+		ARG 0 nbtMapKey
+		ARG 1 nbt
+		ARG 2 dataOutput
 	METHOD a put (Ljava/lang/String;[B)V (Ljava/lang/String;[B)V
 		ARG 0 nbtMapKey
 		ARG 1 dataValue
@@ -763,7 +772,7 @@ CLASS fn NbtMap
 	METHOD a put (Ljava/lang/String;[I)V (Ljava/lang/String;[I)V
 		ARG 0 nbtMapKey
 		ARG 1 dataValue
-	METHOD b b (Ljava/io/DataInput;Lfx;)Ljava/lang/String; (Ljava/io/DataInput;Lfx;)Ljava/lang/String;
+	METHOD b b (Ljava/io/DataInput;Lfx;)Ljava/lang/String; (Ljava/io/DataInput;LNbtSizeUtil;)Ljava/lang/String;
 		ARG 0 dataInput
 		ARG 1 nbtSizeUtil
 	METHOD b isMapTypeOf (Ljava/lang/String;I)Z (Ljava/lang/String;I)Z
@@ -789,7 +798,7 @@ CLASS fn NbtMap
 		ARG 0 nbtMapKey
 	METHOD i getAsDouble (Ljava/lang/String;)D (Ljava/lang/String;)D
 		ARG 0 nbtMapKey
-	METHOD inputData inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILfx;)V
+	METHOD inputData inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
 		ARG 0 dataInput
 		ARG 1 depth
 	METHOD j getAsString (Ljava/lang/String;)Ljava/lang/String; (Ljava/lang/String;)Ljava/lang/String;
@@ -1018,6 +1027,7 @@ CLASS j CrashLogInfo
 		ARG 1 elementValue
 	METHOD a getStackTraceElementsArray ()[Ljava/lang/StackTraceElement; ()[Ljava/lang/StackTraceElement;
 CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
+CLASS qt DimensionServer
 CLASS r CrashLogInfoElement
 	FIELD a name
 	FIELD b value
