@@ -23,15 +23,15 @@ CLASS a TextColor
 	FIELD v RESET
 CLASS ab _ab_ServerCommand_something
 	FIELD a logger
+	METHOD a a (Lac;)Lac; (LIServerCommand;)LIServerCommand;
+		ARG 0 serverCommand
+	METHOD a a (Lae;)Ljava/util/List; (LIServerCommandUser;)Ljava/util/List;
+		ARG 0 serverCommandUser
 	METHOD a a (Lac;[Ljava/lang/String;)I (LIServerCommand;[Ljava/lang/String;)I
 		ARG 0 serverCommand
 	METHOD a a (Lae;[Ljava/lang/String;Lac;Ljava/lang/String;)Z (LIServerCommandUser;[Ljava/lang/String;LIServerCommand;Ljava/lang/String;)Z
 		ARG 0 serverCommandUser
 		ARG 2 serverCommand
-	METHOD a a (Lae;)Ljava/util/List; (LIServerCommandUser;)Ljava/util/List;
-		ARG 0 serverCommandUser
-	METHOD a a (Lac;)Lac; (LIServerCommand;)LIServerCommand;
-		ARG 0 serverCommand
 	METHOD a a (Lae;Ljava/lang/String;)I (LIServerCommandUser;Ljava/lang/String;)I
 		ARG 0 serverCommandUser
 	METHOD a a (Lae;Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;Ljava/lang/String;LBlockCoords;)Ljava/util/List;
@@ -39,13 +39,13 @@ CLASS ab _ab_ServerCommand_something
 CLASS ac IServerCommand
 	METHOD a a (Lae;)Z (LIServerCommandUser;)Z
 		ARG 0 serverCommandUser
-	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
-		ARG 0 serverCommandUser
 	METHOD a a (Lae;[Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;[Ljava/lang/String;LBlockCoords;)Ljava/util/List;
 		ARG 0 serverCommandUser
-	METHOD c c (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD c c (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
 CLASS ad _ad_IServerCommand_something
 	METHOD a a (Lae;)Ljava/util/List; (LIServerCommandUser;)Ljava/util/List;
 		ARG 0 serverCommandUser
@@ -98,30 +98,55 @@ CLASS ah ah
 	CLASS at at
 		METHOD apply apply (Lwv;)Z (Lwv;)Z
 			ARG 0 entity
-	METHOD a a (Lae;Ljava/lang/String;Ljava/lang/Class;)Lwv; (LIServerCommandUser;Ljava/lang/String;Ljava/lang/Class;)LEntity;
+	METHOD a a (Lae;Ljava/lang/String;)Lqw; (LIServerCommandUser;Ljava/lang/String;)Lqw;
+		ARG 0 serverCommandUser
+	METHOD a a (Lae;Ljava/util/Map;)Ljava/util/List; (LIServerCommandUser;Ljava/util/Map;)Ljava/util/List;
 		ARG 0 serverCommandUser
 	METHOD a a (Ljava/util/List;Ljava/util/Map;Lae;Ljava/lang/Class;Ljava/lang/String;Ldt;)Ljava/util/List; (Ljava/util/List;Ljava/util/Map;LIServerCommandUser;Ljava/lang/Class;Ljava/lang/String;LBlockCoords;)Ljava/util/List;
 		ARG 2 serverCommandUser
-	METHOD a a (Lae;Ljava/lang/String;)Lqw; (LIServerCommandUser;Ljava/lang/String;)Lqw;
-		ARG 0 serverCommandUser
 	METHOD a a (Ljava/util/Map;Ljava/lang/String;I)I (Ljava/util/Map;Ljava/lang/String;I)I
 		ARG 1 integerString
 		ARG 2 failureDefaultValue
-	METHOD a a (Lae;Ljava/util/Map;)Ljava/util/List; (LIServerCommandUser;Ljava/util/Map;)Ljava/util/List;
+	METHOD a a (Lae;Ljava/lang/String;Ljava/lang/Class;)Lwv; (LIServerCommandUser;Ljava/lang/String;Ljava/lang/Class;)LEntity;
 		ARG 0 serverCommandUser
 	METHOD b b (Lae;Ljava/util/Map;)Z (LIServerCommandUser;Ljava/util/Map;)Z
 		ARG 0 serverCommandUser
-	METHOD b b (Lae;Ljava/lang/String;)Lho; (LIServerCommandUser;Ljava/lang/String;)Lho;
-		ARG 0 serverCommandUser
 	METHOD b b (Lae;Ljava/lang/String;Ljava/lang/Class;)Ljava/util/List; (LIServerCommandUser;Ljava/lang/String;Ljava/lang/Class;)Ljava/util/List;
+		ARG 0 serverCommandUser
+	METHOD b b (Lae;Ljava/lang/String;)Lho; (LIServerCommandUser;Ljava/lang/String;)Lho;
 		ARG 0 serverCommandUser
 CLASS am am
 	METHOD apply apply (Lwv;)Z (LEntity;)Z
 		ARG 0 entity
 CLASS aqs Dimension
+	FIELD s rand
+	METHOD a a (IIZ)Z (IIZ)Z
+		ARG 0 chunkX
+		ARG 1 chunkZ
+	METHOD a isBlockInWorld (Ldt;)Z (LBlockCoords;)Z
+	METHOD a a (Ldt;Ldt;)Z (LBlockCoords;LBlockCoords;)Z
+		ARG 0 minBlockCoords
+		ARG 1 maxBlockCoords
+	METHOD a a (Ldt;Ldt;Z)Z (LBlockCoords;LBlockCoords;Z)Z
+		ARG 0 minBlockCoords
+		ARG 1 maxBlockCoords
+	METHOD a a (Ldt;IZ)Z (LBlockCoords;IZ)Z
+		ARG 1 range
+	METHOD a a (Ldt;I)Z (LBlockCoords;I)Z
+		ARG 1 range
+	METHOD a isBlockRangeInWorld (IIIIIIZ)Z (IIIIIIZ)Z
+		ARG 0 minWorldX
+		ARG 1 minWorldY
+		ARG 2 minWorldZ
+		ARG 3 maxWorldX
+		ARG 4 maxWorldY
+		ARG 5 maxWorldZ
 	METHOD b getBiomeAt (Ldt;)Lark; (LBlockCoords;)LBiomeGenerator;
-		ARG 0 location
+		ARG 0 blockCoords
+	METHOD b getDimension ()Laqs; ()LDimension;
 CLASS arj BiomeBeach
+	METHOD <init> <init> (I)V (I)V
+		ARG 0 biomeID
 CLASS ark BiomeGenerator
 	FIELD A frozenRiver
 	FIELD B icePlains
@@ -152,6 +177,8 @@ CLASS ark BiomeGenerator
 	FIELD aa mesa
 	FIELD ab mesaPlateauForest
 	FIELD ac mesaPlateau
+	FIELD ap temp
+	FIELD aq rainfall
 	FIELD az biomeID
 	FIELD n biomeSetNoMutated
 	FIELD o idToBiomeMap
@@ -166,6 +193,12 @@ CLASS ark BiomeGenerator
 	FIELD x hell
 	FIELD y theEnd
 	FIELD z frozenOcean
+	METHOD a setTempAndRainfall (FF)Lark; (FF)LBiomeGenerator;
+		ARG 0 temp
+		ARG 1 rainfall
+	METHOD b b (Laqs;Ljava/util/Random;Lbgi;IID)V (LDimension;Ljava/util/Random;Lbgi;IID)V
+		ARG 0 dim
+		ARG 1 rand
 	METHOD k createMutated ()Lark; ()LBiomeGenerator;
 CLASS ary BiomeDesert
 CLASS arz BiomeExtremeHills
@@ -195,15 +228,15 @@ CLASS atk BlockBeacon
 CLASS atn BlockBed
 CLASS atp Block
 	METHOD a registerBlock (ILjava/lang/String;Latp;)V (ILjava/lang/String;LBlock;)V
-	METHOD a registerBlock (ILoa;Latp;)V (ILoa;LBlock;)V
+	METHOD a registerBlock (ILoa;Latp;)V (ILObjectName;LBlock;)V
 CLASS aty BlockBookshelf
 CLASS atz BlockBrewingStand
 CLASS au ServerCommandAchievement
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS aub BlockButtonAbstract
 CLASS aud BlockCactus
 CLASS aue BlockCake
@@ -244,9 +277,9 @@ CLASS aw ServerCommandBanIp
 		ARG 0 serverCommandUser
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS awb BlockFlowerPot
 CLASS awe BlockDoubleStoneSlabs2
 CLASS awf BlockStoneDoubleSlab
@@ -269,9 +302,9 @@ CLASS awz BlockIce
 CLASS ax ServerCommandBan
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 rserverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS axa BlockJukebox
 CLASS axc BlockLadder
 CLASS axe BlockLeavesAbstract
@@ -286,9 +319,9 @@ CLASS axz BlockMushroom
 CLASS ay ServerCommandBlockData
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS aya BlockMycelium
 CLASS ayb BlockNetherBrick
 CLASS ayc BlockNetherWart
@@ -309,9 +342,9 @@ CLASS ayz BlockRedstoneBlock
 CLASS az ServerCommandClear
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS aza BlockRedstoneRail
 CLASS azd BlockPressurePlate
 CLASS azg BlockPrismarine
@@ -339,14 +372,14 @@ CLASS b CrashLogger
 	METHOD <init> <init> (Ljava/lang/String;Ljava/lang/Throwable;)V (Ljava/lang/String;Ljava/lang/Throwable;)V
 		ARG 0 message
 		ARG 1 cause
+	METHOD a buildCrashReport (Ljava/lang/StringBuilder;)V (Ljava/lang/StringBuilder;)V
+		ARG 0 crashReportStringBuilder
 	METHOD a a (Ljava/lang/String;)Lj; (Ljava/lang/String;)LCrashLogInfo;
 		ARG 0 name
 	METHOD a getCrashLogger (Ljava/lang/Throwable;Ljava/lang/String;)Lb; (Ljava/lang/Throwable;Ljava/lang/String;)LCrashLogger;
 		ARG 0 cause
 		ARG 1 message
 	METHOD a getMessage ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD a buildCrashReport (Ljava/lang/StringBuilder;)V (Ljava/lang/StringBuilder;)V
-		ARG 0 crashReportStringBuilder
 	METHOD a saveCrashLog (Ljava/io/File;)Z (Ljava/io/File;)Z
 		ARG 0 logFile
 	METHOD a a (Ljava/lang/String;I)Lj; (Ljava/lang/String;I)LCrashLogInfo;
@@ -362,9 +395,9 @@ CLASS b CrashLogger
 CLASS ba ServerCommandClone
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bab BlockSandStone
 CLASS bad BlockSapling
 CLASS baf BlockSeaLantern
@@ -400,9 +433,9 @@ CLASS bbz BlockWaterlily
 CLASS bc ServerCommandTestForBlocks
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bca BlockWeb
 CLASS bcb BlockWeightedPressurePlate
 CLASS bcc BlockWoodenButton
@@ -412,9 +445,9 @@ CLASS bcf BlockYellowFlower
 CLASS bd ServerCommandDeOp
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bdo BlockPistonBase
 CLASS bdq BlockPistonHead
 CLASS bdv BlockPistonExtension
@@ -422,216 +455,265 @@ CLASS be ServerCommandDebug
 	FIELD a logger
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD d getWittyComment ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bf ServerCommandDefaultGameMode
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bfe bfe
-	METHOD a getBlockAt (Ldt;)Latp; (LBlockCoords;)LBlock;
+	METHOD a isChunk (II)Z (II)Z
+	METHOD a addEntity (Lwv;)V (LEntity;)V
+	METHOD a removeEntity (Lwv;I)V (LEntity;I)V
+	METHOD b removeEntity (Lwv;)V (LEntity;)V
+	METHOD b getHeightAtCoords (II)I (II)I
 CLASS bff Chunk
+	FIELD a chunkX
+	FIELD b chunkZ
 	FIELD c logger
-	FIELD d chunkCubes
+	FIELD d chunkCube
+	FIELD e biomeMap
+	FIELD f rainfallMap
+	FIELD i dimension
+	FIELD j heightMap
+	FIELD m entityStore
+	FIELD r hasEntities
+	METHOD <init> <init> (Laqs;Lbgi;II)V (LDimension;Lbgi;II)V
+		ARG 0 dim
+		ARG 2 chunkX
+		ARG 3 chunkZ
+	METHOD <init> <init> (Laqs;II)V (LDimension;II)V
+		ARG 0 dim
+		ARG 1 chunkX
+		ARG 2 chunkZ
+	METHOD a isChunk (II)Z (II)Z
+		ARG 0 chunkX
+		ARG 1 chunkZ
+	METHOD a setHeightMap ([I)V ([I)V
 	METHOD a getBlockAt (Ldt;)Latp; (LBlockCoords;)LBlock;
 		ARG 0 location
+	METHOD a a (IIII)V (IIII)V
+		ARG 0 worldX
+		ARG 1 worldZ
+		ARG 2 minWorldY
+		ARG 3 maxWorldY
 	METHOD a getBlockAt (III)Latp; (III)LBlock;
 		ARG 0 worldX
 		ARG 1 worldY
 		ARG 2 worldZ
+	METHOD a addEntity (Lwv;)V (LEntity;)V
+	METHOD a removeEntity (Lwv;I)V (LEntity;I)V
+		ARG 1 cubeY
+	METHOD a getBiome (Ldt;Larx;)Lark; (LBlockCoords;Larx;)LBiomeGenerator;
+	METHOD a setBiomeMap ([B)V ([B)V
+	METHOD b removeEntity (Lwv;)V (LEntity;)V
+	METHOD b getHeightAtCoords (II)I (II)I
+		ARG 0 localX
+		ARG 1 localZ
+	METHOD d d (III)V (III)V
+		ARG 0 localX
+		ARG 1 worldY
+		ARG 2 localZ
 	METHOD f getBlockAtLocalCoords (III)Latp; (III)LBlock;
 		ARG 0 localX
 		ARG 1 localY
 		ARG 2 localZ
+	METHOD f getHeightAtCoords (Ldt;)I (LBlockCoords;)I
+	METHOD g g (III)I (III)I
+		ARG 0 localX
+		ARG 1 worldY
+		ARG 2 localZ
+	METHOD g getBlockStoreY ()I ()I
+	METHOD g compareHasEntities (Z)V (Z)V
 	METHOD h getCubeArray ()[Lbfk; ()[LChunkCube;
+	METHOD k getBiomeMap ()[B ()[B
+	METHOD p getDimension ()Laqs; ()LDimension;
+	METHOD q getHeightMap ()[I ()[I
+	METHOD s getEntityStore ()[Luc; ()[Luc;
 CLASS bfk ChunkCube
-	FIELD a yLocation
-	FIELD d blockIDArray
-	METHOD <init> <init> (IZ)V (IZ)V
-		ARG 0 yLocation
 CLASS bg ServerCommandEffect
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bh ServerCommandMe
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bi ServerCommandEnchant
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c c (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bj ServerCommandEntityData
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bk ServerCommandExecute
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c c (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bm ServerCommandXp
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bn ServerCommandFill
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bo ServerCommandDifficulty
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bp ServerCommandGameMode
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD h h (Lae;Ljava/lang/String;)Lara; (LIServerCommandUser;Ljava/lang/String;)Lara;
 		ARG 0 serverCommandUser
 CLASS bq ServerCommandGameRule
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c c (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS br ServerCommandGive
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bs ServerCommandHelp
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD d d (Lae;)Ljava/util/List; (LIServerCommandUser;)Ljava/util/List;
 		ARG 0 serverCommandUser
 CLASS bt ServerCommandKick
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bu ServerCommandKill
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bv ServerCommandBanList
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bw ServerCommandList
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bx ServerCommandTell
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c c (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS by ServerCommandTellRaw
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bz ServerCommandOp
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS ca ServerCommandPardonIp
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS cb ServerCommandPardon
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS cc ServerCommandParticle
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c c (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS cd ServerCommandPlaySound
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS ce ServerCommandPublish
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c c (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS cej DimensionClient
 CLASS cf ServerCommandReplaceItem
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c c (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS cg ServerCommandSaveAll
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS ch ServerCommandSaveOff
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS ci ServerCommandSaveOn
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c c (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS cj ServerCommandSay
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS ck ServerCommandScoreboard
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -641,9 +723,9 @@ CLASS ck ServerCommandScoreboard
 		ARG 0 serverCommandUser
 	METHOD c c (Lae;[Ljava/lang/String;I)V (LIServerCommandUser;[Ljava/lang/String;I)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c c (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD d d (Lae;[Ljava/lang/String;I)V (LIServerCommandUser;[Ljava/lang/String;I)V
 		ARG 0 serverCommandUser
 	METHOD d d (Lae;)V (LIServerCommandUser;)V
@@ -681,43 +763,43 @@ CLASS cl _cl_ServerCommand_something
 CLASS cm ServerCommandSetBlock
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS cn ServerCommandSetWorldSpawn
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS co ServerCommandSetIdleTimeout
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS cp ServerCommandSpawnPoint
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS cq ServerCommandSeed
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS cr ServerCommandSpreadPlayers
-	METHOD a a (Lae;Ljava/util/List;Lcs;DDLaqs;Z)V (LIServerCommandUser;Ljava/util/List;Lcs;DDLDimension;Z)V
-		ARG 0 serverCommandUser
 	METHOD a a (Ljava/util/Random;IDDDD)[Lcs; (Ljava/util/Random;IDDDD)[Lcs;
 		ARG 0 random
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
-	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+	METHOD a a (Lae;Ljava/util/List;Lcs;DDLaqs;Z)V (LIServerCommandUser;Ljava/util/List;Lcs;DDLDimension;Z)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
 CLASS cs cs
 	METHOD a a (Ljava/util/Random;DDDD)V (Ljava/util/Random;DDDD)V
 		ARG 0 random
@@ -728,84 +810,86 @@ CLASS cs cs
 CLASS ct ServerCommandStats
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS cu ServerCommandStop
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS cv ServerCommandSummon
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS cw ServerCommandTp
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS cxg cxg
+	METHOD toString returnFullObjectName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS cy ServerCommandTestForBlock
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS cz ServerCommandTestFor
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS czg czg
 	METHOD b initializeMap ()Ljava/util/Map; ()Ljava/util/Map;
 CLASS da ServerCommandTime
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS db ServerCommandTitle
 	FIELD a logger
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS dc ServerCommandToggleDownFall
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS dd ServerCommandTrigger
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS de ServerCommandWeather
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverComamndUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS df ServerCommandWhiteList
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS dg ServerCommandWorldBorder
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS di ServerCommandException
 	FIELD a errorObjectArray
 	METHOD <init> <init> (Ljava/lang/String;[Ljava/lang/Object;)V (Ljava/lang/String;[Ljava/lang/Object;)V
@@ -827,21 +911,23 @@ CLASS dt BlockCoords
 	FIELD h X_BITMASK
 	FIELD i Y_BITMASK
 	FIELD j Z_BITMASK
-	METHOD <init> <init> (Lwv;)V (LEntity;)V
-		ARG 0 entity
 	METHOD <init> <init> (Lfd;)V (LBlockCoordsBase;)V
 		ARG 0 location
 	METHOD <init> <init> (III)V (III)V
-		ARG 0 x
-		ARG 1 y
-		ARG 2 z
+		ARG 0 worldX
+		ARG 1 worldY
+		ARG 2 worldZ
+	METHOD <init> <init> (Lwv;)V (LEntity;)V
+		ARG 0 entity
+	METHOD a addDirection (Lel;)Ldt; (LDirection;)LBlockCoords;
+	METHOD a scale (I)Ldt; (I)LBlockCoords;
+		ARG 0 factor
+	METHOD a above ()Ldt; ()LBlockCoords;
 	METHOD a add (DDD)Ldt; (DDD)LBlockCoords;
 		ARG 0 x
 		ARG 1 y
 		ARG 2 z
-	METHOD a addDirection (Lel;)Ldt; (Lel;)LBlockCoords;
-	METHOD a scale (I)Ldt; (I)LBlockCoords;
-		ARG 0 factor
+	METHOD a addDirection (Lel;I)Ldt; (LDirection;I)LBlockCoords;
 	METHOD a fromLong (J)Ldt; (J)LBlockCoords;
 		ARG 0 l
 	METHOD a add (Lfd;)Ldt; (LBlockCoordsBase;)LBlockCoords;
@@ -850,13 +936,11 @@ CLASS dt BlockCoords
 		ARG 0 x
 		ARG 1 y
 		ARG 2 z
-	METHOD a above ()Ldt; ()LBlockCoords;
-	METHOD a addDirection (Lel;I)Ldt; (Lel;I)LBlockCoords;
-	METHOD b below ()Ldt; ()LBlockCoords;
-	METHOD b above (I)Ldt; (I)LBlockCoords;
 	METHOD b substract (Lfd;)Ldt; (LBlockCoordsBase;)LBlockCoords;
-	METHOD c north ()Ldt; ()LBlockCoords;
+	METHOD b above (I)Ldt; (I)LBlockCoords;
+	METHOD b below ()Ldt; ()LBlockCoords;
 	METHOD c below (I)Ldt; (I)LBlockCoords;
+	METHOD c north ()Ldt; ()LBlockCoords;
 	METHOD d north (I)Ldt; (I)LBlockCoords;
 	METHOD d south ()Ldt; ()LBlockCoords;
 	METHOD e south (I)Ldt; (I)LBlockCoords;
@@ -873,20 +957,25 @@ CLASS eh eh
 	METHOD a getRegistryItem (Ljava/lang/Object;)Ljava/lang/Object; (Ljava/lang/Object;)Ljava/lang/Object;
 CLASS ei ei
 	METHOD a getRegistryItem (Ljava/lang/Object;)Ljava/lang/Object; (Ljava/lang/Object;)Ljava/lang/Object;
-CLASS el el
+CLASS el Direction
 	FIELD a Down
 	FIELD b Up
 	FIELD c North
 	FIELD d South
 	FIELD e West
 	FIELD f East
+	METHOD a getCWFacing (Len;)Lel; (Len;)LDirection;
+	METHOD e getYRotation ()Lel; ()LDirection;
+	METHOD f getCCWFacing ()Lel; ()LDirection;
+	METHOD n getXRotation ()Lel; ()LDirection;
+	METHOD p getZRotation ()Lel; ()LDirection;
 CLASS eo eo
 	FIELD a Postive
 	FIELD b Negative
 CLASS ep ep
 	FIELD a Horizontal
 	FIELD b Vertical
-	METHOD a a (Ljava/util/Random;)Lel; (Ljava/util/Random;)Lel;
+	METHOD a a (Ljava/util/Random;)Lel; (Ljava/util/Random;)LDirection;
 		ARG 0 random
 CLASS eq IIterable
 CLASS eu eu
@@ -972,13 +1061,13 @@ CLASS fd BlockCoordsBase
 	FIELD c z
 	FIELD e zeroed
 	METHOD <init> <init> (DDD)V (DDD)V
-		ARG 0 x
-		ARG 1 y
-		ARG 2 z
+		ARG 0 worldX
+		ARG 1 worldY
+		ARG 2 worldZ
 	METHOD <init> <init> (III)V (III)V
-		ARG 0 x
-		ARG 1 y
-		ARG 2 rz
+		ARG 0 worldX
+		ARG 1 worldY
+		ARG 2 worldZ
 	METHOD c distanceSquared (DDD)D (DDD)D
 		ARG 0 x
 		ARG 1 y
@@ -996,25 +1085,25 @@ CLASS fl NbtByteArray
 	FIELD b dataValue
 	METHOD <init> <init> ([B)V ([B)V
 		ARG 0 dataValue
-	METHOD a getNbtTypeId ()B ()B
-	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
-		ARG 0 dataOutput
 	METHOD a inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
 		ARG 0 dataInput
 		ARG 1 depth
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
 	METHOD b clone ()Lgd; ()LNbt;
 	METHOD c getDataValue ()[B ()[B
 CLASS fm NbtByte
 	FIELD b dataValue
 	METHOD <init> <init> (B)V (B)V
 		ARG 0 dataValue
-	METHOD a getNbtTypeId ()B ()B
-	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
-		ARG 0 dataOutput
 	METHOD a inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
 		ARG 0 dataInput
 		ARG 1 depth
 		ARG 2 nbtSizeUtil
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
 	METHOD b clone ()Lgd; ()LNbt;
 	METHOD c getAsLong ()J ()J
 	METHOD d getAsInt ()I ()I
@@ -1025,71 +1114,71 @@ CLASS fm NbtByte
 CLASS fn NbtMap
 	FIELD b logger
 	FIELD c dataMap
-	METHOD a a (Ljava/io/DataInput;Lfx;)B (Ljava/io/DataInput;LNbtSizeUtil;)B
-		ARG 0 dataInput
-		ARG 1 nbtSzieUtil
-	METHOD a put (Ljava/lang/String;Z)V (Ljava/lang/String;Z)V
-		ARG 0 nbtMapKey
-		ARG 1 dataValue
-	METHOD a a (Lfn;)V (LNbtMap;)V
-		ARG 0 nbtMap
 	METHOD a a (BLjava/lang/String;Ljava/io/DataInput;ILfx;)Lgd; (BLjava/lang/String;Ljava/io/DataInput;ILNbtSizeUtil;)LNbt;
 		ARG 0 nbtTypeId
 		ARG 1 elementValue
 		ARG 2 dataInput
 		ARG 4 nbtSizeUtil
-	METHOD a getNbtTypeId ()B ()B
 	METHOD a getAsNbt (Ljava/lang/String;)Lgd; (Ljava/lang/String;)LNbt;
 		ARG 0 nbtMapKey
-	METHOD a put (Ljava/lang/String;Lgd;)V (Ljava/lang/String;LNbt;)V
-		ARG 0 nbtMapKey
-		ARG 1 nbt
-	METHOD a a (Ljava/lang/String;ILjava/lang/ClassCastException;)Lb; (Ljava/lang/String;ILjava/lang/ClassCastException;)LCrashLogger;
-		ARG 0 elementValue
-		ARG 2 cause
-	METHOD a put (Ljava/lang/String;I)V (Ljava/lang/String;I)V
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a a (Lfn;)V (LNbtMap;)V
+		ARG 0 nbtMap
+	METHOD a put (Ljava/lang/String;[I)V (Ljava/lang/String;[I)V
 		ARG 0 nbtMapKey
 		ARG 1 dataValue
 	METHOD a a (Ljava/lang/String;Lgd;Ljava/io/DataOutput;)V (Ljava/lang/String;LNbt;Ljava/io/DataOutput;)V
 		ARG 0 nbtMapKey
 		ARG 1 nbt
 		ARG 2 dataOutput
-	METHOD a put (Ljava/lang/String;J)V (Ljava/lang/String;J)V
+	METHOD a put (Ljava/lang/String;B)V (Ljava/lang/String;B)V
 		ARG 0 nbtMapKey
 		ARG 1 dataValue
 	METHOD a put (Ljava/lang/String;[B)V (Ljava/lang/String;[B)V
 		ARG 0 nbtMapKey
 		ARG 1 dataValue
-	METHOD a put (Ljava/lang/String;B)V (Ljava/lang/String;B)V
+	METHOD a a (Ljava/io/DataInput;Lfx;)B (Ljava/io/DataInput;LNbtSizeUtil;)B
+		ARG 0 dataInput
+		ARG 1 nbtSzieUtil
+	METHOD a put (Ljava/lang/String;S)V (Ljava/lang/String;S)V
+		ARG 0 nbtMapKey
+		ARG 1 dataValue
+	METHOD a put (Ljava/lang/String;J)V (Ljava/lang/String;J)V
+		ARG 0 nbtMapKey
+		ARG 1 dataValue
+	METHOD a put (Ljava/lang/String;I)V (Ljava/lang/String;I)V
 		ARG 0 nbtMapKey
 		ARG 1 dataValue
 	METHOD a put (Ljava/lang/String;F)V (Ljava/lang/String;F)V
 		ARG 0 nbtMapKey
 		ARG 1 dataValue
-	METHOD a put (Ljava/lang/String;S)V (Ljava/lang/String;S)V
+	METHOD a put (Ljava/lang/String;D)V (Ljava/lang/String;D)V
 		ARG 0 nbtMapKey
 		ARG 1 dataValue
 	METHOD a put (Ljava/lang/String;Ljava/lang/String;)V (Ljava/lang/String;Ljava/lang/String;)V
 		ARG 0 nbtMapKey
 		ARG 1 dataValue
-	METHOD a put (Ljava/lang/String;D)V (Ljava/lang/String;D)V
+	METHOD a put (Ljava/lang/String;Z)V (Ljava/lang/String;Z)V
 		ARG 0 nbtMapKey
 		ARG 1 dataValue
-	METHOD a put (Ljava/lang/String;[I)V (Ljava/lang/String;[I)V
+	METHOD a put (Ljava/lang/String;Lgd;)V (Ljava/lang/String;LNbt;)V
 		ARG 0 nbtMapKey
-		ARG 1 dataValue
-	METHOD b b (Ljava/io/DataInput;Lfx;)Ljava/lang/String; (Ljava/io/DataInput;LNbtSizeUtil;)Ljava/lang/String;
-		ARG 0 dataInput
-		ARG 1 nbtSizeUtil
+		ARG 1 nbt
+	METHOD a a (Ljava/lang/String;ILjava/lang/ClassCastException;)Lb; (Ljava/lang/String;ILjava/lang/ClassCastException;)LCrashLogger;
+		ARG 0 elementValue
+		ARG 2 cause
+	METHOD b getNbtTypeId (Ljava/lang/String;)B (Ljava/lang/String;)B
+		ARG 0 nbtMapKey
 	METHOD b isMapTypeOf (Ljava/lang/String;I)Z (Ljava/lang/String;I)Z
 		ARG 0 nbtMapKey
 		ARG 1 nbtTypeId
-	METHOD b getNbtTypeId (Ljava/lang/String;)B (Ljava/lang/String;)B
-		ARG 0 nbtMapKey
-	METHOD c getAsNbtList (Ljava/lang/String;I)Lfv; (Ljava/lang/String;I)LNbtLists;
+	METHOD b b (Ljava/io/DataInput;Lfx;)Ljava/lang/String; (Ljava/io/DataInput;LNbtSizeUtil;)Ljava/lang/String;
+		ARG 0 dataInput
+		ARG 1 nbtSizeUtil
+	METHOD c containsKey (Ljava/lang/String;)Z (Ljava/lang/String;)Z
 		ARG 0 nbtMapKey
 	METHOD c getNbtMapKeys ()Ljava/util/Set; ()Ljava/util/Set;
-	METHOD c containsKey (Ljava/lang/String;)Z (Ljava/lang/String;)Z
+	METHOD c getAsNbtList (Ljava/lang/String;I)Lfv; (Ljava/lang/String;I)LNbtLists;
 		ARG 0 nbtMapKey
 	METHOD c_ isEmpty ()Z ()Z
 	METHOD d getAsByte (Ljava/lang/String;)B (Ljava/lang/String;)B
@@ -1123,12 +1212,12 @@ CLASS fq NbtDouble
 	FIELD b dataValue
 	METHOD <init> <init> (D)V (D)V
 		ARG 0 dataValue
-	METHOD a getNbtTypeId ()B ()B
-	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
-		ARG 0 dataOutput
 	METHOD a inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
 		ARG 0 dataInput
 		ARG 1 depth
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
 	METHOD b clone ()Lgd; ()LNbt;
 	METHOD c getAsLong ()J ()J
 	METHOD d getAsInt ()I ()I
@@ -1137,23 +1226,23 @@ CLASS fq NbtDouble
 	METHOD g getAsDouble ()D ()D
 	METHOD h getAsFloat ()F ()F
 CLASS fr NbtEnd
-	METHOD a getNbtTypeId ()B ()B
-	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
-		ARG 0 dataOutput
 	METHOD a inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
 		ARG 0 dataInput
 		ARG 1 depth
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
 	METHOD b clone ()Lgd; ()LNbt;
 CLASS fs NbtFloat
 	FIELD b dataValue
 	METHOD <init> <init> (F)V (F)V
 		ARG 0 dataValue
-	METHOD a getNbtTypeId ()B ()B
-	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
-		ARG 0 dataOutput
 	METHOD a inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
 		ARG 0 dataInput
 		ARG 1 depth
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
 	METHOD b clone ()Lgd; ()LNbt;
 	METHOD c getAsLong ()J ()J
 	METHOD d getAsInt ()I ()I
@@ -1165,24 +1254,24 @@ CLASS ft NbtIntArray
 	FIELD b dataValue
 	METHOD <init> <init> ([I)V ([I)V
 		ARG 0 dataValue
-	METHOD a getNbtTypeId ()B ()B
-	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
-		ARG 0 dataOutput
 	METHOD a inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
 		ARG 0 dataInput
 		ARG 1 depth
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
 	METHOD b clone ()Lgd; ()LNbt;
 	METHOD c getDataValue ()[I ()[I
 CLASS fu NbtInt
 	FIELD b dataValue
 	METHOD <init> <init> (I)V (I)V
 		ARG 0 dataValue
-	METHOD a getNbtTypeId ()B ()B
-	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
-		ARG 0 dataOutput
 	METHOD a inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
 		ARG 0 dataInput
 		ARG 1 depth
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
 	METHOD b clone ()Lgd; ()LNbt;
 	METHOD c getAsLong ()J ()J
 	METHOD d getAsInt ()I ()I
@@ -1201,13 +1290,13 @@ CLASS fv NbtLists
 	METHOD a getNbtTypeId ()B ()B
 	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
 		ARG 0 dataOutput
+	METHOD a set (ILgd;)V (ILNbt;)V
+		ARG 0 index
+		ARG 1 nbt
 	METHOD a add (Lgd;)V (LNbt;)V
 		ARG 0 nbt
 	METHOD a remove (I)Lgd; (I)LNbt;
 		ARG 0 index
-	METHOD a set (ILgd;)V (ILNbt;)V
-		ARG 0 index
-		ARG 1 nbt
 	METHOD b getAsNbtMap (I)Lfn; (I)LNbtMap;
 		ARG 0 index
 	METHOD b clone ()Lgd; ()LNbt;
@@ -1227,12 +1316,12 @@ CLASS fw NbtLong
 	FIELD b dataValue
 	METHOD <init> <init> (J)V (J)V
 		ARG 0 dataValue
-	METHOD a getNbtTypeId ()B ()B
-	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
-		ARG 0 dataOutput
 	METHOD a inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
 		ARG 0 dataInput
 		ARG 1 depth
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
 	METHOD b clone ()Lgd; ()LNbt;
 	METHOD c getAsLong ()J ()J
 	METHOD d getAsInt ()I ()I
@@ -1252,31 +1341,31 @@ CLASS fy NbtSizeUtilDefault
 	METHOD a addSize (J)V (J)V
 		ARG 0 size
 CLASS fz StreamCompressUtil
-	METHOD a readCompressedInputStream (Ljava/io/InputStream;)Lfn; (Ljava/io/InputStream;)LNbtMap;
-		ARG 0 inputStream
-	METHOD a readDataInputToNbtMap (Ljava/io/DataInput;Lfx;)Lfn; (Ljava/io/DataInput;LNbtSizeUtil;)LNbtMap;
-		ARG 0 dataInput
-		ARG 1 nbtSizeUtil
-	METHOD a readDataInputStreamToNbtMap (Ljava/io/DataInputStream;)Lfn; (Ljava/io/DataInputStream;)LNbtMap;
-		ARG 0 dataInputStream
-	METHOD a writeNbtToDataOutput (Lgd;Ljava/io/DataOutput;)V (LNbt;Ljava/io/DataOutput;)V
-		ARG 0 nbt
-		ARG 1 dataOutput
 	METHOD a readDataInputToNbt (Ljava/io/DataInput;ILfx;)Lgd; (Ljava/io/DataInput;ILNbtSizeUtil;)LNbt;
 		ARG 0 dataInput
 		ARG 1 depth
 		ARG 2 nbtSizeUtil
-	METHOD a writeSafelyNbtMapToFile (Lfn;Ljava/io/File;)V (LNbtMap;Ljava/io/File;)V
-		ARG 0 nbtMap
-		ARG 1 file
+	METHOD a readDataInputToNbtMap (Ljava/io/DataInput;Lfx;)Lfn; (Ljava/io/DataInput;LNbtSizeUtil;)LNbtMap;
+		ARG 0 dataInput
+		ARG 1 nbtSizeUtil
 	METHOD a writeNbtMapToDataOutput (Lfn;Ljava/io/DataOutput;)V (LNbtMap;Ljava/io/DataOutput;)V
 		ARG 0 nbtMap
+		ARG 1 dataOutput
+	METHOD a writeNbtToDataOutput (Lgd;Ljava/io/DataOutput;)V (LNbt;Ljava/io/DataOutput;)V
+		ARG 0 nbt
 		ARG 1 dataOutput
 	METHOD a writeNbtMapToOutputStream (Lfn;Ljava/io/OutputStream;)V (LNbtMap;Ljava/io/OutputStream;)V
 		ARG 0 nbtMap
 		ARG 1 outputStream
+	METHOD a readCompressedInputStream (Ljava/io/InputStream;)Lfn; (Ljava/io/InputStream;)LNbtMap;
+		ARG 0 inputStream
 	METHOD a readFileToNbtMap (Ljava/io/File;)Lfn; (Ljava/io/File;)LNbtMap;
 		ARG 0 file
+	METHOD a readDataInputStreamToNbtMap (Ljava/io/DataInputStream;)Lfn; (Ljava/io/DataInputStream;)LNbtMap;
+		ARG 0 dataInputStream
+	METHOD a writeSafelyNbtMapToFile (Lfn;Ljava/io/File;)V (LNbtMap;Ljava/io/File;)V
+		ARG 0 nbtMap
+		ARG 1 file
 	METHOD b writeNbtMapToFile (Lfn;Ljava/io/File;)V (LNbtMap;Ljava/io/File;)V
 		ARG 0 nbtMap
 		ARG 1 file
@@ -1290,12 +1379,12 @@ CLASS gb NbtShort
 	FIELD b dataValue
 	METHOD <init> <init> (S)V (S)V
 		ARG 0 dataValue
-	METHOD a getNbtTypeId ()B ()B
-	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
-		ARG 0 dataOutput
 	METHOD a inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
 		ARG 0 dataInput
 		ARG 1 depth
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
 	METHOD b clone ()Lgd; ()LNbt;
 	METHOD c getAsLong ()J ()J
 	METHOD d getAsInt ()I ()I
@@ -1307,25 +1396,25 @@ CLASS gc NbtStrings
 	FIELD b dataValue
 	METHOD <init> <init> (Ljava/lang/String;)V (Ljava/lang/String;)V
 		ARG 0 dataValue
-	METHOD a getNbtTypeId ()B ()B
-	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
-		ARG 0 dataOutput
 	METHOD a inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
 		ARG 0 dataInput
 		ARG 1 depth
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
 	METHOD a_ getNbtString ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD b clone ()Lgd; ()LNbt;
 	METHOD c_ isEmpty ()Z ()Z
 CLASS gd Nbt
 	FIELD a NBTTypes
-	METHOD a getNbtTypeId ()B ()B
-	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
-		ARG 0 dataOutput
+	METHOD a createNbt (B)Lgd; (B)LNbt;
+		ARG 0 NbtTypeId
 	METHOD a inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
 		ARG 0 dataInput
 		ARG 2 nbtSizeUtil
-	METHOD a createNbt (B)Lgd; (B)LNbt;
-		ARG 0 NbtTypeId
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
 	METHOD a_ getNbtString ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD b clone ()Lgd; ()LNbt;
 	METHOD c_ isEmpty ()Z ()Z
@@ -1347,14 +1436,14 @@ CLASS gm gm
 	FIELD a cipher
 	METHOD <init> <init> (Ljavax/crypto/Cipher;)V (Ljavax/crypto/Cipher;)V
 		ARG 0 cipher
+	METHOD a a (Lio/netty/buffer/ByteBuf;Lio/netty/buffer/ByteBuf;)V (Lio/netty/buffer/ByteBuf;Lio/netty/buffer/ByteBuf;)V
+		ARG 0 byteBuf1
+		ARG 1 byteBuf2
 	METHOD a a (Lio/netty/buffer/ByteBuf;)[B (Lio/netty/buffer/ByteBuf;)[B
 		ARG 0 byteBuf
 	METHOD a a (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;)Lio/netty/buffer/ByteBuf; (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;)Lio/netty/buffer/ByteBuf;
 		ARG 0 channelHandlerContext
 		ARG 1 byteBuf
-	METHOD a a (Lio/netty/buffer/ByteBuf;Lio/netty/buffer/ByteBuf;)V (Lio/netty/buffer/ByteBuf;Lio/netty/buffer/ByteBuf;)V
-		ARG 0 byteBuf1
-		ARG 1 byteBuf2
 CLASS gn gn
 	METHOD <init> <init> (Ljavax/crypto/Cipher;)V (Ljavax/crypto/Cipher;)V
 		ARG 0 cipher
@@ -1393,14 +1482,14 @@ CLASS gr gr
 	FIELD h queue
 	FIELD i channel
 	FIELD j socketAddress
-	METHOD a a (Ljava/net/InetAddress;I)Lgr; (Ljava/net/InetAddress;I)Lgr;
-		ARG 0 inetAddress
-	METHOD a a (Lid;Lio/netty/util/concurrent/GenericFutureListener;[Lio/netty/util/concurrent/GenericFutureListener;)V (Lid;Lio/netty/util/concurrent/GenericFutureListener;[Lio/netty/util/concurrent/GenericFutureListener;)V
-		ARG 1 genericFutureListener
 	METHOD a a (Ljava/net/SocketAddress;)Lgr; (Ljava/net/SocketAddress;)Lgr;
 		ARG 0 socketAddress
+	METHOD a a (Ljava/net/InetAddress;I)Lgr; (Ljava/net/InetAddress;I)Lgr;
+		ARG 0 inetAddress
 	METHOD a a (Ljavax/crypto/SecretKey;)V (Ljavax/crypto/SecretKey;)V
 		ARG 0 secretKey
+	METHOD a a (Lid;Lio/netty/util/concurrent/GenericFutureListener;[Lio/netty/util/concurrent/GenericFutureListener;)V (Lid;Lio/netty/util/concurrent/GenericFutureListener;[Lio/netty/util/concurrent/GenericFutureListener;)V
+		ARG 1 genericFutureListener
 	METHOD channelActive channelActive (Lio/netty/channel/ChannelHandlerContext;)V (Lio/netty/channel/ChannelHandlerContext;)V
 		ARG 0 channelHandlerContext
 	METHOD channelInactive channelInactive (Lio/netty/channel/ChannelHandlerContext;)V (Lio/netty/channel/ChannelHandlerContext;)V
@@ -1484,9 +1573,9 @@ CLASS hs EnumHoverAction
 		ARG 1 intValue
 		ARG 2 name
 		ARG 3 allowInChat
+	METHOD a allowInChat ()Z ()Z
 	METHOD a getByName (Ljava/lang/String;)Lhs; (Ljava/lang/String;)LEnumHoverAction;
 		ARG 0 name
-	METHOD a allowInChat ()Z ()Z
 	METHOD b getName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD getByName getByName (Ljava/lang/String;)Lhs; (Ljava/lang/String;)LEnumHoverAction;
 		ARG 0 name
@@ -1499,15 +1588,15 @@ CLASS hv hv
 	FIELD g isObfuscated
 	FIELD h clickEvent
 	FIELD i hoverEvent
+	METHOD a setTextColor (La;)Lhv; (LTextColor;)Lhv;
+		ARG 0 textColor
+	METHOD a getTextColor ()La; ()LTextColor;
 	METHOD a setHoverEvent (Lhr;)Lhv; (LHoverEvent;)Lhv;
 		ARG 0 hoverEvent
 	METHOD a IsBold (Ljava/lang/Boolean;)Lhv; (Ljava/lang/Boolean;)Lhv;
 		ARG 0 isBold
-	METHOD a getTextColor ()La; ()LTextColor;
 	METHOD a setClickEvent (Lhm;)Lhv; (LClickEvent;)Lhv;
 		ARG 0 clickEvent
-	METHOD a setTextColor (La;)Lhv; (LTextColor;)Lhv;
-		ARG 0 textColor
 	METHOD b IsBold ()Z ()Z
 	METHOD b IsItalic (Ljava/lang/Boolean;)Lhv; (Ljava/lang/Boolean;)Lhv;
 		ARG 0 isItalic
@@ -1525,14 +1614,14 @@ CLASS hv hv
 	METHOD h getClickEvent ()Lhm; ()LClickEvent;
 	METHOD i getHoverEvent ()Lhr; ()LHoverEvent;
 CLASS hw hw
+	METHOD a setTextColor (La;)Lhv; (LTextColor;)Lhv;
+		ARG 0 textColor
+	METHOD a getTextColor ()La; ()LTextColor;
 	METHOD a setHoverEvent (Lhr;)Lhv; (LHoverEvent;)Lhv;
 		ARG 0 hoverEvent
 	METHOD a IsBold (Ljava/lang/Boolean;)Lhv; (Ljava/lang/Boolean;)Lhv;
-	METHOD a getTextColor ()La; ()LTextColor;
 	METHOD a setClickEvent (Lhm;)Lhv; (LClickEvent;)Lhv;
 		ARG 0 clickEvent
-	METHOD a setTextColor (La;)Lhv; (LTextColor;)Lhv;
-		ARG 0 textColor
 	METHOD b IsBold ()Z ()Z
 	METHOD b IsItalic (Ljava/lang/Boolean;)Lhv; (Ljava/lang/Boolean;)Lhv;
 	METHOD c IsStrikethrough (Ljava/lang/Boolean;)Lhv; (Ljava/lang/Boolean;)Lhv;
@@ -1568,9 +1657,9 @@ CLASS ij ij
 	FIELD d YRotation
 	FIELD e XRotation
 CLASS il il
-	METHOD <init> <init> (Lwv;I)V (LEntity;I)V
-		ARG 0 entity
 	METHOD <init> <init> (Lwv;II)V (LEntity;II)V
+		ARG 0 entity
+	METHOD <init> <init> (Lwv;I)V (LEntity;I)V
 		ARG 0 entity
 CLASS in in
 	METHOD <init> <init> (Lwv;)V (LEntity;)V
@@ -1598,25 +1687,25 @@ CLASS j CrashLogInfo
 	METHOD <init> <init> (Lb;Ljava/lang/String;)V (LCrashLogger;Ljava/lang/String;)V
 		ARG 0 crashLogger
 		ARG 1 name
+	METHOD a a (Lj;Ldt;Latp;I)V (LCrashLogInfo;LBlockCoords;LBlock;I)V
+		ARG 0 crashLogInfo
+	METHOD a getDetailsReport (Ljava/lang/StringBuilder;)V (Ljava/lang/StringBuilder;)V
+		ARG 0 reportStringBuilder
+	METHOD a getStackTraceElementsArray ()[Ljava/lang/StackTraceElement; ()[Ljava/lang/StackTraceElement;
+	METHOD a a (Lj;Ldt;Lbea;)V (LCrashLogInfo;LBlockCoords;Lbea;)V
+		ARG 0 crashLogInfo
 	METHOD a a (Ljava/lang/StackTraceElement;Ljava/lang/StackTraceElement;)Z (Ljava/lang/StackTraceElement;Ljava/lang/StackTraceElement;)Z
 		ARG 0 stackTraceElement1
 		ARG 1 stackTraceElement2
-	METHOD a a (Lj;Ldt;Latp;I)V (LCrashLogInfo;LBlockCoords;LBlock;I)V
-		ARG 0 crashLogInfo
+	METHOD a addCrashInfo (Ljava/lang/String;Ljava/lang/Object;)V (Ljava/lang/String;Ljava/lang/Object;)V
+		ARG 0 elementName
+		ARG 1 elementValue
 	METHOD a addCrashInfo (Ljava/lang/String;Ljava/lang/Throwable;)V (Ljava/lang/String;Ljava/lang/Throwable;)V
 		ARG 0 elementName
 		ARG 1 elementValue
 	METHOD a addCallable (Ljava/lang/String;Ljava/util/concurrent/Callable;)V (Ljava/lang/String;Ljava/util/concurrent/Callable;)V
 		ARG 0 elementName
 		ARG 1 callable
-	METHOD a a (Lj;Ldt;Lbea;)V (LCrashLogInfo;LBlockCoords;Lbea;)V
-		ARG 0 crashLogInfo
-	METHOD a getDetailsReport (Ljava/lang/StringBuilder;)V (Ljava/lang/StringBuilder;)V
-		ARG 0 reportStringBuilder
-	METHOD a addCrashInfo (Ljava/lang/String;Ljava/lang/Object;)V (Ljava/lang/String;Ljava/lang/Object;)V
-		ARG 0 elementName
-		ARG 1 elementValue
-	METHOD a getStackTraceElementsArray ()[Ljava/lang/StackTraceElement; ()[Ljava/lang/StackTraceElement;
 CLASS jk jk
 	METHOD <init> <init> (Lwv;B)V (LEntity;B)V
 		ARG 0 entity
@@ -1689,9 +1778,9 @@ CLASS lw lw
 	FIELD b RequestStats
 	FIELD c OpenInventoryAchivement
 CLASS md md
-	METHOD <init> <init> (Lwv;Lbru;)V (LEntity;Lbru;)V
-		ARG 0 entity
 	METHOD <init> <init> (Lwv;Lme;)V (LEntity;Lme;)V
+		ARG 0 entity
+	METHOD <init> <init> (Lwv;Lbru;)V (LEntity;Lbru;)V
 		ARG 0 entity
 	METHOD a a (Laqs;)Lwv; (LDimension;)LEntity;
 		ARG 0 dimension
@@ -1764,6 +1853,14 @@ CLASS nu nu
 	METHOD serialize serialize (Lnt;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement; (Lnt;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement;
 		ARG 1 type
 		ARG 2 jsonSerializationContext
+CLASS oa ObjectName
+	FIELD a modName
+	FIELD b objectname
+	METHOD <init> <init> (I[Ljava/lang/String;)V (I[Ljava/lang/String;)V
+		ARG 0 index
+	METHOD a returnObjectName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD b returnModName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD toString returnFullObjectName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS od od
 	FIELD a printStream
 	FIELD c logger
@@ -1790,7 +1887,7 @@ CLASS pc pc
 CLASS qk qk
 	METHOD <init> <init> (Laqs;)V (LDimension;)V
 		ARG 0 dimension
-	METHOD a a (Lahb;Laqs;Lamh;Ldt;Lel;FFF)Z (Lahb;LDimension;Lamh;LBlockCoords;Lel;FFF)Z
+	METHOD a a (Lahb;Laqs;Lamh;Ldt;Lel;FFF)Z (Lahb;LDimension;Lamh;LBlockCoords;LDirection;FFF)Z
 		ARG 1 dimension
 	METHOD a a (Lahb;Laqs;Lamh;)Z (Lahb;LDimension;Lamh;)Z
 		ARG 1 dimension
@@ -1798,22 +1895,23 @@ CLASS ql ql
 	FIELD a dimensionServer
 	METHOD <init> <init> (Lnet/minecraft/server/MinecraftServer;Lbqw;ILqt;Luw;)V (Lnet/minecraft/server/MinecraftServer;Lbqw;ILDimensionServer;Luw;)V
 		ARG 3 dimensionServer
+	METHOD b getDimension ()Laqs; ()LDimension;
 CLASS qn qn
 	FIELD a logger
 	FIELD b dimensionServer
 	METHOD <init> <init> (Lqt;)V (LDimensionServer;)V
 		ARG 0 dimensionServer
-	METHOD a a (Lwv;II)V (LEntity;II)V
+	METHOD a a (Lwv;Lid;)V (LEntity;Lid;)V
 		ARG 0 entity
 	METHOD a a (Lwv;IIZ)V (LEntity;IIZ)V
 		ARG 0 entity
+	METHOD a a (Lwv;II)V (LEntity;II)V
+		ARG 0 entity
 	METHOD a a (Lwv;)V (LEntity;)V
 		ARG 0 entity
-	METHOD a a (Lwv;Lid;)V (LEntity;Lid;)V
+	METHOD b b (Lwv;)V (LEntity;)V
 		ARG 0 entity
 	METHOD b b (Lwv;Lid;)V (LEntity;Lid;)V
-		ARG 0 entity
-	METHOD b b (Lwv;)V (LEntity;)V
 		ARG 0 entity
 CLASS qp qp
 	FIELD a minecraftServer
@@ -1838,6 +1936,7 @@ CLASS qs qs
 	METHOD a a (Laqs;Ljava/lang/String;Ldt;)Ldt; (LDimension;Ljava/lang/String;LBlockCoords;)LBlockCoords;
 		ARG 0 dimension
 CLASS qt DimensionServer
+	METHOD b getDimension ()Laqs; ()LDimension;
 CLASS qw qw
 	FIELD b minecraftServer
 	FIELD bF logger
@@ -1846,18 +1945,18 @@ CLASS qw qw
 		ARG 0 minecraftServer
 		ARG 1 dimensionServer
 		ARG 2 gameProfile
-	METHOD a a (DZLatp;Ldt;)V (DZLBlock;LBlockCoords;)V
-		ARG 2 block
 	METHOD a a (Lfn;)V (LNbtMap;)V
 		ARG 0 nbtMap
+	METHOD a a (DZLatp;Ldt;)V (DZLBlock;LBlockCoords;)V
+		ARG 2 block
 	METHOD a a (Lwv;)V (LEntity;)V
 		ARG 0 entity
 	METHOD a a (Lwv;I)V (LEntity;I)V
 		ARG 0 entity
-	METHOD b b (Lfn;)V (LNbtMap;)V
-		ARG 0 nbtMap
 	METHOD b b (Lwv;)V (LEntity;)V
 		ARG 0 entity
+	METHOD b b (Lfn;)V (LNbtMap;)V
+		ARG 0 nbtMap
 	METHOD c c (Lwv;)V (LEntity;)V
 		ARG 0 entity
 	METHOD e e (Lwv;)V (LEntity;)V
@@ -1868,12 +1967,12 @@ CLASS qx qx
 	FIELD a dimension
 	METHOD <init> <init> (Laqs;)V (LDimension;)V
 		ARG 0 dimension
-	METHOD a a (Lahb;Laqs;Lamh;Ldt;Lel;FFF)Z (Lahb;LDimension;Lamh;LBlockCoords;Lel;FFF)Z
+	METHOD a a (Lahb;Laqs;Lamh;Ldt;Lel;FFF)Z (Lahb;LDimension;Lamh;LBlockCoords;LDirection;FFF)Z
+		ARG 1 dimension
+	METHOD a a (Lahb;Laqs;Lamh;)Z (Lahb;LDimension;Lamh;)Z
 		ARG 1 dimension
 	METHOD a a (Lqt;)V (LDimensionServer;)V
 		ARG 0 dimension
-	METHOD a a (Lahb;Laqs;Lamh;)Z (Lahb;LDimension;Lamh;)Z
-		ARG 1 dimension
 CLASS qy qy
 	FIELD a entity1
 	FIELD p logger
@@ -1915,24 +2014,10 @@ CLASS uv MathUtil
 	FIELD a squareRootOfTwo
 	FIELD b sinLookupTable
 	FIELD c logBaseTwoDeBruijnMultiplyBitPosition
-	METHOD a average ([J)D ([J)D
-		ARG 0 valuesArray
 	METHOD a parseStringToDouble (Ljava/lang/String;D)D (Ljava/lang/String;D)D
 		ARG 0 value
 		ARG 1 failureDefaultValue
-	METHOD a absoluteValue (I)I (I)I
-		ARG 0 value
 	METHOD a findFirstFloatInMiddle (FFF)F (FFF)F
-		ARG 0 value
-		ARG 1 knownLower
-		ARG 2 knownUpper
-	METHOD a squareRoot (D)F (D)F
-		ARG 0 value
-	METHOD a findMaxDoubleParseString (Ljava/lang/String;DD)D (Ljava/lang/String;DD)D
-		ARG 0 value
-		ARG 1 failureDefaultValue
-		ARG 2 value2
-	METHOD a findFirstDoubleInMiddle (DDD)D (DDD)D
 		ARG 0 value
 		ARG 1 knownLower
 		ARG 2 knownUpper
@@ -1940,43 +2025,57 @@ CLASS uv MathUtil
 		ARG 0 value
 		ARG 1 failureDefaultValue
 		ARG 2 value2
-	METHOD a getUUID (Ljava/util/Random;)Ljava/util/UUID; (Ljava/util/Random;)Ljava/util/UUID;
-		ARG 0 random
 	METHOD a findFirstIntInMiddle (III)I (III)I
 		ARG 0 value
 		ARG 1 knownLower
 		ARG 2 knownUpper
+	METHOD a getRandomDouble (Ljava/util/Random;DD)D (Ljava/util/Random;DD)D
+		ARG 0 random
+		ARG 1 min
+		ARG 2 max
+	METHOD a squareRoot (D)F (D)F
+		ARG 0 value
+	METHOD a average ([J)D ([J)D
+		ARG 0 valuesArray
 	METHOD a sin (F)F (F)F
 		ARG 0 value
 	METHOD a parseStringToInt (Ljava/lang/String;I)I (Ljava/lang/String;I)I
 		ARG 0 value
 		ARG 1 failureDefaultValue
-	METHOD a findMaxAbsoluteValue (DD)D (DD)D
-		ARG 0 value1
-		ARG 1 value2
-	METHOD a getRandomInt (Ljava/util/Random;II)I (Ljava/util/Random;II)I
-		ARG 0 random
-		ARG 1 min
-		ARG 2 max
-	METHOD a getRandomDouble (Ljava/util/Random;DD)D (Ljava/util/Random;DD)D
-		ARG 0 random
-		ARG 1 min
-		ARG 2 max
 	METHOD a getRandomFloat (Ljava/util/Random;FF)F (Ljava/util/Random;FF)F
 		ARG 0 random
 		ARG 1 min
 		ARG 2 max
-	METHOD b roundUpToNearestPowerOfTwo (I)I (I)I
+	METHOD a getUUID (Ljava/util/Random;)Ljava/util/UUID; (Ljava/util/Random;)Ljava/util/UUID;
+		ARG 0 random
+	METHOD a findFirstDoubleInMiddle (DDD)D (DDD)D
 		ARG 0 value
+		ARG 1 knownLower
+		ARG 2 knownUpper
+	METHOD a absoluteValue (I)I (I)I
+		ARG 0 value
+	METHOD a findMaxAbsoluteValue (DD)D (DD)D
+		ARG 0 value1
+		ARG 1 value2
+	METHOD a findMaxDoubleParseString (Ljava/lang/String;DD)D (Ljava/lang/String;DD)D
+		ARG 0 value
+		ARG 1 failureDefaultValue
+		ARG 2 value2
+	METHOD a getRandomInt (Ljava/util/Random;II)I (Ljava/util/Random;II)I
+		ARG 0 random
+		ARG 1 min
+		ARG 2 max
 	METHOD b cos (F)F (F)F
 		ARG 0 value
 	METHOD b truncateToInt (D)I (D)I
 		ARG 0 value
-	METHOD c floorDoubleToInt (D)I (D)I
+	METHOD b roundUpToNearestPowerOfTwo (I)I (I)I
+		ARG 0 value
+	METHOD c logBaseTwo (I)I (I)I
 		ARG 0 value
 	METHOD c squareRoot (F)F (F)F
 		ARG 0 value
-	METHOD c logBaseTwo (I)I (I)I
+	METHOD c floorDoubleToInt (D)I (D)I
 		ARG 0 value
 	METHOD d isPowerOfTwo (I)Z (I)Z
 		ARG 0 value
@@ -1984,15 +2083,15 @@ CLASS uv MathUtil
 		ARG 0 value
 	METHOD d floorFloatToInt (F)I (F)I
 		ARG 0 value
-	METHOD e absoluteValueRoundToInt (D)I (D)I
-		ARG 0 value
 	METHOD e absoluteValue (F)F (F)F
+		ARG 0 value
+	METHOD e absoluteValueRoundToInt (D)I (D)I
 		ARG 0 value
 	METHOD e logBaseTwoDeBruijnFormula (I)I (I)I
 		ARG 0 value
+	METHOD f ceilingDoubleToInt (D)I (D)I
 	METHOD f ceilingFloatToInt (F)I (F)I
 		ARG 0 value
-	METHOD f ceilingDoubleToInt (D)I (D)I
 	METHOD g convertDoubleToPositive180ToNegative180 (D)D (D)D
 		ARG 0 value
 	METHOD g convertFloatToPositive180ToNegative180 (F)F (F)F
@@ -2001,7 +2100,13 @@ CLASS w OSName
 	METHOD a getOSName ()Lx; ()LOSType;
 CLASS wv Entity
 	FIELD V random
+	FIELD ae chunkX
+	FIELD af cubeY
+	FIELD ag chunkZ
 	FIELD ao uuid
+	FIELD s worldX
+	FIELD t worldY
+	FIELD u worldZ
 CLASS x OSType
 	FIELD a Linux
 	FIELD b Solaris
@@ -2014,29 +2119,29 @@ CLASS y _y_IServerCommand_something
 		ARG 0 serverCommandUser
 		ARG 1 serverCommand
 CLASS z ServerCommand
+	METHOD a a (Lae;Ljava/lang/String;)Lqw; (LIServerCommandUser;Ljava/lang/String;)Lqw;
+		ARG 0 serverCommandUser
+	METHOD a a (Lae;)Z (LIServerCommandUser;)Z
+		ARG 0 serverCommandUser
+	METHOD a a (Lae;Lac;Ljava/lang/String;[Ljava/lang/Object;)V (LIServerCommandUser;LIServerCommand;Ljava/lang/String;[Ljava/lang/Object;)V
+		ARG 0 serverCommandUser
+		ARG 1 serverCommand
+	METHOD a a (Lae;Lac;ILjava/lang/String;[Ljava/lang/Object;)V (LIServerCommandUser;LIServerCommand;ILjava/lang/String;[Ljava/lang/Object;)V
+		ARG 0 serverCommandUser
+		ARG 1 serverCommand
 	METHOD a a (Lae;[Ljava/lang/String;I)Lho; (LIServerCommandUser;[Ljava/lang/String;I)Lho;
+		ARG 0 serverCommandUser
+	METHOD a a (Lae;[Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;[Ljava/lang/String;LBlockCoords;)Ljava/util/List;
 		ARG 0 serverCommandUser
 	METHOD a a (Lae;[Ljava/lang/String;IZ)Ldt; (LIServerCommandUser;[Ljava/lang/String;IZ)LBlockCoords;
 		ARG 0 serverCommandUser
 	METHOD a a (Lae;Ljava/lang/String;Ljava/lang/Class;)Lwv; (LIServerCommandUser;Ljava/lang/String;Ljava/lang/Class;)LEntity;
 		ARG 0 serverCommandUser
-	METHOD a a (Lae;Lac;ILjava/lang/String;[Ljava/lang/Object;)V (LIServerCommandUser;LIServerCommand;ILjava/lang/String;[Ljava/lang/Object;)V
-		ARG 0 serverCommandUser
-		ARG 1 serverCommand
-	METHOD a a (Lae;)Z (LIServerCommandUser;)Z
-		ARG 0 serverCommandUser
-	METHOD a a (Lae;Ljava/lang/String;)Lqw; (LIServerCommandUser;Ljava/lang/String;)Lqw;
-		ARG 0 serverCommandUser
-	METHOD a a (Lae;Lac;Ljava/lang/String;[Ljava/lang/Object;)V (LIServerCommandUser;LIServerCommand;Ljava/lang/String;[Ljava/lang/Object;)V
-		ARG 0 serverCommandUser
-		ARG 1 serverCommand
-	METHOD a a (Lae;[Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;[Ljava/lang/String;LBlockCoords;)Ljava/util/List;
-		ARG 0 serverCommandUser
-	METHOD b b (Lae;Ljava/lang/String;)Lwv; (LIServerCommandUser;Ljava/lang/String;)LEntity;
+	METHOD b b (Lae;[Ljava/lang/String;IZ)Lho; (LIServerCommandUser;[Ljava/lang/String;IZ)Lho;
 		ARG 0 serverCommandUser
 	METHOD b b (Lae;)Lqw; (LIServerCommandUser;)Lqw;
 		ARG 0 serverCommandUser
-	METHOD b b (Lae;[Ljava/lang/String;IZ)Lho; (LIServerCommandUser;[Ljava/lang/String;IZ)Lho;
+	METHOD b b (Lae;Ljava/lang/String;)Lwv; (LIServerCommandUser;Ljava/lang/String;)LEntity;
 		ARG 0 serverCommandUser
 	METHOD c c (Lae;Ljava/lang/String;)Ljava/util/List; (LIServerCommandUser;Ljava/lang/String;)Ljava/util/List;
 		ARG 0 serverCommandUser
