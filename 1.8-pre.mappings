@@ -770,6 +770,9 @@ CLASS ez IRegistry
 	METHOD a addRegistryItem (Ljava/lang/Object;Ljava/lang/Object;)V (Ljava/lang/Object;Ljava/lang/Object;)V
 		ARG 0 registryItemKey
 		ARG 1 registryItem
+CLASS fa fa
+	METHOD <init> <init> (Lfv;)V (LNbtLists;)V
+		ARG 0 nbtLists
 CLASS fb Registry
 	FIELD a logger
 	FIELD c registryMap
@@ -1068,6 +1071,41 @@ CLASS fx NbtSizeUtil
 CLASS fy NbtSizeUtilDefault
 	METHOD a addSize (J)V (J)V
 		ARG 0 size
+CLASS fz StreamCompressUtil
+	METHOD a readCompressedInputStream (Ljava/io/InputStream;)Lfn; (Ljava/io/InputStream;)LNbtMap;
+		ARG 0 inputStream
+	METHOD a readDataInputStreamToNbtMap (Ljava/io/DataInputStream;)Lfn; (Ljava/io/DataInputStream;)LNbtMap;
+		ARG 0 dataInputStream
+	METHOD a readDataInputToNbtMap (Ljava/io/DataInput;Lfx;)Lfn; (Ljava/io/DataInput;LNbtSizeUtil;)LNbtMap;
+		ARG 0 dataInput
+		ARG 1 nbtSizeUtil
+	METHOD a writeNbtToDataOutput (Lgd;Ljava/io/DataOutput;)V (LNbt;Ljava/io/DataOutput;)V
+		ARG 0 nbt
+		ARG 1 dataOutput
+	METHOD a writeSafelyNbtMapToFile (Lfn;Ljava/io/File;)V (LNbtMap;Ljava/io/File;)V
+		ARG 0 nbtMap
+		ARG 1 file
+	METHOD a readDataInputToNbt (Ljava/io/DataInput;ILfx;)Lgd; (Ljava/io/DataInput;ILNbtSizeUtil;)LNbt;
+		ARG 0 dataInput
+		ARG 1 depth
+		ARG 2 nbtSizeUtil
+	METHOD a writeNbtMapToDataOutput (Lfn;Ljava/io/DataOutput;)V (LNbtMap;Ljava/io/DataOutput;)V
+		ARG 0 nbtMap
+		ARG 1 dataOutput
+	METHOD a writeNbtMapToOutputStream (Lfn;Ljava/io/OutputStream;)V (LNbtMap;Ljava/io/OutputStream;)V
+		ARG 0 nbtMap
+		ARG 1 outputStream
+	METHOD a readFileToNbtMap (Ljava/io/File;)Lfn; (Ljava/io/File;)LNbtMap;
+		ARG 0 file
+	METHOD b writeNbtMapToFile (Lfn;Ljava/io/File;)V (LNbtMap;Ljava/io/File;)V
+		ARG 0 nbtMap
+		ARG 1 file
+CLASS ga ga
+	METHOD a a (Lfn;Lcom/mojang/authlib/GameProfile;)Lfn; (LNbtMap;Lcom/mojang/authlib/GameProfile;)LNbtMap;
+		ARG 0 nbtMap
+		ARG 1 gameProfile
+	METHOD a a (Lfn;)Lcom/mojang/authlib/GameProfile; (LNbtMap;)Lcom/mojang/authlib/GameProfile;
+		ARG 0 nbtMap
 CLASS gb NbtShort
 	FIELD b dataValue
 	METHOD <init> <init> (S)V (S)V
@@ -1122,6 +1160,256 @@ CLASS ge NbtNumeric
 	METHOD f getAsByte ()B ()B
 	METHOD g getAsDouble ()D ()D
 	METHOD h getAsFloat ()F ()F
+CLASS gg gg
+	FIELD a logger
+	FIELD b pattern
+CLASS gm gm
+	FIELD a cipher
+	METHOD <init> <init> (Ljavax/crypto/Cipher;)V (Ljavax/crypto/Cipher;)V
+		ARG 0 cipher
+	METHOD a a (Lio/netty/buffer/ByteBuf;)[B (Lio/netty/buffer/ByteBuf;)[B
+		ARG 0 byteBuf
+	METHOD a a (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;)Lio/netty/buffer/ByteBuf; (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;)Lio/netty/buffer/ByteBuf;
+		ARG 0 channelHandlerContext
+		ARG 1 byteBuf
+	METHOD a a (Lio/netty/buffer/ByteBuf;Lio/netty/buffer/ByteBuf;)V (Lio/netty/buffer/ByteBuf;Lio/netty/buffer/ByteBuf;)V
+		ARG 0 byteBuf1
+		ARG 1 byteBuf2
+CLASS gn gn
+	METHOD <init> <init> (Ljavax/crypto/Cipher;)V (Ljavax/crypto/Cipher;)V
+		ARG 0 cipher
+	METHOD decode decode (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Ljava/util/List;)V (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Ljava/util/List;)V
+		ARG 0 channelHandlerContext
+		ARG 1 byteBuf
+CLASS go go
+	METHOD <init> <init> (Ljavax/crypto/Cipher;)V (Ljavax/crypto/Cipher;)V
+		ARG 0 cipher
+	METHOD encode encode (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Lio/netty/buffer/ByteBuf;)V (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Lio/netty/buffer/ByteBuf;)V
+		ARG 0 channelHandlerContext
+		ARG 1 byteBuf1
+		ARG 2 byteBuf2
+CLASS gp gp
+	FIELD a inflater
+	FIELD b serverByteThreshold
+	METHOD <init> <init> (I)V (I)V
+		ARG 0 serverByteThreshold
+	METHOD a a (I)V (I)V
+		ARG 0 serverByteThreshold
+	METHOD decode decode (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Ljava/util/List;)V (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Ljava/util/List;)V
+		ARG 0 channelHandlerContext
+		ARG 1 byteBuf
+CLASS gq gq
+	FIELD b deflater
+CLASS gr gr
+	CLASS gv gv
+		METHOD initChannel initChannel (Lio/netty/channel/Channel;)V (Lio/netty/channel/Channel;)V
+	CLASS gw gw
+		METHOD initChannel initChannel (Lio/netty/channel/Channel;)V (Lio/netty/channel/Channel;)V
+			ARG 0 channel
+	FIELD a markerNetwork
+	FIELD b markerNetworkPackets
+	FIELD c attributeKey
+	FIELD f logger
+	FIELD h queue
+	FIELD i channel
+	FIELD j socketAddress
+	METHOD a a (Lid;Lio/netty/util/concurrent/GenericFutureListener;[Lio/netty/util/concurrent/GenericFutureListener;)V (Lid;Lio/netty/util/concurrent/GenericFutureListener;[Lio/netty/util/concurrent/GenericFutureListener;)V
+		ARG 1 genericFutureListener
+	METHOD a a (Ljava/net/InetAddress;I)Lgr; (Ljava/net/InetAddress;I)Lgr;
+		ARG 0 inetAddress
+	METHOD a a (Ljava/net/SocketAddress;)Lgr; (Ljava/net/SocketAddress;)Lgr;
+		ARG 0 socketAddress
+	METHOD a a (Ljavax/crypto/SecretKey;)V (Ljavax/crypto/SecretKey;)V
+		ARG 0 secretKey
+	METHOD channelActive channelActive (Lio/netty/channel/ChannelHandlerContext;)V (Lio/netty/channel/ChannelHandlerContext;)V
+		ARG 0 channelHandlerContext
+	METHOD channelInactive channelInactive (Lio/netty/channel/ChannelHandlerContext;)V (Lio/netty/channel/ChannelHandlerContext;)V
+		ARG 0 channelHandlerContext
+	METHOD channelRead0 channelRead0 (Lio/netty/channel/ChannelHandlerContext;Lid;)V (Lio/netty/channel/ChannelHandlerContext;Lid;)V
+		ARG 0 channelHandlerContext
+	METHOD exceptionCaught exceptionCaught (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Throwable;)V (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Throwable;)V
+		ARG 0 channelHandlerContext
+CLASS gy gy
+	FIELD a Handshaking
+	FIELD b Play
+	FIELD c Status
+	FIELD d Login
+CLASS hd hd
+	FIELD a byteBuf
+	METHOD <init> <init> (Lio/netty/buffer/ByteBuf;)V (Lio/netty/buffer/ByteBuf;)V
+		ARG 0 byteBuf
+CLASS he he
+	FIELD a logger
+	FIELD b markerPacketReceived
+	METHOD decode decode (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Ljava/util/List;)V (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Ljava/util/List;)V
+		ARG 0 channelHandlerContext
+		ARG 1 byteBuf
+CLASS hf hf
+	FIELD a logger
+	FIELD b markerPacketSent
+	METHOD encode encode (Lio/netty/channel/ChannelHandlerContext;Lid;Lio/netty/buffer/ByteBuf;)V (Lio/netty/channel/ChannelHandlerContext;Lid;Lio/netty/buffer/ByteBuf;)V
+		ARG 0 channelHandlerContext
+		ARG 2 byteBuf
+CLASS hh hh
+	METHOD decode decode (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Ljava/util/List;)V (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Ljava/util/List;)V
+		ARG 0 channelHandlerContext
+		ARG 1 byteBuf
+CLASS hi hi
+	METHOD encode encode (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Lio/netty/buffer/ByteBuf;)V (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Lio/netty/buffer/ByteBuf;)V
+		ARG 0 channelHandlerContext
+		ARG 1 byteBuf1
+		ARG 2 byteBuf2
+CLASS hj hj
+	FIELD a list
+	METHOD a a (Ljava/lang/String;)Lho; (Ljava/lang/String;)Lho;
+		ARG 0 text
+CLASS hm ClickEvent
+CLASS hn EnumClickAction
+	FIELD a OpenUrl
+	FIELD b OpenFile
+	FIELD c RunCommand
+	FIELD d TwitchUserInfo
+	FIELD e SuggestCommand
+	FIELD f ChangePage
+	FIELD g nameMap
+	FIELD h allowInChat
+	FIELD i name
+	METHOD <init> <init> (Ljava/lang/String;ILjava/lang/String;Z)V (Ljava/lang/String;ILjava/lang/String;Z)V
+		ARG 1 intValue
+		ARG 2 name
+		ARG 3 allowInChat
+	METHOD a getByName (Ljava/lang/String;)Lhn; (Ljava/lang/String;)LEnumClickAction;
+		ARG 0 name
+	METHOD a allowInChat ()Z ()Z
+	METHOD b getName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS hq hq
+	METHOD a a (Lae;Lho;Lwv;)Lho; (LIServerCommandUser;Lho;LEntity;)Lho;
+		ARG 0 serverCommandUser
+		ARG 2 entity
+CLASS hr HoverEvent
+	FIELD a enumHoverAction
+	METHOD <init> <init> (Lhs;Lho;)V (LEnumHoverAction;Lho;)V
+		ARG 0 enumHoverAction
+	METHOD a getHoverAction ()Lhs; ()LEnumHoverAction;
+CLASS hs EnumHoverAction
+	FIELD a ShowText
+	FIELD b ShowAchievement
+	FIELD c ShowItem
+	FIELD d ShowEntity
+	FIELD e nameMap
+	FIELD f allowInChat
+	FIELD g name
+	FIELD h enumHoverEventActions
+	METHOD <init> <init> (Ljava/lang/String;ILjava/lang/String;Z)V (Ljava/lang/String;ILjava/lang/String;Z)V
+		ARG 1 intValue
+		ARG 2 name
+		ARG 3 allowInChat
+	METHOD a getByName (Ljava/lang/String;)Lhs; (Ljava/lang/String;)LEnumHoverAction;
+		ARG 0 name
+	METHOD a allowInChat ()Z ()Z
+	METHOD b getName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD getByName getByName (Ljava/lang/String;)Lhs; (Ljava/lang/String;)LEnumHoverAction;
+		ARG 0 name
+CLASS hv hv
+	FIELD b textColor
+	FIELD c isBold
+	FIELD d isItalic
+	FIELD e isUnderline
+	FIELD f isStrikethrough
+	FIELD g isObfuscated
+	FIELD h clickEvent
+	FIELD i hoverEvent
+	METHOD a setHoverEvent (Lhr;)Lhv; (LHoverEvent;)Lhv;
+		ARG 0 hoverEvent
+	METHOD a IsBold (Ljava/lang/Boolean;)Lhv; (Ljava/lang/Boolean;)Lhv;
+		ARG 0 isBold
+	METHOD a getTextColor ()La; ()LTextColor;
+	METHOD a setClickEvent (Lhm;)Lhv; (LClickEvent;)Lhv;
+		ARG 0 clickEvent
+	METHOD a setTextColor (La;)Lhv; (LTextColor;)Lhv;
+		ARG 0 textColor
+	METHOD b IsBold ()Z ()Z
+	METHOD b IsItalic (Ljava/lang/Boolean;)Lhv; (Ljava/lang/Boolean;)Lhv;
+		ARG 0 isItalic
+	METHOD c IsStrikethrough (Ljava/lang/Boolean;)Lhv; (Ljava/lang/Boolean;)Lhv;
+		ARG 0 isStrikethrough
+	METHOD c IsItalic ()Z ()Z
+	METHOD d IsUnderlined (Ljava/lang/Boolean;)Lhv; (Ljava/lang/Boolean;)Lhv;
+		ARG 0 isUnderline
+	METHOD d IsStrikethrough ()Z ()Z
+	METHOD e IsObfuscated (Ljava/lang/Boolean;)Lhv; (Ljava/lang/Boolean;)Lhv;
+		ARG 0 isObfuscated
+	METHOD e IsUnderline ()Z ()Z
+	METHOD f IsObfuscated ()Z ()Z
+	METHOD g IsNotStyled ()Z ()Z
+	METHOD h getClickEvent ()Lhm; ()LClickEvent;
+	METHOD i getHoverEvent ()Lhr; ()LHoverEvent;
+CLASS hw hw
+	METHOD a setHoverEvent (Lhr;)Lhv; (LHoverEvent;)Lhv;
+		ARG 0 hoverEvent
+	METHOD a IsBold (Ljava/lang/Boolean;)Lhv; (Ljava/lang/Boolean;)Lhv;
+	METHOD a getTextColor ()La; ()LTextColor;
+	METHOD a setClickEvent (Lhm;)Lhv; (LClickEvent;)Lhv;
+		ARG 0 clickEvent
+	METHOD a setTextColor (La;)Lhv; (LTextColor;)Lhv;
+		ARG 0 textColor
+	METHOD b IsBold ()Z ()Z
+	METHOD b IsItalic (Ljava/lang/Boolean;)Lhv; (Ljava/lang/Boolean;)Lhv;
+	METHOD c IsStrikethrough (Ljava/lang/Boolean;)Lhv; (Ljava/lang/Boolean;)Lhv;
+	METHOD c IsItalic ()Z ()Z
+	METHOD d IsUnderlined (Ljava/lang/Boolean;)Lhv; (Ljava/lang/Boolean;)Lhv;
+	METHOD d IsStrikethrough ()Z ()Z
+	METHOD e IsObfuscated (Ljava/lang/Boolean;)Lhv; (Ljava/lang/Boolean;)Lhv;
+	METHOD e IsUnderline ()Z ()Z
+	METHOD f IsObfuscated ()Z ()Z
+	METHOD h getClickEvent ()Lhm; ()LClickEvent;
+	METHOD i getHoverEvent ()Lhr; ()LHoverEvent;
+CLASS hx hx
+	METHOD deserialize deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lhv; (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lhv;
+		ARG 0 jsonElement
+		ARG 1 type
+		ARG 2 jsonDeserializationContext
+	METHOD serialize serialize (Lhv;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement; (Lhv;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement;
+		ARG 1 type
+		ARG 2 jsonSerializationContext
+CLASS hy TextComponent
+	FIELD b text
+	METHOD <init> <init> (Ljava/lang/String;)V (Ljava/lang/String;)V
+		ARG 0 text
+	METHOD e getText2 ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD g getText ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS ie ie
+	FIELD a ServerBound
+	FIELD b ClientBound
+CLASS ij ij
+	FIELD a X
+	FIELD b Y
+	FIELD c Z
+	FIELD d YRotation
+	FIELD e XRotation
+CLASS il il
+	METHOD <init> <init> (Lwv;I)V (Lwv;I)V
+		ARG 0 entity
+	METHOD <init> <init> (Lwv;II)V (Lwv;II)V
+		ARG 0 entity
+CLASS in in
+	METHOD <init> <init> (Lwv;)V (Lwv;)V
+		ARG 0 entity
+CLASS ir ir
+	METHOD <init> <init> (Lwv;I)V (Lwv;I)V
+		ARG 0 entity
+CLASS iu iu
+	FIELD c nbtMap
+	METHOD <init> <init> (Ldt;ILfn;)V (Ldt;ILfn;)V
+		ARG 2 nbtMap
+CLASS iv iv
+	FIELD d block
+	METHOD <init> <init> (Ldt;Latp;II)V (Ldt;Latp;II)V
+		ARG 1 block
+	METHOD d getBlock ()Latp; ()LBlock;
+CLASS iw iw
+	METHOD <init> <init> (Laqs;Ldt;)V (Laqs;Ldt;)V
+		ARG 0 dimension
 CLASS j CrashLogInfo
 	FIELD a crashLogger
 	FIELD b name
@@ -1149,8 +1437,267 @@ CLASS j CrashLogInfo
 		ARG 0 elementName
 		ARG 1 elementValue
 	METHOD a getStackTraceElementsArray ()[Ljava/lang/StackTraceElement; ()[Ljava/lang/StackTraceElement;
+CLASS jk jk
+	METHOD <init> <init> (Lwv;B)V (Lwv;B)V
+		ARG 0 entity
+	METHOD a a (Laqs;)Lwv; (Laqs;)Lwv;
+		ARG 0 dimension
+CLASS jl jl
+	FIELD b nbtMap
+	METHOD <init> <init> (ILfn;)V (ILfn;)V
+		ARG 1 nbtMap
+	METHOD a a (Laqs;)Lwv; (Laqs;)Lwv;
+		ARG 0 dimension
+CLASS jy jy
+	METHOD a a (Laqs;)Lwv; (Laqs;)Lwv;
+		ARG 0 dimension
+CLASS kg kg
+	FIELD a EnterCombat
+	FIELD b EndCombat
+	FIELD c EntityDied
+CLASS kj kj
+	FIELD a AddPlayer
+	FIELD b UpdateGameMode
+	FIELD c UpdateLatency
+	FIELD d UpdateDisplayName
+	FIELD e RemovePlayer
+CLASS kl kl
+	METHOD a a (Laqs;)Lahb; (Laqs;)Lahb;
+		ARG 0 dimension
+CLASS kq kq
+	METHOD <init> <init> (Lwv;B)V (Lwv;B)V
+		ARG 0 entity
+	METHOD a a (Laqs;)Lwv; (Laqs;)Lwv;
+		ARG 0 dimension
+CLASS kt kt
+	FIELD a SetSize
+	FIELD b LerpSize
+	FIELD c SetCenter
+	FIELD d Initialize
+	FIELD e SetWarningTime
+	FIELD f SetWarningBlocks
+CLASS ku ku
+	METHOD <init> <init> (Lwv;)V (Lwv;)V
+		ARG 0 entity
+	METHOD a a (Laqs;)Lwv; (Laqs;)Lwv;
+		ARG 0 dimension
+CLASS ky ky
+	METHOD <init> <init> (ILwv;Lwv;)V (ILwv;Lwv;)V
+		ARG 1 entity1
+		ARG 2 entity2
+CLASS kz kz
+	METHOD <init> <init> (Lwv;)V (Lwv;)V
+		ARG 0 entity
+CLASS lg lg
+	FIELD a Change
+	FIELD b Remove
+CLASS lk lk
+	FIELD a Title
+	FIELD b Subtitle
+	FIELD c Times
+	FIELD d Clear
+	FIELD e Reset
+CLASS ll ll
+	FIELD a dimension
+	METHOD <init> <init> (Laqs;Ldt;[Lho;)V (Laqs;Ldt;[Lho;)V
+		ARG 0 dimension
+CLASS lo lo
+	METHOD <init> <init> (Lwv;)V (Lwv;)V
+		ARG 0 entity
+CLASS lw lw
+	FIELD a PerformRespawn
+	FIELD b RequestStats
+	FIELD c OpenInventoryAchivement
+CLASS md md
+	METHOD <init> <init> (Lwv;Lbru;)V (Lwv;Lbru;)V
+		ARG 0 entity
+	METHOD <init> <init> (Lwv;Lme;)V (Lwv;Lme;)V
+		ARG 0 entity
+	METHOD a a (Laqs;)Lwv; (Laqs;)Lwv;
+		ARG 0 dimension
+CLASS me me
+	FIELD a Interact
+	FIELD b Attack
+	FIELD c InteractAt
+CLASS mm mm
+	FIELD a StartDestroyBlock
+	FIELD b AbortDestroyBlock
+	FIELD c StopDestroyBlock
+	FIELD d DropAllItems
+	FIELD e DropItem
+	FIELD f ReleaseUseItem
+CLASS mn mn
+	METHOD <init> <init> (Lwv;Lmo;I)V (Lwv;Lmo;I)V
+		ARG 0 entity
+	METHOD <init> <init> (Lwv;Lmo;)V (Lwv;Lmo;)V
+		ARG 0 entity
+CLASS mo mo
+	FIELD a StartSneaking
+	FIELD b StopSneaking
+	FIELD c StopSleeping
+	FIELD d StartSprinting
+	FIELD e StopSprinting
+	FIELD f RidingJump
+	FIELD g OpenInventory
+CLASS mr mr
+	FIELD a SuccessfullyLoaded
+	FIELD b Declined
+	FIELD c FailedDownload
+	FIELD d Accepted
+CLASS mw mw
+	METHOD a a (Lqt;)Lwv; (Lqt;)Lwv;
+		ARG 0 dimensionServer
 CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
+CLASS ni ni
+	FIELD a gameProfile
+	METHOD <init> <init> (Lcom/mojang/authlib/GameProfile;)V (Lcom/mojang/authlib/GameProfile;)V
+		ARG 0 gameProfile
+CLASS nj nj
+	METHOD <init> <init> (Ljavax/crypto/SecretKey;Ljava/security/PublicKey;[B)V (Ljavax/crypto/SecretKey;Ljava/security/PublicKey;[B)V
+		ARG 0 secretKey
+		ARG 1 publicKey
+	METHOD a a (Ljava/security/PrivateKey;)Ljavax/crypto/SecretKey; (Ljava/security/PrivateKey;)Ljavax/crypto/SecretKey;
+		ARG 0 privateKey
+	METHOD b b (Ljava/security/PrivateKey;)[B (Ljava/security/PrivateKey;)[B
+		ARG 0 privateKey
+CLASS nr nr
+	METHOD deserialize deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnq; (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnq;
+		ARG 0 jsonElement
+		ARG 1 type
+		ARG 2 jsonDeserializationContext
+	METHOD serialize serialize (Lnq;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement; (Lnq;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement;
+		ARG 1 type
+		ARG 2 jsonSerializationContext
+CLASS ns ns
+	METHOD deserialize deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnp; (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnp;
+		ARG 0 jsonElement
+		ARG 1 type
+		ARG 2 jsonDeserializationContext
+	METHOD serialize serialize (Lnp;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement; (Lnp;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement;
+		ARG 1 type
+		ARG 2 jsonSerializationContext
+CLASS nu nu
+	METHOD deserialize deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnt; (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnt;
+		ARG 0 jsonElement
+		ARG 1 type
+		ARG 2 jsonDeserializationContext
+	METHOD serialize serialize (Lnt;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement; (Lnt;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement;
+		ARG 1 type
+		ARG 2 jsonSerializationContext
+CLASS od od
+	FIELD a printStream
+	FIELD c logger
+CLASS oe oe
+	METHOD a a (Laqs;Lex;)Lahm; (Laqs;Lex;)Lahm;
+		ARG 0 dimension
+CLASS on on
+	METHOD a a (Laqs;Lex;)Lahm; (Laqs;Lex;)Lahm;
+		ARG 0 dimension
+CLASS oo oo
+	METHOD a a (Laqs;Lex;)Lahm; (Laqs;Lex;)Lahm;
+		ARG 0 dimension
+CLASS op op
+	METHOD a a (Laqs;Lex;)Lahm; (Laqs;Lex;)Lahm;
+		ARG 0 dimension
+CLASS oq oq
+	CLASS or or
+		METHOD a a (Laqs;Lex;)Lahm; (Laqs;Lex;)Lahm;
+			ARG 0 dimension
+CLASS pc pc
+	FIELD a logger
+	METHOD <init> <init> (Ljava/lang/String;Ljava/io/OutputStream;)V (Ljava/lang/String;Ljava/io/OutputStream;)V
+		ARG 1 outputStream
+CLASS qk qk
+	METHOD <init> <init> (Laqs;)V (Laqs;)V
+		ARG 0 dimension
+	METHOD a a (Lahb;Laqs;Lamh;Ldt;Lel;FFF)Z (Lahb;Laqs;Lamh;Ldt;Lel;FFF)Z
+		ARG 1 dimension
+	METHOD a a (Lahb;Laqs;Lamh;)Z (Lahb;Laqs;Lamh;)Z
+		ARG 1 dimension
+CLASS ql ql
+	FIELD a dimensionServer
+	METHOD <init> <init> (Lnet/minecraft/server/MinecraftServer;Lbqw;ILqt;Luw;)V (Lnet/minecraft/server/MinecraftServer;Lbqw;ILqt;Luw;)V
+		ARG 3 dimensionServer
+CLASS qn qn
+	FIELD a logger
+	FIELD b dimensionServer
+	METHOD <init> <init> (Lqt;)V (Lqt;)V
+		ARG 0 dimensionServer
+	METHOD a a (Lwv;II)V (Lwv;II)V
+		ARG 0 entity
+	METHOD a a (Lwv;IIZ)V (Lwv;IIZ)V
+		ARG 0 entity
+	METHOD a a (Lwv;)V (Lwv;)V
+		ARG 0 entity
+	METHOD a a (Lwv;Lid;)V (Lwv;Lid;)V
+		ARG 0 entity
+	METHOD b b (Lwv;Lid;)V (Lwv;Lid;)V
+		ARG 0 entity
+	METHOD b b (Lwv;)V (Lwv;)V
+		ARG 0 entity
+CLASS qp qp
+	FIELD a minecraftServer
+	FIELD b dimensionServer
+	METHOD <init> <init> (Lnet/minecraft/server/MinecraftServer;Lqt;)V (Lnet/minecraft/server/MinecraftServer;Lqt;)V
+		ARG 0 minecraftServer
+		ARG 1 dimensionServer
+	METHOD a a (Lwv;)V (Lwv;)V
+		ARG 0 entity
+	METHOD b b (Lwv;)V (Lwv;)V
+		ARG 0 entity
+CLASS qq qq
+	FIELD a logger
+	FIELD b dimensionServer
+	METHOD <init> <init> (Lqt;)V (Lqt;)V
+		ARG 0 dimensionServer
+CLASS qs qs
+	FIELD b logger
+	FIELD i dimensionServer
+	METHOD <init> <init> (Lqt;Lbfo;Lbfc;)V (Lqt;Lbfo;Lbfc;)V
+		ARG 0 dimensionServer
+	METHOD a a (Laqs;Ljava/lang/String;Ldt;)Ldt; (Laqs;Ljava/lang/String;Ldt;)Ldt;
+		ARG 0 dimension
 CLASS qt DimensionServer
+CLASS qw qw
+	FIELD b minecraftServer
+	FIELD bF logger
+	FIELD bS entity
+	METHOD <init> <init> (Lnet/minecraft/server/MinecraftServer;Lqt;Lcom/mojang/authlib/GameProfile;Lqx;)V (Lnet/minecraft/server/MinecraftServer;Lqt;Lcom/mojang/authlib/GameProfile;Lqx;)V
+		ARG 0 minecraftServer
+		ARG 1 dimensionServer
+		ARG 2 gameProfile
+	METHOD a a (DZLatp;Ldt;)V (DZLatp;Ldt;)V
+		ARG 2 block
+	METHOD a a (Lfn;)V (Lfn;)V
+		ARG 0 nbtMap
+	METHOD a a (Lwv;)V (Lwv;)V
+		ARG 0 entity
+	METHOD a a (Lwv;I)V (Lwv;I)V
+		ARG 0 entity
+	METHOD b b (Lwv;)V (Lwv;)V
+		ARG 0 entity
+	METHOD b b (Lfn;)V (Lfn;)V
+		ARG 0 nbtMap
+	METHOD c c (Lwv;)V (Lwv;)V
+		ARG 0 entity
+	METHOD e e (Lwv;)V (Lwv;)V
+		ARG 0 entity
+	METHOD f f (Lwv;)V (Lwv;)V
+		ARG 0 entity
+CLASS qx qx
+	FIELD a dimension
+	METHOD <init> <init> (Laqs;)V (Laqs;)V
+		ARG 0 dimension
+	METHOD a a (Lahb;Laqs;Lamh;Ldt;Lel;FFF)Z (Lahb;Laqs;Lamh;Ldt;Lel;FFF)Z
+		ARG 1 dimension
+	METHOD a a (Lqt;)V (Lqt;)V
+		ARG 0 dimension
+	METHOD a a (Lahb;Laqs;Lamh;)Z (Lahb;Laqs;Lamh;)Z
+		ARG 1 dimension
+CLASS qy qy
+	FIELD a entity1
+	FIELD p logger
+	FIELD w entity2
 CLASS r CrashLogInfoElement
 	FIELD a name
 	FIELD b value
@@ -1159,6 +1706,26 @@ CLASS r CrashLogInfoElement
 		ARG 1 value
 	METHOD a getName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD b getValue ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS ra ra
+	FIELD a logger
+	METHOD a a (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;)V (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;)V
+		ARG 0 channelHandlerContext
+	METHOD channelRead channelRead (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Object;)V (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Object;)V
+		ARG 0 channelHandlerContext
+CLASS rb rb
+	FIELD a minecraftServer
+	METHOD <init> <init> (Lnet/minecraft/server/MinecraftServer;Lgr;)V (Lnet/minecraft/server/MinecraftServer;Lgr;)V
+		ARG 0 minecraftServer
+CLASS rc rc
+	FIELD d logger
+	FIELD e minecraftServer
+	METHOD <init> <init> (Lnet/minecraft/server/MinecraftServer;)V (Lnet/minecraft/server/MinecraftServer;)V
+		ARG 0 minecraftServer
+CLASS rj rj
+	FIELD c logger
+	FIELD d minecraftServer
+	METHOD <init> <init> (Lnet/minecraft/server/MinecraftServer;Lgr;Lqw;)V (Lnet/minecraft/server/MinecraftServer;Lgr;Lqw;)V
+		ARG 0 minecraftServer
 CLASS u CrashLoggerException
 	FIELD a crashLogger
 	METHOD <init> <init> (Lb;)V (LCrashLogger;)V
