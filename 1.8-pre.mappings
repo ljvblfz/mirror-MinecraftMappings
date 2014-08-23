@@ -1,3 +1,26 @@
+CLASS a TextColor
+	FIELD a BLACK
+	FIELD b DARK_BLUE
+	FIELD c DARK_GREEN
+	FIELD d DARK_AQUA
+	FIELD e DARK_RED
+	FIELD f DARK_PURPLE
+	FIELD g GOLD
+	FIELD h GRAY
+	FIELD i DARK_GRAY
+	FIELD j BLUE
+	FIELD k GREEN
+	FIELD l AQUA
+	FIELD m RED
+	FIELD n LIGHT_PURPLE
+	FIELD o YELLOW
+	FIELD p WHITE
+	FIELD q OBFUSCATED
+	FIELD r BOLD
+	FIELD s STRIKETHROUGH
+	FIELD t UNDERLINE
+	FIELD u ITALIC
+	FIELD v RESET
 CLASS ab _ab_ServerCommand_something
 	FIELD a logger
 	METHOD a a (Lac;[Ljava/lang/String;)I (LIServerCommand;[Ljava/lang/String;)I
@@ -98,13 +121,85 @@ CLASS am am
 CLASS aqs Dimension
 	METHOD b getBiomeAt (Ldt;)Lark; (L_dt_location_ext_fd;)LBiomeGenerator;
 		ARG 0 location
+CLASS arj BiomeBeach
 CLASS ark BiomeGenerator
+	FIELD A frozenRiver
+	FIELD B icePlains
+	FIELD C iceMountains
+	FIELD D mushroomIsland
+	FIELD E mushroomIslandShore
+	FIELD F beach
+	FIELD G desertHills
+	FIELD H forestHills
+	FIELD I taigaHills
+	FIELD J extremeHillsEdge
+	FIELD K jungle
+	FIELD L jungleHills
+	FIELD M jungleEdge
+	FIELD N deepOcean
+	FIELD O stoneBeach
+	FIELD P coldBeach
+	FIELD Q birchForest
+	FIELD R birchForestHills
+	FIELD S roofedForest
+	FIELD T coldTaiga
+	FIELD U coldTaigaHills
+	FIELD V megaTaiga
+	FIELD W megaTaigaHills
+	FIELD X extremeHillsPlus
+	FIELD Y savanna
+	FIELD Z savannaPlateau
+	FIELD aa mesa
+	FIELD ab mesaPlateauForest
+	FIELD ac mesaPlateau
+	FIELD az biomeID
+	FIELD n biomeSetNoMutated
+	FIELD o idToBiomeMap
+	FIELD p ocean
+	FIELD q plains
+	FIELD r desert
+	FIELD s extremeHills
+	FIELD t forest
+	FIELD u taiga
+	FIELD v swampland
+	FIELD w river
+	FIELD x hell
+	FIELD y theEnd
+	FIELD z frozenOcean
+	METHOD k createMutated ()Lark; ()LBiomeGenerator;
+CLASS ary BiomeDesert
+CLASS arz BiomeExtremeHills
+CLASS asb BiomeForest
+CLASS ase BiomeHell
+CLASS asf BiomeIcy
+CLASS asg BiomeJungle
+CLASS ash BiomeMesa
+CLASS asi BiomeMushroomIsland
+CLASS ask BiomeOcean
+CLASS asl BiomePlains
+CLASS asn BiomeRiver
+CLASS aso BiomeSavanna
+CLASS asq BiomeStoneBeach
+CLASS asr BiomeSwampland
+CLASS ass BiomeTaiga
+CLASS ast BiomeTheEnd
+CLASS asw BlockAir
+CLASS atn BlockBed
+CLASS atp Block
+	METHOD a registerBlock (ILjava/lang/String;Latp;)V (ILjava/lang/String;LBlock;)V
+	METHOD a registerBlock (ILoa;Latp;)V (ILoa;LBlock;)V
 CLASS au ServerCommandAchievement
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS aul BlockWool
+CLASS auu BlockDeadBush
+CLASS auv BlockDetectorRail
+CLASS ava BlockDirt
+CLASS avc BlockDispenser
+CLASS avl BlockLiquidFlowing
 CLASS aw ServerCommandBanIp
 	FIELD a IPRegexPatern
 	METHOD a a (Lae;Ljava/lang/String;Ljava/lang/String;)V (LIServerCommandUser;Ljava/lang/String;Ljava/lang/String;)V
@@ -114,24 +209,37 @@ CLASS aw ServerCommandBanIp
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS awj BlockGlass
+CLASS awl BlockGrass
+CLASS awm BlockGravel
 CLASS ax ServerCommandBan
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 rserverCommandUser
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS axo BlockOreBlock
+CLASS axz BlockMushroom
 CLASS ay ServerCommandBlockData
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS ayl BlockNoteBlock
+CLASS ayn BlockLeaves
+CLASS ayp BlockLog
+CLASS ays BlockOre
+CLASS ayu BlockWood
 CLASS az ServerCommandClear
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS aza BlockGoldenRail
+CLASS azn BlockRedFlower
+CLASS azz BlockSand
 CLASS b CrashLogger
 	FIELD a logger
 	FIELD b message
@@ -169,18 +277,30 @@ CLASS ba ServerCommandClone
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS bab BlockSandStone
+CLASS bad BlockSapling
+CLASS bao BlockSponge
+CLASS bav BlockLiquidStill
+CLASS bay BlockStone
+CLASS bbf BlockTallGrass
+CLASS bbi BlockTNT
 CLASS bc ServerCommandTestForBlocks
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS bca BlockWeb
+CLASS bcf BlockYellowFlower
 CLASS bd ServerCommandDeOp
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS bdo BlockPistonBase
+CLASS bdq BlockPistonHead
+CLASS bdv BlockPistonExtension
 CLASS be ServerCommandDebug
 	FIELD a logger
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
@@ -560,6 +680,7 @@ CLASS dl ServerCommandSyntaxException
 CLASS dm ServerCommandPlayerNotFoundException
 CLASS dn ServerCommandNotFoundException
 CLASS dt _dt_location_ext_fd
+	FIELD a zeroed
 	METHOD <init> <init> (III)V (III)V
 		ARG 0 x
 		ARG 1 y
@@ -675,7 +796,7 @@ CLASS fd _fd_location
 		ARG 0 x
 		ARG 1 y
 		ARG 2 rz
-	METHOD c c (DDD)D (DDD)D
+	METHOD c distanceSquared (DDD)D (DDD)D
 		ARG 0 x
 		ARG 1 y
 		ARG 2 z
@@ -683,6 +804,8 @@ CLASS fd _fd_location
 		ARG 0 x
 		ARG 1 y
 		ARG 2 z
+	METHOD i distanceSquared (Lfd;)D (L_fd_location;)D
+		ARG 0 location
 	METHOD n getX ()I ()I
 	METHOD o getY ()I ()I
 	METHOD p getZ ()I ()I
@@ -1010,7 +1133,7 @@ CLASS j CrashLogInfo
 	METHOD a a (Ljava/lang/StackTraceElement;Ljava/lang/StackTraceElement;)Z (Ljava/lang/StackTraceElement;Ljava/lang/StackTraceElement;)Z
 		ARG 0 stackTraceElement1
 		ARG 1 stackTraceElement2
-	METHOD a a (Lj;Ldt;Latp;I)V (LCrashLogInfo;L_dt_location_ext_fd;Latp;I)V
+	METHOD a a (Lj;Ldt;Latp;I)V (LCrashLogInfo;L_dt_location_ext_fd;LBlock;I)V
 		ARG 0 crashLogInfo
 	METHOD a addCrashInfo (Ljava/lang/String;Ljava/lang/Throwable;)V (Ljava/lang/String;Ljava/lang/Throwable;)V
 		ARG 0 elementName
@@ -1178,5 +1301,5 @@ CLASS z ServerCommand
 		ARG 0 serverCommandUser
 	METHOD f f (Lae;Ljava/lang/String;)Lalo; (LIServerCommandUser;Ljava/lang/String;)Lalo;
 		ARG 0 serverCommandUser
-	METHOD g g (Lae;Ljava/lang/String;)Latp; (LIServerCommandUser;Ljava/lang/String;)Latp;
+	METHOD g g (Lae;Ljava/lang/String;)Latp; (LIServerCommandUser;Ljava/lang/String;)LBlock;
 		ARG 0 serverCommandUser
