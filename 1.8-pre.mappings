@@ -1,0 +1,697 @@
+CLASS ab _ab_ServerCommand_something
+	FIELD a logger
+	METHOD a a (Lac;[Ljava/lang/String;)I (LIServerCommand;[Ljava/lang/String;)I
+		ARG 0 serverCommand
+	METHOD a a (Lae;[Ljava/lang/String;Lac;Ljava/lang/String;)Z (LIServerCommandUser;[Ljava/lang/String;LIServerCommand;Ljava/lang/String;)Z
+		ARG 0 serverCommandUser
+		ARG 2 serverCommand
+	METHOD a a (Lae;)Ljava/util/List; (LIServerCommandUser;)Ljava/util/List;
+		ARG 0 serverCommandUser
+	METHOD a a (Lac;)Lac; (LIServerCommand;)LIServerCommand;
+		ARG 0 serverCommand
+	METHOD a a (Lae;Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;Ljava/lang/String;L_dt_location_ext_fd;)Ljava/util/List;
+		ARG 0 serverCommandUser
+	METHOD a a (Lae;Ljava/lang/String;)I (LIServerCommandUser;Ljava/lang/String;)I
+		ARG 0 serverCommandUser
+CLASS ac IServerCommand
+	METHOD a a (Lae;)Z (LIServerCommandUser;)Z
+		ARG 0 serverCommandUser
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD a a (Lae;[Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;[Ljava/lang/String;L_dt_location_ext_fd;)Ljava/util/List;
+		ARG 0 serverCommandUser
+	METHOD c c (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS ad _ad_IServerCommand_something
+	METHOD a a (Lae;)Ljava/util/List; (LIServerCommandUser;)Ljava/util/List;
+		ARG 0 serverCommandUser
+	METHOD a a (Lae;Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;Ljava/lang/String;L_dt_location_ext_fd;)Ljava/util/List;
+		ARG 0 serverCommandUser
+	METHOD a a (Lae;Ljava/lang/String;)I (LIServerCommandUser;Ljava/lang/String;)I
+		ARG 0 serverCommandUser
+CLASS ae IServerCommandUser
+CLASS af af
+	METHOD a a (Lae;Lag;I)V (LIServerCommandUser;Lag;I)V
+		ARG 0 serverCommandUser
+CLASS ag ag
+	FIELD a SuccessCount
+	FIELD b AffectedBlocks
+	FIELD c AffectedEntities
+	FIELD d AffectedItems
+	FIELD e QueryResult
+CLASS ah ah
+	CLASS ai ai
+		METHOD apply apply (Lwv;)Z (Lwv;)Z
+			ARG 0 entity
+	CLASS aj aj
+		METHOD apply apply (Lwv;)Z (Lwv;)Z
+			ARG 0 entity
+	CLASS ak ak
+		METHOD apply apply (Lwv;)Z (Lwv;)Z
+			ARG 0 entity
+	CLASS al al
+		METHOD compare compare (Lwv;Lwv;)I (Lwv;Lwv;)I
+			ARG 0 entity1
+			ARG 1 entity2
+	CLASS an an
+		METHOD apply apply (Lwv;)Z (Lwv;)Z
+			ARG 0 entity
+	CLASS ao ao
+		METHOD apply apply (Lwv;)Z (Lwv;)Z
+			ARG 0 entity
+	CLASS ap ap
+		METHOD apply apply (Lwv;)Z (Lwv;)Z
+			ARG 0 entity
+	CLASS aq aq
+		METHOD apply apply (Lwv;)Z (Lwv;)Z
+			ARG 0 entity
+	CLASS ar ar
+		METHOD apply apply (Lwv;)Z (Lwv;)Z
+			ARG 0 entity
+	CLASS as as
+		METHOD apply apply (Lwv;)Z (Lwv;)Z
+			ARG 0 entity
+	CLASS at at
+		METHOD apply apply (Lwv;)Z (Lwv;)Z
+			ARG 0 entity
+	METHOD a a (Lae;Ljava/lang/String;Ljava/lang/Class;)Lwv; (LIServerCommandUser;Ljava/lang/String;Ljava/lang/Class;)LEntity;
+		ARG 0 serverCommandUser
+	METHOD a a (Ljava/util/List;Ljava/util/Map;Lae;Ljava/lang/Class;Ljava/lang/String;Ldt;)Ljava/util/List; (Ljava/util/List;Ljava/util/Map;LIServerCommandUser;Ljava/lang/Class;Ljava/lang/String;L_dt_location_ext_fd;)Ljava/util/List;
+		ARG 2 serverCommandUser
+	METHOD a a (Lae;Ljava/lang/String;)Lqw; (LIServerCommandUser;Ljava/lang/String;)Lqw;
+		ARG 0 serverCommandUser
+	METHOD a a (Ljava/util/Map;Ljava/lang/String;I)I (Ljava/util/Map;Ljava/lang/String;I)I
+		ARG 1 integerString
+		ARG 2 failureDefaultValue
+	METHOD a a (Lae;Ljava/util/Map;)Ljava/util/List; (LIServerCommandUser;Ljava/util/Map;)Ljava/util/List;
+		ARG 0 serverCommandUser
+	METHOD b b (Lae;Ljava/util/Map;)Z (LIServerCommandUser;Ljava/util/Map;)Z
+		ARG 0 serverCommandUser
+	METHOD b b (Lae;Ljava/lang/String;)Lho; (LIServerCommandUser;Ljava/lang/String;)Lho;
+		ARG 0 serverCommandUser
+	METHOD b b (Lae;Ljava/lang/String;Ljava/lang/Class;)Ljava/util/List; (LIServerCommandUser;Ljava/lang/String;Ljava/lang/Class;)Ljava/util/List;
+		ARG 0 serverCommandUser
+CLASS am am
+	METHOD apply apply (Lwv;)Z (LEntity;)Z
+		ARG 0 entity
+CLASS au ServerCommandAchievement
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS aw ServerCommandBanIp
+	FIELD a IPRegexPatern
+	METHOD a a (Lae;Ljava/lang/String;Ljava/lang/String;)V (LIServerCommandUser;Ljava/lang/String;Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS ax ServerCommandBan
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 rserverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS ay ServerCommandBlockData
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS az ServerCommandClear
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS b CrashLogger
+	FIELD a logger
+	FIELD b message
+	FIELD c cause
+	FIELD d crashLogInfo
+	FIELD e crashLogInfoList
+	FIELD f logFile
+	FIELD h stackTraceElementsArray
+	METHOD <init> <init> (Ljava/lang/String;Ljava/lang/Throwable;)V (Ljava/lang/String;Ljava/lang/Throwable;)V
+		ARG 0 message
+		ARG 1 cause
+	METHOD a a (Ljava/lang/String;)Lj; (Ljava/lang/String;)LCrashLogInfo;
+		ARG 0 name
+	METHOD a getOrCreateCrashLogger (Ljava/lang/Throwable;Ljava/lang/String;)Lb; (Ljava/lang/Throwable;Ljava/lang/String;)LCrashLogger;
+		ARG 0 cause
+		ARG 1 message
+	METHOD a getMessage ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD a buildCrashReport (Ljava/lang/StringBuilder;)V (Ljava/lang/StringBuilder;)V
+		ARG 0 crashReportStringBuilder
+	METHOD a saveCrashLog (Ljava/io/File;)Z (Ljava/io/File;)Z
+		ARG 0 logFile
+	METHOD a a (Ljava/lang/String;I)Lj; (Ljava/lang/String;I)LCrashLogInfo;
+		ARG 0 name
+		ARG 1 depth
+	METHOD b getCause ()Ljava/lang/Throwable; ()Ljava/lang/Throwable;
+	METHOD d getErrorMessage ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD e getReport ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD f getLogFile ()Ljava/io/File; ()Ljava/io/File;
+	METHOD g getCrashLogInfo ()Lj; ()LCrashLogInfo;
+	METHOD h getEnvironmentalInfo ()V ()V
+	METHOD i getFunnyComment ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS ba ServerCommandClone
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS bc ServerCommandTestForBlocks
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS bd ServerCommandDeOp
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS be ServerCommandDebug
+	FIELD a logger
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD d getWittyComment ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS bf ServerCommandDefaultGameMode
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS bg ServerCommandEffect
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS bh ServerCommandMe
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS bi ServerCommandEnchant
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c c (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS bj ServerCommandEntityData
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS bk ServerCommandExecute
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c c (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS bm ServerCommandXp
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS bn ServerCommandFill
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS bo ServerCommandDifficulty
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS bp ServerCommandGameMode
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD h h (Lae;Ljava/lang/String;)Lara; (LIServerCommandUser;Ljava/lang/String;)Lara;
+		ARG 0 serverCommandUser
+CLASS bq ServerCommandGameRule
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c c (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS br ServerCommandGive
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS bs CommandServerHelp
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD d d (Lae;)Ljava/util/List; (LIServerCommandUser;)Ljava/util/List;
+		ARG 0 serverCommandUser
+CLASS bt ServerCommandKick
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS bu ServerCommandKill
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS bv ServerCommandBanList
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS bw ServerCommandList
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS bx ServerCommandTell
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c c (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS by ServerCommandTellRaw
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS bz ServerCommandOp
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS ca ServerCommandPardonIp
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS cb ServerCommandPardon
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS cc ServerCommandParticle
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c c (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS cd ServerCommandPlaySound
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS ce ServerCommandPublish
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c c (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS cf ServerCommandReplaceItem
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c c (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS cg ServerCommandSaveAll
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS ch ServerCommandSaveOff
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS ci ServerCommandSaveOn
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c c (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS cj ServerCommandSay
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS ck ServerCommandScoreboard
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD b b (Lae;[Ljava/lang/String;I)V (LIServerCommandUser;[Ljava/lang/String;I)V
+		ARG 0 serverCommandUser
+	METHOD b b (Lae;[Ljava/lang/String;)Z (LIServerCommandUser;[Ljava/lang/String;)Z
+		ARG 0 serverCommandUser
+	METHOD c c (Lae;[Ljava/lang/String;I)V (LIServerCommandUser;[Ljava/lang/String;I)V
+		ARG 0 serverCommandUser
+	METHOD c c (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD d d (Lae;[Ljava/lang/String;I)V (LIServerCommandUser;[Ljava/lang/String;I)V
+		ARG 0 serverCommandUser
+	METHOD d d (Lae;)V (LIServerCommandUser;)V
+		ARG 0 serverCommandUser
+	METHOD e e (Lae;[Ljava/lang/String;I)V (LIServerCommandUser;[Ljava/lang/String;I)V
+		ARG 0 serverCommandUser
+	METHOD f f (Lae;[Ljava/lang/String;I)V (LIServerCommandUser;[Ljava/lang/String;I)V
+		ARG 0 serverCommandUser
+	METHOD g g (Lae;[Ljava/lang/String;I)V (LIServerCommandUser;[Ljava/lang/String;I)V
+		ARG 0 serverCommandUser
+	METHOD h h (Lae;Ljava/lang/String;)V (LIServerCommandUser;Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD h h (Lae;[Ljava/lang/String;I)V (LIServerCommandUser;[Ljava/lang/String;I)V
+		ARG 0 serverCommandUser
+	METHOD i i (Lae;[Ljava/lang/String;I)V (LIServerCommandUser;[Ljava/lang/String;I)V
+		ARG 0 serverCommandUser
+	METHOD j j (Lae;[Ljava/lang/String;I)V (LIServerCommandUser;[Ljava/lang/String;I)V
+		ARG 0 serverCommandUser
+	METHOD k k (Lae;[Ljava/lang/String;I)V (LIServerCommandUser;[Ljava/lang/String;I)V
+		ARG 0 serverCommandUser
+	METHOD l l (Lae;[Ljava/lang/String;I)V (LIServerCommandUser;[Ljava/lang/String;I)V
+		ARG 0 serverCommandUser
+	METHOD m m (Lae;[Ljava/lang/String;I)V (LIServerCommandUser;[Ljava/lang/String;I)V
+		ARG 0 serverCommandUser
+	METHOD n n (Lae;[Ljava/lang/String;I)V (LIServerCommandUser;[Ljava/lang/String;I)V
+		ARG 0 serverCommandUser
+	METHOD o o (Lae;[Ljava/lang/String;I)V (LIServerCommandUser;[Ljava/lang/String;I)V
+		ARG 0 serverCommandUser
+	METHOD p p (Lae;[Ljava/lang/String;I)V (LIServerCommandUser;[Ljava/lang/String;I)V
+		ARG 0 serverCommandUser
+CLASS cl _cl_ServerCommand_something
+	METHOD a a (Lae;Lac;ILjava/lang/String;[Ljava/lang/Object;)V (LIServerCommandUser;LIServerCommand;ILjava/lang/String;[Ljava/lang/Object;)V
+		ARG 0 serverCommandUser
+		ARG 1 serverCommand
+CLASS cm ServerCommandSetBlock
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS cn ServerCommandSetWorldSpawn
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS co ServerCommandSetIdleTimeout
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS cp ServerCommandSpawnPoint
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS cq ServerCommandSeed
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS cr ServerCommandSpreadPlayers
+	METHOD a a (Ljava/util/Random;IDDDD)[Lcs; (Ljava/util/Random;IDDDD)[Lcs;
+		ARG 0 random
+	METHOD a a (Lae;Ljava/util/List;Lcs;DDLaqs;Z)V (LIServerCommandUser;Ljava/util/List;Lcs;DDLaqs;Z)V
+		ARG 0 serverCommandUser
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS cs cs
+	METHOD a a (Ljava/util/Random;DDDD)V (Ljava/util/Random;DDDD)V
+		ARG 0 random
+		ARG 1 min
+		ARG 2 min2
+		ARG 3 max
+		ARG 4 max2
+CLASS ct ServerCommandStats
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS cu ServerCommandStop
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS cv ServerCommandSummon
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS cw ServerCommandTp
+	METHOD a a (Lae;[Ljava/lang/String;)V (Lae;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS dt _dt_location_ext_fd
+CLASS dy dy
+	METHOD n getX ()I ()I
+	METHOD o getY ()I ()I
+	METHOD p getZ ()I ()I
+CLASS fd _fd_location
+	FIELD a x
+	FIELD b y
+	FIELD c z
+	FIELD e zeroed
+	METHOD <init> <init> (DDD)V (DDD)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD <init> <init> (III)V (III)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 rz
+	METHOD c c (DDD)D (DDD)D
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD d d (DDD)D (DDD)D
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD n getX ()I ()I
+	METHOD o getY ()I ()I
+	METHOD p getZ ()I ()I
+CLASS j CrashLogInfo
+	FIELD a crashLogger
+	FIELD b name
+	FIELD c crashLogInfoList
+	FIELD d stackTraceElementsArray
+	METHOD <init> <init> (Lb;Ljava/lang/String;)V (LCrashLogger;Ljava/lang/String;)V
+		ARG 0 crashLogger
+		ARG 1 name
+	METHOD a a (Ljava/lang/StackTraceElement;Ljava/lang/StackTraceElement;)Z (Ljava/lang/StackTraceElement;Ljava/lang/StackTraceElement;)Z
+		ARG 0 stackTraceElement1
+		ARG 1 stackTraceElement2
+	METHOD a a (Lj;Ldt;Latp;I)V (LCrashLogInfo;L_dt_location_ext_fd;Latp;I)V
+		ARG 0 crashLogInfo
+	METHOD a addCrashInfo (Ljava/lang/String;Ljava/lang/Throwable;)V (Ljava/lang/String;Ljava/lang/Throwable;)V
+		ARG 0 elementName
+		ARG 1 elementValue
+	METHOD a addCallable (Ljava/lang/String;Ljava/util/concurrent/Callable;)V (Ljava/lang/String;Ljava/util/concurrent/Callable;)V
+		ARG 0 elementName
+		ARG 1 callable
+	METHOD a a (Lj;Ldt;Lbea;)V (LCrashLogInfo;L_dt_location_ext_fd;Lbea;)V
+		ARG 0 crashLogInfo
+	METHOD a getDetailsReport (Ljava/lang/StringBuilder;)V (Ljava/lang/StringBuilder;)V
+		ARG 0 reportStringBuilder
+	METHOD a addCrashInfo (Ljava/lang/String;Ljava/lang/Object;)V (Ljava/lang/String;Ljava/lang/Object;)V
+		ARG 0 elementName
+		ARG 1 elementValue
+	METHOD a getStackTraceElementsArray ()[Ljava/lang/StackTraceElement; ()[Ljava/lang/StackTraceElement;
+CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
+CLASS r CrashLogInfoElement
+	FIELD a name
+	FIELD b value
+	METHOD <init> <init> (Ljava/lang/String;Ljava/lang/Object;)V (Ljava/lang/String;Ljava/lang/Object;)V
+		ARG 0 name
+		ARG 1 value
+	METHOD a getName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD b getValue ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS u CrashLoggerException
+	FIELD a crashLogger
+	METHOD <init> <init> (Lb;)V (LCrashLogger;)V
+		ARG 0 crashLogger
+	METHOD a getCrashLogger ()Lb; ()LCrashLogger;
+CLASS uv MathUtil
+	FIELD a squareRootOfTwo
+	FIELD b sinLookupTable
+	FIELD c logBaseTwoDeBruijnMultiplyBitPosition
+	METHOD a average ([J)D ([J)D
+		ARG 0 valuesArray
+	METHOD a parseStringToDouble (Ljava/lang/String;D)D (Ljava/lang/String;D)D
+		ARG 0 value
+		ARG 1 failureDefaultValue
+	METHOD a absoluteValue (I)I (I)I
+		ARG 0 value
+	METHOD a findFirstFloatInMiddle (FFF)F (FFF)F
+		ARG 0 value
+		ARG 1 knownLower
+		ARG 2 knownUpper
+	METHOD a squareRoot (D)F (D)F
+		ARG 0 value
+	METHOD a findMaxDoubleParseString (Ljava/lang/String;DD)D (Ljava/lang/String;DD)D
+		ARG 0 value
+		ARG 1 failureDefaultValue
+		ARG 2 value2
+	METHOD a findFirstDoubleInMiddle (DDD)D (DDD)D
+		ARG 0 value
+		ARG 1 knownLower
+		ARG 2 knownUpper
+	METHOD a findMaxIntParseString (Ljava/lang/String;II)I (Ljava/lang/String;II)I
+		ARG 0 value
+		ARG 1 failureDefaultValue
+		ARG 2 value2
+	METHOD a getUUID (Ljava/util/Random;)Ljava/util/UUID; (Ljava/util/Random;)Ljava/util/UUID;
+		ARG 0 random
+	METHOD a findFirstIntInMiddle (III)I (III)I
+		ARG 0 value
+		ARG 1 knownLower
+		ARG 2 knownUpper
+	METHOD a sin (F)F (F)F
+		ARG 0 value
+	METHOD a parseStringToInt (Ljava/lang/String;I)I (Ljava/lang/String;I)I
+		ARG 0 value
+		ARG 1 failureDefaultValue
+	METHOD a findMaxAbsoluteValue (DD)D (DD)D
+		ARG 0 value1
+		ARG 1 value2
+	METHOD a getRandomInt (Ljava/util/Random;II)I (Ljava/util/Random;II)I
+		ARG 0 random
+		ARG 1 min
+		ARG 2 max
+	METHOD a getRandomDouble (Ljava/util/Random;DD)D (Ljava/util/Random;DD)D
+		ARG 0 random
+		ARG 1 min
+		ARG 2 max
+	METHOD a getRandomFloat (Ljava/util/Random;FF)F (Ljava/util/Random;FF)F
+		ARG 0 random
+		ARG 1 min
+		ARG 2 max
+	METHOD b roundUpToNearestPowerOfTwo (I)I (I)I
+		ARG 0 value
+	METHOD b cos (F)F (F)F
+		ARG 0 value
+	METHOD b truncateToInt (D)I (D)I
+		ARG 0 value
+	METHOD c floorDoubleToInt (D)I (D)I
+		ARG 0 value
+	METHOD c squareRoot (F)F (F)F
+		ARG 0 value
+	METHOD c logBaseTwo (I)I (I)I
+		ARG 0 value
+	METHOD d isPowerOfTwo (I)Z (I)Z
+		ARG 0 value
+	METHOD d floorDoubleToLong (D)J (D)J
+		ARG 0 value
+	METHOD d floorFloatToInt (F)I (F)I
+		ARG 0 value
+	METHOD e absoluteValueRoundToInt (D)I (D)I
+		ARG 0 value
+	METHOD e absoluteValue (F)F (F)F
+		ARG 0 value
+	METHOD e logBaseTwoDeBruijnFormula (I)I (I)I
+		ARG 0 value
+	METHOD f ceilingFloatToInt (F)I (F)I
+		ARG 0 value
+	METHOD f ceilingDoubleToInt (D)I (D)I
+	METHOD g convertDoubleToPositive180ToNegative180 (D)D (D)D
+		ARG 0 value
+	METHOD g convertFloatToPositive180ToNegative180 (F)F (F)F
+		ARG 0 value
+CLASS w OSName
+	METHOD a getOSName ()Lx; ()LOSType;
+CLASS wv Entity
+	FIELD V random
+	FIELD ao uuid
+CLASS x OSType
+	FIELD a Linux
+	FIELD b Solaris
+	FIELD c Windows
+	FIELD d OSX
+	FIELD e Unknown
+	FIELD f OSTypes
+CLASS y _y_IServerCommand_something
+	METHOD a a (Lae;Lac;ILjava/lang/String;[Ljava/lang/Object;)V (LIServerCommandUser;LIServerCommand;ILjava/lang/String;[Ljava/lang/Object;)V
+		ARG 0 serverCommandUser
+		ARG 1 serverCommand
+CLASS z ServerCommand
+	METHOD a a (Lae;[Ljava/lang/String;I)Lho; (LIServerCommandUser;[Ljava/lang/String;I)Lho;
+		ARG 0 serverCommandUser
+	METHOD a a (Lae;[Ljava/lang/String;IZ)Ldt; (LIServerCommandUser;[Ljava/lang/String;IZ)L_dt_location_ext_fd;
+		ARG 0 serverCommandUser
+	METHOD a a (Lae;Ljava/lang/String;Ljava/lang/Class;)Lwv; (LIServerCommandUser;Ljava/lang/String;Ljava/lang/Class;)LEntity;
+		ARG 0 serverCommandUser
+	METHOD a a (Lae;Lac;ILjava/lang/String;[Ljava/lang/Object;)V (LIServerCommandUser;LIServerCommand;ILjava/lang/String;[Ljava/lang/Object;)V
+		ARG 0 serverCommandUser
+		ARG 1 serverCommand
+	METHOD a a (Lae;)Z (LIServerCommandUser;)Z
+		ARG 0 serverCommandUser
+	METHOD a a (Lae;Ljava/lang/String;)Lqw; (LIServerCommandUser;Ljava/lang/String;)Lqw;
+		ARG 0 serverCommandUser
+	METHOD a a (Lae;Lac;Ljava/lang/String;[Ljava/lang/Object;)V (LIServerCommandUser;LIServerCommand;Ljava/lang/String;[Ljava/lang/Object;)V
+		ARG 0 serverCommandUser
+		ARG 1 serverCommand
+	METHOD a a (Lae;[Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;[Ljava/lang/String;L_dt_location_ext_fd;)Ljava/util/List;
+		ARG 0 serverCommandUser
+	METHOD b b (Lae;Ljava/lang/String;)Lwv; (LIServerCommandUser;Ljava/lang/String;)LEntity;
+		ARG 0 serverCommandUser
+	METHOD b b (Lae;)Lqw; (LIServerCommandUser;)Lqw;
+		ARG 0 serverCommandUser
+	METHOD b b (Lae;[Ljava/lang/String;IZ)Lho; (LIServerCommandUser;[Ljava/lang/String;IZ)Lho;
+		ARG 0 serverCommandUser
+	METHOD c c (Lae;Ljava/lang/String;)Ljava/util/List; (LIServerCommandUser;Ljava/lang/String;)Ljava/util/List;
+		ARG 0 serverCommandUser
+	METHOD compareTo compareTo (Lac;)I (LIServerCommand;)I
+		ARG 0 serverCommand
+	METHOD d d (Lae;Ljava/lang/String;)Ljava/lang/String; (LIServerCommandUser;Ljava/lang/String;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD e e (Lae;Ljava/lang/String;)Ljava/lang/String; (LIServerCommandUser;Ljava/lang/String;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD f f (Lae;Ljava/lang/String;)Lalo; (LIServerCommandUser;Ljava/lang/String;)Lalo;
+		ARG 0 serverCommandUser
+	METHOD g g (Lae;Ljava/lang/String;)Latp; (LIServerCommandUser;Ljava/lang/String;)Latp;
+		ARG 0 serverCommandUser
