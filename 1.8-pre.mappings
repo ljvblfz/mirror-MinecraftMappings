@@ -184,7 +184,14 @@ CLASS asr BiomeSwampland
 CLASS ass BiomeTaiga
 CLASS ast BiomeTheEnd
 CLASS asw BlockAir
+CLASS asx BlockAnvil
+CLASS asz BlockBannerBase
+CLASS atb BlockStandingBanner
+CLASS atc BlockWallBanner
+CLASS atd BlockBarrier
+CLASS atf BlockPressurePlateAbstract
 CLASS atg BlockAbstractRail
+CLASS atk BlockBeacon
 CLASS atn BlockBed
 CLASS atp Block
 	METHOD a registerBlock (ILjava/lang/String;Latp;)V (ILjava/lang/String;LBlock;)V
@@ -197,28 +204,40 @@ CLASS au ServerCommandAchievement
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS aub BlockButtonAbstract
 CLASS aud BlockCactus
 CLASS aue BlockCake
+CLASS auf BlockCarrots
 CLASS aug BlockCauldron
 CLASS auh BlockChest
 CLASS aui BlockClay
-CLASS aul BlockWool
+CLASS auj BlockCocoaBeans
+CLASS aul BlockColored
+CLASS aum BlockCommandBlock
+CLASS aun BlockComparator
 CLASS auq BlockCraftingTable
-CLASS aus BlockWheat
+CLASS aus BlockCrops
+CLASS aut BlockDaylightDetector
 CLASS auu BlockDeadBush
 CLASS auv BlockDetectorRail
+CLASS auz BlockRotatable4
 CLASS ava BlockDirt
 CLASS avc BlockDispenser
 CLASS avd BlockDoor
+CLASS avg BlockDoublePlant
 CLASS avj BlockDragonEgg
+CLASS avk BlockDropper
 CLASS avl BlockLiquidFlowing
 CLASS avm BlockEnchantingTable
 CLASS avn BlockEndPortal
 CLASS avo BlockEndPortalFrame
+CLASS avp BlockEnderChest
+CLASS avr BlockFalling
 CLASS avs BlockFarmland
 CLASS avt BlockFence
 CLASS avu BlockFenceGate
 CLASS avv BlockFire
+CLASS avw BlockFlowerAbstract
 CLASS aw ServerCommandBanIp
 	FIELD a IPRegexPatern
 	METHOD a a (Lae;Ljava/lang/String;Ljava/lang/String;)V (LIServerCommandUser;Ljava/lang/String;Ljava/lang/String;)V
@@ -228,6 +247,8 @@ CLASS aw ServerCommandBanIp
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS awb BlockFlowerPot
+CLASS awe BlockDoubleStoneSlabs2
 CLASS awf BlockStoneDoubleSlab
 CLASS awg BlockWoodenDoubleSlab
 CLASS awh BlockFurnace
@@ -235,7 +256,14 @@ CLASS awj BlockGlass
 CLASS awk BlockGlowstone
 CLASS awl BlockGrass
 CLASS awm BlockGravel
+CLASS awn BlockStoneSlabs2
+CLASS awo BlockSlabAbstract
 CLASS awq BlockStoneSlab
+CLASS awr BlockTransparentCube
+CLASS aws BlockWoodenSlab
+CLASS awt BlockHardenedClay
+CLASS awu BlockHayBlock
+CLASS awv BlockHopper
 CLASS awx BlockMushroom
 CLASS awz BlockIce
 CLASS ax ServerCommandBan
@@ -246,7 +274,10 @@ CLASS ax ServerCommandBan
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS axa BlockJukebox
 CLASS axc BlockLadder
+CLASS axe BlockLeavesAbstract
 CLASS axg BlockLever
+CLASS axj BlockLiquidAbstract
+CLASS axk BlockLogAbstract
 CLASS axn BlockMelon
 CLASS axo BlockRefinedOre
 CLASS axp BlockMobSpawner
@@ -262,13 +293,19 @@ CLASS aya BlockMycelium
 CLASS ayb BlockNetherBrick
 CLASS ayc BlockNetherWart
 CLASS ayd BlockNetherrack
+CLASS aye BlockLeaves2
+CLASS ayg BlockLog2
+CLASS ayj BlockStoneSlab2Abstract
 CLASS ayl BlockNoteBlock
 CLASS aym BlockObsidian
 CLASS ayn BlockLeaves
 CLASS ayp BlockLog
 CLASS ays BlockOre
+CLASS ayt BlockPackedIce
 CLASS ayu BlockWood
 CLASS ayw BlockNetherPortal
+CLASS ayy BlockPotatoes
+CLASS ayz BlockRedstoneBlock
 CLASS az ServerCommandClear
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -277,15 +314,19 @@ CLASS az ServerCommandClear
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS aza BlockRedstoneRail
 CLASS azd BlockPressurePlate
+CLASS azg BlockPrismarine
 CLASS azi BlockPumpkin
+CLASS azj BlockQuartzBlock
 CLASS azm BlockRail
 CLASS azn BlockRedFlower
+CLASS azo BlockRedSandstone
 CLASS azq BlockRedstoneOre
 CLASS azr BlockRedstoneWire
 CLASS azt BlockRedstoneLamp
 CLASS azu BlockRedstoneTorch
 CLASS azw BlockReeds
 CLASS azx BlockRepeater
+CLASS azy BlockRotatable6
 CLASS azz BlockSand
 CLASS b CrashLogger
 	FIELD a logger
@@ -326,11 +367,16 @@ CLASS ba ServerCommandClone
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bab BlockSandStone
 CLASS bad BlockSapling
+CLASS baf BlockSeaLantern
+CLASS bag BlockSignBase
+CLASS bah BlockSkull
+CLASS bak BlockSlime
 CLASS bal BlockSnow
 CLASS bam BlockSnowLayer
 CLASS ban BlockSoulSand
 CLASS bao BlockSponge
 CLASS bap BlockStainedGlass
+CLASS baq BlockStainedGlassPane
 CLASS bar BlockStairs
 CLASS bau BlockStandingSign
 CLASS bav BlockLiquidStill
@@ -338,12 +384,17 @@ CLASS baw BlockPlantStem
 CLASS bay BlockStone
 CLASS bba BlockStonebrick
 CLASS bbc BlockButton
+CLASS bbd BlockStoneSlabAbstract
 CLASS bbf BlockTallGrass
 CLASS bbh BlockWindow
 CLASS bbi BlockTNT
 CLASS bbj BlockTorch
+CLASS bbm BlockDecayable
 CLASS bbn BlockTrapdoor
+CLASS bbq BlockTripwire
+CLASS bbr BlockTripwireHook
 CLASS bbt BlockVine
+CLASS bbv BlockCobbleWall
 CLASS bbx BlockWallSign
 CLASS bbz BlockWaterlily
 CLASS bc ServerCommandTestForBlocks
@@ -353,6 +404,10 @@ CLASS bc ServerCommandTestForBlocks
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bca BlockWeb
+CLASS bcb BlockWeightedPressurePlate
+CLASS bcc BlockWoodenButton
+CLASS bcd BlockWoodenSlabAbstract
+CLASS bce BlockCarpet
 CLASS bcf BlockYellowFlower
 CLASS bd ServerCommandDeOp
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
