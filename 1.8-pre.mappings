@@ -9,9 +9,9 @@ CLASS ab _ab_ServerCommand_something
 		ARG 0 serverCommandUser
 	METHOD a a (Lac;)Lac; (LIServerCommand;)LIServerCommand;
 		ARG 0 serverCommand
-	METHOD a a (Lae;Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;Ljava/lang/String;L_dt_location_ext_fd;)Ljava/util/List;
-		ARG 0 serverCommandUser
 	METHOD a a (Lae;Ljava/lang/String;)I (LIServerCommandUser;Ljava/lang/String;)I
+		ARG 0 serverCommandUser
+	METHOD a a (Lae;Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;Ljava/lang/String;L_dt_location_ext_fd;)Ljava/util/List;
 		ARG 0 serverCommandUser
 CLASS ac IServerCommand
 	METHOD a a (Lae;)Z (LIServerCommandUser;)Z
@@ -26,9 +26,9 @@ CLASS ac IServerCommand
 CLASS ad _ad_IServerCommand_something
 	METHOD a a (Lae;)Ljava/util/List; (LIServerCommandUser;)Ljava/util/List;
 		ARG 0 serverCommandUser
-	METHOD a a (Lae;Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;Ljava/lang/String;L_dt_location_ext_fd;)Ljava/util/List;
-		ARG 0 serverCommandUser
 	METHOD a a (Lae;Ljava/lang/String;)I (LIServerCommandUser;Ljava/lang/String;)I
+		ARG 0 serverCommandUser
+	METHOD a a (Lae;Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;Ljava/lang/String;L_dt_location_ext_fd;)Ljava/util/List;
 		ARG 0 serverCommandUser
 CLASS ae IServerCommandUser
 CLASS af af
@@ -141,7 +141,7 @@ CLASS b CrashLogger
 		ARG 1 cause
 	METHOD a a (Ljava/lang/String;)Lj; (Ljava/lang/String;)LCrashLogInfo;
 		ARG 0 name
-	METHOD a getOrCreateCrashLogger (Ljava/lang/Throwable;Ljava/lang/String;)Lb; (Ljava/lang/Throwable;Ljava/lang/String;)LCrashLogger;
+	METHOD a getCrashLogger (Ljava/lang/Throwable;Ljava/lang/String;)Lb; (Ljava/lang/Throwable;Ljava/lang/String;)LCrashLogger;
 		ARG 0 cause
 		ARG 1 message
 	METHOD a getMessage ()Ljava/lang/String; ()Ljava/lang/String;
@@ -259,7 +259,7 @@ CLASS br ServerCommandGive
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-CLASS bs CommandServerHelp
+CLASS bs ServerCommandHelp
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
@@ -446,10 +446,10 @@ CLASS cq ServerCommandSeed
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS cr ServerCommandSpreadPlayers
-	METHOD a a (Ljava/util/Random;IDDDD)[Lcs; (Ljava/util/Random;IDDDD)[Lcs;
-		ARG 0 random
 	METHOD a a (Lae;Ljava/util/List;Lcs;DDLaqs;Z)V (LIServerCommandUser;Ljava/util/List;Lcs;DDLaqs;Z)V
 		ARG 0 serverCommandUser
+	METHOD a a (Ljava/util/Random;IDDDD)[Lcs; (Ljava/util/Random;IDDDD)[Lcs;
+		ARG 0 random
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
@@ -481,16 +481,178 @@ CLASS cv ServerCommandSummon
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS cw ServerCommandTp
-	METHOD a a (Lae;[Ljava/lang/String;)V (Lae;[Ljava/lang/String;)V
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS cy ServerCommandTestForBlock
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS cz ServerCommandTestFor
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS czg czg
+	METHOD b initializeMap ()Ljava/util/Map; ()Ljava/util/Map;
+CLASS da ServerCommandTime
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS db ServerCommandTitle
+	FIELD a logger
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS dc ServerCommandToggleDownFall
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS dd ServerCommandTrigger
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS de ServerCommandWeather
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverComamndUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS df ServerCommandWhiteList
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS dg ServerCommandWorldBorder
+	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
+		ARG 0 serverCommandUser
+	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
+		ARG 0 serverCommandUser
+	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS di ServerCommandException
+	FIELD a errorObjectArray
+	METHOD <init> <init> (Ljava/lang/String;[Ljava/lang/Object;)V (Ljava/lang/String;[Ljava/lang/Object;)V
+		ARG 0 message
+		ARG 1 errorObjectArray
+	METHOD a getErrorObjectArray ()[Ljava/lang/Object; ()[Ljava/lang/Object;
+CLASS dj ServerCommandEntityNotFoundException
+CLASS dk ServerCommandInvalidNumberException
+CLASS dl ServerCommandSyntaxException
+CLASS dm ServerCommandPlayerNotFoundException
+CLASS dn ServerCommandNotFoundException
 CLASS dt _dt_location_ext_fd
 CLASS dy dy
 	METHOD n getX ()I ()I
 	METHOD o getY ()I ()I
 	METHOD p getZ ()I ()I
+CLASS eh eh
+	METHOD a getRegistryItem (Ljava/lang/Object;)Ljava/lang/Object; (Ljava/lang/Object;)Ljava/lang/Object;
+CLASS ei ei
+	METHOD a getRegistryItem (Ljava/lang/Object;)Ljava/lang/Object; (Ljava/lang/Object;)Ljava/lang/Object;
+CLASS el el
+	FIELD a Down
+	FIELD b Up
+	FIELD c North
+	FIELD d South
+	FIELD e West
+	FIELD f East
+CLASS eo eo
+	FIELD a Postive
+	FIELD b Negative
+CLASS ep ep
+	FIELD a Horizontal
+	FIELD b Vertical
+	METHOD a a (Ljava/util/Random;)Lel; (Ljava/util/Random;)Lel;
+		ARG 0 random
+CLASS eq IIterable
+CLASS eu eu
+	METHOD a a (Ljava/lang/Iterable;Ljava/lang/Iterable;Ljava/util/Map;)Ljava/util/Map; (Ljava/lang/Iterable;Ljava/lang/Iterable;Ljava/util/Map;)Ljava/util/Map;
+		ARG 0 iterable1
+		ARG 1 iterable2
+	METHOD b b (Ljava/lang/Iterable;Ljava/lang/Iterable;)Ljava/util/Map; (Ljava/lang/Iterable;Ljava/lang/Iterable;)Ljava/util/Map;
+		ARG 0 iterable1
+		ARG 1 iterable2
+CLASS ev ev
+	METHOD a getRegistryItem (Ljava/lang/Object;)Ljava/lang/Object; (Ljava/lang/Object;)Ljava/lang/Object;
+	METHOD b initializeMap ()Ljava/util/Map; ()Ljava/util/Map;
+	METHOD d containsKey (Ljava/lang/Object;)Z (Ljava/lang/Object;)Z
+	METHOD iterator iterator ()Ljava/util/Iterator; ()Ljava/util/Iterator;
+CLASS ew ew
+	FIELD A Flame
+	FIELD B Lava
+	FIELD C Footstep
+	FIELD D Cloud
+	FIELD E Redstone
+	FIELD F Snowball
+	FIELD G SnowShovel
+	FIELD H Slime
+	FIELD I Heart
+	FIELD J Barrier
+	FIELD K ItemCrack
+	FIELD L BlockCrack
+	FIELD M BlockDust
+	FIELD N WaterDrop
+	FIELD O ItemTake
+	FIELD P MobAppearance
+	FIELD a ExplosionNormal
+	FIELD b ExplosionLarge
+	FIELD c ExplosionHuge
+	FIELD d FireworksSpark
+	FIELD e WaterBubble
+	FIELD f WaterSplash
+	FIELD g WaterWake
+	FIELD h Suspended
+	FIELD i SuspendedDepth
+	FIELD j Crit
+	FIELD k CritMagic
+	FIELD l SmokeNormal
+	FIELD m SmokeLarge
+	FIELD n Spell
+	FIELD o SpellInstant
+	FIELD p SpellMob
+	FIELD q SpellMobAmbient
+	FIELD r SpellWitch
+	FIELD s DipWater
+	FIELD t DripLava
+	FIELD u VillagerAngery
+	FIELD v VillagerHappy
+	FIELD w TownAura
+	FIELD x Note
+	FIELD y Portal
+	FIELD z EnchantmentTable
+CLASS ez IRegistry
+	METHOD a getRegistryItem (Ljava/lang/Object;)Ljava/lang/Object; (Ljava/lang/Object;)Ljava/lang/Object;
+		ARG 0 registryItemKey
+	METHOD a addRegistryItem (Ljava/lang/Object;Ljava/lang/Object;)V (Ljava/lang/Object;Ljava/lang/Object;)V
+		ARG 0 registryItemKey
+		ARG 1 registryItem
+CLASS fb Registry
+	FIELD a logger
+	FIELD c registryMap
+	METHOD a getRegistryItem (Ljava/lang/Object;)Ljava/lang/Object; (Ljava/lang/Object;)Ljava/lang/Object;
+		ARG 0 registryItemKey
+	METHOD a addRegistryItem (Ljava/lang/Object;Ljava/lang/Object;)V (Ljava/lang/Object;Ljava/lang/Object;)V
+		ARG 0 registryItemKey
+		ARG 1 registryItem
+	METHOD b initializeMap ()Ljava/util/Map; ()Ljava/util/Map;
+	METHOD c getRegistryKeys ()Ljava/util/Set; ()Ljava/util/Set;
+	METHOD d containsKey (Ljava/lang/Object;)Z (Ljava/lang/Object;)Z
+		ARG 0 registryItemKey
+	METHOD iterator iterator ()Ljava/util/Iterator; ()Ljava/util/Iterator;
 CLASS fd _fd_location
 	FIELD a x
 	FIELD b y
@@ -515,6 +677,319 @@ CLASS fd _fd_location
 	METHOD n getX ()I ()I
 	METHOD o getY ()I ()I
 	METHOD p getZ ()I ()I
+CLASS fl NbtByteArray
+	FIELD b dataValue
+	METHOD <init> <init> ([B)V ([B)V
+		ARG 0 dataValue
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD a inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
+		ARG 0 dataInput
+		ARG 1 depth
+	METHOD b clone ()Lgd; ()LNbt;
+	METHOD c getDataValue ()[B ()[B
+CLASS fm NbtByte
+	FIELD b dataValue
+	METHOD <init> <init> (B)V (B)V
+		ARG 0 dataValue
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD a inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
+		ARG 0 dataInput
+		ARG 1 depth
+		ARG 2 nbtSizeUtil
+	METHOD b clone ()Lgd; ()LNbt;
+	METHOD c getAsLong ()J ()J
+	METHOD d getAsInt ()I ()I
+	METHOD e getAsShort ()S ()S
+	METHOD f getAsByte ()B ()B
+	METHOD g getAsDouble ()D ()D
+	METHOD h getAsFloat ()F ()F
+CLASS fn NbtMap
+	FIELD b logger
+	FIELD c dataMap
+	METHOD a a (Ljava/io/DataInput;Lfx;)B (Ljava/io/DataInput;Lfx;)B
+		ARG 0 dataInput
+		ARG 1 nbtSzieUtil
+	METHOD a put (Ljava/lang/String;Z)V (Ljava/lang/String;Z)V
+		ARG 0 nbtMapKey
+		ARG 1 dataValue
+	METHOD a a (Lfn;)V (Lfn;)V
+		ARG 0 nbtMap
+	METHOD a a (BLjava/lang/String;Ljava/io/DataInput;ILfx;)Lgd; (BLjava/lang/String;Ljava/io/DataInput;ILfx;)Lgd;
+		ARG 0 nbtTypeId
+		ARG 1 elementValue
+		ARG 2 dataInput
+		ARG 4 nbtSizeUtil
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a getAsNbt (Ljava/lang/String;)Lgd; (Ljava/lang/String;)LNbt;
+		ARG 0 nbtMapKey
+	METHOD a put (Ljava/lang/String;Lgd;)V (Ljava/lang/String;LNbt;)V
+		ARG 0 nbtMapKey
+		ARG 1 nbt
+	METHOD a a (Ljava/lang/String;ILjava/lang/ClassCastException;)Lb; (Ljava/lang/String;ILjava/lang/ClassCastException;)Lb;
+		ARG 0 elementValue
+		ARG 2 cause
+	METHOD a put (Ljava/lang/String;I)V (Ljava/lang/String;I)V
+		ARG 0 nbtMapKey
+		ARG 1 dataValue
+	METHOD a a (Ljava/lang/String;Lgd;Ljava/io/DataOutput;)V (Ljava/lang/String;Lgd;Ljava/io/DataOutput;)V
+		ARG 0 nbtMapKey
+		ARG 1 nbt
+		ARG 2 dataOutput
+	METHOD a put (Ljava/lang/String;J)V (Ljava/lang/String;J)V
+		ARG 0 nbtMapKey
+		ARG 1 dataValue
+	METHOD a put (Ljava/lang/String;[B)V (Ljava/lang/String;[B)V
+		ARG 0 nbtMapKey
+		ARG 1 dataValue
+	METHOD a put (Ljava/lang/String;B)V (Ljava/lang/String;B)V
+		ARG 0 nbtMapKey
+		ARG 1 dataValue
+	METHOD a put (Ljava/lang/String;F)V (Ljava/lang/String;F)V
+		ARG 0 nbtMapKey
+		ARG 1 dataValue
+	METHOD a put (Ljava/lang/String;S)V (Ljava/lang/String;S)V
+		ARG 0 nbtMapKey
+		ARG 1 dataValue
+	METHOD a put (Ljava/lang/String;Ljava/lang/String;)V (Ljava/lang/String;Ljava/lang/String;)V
+		ARG 0 nbtMapKey
+		ARG 1 dataValue
+	METHOD a put (Ljava/lang/String;D)V (Ljava/lang/String;D)V
+		ARG 0 nbtMapKey
+		ARG 1 dataValue
+	METHOD a put (Ljava/lang/String;[I)V (Ljava/lang/String;[I)V
+		ARG 0 nbtMapKey
+		ARG 1 dataValue
+	METHOD b b (Ljava/io/DataInput;Lfx;)Ljava/lang/String; (Ljava/io/DataInput;Lfx;)Ljava/lang/String;
+		ARG 0 dataInput
+		ARG 1 nbtSizeUtil
+	METHOD b isMapTypeOf (Ljava/lang/String;I)Z (Ljava/lang/String;I)Z
+		ARG 0 nbtMapKey
+		ARG 1 nbtTypeId
+	METHOD b getNbtTypeId (Ljava/lang/String;)B (Ljava/lang/String;)B
+		ARG 0 nbtMapKey
+	METHOD c getAsNbtList (Ljava/lang/String;I)Lfv; (Ljava/lang/String;I)LNbtLists;
+		ARG 0 nbtMapKey
+	METHOD c getNbtMapKeys ()Ljava/util/Set; ()Ljava/util/Set;
+	METHOD c containsKey (Ljava/lang/String;)Z (Ljava/lang/String;)Z
+		ARG 0 nbtMapKey
+	METHOD c_ isEmpty ()Z ()Z
+	METHOD d getAsByte (Ljava/lang/String;)B (Ljava/lang/String;)B
+		ARG 0 nbtMapKey
+	METHOD e getAsShort (Ljava/lang/String;)S (Ljava/lang/String;)S
+		ARG 0 nbtMapKey
+	METHOD f getAsInt (Ljava/lang/String;)I (Ljava/lang/String;)I
+		ARG 0 nbtMapKey
+	METHOD g getAsLong (Ljava/lang/String;)J (Ljava/lang/String;)J
+		ARG 0 nbtMapKey
+	METHOD h getAsFloat (Ljava/lang/String;)F (Ljava/lang/String;)F
+		ARG 0 nbtMapKey
+	METHOD i getAsDouble (Ljava/lang/String;)D (Ljava/lang/String;)D
+		ARG 0 nbtMapKey
+	METHOD inputData inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILfx;)V
+		ARG 0 dataInput
+		ARG 1 depth
+	METHOD j getAsString (Ljava/lang/String;)Ljava/lang/String; (Ljava/lang/String;)Ljava/lang/String;
+		ARG 0 nbtMapKey
+	METHOD k getAsByteArray (Ljava/lang/String;)[B (Ljava/lang/String;)[B
+		ARG 0 nbtMapKey
+	METHOD l getAsIntArray (Ljava/lang/String;)[I (Ljava/lang/String;)[I
+		ARG 0 nbtMapKey
+	METHOD m getAsNbtMap (Ljava/lang/String;)Lfn; (Ljava/lang/String;)LNbtMap;
+		ARG 0 nbtMapKey
+	METHOD n n (Ljava/lang/String;)Z (Ljava/lang/String;)Z
+		ARG 0 nbtMapKey
+	METHOD o remove (Ljava/lang/String;)V (Ljava/lang/String;)V
+		ARG 0 nbtMapKey
+CLASS fq NbtDouble
+	FIELD b dataValue
+	METHOD <init> <init> (D)V (D)V
+		ARG 0 dataValue
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD a inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
+		ARG 0 dataInput
+		ARG 1 depth
+	METHOD b clone ()Lgd; ()LNbt;
+	METHOD c getAsLong ()J ()J
+	METHOD d getAsInt ()I ()I
+	METHOD e getAsShort ()S ()S
+	METHOD f getAsByte ()B ()B
+	METHOD g getAsDouble ()D ()D
+	METHOD h getAsFloat ()F ()F
+CLASS fr NbtEnd
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD a inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
+		ARG 0 dataInput
+		ARG 1 depth
+	METHOD b clone ()Lgd; ()LNbt;
+CLASS fs NbtFloat
+	FIELD b dataValue
+	METHOD <init> <init> (F)V (F)V
+		ARG 0 dataValue
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD a inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
+		ARG 0 dataInput
+		ARG 1 depth
+	METHOD b clone ()Lgd; ()LNbt;
+	METHOD c getAsLong ()J ()J
+	METHOD d getAsInt ()I ()I
+	METHOD e getAsShort ()S ()S
+	METHOD f getAsByte ()B ()B
+	METHOD g getAsDouble ()D ()D
+	METHOD h getAsFloat ()F ()F
+CLASS ft NbtIntArray
+	FIELD b dataValue
+	METHOD <init> <init> ([I)V ([I)V
+		ARG 0 dataValue
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD a inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
+		ARG 0 dataInput
+		ARG 1 depth
+	METHOD b clone ()Lgd; ()LNbt;
+	METHOD c getDataValue ()[I ()[I
+CLASS fu NbtInt
+	FIELD b dataValue
+	METHOD <init> <init> (I)V (I)V
+		ARG 0 dataValue
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD a inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
+		ARG 0 dataInput
+		ARG 1 depth
+	METHOD b clone ()Lgd; ()LNbt;
+	METHOD c getAsLong ()J ()J
+	METHOD d getAsInt ()I ()I
+	METHOD e getAsShort ()S ()S
+	METHOD f getAsByte ()B ()B
+	METHOD g getAsDouble ()D ()D
+	METHOD h getAsFloat ()F ()F
+CLASS fv NbtLists
+	FIELD b logger
+	FIELD c nbtList
+	FIELD d listOfNbtTypeId
+	METHOD a inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
+		ARG 0 dataInput
+		ARG 1 depth
+		ARG 2 nbtSizeUtil
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD a add (Lgd;)V (LNbt;)V
+		ARG 0 nbt
+	METHOD a remove (I)Lgd; (I)LNbt;
+		ARG 0 index
+	METHOD a set (ILgd;)V (ILNbt;)V
+		ARG 0 index
+		ARG 1 nbt
+	METHOD b getAsNbtMap (I)Lfn; (I)LNbtMap;
+		ARG 0 index
+	METHOD b clone ()Lgd; ()LNbt;
+	METHOD c getAsIntArray (I)[I (I)[I
+		ARG 0 index
+	METHOD c_ isEmpty ()Z ()Z
+	METHOD d getAsDouble (I)D (I)D
+		ARG 0 index
+	METHOD e getAsFloat (I)F (I)F
+		ARG 0 index
+	METHOD f getListNbtTypeId ()I ()I
+	METHOD f getAsString (I)Ljava/lang/String; (I)Ljava/lang/String;
+		ARG 0 index
+	METHOD g getAsNbt (I)Lgd; (I)LNbt;
+		ARG 0 index
+CLASS fw NbtLong
+	FIELD b dataValue
+	METHOD <init> <init> (J)V (J)V
+		ARG 0 dataValue
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD a inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
+		ARG 0 dataInput
+		ARG 1 depth
+	METHOD b clone ()Lgd; ()LNbt;
+	METHOD c getAsLong ()J ()J
+	METHOD d getAsInt ()I ()I
+	METHOD e getAsShort ()S ()S
+	METHOD f getAsByte ()B ()B
+	METHOD g getAsDouble ()D ()D
+	METHOD h getAsFloat ()F ()F
+CLASS fx NbtSizeUtil
+	FIELD a nbtSizeUtilDefault
+	FIELD b maxSize
+	FIELD c currentSize
+	METHOD <init> <init> (J)V (J)V
+		ARG 0 maxSize
+	METHOD a addSize (J)V (J)V
+		ARG 0 size
+CLASS fy NbtSizeUtilDefault
+	METHOD a addSize (J)V (J)V
+		ARG 0 size
+CLASS gb NbtShort
+	FIELD b dataValue
+	METHOD <init> <init> (S)V (S)V
+		ARG 0 dataValue
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD a inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
+		ARG 0 dataInput
+		ARG 1 depth
+	METHOD b clone ()Lgd; ()LNbt;
+	METHOD c getAsLong ()J ()J
+	METHOD d getAsInt ()I ()I
+	METHOD e getAsShort ()S ()S
+	METHOD f getAsByte ()B ()B
+	METHOD g getAsDouble ()D ()D
+	METHOD h getAsFloat ()F ()F
+CLASS gc NbtStrings
+	FIELD b dataValue
+	METHOD <init> <init> (Ljava/lang/String;)V (Ljava/lang/String;)V
+		ARG 0 dataValue
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD a inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
+		ARG 0 dataInput
+		ARG 1 depth
+	METHOD a_ getNbtString ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD b clone ()Lgd; ()LNbt;
+	METHOD c_ isEmpty ()Z ()Z
+CLASS gd Nbt
+	FIELD a NBTTypes
+	METHOD a getNbtTypeId ()B ()B
+	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
+		ARG 0 dataOutput
+	METHOD a inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
+		ARG 0 dataInput
+		ARG 2 nbtSizeUtil
+	METHOD a createNbt (B)Lgd; (B)LNbt;
+		ARG 0 NbtTypeId
+	METHOD a_ getNbtString ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD b clone ()Lgd; ()LNbt;
+	METHOD c_ isEmpty ()Z ()Z
+	METHOD inputData inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
+		ARG 0 dataInput
+		ARG 1 depth
+		ARG 2 nbtSizeUtil
+CLASS ge NbtNumeric
+	METHOD c getAsLong ()J ()J
+	METHOD d getAsInt ()I ()I
+	METHOD e getAsShort ()S ()S
+	METHOD f getAsByte ()B ()B
+	METHOD g getAsDouble ()D ()D
+	METHOD h getAsFloat ()F ()F
 CLASS j CrashLogInfo
 	FIELD a crashLogger
 	FIELD b name
