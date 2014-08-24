@@ -262,10 +262,10 @@ CLASS ape EnchantTypes
 	METHOD a canItemBeEnchanted (Lalo;)Z (LItem;)Z
 		ARG 0 item
 CLASS aqs Dimension
-	METHOD b getBiomeAt (Ldt;)Lark; (LBlockCoords;)LBiomeGenerator;
+	METHOD b getBiomeAt (Ldt;)Lark; (LBlockCoords;)LBiome;
 		ARG 0 location
 CLASS arj BiomeBeach
-CLASS ark BiomeGenerator
+CLASS ark Biome
 	FIELD A frozenRiver
 	FIELD B icePlains
 	FIELD C iceMountains
@@ -292,10 +292,17 @@ CLASS ark BiomeGenerator
 	FIELD X extremeHillsPlus
 	FIELD Y savanna
 	FIELD Z savannaPlateau
+	FIELD aE biomeArray
 	FIELD aa mesa
 	FIELD ab mesaPlateauForest
 	FIELD ac mesaPlateau
 	FIELD az biomeID
+	FIELD b riverTerrainData
+	FIELD c oceanTerrainData
+	FIELD g hillsTerrainData
+	FIELD h plateauTerrainData
+	FIELD i extremeHillsTerrainData
+	FIELD m swamplandTerrainData
 	FIELD n biomeSetNoMutated
 	FIELD o idToBiomeMap
 	FIELD p ocean
@@ -309,7 +316,10 @@ CLASS ark BiomeGenerator
 	FIELD x hell
 	FIELD y theEnd
 	FIELD z frozenOcean
-	METHOD k createMutated ()Lark; ()LBiomeGenerator;
+	METHOD a setName (Ljava/lang/String;)Lark; (Ljava/lang/String;)LBiome;
+	METHOD a setBiomeTerrainData (Larm;)Lark; (Larm;)LBiome;
+	METHOD a setTemperatureRainfall (FF)Lark; (FF)LBiome;
+	METHOD k createMutated ()Lark; ()LBiome;
 CLASS ary BiomeDesert
 CLASS arz BiomeExtremeHills
 CLASS asb BiomeForest
