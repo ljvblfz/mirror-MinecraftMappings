@@ -119,31 +119,46 @@ CLASS am am
 	METHOD apply apply (Lwv;)Z (LEntity;)Z
 		ARG 0 entity
 CLASS aqs Dimension
+	FIELD c cloudColor
+	FIELD n WOO_MAGIC_NUMBER
 	FIELD s rand
-	METHOD a a (IIZ)Z (IIZ)Z
+	FIELD v chunkProvider
+	METHOD a checkChunkExists (IIZ)Z (IIZ)Z
 		ARG 0 chunkX
 		ARG 1 chunkZ
+		ARG 2 flag
 	METHOD a isBlockInWorld (Ldt;)Z (LBlockCoords;)Z
-	METHOD a a (Ldt;Ldt;)Z (LBlockCoords;LBlockCoords;)Z
+	METHOD a checkBlockRangeIsInWorld (Ldt;Ldt;)Z (LBlockCoords;LBlockCoords;)Z
 		ARG 0 minBlockCoords
 		ARG 1 maxBlockCoords
-	METHOD a a (Ldt;Ldt;Z)Z (LBlockCoords;LBlockCoords;Z)Z
+	METHOD a checkBlockRangeIsInWorld (Ldt;Ldt;Z)Z (LBlockCoords;LBlockCoords;Z)Z
 		ARG 0 minBlockCoords
 		ARG 1 maxBlockCoords
-	METHOD a a (Ldt;IZ)Z (LBlockCoords;IZ)Z
+		ARG 2 flag
+	METHOD a checkBlockRangeIsInWorld (Ldt;IZ)Z (LBlockCoords;IZ)Z
 		ARG 1 range
-	METHOD a a (Ldt;I)Z (LBlockCoords;I)Z
+		ARG 2 flag
+	METHOD a checkBlockRangeIsInWorld (Ldt;I)Z (LBlockCoords;I)Z
 		ARG 1 range
-	METHOD a isBlockRangeInWorld (IIIIIIZ)Z (IIIIIIZ)Z
+	METHOD a checkBlockRangeIsInWorld (Lbiz;)Z (LCoordRange;)Z
+	METHOD a getChunk (II)Lbff; (II)LChunk;
+	METHOD a checkBlockRangeIsInWorld (IIIIIIZ)Z (IIIIIIZ)Z
 		ARG 0 minWorldX
 		ARG 1 minWorldY
 		ARG 2 minWorldZ
 		ARG 3 maxWorldX
 		ARG 4 maxWorldY
 		ARG 5 maxWorldZ
+	METHOD a checkBlockIsInWorld (Ldt;Z)Z (LBlockCoords;Z)Z
+		ARG 1 flag
+	METHOD b checkBlockRangeIsInWorld (Lbiz;Z)Z (LCoordRange;Z)Z
+		ARG 1 rflag
 	METHOD b getBiomeAt (Ldt;)Lark; (LBlockCoords;)LBiomeGenerator;
 		ARG 0 blockCoords
 	METHOD b getDimension ()Laqs; ()LDimension;
+	METHOD e checkBlockIsInWorld (Ldt;)Z (LBlockCoords;)Z
+	METHOD f getChunkFromBlockCoords (Ldt;)Lbff; (LBlockCoords;)LChunk;
+CLASS arb IBlockAccess
 CLASS arj BiomeBeach
 	METHOD <init> <init> (I)V (I)V
 		ARG 0 biomeID
@@ -196,7 +211,7 @@ CLASS ark BiomeGenerator
 	METHOD a setTempAndRainfall (FF)Lark; (FF)LBiomeGenerator;
 		ARG 0 temp
 		ARG 1 rainfall
-	METHOD b b (Laqs;Ljava/util/Random;Lbgi;IID)V (LDimension;Ljava/util/Random;Lbgi;IID)V
+	METHOD b b (Laqs;Ljava/util/Random;Lbgi;IID)V (LDimension;Ljava/util/Random;LBlockArray;IID)V
 		ARG 0 dim
 		ARG 1 rand
 	METHOD k createMutated ()Lark; ()LBiomeGenerator;
@@ -229,6 +244,217 @@ CLASS atn BlockBed
 CLASS atp Block
 	METHOD a registerBlock (ILjava/lang/String;Latp;)V (ILjava/lang/String;LBlock;)V
 	METHOD a registerBlock (ILoa;Latp;)V (ILObjectName;LBlock;)V
+CLASS atw BlockRegistry
+	FIELD A sandstone
+	FIELD B noteblock
+	FIELD C bed
+	FIELD D golden_rail
+	FIELD E detector_rail
+	FIELD F sticky_piston
+	FIELD G web
+	FIELD H tallgrass
+	FIELD I deadbush
+	FIELD J piston
+	FIELD K piston_head
+	FIELD L wool
+	FIELD M piston_extension
+	FIELD N yellow_flower
+	FIELD O red_flower
+	FIELD P brown_mushroom
+	FIELD Q red_mushroom
+	FIELD R rgold_block
+	FIELD S iron_block
+	FIELD T double_stone_slab
+	FIELD U stone_slab
+	FIELD V brick_block
+	FIELD W tnt
+	FIELD X bookshelf
+	FIELD Y mossy_cobblestone
+	FIELD Z obsidian
+	FIELD a Air
+	FIELD aA iron_door
+	FIELD aB wooden_pressure_plate
+	FIELD aC redstone_ore
+	FIELD aD lit_redstone_torch
+	FIELD aE unlit_redstone_torch
+	FIELD aF edstone_torch
+	FIELD aG stone_button
+	FIELD aH snow_layer
+	FIELD aI ice
+	FIELD aJ snow
+	FIELD aK cactus
+	FIELD aL clay
+	FIELD aM reeds
+	FIELD aN jukebox
+	FIELD aO fence
+	FIELD aP spruce_fence
+	FIELD aQ birch_fence
+	FIELD aR jungle_fence
+	FIELD aS dark_oak_fence
+	FIELD aT acacia_fence
+	FIELD aU pumpkin
+	FIELD aV netherrack
+	FIELD aW soul_sand
+	FIELD aX glowstone
+	FIELD aY portal
+	FIELD aZ lit_pumpkin
+	FIELD aa torch
+	FIELD ab fire
+	FIELD ac mob_spawner
+	FIELD ad oak_stairs
+	FIELD ae chest
+	FIELD af redstone_wire
+	FIELD ag diamond_ore
+	FIELD ah diamond_block
+	FIELD ai crafting_table
+	FIELD aj wheat
+	FIELD ak farmland
+	FIELD al furnace
+	FIELD am lit_furnace
+	FIELD an standing_sign
+	FIELD ao wooden_door
+	FIELD ap spruce_door
+	FIELD aq birch_door
+	FIELD ar jungle_door
+	FIELD as acacia_door
+	FIELD at dark_oak_door
+	FIELD au ladder
+	FIELD av rail
+	FIELD aw stone_stairs
+	FIELD ax wall_sign
+	FIELD ay lever
+	FIELD az stone_pressure_plate
+	FIELD b stone
+	FIELD bA nether_brick_stairs
+	FIELD bB nether_wart
+	FIELD bC enchanting_table
+	FIELD bD brewing_stand
+	FIELD bE cauldron
+	FIELD bF end_portal
+	FIELD bG end_portal_frame
+	FIELD bH end_stone
+	FIELD bI dragon_egg
+	FIELD bJ redstone_lamp
+	FIELD bK lit_redstone_lamp
+	FIELD bL double_wooden_slab
+	FIELD bM wooden_slab
+	FIELD bN cocoa
+	FIELD bO sandstone_stairs
+	FIELD bP emerald_ore
+	FIELD bQ ender_chest
+	FIELD bR tripwire_hook
+	FIELD bS tripwire
+	FIELD bT emerald_block
+	FIELD bU spruce_stairs
+	FIELD bV birch_stairs
+	FIELD bW jungle_stairs
+	FIELD bX command_block
+	FIELD bY beacon
+	FIELD bZ cobblestone_wall
+	FIELD ba cake
+	FIELD bb unpowered_repeater
+	FIELD bc powered_repeater
+	FIELD bd trapdoor
+	FIELD be monster_egg
+	FIELD bf stonebrick
+	FIELD bg brown_mushroom_block
+	FIELD bh red_mushroom_block
+	FIELD bi iron_bars
+	FIELD bj glass_pane
+	FIELD bk melon_block
+	FIELD bl pumpkin_stem
+	FIELD bm melon_stem
+	FIELD bn vine
+	FIELD bo fence_gate
+	FIELD bp spruce_fence_gate
+	FIELD bq birch_fence_gate
+	FIELD br jungle_fence_gate
+	FIELD bs dark_oak_fence_gate
+	FIELD bt acacia_fence_gate
+	FIELD bu brick_stairs
+	FIELD bv rstone_brick_stairs
+	FIELD bw mycelium
+	FIELD bx waterlily
+	FIELD by nether_brick
+	FIELD bz nether_brick_fence
+	FIELD c grass
+	FIELD cA coal_block
+	FIELD cB packed_ice
+	FIELD cC acacia_stairs
+	FIELD cD dark_oak_stairs
+	FIELD cE slime
+	FIELD cF rdouble_plant
+	FIELD cG stained_glass
+	FIELD cH stained_glass_pane
+	FIELD cI prismarine
+	FIELD cJ sea_lantern
+	FIELD cK standing_banner
+	FIELD cL wall_banner
+	FIELD cM red_sandstone
+	FIELD cN red_sandstone_stairs
+	FIELD cO double_stone_slab2
+	FIELD cP stone_slab2
+	FIELD ca flower_pot
+	FIELD cb carrots
+	FIELD cc potatoes
+	FIELD cd wooden_button
+	FIELD ce skull
+	FIELD cf anvil
+	FIELD cg trapped_chest
+	FIELD ch light_weighted_pressure_plate
+	FIELD ci heavy_weighted_pressure_plate
+	FIELD cj unpowered_comparator
+	FIELD ck powered_comparator
+	FIELD cl daylight_detector
+	FIELD cm daylight_detector_inverted
+	FIELD cn redstone_block
+	FIELD co quartz_ore
+	FIELD cp hopper
+	FIELD cq quartz_block
+	FIELD cr quartz_stairs
+	FIELD cs activator_rail
+	FIELD ct dropper
+	FIELD cu stained_hardened_clay
+	FIELD cv barrier
+	FIELD cw iron_trapdoor
+	FIELD cx hay_block
+	FIELD cy carpet
+	FIELD cz rhardened_clay
+	FIELD d dirt
+	FIELD e cobblestone
+	FIELD f planks
+	FIELD g sapling
+	FIELD h bedrock
+	FIELD i flowing_water
+	FIELD j water
+	FIELD k flowing_lava
+	FIELD l lava
+	FIELD m sand
+	FIELD n gravel
+	FIELD o gold_ore
+	FIELD p iron_ore
+	FIELD q coal_ore
+	FIELD r log
+	FIELD s log2
+	FIELD t leaves
+	FIELD u leaves2
+	FIELD v sponge
+	FIELD w glass
+	FIELD x lapis_ore
+	FIELD y lapis_block
+	FIELD z dispenser
+CLASS atx IGrowable
+	METHOD a a (Laqs;Ljava/util/Random;Ldt;Lbea;)Z (LDimension;Ljava/util/Random;LBlockCoords;Lbea;)Z
+		ARG 0 dim
+		ARG 1 rand
+		ARG 2 blockCoords
+	METHOD a a (Laqs;Ldt;Lbea;Z)Z (LDimension;LBlockCoords;Lbea;Z)Z
+		ARG 0 dim
+		ARG 1 blockCoords
+	METHOD b b (Laqs;Ljava/util/Random;Ldt;Lbea;)V (LDimension;Ljava/util/Random;LBlockCoords;Lbea;)V
+		ARG 0 dim
+		ARG 1 rand
+		ARG 2 blockCoords
 CLASS aty BlockBookshelf
 CLASS atz BlockBrewingStand
 CLASS au ServerCommandAchievement
@@ -237,6 +463,7 @@ CLASS au ServerCommandAchievement
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS aua BlockGrowable
 CLASS aub BlockButtonAbstract
 CLASS aud BlockCactus
 CLASS aue BlockCake
@@ -306,6 +533,7 @@ CLASS ax ServerCommandBan
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS axa BlockJukebox
+CLASS axb TileEntityRecordPlayer
 CLASS axc BlockLadder
 CLASS axe BlockLeavesAbstract
 CLASS axg BlockLever
@@ -442,14 +670,44 @@ CLASS bcc BlockWoodenButton
 CLASS bcd BlockWoodenSlabAbstract
 CLASS bce BlockCarpet
 CLASS bcf BlockYellowFlower
+CLASS bcg TileEntityBanner
+CLASS bci TileEntityBeacon
+CLASS bck TileEntity
+	FIELD a logger
+	FIELD b dim
+	FIELD c blockCoords
+	FIELD e block
+	METHOD a setDimension (Laqs;)V (LDimension;)V
+	METHOD t checkHasDimension ()Z ()Z
+	METHOD v getBlockCoords ()Ldt; ()LBlockCoords;
+	METHOD w getBlock ()Latp; ()LBlock;
+	METHOD z getDimension ()Laqs; ()LDimension;
+CLASS bco TileEntityCauldron
+CLASS bcp TileEntityChest
+CLASS bcr TileEntityControl
+CLASS bct TileEntityComparator
+CLASS bcu TileEntityDLDetector
+CLASS bcv TileEntityTrap
+CLASS bcw TileEntityDropper
+CLASS bcx TileEntityEnchantTable
+CLASS bcy TileEntityEnderChest
+CLASS bcz TileEntityFlowerPot
 CLASS bd ServerCommandDeOp
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS bda TileEntityFurnace
+CLASS bdc TileEntityHopper
+CLASS bde TileEntityMobSpawner
+CLASS bdg TileEntityMusic
+CLASS bdh TileEntitySign
+CLASS bdk TileEntitySkull
+CLASS bdl TileEntityAirportal
 CLASS bdo BlockPistonBase
 CLASS bdq BlockPistonHead
+CLASS bdt TileEntityPiston
 CLASS bdv BlockPistonExtension
 CLASS be ServerCommandDebug
 	FIELD a logger
@@ -465,6 +723,24 @@ CLASS bf ServerCommandDefaultGameMode
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS bfc IChunkProvider
+	METHOD a getChunkFromBlockCoords (Ldt;)Lbff; (LBlockCoords;)LChunk;
+		ARG 0 blockCoords
+	METHOD a doesChunkExist (II)Z (II)Z
+		ARG 0 chunkX
+		ARG 1 chunkZ
+	METHOD a a (Lbfc;Lbff;II)Z (LIChunkProvider;LChunk;II)Z
+		ARG 0 chunkProvider
+		ARG 1 chunk
+		ARG 2 chunkX
+		ARG 3 chunkZ
+	METHOD a populate (Lbfc;II)V (LIChunkProvider;II)V
+		ARG 0 chunkProvider
+		ARG 1 chunkX
+		ARG 2 chunkZ
+	METHOD d getChunk (II)Lbff; (II)LChunk;
+		ARG 0 chunkX
+		ARG 1 chunkZ
 CLASS bfe bfe
 	METHOD a isChunk (II)Z (II)Z
 	METHOD a addEntity (Lwv;)V (LEntity;)V
@@ -478,11 +754,15 @@ CLASS bff Chunk
 	FIELD d chunkCube
 	FIELD e biomeMap
 	FIELD f rainfallMap
+	FIELD g skylightUpdateMap
 	FIELD i dimension
 	FIELD j heightMap
+	FIELD k isChunkLoaded
+	FIELD l tileEntityMap
 	FIELD m entityStore
 	FIELD r hasEntities
-	METHOD <init> <init> (Laqs;Lbgi;II)V (LDimension;Lbgi;II)V
+	FIELD v queuedLighting
+	METHOD <init> <init> (Laqs;Lbgi;II)V (LDimension;LBlockArray;II)V
 		ARG 0 dim
 		ARG 2 chunkX
 		ARG 3 chunkZ
@@ -533,7 +813,7 @@ CLASS bff Chunk
 	METHOD k getBiomeMap ()[B ()[B
 	METHOD p getDimension ()Laqs; ()LDimension;
 	METHOD q getHeightMap ()[I ()[I
-	METHOD s getEntityStore ()[Luc; ()[Luc;
+	METHOD s getEntityStore ()[Luc; ()[LEntitySet;
 CLASS bfk ChunkCube
 CLASS bg ServerCommandEffect
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
@@ -541,6 +821,10 @@ CLASS bg ServerCommandEffect
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS bgi BlockArray
+	FIELD a blockArray
+	METHOD a a (I)Lbea; (I)Lbea;
+		ARG 0 arrayPos
 CLASS bh ServerCommandMe
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -553,6 +837,50 @@ CLASS bi ServerCommandEnchant
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c c (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS biz CoordRange
+	FIELD a minX
+	FIELD b minY
+	FIELD c minZ
+	FIELD d maxX
+	FIELD e maxY
+	FIELD f maxZ
+	METHOD <init> <init> (Lfd;Lfd;)V (LVec3Int;LVec3Int;)V
+		ARG 0 vec1
+	METHOD a a (IIIIIIIIILel;)Lbiz; (IIIIIIIIILDirection;)LCoordRange;
+		ARG 0 x1
+		ARG 1 y1
+		ARG 2 z1
+		ARG 3 x2
+		ARG 4 y2
+		ARG 5 z2
+		ARG 6 x3
+		ARG 7 y3
+		ARG 8 z3
+	METHOD a ExpandRange (III)V (III)V
+		ARG 0 addX
+		ARG 1 addY
+		ARG 2 addZ
+	METHOD a getMaxRange ()Lbiz; ()LCoordRange;
+	METHOD a checkIfInRange (Lbiz;)Z (LCoordRange;)Z
+	METHOD a getSortedRange (IIIIII)Lbiz; (IIIIII)LCoordRange;
+		ARG 0 x1
+		ARG 1 y1
+		ARG 2 z1
+		ARG 3 x2
+		ARG 4 y2
+		ARG 5 z2
+	METHOD a checkIfInRange (IIII)Z (IIII)Z
+		ARG 0 maxX
+		ARG 1 maxZ
+		ARG 2 minX
+		ARG 3 minZ
+	METHOD b checkIfInRange (Lfd;)Z (LVec3Int;)Z
+	METHOD b addRange (Lbiz;)V (LCoordRange;)V
+	METHOD b getSize ()Lfd; ()LVec3Int;
+	METHOD c xSize ()I ()I
+	METHOD d ySize ()I ()I
+	METHOD e zSize ()I ()I
+	METHOD g writeRangeToNBT ()Lft; ()LNbtIntArray;
 CLASS bj ServerCommandEntityData
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -583,6 +911,17 @@ CLASS bo ServerCommandDifficulty
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS bod MaterialRegistry
+	FIELD a Air
+CLASS bof BlockMapColorRegistry
+	FIELD L color
+	FIELD M mapColorID
+	FIELD a registryArray
+	METHOD <init> <init> (II)V (II)V
+		ARG 0 mapColorID
+		ARG 1 color
+	METHOD a returnColor (I)I (I)I
+		ARG 0 colorModifier
 CLASS bp ServerCommandGameMode
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -603,6 +942,23 @@ CLASS br ServerCommandGive
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS bru Vec3
+	FIELD a x
+	FIELD b y
+	FIELD c z
+	METHOD a getNYDistance (Lbru;)Lbru; (LVec3;)LVec3;
+	METHOD a subtractVector (DDD)Lbru; (DDD)LVec3;
+	METHOD a rotateAroundX (F)Lbru; (F)LVec3;
+	METHOD a getUnitVector ()Lbru; ()LVec3;
+	METHOD b multiplyVector (Lbru;)D (LVec3;)D
+	METHOD b addVector (DDD)Lbru; (DDD)LVec3;
+	METHOD b getLength ()D ()D
+	METHOD b rotateAroundY (F)Lbru; (F)LVec3;
+	METHOD c calcCrossProduct (Lbru;)Lbru; (LVec3;)LVec3;
+	METHOD d subtractVector (Lbru;)Lbru; (LVec3;)LVec3;
+	METHOD e addVector (Lbru;)Lbru; (LVec3;)LVec3;
+	METHOD f getDistance (Lbru;)D (LVec3;)D
+	METHOD g getSquaredDistance (Lbru;)D (LVec3;)D
 CLASS bs ServerCommandHelp
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -911,7 +1267,7 @@ CLASS dt BlockCoords
 	FIELD h X_BITMASK
 	FIELD i Y_BITMASK
 	FIELD j Z_BITMASK
-	METHOD <init> <init> (Lfd;)V (LBlockCoordsBase;)V
+	METHOD <init> <init> (Lfd;)V (LVec3Int;)V
 		ARG 0 location
 	METHOD <init> <init> (III)V (III)V
 		ARG 0 worldX
@@ -930,13 +1286,13 @@ CLASS dt BlockCoords
 	METHOD a addDirection (Lel;I)Ldt; (LDirection;I)LBlockCoords;
 	METHOD a fromLong (J)Ldt; (J)LBlockCoords;
 		ARG 0 l
-	METHOD a add (Lfd;)Ldt; (LBlockCoordsBase;)LBlockCoords;
+	METHOD a add (Lfd;)Ldt; (LVec3Int;)LBlockCoords;
 		ARG 0 location
 	METHOD a add (III)Ldt; (III)LBlockCoords;
 		ARG 0 x
 		ARG 1 y
 		ARG 2 z
-	METHOD b substract (Lfd;)Ldt; (LBlockCoordsBase;)LBlockCoords;
+	METHOD b substract (Lfd;)Ldt; (LVec3Int;)LBlockCoords;
 	METHOD b above (I)Ldt; (I)LBlockCoords;
 	METHOD b below ()Ldt; ()LBlockCoords;
 	METHOD c below (I)Ldt; (I)LBlockCoords;
@@ -964,6 +1320,7 @@ CLASS el Direction
 	FIELD d South
 	FIELD e West
 	FIELD f East
+	FIELD m blockCoords
 	METHOD a getCWFacing (Len;)Lel; (Len;)LDirection;
 	METHOD e getYRotation ()Lel; ()LDirection;
 	METHOD f getCCWFacing ()Lel; ()LDirection;
@@ -1055,7 +1412,7 @@ CLASS fb Registry
 	METHOD d containsKey (Ljava/lang/Object;)Z (Ljava/lang/Object;)Z
 		ARG 0 registryItemKey
 	METHOD iterator iterator ()Ljava/util/Iterator; ()Ljava/util/Iterator;
-CLASS fd BlockCoordsBase
+CLASS fd Vec3Int
 	FIELD a x
 	FIELD b y
 	FIELD c z
@@ -1076,7 +1433,7 @@ CLASS fd BlockCoordsBase
 		ARG 0 x
 		ARG 1 y
 		ARG 2 z
-	METHOD i distanceSquared (Lfd;)D (LBlockCoordsBase;)D
+	METHOD i distanceSquared (Lfd;)D (LVec3Int;)D
 		ARG 0 location
 	METHOD n getX ()I ()I
 	METHOD o getY ()I ()I
@@ -1780,7 +2137,7 @@ CLASS lw lw
 CLASS md md
 	METHOD <init> <init> (Lwv;Lme;)V (LEntity;Lme;)V
 		ARG 0 entity
-	METHOD <init> <init> (Lwv;Lbru;)V (LEntity;Lbru;)V
+	METHOD <init> <init> (Lwv;Lbru;)V (LEntity;LVec3;)V
 		ARG 0 entity
 	METHOD a a (Laqs;)Lwv; (LDimension;)LEntity;
 		ARG 0 dimension
@@ -1931,7 +2288,7 @@ CLASS qq qq
 CLASS qs qs
 	FIELD b logger
 	FIELD i dimensionServer
-	METHOD <init> <init> (Lqt;Lbfo;Lbfc;)V (LDimensionServer;Lbfo;Lbfc;)V
+	METHOD <init> <init> (Lqt;Lbfo;Lbfc;)V (LDimensionServer;Lbfo;LIChunkProvider;)V
 		ARG 0 dimensionServer
 	METHOD a a (Laqs;Ljava/lang/String;Ldt;)Ldt; (LDimension;Ljava/lang/String;LBlockCoords;)LBlockCoords;
 		ARG 0 dimension
@@ -2010,6 +2367,11 @@ CLASS u CrashLoggerException
 	METHOD <init> <init> (Lb;)V (LCrashLogger;)V
 		ARG 0 crashLogger
 	METHOD a getCrashLogger ()Lb; ()LCrashLogger;
+CLASS uc EntitySet
+	FIELD a entityMap
+	FIELD b entitySet
+	METHOD a a (Ljava/lang/Class;Z)Ljava/lang/Class; (Ljava/lang/Class;Z)Ljava/lang/Class;
+		ARG 1 flag
 CLASS uv MathUtil
 	FIELD a squareRootOfTwo
 	FIELD b sinLookupTable
