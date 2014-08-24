@@ -296,6 +296,11 @@ CLASS ark Biome
 	FIELD aa mesa
 	FIELD ab mesaPlateauForest
 	FIELD ac mesaPlateau
+	FIELD ah biomeName
+	FIELD an height
+	FIELD ao volatility
+	FIELD ap temperature
+	FIELD aq rainfall
 	FIELD az biomeID
 	FIELD b riverTerrainData
 	FIELD c oceanTerrainData
@@ -317,9 +322,14 @@ CLASS ark Biome
 	FIELD y theEnd
 	FIELD z frozenOcean
 	METHOD a setName (Ljava/lang/String;)Lark; (Ljava/lang/String;)LBiome;
-	METHOD a setBiomeTerrainData (Larm;)Lark; (Larm;)LBiome;
+	METHOD a setBiomeTerrainData (Larm;)Lark; (LBiomeTerrainData;)LBiome;
 	METHOD a setTemperatureRainfall (FF)Lark; (FF)LBiome;
+		ARG 0 temperature
+		ARG 1 rainfall
 	METHOD k createMutated ()Lark; ()LBiome;
+CLASS arm BiomeTerrainData
+	FIELD a height
+	FIELD b volatility
 CLASS ary BiomeDesert
 CLASS arz BiomeExtremeHills
 CLASS asb BiomeForest
@@ -597,6 +607,207 @@ CLASS atv SoundInfo
 	METHOD c getStepInfo ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD d getSoundVolume ()F ()F
 	METHOD e getSoundPitch ()F ()F
+CLASS atw Blocks
+	FIELD A sandstone
+	FIELD B noteblock
+	FIELD C bed
+	FIELD D goldenRail
+	FIELD E detectorRail
+	FIELD F stickyPiston
+	FIELD G web
+	FIELD H tallgrass
+	FIELD I deadbush
+	FIELD J piston
+	FIELD K pistonHead
+	FIELD L wool
+	FIELD M pistonExtension
+	FIELD N yellowFlower
+	FIELD O redFlower
+	FIELD P brownMushroom
+	FIELD Q redMushroom
+	FIELD R goldBlock
+	FIELD S ironBlock
+	FIELD T doubleStoneSlab
+	FIELD U doubleSlab
+	FIELD V brickBlock
+	FIELD W tnt
+	FIELD X bookshelf
+	FIELD Y mossyCobblestone
+	FIELD Z obsidian
+	FIELD a air
+	FIELD aA ironDoor
+	FIELD aB woodenPressurePlate
+	FIELD aC redstoneOre
+	FIELD aD litRedstoneOre
+	FIELD aE unlitRedstoneTorch
+	FIELD aF redstoneTorch
+	FIELD aG stoneButton
+	FIELD aH snowLayer
+	FIELD aI ice
+	FIELD aJ snow
+	FIELD aK cactus
+	FIELD aL clay
+	FIELD aM reeds
+	FIELD aN jukebox
+	FIELD aO fence
+	FIELD aP spruceFence
+	FIELD aQ birchFence
+	FIELD aR jungleFence
+	FIELD aS darkOakFence
+	FIELD aT acaciaFence
+	FIELD aU pumpkin
+	FIELD aV netherrack
+	FIELD aW soulSand
+	FIELD aX glowstone
+	FIELD aY portal
+	FIELD aZ litPumpkin
+	FIELD aa torch
+	FIELD ab fire
+	FIELD ac mobSpawner
+	FIELD ad oakStairs
+	FIELD ae chest
+	FIELD af redstoneWire
+	FIELD ag diamondOre
+	FIELD ah diamondBlock
+	FIELD ai craftingTable
+	FIELD aj wheat
+	FIELD ak farmland
+	FIELD al furnace
+	FIELD am litFurnace
+	FIELD an standingSign
+	FIELD ao woodenDoor
+	FIELD ap speuceDoor
+	FIELD aq birchDoor
+	FIELD ar jungleDoor
+	FIELD as accaciaDoor
+	FIELD at darkOakDoor
+	FIELD au ladder
+	FIELD av rail
+	FIELD aw stoneStairs
+	FIELD ax wallSign
+	FIELD ay lever
+	FIELD az stonePressurePlate
+	FIELD b stone
+	FIELD bA netherBrickStairs
+	FIELD bB netherWart
+	FIELD bC enchantingTable
+	FIELD bD brewingStand
+	FIELD bE cauldron
+	FIELD bF endPortal
+	FIELD bG endPortalFrame
+	FIELD bH endStone
+	FIELD bI dragonEgg
+	FIELD bJ redstoneLamp
+	FIELD bK litRedstoneLamp
+	FIELD bL doubleWoodenSlab
+	FIELD bM woodenSlab
+	FIELD bN cocoa
+	FIELD bO sandstoneStairs
+	FIELD bP emeraldOre
+	FIELD bQ enderChest
+	FIELD bR tripwireHook
+	FIELD bS tripwire
+	FIELD bT emeraldBlock
+	FIELD bU spruceStairs
+	FIELD bV birchStairs
+	FIELD bW jungleStairs
+	FIELD bX commandBlock
+	FIELD bY beacon
+	FIELD bZ cobblestoneWall
+	FIELD ba cake
+	FIELD bb unpoweredRepeater
+	FIELD bc poweredRepeater
+	FIELD bd trapdoor
+	FIELD be monsterEgg
+	FIELD bf stoneBrick
+	FIELD bg brownMushroomBlock
+	FIELD bh redMushroomBlock
+	FIELD bi ironBars
+	FIELD bj glassPane
+	FIELD bk melonBlock
+	FIELD bl pumpkinStem
+	FIELD bm melonStem
+	FIELD bn vine
+	FIELD bo fenceGate
+	FIELD bp spruceFenceGate
+	FIELD bq birchFenceGate
+	FIELD br jungleFenceGate
+	FIELD bs darkOakFenceGate
+	FIELD bt acaciaFenceGate
+	FIELD bu brickStairs
+	FIELD bv stoneBrickStairs
+	FIELD bw mycelium
+	FIELD bx waterlily
+	FIELD by netherBrick
+	FIELD bz netherBrickFence
+	FIELD c grass
+	FIELD cA coalBlock
+	FIELD cB packedIce
+	FIELD cC acaciaStairs
+	FIELD cD darkOakStairs
+	FIELD cE slime
+	FIELD cF doublePlant
+	FIELD cG stainedGlass
+	FIELD cH stainedGlassPane
+	FIELD cI prismarine
+	FIELD cJ seaLantern
+	FIELD cK standingBanner
+	FIELD cL wallBanner
+	FIELD cM redSandstone
+	FIELD cN redSandstoneStairs
+	FIELD cO doubleStoneSlab2
+	FIELD cP stoneSlab2
+	FIELD ca flowerPot
+	FIELD cb carrots
+	FIELD cc potatoes
+	FIELD cd woodenButton
+	FIELD ce skull
+	FIELD cf anvil
+	FIELD cg trappedChest
+	FIELD ch lightWeightedPressurePlate
+	FIELD ci heavyWeightedPressurePlate
+	FIELD cj unpoweredComparator
+	FIELD ck poweredComparator
+	FIELD cl daylightDetector
+	FIELD cm daylightDetectorInverted
+	FIELD cn redstoneBlock
+	FIELD co quartzOre
+	FIELD cp hopper
+	FIELD cq quartzBlock
+	FIELD cr quartzStairs
+	FIELD cs activatorRail
+	FIELD ct dropper
+	FIELD cu stainedHardenedClay
+	FIELD cv barrier
+	FIELD cw ironTrapdoor
+	FIELD cx hayBlock
+	FIELD cy carpet
+	FIELD cz hardenedClay
+	FIELD d dirt
+	FIELD e cobblestone
+	FIELD f planks
+	FIELD g sapling
+	FIELD h bedrock
+	FIELD i flowingWater
+	FIELD j water
+	FIELD k flowingLava
+	FIELD l lava
+	FIELD m sand
+	FIELD n gravel
+	FIELD o goldOre
+	FIELD p ironOre
+	FIELD q coalOre
+	FIELD r log
+	FIELD s log2
+	FIELD t leaves
+	FIELD u leaves2
+	FIELD v sponge
+	FIELD w glass
+	FIELD x lapisOre
+	FIELD y lapisBlock
+	FIELD z dispenser
+	METHOD a fromName (Ljava/lang/String;)Latp; (Ljava/lang/String;)LBlock;
+		ARG 0 name
 CLASS aty BlockBookshelf
 CLASS atz BlockBrewingStand
 	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
