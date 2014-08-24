@@ -32,9 +32,9 @@ CLASS ab _ab_ServerCommand_something
 		ARG 0 serverCommandUser
 	METHOD a a (Lac;)Lac; (LIServerCommand;)LIServerCommand;
 		ARG 0 serverCommand
-	METHOD a a (Lae;Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;Ljava/lang/String;LBlockCoords;)Ljava/util/List;
-		ARG 0 serverCommandUser
 	METHOD a a (Lae;Ljava/lang/String;)I (LIServerCommandUser;Ljava/lang/String;)I
+		ARG 0 serverCommandUser
+	METHOD a a (Lae;Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;Ljava/lang/String;LBlockCoords;)Ljava/util/List;
 		ARG 0 serverCommandUser
 CLASS ac IServerCommand
 	METHOD a a (Lae;)Z (LIServerCommandUser;)Z
@@ -49,9 +49,9 @@ CLASS ac IServerCommand
 CLASS ad _ad_IServerCommand_something
 	METHOD a a (Lae;)Ljava/util/List; (LIServerCommandUser;)Ljava/util/List;
 		ARG 0 serverCommandUser
-	METHOD a a (Lae;Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;Ljava/lang/String;LBlockCoords;)Ljava/util/List;
-		ARG 0 serverCommandUser
 	METHOD a a (Lae;Ljava/lang/String;)I (LIServerCommandUser;Ljava/lang/String;)I
+		ARG 0 serverCommandUser
+	METHOD a a (Lae;Ljava/lang/String;Ldt;)Ljava/util/List; (LIServerCommandUser;Ljava/lang/String;LBlockCoords;)Ljava/util/List;
 		ARG 0 serverCommandUser
 CLASS ae IServerCommandUser
 CLASS af af
@@ -205,12 +205,12 @@ CLASS alo Item
 		ARG 3 blockCoords
 	METHOD a a (Lakd;)Lalo; (LCreativeGroups;)LItem;
 		ARG 0 creativeGroups
-	METHOD a a (Lamh;Lahb;Laqs;Ldt;Lel;FFF)Z (Lamh;Lahb;LDimension;LBlockCoords;Lel;FFF)Z
-		ARG 2 dimension
-		ARG 3 blockCoords
 	METHOD a a (Lamh;Laqs;Lwv;IZ)V (Lamh;LDimension;LEntity;IZ)V
 		ARG 1 dimension
 		ARG 2 entity
+	METHOD a a (Lamh;Lahb;Laqs;Ldt;Lel;FFF)Z (Lamh;Lahb;LDimension;LBlockCoords;Lel;FFF)Z
+		ARG 2 dimension
+		ARG 3 blockCoords
 	METHOD b b (Latp;)Z (LBlock;)Z
 		ARG 0 block
 	METHOD b b (Lamh;Laqs;Lahb;)Lamh; (Lamh;LDimension;Lahb;)Lamh;
@@ -329,11 +329,17 @@ CLASS ast BiomeTheEnd
 CLASS asw BlockAir
 	METHOD c IsOpaque ()Z ()Z
 CLASS asx BlockAnvil
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS asz BlockBannerBase
 	METHOD c IsOpaque ()Z ()Z
 CLASS atb BlockStandingBanner
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS atc BlockWallBanner
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS atd BlockBarrier
 	METHOD c IsOpaque ()Z ()Z
 CLASS atf BlockPressurePlateAbstract
@@ -343,10 +349,14 @@ CLASS atg BlockAbstractRail
 CLASS atk BlockBeacon
 	METHOD c IsOpaque ()Z ()Z
 CLASS atn BlockBed
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS atp Block
+	FIELD H soundInfo
 	FIELD N name
-	FIELD c registryCDK
+	FIELD b creativeGroup
+	FIELD c blockRegistry
 	FIELD d intObjectMap
 	FIELD e soundInfoDust
 	FIELD f soundInfoWood
@@ -361,7 +371,11 @@ CLASS atp Block
 	FIELD o soundInfoLadder
 	FIELD p soundInfoAnvil
 	FIELD q soundInfoSlime
+	FIELD u lightEmmisionLevel
+	FIELD w hardness
+	FIELD x explosionResistance
 	METHOD H getBlockName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD K getCreativeGroup ()Lakd; ()LCreativeGroups;
 	METHOD a a (Lahb;Laqs;Ldt;)F (Lahb;LDimension;LBlockCoords;)F
 		ARG 1 dimension
 		ARG 2 blockCoords
@@ -373,6 +387,8 @@ CLASS atp Block
 	METHOD a a (Laqs;Ldt;Lel;Lamh;)Z (LDimension;LBlockCoords;Lel;Lamh;)Z
 		ARG 0 dimension
 		ARG 1 blockCoords
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+		ARG 0 metadata
 	METHOD a a (Laqs;Ldt;Lwv;Lbru;)Lbru; (LDimension;LBlockCoords;LEntity;Lbru;)Lbru;
 		ARG 0 dimension
 		ARG 1 blockCoords
@@ -383,10 +399,10 @@ CLASS atp Block
 	METHOD a a (Laqs;Lwv;)V (LDimension;LEntity;)V
 		ARG 0 dimension
 		ARG 1 entity
-	METHOD a a (Laqs;Ldt;Lbea;II)Z (LDimension;LBlockCoords;Lbea;II)Z
+	METHOD a a (Laqs;Ldt;Lbea;II)Z (LDimension;LBlockCoords;LBlockState;II)Z
 		ARG 0 dimension
 		ARG 1 blockCoords
-	METHOD a a (Laqs;Ldt;Lbea;Lxm;Lamh;)V (LDimension;LBlockCoords;Lbea;Lxm;Lamh;)V
+	METHOD a a (Laqs;Ldt;Lbea;Lxm;Lamh;)V (LDimension;LBlockCoords;LBlockState;Lxm;Lamh;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
 	METHOD a a (Laqs;Ldt;Lwv;)V (LDimension;LBlockCoords;LEntity;)V
@@ -396,66 +412,70 @@ CLASS atp Block
 	METHOD a a (Laqs;Ldt;Laqm;)V (LDimension;LBlockCoords;Laqm;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
-	METHOD a a (Latp;)I (LBlock;)I
-		ARG 0 block
-	METHOD a a (Laqs;Ldt;Lbea;Ljava/util/Random;)V (LDimension;LBlockCoords;Lbea;Ljava/util/Random;)V
+	METHOD a a (Laqs;Ldt;Lbea;Ljava/util/Random;)V (LDimension;LBlockCoords;LBlockState;Ljava/util/Random;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
 		ARG 3 random
+	METHOD a getBlockIndex (Latp;)I (LBlock;)I
+		ARG 0 block
 	METHOD a a (Larb;Ldt;I)I (Larb;LBlockCoords;I)I
 		ARG 1 blockCoords
 	METHOD a a (Larb;Ldt;)V (Larb;LBlockCoords;)V
 		ARG 1 blockCoords
-	METHOD a a (Laqs;Ldt;Lbea;Latp;)V (LDimension;LBlockCoords;Lbea;LBlock;)V
+	METHOD a a (Laqs;Ldt;Lbea;Latp;)V (LDimension;LBlockCoords;LBlockState;LBlock;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
 		ARG 3 block
-	METHOD a a (Larb;Ldt;Lbea;Lel;)I (Larb;LBlockCoords;Lbea;Lel;)I
+	METHOD a a (Larb;Ldt;Lbea;Lel;)I (Larb;LBlockCoords;LBlockState;Lel;)I
 		ARG 1 blockCoords
-	METHOD a a (Laqs;Ldt;Lbea;)Lbrr; (LDimension;LBlockCoords;Lbea;)Lbrr;
+	METHOD a a (Laqs;Ldt;Lbea;)Lbrr; (LDimension;LBlockCoords;LBlockState;)Lbrr;
 		ARG 0 dimension
 		ARG 1 blockCoords
 	METHOD a registerBlock (ILjava/lang/String;Latp;)V (ILjava/lang/String;LBlock;)V
 		ARG 2 block
 	METHOD a a (Laqs;)I (LDimension;)I
 		ARG 0 dimension
-	METHOD a a (Laqs;Ldt;Lbea;FI)V (LDimension;LBlockCoords;Lbea;FI)V
+	METHOD a a (Laqs;Ldt;Lbea;FI)V (LDimension;LBlockCoords;LBlockState;FI)V
 		ARG 0 dimension
 		ARG 1 blockCoords
+	METHOD a setLightEmmisionLevel (F)Latp; (F)LBlock;
 	METHOD a a (Larb;Ldt;Lel;)Z (Larb;LBlockCoords;Lel;)Z
 		ARG 1 blockCoords
 	METHOD a a (Laqs;Ldt;)Lbrr; (LDimension;LBlockCoords;)Lbrr;
 		ARG 0 dimension
 		ARG 1 blockCoords
-	METHOD a a (Laqs;Ldt;Lbea;Lahb;)V (LDimension;LBlockCoords;Lbea;Lahb;)V
+	METHOD a setCreativeGroup (Lakd;)Latp; (LCreativeGroups;)LBlock;
+		ARG 0 group
+	METHOD a a (Laqs;Ldt;Lbea;Lahb;)V (LDimension;LBlockCoords;LBlockState;Lahb;)V
 		ARG 0 dimension
 		ARG 1 rblockCoords
 	METHOD a a (Laqs;Ldt;Lel;)Z (LDimension;LBlockCoords;Lel;)Z
 		ARG 0 dimension
 		ARG 1 blockCoords
-	METHOD a a (Lbea;Ljava/util/Random;I)Lalo; (Lbea;Ljava/util/Random;I)LItem;
+	METHOD a a (Lbea;Ljava/util/Random;I)Lalo; (LBlockState;Ljava/util/Random;I)LItem;
 		ARG 1 random
 	METHOD a a (ILjava/util/Random;)I (ILjava/util/Random;)I
 		ARG 1 random
-	METHOD a a (Laqs;Ldt;Lbea;Lwv;)V (LDimension;LBlockCoords;Lbea;LEntity;)V
+	METHOD a a (Laqs;Ldt;Lbea;Lwv;)V (LDimension;LBlockCoords;LBlockState;LEntity;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
 		ARG 3 entity
-	METHOD a a (Lbea;Larb;Ldt;)Lbea; (Lbea;Larb;LBlockCoords;)Lbea;
+	METHOD a a (Lbea;Larb;Ldt;)Lbea; (LBlockState;Larb;LBlockCoords;)LBlockState;
 		ARG 2 blockCoords
 	METHOD a getBlockTileName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD a a (Laqs;Ldt;Lwv;F)V (LDimension;LBlockCoords;LEntity;F)V
 		ARG 0 dimension
 		ARG 1 blockCoords
 		ARG 2 entity
-	METHOD a a (Laqs;Lahb;Ldt;Lbea;Lbck;)V (LDimension;Lahb;LBlockCoords;Lbea;Lbck;)V
+	METHOD a a (Laqs;Lahb;Ldt;Lbea;Lbck;)V (LDimension;Lahb;LBlockCoords;LBlockState;Lbck;)V
 		ARG 0 dimension
 		ARG 2 blockCoords
-	METHOD a a (Laqs;Ldt;Lbea;Lbrr;Ljava/util/List;Lwv;)V (LDimension;LBlockCoords;Lbea;Lbrr;Ljava/util/List;LEntity;)V
+	METHOD a setSoundInfo (Latv;)Latp; (LSoundInfo;)LBlock;
+	METHOD a a (Laqs;Ldt;Lbea;Lbrr;Ljava/util/List;Lwv;)V (LDimension;LBlockCoords;LBlockState;Lbrr;Ljava/util/List;LEntity;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
 		ARG 5 entity
-	METHOD a a (Laqs;Ldt;Lel;FFFILxm;)Lbea; (LDimension;LBlockCoords;Lel;FFFILxm;)Lbea;
+	METHOD a a (Laqs;Ldt;Lel;FFFILxm;)Lbea; (LDimension;LBlockCoords;Lel;FFFILxm;)LBlockState;
 		ARG 0 dimension
 		ARG 1 blockCoords
 	METHOD a a (Ljava/util/Random;)I (Ljava/util/Random;)I
@@ -468,13 +488,13 @@ CLASS atp Block
 	METHOD a a (Laqs;Ldt;Lahb;)V (LDimension;LBlockCoords;Lahb;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
-	METHOD a a (Laqs;Ldt;Lbea;Lahb;Lel;FFF)Z (LDimension;LBlockCoords;Lbea;Lahb;Lel;FFF)Z
+	METHOD a a (Laqs;Ldt;Lbea;Lahb;Lel;FFF)Z (LDimension;LBlockCoords;LBlockState;Lahb;Lel;FFF)Z
 		ARG 0 dimension
 		ARG 1 blockCoords
 	METHOD b b (Laqs;Ldt;I)V (LDimension;LBlockCoords;I)V
 		ARG 0 dimension
 		ARG 1 blockCoords
-	METHOD b b (Laqs;Ldt;Lbea;)V (LDimension;LBlockCoords;Lbea;)V
+	METHOD b b (Laqs;Ldt;Lbea;)V (LDimension;LBlockCoords;LBlockState;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
 	METHOD b b (Larb;Ldt;Lel;)Z (Larb;LBlockCoords;Lel;)Z
@@ -484,37 +504,49 @@ CLASS atp Block
 		ARG 1 blockCoords
 	METHOD b b (Larb;Ldt;)Z (Larb;LBlockCoords;)Z
 		ARG 1 blockCoords
-	METHOD b b (Laqs;Ldt;Lbea;I)V (LDimension;LBlockCoords;Lbea;I)V
+	METHOD b b (Laqs;Ldt;Lbea;I)V (LDimension;LBlockCoords;LBlockState;I)V
 		ARG 0 dimension
 		ARG 1 blockCoords
 	METHOD b b (Latp;)Z (LBlock;)Z
 		ARG 0 block
-	METHOD b b (Laqs;Ldt;Lbea;Ljava/util/Random;)V (LDimension;LBlockCoords;Lbea;Ljava/util/Random;)V
+	METHOD b b (Laqs;Ldt;Lbea;Ljava/util/Random;)V (LDimension;LBlockCoords;LBlockState;Ljava/util/Random;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
 		ARG 3 random
-	METHOD b b (Larb;Ldt;Lbea;Lel;)I (Larb;LBlockCoords;Lbea;Lel;)I
+	METHOD b b (Larb;Ldt;Lbea;Lel;)I (Larb;LBlockCoords;LBlockState;Lel;)I
 		ARG 1 blockCoords
+	METHOD b getBlockFromName (Ljava/lang/String;)Latp; (Ljava/lang/String;)LBlock;
+		ARG 0 name
+	METHOD b setExplosionResistance (F)Latp; (F)LBlock;
 	METHOD c setName (Ljava/lang/String;)Latp; (Ljava/lang/String;)LBlock;
 		ARG 0 name
 	METHOD c c (Larb;Ldt;)I (Larb;LBlockCoords;)I
 		ARG 1 below
+	METHOD c getBlockFromIndex (I)Latp; (I)LBlock;
+		ARG 0 index
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
+		ARG 0 state
 	METHOD c IsOpaque ()Z ()Z
-	METHOD c c (Laqs;Ldt;Lbea;Ljava/util/Random;)V (LDimension;LBlockCoords;Lbea;Ljava/util/Random;)V
+	METHOD c c (Laqs;Ldt;Lbea;Ljava/util/Random;)V (LDimension;LBlockCoords;LBlockState;Ljava/util/Random;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
 		ARG 3 random
-	METHOD c c (Laqs;Ldt;Lbea;)V (LDimension;LBlockCoords;Lbea;)V
+	METHOD c setHardness (F)Latp; (F)LBlock;
+	METHOD c c (Laqs;Ldt;Lbea;)V (LDimension;LBlockCoords;LBlockState;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
 	METHOD c c (Laqs;Ldt;)Z (LDimension;LBlockCoords;)Z
 		ARG 0 dimension
 		ARG 1 blockCoords
-	METHOD d d (Laqs;Ldt;Lbea;)V (LDimension;LBlockCoords;Lbea;)V
+	METHOD d getBlockStateFromIntData (I)Lbea; (I)LBlockState;
+		ARG 0 data
+	METHOD d d (Laqs;Ldt;Lbea;)V (LDimension;LBlockCoords;LBlockState;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
 	METHOD d d (Larb;Ldt;)I (Larb;LBlockCoords;)I
 		ARG 1 blockCoords
+	METHOD f getIntDataForBlockState (Lbea;)I (LBlockState;)I
+		ARG 0 state
 	METHOD f f (Laqs;Ldt;)Z (LDimension;LBlockCoords;)Z
 		ARG 0 dimension
 		ARG 1 blockCorods
@@ -557,6 +589,8 @@ CLASS atv SoundInfo
 	METHOD e getSoundPitch ()F ()F
 CLASS aty BlockBookshelf
 CLASS atz BlockBrewingStand
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS au ServerCommandAchievement
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
@@ -567,36 +601,68 @@ CLASS au ServerCommandAchievement
 CLASS aua aua
 	METHOD c IsOpaque ()Z ()Z
 CLASS aub BlockButtonAbstract
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS aud BlockCactus
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS aue BlockCake
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS auf BlockCarrots
 CLASS aug BlockCauldron
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS auh BlockChest
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS aui BlockClay
 CLASS auj BlockCocoaBeans
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS aul BlockColored
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS aum BlockCommandBlock
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS aun BlockComparator
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS auq BlockCraftingTable
 CLASS aus BlockCrops
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS aut BlockDaylightDetector
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS auu BlockDeadBush
 CLASS auv BlockDetectorRail
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS auy auy
 	METHOD c IsOpaque ()Z ()Z
 CLASS auz BlockRotatable4
 CLASS ava BlockDirt
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS avc BlockDispenser
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS avd BlockDoor
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS avg BlockDoublePlant
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS avj BlockDragonEgg
 	METHOD c IsOpaque ()Z ()Z
 CLASS avk BlockDropper
@@ -606,19 +672,32 @@ CLASS avm BlockEnchantingTable
 CLASS avn BlockEndPortal
 	METHOD c IsOpaque ()Z ()Z
 CLASS avo BlockEndPortalFrame
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS avp BlockEnderChest
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS avr BlockFalling
 CLASS avs BlockFarmland
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS avt BlockFence
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS avu BlockFenceGate
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS avv BlockFire
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS avw BlockFlowerAbstract
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS aw ServerCommandBanIp
 	FIELD a IPRegexPatern
 	METHOD a a (Lae;Ljava/lang/String;Ljava/lang/String;)V (LIServerCommandUser;Ljava/lang/String;Ljava/lang/String;)V
@@ -629,14 +708,18 @@ CLASS aw ServerCommandBanIp
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS awb BlockFlowerPot
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS awe BlockDoubleStoneSlabs2
 CLASS awf BlockStoneDoubleSlab
 CLASS awg BlockWoodenDoubleSlab
 CLASS awh BlockFurnace
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS awj BlockGlass
 CLASS awk BlockGlowstone
 CLASS awl BlockGrass
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS awm BlockGravel
 CLASS awn BlockStoneSlabs2
 CLASS awo BlockSlabAbstract
@@ -647,9 +730,15 @@ CLASS awr BlockTransparentCube
 CLASS aws BlockWoodenSlab
 CLASS awt BlockHardenedClay
 CLASS awu BlockHayBlock
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS awv BlockHopper
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS awx BlockMushroom
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS awz BlockIce
 CLASS ax ServerCommandBan
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
@@ -658,13 +747,21 @@ CLASS ax ServerCommandBan
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS axa BlockJukebox
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS axc BlockLadder
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS axe BlockLeavesAbstract
 	METHOD c IsOpaque ()Z ()Z
 CLASS axg BlockLever
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS axj BlockLiquidAbstract
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS axk BlockLogAbstract
 CLASS axn BlockMelon
@@ -672,6 +769,8 @@ CLASS axo BlockRefinedOre
 CLASS axp BlockMobSpawner
 	METHOD c IsOpaque ()Z ()Z
 CLASS axq BlockMonsterEgg
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS axz BlockMushroom
 CLASS ay ServerCommandBlockData
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
@@ -680,20 +779,37 @@ CLASS ay ServerCommandBlockData
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS aya BlockMycelium
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS ayb BlockNetherBrick
 CLASS ayc BlockNetherWart
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS ayd BlockNetherrack
 CLASS aye BlockLeaves2
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS ayg BlockLog2
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS ayj BlockStoneSlab2Abstract
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS ayl BlockNoteBlock
 CLASS aym BlockObsidian
 CLASS ayn BlockLeaves
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS ayp BlockLog
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS ays BlockOre
 CLASS ayt BlockPackedIce
 CLASS ayu BlockWood
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS ayw BlockNetherPortal
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS ayy BlockPotatoes
 CLASS ayz BlockRedstoneBlock
 CLASS az ServerCommandClear
@@ -703,23 +819,45 @@ CLASS az ServerCommandClear
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS aza BlockRedstoneRail
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS azd BlockPressurePlate
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS azg BlockPrismarine
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS azi BlockPumpkin
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS azj BlockQuartzBlock
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS azm BlockRail
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS azn BlockRedFlower
 CLASS azo BlockRedSandstone
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS azq BlockRedstoneOre
 CLASS azr BlockRedstoneWire
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS azt BlockRedstoneLamp
 CLASS azu BlockRedstoneTorch
 CLASS azw BlockReeds
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS azx BlockRepeater
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS azy BlockRotatable6
 CLASS azz BlockSand
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS b CrashLogger
 	FIELD a logger
 	FIELD b message
@@ -758,49 +896,95 @@ CLASS ba ServerCommandClone
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bab BlockSandStone
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS bad BlockSapling
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS baf BlockSeaLantern
 CLASS bag BlockSignBase
 	METHOD c IsOpaque ()Z ()Z
 CLASS bah BlockSkull
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS bak BlockSlime
 CLASS bal BlockSnow
 CLASS bam BlockSnowLayer
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS ban BlockSoulSand
 CLASS bao BlockSponge
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS bap BlockStainedGlass
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS baq BlockStainedGlassPane
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS bar BlockStairs
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS bau BlockStandingSign
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS bav BlockLiquidStill
 CLASS baw BlockPlantStem
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS bay BlockStone
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS bba BlockStonebrick
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS bbc BlockButton
 CLASS bbd BlockStoneSlabAbstract
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS bbf BlockTallGrass
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS bbh BlockWindow
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS bbi BlockTNT
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS bbj BlockTorch
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS bbm BlockDecayable
 	METHOD c IsOpaque ()Z ()Z
 CLASS bbn BlockTrapdoor
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS bbq BlockTripwire
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS bbr BlockTripwireHook
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS bbt BlockVine
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS bbv BlockCobbleWall
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS bbx BlockWallSign
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS bbz BlockWaterlily
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS bc ServerCommandTestForBlocks
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -810,9 +994,15 @@ CLASS bc ServerCommandTestForBlocks
 CLASS bca BlockWeb
 	METHOD c IsOpaque ()Z ()Z
 CLASS bcb BlockWeightedPressurePlate
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS bcc BlockWoodenButton
 CLASS bcd BlockWoodenSlabAbstract
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 CLASS bce BlockCarpet
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS bcf BlockYellowFlower
 CLASS bd ServerCommandDeOp
@@ -822,10 +1012,16 @@ CLASS bd ServerCommandDeOp
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bdo BlockPistonBase
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS bdq BlockPistonHead
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS bdv BlockPistonExtension
+	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
+	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
 	METHOD c IsOpaque ()Z ()Z
 CLASS be ServerCommandDebug
 	FIELD a logger
@@ -835,6 +1031,8 @@ CLASS be ServerCommandDebug
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD d getWittyComment ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS bea BlockState
+	METHOD c getBlock ()Latp; ()LBlock;
 CLASS bf ServerCommandDefaultGameMode
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -843,25 +1041,62 @@ CLASS bf ServerCommandDefaultGameMode
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bfe bfe
 	METHOD a getBlockAt (Ldt;)Latp; (LBlockCoords;)LBlock;
+	METHOD c getBlockMetadataAt (Ldt;)I (LBlockCoords;)I
 CLASS bff Chunk
 	FIELD c logger
 	FIELD d chunkCubes
+	FIELD i dimension
+	FIELD j heightmap
+	METHOD a setChunkHeightmap ([I)V ([I)V
+		ARG 0 newHeightmap
 	METHOD a getBlockAt (Ldt;)Latp; (LBlockCoords;)LBlock;
 		ARG 0 location
 	METHOD a getBlockAt (III)Latp; (III)LBlock;
 		ARG 0 worldX
 		ARG 1 worldY
 		ARG 2 worldZ
+	METHOD c getBlockMetadataAt (Ldt;)I (LBlockCoords;)I
+		ARG 0 location
+	METHOD f f (Ldt;)I (LBlockCoords;)I
+		ARG 0 location
 	METHOD f getBlockAtLocalCoords (III)Latp; (III)LBlock;
 		ARG 0 localX
 		ARG 1 localY
 		ARG 2 localZ
+	METHOD g getBlockStateAt (Ldt;)Lbea; (LBlockCoords;)LBlockState;
+		ARG 0 location
+	METHOD g getBlockMetadataAtLocalCoords (III)I (III)I
+		ARG 0 localX
+		ARG 1 localY
+		ARG 2 localZ
+	METHOD g getLowestNonEmptyCubeY ()I ()I
 	METHOD h getCubeArray ()[Lbfk; ()[LChunkCube;
 CLASS bfk ChunkCube
 	FIELD a yLocation
-	FIELD d blockIDArray
+	FIELD d blockDataArray
 	METHOD <init> <init> (IZ)V (IZ)V
 		ARG 0 yLocation
+	METHOD a setBlockStateAt (IIILbea;)V (IIILBlockState;)V
+		ARG 0 localX
+		ARG 1 localY
+		ARG 2 localZ
+		ARG 3 state
+	METHOD a getBlockStateAt (III)Lbea; (III)LBlockState;
+		ARG 0 localX
+		ARG 1 localY
+		ARG 2 localZ
+	METHOD a setBlockDataArray ([C)V ([C)V
+		ARG 0 newDataArray
+	METHOD b getBlockAt (III)Latp; (III)LBlock;
+		ARG 0 localX
+		ARG 1 localY
+		ARG 2 localZ
+	METHOD c getBlockMetadataAt (III)I (III)I
+		ARG 0 localX
+		ARG 1 localY
+		ARG 2 localZ
+	METHOD d getYLocation ()I ()I
+	METHOD g getBlockDataArray ()[C ()[C
 CLASS bg ServerCommandEffect
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -1118,10 +1353,10 @@ CLASS cq ServerCommandSeed
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS cr ServerCommandSpreadPlayers
-	METHOD a a (Ljava/util/Random;IDDDD)[Lcs; (Ljava/util/Random;IDDDD)[Lcs;
-		ARG 0 random
 	METHOD a a (Lae;Ljava/util/List;Lcs;DDLaqs;Z)V (LIServerCommandUser;Ljava/util/List;Lcs;DDLDimension;Z)V
 		ARG 0 serverCommandUser
+	METHOD a a (Ljava/util/Random;IDDDD)[Lcs; (Ljava/util/Random;IDDDD)[Lcs;
+		ARG 0 random
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getUsage (Lae;)Ljava/lang/String; (LIServerCommandUser;)Ljava/lang/String;
@@ -1270,8 +1505,8 @@ CLASS dt BlockCoords
 	METHOD d south ()Ldt; ()LBlockCoords;
 	METHOD e south (I)Ldt; (I)LBlockCoords;
 	METHOD e west ()Ldt; ()LBlockCoords;
-	METHOD f west (I)Ldt; (I)LBlockCoords;
 	METHOD f east ()Ldt; ()LBlockCoords;
+	METHOD f west (I)Ldt; (I)LBlockCoords;
 	METHOD g east (I)Ldt; (I)LBlockCoords;
 	METHOD g asLong ()J ()J
 CLASS dy dy
@@ -1495,13 +1730,13 @@ CLASS fn NbtMap
 	METHOD a put (Ljava/lang/String;I)V (Ljava/lang/String;I)V
 		ARG 0 nbtMapKey
 		ARG 1 dataValue
-	METHOD a put (Ljava/lang/String;J)V (Ljava/lang/String;J)V
-		ARG 0 nbtMapKey
-		ARG 1 dataValue
 	METHOD a a (Ljava/lang/String;Lgd;Ljava/io/DataOutput;)V (Ljava/lang/String;LNbt;Ljava/io/DataOutput;)V
 		ARG 0 nbtMapKey
 		ARG 1 nbt
 		ARG 2 dataOutput
+	METHOD a put (Ljava/lang/String;J)V (Ljava/lang/String;J)V
+		ARG 0 nbtMapKey
+		ARG 1 dataValue
 	METHOD a put (Ljava/lang/String;[B)V (Ljava/lang/String;[B)V
 		ARG 0 nbtMapKey
 		ARG 1 dataValue
@@ -1699,21 +1934,21 @@ CLASS fy NbtSizeUtilDefault
 CLASS fz StreamCompressUtil
 	METHOD a readCompressedInputStream (Ljava/io/InputStream;)Lfn; (Ljava/io/InputStream;)LNbtMap;
 		ARG 0 inputStream
-	METHOD a readDataInputStreamToNbtMap (Ljava/io/DataInputStream;)Lfn; (Ljava/io/DataInputStream;)LNbtMap;
-		ARG 0 dataInputStream
 	METHOD a readDataInputToNbtMap (Ljava/io/DataInput;Lfx;)Lfn; (Ljava/io/DataInput;LNbtSizeUtil;)LNbtMap;
 		ARG 0 dataInput
 		ARG 1 nbtSizeUtil
+	METHOD a readDataInputStreamToNbtMap (Ljava/io/DataInputStream;)Lfn; (Ljava/io/DataInputStream;)LNbtMap;
+		ARG 0 dataInputStream
 	METHOD a writeNbtToDataOutput (Lgd;Ljava/io/DataOutput;)V (LNbt;Ljava/io/DataOutput;)V
 		ARG 0 nbt
 		ARG 1 dataOutput
-	METHOD a writeSafelyNbtMapToFile (Lfn;Ljava/io/File;)V (LNbtMap;Ljava/io/File;)V
-		ARG 0 nbtMap
-		ARG 1 file
 	METHOD a readDataInputToNbt (Ljava/io/DataInput;ILfx;)Lgd; (Ljava/io/DataInput;ILNbtSizeUtil;)LNbt;
 		ARG 0 dataInput
 		ARG 1 depth
 		ARG 2 nbtSizeUtil
+	METHOD a writeSafelyNbtMapToFile (Lfn;Ljava/io/File;)V (LNbtMap;Ljava/io/File;)V
+		ARG 0 nbtMap
+		ARG 1 file
 	METHOD a writeNbtMapToDataOutput (Lfn;Ljava/io/DataOutput;)V (LNbtMap;Ljava/io/DataOutput;)V
 		ARG 0 nbtMap
 		ARG 1 dataOutput
@@ -1838,10 +2073,10 @@ CLASS gr gr
 	FIELD h queue
 	FIELD i channel
 	FIELD j socketAddress
-	METHOD a a (Lid;Lio/netty/util/concurrent/GenericFutureListener;[Lio/netty/util/concurrent/GenericFutureListener;)V (Lid;Lio/netty/util/concurrent/GenericFutureListener;[Lio/netty/util/concurrent/GenericFutureListener;)V
-		ARG 1 genericFutureListener
 	METHOD a a (Ljava/net/InetAddress;I)Lgr; (Ljava/net/InetAddress;I)Lgr;
 		ARG 0 inetAddress
+	METHOD a a (Lid;Lio/netty/util/concurrent/GenericFutureListener;[Lio/netty/util/concurrent/GenericFutureListener;)V (Lid;Lio/netty/util/concurrent/GenericFutureListener;[Lio/netty/util/concurrent/GenericFutureListener;)V
+		ARG 1 genericFutureListener
 	METHOD a a (Ljava/net/SocketAddress;)Lgr; (Ljava/net/SocketAddress;)Lgr;
 		ARG 0 socketAddress
 	METHOD a a (Ljavax/crypto/SecretKey;)V (Ljavax/crypto/SecretKey;)V
@@ -2054,7 +2289,7 @@ CLASS j CrashLogInfo
 	METHOD a addCallable (Ljava/lang/String;Ljava/util/concurrent/Callable;)V (Ljava/lang/String;Ljava/util/concurrent/Callable;)V
 		ARG 0 elementName
 		ARG 1 callable
-	METHOD a a (Lj;Ldt;Lbea;)V (LCrashLogInfo;LBlockCoords;Lbea;)V
+	METHOD a a (Lj;Ldt;Lbea;)V (LCrashLogInfo;LBlockCoords;LBlockState;)V
 		ARG 0 crashLogInfo
 	METHOD a getDetailsReport (Ljava/lang/StringBuilder;)V (Ljava/lang/StringBuilder;)V
 		ARG 0 reportStringBuilder
@@ -2299,10 +2534,10 @@ CLASS qw qw
 		ARG 0 entity
 	METHOD a a (Lwv;I)V (LEntity;I)V
 		ARG 0 entity
-	METHOD b b (Lwv;)V (LEntity;)V
-		ARG 0 entity
 	METHOD b b (Lfn;)V (LNbtMap;)V
 		ARG 0 nbtMap
+	METHOD b b (Lwv;)V (LEntity;)V
+		ARG 0 entity
 	METHOD c c (Lwv;)V (LEntity;)V
 		ARG 0 entity
 	METHOD e e (Lwv;)V (LEntity;)V
