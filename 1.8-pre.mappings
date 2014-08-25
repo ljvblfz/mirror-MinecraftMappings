@@ -23,10 +23,6 @@ CLASS a TextColor
 	FIELD v RESET
 CLASS ab _ab_ServerCommand_something
 	FIELD a logger
-	METHOD a a (Lac;)Lac; (LIServerCommand;)LIServerCommand;
-		ARG 0 serverCommand
-	METHOD a a (Lae;)Ljava/util/List; (LIServerCommandUser;)Ljava/util/List;
-		ARG 0 serverCommandUser
 	METHOD a a (Lac;[Ljava/lang/String;)I (LIServerCommand;[Ljava/lang/String;)I
 		ARG 0 serverCommand
 	METHOD a a (Lae;[Ljava/lang/String;Lac;Ljava/lang/String;)Z (LIServerCommandUser;[Ljava/lang/String;LIServerCommand;Ljava/lang/String;)Z
@@ -236,7 +232,7 @@ CLASS ajl ItemArmor
 	FIELD creativeGroups armorPieceId
 	METHOD <init> <init> (Lajn;II)V (Lajn;II)V
 		ARG 2 armorPieceId
-	METHOD b b (Lamh;I)V (Lamh;I)V
+	METHOD b b (Lamh;I)V (LCraftingResult;I)V
 		ARG 1 dataValue
 CLASS ajo ItemArmorStand
 CLASS ajp ItemAxe
@@ -293,15 +289,15 @@ CLASS alo Item
 	METHOD a a (Latp;Lalo;)V (LBlockType;LItem;)V
 		ARG 0 block
 		ARG 1 item
-	METHOD a a (Lamh;Latp;)F (Lamh;LBlockType;)F
+	METHOD a a (Lamh;Latp;)F (LCraftingResult;LBlockType;)F
 		ARG 1 block
-	METHOD a a (Lamh;Laqs;Lahb;)Lamh; (Lamh;LDimension;LEntityPlayerAbstract;)Lamh;
+	METHOD a a (Lamh;Laqs;Lahb;)Lamh; (LCraftingResult;LDimension;LEntityPlayerAbstract;)LCraftingResult;
 		ARG 1 dimension
 	METHOD a a (Latp;)Lalo; (LBlockType;)LItem;
 		ARG 0 block
 	METHOD a a (Lfn;)Z (LNbtMap;)Z
 		ARG 0 nbtMap
-	METHOD a a (Lamh;Laqs;Lahb;I)V (Lamh;LDimension;LEntityPlayerAbstract;I)V
+	METHOD a a (Lamh;Laqs;Lahb;I)V (LCraftingResult;LDimension;LEntityPlayerAbstract;I)V
 		ARG 1 dimension
 	METHOD a a (ILjava/lang/String;Lalo;)V (ILjava/lang/String;LItem;)V
 		ARG 0 index
@@ -312,7 +308,7 @@ CLASS alo Item
 		ARG 0 index
 		ARG 1 registryItemKey
 		ARG 2 registryItem
-	METHOD a a (Lamh;Laqs;Latp;Ldt;Lxm;)Z (Lamh;LDimension;LBlockType;LBlockCoords;LEntityLiving;)Z
+	METHOD a a (Lamh;Laqs;Latp;Ldt;Lxm;)Z (LCraftingResult;LDimension;LBlockType;LBlockCoords;LEntityLiving;)Z
 		ARG 1 dimension
 		ARG 2 block
 		ARG 3 blockCoords
@@ -321,15 +317,15 @@ CLASS alo Item
 		ARG 1 creativeGroups
 	METHOD a a (Lakd;)Lalo; (LCreativeGroups;)LItem;
 		ARG 0 creativeGroups
-	METHOD a a (Lamh;Lahb;Laqs;Ldt;Lel;FFF)Z (Lamh;LEntityPlayerAbstract;LDimension;LBlockCoords;LDirection;FFF)Z
+	METHOD a a (Lamh;Lahb;Laqs;Ldt;Lel;FFF)Z (LCraftingResult;LEntityPlayerAbstract;LDimension;LBlockCoords;LDirection;FFF)Z
 		ARG 2 dimension
 		ARG 3 blockCoords
-	METHOD a a (Lamh;Laqs;Lwv;IZ)V (Lamh;LDimension;LEntity;IZ)V
+	METHOD a a (Lamh;Laqs;Lwv;IZ)V (LCraftingResult;LDimension;LEntity;IZ)V
 		ARG 1 dimension
 		ARG 2 entity
 	METHOD b b (Latp;)Z (LBlockType;)Z
 		ARG 0 block
-	METHOD b b (Lamh;Laqs;Lahb;)Lamh; (Lamh;LDimension;LEntityPlayerAbstract;)Lamh;
+	METHOD b b (Lamh;Laqs;Lahb;)Lamh; (LCraftingResult;LDimension;LEntityPlayerAbstract;)LCraftingResult;
 		ARG 1 dimension
 	METHOD b b (I)Lalo; (I)LItem;
 		ARG 0 index
@@ -337,7 +333,7 @@ CLASS alo Item
 		ARG 0 registryItemKey
 	METHOD c c (Latp;)V (LBlockType;)V
 		ARG 0 block
-	METHOD d d (Lamh;Laqs;Lahb;)V (Lamh;LDimension;LEntityPlayerAbstract;)V
+	METHOD d d (Lamh;Laqs;Lahb;)V (LCraftingResult;LDimension;LEntityPlayerAbstract;)V
 		ARG 1 dimension
 CLASS am am
 	METHOD apply apply (Lwv;)Z (LEntity;)Z
@@ -348,8 +344,198 @@ CLASS amg ItemMaterialTypes
 	FIELD c Iron
 	FIELD d Emerald
 	FIELD e Gold
-CLASS amh amh
+CLASS amh CraftingResult
 	FIELD d item
+CLASS ami Items
+	FIELD A mushroomStew
+	FIELD B goldenSword
+	FIELD C goldenShovel
+	FIELD D goldenPickaxe
+	FIELD E goldenAxe
+	FIELD F string
+	FIELD G feather
+	FIELD H gunpowder
+	FIELD I woodenHow
+	FIELD J stoneHoe
+	FIELD K ironHoe
+	FIELD L diamondHoe
+	FIELD M goldenHoe
+	FIELD N wheatSeeds
+	FIELD O heat
+	FIELD P bread
+	FIELD Q leatherHelmet
+	FIELD R leatherChestplate
+	FIELD S leatherLeggings
+	FIELD T leatherBoots
+	FIELD U chainmailHelmet
+	FIELD V chainmailChestplate
+	FIELD W chainmailLeggings
+	FIELD X chainmailBoots
+	FIELD Y ironHelmet
+	FIELD Z ironChestplate
+	FIELD a ironShovel
+	FIELD aA saddle
+	FIELD aB ironDoor
+	FIELD aC redstone
+	FIELD aD snowball
+	FIELD aE boat
+	FIELD aF leather
+	FIELD aG milkBucket
+	FIELD aH brick
+	FIELD aI clayBall
+	FIELD aJ reeds
+	FIELD aK paper
+	FIELD aL book
+	FIELD aM slimeBall
+	FIELD aN chestMinecart
+	FIELD aO furnaceMinecart
+	FIELD aP egg
+	FIELD aQ compass
+	FIELD aR fishingRod
+	FIELD aS clock
+	FIELD aT glowstoneDust
+	FIELD aU fish
+	FIELD aV cookedFish
+	FIELD aW dye
+	FIELD aX bone
+	FIELD aY sugar
+	FIELD aZ cakercake
+	FIELD aa ironLeggings
+	FIELD ab ironBoots
+	FIELD ac diamondHelmet
+	FIELD ad diamondChestplate
+	FIELD ae diamondLeggings
+	FIELD af diamondBoots
+	FIELD ag goldenHelmet
+	FIELD ah goldenChestplate
+	FIELD ai goldenLeggings
+	FIELD aj goldenBoots
+	FIELD ak flint
+	FIELD al porkchop
+	FIELD am cookedPorkchop
+	FIELD an painting
+	FIELD ao goldenApple
+	FIELD ap sign
+	FIELD aq woodenDoor
+	FIELD ar spruceDoor
+	FIELD as birchDoor
+	FIELD at jungleDoor
+	FIELD au acaciaDoor
+	FIELD av darkOakDoor
+	FIELD aw bucket
+	FIELD ax waterBucket
+	FIELD ay lavaBucket
+	FIELD az minecart
+	FIELD b ironPickaxe
+	FIELD bA glassBottle
+	FIELD bB spiderEye
+	FIELD bC fermentedSpiderEye
+	FIELD bD blazePowder
+	FIELD bE magmaCream
+	FIELD bF brewingStand
+	FIELD bG cauldron
+	FIELD bH enderEye
+	FIELD bI speckledMelon
+	FIELD bJ spwanEgg
+	FIELD bK experienceBottle
+	FIELD bL fireCharge
+	FIELD bM writableBook
+	FIELD bN writtenBook
+	FIELD bO emerald
+	FIELD bP itemFrame
+	FIELD bQ flowerPot
+	FIELD bR carrot
+	FIELD bS potato
+	FIELD bT bakedPotato
+	FIELD bU poisonousPotato
+	FIELD bV map
+	FIELD bW goldenCarrot
+	FIELD bX skull
+	FIELD bY carrotOnStick
+	FIELD bZ netherStar
+	FIELD ba bed
+	FIELD bb repeater
+	FIELD bc cookie
+	FIELD bd filledMap
+	FIELD be shears
+	FIELD bf melon
+	FIELD bg pumpkinSeeds
+	FIELD bh melonSeeds
+	FIELD bi beef
+	FIELD bj cookedBeef
+	FIELD bk chicken
+	FIELD bl cookedChinken
+	FIELD bm mutton
+	FIELD bn cookedMutton
+	FIELD bo rabbit
+	FIELD bp cookedRabbit
+	FIELD bq rabbitStew
+	FIELD br rabbitFoot
+	FIELD bs rabbitHide
+	FIELD bt rabbitFlesh
+	FIELD bu enderPearl
+	FIELD bv blazeRod
+	FIELD bw ghastTear
+	FIELD bx goldNugget
+	FIELD by netherWart
+	FIELD bz potion
+	FIELD c ironAxe
+	FIELD cA record11
+	FIELD cB recordWait
+	FIELD cC prismarineShard
+	FIELD cD prismarineCrystals
+	FIELD cE banner
+	FIELD ca pumpkinPie
+	FIELD cb fireworks
+	FIELD cc fireworkCharge
+	FIELD cd enchantedBook
+	FIELD ce comparator
+	FIELD cf netherbrick
+	FIELD cg quartz
+	FIELD ch tntMinecart
+	FIELD ci hopperMinecart
+	FIELD cj armorStand
+	FIELD ck ironHorseArmor
+	FIELD cl goldenHorseArmor
+	FIELD cm diamondHorseArmor
+	FIELD cn lead
+	FIELD co nameTag
+	FIELD cp commandBlockMinecart
+	FIELD cq record13
+	FIELD cr recordCat
+	FIELD cs recordBlocks
+	FIELD ct recordChirp
+	FIELD cu recordFar
+	FIELD cv recordMall
+	FIELD cw recordMellohi
+	FIELD cx recordStal
+	FIELD cy recordStrad
+	FIELD cz recordWard
+	FIELD d flintAndSteel
+	FIELD e apple
+	FIELD f bow
+	FIELD g arrow
+	FIELD h coal
+	FIELD i diamond
+	FIELD j ironIngot
+	FIELD k goldIngot
+	FIELD l ironSword
+	FIELD m woodenSword
+	FIELD n woodenShovel
+	FIELD o woodenPickaxe
+	FIELD p woodenAxe
+	FIELD q stoneSword
+	FIELD r stoneShovel
+	FIELD s stonePickaxe
+	FIELD t stoneAxe
+	FIELD u diamonsSword
+	FIELD v diamondShovel
+	FIELD w diamondPickaxe
+	FIELD x diamondAxe
+	FIELD y stick
+	FIELD z bowl
+	METHOD a getItemFromName (Ljava/lang/String;)Lalo; (Ljava/lang/String;)LItem;
+		ARG 0 name
 CLASS amj ItemLead
 CLASS amm ItemMilkBucket
 CLASS amn ItemMinecart
@@ -364,6 +550,41 @@ CLASS ank ItemWeapon
 	FIELD b itemMaterialTypes
 	METHOD <init> <init> (Lamg;)V (LItemMaterialTypes;)V
 		ARG 0 itemMaterialTypes
+CLASS anz CraftingRecipesArmors
+	FIELD a recipeBase
+	FIELD b materials
+	METHOD a registerRecipes (Laon;)V (LCraftingRecipeRegistry;)V
+		ARG 0 registry
+CLASS aoa CraftingRecipesPaintings
+	METHOD a registerRecipes (Laon;)V (LCraftingRecipeRegistry;)V
+		ARG 0 registry
+CLASS aof CraftingRecipesDye
+	METHOD a registerRecipes (Laon;)V (LCraftingRecipeRegistry;)V
+CLASS aoh _aoh_CraftingRecipes_something
+	METHOD a registerRecipes (Laon;)V (LCraftingRecipeRegistry;)V
+		ARG 0 registry
+CLASS aol CraftingRecipesOreBlocks
+	FIELD a materials
+	METHOD a registerRecipes (Laon;)V (LCraftingRecipeRegistry;)V
+		ARG 0 registry
+CLASS aon CraftingRecipeRegistry
+	FIELD a instance
+	FIELD b recipeList
+	METHOD a registerShapedRecipe (Lamh;[Ljava/lang/Object;)Laoq; (LCraftingResult;[Ljava/lang/Object;)Laoq;
+	METHOD a getRegistry ()Laon; ()LCraftingRecipeRegistry;
+	METHOD b getRecipeList ()Ljava/util/List; ()Ljava/util/List;
+	METHOD b registerShapelessRecipe (Lamh;[Ljava/lang/Object;)V (LCraftingResult;[Ljava/lang/Object;)V
+CLASS aos _aos_CraftingRecipes_something
+	METHOD a registerRecipes (Laon;)V (LCraftingRecipeRegistry;)V
+CLASS aot CraftingRecipesTools
+	FIELD a recipeBase
+	FIELD b materials
+	METHOD a registerRecipes (Laon;)V (LCraftingRecipeRegistry;)V
+		ARG 0 registry
+CLASS aou CraftingRecipesWeapons
+	FIELD a recipeBase
+	FIELD b materials
+	METHOD a registerRecipes (Laon;)V (LCraftingRecipeRegistry;)V
 CLASS ape EnchantTypes
 	FIELD a All
 	FIELD b Armor
@@ -571,7 +792,7 @@ CLASS atp BlockType
 		ARG 1 blockCoords
 	METHOD a registerBlock (ILoa;Latp;)V (ILObjectName;LBlockType;)V
 		ARG 2 block
-	METHOD a a (Laqs;Ldt;Lel;Lamh;)Z (LDimension;LBlockCoords;LDirection;Lamh;)Z
+	METHOD a a (Laqs;Ldt;Lel;Lamh;)Z (LDimension;LBlockCoords;LDirection;LCraftingResult;)Z
 		ARG 0 dimension
 		ARG 1 blockCoords
 	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
@@ -580,7 +801,7 @@ CLASS atp BlockType
 		ARG 0 dimension
 		ARG 1 blockCoords
 		ARG 2 entity
-	METHOD a a (Laqs;Ldt;Lamh;)V (LDimension;LBlockCoords;Lamh;)V
+	METHOD a a (Laqs;Ldt;Lamh;)V (LDimension;LBlockCoords;LCraftingResult;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
 	METHOD a a (Laqs;Lwv;)V (LDimension;LEntity;)V
@@ -589,7 +810,7 @@ CLASS atp BlockType
 	METHOD a a (Laqs;Ldt;Lbea;II)Z (LDimension;LBlockCoords;LBlockState;II)Z
 		ARG 0 dimension
 		ARG 1 blockCoords
-	METHOD a a (Laqs;Ldt;Lbea;Lxm;Lamh;)V (LDimension;LBlockCoords;LBlockState;LEntityLiving;Lamh;)V
+	METHOD a a (Laqs;Ldt;Lbea;Lxm;Lamh;)V (LDimension;LBlockCoords;LBlockState;LEntityLiving;LCraftingResult;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
 	METHOD a a (Laqs;Ldt;Lwv;)V (LDimension;LBlockCoords;LEntity;)V
@@ -1495,6 +1716,31 @@ CLASS bfc IChunkProvider
 		ARG 1 chunkZ
 CLASS bfd NibbleArray
 	FIELD a array
+	METHOD <init> <init> ([B)V ([B)V
+		ARG 0 array
+	METHOD a set (IIII)V (IIII)V
+		ARG 0 localX
+		ARG 1 localY
+		ARG 2 localZ
+		ARG 3 value
+	METHOD a get (III)I (III)I
+		ARG 0 localX
+		ARG 1 localY
+		ARG 2 localZ
+	METHOD a getAtIndex (I)I (I)I
+		ARG 0 index
+	METHOD a getArray ()[B ()[B
+	METHOD a set (II)V (II)V
+		ARG 0 index
+		ARG 1 value
+	METHOD b isIndexLSB (I)Z (I)Z
+		ARG 0 index
+	METHOD b coordsToIndex (III)I (III)I
+		ARG 0 localX
+		ARG 1 localY
+		ARG 2 localZ
+	METHOD c getArrayIndexFromNibbleIndex (I)I (I)I
+		ARG 0 index
 CLASS bfe EmptyChunk
 	METHOD a isChunk (II)Z (II)Z
 	METHOD a addEntity (Lwv;)V (LEntity;)V
@@ -1575,30 +1821,56 @@ CLASS bff Chunk
 	METHOD s getEntityStore ()[Luc; ()[LEntitySet;
 CLASS bfk ChunkCube
 	FIELD a yLocation
+	FIELD b blockCount
 	FIELD d blockDataArray
+	FIELD e blocklightArray
+	FIELD f skylightArray
 	METHOD <init> <init> (IZ)V (IZ)V
 		ARG 0 yLocation
+	METHOD a setSkylightAt (IIII)V (IIII)V
+		ARG 0 localX
+		ARG 1 localY
+		ARG 2 localZ
+		ARG 3 value
 	METHOD a setBlockStateAt (IIILbea;)V (IIILBlockState;)V
 		ARG 0 localX
 		ARG 1 localY
 		ARG 2 localZ
 		ARG 3 state
+	METHOD a isEmpty ()Z ()Z
+	METHOD a setBlocklightArray (Lbfd;)V (LNibbleArray;)V
 	METHOD a getBlockStateAt (III)Lbea; (III)LBlockState;
 		ARG 0 localX
 		ARG 1 localY
 		ARG 2 localZ
 	METHOD a setBlockDataArray ([C)V ([C)V
 		ARG 0 newDataArray
+	METHOD b setBlocklightAt (IIII)V (IIII)V
+		ARG 0 localX
+		ARG 1 localY
+		ARG 2 localZ
+		ARG 3 value
 	METHOD b getBlockAt (III)Latp; (III)LBlockType;
 		ARG 0 localX
 		ARG 1 localY
 		ARG 2 localZ
+	METHOD b setSkylightArray (Lbfd;)V (LNibbleArray;)V
 	METHOD c getBlockMetadataAt (III)I (III)I
 		ARG 0 localX
 		ARG 1 localY
 		ARG 2 localZ
 	METHOD d getYLocation ()I ()I
+	METHOD d getSkylightAt (III)I (III)I
+		ARG 0 localX
+		ARG 1 localY
+		ARG 2 localZ
+	METHOD e getBlocklightAt (III)I (III)I
+		ARG 0 localX
+		ARG 1 localY
+		ARG 2 localZ
 	METHOD g getBlockDataArray ()[C ()[C
+	METHOD h getBlocklightArray ()Lbfd; ()LNibbleArray;
+	METHOD i getSkylightArray ()Lbfd; ()LNibbleArray;
 CLASS bfl bfl
 	FIELD a aByte
 	FIELD b offset1
@@ -1841,6 +2113,7 @@ CLASS bj ServerCommandEntityData
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS bjb GenStructureMineshaft
+CLASS bjj GenStructureNetherFortress
 CLASS bk ServerCommandExecute
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -3332,9 +3605,9 @@ CLASS pc pc
 CLASS qk qk
 	METHOD <init> <init> (Laqs;)V (LDimension;)V
 		ARG 0 dimension
-	METHOD a a (Lahb;Laqs;Lamh;Ldt;Lel;FFF)Z (LEntityPlayerAbstract;LDimension;Lamh;LBlockCoords;LDirection;FFF)Z
+	METHOD a a (Lahb;Laqs;Lamh;Ldt;Lel;FFF)Z (LEntityPlayerAbstract;LDimension;LCraftingResult;LBlockCoords;LDirection;FFF)Z
 		ARG 1 dimension
-	METHOD a a (Lahb;Laqs;Lamh;)Z (LEntityPlayerAbstract;LDimension;Lamh;)Z
+	METHOD a a (Lahb;Laqs;Lamh;)Z (LEntityPlayerAbstract;LDimension;LCraftingResult;)Z
 		ARG 1 dimension
 CLASS ql ql
 	FIELD a dimensionServer
@@ -3413,11 +3686,11 @@ CLASS qx qx
 	FIELD a dimension
 	METHOD <init> <init> (Laqs;)V (LDimension;)V
 		ARG 0 dimension
-	METHOD a a (Lahb;Laqs;Lamh;Ldt;Lel;FFF)Z (LEntityPlayerAbstract;LDimension;Lamh;LBlockCoords;LDirection;FFF)Z
+	METHOD a a (Lahb;Laqs;Lamh;Ldt;Lel;FFF)Z (LEntityPlayerAbstract;LDimension;LCraftingResult;LBlockCoords;LDirection;FFF)Z
 		ARG 1 dimension
 	METHOD a a (Lqt;)V (LDimensionServer;)V
 		ARG 0 dimension
-	METHOD a a (Lahb;Laqs;Lamh;)Z (LEntityPlayerAbstract;LDimension;Lamh;)Z
+	METHOD a a (Lahb;Laqs;Lamh;)Z (LEntityPlayerAbstract;LDimension;LCraftingResult;)Z
 		ARG 1 dimension
 CLASS qy qy
 	FIELD a entity1
