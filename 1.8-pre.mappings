@@ -232,7 +232,7 @@ CLASS ajl ItemArmor
 	FIELD creativeGroups armorPieceId
 	METHOD <init> <init> (Lajn;II)V (Lajn;II)V
 		ARG 2 armorPieceId
-	METHOD b b (Lamh;I)V (LCraftingResult;I)V
+	METHOD b b (Lamh;I)V (LItemStack;I)V
 		ARG 1 dataValue
 CLASS ajo ItemArmorStand
 CLASS ajp ItemAxe
@@ -289,15 +289,15 @@ CLASS alo Item
 	METHOD a a (Latp;Lalo;)V (LBlockType;LItem;)V
 		ARG 0 block
 		ARG 1 item
-	METHOD a a (Lamh;Latp;)F (LCraftingResult;LBlockType;)F
+	METHOD a a (Lamh;Latp;)F (LItemStack;LBlockType;)F
 		ARG 1 block
-	METHOD a a (Lamh;Laqs;Lahb;)Lamh; (LCraftingResult;LDimension;LEntityPlayerAbstract;)LCraftingResult;
+	METHOD a a (Lamh;Laqs;Lahb;)Lamh; (LItemStack;LDimension;LEntityPlayerAbstract;)LItemStack;
 		ARG 1 dimension
 	METHOD a a (Latp;)Lalo; (LBlockType;)LItem;
 		ARG 0 block
 	METHOD a a (Lfn;)Z (LNbtMap;)Z
 		ARG 0 nbtMap
-	METHOD a a (Lamh;Laqs;Lahb;I)V (LCraftingResult;LDimension;LEntityPlayerAbstract;I)V
+	METHOD a a (Lamh;Laqs;Lahb;I)V (LItemStack;LDimension;LEntityPlayerAbstract;I)V
 		ARG 1 dimension
 	METHOD a a (ILjava/lang/String;Lalo;)V (ILjava/lang/String;LItem;)V
 		ARG 0 index
@@ -308,7 +308,7 @@ CLASS alo Item
 		ARG 0 index
 		ARG 1 registryItemKey
 		ARG 2 registryItem
-	METHOD a a (Lamh;Laqs;Latp;Ldt;Lxm;)Z (LCraftingResult;LDimension;LBlockType;LBlockCoords;LEntityLiving;)Z
+	METHOD a a (Lamh;Laqs;Latp;Ldt;Lxm;)Z (LItemStack;LDimension;LBlockType;LBlockCoords;LEntityLiving;)Z
 		ARG 1 dimension
 		ARG 2 block
 		ARG 3 blockCoords
@@ -317,15 +317,15 @@ CLASS alo Item
 		ARG 1 creativeGroups
 	METHOD a a (Lakd;)Lalo; (LCreativeGroups;)LItem;
 		ARG 0 creativeGroups
-	METHOD a a (Lamh;Lahb;Laqs;Ldt;Lel;FFF)Z (LCraftingResult;LEntityPlayerAbstract;LDimension;LBlockCoords;LDirection;FFF)Z
+	METHOD a a (Lamh;Lahb;Laqs;Ldt;Lel;FFF)Z (LItemStack;LEntityPlayerAbstract;LDimension;LBlockCoords;LDirection;FFF)Z
 		ARG 2 dimension
 		ARG 3 blockCoords
-	METHOD a a (Lamh;Laqs;Lwv;IZ)V (LCraftingResult;LDimension;LEntity;IZ)V
+	METHOD a a (Lamh;Laqs;Lwv;IZ)V (LItemStack;LDimension;LEntity;IZ)V
 		ARG 1 dimension
 		ARG 2 entity
 	METHOD b b (Latp;)Z (LBlockType;)Z
 		ARG 0 block
-	METHOD b b (Lamh;Laqs;Lahb;)Lamh; (LCraftingResult;LDimension;LEntityPlayerAbstract;)LCraftingResult;
+	METHOD b b (Lamh;Laqs;Lahb;)Lamh; (LItemStack;LDimension;LEntityPlayerAbstract;)LItemStack;
 		ARG 1 dimension
 	METHOD b b (I)Lalo; (I)LItem;
 		ARG 0 index
@@ -333,7 +333,7 @@ CLASS alo Item
 		ARG 0 registryItemKey
 	METHOD c c (Latp;)V (LBlockType;)V
 		ARG 0 block
-	METHOD d d (Lamh;Laqs;Lahb;)V (LCraftingResult;LDimension;LEntityPlayerAbstract;)V
+	METHOD d d (Lamh;Laqs;Lahb;)V (LItemStack;LDimension;LEntityPlayerAbstract;)V
 		ARG 1 dimension
 CLASS am am
 	METHOD apply apply (Lwv;)Z (LEntity;)Z
@@ -344,7 +344,7 @@ CLASS amg ItemMaterialTypes
 	FIELD c Iron
 	FIELD d Emerald
 	FIELD e Gold
-CLASS amh CraftingResult
+CLASS amh ItemStack
 	FIELD d item
 CLASS ami Items
 	FIELD A mushroomStew
@@ -570,10 +570,10 @@ CLASS aol CraftingRecipesOreBlocks
 CLASS aon CraftingRecipeRegistry
 	FIELD a instance
 	FIELD b recipeList
-	METHOD a registerShapedRecipe (Lamh;[Ljava/lang/Object;)Laoq; (LCraftingResult;[Ljava/lang/Object;)Laoq;
+	METHOD a registerShapedRecipe (Lamh;[Ljava/lang/Object;)Laoq; (LItemStack;[Ljava/lang/Object;)Laoq;
 	METHOD a getRegistry ()Laon; ()LCraftingRecipeRegistry;
 	METHOD b getRecipeList ()Ljava/util/List; ()Ljava/util/List;
-	METHOD b registerShapelessRecipe (Lamh;[Ljava/lang/Object;)V (LCraftingResult;[Ljava/lang/Object;)V
+	METHOD b registerShapelessRecipe (Lamh;[Ljava/lang/Object;)V (LItemStack;[Ljava/lang/Object;)V
 CLASS aos _aos_CraftingRecipes_something
 	METHOD a registerRecipes (Laon;)V (LCraftingRecipeRegistry;)V
 CLASS aot CraftingRecipesTools
@@ -792,7 +792,7 @@ CLASS atp BlockType
 		ARG 1 blockCoords
 	METHOD a registerBlock (ILoa;Latp;)V (ILObjectName;LBlockType;)V
 		ARG 2 block
-	METHOD a a (Laqs;Ldt;Lel;Lamh;)Z (LDimension;LBlockCoords;LDirection;LCraftingResult;)Z
+	METHOD a a (Laqs;Ldt;Lel;Lamh;)Z (LDimension;LBlockCoords;LDirection;LItemStack;)Z
 		ARG 0 dimension
 		ARG 1 blockCoords
 	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
@@ -801,7 +801,7 @@ CLASS atp BlockType
 		ARG 0 dimension
 		ARG 1 blockCoords
 		ARG 2 entity
-	METHOD a a (Laqs;Ldt;Lamh;)V (LDimension;LBlockCoords;LCraftingResult;)V
+	METHOD a a (Laqs;Ldt;Lamh;)V (LDimension;LBlockCoords;LItemStack;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
 	METHOD a a (Laqs;Lwv;)V (LDimension;LEntity;)V
@@ -810,7 +810,7 @@ CLASS atp BlockType
 	METHOD a a (Laqs;Ldt;Lbea;II)Z (LDimension;LBlockCoords;LBlockState;II)Z
 		ARG 0 dimension
 		ARG 1 blockCoords
-	METHOD a a (Laqs;Ldt;Lbea;Lxm;Lamh;)V (LDimension;LBlockCoords;LBlockState;LEntityLiving;LCraftingResult;)V
+	METHOD a a (Laqs;Ldt;Lbea;Lxm;Lamh;)V (LDimension;LBlockCoords;LBlockState;LEntityLiving;LItemStack;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
 	METHOD a a (Laqs;Ldt;Lwv;)V (LDimension;LBlockCoords;LEntity;)V
@@ -3605,9 +3605,9 @@ CLASS pc pc
 CLASS qk qk
 	METHOD <init> <init> (Laqs;)V (LDimension;)V
 		ARG 0 dimension
-	METHOD a a (Lahb;Laqs;Lamh;Ldt;Lel;FFF)Z (LEntityPlayerAbstract;LDimension;LCraftingResult;LBlockCoords;LDirection;FFF)Z
+	METHOD a a (Lahb;Laqs;Lamh;Ldt;Lel;FFF)Z (LEntityPlayerAbstract;LDimension;LItemStack;LBlockCoords;LDirection;FFF)Z
 		ARG 1 dimension
-	METHOD a a (Lahb;Laqs;Lamh;)Z (LEntityPlayerAbstract;LDimension;LCraftingResult;)Z
+	METHOD a a (Lahb;Laqs;Lamh;)Z (LEntityPlayerAbstract;LDimension;LItemStack;)Z
 		ARG 1 dimension
 CLASS ql ql
 	FIELD a dimensionServer
@@ -3686,11 +3686,11 @@ CLASS qx qx
 	FIELD a dimension
 	METHOD <init> <init> (Laqs;)V (LDimension;)V
 		ARG 0 dimension
-	METHOD a a (Lahb;Laqs;Lamh;Ldt;Lel;FFF)Z (LEntityPlayerAbstract;LDimension;LCraftingResult;LBlockCoords;LDirection;FFF)Z
+	METHOD a a (Lahb;Laqs;Lamh;Ldt;Lel;FFF)Z (LEntityPlayerAbstract;LDimension;LItemStack;LBlockCoords;LDirection;FFF)Z
 		ARG 1 dimension
 	METHOD a a (Lqt;)V (LDimensionServer;)V
 		ARG 0 dimension
-	METHOD a a (Lahb;Laqs;Lamh;)Z (LEntityPlayerAbstract;LDimension;LCraftingResult;)Z
+	METHOD a a (Lahb;Laqs;Lamh;)Z (LEntityPlayerAbstract;LDimension;LItemStack;)Z
 		ARG 1 dimension
 CLASS qy qy
 	FIELD a entity1
