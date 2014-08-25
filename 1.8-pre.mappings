@@ -227,20 +227,38 @@ CLASS ahr EntityThrownEnderpearl
 CLASS ahs EntityThrownExpBottle
 CLASS aht EntityThrownPotion
 CLASS ahu EntityWitherSkull
+CLASS ajk ItemAnvil
 CLASS ajl ItemArmor
 	FIELD b armorPieceId
 	FIELD creativeGroups armorPieceId
-	METHOD <init> <init> (Lajn;II)V (Lajn;II)V
+	METHOD <init> <init> (Lajn;II)V (LItemArmorMaterials;II)V
 		ARG 2 armorPieceId
 	METHOD b b (Lamh;I)V (LCraftingResult;I)V
 		ARG 1 dataValue
+CLASS ajn ItemArmorMaterials
+	FIELD a Leather
+	FIELD b Chain
+	FIELD c Iron
+	FIELD d Gold
+	FIELD e Diamond
+	FIELD g damage
+	FIELD h damageReductionArray
+	FIELD i enchantCoefficient
 CLASS ajo ItemArmorStand
 CLASS ajp ItemAxe
 CLASS ajq ItemBanner
+CLASS ajr ItemBed
+CLASS ajs ItemBlockType
+	METHOD c setName (Ljava/lang/String;)Lalo; (Ljava/lang/String;)LItem;
+CLASS aju ItemBoat
+CLASS ajv ItemBook
+CLASS ajw ItemGlassBottle
 CLASS ajx ItemBow
 CLASS ajy ItemStew
 CLASS ajz ItemBucket
+CLASS aka ItemCarrotOnStick
 CLASS akb ItemCoal
+CLASS akc ItemNavigationMapBase
 CLASS akd CreativeGroups
 	FIELD a creativeGroupsArray
 	FIELD b buildingBlocks
@@ -273,20 +291,38 @@ CLASS akq ItemDigger
 	METHOD <init> <init> (FLamg;Ljava/util/Set;)V (FLItemMaterialTypes;Ljava/util/Set;)V
 		ARG 1 itemMaterialTypes
 CLASS akr ItemDoor
-CLASS akx ItemMap
+CLASS aks ItemDoublePlant
+CLASS aku ItemDye
+CLASS akv ItemColorable
+CLASS akw ItemEgg
+CLASS akx ItemNavigationMapBlank
 CLASS aky ItemEnchantedBook
+CLASS akz ItemEnderEye
+CLASS ala ItemEnderPearl
+CLASS alb ItemExperienceBottle
+CLASS alc ItemFireCharge
 CLASS ald ItemFireworkCharge
 CLASS ale ItemFireworks
+CLASS alf ItemFish
 CLASS alh ItemFishingRod
 CLASS ali ItemFlintAndSteel
 CLASS alj ItemFood
+	FIELD l entityEffectId
+	FIELD m entityEffectDuration
+	FIELD n entityEffectAmplifier
+	METHOD a setEntityEffect (IIIF)Lalj; (IIIF)LItemFood;
+CLASS alk ItemGoldenApple
+CLASS all ItemWallHangable
 CLASS alm ItemHoe
 CLASS alo Item
-	FIELD b creativeGroups
+	FIELD a blockItemMap
+	FIELD b creativeGroup
 	FIELD e registryComplex
 	FIELD f uuid
 	FIELD g random
-	METHOD a a (Latp;Lalo;)V (LBlockType;LItem;)V
+	FIELD h stackLimit
+	FIELD l name
+	METHOD a addItemBlockTypeToRegistry (Latp;Lalo;)V (LBlockType;LItem;)V
 		ARG 0 block
 		ARG 1 item
 	METHOD a a (Lamh;Latp;)F (LCraftingResult;LBlockType;)F
@@ -299,12 +335,13 @@ CLASS alo Item
 		ARG 0 nbtMap
 	METHOD a a (Lamh;Laqs;Lahb;I)V (LCraftingResult;LDimension;LEntityPlayerAbstract;I)V
 		ARG 1 dimension
-	METHOD a a (ILjava/lang/String;Lalo;)V (ILjava/lang/String;LItem;)V
+	METHOD a addItemToRegistry (ILjava/lang/String;Lalo;)V (ILjava/lang/String;LItem;)V
 		ARG 0 index
+		ARG 1 objectNameString
 		ARG 2 item
 	METHOD a a (Laqs;Lahb;Z)Lbrs; (LDimension;LEntityPlayerAbstract;Z)Lbrs;
 		ARG 0 dimension
-	METHOD a a (ILoa;Lalo;)V (ILObjectName;LItem;)V
+	METHOD a addItemToRegistry (ILoa;Lalo;)V (ILObjectName;LItem;)V
 		ARG 0 index
 		ARG 1 registryItemKey
 		ARG 2 registryItem
@@ -315,8 +352,8 @@ CLASS alo Item
 	METHOD a a (Lalo;Lakd;Ljava/util/List;)V (LItem;LCreativeGroups;Ljava/util/List;)V
 		ARG 0 item
 		ARG 1 creativeGroups
-	METHOD a a (Lakd;)Lalo; (LCreativeGroups;)LItem;
-		ARG 0 creativeGroups
+	METHOD a setCreativeGroup (Lakd;)Lalo; (LCreativeGroups;)LItem;
+		ARG 0 creativeGroup
 	METHOD a a (Lamh;Lahb;Laqs;Ldt;Lel;FFF)Z (LCraftingResult;LEntityPlayerAbstract;LDimension;LBlockCoords;LDirection;FFF)Z
 		ARG 2 dimension
 		ARG 3 blockCoords
@@ -331,8 +368,12 @@ CLASS alo Item
 		ARG 0 index
 	METHOD b b (Lalo;)I (LItem;)I
 		ARG 0 registryItemKey
-	METHOD c c (Latp;)V (LBlockType;)V
+	METHOD c setStackLimit (I)Lalo; (I)LItem;
+		ARG 0 stackLimit
+	METHOD c addItemBlockTypeToRegistry (Latp;)V (LBlockType;)V
 		ARG 0 block
+	METHOD c setName (Ljava/lang/String;)Lalo; (Ljava/lang/String;)LItem;
+		ARG 0 name
 	METHOD d d (Lamh;Laqs;Lahb;)V (LCraftingResult;LDimension;LEntityPlayerAbstract;)V
 		ARG 1 dimension
 CLASS am am
@@ -537,19 +578,38 @@ CLASS ami Items
 	METHOD a getItemFromName (Ljava/lang/String;)Lalo; (Ljava/lang/String;)LItem;
 		ARG 0 name
 CLASS amj ItemLead
+CLASS amk ItemLeaves
+CLASS aml ItemNavigationMapFilled
 CLASS amm ItemMilkBucket
 CLASS amn ItemMinecart
+CLASS amp ItemMultipleTextures
 CLASS amr ItemNameTag
 CLASS ams ItemPickaxe
+CLASS amt ItemPiston
+CLASS amu ItemPotion
 CLASS amw ItemRecord
+CLASS amx ItemRedstone
+CLASS amy ItemSaddle
 CLASS amz ItemFoodSeed
 	FIELD b block1
 CLASS ana ItemSeeds
+CLASS anb ItemShears
 CLASS anc ItemShovel
+CLASS and ItemSign
+CLASS ane ItemNetherStar
+CLASS anf ItemSkull
+CLASS ang ItemSlab
+CLASS anh ItemSnowLayer
+CLASS ani ItemSnowball
+CLASS anj ItemSpawnEgg
 CLASS ank ItemWeapon
 	FIELD b itemMaterialTypes
 	METHOD <init> <init> (Lamg;)V (LItemMaterialTypes;)V
 		ARG 0 itemMaterialTypes
+CLASS anl ItemWeed
+CLASS ann ItemWaterlily
+CLASS ano ItemBookWritable
+CLASS anp ItemBookWritten
 CLASS anz CraftingRecipesArmors
 	FIELD a recipeBase
 	FIELD b materials
@@ -1134,7 +1194,7 @@ CLASS atw Blocks
 	FIELD cC acacia_stairs
 	FIELD cD dark_oak_stairs
 	FIELD cE slime
-	FIELD cF rdouble_plant
+	FIELD cF double_plant
 	FIELD cG stained_glass
 	FIELD cH stained_glass_pane
 	FIELD cI prismarine
@@ -2847,6 +2907,9 @@ CLASS fm NbtByte
 CLASS fn NbtMap
 	FIELD b logger
 	FIELD c dataMap
+	METHOD a put (Ljava/lang/String;Z)V (Ljava/lang/String;Z)V
+		ARG 0 nbtMapKey
+		ARG 1 dataValue
 	METHOD a a (Lfn;)V (LNbtMap;)V
 		ARG 0 nbtMap
 	METHOD a a (BLjava/lang/String;Ljava/io/DataInput;ILfx;)Lgd; (BLjava/lang/String;Ljava/io/DataInput;ILNbtSizeUtil;)LNbt;
@@ -3576,7 +3639,11 @@ CLASS oa ObjectName
 	FIELD b objectname
 	METHOD <init> <init> (I[Ljava/lang/String;)V (I[Ljava/lang/String;)V
 		ARG 0 index
+	METHOD <init> <init> (Ljava/lang/String;)V (Ljava/lang/String;)V
+		ARG 0 objectNameString
 	METHOD a returnObjectName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD a parseObjectNameString (Ljava/lang/String;)[Ljava/lang/String; (Ljava/lang/String;)[Ljava/lang/String;
+		ARG 0 objectNameString
 	METHOD b returnModName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD toString returnFullObjectName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS od od
@@ -3822,6 +3889,67 @@ CLASS uv MathUtil
 		ARG 0 value
 CLASS w OSName
 	METHOD a getOSName ()Lx; ()LOSType;
+CLASS wp EntityEffectType
+	FIELD H id
+	FIELD M name
+	FIELD a entityEffectType
+	FIELD c speed
+	FIELD d slowness
+	FIELD e haste
+	FIELD f minig_fatigue
+	FIELD g strength
+	FIELD h instantHealth
+	FIELD i instantDamage
+	FIELD j jumpBoost
+	FIELD k nausea
+	FIELD l regeneration
+	FIELD m resistance
+	FIELD n fireResistance
+	FIELD o waterBreathing
+	FIELD p invisibility
+	FIELD q blindness
+	FIELD r nightVision
+	FIELD s hunger
+	FIELD t weakness
+	FIELD u poison
+	FIELD v wither
+	FIELD w healthBoost
+	FIELD x absorption
+	FIELD y saturation
+	METHOD a getName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD c setName (Ljava/lang/String;)Lwp; (Ljava/lang/String;)LEntityEffectType;
+		ARG 0 name
+CLASS wq EntityEffect
+	FIELD a logger
+	FIELD b id
+	FIELD c duration
+	FIELD d amplifier
+	FIELD e hasSplash
+	FIELD f hasAmbient
+	FIELD h hasParticles
+	METHOD <init> <init> (IIIZZ)V (IIIZZ)V
+		ARG 0 id
+		ARG 1 duration
+		ARG 2 amplifier
+		ARG 3 hasAmbient
+		ARG 4 hasParticles
+	METHOD <init> <init> (II)V (II)V
+		ARG 0 id
+		ARG 1 duration
+	METHOD <init> <init> (III)V (III)V
+		ARG 0 id
+		ARG 1 duration
+		ARG 2 amplifier
+	METHOD a writeNbtMap (Lfn;)Lfn; (LNbtMap;)LNbtMap;
+		ARG 0 nbtMap
+	METHOD a getId ()I ()I
+	METHOD a setHasSplash (Z)V (Z)V
+		ARG 0 hasSplash
+	METHOD b getDuration ()I ()I
+	METHOD c getAmplifier ()I ()I
+	METHOD e getHasAmbient ()Z ()Z
+	METHOD f getHasParticles ()Z ()Z
+	METHOD g getEntityEffectsName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS wv Entity
 	FIELD V random
 	FIELD ae chunkX
