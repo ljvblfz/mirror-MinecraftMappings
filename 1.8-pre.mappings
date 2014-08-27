@@ -190,7 +190,6 @@ CLASS none/aht none/EntityThrownPotion
 CLASS none/ahu none/EntityWitherSkull
 CLASS none/ajl none/ItemArmor
 	FIELD b armorPieceId
-	FIELD creativeGroups armorPieceId
 	METHOD <init> <init> (Lajn;II)V (Lajn;II)V
 		ARG 2 armorPieceId
 	METHOD b b (Lamh;I)V (Lamh;I)V
@@ -1164,7 +1163,6 @@ CLASS none/axp none/BlockMobSpawner
 CLASS none/axq none/BlockMonsterEgg
 	METHOD a getBlockStateForMetadata (I)Lbea; (I)LBlockState;
 	METHOD c getMetadataForBlockState (Lbea;)I (LBlockState;)I
-CLASS none/axz none/BlockMushroom
 CLASS none/ay none/ServerCommandBlockData
 	METHOD a a (Lae;[Ljava/lang/String;)V (LIServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -2747,9 +2745,6 @@ CLASS none/gd none/Nbt
 	METHOD a getNbtTypeId ()B ()B
 	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
 		ARG 0 dataOutput
-	METHOD a inputData (Ljava/io/DataInput;ILfx;)V (Ljava/io/DataInput;ILNbtSizeUtil;)V
-		ARG 0 dataInput
-		ARG 2 nbtSizeUtil
 	METHOD a createNbt (B)Lgd; (B)LNbt;
 		ARG 0 NbtTypeId
 	METHOD a_ getNbtString ()Ljava/lang/String; ()Ljava/lang/String;
@@ -2914,8 +2909,6 @@ CLASS none/hs none/HoverActionTypes
 		ARG 0 name
 	METHOD a allowInChat ()Z ()Z
 	METHOD b getName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD getByName getByName (Ljava/lang/String;)Lhs; (Ljava/lang/String;)LHoverActionTypes;
-		ARG 0 name
 CLASS none/hv none/hv
 	FIELD b textColor
 	FIELD c isBold
