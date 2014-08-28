@@ -2537,7 +2537,7 @@ CLASS none/fn none/NbtMap
 		ARG 0 nbtMapKey
 	METHOD i getAsDouble (Ljava/lang/String;)D (Ljava/lang/String;)D
 		ARG 0 nbtMapKey
-	METHOD inputData inputData (Ljava/io/DataInput;ILnone/fx;)V (Ljava/io/DataInput;ILnone/NbtSizeUtil;)V
+	METHOD a inputData (Ljava/io/DataInput;ILnone/fx;)V (Ljava/io/DataInput;ILnone/NbtSizeUtil;)V
 		ARG 0 dataInput
 		ARG 1 depth
 	METHOD j getAsString (Ljava/lang/String;)Ljava/lang/String; (Ljava/lang/String;)Ljava/lang/String;
@@ -2750,7 +2750,7 @@ CLASS none/gd none/Nbt
 	METHOD a_ getNbtString ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD b clone ()Lnone/gd; ()Lnone/Nbt;
 	METHOD c_ isEmpty ()Z ()Z
-	METHOD inputData inputData (Ljava/io/DataInput;ILnone/fx;)V (Ljava/io/DataInput;ILnone/NbtSizeUtil;)V
+	METHOD a inputData (Ljava/io/DataInput;ILnone/fx;)V (Ljava/io/DataInput;ILnone/NbtSizeUtil;)V
 		ARG 0 dataInput
 		ARG 1 depth
 		ARG 2 nbtSizeUtil
