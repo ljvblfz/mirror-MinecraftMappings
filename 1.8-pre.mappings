@@ -1999,25 +1999,107 @@ CLASS none/cf none/ServerCommandReplaceItem
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c c (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/cfc none/cfc
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfe none/cfe
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cff none/cff
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfg net/minecraft/world/entity/particle/ParticleSnowballBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfi net/minecraft/world/entity/particle/ParticleWaterBubbleBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfk net/minecraft/world/entity/particle/ParticleCritMagicBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfl net/minecraft/world/entity/particle/ParticleCritBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfn net/minecraft/world/entity/particle/ParticleDripLavaBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfo net/minecraft/world/entity/particle/ParticleDripWaterBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfq net/minecraft/world/entity/particle/ParticleEnchantmentTableBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfs net/minecraft/world/entity/particle/ParticleExplosionNormalBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfx none/cfx
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfz net/minecraft/world/entity/particle/ParticleFlameBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cg none/ServerCommandSaveAll
 	METHOD a a (Lnone/ae;[Ljava/lang/String;)V (Lnone/IServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/cgb net/minecraft/world/entity/particle/ParticleFootstepBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cgd net/minecraft/world/entity/particle/ParticleVillagerAngryBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cge none/cge
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cgg none/cgg
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cgi none/cgi
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cgl net/minecraft/world/entity/particle/ParticleSmokeLargeBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cgn net/minecraft/world/entity/particle/ParticleLavaBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cgp none/cgp
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cgr net/minecraft/world/entity/particle/ParticleNoteBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cgs none/EntityParticle
+CLASS none/cgy none/IParticleBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/ch none/ServerCommandSaveOff
 	METHOD a a (Lnone/ae;[Ljava/lang/String;)V (Lnone/IServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/cha net/minecraft/world/entity/particle/ParticleCloudBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chc net/minecraft/world/entity/particle/ParticlePortalBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/che net/minecraft/world/entity/particle/ParticleRedstoneBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chh net/minecraft/world/entity/particle/ParticleSmokeNormalBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chj net/minecraft/world/entity/particle/ParticleSnowShovelBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chl net/minecraft/world/entity/particle/ParticleSpellMobAmbientBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chm net/minecraft/world/entity/particle/ParticleSpellInstaltBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chn net/minecraft/world/entity/particle/ParticleSpellMobBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cho net/minecraft/world/entity/particle/ParticleSpellBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chp net/minecraft/world/entity/particle/ParticleSpellWitchBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chr net/minecraft/world/entity/particle/ParticleWaterSplashBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cht net/minecraft/world/entity/particle/ParticleSuspendedBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chv net/minecraft/world/entity/particle/ParticleVillagerHappyBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chw net/minecraft/world/entity/particle/chw
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chy none/chy
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/ci none/ServerCommandSaveOn
 	METHOD a a (Lnone/ae;[Ljava/lang/String;)V (Lnone/IServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c c (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/cia none/cia
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cid net/minecraft/world/entity/particle/ParticleWaterWakeBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cif net/minecraft/world/entity/particle/ParticleWaterDropBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cj none/ServerCommandSay
 	METHOD a a (Lnone/ae;[Ljava/lang/String;)V (Lnone/IServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -2375,9 +2457,9 @@ CLASS none/ew none/ew
 	FIELD p SpellMob
 	FIELD q SpellMobAmbient
 	FIELD r SpellWitch
-	FIELD s DipWater
+	FIELD s DripWater
 	FIELD t DripLava
-	FIELD u VillagerAngery
+	FIELD u VillagerAngry
 	FIELD v VillagerHappy
 	FIELD w TownAura
 	FIELD x Note
@@ -2470,6 +2552,9 @@ CLASS none/fn none/NbtMap
 		ARG 1 elementValue
 		ARG 2 dataInput
 		ARG 4 nbtSizeUtil
+	METHOD a inputData (Ljava/io/DataInput;ILnone/fx;)V (Ljava/io/DataInput;ILnone/NbtSizeUtil;)V
+		ARG 0 dataInput
+		ARG 1 depth
 	METHOD a getAsNbt (Ljava/lang/String;)Lnone/gd; (Ljava/lang/String;)Lnone/Nbt;
 		ARG 0 nbtMapKey
 	METHOD a put (Ljava/lang/String;B)V (Ljava/lang/String;B)V
@@ -2537,9 +2622,6 @@ CLASS none/fn none/NbtMap
 		ARG 0 nbtMapKey
 	METHOD i getAsDouble (Ljava/lang/String;)D (Ljava/lang/String;)D
 		ARG 0 nbtMapKey
-	METHOD a inputData (Ljava/io/DataInput;ILnone/fx;)V (Ljava/io/DataInput;ILnone/NbtSizeUtil;)V
-		ARG 0 dataInput
-		ARG 1 depth
 	METHOD j getAsString (Ljava/lang/String;)Ljava/lang/String; (Ljava/lang/String;)Ljava/lang/String;
 		ARG 0 nbtMapKey
 	METHOD k getAsByteArray (Ljava/lang/String;)[B (Ljava/lang/String;)[B
@@ -2745,15 +2827,15 @@ CLASS none/gd none/Nbt
 	METHOD a getNbtTypeId ()B ()B
 	METHOD a createNbt (B)Lnone/gd; (B)Lnone/Nbt;
 		ARG 0 NbtTypeId
+	METHOD a inputData (Ljava/io/DataInput;ILnone/fx;)V (Ljava/io/DataInput;ILnone/NbtSizeUtil;)V
+		ARG 0 dataInput
+		ARG 1 depth
+		ARG 2 nbtSizeUtil
 	METHOD a outputData (Ljava/io/DataOutput;)V (Ljava/io/DataOutput;)V
 		ARG 0 dataOutput
 	METHOD a_ getNbtString ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD b clone ()Lnone/gd; ()Lnone/Nbt;
 	METHOD c_ isEmpty ()Z ()Z
-	METHOD a inputData (Ljava/io/DataInput;ILnone/fx;)V (Ljava/io/DataInput;ILnone/NbtSizeUtil;)V
-		ARG 0 dataInput
-		ARG 1 depth
-		ARG 2 nbtSizeUtil
 CLASS none/ge none/NbtNumeric
 	METHOD c getAsLong ()J ()J
 	METHOD d getAsInt ()I ()I
