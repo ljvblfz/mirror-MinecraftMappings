@@ -275,7 +275,7 @@ CLASS none/alo none/Item
 	METHOD a a (Lnone/alo;Lnone/akd;Ljava/util/List;)V (Lnone/Item;Lnone/CreativeGroups;Ljava/util/List;)V
 		ARG 0 item
 		ARG 1 creativeGroups
-	METHOD a a (Lnone/amh;Lnone/ahb;Lnone/aqs;Lnone/dt;Lnone/el;FFF)Z (Lnone/amh;Lnone/ahb;Lnone/Dimension;Lnone/BlockCoords;Lnone/Direction;FFF)Z
+	METHOD a a (Lnone/amh;Lnone/ahb;Lnone/aqs;Lnone/dt;Lnone/ej;FFF)Z (Lnone/amh;Lnone/ahb;Lnone/Dimension;Lnone/BlockCoords;Lnone/Direction;FFF)Z
 		ARG 2 dimension
 		ARG 3 blockCoords
 	METHOD a a (Lnone/amh;Lnone/aqs;Lnone/ahb;)Lnone/amh; (Lnone/amh;Lnone/Dimension;Lnone/ahb;)Lnone/amh;
@@ -607,7 +607,7 @@ CLASS none/atp none/BlockType
 	METHOD a a (Lnone/aqs;Lnone/dt;Lnone/bea;Lnone/ahb;)V (Lnone/Dimension;Lnone/BlockCoords;Lnone/BlockState;Lnone/ahb;)V
 		ARG 0 dimension
 		ARG 1 rblockCoords
-	METHOD a a (Lnone/aqs;Lnone/dt;Lnone/bea;Lnone/ahb;Lnone/el;FFF)Z (Lnone/Dimension;Lnone/BlockCoords;Lnone/BlockState;Lnone/ahb;Lnone/Direction;FFF)Z
+	METHOD a a (Lnone/aqs;Lnone/dt;Lnone/bea;Lnone/ahb;Lnone/ej;FFF)Z (Lnone/Dimension;Lnone/BlockCoords;Lnone/BlockState;Lnone/ahb;Lnone/Direction;FFF)Z
 		ARG 0 dimension
 		ARG 1 blockCoords
 	METHOD a a (Lnone/aqs;Lnone/dt;Lnone/bea;Lnone/atp;)V (Lnone/Dimension;Lnone/BlockCoords;Lnone/BlockState;Lnone/BlockType;)V
@@ -628,13 +628,13 @@ CLASS none/atp none/BlockType
 	METHOD a a (Lnone/aqs;Lnone/dt;Lnone/bru;Lnone/bru;)Lnone/brs; (Lnone/Dimension;Lnone/BlockCoords;Lnone/Vec3;Lnone/Vec3;)Lnone/brs;
 		ARG 0 dimension
 		ARG 1 blockCoords
-	METHOD a a (Lnone/aqs;Lnone/dt;Lnone/el;)Z (Lnone/Dimension;Lnone/BlockCoords;Lnone/Direction;)Z
+	METHOD a a (Lnone/aqs;Lnone/dt;Lnone/ej;)Z (Lnone/Dimension;Lnone/BlockCoords;Lnone/Direction;)Z
 		ARG 0 dimension
 		ARG 1 blockCoords
-	METHOD a a (Lnone/aqs;Lnone/dt;Lnone/el;FFFILnone/xm;)Lnone/bea; (Lnone/Dimension;Lnone/BlockCoords;Lnone/Direction;FFFILnone/EntityLiving;)Lnone/BlockState;
+	METHOD a a (Lnone/aqs;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bea; (Lnone/Dimension;Lnone/BlockCoords;Lnone/Direction;FFFILnone/EntityLiving;)Lnone/BlockState;
 		ARG 0 dimension
 		ARG 1 blockCoords
-	METHOD a a (Lnone/aqs;Lnone/dt;Lnone/el;Lnone/amh;)Z (Lnone/Dimension;Lnone/BlockCoords;Lnone/Direction;Lnone/amh;)Z
+	METHOD a a (Lnone/aqs;Lnone/dt;Lnone/ej;Lnone/amh;)Z (Lnone/Dimension;Lnone/BlockCoords;Lnone/Direction;Lnone/amh;)Z
 		ARG 0 dimension
 		ARG 1 blockCoords
 	METHOD a a (Lnone/aqs;Lnone/dt;Lnone/wv;)V (Lnone/Dimension;Lnone/BlockCoords;Lnone/Entity;)V
@@ -656,9 +656,9 @@ CLASS none/atp none/BlockType
 		ARG 1 blockCoords
 	METHOD a a (Lnone/arb;Lnone/dt;I)I (Lnone/IBlockAccess;Lnone/BlockCoords;I)I
 		ARG 1 blockCoords
-	METHOD a a (Lnone/arb;Lnone/dt;Lnone/bea;Lnone/el;)I (Lnone/IBlockAccess;Lnone/BlockCoords;Lnone/BlockState;Lnone/Direction;)I
+	METHOD a a (Lnone/arb;Lnone/dt;Lnone/bea;Lnone/ej;)I (Lnone/IBlockAccess;Lnone/BlockCoords;Lnone/BlockState;Lnone/Direction;)I
 		ARG 1 blockCoords
-	METHOD a a (Lnone/arb;Lnone/dt;Lnone/el;)Z (Lnone/IBlockAccess;Lnone/BlockCoords;Lnone/Direction;)Z
+	METHOD a a (Lnone/arb;Lnone/dt;Lnone/ej;)Z (Lnone/IBlockAccess;Lnone/BlockCoords;Lnone/Direction;)Z
 		ARG 1 blockCoords
 	METHOD a getBlockIndex (Lnone/atp;)I (Lnone/BlockType;)I
 		ARG 0 block
@@ -693,9 +693,9 @@ CLASS none/atp none/BlockType
 		ARG 3 random
 	METHOD b b (Lnone/arb;Lnone/dt;)Z (Lnone/IBlockAccess;Lnone/BlockCoords;)Z
 		ARG 1 blockCoords
-	METHOD b b (Lnone/arb;Lnone/dt;Lnone/bea;Lnone/el;)I (Lnone/IBlockAccess;Lnone/BlockCoords;Lnone/BlockState;Lnone/Direction;)I
+	METHOD b b (Lnone/arb;Lnone/dt;Lnone/bea;Lnone/ej;)I (Lnone/IBlockAccess;Lnone/BlockCoords;Lnone/BlockState;Lnone/Direction;)I
 		ARG 1 blockCoords
-	METHOD b b (Lnone/arb;Lnone/dt;Lnone/el;)Z (Lnone/IBlockAccess;Lnone/BlockCoords;Lnone/Direction;)Z
+	METHOD b b (Lnone/arb;Lnone/dt;Lnone/ej;)Z (Lnone/IBlockAccess;Lnone/BlockCoords;Lnone/Direction;)Z
 		ARG 1 blockCoords
 	METHOD b b (Lnone/atp;)Z (Lnone/BlockType;)Z
 		ARG 0 block
@@ -1808,7 +1808,7 @@ CLASS none/biz none/CoordRange
 		ARG 3 x2
 		ARG 4 y2
 		ARG 5 z2
-	METHOD a a (IIIIIIIIILnone/el;)Lnone/biz; (IIIIIIIIILnone/Direction;)Lnone/CoordRange;
+	METHOD a a (IIIIIIIIILnone/ej;)Lnone/biz; (IIIIIIIIILnone/Direction;)Lnone/CoordRange;
 		ARG 0 x1
 		ARG 1 y1
 		ARG 2 z1
@@ -1992,114 +1992,114 @@ CLASS none/ce none/ServerCommandPublish
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c c (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-CLASS none/cej none/DimensionClient
+CLASS none/cel none/DimensionClient
 CLASS none/cf none/ServerCommandReplaceItem
 	METHOD a a (Lnone/ae;[Ljava/lang/String;)V (Lnone/IServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c c (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-CLASS none/cfc none/cfc
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cfe none/cfe
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cff none/cff
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cfg net/minecraft/world/entity/particle/ParticleSnowballBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cfi net/minecraft/world/entity/particle/ParticleWaterBubbleBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cfk net/minecraft/world/entity/particle/ParticleCritMagicBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cfl net/minecraft/world/entity/particle/ParticleCritBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cfn net/minecraft/world/entity/particle/ParticleDripLavaBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cfo net/minecraft/world/entity/particle/ParticleDripWaterBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cfq net/minecraft/world/entity/particle/ParticleEnchantmentTableBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cfs net/minecraft/world/entity/particle/ParticleExplosionNormalBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cfx none/cfx
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cfz net/minecraft/world/entity/particle/ParticleFlameBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfe none/cfc
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfg none/cfe
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfh none/cff
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfi net/minecraft/world/entity/particle/ParticleSnowballBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfk net/minecraft/world/entity/particle/ParticleWaterBubbleBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfm net/minecraft/world/entity/particle/ParticleCritMagicBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfn net/minecraft/world/entity/particle/ParticleCritBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfp net/minecraft/world/entity/particle/ParticleDripLavaBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfq net/minecraft/world/entity/particle/ParticleDripWaterBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfs net/minecraft/world/entity/particle/ParticleEnchantmentTableBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfu net/minecraft/world/entity/particle/ParticleExplosionNormalBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfz none/cfx
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cg none/ServerCommandSaveAll
 	METHOD a a (Lnone/ae;[Ljava/lang/String;)V (Lnone/IServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-CLASS none/cgb net/minecraft/world/entity/particle/ParticleFootstepBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cgd net/minecraft/world/entity/particle/ParticleVillagerAngryBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cge none/cge
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cgg none/cgg
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cgi none/cgi
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cgl net/minecraft/world/entity/particle/ParticleSmokeLargeBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cgn net/minecraft/world/entity/particle/ParticleLavaBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cgp none/cgp
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cgr net/minecraft/world/entity/particle/ParticleNoteBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cgs none/EntityParticle
-CLASS none/cgy none/IParticleBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cgb net/minecraft/world/entity/particle/ParticleFlameBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cgd net/minecraft/world/entity/particle/ParticleFootstepBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cgf net/minecraft/world/entity/particle/ParticleVillagerAngryBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cgg none/cge
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cgi none/cgg
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cgk none/cgi
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cgn net/minecraft/world/entity/particle/ParticleSmokeLargeBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cgp net/minecraft/world/entity/particle/ParticleLavaBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cgr none/cgp
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cgt net/minecraft/world/entity/particle/ParticleNoteBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cgu none/EntityParticle
 CLASS none/ch none/ServerCommandSaveOff
 	METHOD a a (Lnone/ae;[Ljava/lang/String;)V (Lnone/IServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-CLASS none/cha net/minecraft/world/entity/particle/ParticleCloudBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/chc net/minecraft/world/entity/particle/ParticlePortalBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/che net/minecraft/world/entity/particle/ParticleRedstoneBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/chh net/minecraft/world/entity/particle/ParticleSmokeNormalBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/chj net/minecraft/world/entity/particle/ParticleSnowShovelBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/chl net/minecraft/world/entity/particle/ParticleSpellMobAmbientBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/chm net/minecraft/world/entity/particle/ParticleSpellInstaltBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/chn net/minecraft/world/entity/particle/ParticleSpellMobBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cho net/minecraft/world/entity/particle/ParticleSpellBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/chp net/minecraft/world/entity/particle/ParticleSpellWitchBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/chr net/minecraft/world/entity/particle/ParticleWaterSplashBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cht net/minecraft/world/entity/particle/ParticleSuspendedBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/chv net/minecraft/world/entity/particle/ParticleVillagerHappyBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/chw net/minecraft/world/entity/particle/chw
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/chy none/chy
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cha none/IParticleBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chc net/minecraft/world/entity/particle/ParticleCloudBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/che net/minecraft/world/entity/particle/ParticlePortalBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chg net/minecraft/world/entity/particle/ParticleRedstoneBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chj net/minecraft/world/entity/particle/ParticleSmokeNormalBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chl net/minecraft/world/entity/particle/ParticleSnowShovelBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chn net/minecraft/world/entity/particle/ParticleSpellMobAmbientBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cho net/minecraft/world/entity/particle/ParticleSpellInstaltBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chp net/minecraft/world/entity/particle/ParticleSpellMobBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chq net/minecraft/world/entity/particle/ParticleSpellBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chr net/minecraft/world/entity/particle/ParticleSpellWitchBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cht net/minecraft/world/entity/particle/ParticleWaterSplashBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chv net/minecraft/world/entity/particle/ParticleSuspendedBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chx net/minecraft/world/entity/particle/ParticleVillagerHappyBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chy net/minecraft/world/entity/particle/chw
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/ci none/ServerCommandSaveOn
 	METHOD a a (Lnone/ae;[Ljava/lang/String;)V (Lnone/IServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c c (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-CLASS none/cia none/cia
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cid net/minecraft/world/entity/particle/ParticleWaterWakeBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cif net/minecraft/world/entity/particle/ParticleWaterDropBuilder
-	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgs; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cia none/chy
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cic none/cia
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cif net/minecraft/world/entity/particle/ParticleWaterWakeBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cih net/minecraft/world/entity/particle/ParticleWaterDropBuilder
+	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cj none/ServerCommandSay
 	METHOD a a (Lnone/ae;[Ljava/lang/String;)V (Lnone/IServerCommandUser;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -2223,7 +2223,7 @@ CLASS none/cw none/ServerCommandTp
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-CLASS none/cxg none/cxg
+CLASS none/cxj none/cxg
 	METHOD toString returnFullObjectName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS none/cy none/ServerCommandTestForBlock
 	METHOD a a (Lnone/ae;[Ljava/lang/String;)V (Lnone/IServerCommandUser;[Ljava/lang/String;)V
@@ -2237,7 +2237,7 @@ CLASS none/cz none/ServerCommandTestFor
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-CLASS none/czg none/czg
+CLASS none/czj none/czg
 	METHOD b initializeMap ()Ljava/util/Map; ()Ljava/util/Map;
 CLASS none/da none/ServerCommandTime
 	METHOD a a (Lnone/ae;[Ljava/lang/String;)V (Lnone/IServerCommandUser;[Ljava/lang/String;)V
@@ -2324,8 +2324,8 @@ CLASS none/dt none/BlockCoords
 		ARG 2 z
 	METHOD a fromLong (J)Lnone/dt; (J)Lnone/BlockCoords;
 		ARG 0 l
-	METHOD a addDirection (Lnone/el;)Lnone/dt; (Lnone/Direction;)Lnone/BlockCoords;
-	METHOD a addDirection (Lnone/el;I)Lnone/dt; (Lnone/Direction;I)Lnone/BlockCoords;
+	METHOD a addDirection (Lnone/ej;)Lnone/dt; (Lnone/Direction;)Lnone/BlockCoords;
+	METHOD a addDirection (Lnone/ej;I)Lnone/dt; (Lnone/Direction;I)Lnone/BlockCoords;
 	METHOD a add (Lnone/fd;)Lnone/dt; (Lnone/Vec3Int;)Lnone/BlockCoords;
 		ARG 0 location
 	METHOD b below ()Lnone/dt; ()Lnone/BlockCoords;
@@ -2361,7 +2361,7 @@ CLASS none/eh none/RegistryComplexDefaultKey
 		ARG 0 registryItemKey
 CLASS none/ei none/ei
 	METHOD a getRegistryItem (Ljava/lang/Object;)Ljava/lang/Object; (Ljava/lang/Object;)Ljava/lang/Object;
-CLASS none/el none/Direction
+CLASS none/ej none/Direction
 	FIELD a Down
 	FIELD b Up
 	FIELD c North
@@ -2369,21 +2369,21 @@ CLASS none/el none/Direction
 	FIELD e West
 	FIELD f East
 	FIELD m blockCoords
-	METHOD a getCWFacing (Lnone/en;)Lnone/el; (Lnone/en;)Lnone/Direction;
-	METHOD e getYRotation ()Lnone/el; ()Lnone/Direction;
-	METHOD f getCCWFacing ()Lnone/el; ()Lnone/Direction;
-	METHOD n getXRotation ()Lnone/el; ()Lnone/Direction;
-	METHOD p getZRotation ()Lnone/el; ()Lnone/Direction;
-CLASS none/eo none/AxisDirection
+	METHOD a getCWFacing (Lnone/el;)Lnone/ej; (Lnone/en;)Lnone/Direction;
+	METHOD e getYRotation ()Lnone/ej; ()Lnone/Direction;
+	METHOD f getCCWFacing ()Lnone/ej; ()Lnone/Direction;
+	METHOD n getXRotation ()Lnone/ej; ()Lnone/Direction;
+	METHOD p getZRotation ()Lnone/ej; ()Lnone/Direction;
+CLASS none/em none/AxisDirection
 	FIELD a Postive
 	FIELD b Negative
 	FIELD c index
 	FIELD d name
 	METHOD a getIndex ()I ()I
-CLASS none/ep none/ep
+CLASS none/en none/ep
 	FIELD a Horizontal
 	FIELD b Vertical
-	METHOD a a (Ljava/util/Random;)Lnone/el; (Ljava/util/Random;)Lnone/Direction;
+	METHOD a a (Ljava/util/Random;)Lnone/ej; (Ljava/util/Random;)Lnone/Direction;
 		ARG 0 random
 CLASS none/eq none/IIterable
 CLASS none/er none/IntObjectMap
@@ -3300,7 +3300,7 @@ CLASS none/qk none/qk
 		ARG 0 dimension
 	METHOD a a (Lnone/ahb;Lnone/aqs;Lnone/amh;)Z (Lnone/ahb;Lnone/Dimension;Lnone/amh;)Z
 		ARG 1 dimension
-	METHOD a a (Lnone/ahb;Lnone/aqs;Lnone/amh;Lnone/dt;Lnone/el;FFF)Z (Lnone/ahb;Lnone/Dimension;Lnone/amh;Lnone/BlockCoords;Lnone/Direction;FFF)Z
+	METHOD a a (Lnone/ahb;Lnone/aqs;Lnone/amh;Lnone/dt;Lnone/ej;FFF)Z (Lnone/ahb;Lnone/Dimension;Lnone/amh;Lnone/BlockCoords;Lnone/Direction;FFF)Z
 		ARG 1 dimension
 CLASS none/ql none/ql
 	FIELD a dimensionServer
@@ -3380,7 +3380,7 @@ CLASS none/qx none/qx
 		ARG 0 dimension
 	METHOD a a (Lnone/ahb;Lnone/aqs;Lnone/amh;)Z (Lnone/ahb;Lnone/Dimension;Lnone/amh;)Z
 		ARG 1 dimension
-	METHOD a a (Lnone/ahb;Lnone/aqs;Lnone/amh;Lnone/dt;Lnone/el;FFF)Z (Lnone/ahb;Lnone/Dimension;Lnone/amh;Lnone/BlockCoords;Lnone/Direction;FFF)Z
+	METHOD a a (Lnone/ahb;Lnone/aqs;Lnone/amh;Lnone/dt;Lnone/ej;FFF)Z (Lnone/ahb;Lnone/Dimension;Lnone/amh;Lnone/BlockCoords;Lnone/Direction;FFF)Z
 		ARG 1 dimension
 	METHOD a a (Lnone/qt;)V (Lnone/DimensionServer;)V
 		ARG 0 dimension
