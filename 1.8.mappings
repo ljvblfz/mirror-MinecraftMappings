@@ -202,12 +202,12 @@ CLASS none/aju none/ItemBlock
 	METHOD a getName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getCreativeGroups ()Lnone/akf; ()Lnone/CreativeGroups;
 	METHOD c setName (Ljava/lang/String;)Lnone/alq; (Ljava/lang/String;)Lnone/Item;
-	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amh;)Ljava/lang/String;
+	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amj;)Ljava/lang/String;
 CLASS none/ajz none/ItemBow
 CLASS none/aka none/ItemStew
 CLASS none/akb none/ItemBucket
 CLASS none/akd none/ItemCoal
-	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amh;)Ljava/lang/String;
+	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amj;)Ljava/lang/String;
 CLASS none/akf none/CreativeGroups
 	FIELD a creativeGroupsArray
 	FIELD b buildingBlocks
@@ -241,15 +241,15 @@ CLASS none/aks none/ItemDigger
 		ARG 1 itemMaterialTypes
 CLASS none/akt none/ItemDoor
 CLASS none/akw
-	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amh;)Ljava/lang/String;
+	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amj;)Ljava/lang/String;
 CLASS none/akx
-	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amh;)Ljava/lang/String;
+	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amj;)Ljava/lang/String;
 CLASS none/akz none/ItemMap
 CLASS none/ala none/ItemEnchantedBook
 CLASS none/alf none/ItemFireworkCharge
 CLASS none/alg none/ItemFireworks
 CLASS none/alh
-	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amh;)Ljava/lang/String;
+	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amj;)Ljava/lang/String;
 CLASS none/alj none/ItemFishingRod
 CLASS none/alk none/ItemFlintAndSteel
 CLASS none/all none/ItemFood
@@ -319,7 +319,7 @@ CLASS none/alq none/Item
 		ARG 0 s
 	METHOD d (Lnone/amj;Lnone/aqu;Lnone/ahd;)V
 		ARG 1 dimension
-	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amh;)Ljava/lang/String;
+	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amj;)Ljava/lang/String;
 	METHOD j getMaxStackSize ()I ()I
 	METHOD t registerItems ()V ()V
 CLASS none/am
@@ -334,13 +334,202 @@ CLASS none/ami none/ItemMaterialTypes
 CLASS none/amj
 	FIELD d item
 	METHOD b getItem ()Lnone/alq; ()Lnone/Item;
+CLASS none/amk none/Items
+	FIELD A mushroomStew
+	FIELD B goldenSword
+	FIELD C goldenShovel
+	FIELD D goldenPickaxe
+	FIELD E goldenAxe
+	FIELD F string
+	FIELD G feather
+	FIELD H gunpowder
+	FIELD I woodenHoe
+	FIELD J stoneHoe
+	FIELD K ironHoe
+	FIELD L diamondHoe
+	FIELD M goldenHoe
+	FIELD N wheatSeeds
+	FIELD O wheat
+	FIELD P bread
+	FIELD Q leatherHelmet
+	FIELD R leatherChestplate
+	FIELD S leatherLeggings
+	FIELD T leatherBoots
+	FIELD U chainmailHelmet
+	FIELD V chainmailChestplate
+	FIELD W chainmailLeggings
+	FIELD X chainmailBoots
+	FIELD Y ironHelmet
+	FIELD Z ironChestplate
+	FIELD a ironShovel
+	FIELD aA saddle
+	FIELD aB ironDoor
+	FIELD aC redstone
+	FIELD aD snowball
+	FIELD aE boat
+	FIELD aF leather
+	FIELD aG molkBucket
+	FIELD aH brick
+	FIELD aI clayBall
+	FIELD aJ reeds
+	FIELD aK paper
+	FIELD aL book
+	FIELD aM slimeBall
+	FIELD aN chestMinecart
+	FIELD aO furnaceMinecart
+	FIELD aP egg
+	FIELD aQ compass
+	FIELD aR fishingRod
+	FIELD aS clock
+	FIELD aT glowstoneDust
+	FIELD aU fish
+	FIELD aV cookedFish
+	FIELD aW dye
+	FIELD aX bone
+	FIELD aY sugar
+	FIELD aZ cake
+	FIELD aa ironLeggings
+	FIELD ab ironBoots
+	FIELD ac diamondHelmet
+	FIELD ad diamondChestplate
+	FIELD ae diamondLeggings
+	FIELD af DiamondBoots
+	FIELD ag goldenHelmet
+	FIELD ah goldenChestplate
+	FIELD ai goldenLeggings
+	FIELD aj goldenBoots
+	FIELD ak flint
+	FIELD al porkchop
+	FIELD am cookedPorkchop
+	FIELD an painting
+	FIELD ao goldenApple
+	FIELD ap gign
+	FIELD aq woodenDoor
+	FIELD ar spruceDoor
+	FIELD as birchDoor
+	FIELD at jungleDoor
+	FIELD au acaciaDoor
+	FIELD av darkOakDoor
+	FIELD aw bucket
+	FIELD ax waterBocket
+	FIELD ay lavaBucket
+	FIELD az minecart
+	FIELD b ironPickaxe
+	FIELD bA glassBottle
+	FIELD bB spiderEye
+	FIELD bC fermentedSpiderEye
+	FIELD bD blazePowder
+	FIELD bE magmaCream
+	FIELD bF brewingStand
+	FIELD bG cauldron
+	FIELD bH enderEye
+	FIELD bI speckledMelon
+	FIELD bJ spawnEgg
+	FIELD bK experienceBottle
+	FIELD bL fireCharge
+	FIELD bM writableBook
+	FIELD bN writtenBook
+	FIELD bO emerald
+	FIELD bP itemFrame
+	FIELD bQ flowerPot
+	FIELD bR carrot
+	FIELD bS potato
+	FIELD bT bakedPotato
+	FIELD bU poisonousPotato
+	FIELD bV map
+	FIELD bW goldenCarrot
+	FIELD bX skull
+	FIELD bY carrotOnAStick
+	FIELD bZ netherStar
+	FIELD ba bed
+	FIELD bb repeater
+	FIELD bc cookie
+	FIELD bd illedMap
+	FIELD be shears
+	FIELD bf melon
+	FIELD bg pumpkinSeeds
+	FIELD bh melonSeeds
+	FIELD bi beef
+	FIELD bj cookedBeef
+	FIELD bk chicken
+	FIELD bl cookedChicken
+	FIELD bm mutton
+	FIELD bn cookedMutton
+	FIELD bo rabbit
+	FIELD bp cookedRabbit
+	FIELD bq rabbitStew
+	FIELD br rabbitFoot
+	FIELD bs rabbitHide
+	FIELD bt rabbitFlesh
+	FIELD bu enderPearl
+	FIELD bv blazeRod
+	FIELD bw ghastTear
+	FIELD bx goldNugget
+	FIELD by netherWart
+	FIELD bz potion
+	FIELD c ironAxe
+	FIELD cA record11
+	FIELD cB recordWait
+	FIELD cC prismarineShard
+	FIELD cD prismarineCrystals
+	FIELD cE banner
+	FIELD ca pumpkinPie
+	FIELD cb fireworks
+	FIELD cc fireworkCharge
+	FIELD cd enchantedBook
+	FIELD ce comparator
+	FIELD cf netherbrick
+	FIELD cg quartz
+	FIELD ch tntMinecart
+	FIELD ci hopperMinecart
+	FIELD cj armorStand
+	FIELD ck ironHorseArmor
+	FIELD cl goldenHorseArmor
+	FIELD cm diamondHorseArmor
+	FIELD cn lead
+	FIELD co nameTag
+	FIELD cp commandBlockMinecart
+	FIELD cq record13
+	FIELD cr recordCat
+	FIELD cs recordBlock
+	FIELD ct recordChirp
+	FIELD cu recordFar
+	FIELD cv recordMall
+	FIELD cw recordMellohi
+	FIELD cx recordStal
+	FIELD cy recordStrad
+	FIELD cz recordWard
+	FIELD d flintAndSteel
+	FIELD e apple
+	FIELD f bow
+	FIELD g arrow
+	FIELD h coal
+	FIELD i diamond
+	FIELD j iron
+	FIELD k goldIngot
+	FIELD l ironSword
+	FIELD m woodenSword
+	FIELD n woodenShovel
+	FIELD o woodenPickaxe
+	FIELD p woodenAxe
+	FIELD q stoneSword
+	FIELD r stoneShovel
+	FIELD s stonePickaxe
+	FIELD t stoneAxe
+	FIELD u diamondSword
+	FIELD v diamondShovel
+	FIELD w diamondPickaxe
+	FIELD x diamondAxe
+	FIELD y stick
+	FIELD z bowl
+	METHOD a getItem (Ljava/lang/String;)Lnone/alq; (Ljava/lang/String;)Lnone/Item;
 CLASS none/aml none/ItemLead
 CLASS none/amm
-	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amh;)Ljava/lang/String;
+	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amj;)Ljava/lang/String;
 CLASS none/amo none/ItemMilkBucket
 CLASS none/amp none/ItemMinecart
 CLASS none/amr
-	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amh;)Ljava/lang/String;
+	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amj;)Ljava/lang/String;
 CLASS none/amt none/ItemNameTag
 CLASS none/amu none/ItemPickaxe
 CLASS none/amy none/ItemRecord
@@ -349,15 +538,15 @@ CLASS none/anb none/ItemFoodSeed
 CLASS none/anc none/ItemSeeds
 CLASS none/ane none/ItemShovel
 CLASS none/anh
-	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amh;)Ljava/lang/String;
+	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amj;)Ljava/lang/String;
 CLASS none/ani
-	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amh;)Ljava/lang/String;
+	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amj;)Ljava/lang/String;
 CLASS none/anm none/ItemWeapon
 	FIELD b itemMaterialTypes
 	METHOD <init> (Lnone/ami;)V
 		ARG 0 itemMaterialTypes
 CLASS none/ann
-	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amh;)Ljava/lang/String;
+	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amj;)Ljava/lang/String;
 CLASS none/apg none/EnchantTypes
 	FIELD a All
 	FIELD b Armor
@@ -1615,7 +1804,7 @@ CLASS none/bfv
 	FIELD b fileTarget
 CLASS none/bfx none/RegionFileWriter
 	METHOD a clearFileWriter ()V ()V
-	METHOD a writeChunkToFile (Ljava/io/File;II)Lnone/bfv; (Ljava/io/File;II)Lnone/bft;
+	METHOD a writeChunkToFile (Ljava/io/File;II)Lnone/bfv; (Ljava/io/File;II)Lnone/bfv;
 		ARG 1 chunkX
 		ARG 2 chunkZ
 	METHOD c readRegionFile (Ljava/io/File;II)Ljava/io/DataInputStream; (Ljava/io/File;II)Ljava/io/DataInputStream;
@@ -1855,14 +2044,17 @@ CLASS none/bn none/ServerCommandFill
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-CLASS none/bnv none/NoiseGenOctaves
-CLASS none/bnw none/NoiseGenPerlin
+CLASS none/bnu net/minecraft/world/generator/noisegen/Perlin3d
+CLASS none/bnv net/minecraft/world/generator/noisegen/Perlin3dOctaves
+CLASS none/bnw net/minecraft/world/generator/noisegen/Simplex2dOctaves
+CLASS none/bnz net/minecraft/world/generator/noisegen/Simplex2d
 CLASS none/bo none/ServerCommandDifficulty
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/boa net/minecraft/world/generator/noisegen/NoiseGenAbstract
 CLASS none/bof none/MaterialRegistry
 	FIELD a Air
 CLASS none/boh none/BlockMapColorRegistry
@@ -1998,57 +2190,73 @@ CLASS none/cf none/ServerCommandReplaceItem
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-CLASS none/cfg
+CLASS none/cff net/minecraft/world/entity/particle/ParticleItem
+CLASS none/cfg net/minecraft/world/entity/particle/ParticleBarrierBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cfi
+CLASS none/cfh net/minecraft/world/entity/particle/ParticleItemCrack
+CLASS none/cfi net/minecraft/world/entity/particle/ParticleItemCrackBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cfj
+CLASS none/cfj net/minecraft/world/entity/particle/ParticleSlimeBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cfk net/minecraft/world/entity/particle/ParticleSnowballBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cfm net/minecraft/world/entity/particle/ParticleWaterBubbleBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfn net/minecraft/world/entity/particle/ParticleCrit
 CLASS none/cfo net/minecraft/world/entity/particle/ParticleCritMagicBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cfp net/minecraft/world/entity/particle/ParticleCritBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfq net/minecraft/world/entity/particle/ParticleDripLiquid
 CLASS none/cfr net/minecraft/world/entity/particle/ParticleDripLavaBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cfs net/minecraft/world/entity/particle/ParticleDripWaterBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cft net/minecraft/world/entity/particle/ParticleEnchantmentTable
 CLASS none/cfu net/minecraft/world/entity/particle/ParticleEnchantmentTableBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfv net/minecraft/world/entity/particle/ParticleExplosionNormal
 CLASS none/cfw net/minecraft/world/entity/particle/ParticleExplosionNormalBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cfz net/minecraft/world/entity/particle/ParticleFireworksSpark
 CLASS none/cg none/ServerCommandSaveAll
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-CLASS none/cgb
+CLASS none/cgb net/minecraft/world/entity/particle/ParticleFireworksSparkBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cgc net/minecraft/world/entity/particle/ParticleFlame
 CLASS none/cgd net/minecraft/world/entity/particle/ParticleFlameBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cge net/minecraft/world/entity/particle/ParticleFootstep
 CLASS none/cgf net/minecraft/world/entity/particle/ParticleFootstepBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cgg net/minecraft/world/entity/particle/ParticleHeart
 CLASS none/cgh net/minecraft/world/entity/particle/ParticleVillagerAngryBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cgi
+CLASS none/cgi net/minecraft/world/entity/particle/ParticleHeartBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cgk
+CLASS none/cgj net/minecraft/world/entity/particle/ParticleExplosionLarge
+CLASS none/cgk net/minecraft/world/entity/particle/ParticleExplosionLargeBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cgm
+CLASS none/cgl net/minecraft/world/entity/particle/ParticleExplosionHuge
+CLASS none/cgm net/minecraft/world/entity/particle/ParticleExplosionHugeBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cgp net/minecraft/world/entity/particle/ParticleSmokeLargeBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cgq net/minecraft/world/entity/particle/ParticleLava
 CLASS none/cgr net/minecraft/world/entity/particle/ParticleLavaBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cgt
+CLASS none/cgs net/minecraft/world/entity/particle/ParticleMobAppearance
+CLASS none/cgt net/minecraft/world/entity/particle/ParticleMobAppearanceBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cgu net/minecraft/world/entity/particle/ParticleNote
 CLASS none/cgv net/minecraft/world/entity/particle/ParticleNoteBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cgw none/EntityParticle
+CLASS none/cgx net/minecraft/world/entity/particle/ParticleManager
 CLASS none/ch none/ServerCommandSaveOff
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -2057,10 +2265,13 @@ CLASS none/ch none/ServerCommandSaveOff
 		ARG 0 serverCommandUser
 CLASS none/chc none/IParticleBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chd net/minecraft/world/entity/particle/ParticleCloud
 CLASS none/che net/minecraft/world/entity/particle/ParticleCloudBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chf net/minecraft/world/entity/particle/ParticlePortal
 CLASS none/chg net/minecraft/world/entity/particle/ParticlePortalBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/chh net/minecraft/world/entity/particle/ParticleRedstone
 CLASS none/chi net/minecraft/world/entity/particle/ParticleRedstoneBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/chl net/minecraft/world/entity/particle/ParticleSmokeNormalBuilder
@@ -2091,9 +2302,11 @@ CLASS none/ci none/ServerCommandSaveOn
 		ARG 0 serverCommandUser
 CLASS none/cia net/minecraft/world/entity/particle/chw
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cic
+CLASS none/cib net/minecraft/world/entity/particle/ParticleBlockDust
+CLASS none/cic net/minecraft/world/entity/particle/ParticleBlockDustBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cie
+CLASS none/cid net/minecraft/world/entity/particle/ParticleBlockCrack
+CLASS none/cie net/minecraft/world/entity/particle/ParticleBlockCrackBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cih net/minecraft/world/entity/particle/ParticleWaterWakeBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
@@ -2368,7 +2581,7 @@ CLASS none/ej none/Direction
 	FIELD e West
 	FIELD f East
 	FIELD m blockCoords
-	METHOD a getCWFacing (Lnone/el;)Lnone/ej; (Lnone/en;)Lnone/Direction;
+	METHOD a getCWFacing (Lnone/el;)Lnone/ej; (Lnone/el;)Lnone/Direction;
 	METHOD e getYRotation ()Lnone/ej; ()Lnone/Direction;
 	METHOD f getCCWFacing ()Lnone/ej; ()Lnone/Direction;
 	METHOD n getXRotation ()Lnone/ej; ()Lnone/Direction;
