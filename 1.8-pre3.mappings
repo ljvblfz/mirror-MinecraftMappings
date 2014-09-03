@@ -1999,11 +1999,11 @@ CLASS none/cf none/ServerCommandReplaceItem
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-CLASS none/cfe none/cfc
+CLASS none/cfe
 	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cfg none/cfe
+CLASS none/cfg
 	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cfh none/cff
+CLASS none/cfh
 	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cfi net/minecraft/world/entity/particle/ParticleSnowballBuilder
 	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
@@ -2021,7 +2021,7 @@ CLASS none/cfs net/minecraft/world/entity/particle/ParticleEnchantmentTableBuild
 	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cfu net/minecraft/world/entity/particle/ParticleExplosionNormalBuilder
 	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cfz none/cfx
+CLASS none/cfz
 	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cg none/ServerCommandSaveAll
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
@@ -2035,17 +2035,17 @@ CLASS none/cgd net/minecraft/world/entity/particle/ParticleFootstepBuilder
 	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cgf net/minecraft/world/entity/particle/ParticleVillagerAngryBuilder
 	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cgg none/cge
+CLASS none/cgg
 	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cgi none/cgg
+CLASS none/cgi
 	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cgk none/cgi
+CLASS none/cgk
 	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cgn net/minecraft/world/entity/particle/ParticleSmokeLargeBuilder
 	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cgp net/minecraft/world/entity/particle/ParticleLavaBuilder
 	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cgr none/cgp
+CLASS none/cgr
 	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cgt net/minecraft/world/entity/particle/ParticleNoteBuilder
 	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
@@ -2092,9 +2092,9 @@ CLASS none/ci none/ServerCommandSaveOn
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-CLASS none/cia none/chy
+CLASS none/cia
 	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
-CLASS none/cic none/cia
+CLASS none/cic
 	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cif net/minecraft/world/entity/particle/ParticleWaterWakeBuilder
 	METHOD a newParticle (ILnone/aqs;DDDDDD[I)Lnone/cgu; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
@@ -2223,7 +2223,7 @@ CLASS none/cw none/ServerCommandTp
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-CLASS none/cxj none/cxg
+CLASS none/cxj
 	METHOD toString returnFullObjectName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS none/cy none/ServerCommandTestForBlock
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
@@ -2237,7 +2237,7 @@ CLASS none/cz none/ServerCommandTestFor
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-CLASS none/czj none/czg
+CLASS none/czj
 	METHOD b initializeMap ()Ljava/util/Map; ()Ljava/util/Map;
 CLASS none/da none/ServerCommandTime
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
@@ -2380,7 +2380,7 @@ CLASS none/em none/AxisDirection
 	FIELD c index
 	FIELD d name
 	METHOD a getIndex ()I ()I
-CLASS none/en none/ep
+CLASS none/en
 	FIELD a Horizontal
 	FIELD b Vertical
 	METHOD a (Ljava/util/Random;)Lnone/ej;
