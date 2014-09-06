@@ -1,4 +1,148 @@
 CLASS net/minecraft/server/MinecraftServer
+	FIELD A canSpawnAnimals
+	FIELD B canSpawnNPCs
+	FIELD C pvpEnabled
+	FIELD D allowFlight
+	FIELD E motd
+	FIELD F buildLimit
+	FIELD H serverKeyPair
+	FIELD I serverOwner
+	FIELD J folderName
+	FIELD K worldName
+	FIELD L isDemo
+	FIELD M enableBonusChest
+	FIELD N worldIsBeingDeleted
+	FIELD O texturePack
+	FIELD P resourcePack
+	FIELD Q serverIsRunning
+	FIELD R timeOfLastWarning
+	FIELD S userMessage
+	FIELD T startProfiling
+	FIELD V yggdrasilAuthenticationService
+	FIELD W minecraftSessionService
+	FIELD Y gameProfileRepository
+	FIELD a userCacheFile
+	FIELD aa thread
+	FIELD ab currentTimeMillis
+	FIELD b theProfiler
+	FIELD c worldServers
+	FIELD d serverproxy
+	FIELD e currentTask
+	FIELD f percentDone
+	FIELD g tickTimeArray
+	FIELD h timeOfLastDimensionTick
+	FIELD i queue
+	FIELD j logger
+	FIELD k mcServer
+	FIELD l anvilConverterForAnvilFile
+	FIELD m usageSnooper
+	FIELD o tickables
+	FIELD p commandManager
+	FIELD q networkThread
+	FIELD s random
+	FIELD v serverConfigManager
+	FIELD w serverRunning
+	FIELD x serverStopped
+	FIELD y tickCounter
+	FIELD z onlineMode
+	METHOD A getAllowNether ()Z ()Z
+	METHOD B startServerThread ()V ()V
+	METHOD F getMinecraftVersion ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD G getCurrentPlayerCount ()I ()I
+	METHOD H getMaxPlayers ()I ()I
+	METHOD I getAllUsernames ()[Ljava/lang/String; ()[Ljava/lang/String;
+	METHOD J getGameProfiles ()[Lcom/mojang/authlib/GameProfile; ()[Lcom/mojang/authlib/GameProfile;
+	METHOD M getServer ()Lnet/minecraft/server/MinecraftServer; ()Lnet/minecraft/server/MinecraftServer;
+	METHOD O getCommandManager ()Lnone/ad; ()Lnone/ICommandManager;
+	METHOD P getKeyPair ()Ljava/security/KeyPair; ()Ljava/security/KeyPair;
+	METHOD R getServerOwner ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD S isSinglePlayer ()Z ()Z
+	METHOD T getFolderName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD U getWorldName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD V allowSpawnMonsters ()Z ()Z
+	METHOD W isDemo ()Z ()Z
+	METHOD X getActiveAnvilConverter ()Lnone/bra; ()Lnone/ISaveFormat;
+	METHOD Z deleteWorldAndStopServer ()V ()V
+	METHOD a worldServerForDimension (I)Lnone/qt; (I)Lnone/WorldServer;
+	METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
+	METHOD a convertMapIfNeeded (Ljava/lang/String;)V (Ljava/lang/String;)V
+	METHOD a loadAllWorlds (Ljava/lang/String;Ljava/lang/String;JLnone/are;Ljava/lang/String;)V (Ljava/lang/String;Ljava/lang/String;JLnone/WorldType;Ljava/lang/String;)V
+	METHOD a setKeyPair (Ljava/security/KeyPair;)V (Ljava/security/KeyPair;)V
+		ARG 0 keyPair
+	METHOD a getServerConfigurationManager (Lnet/minecraft/server/MinecraftServer;)Lnone/sn; (Lnet/minecraft/server/MinecraftServer;)Lnet/minecraft/server/ServerConfigurationManager;
+	METHOD a getPossibleCompletions (Lnone/ae;Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;Ljava/lang/String;Lnone/ChunkCoordinates;)Ljava/util/List;
+	METHOD a isBlockProtected (Lnone/aqu;Lnone/dt;Lnone/ahd;)Z (Lnone/World;Lnone/ChunkCoordinates;Lnone/ahd;)Z
+	METHOD a setGameType (Lnone/arc;)V (Lnone/EnumGameType;)V
+	METHOD a shareToLAN (Lnone/arc;Z)Ljava/lang/String; (Lnone/EnumGameType;Z)Ljava/lang/String;
+	METHOD a finalTick (Lnone/b;)V (Lnone/CrashLogger;)V
+	METHOD a sendChatToPlayer (Lnone/ho;)V (Lnone/ChatMessageComponent;)V
+	METHOD a setConfigurationManager (Lnone/sn;)V (Lnet/minecraft/server/ServerConfigurationManager;)V
+	METHOD a setDifficultyForAllWorlds (Lnone/vt;)V (Lnone/EnumDifficulty;)V
+	METHOD a addServerStatsToSnooper (Lnone/wb;)V (Lnone/PlayerUsageSnooper;)V
+	METHOD a saveAllWorlds (Z)V (Z)V
+	METHOD aI getMaxWorldHeight ()I ()I
+	METHOD a_ outputPercentRemaining (Ljava/lang/String;I)V (Ljava/lang/String;I)V
+	METHOD a_ setTexturePack (Ljava/lang/String;Ljava/lang/String;)V (Ljava/lang/String;Ljava/lang/String;)V
+	METHOD aa getTexturePack ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD ab getResourcePack ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD ac isSnooperEnabled ()Z ()Z
+	METHOD ad isDedicatedServer ()Z ()Z
+	METHOD ae isServerInOnlineMode ()Z ()Z
+	METHOD af getCanSpawnAnimals ()Z ()Z
+	METHOD ag getCanSpawnNPCs ()Z ()Z
+	METHOD ah isPVPEnabled ()Z ()Z
+	METHOD ai isFlightAllowed ()Z ()Z
+	METHOD aj isCommandBlockEnabled ()Z ()Z
+	METHOD ak getMOTD ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD al getBuildLimit ()I ()I
+	METHOD an getConfigurationManager ()Lnone/sn; ()Lnet/minecraft/server/ServerConfigurationManager;
+	METHOD ao getNetworkThread ()Lnone/rc; ()Lnone/NetworkListenThread;
+	METHOD ap serverIsInRunLoop ()Z ()Z
+	METHOD aq getGuiEnabled ()Z ()Z
+	METHOD ar getTickCounter ()I ()I
+	METHOD as enableProfiling ()V ()V
+	METHOD at getPlayerUsageSnooper ()Lnone/wb; ()Lnone/PlayerUsageSnooper;
+	METHOD au getSpawnProtectionSize ()I ()I
+	METHOD aw getServerProxy ()Ljava/net/Proxy; ()Ljava/net/Proxy;
+	METHOD ax getSystemTimeMills ()J ()J
+	METHOD b setUserMessage (Ljava/lang/String;)V (Ljava/lang/String;)V
+	METHOD b addServerInfoToCrashReport (Lnone/b;)Lnone/b; (Lnone/CrashLogger;)Lnone/CrashLogger;
+	METHOD b addServerTypeToSnooper (Lnone/wb;)V (Lnone/PlayerUsageSnooper;)V
+	METHOD b setDemo (Z)V (Z)V
+	METHOD c setBuildLimit (I)V (I)V
+	METHOD c canCreateBonusChest (Z)V (Z)V
+	METHOD d getFile (Ljava/lang/String;)Ljava/io/File; (Ljava/lang/String;)Ljava/io/File;
+	METHOD d setOnlineMode (Z)V (Z)V
+		ARG 0 online
+	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD e getEntityWorld ()Lnone/aqu; ()Lnone/World;
+	METHOD e setCanSpawnAnimals (Z)V (Z)V
+	METHOD f logInfo (Ljava/lang/String;)V (Ljava/lang/String;)V
+	METHOD f setCanSpawnNPCs (Z)V (Z)V
+	METHOD g setAllowPvp (Z)V (Z)V
+	METHOD h getServerCommandManager ()Lnone/cl; ()Lnone/_cl_ServerCommand_something;
+	METHOD h setAllowFlight (Z)V (Z)V
+	METHOD i startServer ()Z ()Z
+	METHOD j getUserMessage ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD j setServerOwner (Ljava/lang/String;)V (Ljava/lang/String;)V
+	METHOD k initialWorldChunkLoad ()V ()V
+	METHOD k setFolderName (Ljava/lang/String;)V (Ljava/lang/String;)V
+	METHOD l canStructuresSpawn ()Z ()Z
+	METHOD l setWorldName (Ljava/lang/String;)V (Ljava/lang/String;)V
+	METHOD m getGameType ()Lnone/arc; ()Lnone/EnumGameType;
+	METHOD m setMOTD (Ljava/lang/String;)V (Ljava/lang/String;)V
+	METHOD n getDifficulty ()Lnone/vt; ()Lnone/EnumDifficulty;
+	METHOD o isHardcore ()Z ()Z
+	METHOD q clearCurrentTask ()V ()V
+	METHOD r stopServer ()V ()V
+	METHOD shareToLAN (Lnone/arc;Z)Ljava/lang/String;
+		ARG 0 gameType
+	METHOD t isServerRunning ()Z ()Z
+	METHOD u initiateShutdown ()V ()V
+	METHOD w getDataDirectory ()Ljava/io/File; ()Ljava/io/File;
+	METHOD x systemExitNow ()V ()V
+	METHOD y tick ()V ()V
+	METHOD z updateTimeLightAndEntities ()V ()V
 CLASS none/a none/TextColor
 	FIELD a BLACK
 	FIELD b DARK_BLUE
@@ -32,7 +176,7 @@ CLASS none/ab none/_ab_ServerCommand_something
 		ARG 0 serverCommandUser
 	METHOD a (Lnone/ae;Ljava/lang/String;)I
 		ARG 0 serverCommandUser
-	METHOD a (Lnone/ae;Ljava/lang/String;Lnone/dt;)Ljava/util/List;
+	METHOD a getPossibleCommands (Lnone/ae;Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;Ljava/lang/String;Lnone/ChunkCoordinates;)Ljava/util/List;
 		ARG 0 serverCommandUser
 	METHOD a (Lnone/ae;[Ljava/lang/String;Lnone/ac;Ljava/lang/String;)Z
 		ARG 0 serverCommandUser
@@ -42,8 +186,10 @@ CLASS none/abq none/EntityAnimal
 CLASS none/abr none/EntityChicken
 CLASS none/abs none/EntityCow
 CLASS none/abt none/EntityHorse
+	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS none/abx none/EntityMooshroom
 CLASS none/aby none/EntityOzelot
+	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS none/ac none/IServerCommand
 	METHOD a (Lnone/ae;)Z
 		ARG 0 serverCommandUser
@@ -61,12 +207,12 @@ CLASS none/acn none/EntitySnowMan
 CLASS none/aco none/EntitySquid
 CLASS none/acq none/EntityIronGolem
 CLASS none/acu none/EntityWolf
-CLASS none/ad none/_ad_IServerCommand_something
+CLASS none/ad none/ICommandManager
 	METHOD a (Lnone/ae;)Ljava/util/List;
 		ARG 0 serverCommandUser
 	METHOD a (Lnone/ae;Ljava/lang/String;)I
 		ARG 0 serverCommandUser
-	METHOD a (Lnone/ae;Ljava/lang/String;Lnone/dt;)Ljava/util/List;
+	METHOD a getPossibleCommands (Lnone/ae;Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;Ljava/lang/String;Lnone/ChunkCoordinates;)Ljava/util/List;
 		ARG 0 serverCommandUser
 CLASS none/ada none/EntityEnderCrystal
 CLASS none/adb none/EntityEnderdragon
@@ -78,7 +224,9 @@ CLASS none/adm none/EntityPainting
 CLASS none/adu none/EntityBoat
 CLASS none/adv none/EntityFallingBlock
 CLASS none/adw none/EntityItem
+	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS none/adx none/EntityMinecartBase
+	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS none/adz none/MinecartTypeEnum
 	FIELD a RIDEABLE
 	FIELD b CHEST
@@ -89,9 +237,16 @@ CLASS none/adz none/MinecartTypeEnum
 	FIELD g COMMAND_BLOCK
 	METHOD b getName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS none/ae none/IServerCommandUser
+	METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
+	METHOD a sendChatToPlayer (Lnone/ho;)V (Lnone/ChatMessageComponent;)V
+	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD e getEntityWorld ()Lnone/aqu; ()Lnone/World;
 CLASS none/aea none/EntityMinecartChest
 CLASS none/aeb none/EntityMinecartCommandBlock
+	CLASS aec
+		METHOD e getEntityWorld ()Lnone/aqu; ()Lnone/World;
 CLASS none/aed none/EntityMinecartStorage
+	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS none/aee none/EntityMinecartFurnace
 CLASS none/aef none/EntityMinecartHopper
 CLASS none/aeg none/EntityMinecartRideable
@@ -177,6 +332,8 @@ CLASS none/ah
 		ARG 0 serverCommandUser
 	METHOD b (Lnone/ae;Ljava/util/Map;)Z
 		ARG 0 serverCommandUser
+CLASS none/ahd
+	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS none/ahj none/EntityArrow
 CLASS none/ahk none/EntityEyeEnderSignal
 CLASS none/ahm none/EntityFireworksRicket
@@ -562,11 +719,24 @@ CLASS none/apg none/EnchantTypes
 	FIELD l EnchantTypesArray
 	METHOD a canItemBeEnchanted (Lnone/alq;)Z (Lnone/Item;)Z
 		ARG 0 item
-CLASS none/aqu none/Dimension
+CLASS none/aqf
+	METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
+	METHOD a sendChatToPlayer (Lnone/ho;)V (Lnone/ChatMessageComponent;)V
+	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS none/aqq
+	METHOD b getGameRuleBooleanValue (Ljava/lang/String;)Z (Ljava/lang/String;)Z
+CLASS none/aqu none/World
 	FIELD c cloudColor
 	FIELD n WOO_MAGIC_NUMBER
 	FIELD s rand
 	FIELD v chunkProvider
+	METHOD K getTotalWorldTime ()J ()J
+	METHOD L getWorldTime ()J ()J
+	METHOD M getSpawnPoint ()Lnone/dt; ()Lnone/ChunkCoordinates;
+	METHOD N getChunkProvider ()Lnone/bfe; ()Lnone/IChunkProvider;
+	METHOD O getSaveHandler ()Lnone/bqy; ()Lnone/ISaveHandler;
+	METHOD P getWorldInfo ()Lnone/bqo; ()Lnone/WorldInfo;
+	METHOD Q getGameRules ()Lnone/aqq; ()Lnone/aqq;
 	METHOD a getChunk (II)Lnone/bfh; (II)Lnone/Chunk;
 	METHOD a checkBlockRangeIsInWorld (IIIIIIZ)Z (IIIIIIZ)Z
 		ARG 0 minWorldX
@@ -579,31 +749,41 @@ CLASS none/aqu none/Dimension
 		ARG 0 chunkX
 		ARG 1 chunkZ
 		ARG 2 flag
+	METHOD a addWorldAccess (Lnone/ara;)V (Lnone/ara;)V
+	METHOD a addWorldInfoToCrashReport (Lnone/b;)Lnone/j; (Lnone/CrashLogger;)Lnone/CrashLogInfo;
 	METHOD a checkBlockRangeIsInWorld (Lnone/bjb;)Z (Lnone/CoordRange;)Z
-	METHOD a isBlockInWorld (Lnone/dt;)Z (Lnone/BlockCoords;)Z
-	METHOD a checkBlockRangeIsInWorld (Lnone/dt;I)Z (Lnone/BlockCoords;I)Z
+	METHOD a isBlockInWorld (Lnone/dt;)Z (Lnone/ChunkCoordinates;)Z
+	METHOD a checkBlockRangeIsInWorld (Lnone/dt;I)Z (Lnone/ChunkCoordinates;I)Z
 		ARG 1 range
-	METHOD a checkBlockRangeIsInWorld (Lnone/dt;IZ)Z (Lnone/BlockCoords;IZ)Z
+	METHOD a checkBlockRangeIsInWorld (Lnone/dt;IZ)Z (Lnone/ChunkCoordinates;IZ)Z
 		ARG 1 range
 		ARG 2 flag
-	METHOD a checkBlockRangeIsInWorld (Lnone/dt;Lnone/dt;)Z (Lnone/BlockCoords;Lnone/BlockCoords;)Z
+	METHOD a checkBlockRangeIsInWorld (Lnone/dt;Lnone/dt;)Z (Lnone/ChunkCoordinates;Lnone/ChunkCoordinates;)Z
 		ARG 0 minBlockCoords
 		ARG 1 maxBlockCoords
-	METHOD a checkBlockRangeIsInWorld (Lnone/dt;Lnone/dt;Z)Z (Lnone/BlockCoords;Lnone/BlockCoords;Z)Z
+	METHOD a checkBlockRangeIsInWorld (Lnone/dt;Lnone/dt;Z)Z (Lnone/ChunkCoordinates;Lnone/ChunkCoordinates;Z)Z
 		ARG 0 minBlockCoords
 		ARG 1 maxBlockCoords
 		ARG 2 flag
-	METHOD b getDimension ()Lnone/aqu; ()Lnone/Dimension;
+	METHOD a setAllowedSpawnTypes (ZZ)V (ZZ)V
+	METHOD aa getDifficulty ()Lnone/vt; ()Lnone/EnumDifficulty;
+	METHOD b getDimension ()Lnone/aqu; ()Lnone/World;
 	METHOD b checkBlockRangeIsInWorld (Lnone/bjb;Z)Z (Lnone/CoordRange;Z)Z
 		ARG 1 rflag
-	METHOD b getBiomeAt (Lnone/dt;)Lnone/arm; (Lnone/BlockCoords;)Lnet/minecraft/world/biome/Biome;
+	METHOD b getBiomeAt (Lnone/dt;)Lnone/arm; (Lnone/ChunkCoordinates;)Lnet/minecraft/world/biome/Biome;
 		ARG 0 blockCoords
-	METHOD e checkBlockIsInWorld (Lnone/dt;)Z (Lnone/BlockCoords;)Z
-	METHOD f getChunkFromBlockCoords (Lnone/dt;)Lnone/bfh; (Lnone/BlockCoords;)Lnone/Chunk;
+	METHOD c tick ()V ()V
+	METHOD e checkBlockIsInWorld (Lnone/dt;)Z (Lnone/ChunkCoordinates;)Z
+	METHOD f getChunkFromBlockCoords (Lnone/dt;)Lnone/bfh; (Lnone/ChunkCoordinates;)Lnone/Chunk;
+	METHOD i updateEntities ()V ()V
+CLASS none/aqz none/MinecraftException
+CLASS none/arb none/WorldSettings
+CLASS none/arc none/EnumGameType
 CLASS none/ard none/IBlockAccess
-CLASS none/arl net/minecraft/world/biome/biomes/Beach
-	METHOD <init> (I)V
-		ARG 0 biomeID
+CLASS none/are none/WorldType
+	METHOD a getWorldTypeName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD d getGeneratorVersion ()I ()I
+CLASS none/arl none/BiomeBeach
 CLASS none/arm net/minecraft/world/biome/Biome
 	FIELD A frozenRiver
 	FIELD B icePlains
@@ -637,16 +817,10 @@ CLASS none/arm net/minecraft/world/biome/Biome
 	FIELD ab mesaPlateauForest
 	FIELD ac mesaPlateau
 	FIELD ah biomeName
-	FIELD ak topBlock
-	FIELD al fillBlock
 	FIELD an height
 	FIELD ao volatility
 	FIELD ap temperature
 	FIELD aq rainfall
-	FIELD at spawnHostileMobList
-	FIELD au spawnLandMobList
-	FIELD av spawnSeaMobList
-	FIELD aw spawnSkyMobList
 	FIELD az biomeID
 	FIELD b riverTerrainData
 	FIELD c oceanTerrainData
@@ -671,97 +845,38 @@ CLASS none/arm net/minecraft/world/biome/Biome
 		ARG 0 temperature
 		ARG 1 rainfall
 	METHOD a setName (Ljava/lang/String;)Lnone/arm; (Ljava/lang/String;)Lnet/minecraft/world/biome/Biome;
-	METHOD a (Lnone/aqu;Ljava/util/Random;Lnone/bgk;IID)V
-		ARG 0 dim
-		ARG 1 rand
-	METHOD a (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
-		ARG 0 dim
-		ARG 1 rand
-	METHOD a setBiomeTerrainData (Lnone/aro;)Lnone/arm; (Lnet/minecraft/world/biome/BiomeTerrainData;)Lnet/minecraft/world/biome/Biome;
-	METHOD d createSubBiome (I)Lnone/arm; (I)Lnet/minecraft/world/biome/Biome;
+	METHOD a setBiomeTerrainData (Lnone/aro;)Lnone/arm; (Lnone/BiomeTerrainData;)Lnet/minecraft/world/biome/Biome;
 	METHOD k createMutated ()Lnone/arm; ()Lnet/minecraft/world/biome/Biome;
-CLASS none/aro net/minecraft/world/biome/BiomeTerrainData
+CLASS none/aro none/BiomeTerrainData
 	FIELD a height
 	FIELD b volatility
-	METHOD a dampenTerrain ()Lnone/aro; ()Lnet/minecraft/world/biome/BiomeTerrainData;
-CLASS none/arp net/minecraft/world/biome/BiomeTemperatureTypes
+CLASS none/arp none/BiomeTemperatureTypes
 	FIELD a ocean
 	FIELD b cold
 	FIELD c medium
-	FIELD d warm
-	FIELD e aTempTypes
-CLASS none/arq none/EntitySpawn
+	FIELD d m
 CLASS none/ary
 	FIELD a dim
 	FIELD b rand
 	FIELD c blockCoords
 CLASS none/arz none/WorldChunkManager
 	FIELD e spawnBiomes
-CLASS none/asa net/minecraft/world/biome/biomes/Desert
-	METHOD <init> (I)V
-		ARG 0 biomeID
-CLASS none/asb net/minecraft/world/biome/biomes/ExtremeHills
-	METHOD <init> (IZ)V
-		ARG 0 biomeID
-	METHOD d createSubBiome (I)Lnone/arm; (I)Lnet/minecraft/world/biome/Biome;
-CLASS none/asd net/minecraft/world/biome/biomes/Forest
-	FIELD aG forestType
-	METHOD <init> (II)V
-		ARG 0 biomeID
-		ARG 1 typeID
-	METHOD d createSubBiome (I)Lnone/arm; (I)Lnet/minecraft/world/biome/Biome;
-CLASS none/asg net/minecraft/world/biome/biomes/Hell
-	METHOD <init> (I)V
-		ARG 0 biomeID
-CLASS none/ash net/minecraft/world/biome/biomes/Icy
-	METHOD <init> (IZ)V
-		ARG 0 biomeID
-		ARG 1 hasSnow
-	METHOD d createSubBiome (I)Lnone/arm; (I)Lnet/minecraft/world/biome/Biome;
-CLASS none/asi net/minecraft/world/biome/biomes/Jungle
-	METHOD <init> (IZ)V
-		ARG 0 biomeID
-CLASS none/asj net/minecraft/world/biome/biomes/Mesa
-	FIELD aD aBlockState
-	FIELD aI isAlreadyMesa
-	FIELD aJ hasForest
-	METHOD <init> (IZZ)V
-		ARG 0 biomeID
-		ARG 1 isAlreadyMesa
-		ARG 2 hasForest
-	METHOD d createSubBiome (I)Lnone/arm; (I)Lnet/minecraft/world/biome/Biome;
-CLASS none/ask net/minecraft/world/biome/biomes/MushroomIsland
-	METHOD <init> (I)V
-		ARG 0 biomeID
-CLASS none/asm net/minecraft/world/biome/biomes/Ocean
-	METHOD <init> (I)V
-		ARG 0 biomeID
-CLASS none/asn net/minecraft/world/biome/biomes/Plains
-	METHOD <init> (I)V
-		ARG 0 biomeID
-	METHOD d createSubBiome (I)Lnone/arm; (I)Lnet/minecraft/world/biome/Biome;
-CLASS none/asp net/minecraft/world/biome/biomes/River
-	METHOD <init> (I)V
-		ARG 0 biomeID
-CLASS none/asq net/minecraft/world/biome/biomes/Savanna
-	METHOD <init> (I)V
-		ARG 0 biomeID
-	METHOD d createSubBiome (I)Lnone/arm; (I)Lnet/minecraft/world/biome/Biome;
-CLASS none/ass net/minecraft/world/biome/biomes/StoneBeach
-	METHOD <init> (I)V
-		ARG 0 biomeID
-CLASS none/ast net/minecraft/world/biome/biomes/Swampland
-	METHOD <init> (I)V
-		ARG 0 biomeID
-CLASS none/asu net/minecraft/world/biome/biomes/Taiga
-	FIELD aI type
-	METHOD <init> (II)V
-		ARG 0 biomeID
-		ARG 1 typeID
-	METHOD d createSubBiome (I)Lnone/arm; (I)Lnet/minecraft/world/biome/Biome;
-CLASS none/asv net/minecraft/world/biome/biomes/TheEnd
-	METHOD <init> (I)V
-		ARG 0 biomeID
+CLASS none/asa none/BiomeDesert
+CLASS none/asb none/BiomeExtremeHills
+CLASS none/asd none/BiomeForest
+CLASS none/asg none/BiomeHell
+CLASS none/ash none/BiomeIcy
+CLASS none/asi none/BiomeJungle
+CLASS none/asj none/BiomeMesa
+CLASS none/ask none/BiomeMushroomIsland
+CLASS none/asm none/BiomeOcean
+CLASS none/asn none/BiomePlains
+CLASS none/asp none/BiomeRiver
+CLASS none/asq none/BiomeSavanna
+CLASS none/ass none/BiomeStoneBeach
+CLASS none/ast none/BiomeSwampland
+CLASS none/asu none/BiomeTaiga
+CLASS none/asv none/BiomeTheEnd
 CLASS none/asy none/BlockAir
 	METHOD c IsOpaque ()Z ()Z
 CLASS none/asz none/BlockAnvil
@@ -1654,24 +1769,31 @@ CLASS none/bcg none/BlockCarpet
 CLASS none/bch none/BlockYellowFlower
 CLASS none/bci none/TileEntityBanner
 CLASS none/bck none/TileEntityBeacon
+	METHOD c update ()V ()V
 CLASS none/bcm none/TileEntity
 	FIELD a logger
 	FIELD b dim
 	FIELD c blockCoords
 	FIELD e block
-	METHOD a setDimension (Lnone/aqu;)V (Lnone/Dimension;)V
+	METHOD a setDimension (Lnone/aqu;)V (Lnone/World;)V
 	METHOD t checkHasDimension ()Z ()Z
-	METHOD v getBlockCoords ()Lnone/dt; ()Lnone/BlockCoords;
+	METHOD v getBlockCoords ()Lnone/dt; ()Lnone/ChunkCoordinates;
 	METHOD w getBlock ()Lnone/atr; ()Lnone/BlockType;
-	METHOD z getDimension ()Lnone/aqu; ()Lnone/Dimension;
+	METHOD z getDimension ()Lnone/aqu; ()Lnone/World;
 CLASS none/bcq none/TileEntityCauldron
+	METHOD c update ()V ()V
 CLASS none/bcr none/TileEntityChest
+	METHOD c update ()V ()V
 CLASS none/bct none/TileEntityControl
+	CLASS bcu
+		METHOD e getEntityWorld ()Lnone/aqu; ()Lnone/World;
 CLASS none/bcv none/TileEntityComparator
 CLASS none/bcw none/TileEntityDLDetector
+	METHOD c update ()V ()V
 CLASS none/bcx none/TileEntityTrap
 CLASS none/bcy none/TileEntityDropper
 CLASS none/bcz none/TileEntityEnchantTable
+	METHOD c update ()V ()V
 CLASS none/bd none/ServerCommandDeOp
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -1679,12 +1801,26 @@ CLASS none/bd none/ServerCommandDeOp
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bda none/TileEntityEnderChest
+	METHOD c update ()V ()V
 CLASS none/bdb none/TileEntityFlowerPot
 CLASS none/bdc none/TileEntityFurnace
+	METHOD c update ()V ()V
 CLASS none/bde none/TileEntityHopper
+	METHOD c update ()V ()V
 CLASS none/bdg none/TileEntityMobSpawner
+	METHOD c update ()V ()V
 CLASS none/bdi none/TileEntityMusic
 CLASS none/bdj none/TileEntitySign
+	CLASS bdk
+		METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
+		METHOD a sendChatToPlayer (Lnone/ho;)V (Lnone/ho;)V
+		METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
+		METHOD e getEntityWorld ()Lnone/aqu; ()Lnone/World;
+	CLASS bdl
+		METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
+		METHOD a sendChatToPlayer (Lnone/ho;)V (Lnone/ho;)V
+		METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
+		METHOD e getEntityWorld ()Lnone/aqu; ()Lnone/World;
 CLASS none/bdm none/TileEntitySkull
 CLASS none/bdn none/TileEntityAirportal
 CLASS none/bdq none/BlockPistonBase
@@ -1696,6 +1832,7 @@ CLASS none/bds none/BlockPistonHead
 	METHOD c IsOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnone/BlockState;)I
 CLASS none/bdv none/TileEntityPiston
+	METHOD c update ()V ()V
 CLASS none/bdx none/BlockPistonExtension
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnone/BlockState;
 	METHOD c IsOpaque ()Z ()Z
@@ -1736,21 +1873,22 @@ CLASS none/bfe none/IChunkProvider
 		ARG 1 chunk
 		ARG 2 chunkX
 		ARG 3 chunkZ
-	METHOD a getChunkFromBlockCoords (Lnone/dt;)Lnone/bfh; (Lnone/BlockCoords;)Lnone/Chunk;
+	METHOD a getChunkFromBlockCoords (Lnone/dt;)Lnone/bfh; (Lnone/ChunkCoordinates;)Lnone/Chunk;
 		ARG 0 blockCoords
 	METHOD d getChunk (II)Lnone/bfh; (II)Lnone/Chunk;
 		ARG 0 chunkX
 		ARG 1 chunkZ
+	METHOD g getLoadedChunkCount ()I ()I
 CLASS none/bff none/NibbleArray
 	FIELD a array
 CLASS none/bfg none/EmptyChunk
 	METHOD a isChunk (II)Z (II)Z
-	METHOD a getBlockAt (Lnone/dt;)Lnone/atr; (Lnone/BlockCoords;)Lnone/BlockType;
+	METHOD a getBlockAt (Lnone/dt;)Lnone/atr; (Lnone/ChunkCoordinates;)Lnone/BlockType;
 	METHOD a addEntity (Lnone/wv;)V (Lnone/Entity;)V
 	METHOD a removeEntity (Lnone/wv;I)V (Lnone/Entity;I)V
 	METHOD b getHeightAtCoords (II)I (II)I
 	METHOD b removeEntity (Lnone/wv;)V (Lnone/Entity;)V
-	METHOD c getBlockMetadataAt (Lnone/dt;)I (Lnone/BlockCoords;)I
+	METHOD c getBlockMetadataAt (Lnone/dt;)I (Lnone/ChunkCoordinates;)I
 CLASS none/bfh none/Chunk
 	FIELD a chunkX
 	FIELD b chunkZ
@@ -1788,9 +1926,9 @@ CLASS none/bfh none/Chunk
 		ARG 2 minWorldY
 		ARG 3 maxWorldY
 	METHOD a populateChunk (Lnone/bfe;Lnone/bfe;II)V (Lnone/IChunkProvider;Lnone/IChunkProvider;II)V
-	METHOD a getBlockAt (Lnone/dt;)Lnone/atr; (Lnone/BlockCoords;)Lnone/BlockType;
+	METHOD a getBlockAt (Lnone/dt;)Lnone/atr; (Lnone/ChunkCoordinates;)Lnone/BlockType;
 		ARG 0 location
-	METHOD a getBiome (Lnone/dt;Lnone/arz;)Lnone/arm; (Lnone/BlockCoords;Lnone/WorldChunkManager;)Lnet/minecraft/world/biome/Biome;
+	METHOD a getBiome (Lnone/dt;Lnone/arz;)Lnone/arm; (Lnone/ChunkCoordinates;Lnone/WorldChunkManager;)Lnet/minecraft/world/biome/Biome;
 	METHOD a addEntity (Lnone/wv;)V (Lnone/Entity;)V
 	METHOD a removeEntity (Lnone/wv;I)V (Lnone/Entity;I)V
 		ARG 1 cubeY
@@ -1809,7 +1947,7 @@ CLASS none/bfh none/Chunk
 		ARG 0 localX
 		ARG 1 localY
 		ARG 2 localZ
-	METHOD f getHeightAtCoords (Lnone/dt;)I (Lnone/BlockCoords;)I
+	METHOD f getHeightAtCoords (Lnone/dt;)I (Lnone/ChunkCoordinates;)I
 	METHOD g getBlockStoreY ()I ()I
 	METHOD g (III)I
 		ARG 0 localX
@@ -1818,7 +1956,7 @@ CLASS none/bfh none/Chunk
 	METHOD g compareHasEntities (Z)V (Z)V
 	METHOD h getCubeArray ()[Lnone/bfm; ()[Lnone/ChunkCube;
 	METHOD k getBiomeMap ()[B ()[B
-	METHOD p getDimension ()Lnone/aqu; ()Lnone/Dimension;
+	METHOD p getDimension ()Lnone/aqu; ()Lnone/World;
 	METHOD q getHeightMap ()[I ()[I
 	METHOD s getEntityStore ()[Lnone/uc; ()[Lnone/EntitySet;
 CLASS none/bfm none/ChunkCube
@@ -1882,6 +2020,15 @@ CLASS none/bg none/ServerCommandEffect
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/bgd
+	METHOD k getDimensionName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD q dimensionId ()I ()I
+CLASS none/bge
+	METHOD k getDimensionName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS none/bgg
+	METHOD k getDimensionName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS none/bgh
+	METHOD k getDimensionName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS none/bgj none/MapGenRavines
 	FIELD d widthArray
 CLASS none/bgk none/BlockArray
@@ -1894,7 +2041,7 @@ CLASS none/bgk none/BlockArray
 		ARG 1 localY
 		ARG 2 localZ
 	METHOD a setBlockState (ILnone/bec;)V (ILnone/BlockState;)V
-CLASS none/bgl net/minecraft/world/biome/BiomeConfigSettingsList
+CLASS none/bgl none/BiomeConfigSettingsList
 CLASS none/bgn none/BiomeConfig
 	FIELD A useRavines
 	FIELD B useWaterLakes
@@ -1974,9 +2121,10 @@ CLASS none/bgn none/BiomeConfig
 	FIELD x useMineshafts
 	FIELD y useTemples
 	FIELD z useMonuments
-CLASS none/bgo net/minecraft/world/biome/BiomeConfigSerialHandler
+CLASS none/bgo none/BiomeConfigSerialHandler
 CLASS none/bgp none/ChunkGeneratorDebug
 	FIELD c dim
+	METHOD g getLoadedChunkCount ()I ()I
 CLASS none/bgq none/ChunkGeneratorFlat
 	FIELD a dim
 	FIELD b and
@@ -1984,6 +2132,7 @@ CLASS none/bgq none/ChunkGeneratorFlat
 	METHOD a (Lnone/bfe;II)V
 		ARG 1 chunkX
 		ARG 2 chunkZ
+	METHOD g getLoadedChunkCount ()I ()I
 CLASS none/bgr none/ChunkGeneratorHell
 	FIELD h dim
 	FIELD j rand
@@ -1992,6 +2141,7 @@ CLASS none/bgr none/ChunkGeneratorHell
 	METHOD a generateTerrain (IILnone/bgk;)V (IILnone/BlockArray;)V
 	METHOD a generateNoiseField ([DIIIIII)[D ([DIIIIII)[D
 	METHOD b replaceBlocks (IILnone/bgk;)V (IILnone/BlockArray;)V
+	METHOD g getLoadedChunkCount ()I ()I
 CLASS none/bgs none/MapGenCaves
 CLASS none/bgt none/MapGenBase
 CLASS none/bgu none/MapGenCaves2
@@ -2021,10 +2171,12 @@ CLASS none/bgv none/ChunkGeneratorDefault
 	METHOD a (Lnone/bfe;Lnone/bfh;II)Z
 		ARG 2 chunkX
 		ARG 3 chunkZ
+	METHOD g getLoadedChunkCount ()I ()I
 CLASS none/bgw none/ChunkGeneratorEnd
 	FIELD h rand
 	FIELD l dim
 	FIELD n biomeArray
+	METHOD g getLoadedChunkCount ()I ()I
 CLASS none/bh none/ServerCommandMe
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -2089,6 +2241,11 @@ CLASS none/bjb none/CoordRange
 	METHOD g writeRangeToNBT ()Lnone/ft; ()Lnone/NbtIntArray;
 CLASS none/bjd none/GenStructureMineshaft
 CLASS none/bk none/ServerCommandExecute
+	CLASS bl
+		METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
+		METHOD a sendChatToPlayer (Lnone/ho;)V (Lnone/ho;)V
+		METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
+		METHOD e getEntityWorld ()Lnone/aqu; ()Lnone/World;
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
@@ -2147,12 +2304,48 @@ CLASS none/bq none/ServerCommandGameRule
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/bqj none/AnvilSaveConverter
+	METHOD a convertMapFormat (Ljava/lang/String;Lnone/uy;)Z (Ljava/lang/String;Lnone/uy;)Z
+	METHOD a getSaveLoader (Ljava/lang/String;Z)Lnone/bqy; (Ljava/lang/String;Z)Lnone/ISaveHandler;
+	METHOD d flushCache ()V ()V
+CLASS none/bql
+	METHOD a setDifficulty (Lnone/vt;)V (Lnone/EnumDifficulty;)V
+	METHOD k getWorldName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD r getGameType ()Lnone/arc; ()Lnone/EnumGameType;
+	METHOD t isHardcoreModeEnabled ()Z ()Z
+	METHOD u getTerrainType ()Lnone/are; ()Lnone/WorldType;
+CLASS none/bqm
+	METHOD d loadWorldInfo ()Lnone/bqo; ()Lnone/WorldInfo;
+	METHOD g getWorldDirectoryName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS none/bqn
+	METHOD a convertMapFormat (Ljava/lang/String;Lnone/uy;)Z (Ljava/lang/String;Lnone/uy;)Z
+	METHOD a getSaveLoader (Ljava/lang/String;Z)Lnone/bqy; (Ljava/lang/String;Z)Lnone/ISaveHandler;
+	METHOD d flushCache ()V ()V
+	METHOD e deleteWorldDirectory (Ljava/lang/String;)Z (Ljava/lang/String;)Z
+CLASS none/bqo none/WorldInfo
+	METHOD a setGameType (Lnone/arc;)V (Lnone/EnumGameType;)V
+	METHOD a setDifficulty (Lnone/vt;)V (Lnone/EnumDifficulty;)V
+	METHOD k getWorldName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD r getGameType ()Lnone/arc; ()Lnone/EnumGameType;
+	METHOD t isHardcoreModeEnabled ()Z ()Z
+	METHOD u getTerrainType ()Lnone/are; ()Lnone/WorldType;
+CLASS none/bqy none/ISaveHandler
+	METHOD d loadWorldInfo ()Lnone/bqo; ()Lnone/WorldInfo;
+	METHOD g getWorldDirectoryName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS none/br none/ServerCommandGive
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/bra none/ISaveFormat
+	METHOD a convertMapFormat (Ljava/lang/String;Lnone/uy;)Z (Ljava/lang/String;Lnone/uy;)Z
+	METHOD a getSaveLoader (Ljava/lang/String;Z)Lnone/bqy; (Ljava/lang/String;Z)Lnone/ISaveHandler;
+	METHOD d flushCache ()V ()V
+	METHOD e deleteWorldDirectory (Ljava/lang/String;)Z (Ljava/lang/String;)Z
+CLASS none/brk
+	METHOD d loadWorldInfo ()Lnone/bqo; ()Lnone/WorldInfo;
+	METHOD g getWorldDirectoryName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS none/brw none/Vec3
 	FIELD a x
 	FIELD b y
@@ -2178,6 +2371,10 @@ CLASS none/bs none/ServerCommandHelp
 		ARG 0 serverCommandUser
 	METHOD d (Lnone/ae;)Ljava/util/List;
 		ARG 0 serverCommandUser
+CLASS none/bsu
+	METHOD a addServerStatsToSnooper (Lnone/wb;)V (Lnone/PlayerUsageSnooper;)V
+	METHOD ac isSnooperEnabled ()Z ()Z
+	METHOD b addServerTypeToSnooper (Lnone/wb;)V (Lnone/PlayerUsageSnooper;)V
 CLASS none/bt none/ServerCommandKick
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -2250,7 +2447,11 @@ CLASS none/ce none/ServerCommandPublish
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/cel
+	METHOD g getLoadedChunkCount ()I ()I
 CLASS none/cen none/DimensionClient
+	METHOD a addWorldInfoToCrashReport (Lnone/b;)Lnone/j; (Lnone/CrashLogger;)Lnone/CrashLogInfo;
+	METHOD c tick ()V ()V
 CLASS none/cf none/ServerCommandReplaceItem
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -2259,32 +2460,32 @@ CLASS none/cf none/ServerCommandReplaceItem
 		ARG 0 serverCommandUser
 CLASS none/cff net/minecraft/world/entity/particle/ParticleItem
 CLASS none/cfg net/minecraft/world/entity/particle/ParticleBarrierBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cfh net/minecraft/world/entity/particle/ParticleItemCrack
 CLASS none/cfi net/minecraft/world/entity/particle/ParticleItemCrackBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cfj net/minecraft/world/entity/particle/ParticleSlimeBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cfk net/minecraft/world/entity/particle/ParticleSnowballBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cfm net/minecraft/world/entity/particle/ParticleWaterBubbleBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cfn net/minecraft/world/entity/particle/ParticleCrit
 CLASS none/cfo net/minecraft/world/entity/particle/ParticleCritMagicBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cfp net/minecraft/world/entity/particle/ParticleCritBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cfq net/minecraft/world/entity/particle/ParticleDripLiquid
 CLASS none/cfr net/minecraft/world/entity/particle/ParticleDripLavaBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cfs net/minecraft/world/entity/particle/ParticleDripWaterBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cft net/minecraft/world/entity/particle/ParticleEnchantmentTable
 CLASS none/cfu net/minecraft/world/entity/particle/ParticleEnchantmentTableBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cfv net/minecraft/world/entity/particle/ParticleExplosionNormal
 CLASS none/cfw net/minecraft/world/entity/particle/ParticleExplosionNormalBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cfz net/minecraft/world/entity/particle/ParticleFireworksSpark
 CLASS none/cg none/ServerCommandSaveAll
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
@@ -2293,35 +2494,35 @@ CLASS none/cg none/ServerCommandSaveAll
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cgb net/minecraft/world/entity/particle/ParticleFireworksSparkBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cgc net/minecraft/world/entity/particle/ParticleFlame
 CLASS none/cgd net/minecraft/world/entity/particle/ParticleFlameBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cge net/minecraft/world/entity/particle/ParticleFootstep
 CLASS none/cgf net/minecraft/world/entity/particle/ParticleFootstepBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cgg net/minecraft/world/entity/particle/ParticleHeart
 CLASS none/cgh net/minecraft/world/entity/particle/ParticleVillagerAngryBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cgi net/minecraft/world/entity/particle/ParticleHeartBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cgj net/minecraft/world/entity/particle/ParticleExplosionLarge
 CLASS none/cgk net/minecraft/world/entity/particle/ParticleExplosionLargeBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cgl net/minecraft/world/entity/particle/ParticleExplosionHuge
 CLASS none/cgm net/minecraft/world/entity/particle/ParticleExplosionHugeBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cgp net/minecraft/world/entity/particle/ParticleSmokeLargeBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cgq net/minecraft/world/entity/particle/ParticleLava
 CLASS none/cgr net/minecraft/world/entity/particle/ParticleLavaBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cgs net/minecraft/world/entity/particle/ParticleMobAppearance
 CLASS none/cgt net/minecraft/world/entity/particle/ParticleMobAppearanceBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cgu net/minecraft/world/entity/particle/ParticleNote
 CLASS none/cgv net/minecraft/world/entity/particle/ParticleNoteBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cgw none/EntityParticle
 CLASS none/cgx net/minecraft/world/entity/particle/ParticleManager
 CLASS none/ch none/ServerCommandSaveOff
@@ -2331,36 +2532,36 @@ CLASS none/ch none/ServerCommandSaveOff
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/chc none/IParticleBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/chd net/minecraft/world/entity/particle/ParticleCloud
 CLASS none/che net/minecraft/world/entity/particle/ParticleCloudBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/chf net/minecraft/world/entity/particle/ParticlePortal
 CLASS none/chg net/minecraft/world/entity/particle/ParticlePortalBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/chh net/minecraft/world/entity/particle/ParticleRedstone
 CLASS none/chi net/minecraft/world/entity/particle/ParticleRedstoneBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/chl net/minecraft/world/entity/particle/ParticleSmokeNormalBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/chn net/minecraft/world/entity/particle/ParticleSnowShovelBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/chp net/minecraft/world/entity/particle/ParticleSpellMobAmbientBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/chq net/minecraft/world/entity/particle/ParticleSpellInstaltBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/chr net/minecraft/world/entity/particle/ParticleSpellMobBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/chs net/minecraft/world/entity/particle/ParticleSpellBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cht net/minecraft/world/entity/particle/ParticleSpellWitchBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/chv net/minecraft/world/entity/particle/ParticleWaterSplashBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/chx net/minecraft/world/entity/particle/ParticleSuspendedBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/chz net/minecraft/world/entity/particle/ParticleVillagerHappyBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/ci none/ServerCommandSaveOn
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -2368,17 +2569,23 @@ CLASS none/ci none/ServerCommandSaveOn
 	METHOD c (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cia net/minecraft/world/entity/particle/chw
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cib net/minecraft/world/entity/particle/ParticleBlockDust
 CLASS none/cic net/minecraft/world/entity/particle/ParticleBlockDustBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cid net/minecraft/world/entity/particle/ParticleBlockCrack
 CLASS none/cie net/minecraft/world/entity/particle/ParticleBlockCrackBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cih net/minecraft/world/entity/particle/ParticleWaterWakeBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cij net/minecraft/world/entity/particle/ParticleWaterDropBuilder
-	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/Dimension;DDDDDD[I)Lnone/EntityParticle;
+	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
+CLASS none/cio
+	METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
+	METHOD a sendChatToPlayer (Lnone/ho;)V (Lnone/ChatMessageComponent;)V
+CLASS none/cip
+	METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
+	METHOD a sendChatToPlayer (Lnone/ho;)V (Lnone/ChatMessageComponent;)V
 CLASS none/cj none/ServerCommandSay
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -2510,12 +2717,37 @@ CLASS none/cy none/ServerCommandTestForBlock
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/cyk
+	METHOD a loadAllWorlds (Ljava/lang/String;Ljava/lang/String;JLnone/are;Ljava/lang/String;)V (Ljava/lang/String;Ljava/lang/String;JLnone/WorldType;Ljava/lang/String;)V
+	METHOD a setGameType (Lnone/arc;)V (Lnone/EnumGameType;)V
+	METHOD a shareToLAN (Lnone/arc;Z)Ljava/lang/String; (Lnone/EnumGameType;Z)Ljava/lang/String;
+	METHOD a finalTick (Lnone/b;)V (Lnone/CrashLogger;)V
+	METHOD a setDifficultyForAllWorlds (Lnone/vt;)V (Lnone/EnumDifficulty;)V
+	METHOD a addServerStatsToSnooper (Lnone/wb;)V (Lnone/PlayerUsageSnooper;)V
+	METHOD ac isSnooperEnabled ()Z ()Z
+	METHOD ad isDedicatedServer ()Z ()Z
+	METHOD aj isCommandBlockEnabled ()Z ()Z
+	METHOD b addServerInfoToCrashReport (Lnone/b;)Lnone/b; (Lnone/CrashLogger;)Lnone/CrashLogger;
+	METHOD h getServerCommandManager ()Lnone/cl; ()Lnone/_cl_ServerCommand_something;
+	METHOD i startServer ()Z ()Z
+	METHOD l canStructuresSpawn ()Z ()Z
+	METHOD m getGameType ()Lnone/arc; ()Lnone/EnumGameType;
+	METHOD n getDifficulty ()Lnone/vt; ()Lnone/EnumDifficulty;
+	METHOD o isHardcore ()Z ()Z
+	METHOD r stopServer ()V ()V
+	METHOD u initiateShutdown ()V ()V
+	METHOD w getDataDirectory ()Ljava/io/File; ()Ljava/io/File;
+	METHOD y tick ()V ()V
+CLASS none/cyx
+	METHOD c update ()V ()V
 CLASS none/cz none/ServerCommandTestFor
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/czh
+	METHOD c update ()V ()V
 CLASS none/czl
 	METHOD b initializeMap ()Ljava/util/Map; ()Ljava/util/Map;
 CLASS none/da none/ServerCommandTime
@@ -2572,7 +2804,7 @@ CLASS none/dk none/ServerCommandInvalidNumberException
 CLASS none/dl none/ServerCommandSyntaxException
 CLASS none/dm none/ServerCommandPlayerNotFoundException
 CLASS none/dn none/ServerCommandNotFoundException
-CLASS none/dt none/BlockCoords
+CLASS none/dt none/ChunkCoordinates
 	FIELD a zeroed
 	FIELD b BITS_X
 	FIELD c BITS_Z
@@ -2590,36 +2822,36 @@ CLASS none/dt none/BlockCoords
 		ARG 0 location
 	METHOD <init> (Lnone/wv;)V
 		ARG 0 entity
-	METHOD a above ()Lnone/dt; ()Lnone/BlockCoords;
-	METHOD a add (DDD)Lnone/dt; (DDD)Lnone/BlockCoords;
+	METHOD a above ()Lnone/dt; ()Lnone/ChunkCoordinates;
+	METHOD a add (DDD)Lnone/dt; (DDD)Lnone/ChunkCoordinates;
 		ARG 0 x
 		ARG 1 y
 		ARG 2 z
-	METHOD a scale (I)Lnone/dt; (I)Lnone/BlockCoords;
+	METHOD a scale (I)Lnone/dt; (I)Lnone/ChunkCoordinates;
 		ARG 0 factor
-	METHOD a add (III)Lnone/dt; (III)Lnone/BlockCoords;
+	METHOD a add (III)Lnone/dt; (III)Lnone/ChunkCoordinates;
 		ARG 0 x
 		ARG 1 y
 		ARG 2 z
-	METHOD a fromLong (J)Lnone/dt; (J)Lnone/BlockCoords;
+	METHOD a fromLong (J)Lnone/dt; (J)Lnone/ChunkCoordinates;
 		ARG 0 l
-	METHOD a addDirection (Lnone/ej;)Lnone/dt; (Lnone/Direction;)Lnone/BlockCoords;
-	METHOD a addDirection (Lnone/ej;I)Lnone/dt; (Lnone/Direction;I)Lnone/BlockCoords;
-	METHOD a add (Lnone/fd;)Lnone/dt; (Lnone/Vec3Int;)Lnone/BlockCoords;
+	METHOD a addDirection (Lnone/ej;)Lnone/dt; (Lnone/Direction;)Lnone/ChunkCoordinates;
+	METHOD a addDirection (Lnone/ej;I)Lnone/dt; (Lnone/Direction;I)Lnone/ChunkCoordinates;
+	METHOD a add (Lnone/fd;)Lnone/dt; (Lnone/Vec3Int;)Lnone/ChunkCoordinates;
 		ARG 0 location
-	METHOD b below ()Lnone/dt; ()Lnone/BlockCoords;
-	METHOD b above (I)Lnone/dt; (I)Lnone/BlockCoords;
-	METHOD b substract (Lnone/fd;)Lnone/dt; (Lnone/Vec3Int;)Lnone/BlockCoords;
-	METHOD c north ()Lnone/dt; ()Lnone/BlockCoords;
-	METHOD c below (I)Lnone/dt; (I)Lnone/BlockCoords;
-	METHOD d south ()Lnone/dt; ()Lnone/BlockCoords;
-	METHOD d north (I)Lnone/dt; (I)Lnone/BlockCoords;
-	METHOD e west ()Lnone/dt; ()Lnone/BlockCoords;
-	METHOD e south (I)Lnone/dt; (I)Lnone/BlockCoords;
-	METHOD f east ()Lnone/dt; ()Lnone/BlockCoords;
-	METHOD f west (I)Lnone/dt; (I)Lnone/BlockCoords;
+	METHOD b below ()Lnone/dt; ()Lnone/ChunkCoordinates;
+	METHOD b above (I)Lnone/dt; (I)Lnone/ChunkCoordinates;
+	METHOD b substract (Lnone/fd;)Lnone/dt; (Lnone/Vec3Int;)Lnone/ChunkCoordinates;
+	METHOD c north ()Lnone/dt; ()Lnone/ChunkCoordinates;
+	METHOD c below (I)Lnone/dt; (I)Lnone/ChunkCoordinates;
+	METHOD d south ()Lnone/dt; ()Lnone/ChunkCoordinates;
+	METHOD d north (I)Lnone/dt; (I)Lnone/ChunkCoordinates;
+	METHOD e west ()Lnone/dt; ()Lnone/ChunkCoordinates;
+	METHOD e south (I)Lnone/dt; (I)Lnone/ChunkCoordinates;
+	METHOD f east ()Lnone/dt; ()Lnone/ChunkCoordinates;
+	METHOD f west (I)Lnone/dt; (I)Lnone/ChunkCoordinates;
 	METHOD g asLong ()J ()J
-	METHOD g east (I)Lnone/dt; (I)Lnone/BlockCoords;
+	METHOD g east (I)Lnone/dt; (I)Lnone/ChunkCoordinates;
 CLASS none/dy
 	METHOD n getX ()I ()I
 	METHOD o getY ()I ()I
@@ -3225,6 +3457,7 @@ CLASS none/hj
 	FIELD a list
 	METHOD a (Ljava/lang/String;)Lnone/ho;
 		ARG 0 text
+	METHOD c chatMessageComponentToString ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS none/hm none/ClickEvent
 CLASS none/hn none/ClickActionTypes
 	FIELD a OpenUrl
@@ -3244,6 +3477,8 @@ CLASS none/hn none/ClickActionTypes
 	METHOD a getByName (Ljava/lang/String;)Lnone/hn; (Ljava/lang/String;)Lnone/ClickActionTypes;
 		ARG 0 name
 	METHOD b getName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS none/ho none/ChatMessageComponent
+	METHOD c chatMessageComponentToString ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS none/hq
 	METHOD a (Lnone/ae;Lnone/ho;Lnone/wv;)Lnone/ho;
 		ARG 0 serverCommandUser
@@ -3451,6 +3686,7 @@ CLASS none/kz
 CLASS none/lg
 	FIELD a Change
 	FIELD b Remove
+CLASS none/li none/Packet4UpdateTime
 CLASS none/lk
 	FIELD a Title
 	FIELD b Subtitle
@@ -3574,6 +3810,10 @@ CLASS none/pc
 	FIELD a logger
 	METHOD <init> (Ljava/lang/String;Ljava/io/OutputStream;)V
 		ARG 1 outputStream
+CLASS none/pd none/ConvertingProcessUpdate
+CLASS none/pm none/IUpdatePlayerListBox
+	METHOD c update ()V ()V
+CLASS none/qj none/DemoWorldServer
 CLASS none/qk
 	METHOD <init> (Lnone/aqu;)V
 		ARG 0 dimension
@@ -3581,16 +3821,17 @@ CLASS none/qk
 		ARG 1 dimension
 	METHOD a (Lnone/ahd;Lnone/aqu;Lnone/amj;Lnone/dt;Lnone/ej;FFF)Z
 		ARG 1 dimension
-CLASS none/ql
+CLASS none/ql none/WorldServerMulti
 	FIELD a dimensionServer
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnone/bqy;ILnone/qt;Lnone/uw;)V
 		ARG 3 dimensionServer
-	METHOD b getDimension ()Lnone/aqu; ()Lnone/Dimension;
+	METHOD b getDimension ()Lnone/aqu; ()Lnone/World;
 CLASS none/qn
 	FIELD a logger
 	FIELD b dimensionServer
 	METHOD <init> (Lnone/qt;)V
 		ARG 0 dimensionServer
+	METHOD a updateTrackedEntities ()V ()V
 	METHOD a (Lnone/wv;)V
 		ARG 0 entity
 	METHOD a (Lnone/wv;II)V
@@ -3603,7 +3844,7 @@ CLASS none/qn
 		ARG 0 entity
 	METHOD b (Lnone/wv;Lnone/id;)V
 		ARG 0 entity
-CLASS none/qp
+CLASS none/qp none/WorldManager
 	FIELD a minecraftServer
 	FIELD b dimensionServer
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnone/qt;)V
@@ -3625,8 +3866,18 @@ CLASS none/qs
 		ARG 0 dimensionServer
 	METHOD a (Lnone/aqu;Ljava/lang/String;Lnone/dt;)Lnone/dt;
 		ARG 0 dimension
-CLASS none/qt none/DimensionServer
-	METHOD b getDimension ()Lnone/aqu; ()Lnone/Dimension;
+	METHOD c loadChunk (II)Lnone/bfh; (II)Lnone/Chunk;
+	METHOD g getLoadedChunkCount ()I ()I
+CLASS none/qt none/WorldServer
+	FIELD b theChunkProviderServer
+	FIELD t provider
+	METHOD a saveAllChunks (ZLnone/uy;)V (ZLnone/uy;)V
+	METHOD b getDimension ()Lnone/aqu; ()Lnone/World;
+	METHOD c tick ()V ()V
+	METHOD f areAllPlayersAsleep ()Z ()Z
+	METHOD i updateEntities ()V ()V
+	METHOD o flush ()V ()V
+	METHOD s getEntityTracker ()Lnone/qn; ()Lnone/qn;
 CLASS none/qw
 	FIELD b minecraftServer
 	FIELD bF logger
@@ -3637,8 +3888,10 @@ CLASS none/qw
 		ARG 2 gameProfile
 	METHOD a (DZLnone/atr;Lnone/dt;)V
 		ARG 2 block
+	METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
 	METHOD a (Lnone/fn;)V
 		ARG 0 nbtMap
+	METHOD a sendChatToPlayer (Lnone/ho;)V (Lnone/ChatMessageComponent;)V
 	METHOD a (Lnone/wv;)V
 		ARG 0 entity
 	METHOD a (Lnone/wv;I)V
@@ -3685,16 +3938,32 @@ CLASS none/rb
 	FIELD a minecraftServer
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnone/gr;)V
 		ARG 0 minecraftServer
-CLASS none/rc
+CLASS none/rc none/NetworkListenThread
 	FIELD d logger
 	FIELD e minecraftServer
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;)V
 		ARG 0 minecraftServer
+	METHOD b stopListening ()V ()V
+	METHOD c networkTick ()V ()V
 CLASS none/rj
 	FIELD c logger
 	FIELD d minecraftServer
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnone/gr;Lnone/qw;)V
 		ARG 0 minecraftServer
+	METHOD c update ()V ()V
+CLASS none/rq
+	METHOD c update ()V ()V
+CLASS none/sn net/minecraft/server/ServerConfigurationManager
+	METHOD a setPacketToAllPlayersInDimension (Lnone/id;I)V (Lnone/id;I)V
+	METHOD a setPlayerManager ([Lnone/qt;)V ([Lnone/WorldServer;)V
+	METHOD e sendPlayerInfoToAllPlayers ()V ()V
+	METHOD g getAllUsernames ()[Ljava/lang/String; ()[Ljava/lang/String;
+	METHOD h getGameProfiles ()[Lcom/mojang/authlib/GameProfile; ()[Lcom/mojang/authlib/GameProfile;
+	METHOD k saveAllPlayerData ()V ()V
+	METHOD p getCurrentPlayerCount ()I ()I
+	METHOD q getMaxPlayers ()I ()I
+	METHOD r getAvailablePlayerDat ()[Ljava/lang/String; ()[Ljava/lang/String;
+	METHOD v removeAllPlayers ()V ()V
 CLASS none/u none/CrashLoggerException
 	FIELD a crashLogger
 	METHOD <init> (Lnone/b;)V
@@ -3791,8 +4060,30 @@ CLASS none/uv none/MathUtil
 		ARG 0 value
 	METHOD g convertFloatToPositive180ToNegative180 (F)F (F)F
 		ARG 0 value
+CLASS none/uw none/Profiler
+	FIELD a profilingEnabled
+	METHOD a clearProfiling ()V ()V
+	METHOD a addSection (Ljava/lang/String;)V (Ljava/lang/String;)V
+	METHOD b endSection ()V ()V
+	METHOD c startSection (Ljava/lang/String;)V (Ljava/lang/String;)V
+CLASS none/vt none/EnumDifficulty
+	FIELD a PEACEFUL
+	FIELD b EASY
+	FIELD c NORMAL
+	FIELD d HARD
 CLASS none/w none/OSName
 	METHOD a getOSName ()Lnone/x; ()Lnone/OSType;
+CLASS none/wb none/PlayerUsageSnooper
+	METHOD a startSnooper ()V ()V
+	METHOD a addData (Ljava/lang/String;Ljava/lang/Object;)V (Ljava/lang/String;Ljava/lang/Object;)V
+	METHOD b addMemoryStatsToSnooper ()V ()V
+	METHOD b addData2 (Ljava/lang/String;Ljava/lang/Object;)V (Ljava/lang/String;Ljava/lang/Object;)V
+	METHOD d isSnooperRunning ()Z ()Z
+	METHOD e stopSnooper ()V ()V
+CLASS none/wd
+	METHOD a addServerStatsToSnooper (Lnone/wb;)V (Lnone/PlayerUsageSnooper;)V
+	METHOD ac isSnooperEnabled ()Z ()Z
+	METHOD b addServerTypeToSnooper (Lnone/wb;)V (Lnone/PlayerUsageSnooper;)V
 CLASS none/wv none/Entity
 	FIELD V random
 	FIELD ae chunkX
@@ -3802,6 +4093,10 @@ CLASS none/wv none/Entity
 	FIELD s worldX
 	FIELD t worldY
 	FIELD u worldZ
+	METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
+	METHOD a sendChatToPlayer (Lnone/ho;)V (Lnone/ChatMessageComponent;)V
+	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD e getEntityWorld ()Lnone/aqu; ()Lnone/World;
 CLASS none/x none/OSType
 	FIELD a Linux
 	FIELD b Solaris
@@ -3835,6 +4130,7 @@ CLASS none/y none/_y_IServerCommand_something
 		ARG 0 serverCommandUser
 		ARG 1 serverCommand
 CLASS none/z none/ServerCommand
+	METHOD a doesStringStartWith (Ljava/lang/String;Ljava/lang/String;)Z (Ljava/lang/String;Ljava/lang/String;)Z
 	METHOD a (Lnone/ae;)Z
 		ARG 0 serverCommandUser
 	METHOD a (Lnone/ae;Ljava/lang/String;)Lnone/qw;
