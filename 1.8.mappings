@@ -601,7 +601,9 @@ CLASS none/aqu none/Dimension
 	METHOD e checkBlockIsInWorld (Lnone/dt;)Z (Lnone/BlockCoords;)Z
 	METHOD f getChunkFromBlockCoords (Lnone/dt;)Lnone/bfh; (Lnone/BlockCoords;)Lnone/Chunk;
 CLASS none/ard none/IBlockAccess
-CLASS none/arl none/BiomeBeach
+CLASS none/arl net/minecraft/world/biome/biomes/Beach
+	METHOD <init> (I)V
+		ARG 0 biomeID
 CLASS none/arm net/minecraft/world/biome/Biome
 	FIELD A frozenRiver
 	FIELD B icePlains
@@ -635,10 +637,16 @@ CLASS none/arm net/minecraft/world/biome/Biome
 	FIELD ab mesaPlateauForest
 	FIELD ac mesaPlateau
 	FIELD ah biomeName
+	FIELD ak topBlock
+	FIELD al fillBlock
 	FIELD an height
 	FIELD ao volatility
 	FIELD ap temperature
 	FIELD aq rainfall
+	FIELD at spawnHostileMobList
+	FIELD au spawnLandMobList
+	FIELD av spawnSeaMobList
+	FIELD aw spawnSkyMobList
 	FIELD az biomeID
 	FIELD b riverTerrainData
 	FIELD c oceanTerrainData
@@ -663,38 +671,97 @@ CLASS none/arm net/minecraft/world/biome/Biome
 		ARG 0 temperature
 		ARG 1 rainfall
 	METHOD a setName (Ljava/lang/String;)Lnone/arm; (Ljava/lang/String;)Lnet/minecraft/world/biome/Biome;
-	METHOD a setBiomeTerrainData (Lnone/aro;)Lnone/arm; (Lnone/BiomeTerrainData;)Lnet/minecraft/world/biome/Biome;
+	METHOD a (Lnone/aqu;Ljava/util/Random;Lnone/bgk;IID)V
+		ARG 0 dim
+		ARG 1 rand
+	METHOD a (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
+		ARG 0 dim
+		ARG 1 rand
+	METHOD a setBiomeTerrainData (Lnone/aro;)Lnone/arm; (Lnet/minecraft/world/biome/BiomeTerrainData;)Lnet/minecraft/world/biome/Biome;
+	METHOD d createSubBiome (I)Lnone/arm; (I)Lnet/minecraft/world/biome/Biome;
 	METHOD k createMutated ()Lnone/arm; ()Lnet/minecraft/world/biome/Biome;
-CLASS none/aro none/BiomeTerrainData
+CLASS none/aro net/minecraft/world/biome/BiomeTerrainData
 	FIELD a height
 	FIELD b volatility
-CLASS none/arp none/BiomeTemperatureTypes
+	METHOD a dampenTerrain ()Lnone/aro; ()Lnet/minecraft/world/biome/BiomeTerrainData;
+CLASS none/arp net/minecraft/world/biome/BiomeTemperatureTypes
 	FIELD a ocean
 	FIELD b cold
 	FIELD c medium
-	FIELD d m
+	FIELD d warm
+	FIELD e aTempTypes
+CLASS none/arq none/EntitySpawn
 CLASS none/ary
 	FIELD a dim
 	FIELD b rand
 	FIELD c blockCoords
 CLASS none/arz none/WorldChunkManager
 	FIELD e spawnBiomes
-CLASS none/asa none/BiomeDesert
-CLASS none/asb none/BiomeExtremeHills
-CLASS none/asd none/BiomeForest
-CLASS none/asg none/BiomeHell
-CLASS none/ash none/BiomeIcy
-CLASS none/asi none/BiomeJungle
-CLASS none/asj none/BiomeMesa
-CLASS none/ask none/BiomeMushroomIsland
-CLASS none/asm none/BiomeOcean
-CLASS none/asn none/BiomePlains
-CLASS none/asp none/BiomeRiver
-CLASS none/asq none/BiomeSavanna
-CLASS none/ass none/BiomeStoneBeach
-CLASS none/ast none/BiomeSwampland
-CLASS none/asu none/BiomeTaiga
-CLASS none/asv none/BiomeTheEnd
+CLASS none/asa net/minecraft/world/biome/biomes/Desert
+	METHOD <init> (I)V
+		ARG 0 biomeID
+CLASS none/asb net/minecraft/world/biome/biomes/ExtremeHills
+	METHOD <init> (IZ)V
+		ARG 0 biomeID
+	METHOD d createSubBiome (I)Lnone/arm; (I)Lnet/minecraft/world/biome/Biome;
+CLASS none/asd net/minecraft/world/biome/biomes/Forest
+	FIELD aG forestType
+	METHOD <init> (II)V
+		ARG 0 biomeID
+		ARG 1 typeID
+	METHOD d createSubBiome (I)Lnone/arm; (I)Lnet/minecraft/world/biome/Biome;
+CLASS none/asg net/minecraft/world/biome/biomes/Hell
+	METHOD <init> (I)V
+		ARG 0 biomeID
+CLASS none/ash net/minecraft/world/biome/biomes/Icy
+	METHOD <init> (IZ)V
+		ARG 0 biomeID
+		ARG 1 hasSnow
+	METHOD d createSubBiome (I)Lnone/arm; (I)Lnet/minecraft/world/biome/Biome;
+CLASS none/asi net/minecraft/world/biome/biomes/Jungle
+	METHOD <init> (IZ)V
+		ARG 0 biomeID
+CLASS none/asj net/minecraft/world/biome/biomes/Mesa
+	FIELD aD aBlockState
+	FIELD aI isAlreadyMesa
+	FIELD aJ hasForest
+	METHOD <init> (IZZ)V
+		ARG 0 biomeID
+		ARG 1 isAlreadyMesa
+		ARG 2 hasForest
+	METHOD d createSubBiome (I)Lnone/arm; (I)Lnet/minecraft/world/biome/Biome;
+CLASS none/ask net/minecraft/world/biome/biomes/MushroomIsland
+	METHOD <init> (I)V
+		ARG 0 biomeID
+CLASS none/asm net/minecraft/world/biome/biomes/Ocean
+	METHOD <init> (I)V
+		ARG 0 biomeID
+CLASS none/asn net/minecraft/world/biome/biomes/Plains
+	METHOD <init> (I)V
+		ARG 0 biomeID
+	METHOD d createSubBiome (I)Lnone/arm; (I)Lnet/minecraft/world/biome/Biome;
+CLASS none/asp net/minecraft/world/biome/biomes/River
+	METHOD <init> (I)V
+		ARG 0 biomeID
+CLASS none/asq net/minecraft/world/biome/biomes/Savanna
+	METHOD <init> (I)V
+		ARG 0 biomeID
+	METHOD d createSubBiome (I)Lnone/arm; (I)Lnet/minecraft/world/biome/Biome;
+CLASS none/ass net/minecraft/world/biome/biomes/StoneBeach
+	METHOD <init> (I)V
+		ARG 0 biomeID
+CLASS none/ast net/minecraft/world/biome/biomes/Swampland
+	METHOD <init> (I)V
+		ARG 0 biomeID
+CLASS none/asu net/minecraft/world/biome/biomes/Taiga
+	FIELD aI type
+	METHOD <init> (II)V
+		ARG 0 biomeID
+		ARG 1 typeID
+	METHOD d createSubBiome (I)Lnone/arm; (I)Lnet/minecraft/world/biome/Biome;
+CLASS none/asv net/minecraft/world/biome/biomes/TheEnd
+	METHOD <init> (I)V
+		ARG 0 biomeID
 CLASS none/asy none/BlockAir
 	METHOD c IsOpaque ()Z ()Z
 CLASS none/asz none/BlockAnvil
@@ -1827,7 +1894,7 @@ CLASS none/bgk none/BlockArray
 		ARG 1 localY
 		ARG 2 localZ
 	METHOD a setBlockState (ILnone/bec;)V (ILnone/BlockState;)V
-CLASS none/bgl none/BiomeConfigSettingsList
+CLASS none/bgl net/minecraft/world/biome/BiomeConfigSettingsList
 CLASS none/bgn none/BiomeConfig
 	FIELD A useRavines
 	FIELD B useWaterLakes
@@ -1907,7 +1974,7 @@ CLASS none/bgn none/BiomeConfig
 	FIELD x useMineshafts
 	FIELD y useTemples
 	FIELD z useMonuments
-CLASS none/bgo none/BiomeConfigSerialHandler
+CLASS none/bgo net/minecraft/world/biome/BiomeConfigSerialHandler
 CLASS none/bgp none/ChunkGeneratorDebug
 	FIELD c dim
 CLASS none/bgq none/ChunkGeneratorFlat
