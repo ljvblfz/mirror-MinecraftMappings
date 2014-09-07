@@ -74,6 +74,7 @@ CLASS net/minecraft/server/MinecraftServer
 	METHOD a isBlockProtected (Lnone/aqu;Lnone/dt;Lnone/ahd;)Z (Lnone/World;Lnone/ChunkCoordinates;Lnone/ahd;)Z
 	METHOD a setGameType (Lnone/arc;)V (Lnone/EnumGameType;)V
 	METHOD a shareToLAN (Lnone/arc;Z)Ljava/lang/String; (Lnone/EnumGameType;Z)Ljava/lang/String;
+		ARG 0 gameType
 	METHOD a finalTick (Lnone/b;)V (Lnone/CrashLogger;)V
 	METHOD a sendChatToPlayer (Lnone/ho;)V (Lnone/ChatMessageComponent;)V
 	METHOD a setConfigurationManager (Lnone/sn;)V (Lnet/minecraft/server/ServerConfigurationManager;)V
@@ -135,8 +136,6 @@ CLASS net/minecraft/server/MinecraftServer
 	METHOD o isHardcore ()Z ()Z
 	METHOD q clearCurrentTask ()V ()V
 	METHOD r stopServer ()V ()V
-	METHOD shareToLAN (Lnone/arc;Z)Ljava/lang/String;
-		ARG 0 gameType
 	METHOD t isServerRunning ()Z ()Z
 	METHOD u initiateShutdown ()V ()V
 	METHOD w getDataDirectory ()Ljava/io/File; ()Ljava/io/File;
@@ -243,7 +242,7 @@ CLASS none/ae none/IServerCommandUser
 	METHOD e getEntityWorld ()Lnone/aqu; ()Lnone/World;
 CLASS none/aea none/EntityMinecartChest
 CLASS none/aeb none/EntityMinecartCommandBlock
-	CLASS aec
+	CLASS none/aec
 		METHOD e getEntityWorld ()Lnone/aqu; ()Lnone/World;
 CLASS none/aed none/EntityMinecartStorage
 	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
@@ -1785,7 +1784,7 @@ CLASS none/bcq none/TileEntityCauldron
 CLASS none/bcr none/TileEntityChest
 	METHOD c update ()V ()V
 CLASS none/bct none/TileEntityControl
-	CLASS bcu
+	CLASS none/bcu
 		METHOD e getEntityWorld ()Lnone/aqu; ()Lnone/World;
 CLASS none/bcv none/TileEntityComparator
 CLASS none/bcw none/TileEntityDLDetector
@@ -1811,12 +1810,12 @@ CLASS none/bdg none/TileEntityMobSpawner
 	METHOD c update ()V ()V
 CLASS none/bdi none/TileEntityMusic
 CLASS none/bdj none/TileEntitySign
-	CLASS bdk
+	CLASS none/bdk
 		METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
 		METHOD a sendChatToPlayer (Lnone/ho;)V (Lnone/ho;)V
 		METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
 		METHOD e getEntityWorld ()Lnone/aqu; ()Lnone/World;
-	CLASS bdl
+	CLASS none/bdl
 		METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
 		METHOD a sendChatToPlayer (Lnone/ho;)V (Lnone/ho;)V
 		METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
@@ -2241,7 +2240,7 @@ CLASS none/bjb none/CoordRange
 	METHOD g writeRangeToNBT ()Lnone/ft; ()Lnone/NbtIntArray;
 CLASS none/bjd none/GenStructureMineshaft
 CLASS none/bk none/ServerCommandExecute
-	CLASS bl
+	CLASS none/bl
 		METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
 		METHOD a sendChatToPlayer (Lnone/ho;)V (Lnone/ho;)V
 		METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
