@@ -142,7 +142,7 @@ CLASS net/minecraft/server/MinecraftServer
 	METHOD x systemExitNow ()V ()V
 	METHOD y tick ()V ()V
 	METHOD z updateTimeLightAndEntities ()V ()V
-CLASS none/a none/TextColor
+CLASS none/a net/minecraft/src/EnumChatFormatting
 	FIELD a BLACK
 	FIELD b DARK_BLUE
 	FIELD c DARK_GREEN
@@ -253,6 +253,7 @@ CLASS none/aeh none/EntityMinecartSpawner
 CLASS none/aej none/EntityMinecartTNT
 CLASS none/aek none/EntityPrimedTNT
 CLASS none/aem none/EntityBlaze
+	METHOD c getBrightness (F)F (F)F
 CLASS none/aeo none/EntityCaveSpider
 CLASS none/aep none/EntityCreeper
 CLASS none/aer none/EntityEnderman
@@ -264,6 +265,7 @@ CLASS none/afa none/EntityGhast
 CLASS none/aff none/EntityGiant
 CLASS none/afg none/EntityGuardian
 CLASS none/afl none/EntityMagmacube
+	METHOD c getBrightness (F)F (F)F
 CLASS none/afm none/EntityMonster
 CLASS none/afo none/EntityPigZombie
 CLASS none/aft none/EntitySilverfish
@@ -278,7 +280,10 @@ CLASS none/ag
 CLASS none/age none/EntitySpider
 CLASS none/agi none/EntityWitch
 CLASS none/agj none/EntityZombie
+CLASS none/agn
+	METHOD b_ getRecipes (Lnone/ahd;)Lnone/aqd; (Lnone/ahd;)Lnet/minecraft/src/MerchantRecipeList;
 CLASS none/agp none/EntityVillager
+	METHOD b_ getRecipes (Lnone/ahd;)Lnone/aqd; (Lnone/ahd;)Lnet/minecraft/src/MerchantRecipeList;
 CLASS none/ah
 	CLASS none/ai
 		METHOD apply (Lnone/wv;)Z
@@ -331,11 +336,25 @@ CLASS none/ah
 		ARG 0 serverCommandUser
 	METHOD b (Lnone/ae;Ljava/util/Map;)Z
 		ARG 0 serverCommandUser
+CLASS none/ahb net/minecraft/src/InventoryPlayer
+	METHOD o_ onInventoryChanged ()V ()V
+	METHOD p getItemStack ()Lnone/amj; ()Lnet/minecraft/src/ItemStack;
 CLASS none/ahd
+	METHOD cf getSleepTimer ()I ()I
+	METHOD ck getFoodStats ()Lnone/ahz; ()Lnone/ahz;
 	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD n closeScreen ()V ()V
+CLASS none/ahg net/minecraft/src/EnumChatVisibility
+	FIELD a FULL
+	FIELD b SYSTEM
+	FIELD c HIDDEN
 CLASS none/ahj none/EntityArrow
 CLASS none/ahk none/EntityEyeEnderSignal
+	METHOD c getBrightness (F)F (F)F
+CLASS none/ahl
+	METHOD c getBrightness (F)F (F)F
 CLASS none/ahm none/EntityFireworksRicket
+	METHOD c getBrightness (F)F (F)F
 CLASS none/ahn none/EntityFireball
 CLASS none/ahp none/EntitySmallFireball
 CLASS none/ahq none/EntitySnowball
@@ -344,6 +363,73 @@ CLASS none/aht none/EntityThrownEnderpearl
 CLASS none/ahu none/EntityThrownExpBottle
 CLASS none/ahv none/EntityThrownPotion
 CLASS none/ahw none/EntityWitherSkull
+CLASS none/aib net/minecraft/src/Container
+	FIELD c inventorySlots
+	FIELD d windowId
+	METHOD b onContainerClosed (Lnone/ahd;)V (Lnone/ahd;)V
+	METHOD b canDragIntoSlot (Lnone/ajk;)Z (Lnet/minecraft/src/Slot;)Z
+CLASS none/aid
+	CLASS aie
+		METHOD o_ onInventoryChanged ()V ()V
+	CLASS aif
+		METHOD a isItemValid (Lnone/amj;)Z (Lnet/minecraft/src/ItemStack;)Z
+	METHOD b onContainerClosed (Lnone/ahd;)V (Lnone/ahd;)V
+CLASS none/aig
+	CLASS aih
+		METHOD a isItemValid (Lnone/amj;)Z (Lnet/minecraft/src/ItemStack;)Z
+CLASS none/aii
+	CLASS aij
+		METHOD a isItemValid (Lnone/amj;)Z (Lnet/minecraft/src/ItemStack;)Z
+CLASS none/aik
+	METHOD a isItemValid (Lnone/amj;)Z (Lnet/minecraft/src/ItemStack;)Z
+CLASS none/aim
+	METHOD b onContainerClosed (Lnone/ahd;)V (Lnone/ahd;)V
+CLASS none/ain
+	METHOD o_ onInventoryChanged ()V ()V
+CLASS none/aio
+	METHOD b onContainerClosed (Lnone/ahd;)V (Lnone/ahd;)V
+CLASS none/aiq
+	CLASS air
+		METHOD o_ onInventoryChanged ()V ()V
+	CLASS ais
+		METHOD a isItemValid (Lnone/amj;)Z (Lnet/minecraft/src/ItemStack;)Z
+	CLASS ait
+		METHOD a isItemValid (Lnone/amj;)Z (Lnet/minecraft/src/ItemStack;)Z
+	METHOD b onContainerClosed (Lnone/ahd;)V (Lnone/ahd;)V
+CLASS none/aiu
+	METHOD a isItemValid (Lnone/amj;)Z (Lnet/minecraft/src/ItemStack;)Z
+CLASS none/aiw
+	METHOD a isItemValid (Lnone/amj;)Z (Lnet/minecraft/src/ItemStack;)Z
+CLASS none/aix
+	METHOD b onContainerClosed (Lnone/ahd;)V (Lnone/ahd;)V
+CLASS none/aiy
+	CLASS aiz
+		METHOD a isItemValid (Lnone/amj;)Z (Lnet/minecraft/src/ItemStack;)Z
+	CLASS aja
+		METHOD a isItemValid (Lnone/amj;)Z (Lnet/minecraft/src/ItemStack;)Z
+	METHOD b onContainerClosed (Lnone/ahd;)V (Lnone/ahd;)V
+CLASS none/ajb
+	CLASS ajc
+		METHOD a isItemValid (Lnone/amj;)Z (Lnet/minecraft/src/ItemStack;)Z
+	METHOD b onContainerClosed (Lnone/ahd;)V (Lnone/ahd;)V
+CLASS none/aje
+	METHOD o_ onInventoryChanged ()V ()V
+CLASS none/ajf net/minecraft/src/ContainerMerchant
+	METHOD b onContainerClosed (Lnone/ahd;)V (Lnone/ahd;)V
+	METHOD d setCurrentRecipeIndex (I)V (I)V
+CLASS none/ajg
+	METHOD a isItemValid (Lnone/amj;)Z (Lnet/minecraft/src/ItemStack;)Z
+CLASS none/aji
+	METHOD o_ onInventoryChanged ()V ()V
+CLASS none/ajj
+	METHOD a isItemValid (Lnone/amj;)Z (Lnet/minecraft/src/ItemStack;)Z
+CLASS none/ajk net/minecraft/src/Slot
+	FIELD e slotNumber
+	FIELD f xDisplayPosition
+	FIELD g yDisplayPosition
+	METHOD a isItemValid (Lnone/amj;)Z (Lnet/minecraft/src/ItemStack;)Z
+	METHOD d getStack ()Lnone/amj; ()Lnet/minecraft/src/ItemStack;
+	METHOD e getHasStack ()Z ()Z
 CLASS none/ajn none/ItemArmor
 	FIELD b armorPieceId
 	METHOD <init> (Lnone/ajp;II)V
@@ -358,12 +444,12 @@ CLASS none/aju none/ItemBlock
 	METHOD a getName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getCreativeGroups ()Lnone/akf; ()Lnone/CreativeGroups;
 	METHOD c setName (Ljava/lang/String;)Lnone/alq; (Ljava/lang/String;)Lnone/Item;
-	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amj;)Ljava/lang/String;
+	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnet/minecraft/src/ItemStack;)Ljava/lang/String;
 CLASS none/ajz none/ItemBow
 CLASS none/aka none/ItemStew
 CLASS none/akb none/ItemBucket
 CLASS none/akd none/ItemCoal
-	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amj;)Ljava/lang/String;
+	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnet/minecraft/src/ItemStack;)Ljava/lang/String;
 CLASS none/akf none/CreativeGroups
 	FIELD a creativeGroupsArray
 	FIELD b buildingBlocks
@@ -397,15 +483,15 @@ CLASS none/aks none/ItemDigger
 		ARG 1 itemMaterialTypes
 CLASS none/akt none/ItemDoor
 CLASS none/akw
-	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amj;)Ljava/lang/String;
+	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnet/minecraft/src/ItemStack;)Ljava/lang/String;
 CLASS none/akx
-	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amj;)Ljava/lang/String;
+	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnet/minecraft/src/ItemStack;)Ljava/lang/String;
 CLASS none/akz none/ItemMap
 CLASS none/ala none/ItemEnchantedBook
 CLASS none/alf none/ItemFireworkCharge
 CLASS none/alg none/ItemFireworks
 CLASS none/alh
-	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amj;)Ljava/lang/String;
+	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnet/minecraft/src/ItemStack;)Ljava/lang/String;
 CLASS none/alj none/ItemFishingRod
 CLASS none/alk none/ItemFlintAndSteel
 CLASS none/all none/ItemFood
@@ -422,7 +508,7 @@ CLASS none/alq none/Item
 	METHOD a registerItem (ILjava/lang/String;Lnone/alq;)V (ILjava/lang/String;Lnone/Item;)V
 		ARG 0 index
 		ARG 2 item
-	METHOD a registerItem (ILnone/oa;Lnone/alq;)V (ILnone/ObjectName;Lnone/Item;)V
+	METHOD a registerItem (ILnone/oa;Lnone/alq;)V (ILnet/minecraft/src/ResourceLocation;Lnone/Item;)V
 		ARG 0 index
 		ARG 1 registryItemKey
 		ARG 2 registryItem
@@ -475,7 +561,7 @@ CLASS none/alq none/Item
 		ARG 0 s
 	METHOD d (Lnone/amj;Lnone/aqu;Lnone/ahd;)V
 		ARG 1 dimension
-	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amj;)Ljava/lang/String;
+	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnet/minecraft/src/ItemStack;)Ljava/lang/String;
 	METHOD j getMaxStackSize ()I ()I
 	METHOD t registerItems ()V ()V
 CLASS none/am
@@ -487,9 +573,11 @@ CLASS none/ami none/ItemMaterialTypes
 	FIELD c Iron
 	FIELD d Emerald
 	FIELD e Gold
-CLASS none/amj
+CLASS none/amj net/minecraft/src/ItemStack
+	FIELD b stackSize
 	FIELD d item
 	METHOD b getItem ()Lnone/alq; ()Lnone/Item;
+	METHOD k copy ()Lnone/amj; ()Lnet/minecraft/src/ItemStack;
 CLASS none/amk none/Items
 	FIELD A mushroomStew
 	FIELD B goldenSword
@@ -681,11 +769,11 @@ CLASS none/amk none/Items
 	METHOD a getItem (Ljava/lang/String;)Lnone/alq; (Ljava/lang/String;)Lnone/Item;
 CLASS none/aml none/ItemLead
 CLASS none/amm
-	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amj;)Ljava/lang/String;
+	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnet/minecraft/src/ItemStack;)Ljava/lang/String;
 CLASS none/amo none/ItemMilkBucket
 CLASS none/amp none/ItemMinecart
 CLASS none/amr
-	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amj;)Ljava/lang/String;
+	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnet/minecraft/src/ItemStack;)Ljava/lang/String;
 CLASS none/amt none/ItemNameTag
 CLASS none/amu none/ItemPickaxe
 CLASS none/amy none/ItemRecord
@@ -694,15 +782,15 @@ CLASS none/anb none/ItemFoodSeed
 CLASS none/anc none/ItemSeeds
 CLASS none/ane none/ItemShovel
 CLASS none/anh
-	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amj;)Ljava/lang/String;
+	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnet/minecraft/src/ItemStack;)Ljava/lang/String;
 CLASS none/ani
-	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amj;)Ljava/lang/String;
+	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnet/minecraft/src/ItemStack;)Ljava/lang/String;
 CLASS none/anm none/ItemWeapon
 	FIELD b itemMaterialTypes
 	METHOD <init> (Lnone/ami;)V
 		ARG 0 itemMaterialTypes
 CLASS none/ann
-	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnone/amj;)Ljava/lang/String;
+	METHOD e_ getName (Lnone/amj;)Ljava/lang/String; (Lnet/minecraft/src/ItemStack;)Ljava/lang/String;
 CLASS none/apg none/EnchantTypes
 	FIELD a All
 	FIELD b Armor
@@ -718,6 +806,13 @@ CLASS none/apg none/EnchantTypes
 	FIELD l EnchantTypesArray
 	METHOD a canItemBeEnchanted (Lnone/alq;)Z (Lnone/Item;)Z
 		ARG 0 item
+CLASS none/aqb net/minecraft/src/IMerchant
+	METHOD b_ getRecipes (Lnone/ahd;)Lnone/aqd; (Lnone/ahd;)Lnet/minecraft/src/MerchantRecipeList;
+CLASS none/aqc net/minecraft/src/MerchantRecipe
+	METHOD a getItemToBuy ()Lnone/amj; ()Lnet/minecraft/src/ItemStack;
+	METHOD b getSecondItemToBuy ()Lnone/amj; ()Lnet/minecraft/src/ItemStack;
+	METHOD d getItemToSell ()Lnone/amj; ()Lnet/minecraft/src/ItemStack;
+CLASS none/aqd net/minecraft/src/MerchantRecipeList
 CLASS none/aqf
 	METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
 	METHOD a sendChatToPlayer (Lnone/ho;)V (Lnone/ChatMessageComponent;)V
@@ -935,7 +1030,7 @@ CLASS none/atr none/BlockType
 		ARG 2 block
 	METHOD a (ILjava/util/Random;)I
 		ARG 1 random
-	METHOD a registerBlock (ILnone/oa;Lnone/atr;)V (ILnone/ObjectName;Lnone/BlockType;)V
+	METHOD a registerBlock (ILnone/oa;Lnone/atr;)V (ILnet/minecraft/src/ResourceLocation;Lnone/BlockType;)V
 		ARG 2 block
 	METHOD a (Ljava/util/Random;)I
 		ARG 0 random
@@ -1775,7 +1870,9 @@ CLASS none/bcm none/TileEntity
 	FIELD c blockCoords
 	FIELD e block
 	METHOD a setDimension (Lnone/aqu;)V (Lnone/World;)V
+	METHOD o_ onInventoryChanged ()V ()V
 	METHOD t checkHasDimension ()Z ()Z
+	METHOD u getBlockMetadata ()I ()I
 	METHOD v getBlockCoords ()Lnone/dt; ()Lnone/ChunkCoordinates;
 	METHOD w getBlock ()Lnone/atr; ()Lnone/BlockType;
 	METHOD z getDimension ()Lnone/aqu; ()Lnone/World;
@@ -1806,6 +1903,7 @@ CLASS none/bdc none/TileEntityFurnace
 	METHOD c update ()V ()V
 CLASS none/bde none/TileEntityHopper
 	METHOD c update ()V ()V
+	METHOD o_ onInventoryChanged ()V ()V
 CLASS none/bdg none/TileEntityMobSpawner
 	METHOD c update ()V ()V
 CLASS none/bdi none/TileEntityMusic
@@ -1820,6 +1918,9 @@ CLASS none/bdj none/TileEntitySign
 		METHOD a sendChatToPlayer (Lnone/ho;)V (Lnone/ho;)V
 		METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
 		METHOD e getEntityWorld ()Lnone/aqu; ()Lnone/World;
+	FIELD a signText
+	FIELD f lineBeingEdited
+	METHOD a setEditable (Z)V (Z)V
 CLASS none/bdm none/TileEntitySkull
 CLASS none/bdn none/TileEntityAirportal
 CLASS none/bdq none/BlockPistonBase
@@ -1832,6 +1933,7 @@ CLASS none/bds none/BlockPistonHead
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnone/BlockState;)I
 CLASS none/bdv none/TileEntityPiston
 	METHOD c update ()V ()V
+	METHOD u getBlockMetadata ()I ()I
 CLASS none/bdx none/BlockPistonExtension
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnone/BlockState;
 	METHOD c IsOpaque ()Z ()Z
@@ -2013,6 +2115,8 @@ CLASS none/bfx none/RegionFileWriter
 		ARG 2 chunkZ
 	METHOD c readRegionFile (Ljava/io/File;II)Ljava/io/DataInputStream; (Ljava/io/File;II)Ljava/io/DataInputStream;
 	METHOD d writeRegionFile (Ljava/io/File;II)Ljava/io/DataOutputStream; (Ljava/io/File;II)Ljava/io/DataOutputStream;
+CLASS none/bfy
+	FIELD a logger
 CLASS none/bg none/ServerCommandEffect
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -2370,58 +2474,739 @@ CLASS none/bs none/ServerCommandHelp
 		ARG 0 serverCommandUser
 	METHOD d (Lnone/ae;)Ljava/util/List;
 		ARG 0 serverCommandUser
-CLASS none/bsu
+CLASS none/bsq net/minecraft/src/ChatLine
+	METHOD a getChatLineString ()Lnone/ho; ()Lnone/ChatMessageComponent;
+	METHOD b getUpdateCounter ()I ()I
+	METHOD c getChatLineId ()I ()I
+CLASS none/bsr
+	METHOD i keyCode ()I ()I
+CLASS none/bss net/minecraft/src/RenderHelper
+	METHOD a disableStandardItemLighting ()V ()V
+	METHOD b enableStandardItemLighting ()V ()V
+	METHOD c enableGUIStandardItemLighting ()V ()V
+CLASS none/bsu none/Minecraft
+	CLASS btc
+		METHOD a confirmClicked (ZI)V (ZI)V
+	FIELD a isRunningOnMac
+	FIELD c playerController
+	FIELD d displayWidth
+	FIELD e displayHeight
+	FIELD f theWorld
+	FIELD h thePlayer
+	FIELD k fontRenderer
+	FIELD m currentScreen
+	FIELD o entityRenderer
+	FIELD q ingameGUI
+	FIELD t gameSettings
+	FIELD y mcProfiler
+	METHOD I getSystemTime ()J ()J
+	METHOD N getTextureManager ()Lnone/cug; ()Lnone/cug;
+	METHOD a displayGuiScreen (Lnone/bxf;)V (Lnet/minecraft/src/GuiScreen;)V
 	METHOD a addServerStatsToSnooper (Lnone/wb;)V (Lnone/PlayerUsageSnooper;)V
 	METHOD ac isSnooperEnabled ()Z ()Z
+	METHOD af getFontRenderer ()Lnone/cqh; ()Lnone/cqh;
 	METHOD b addServerTypeToSnooper (Lnone/wb;)V (Lnone/PlayerUsageSnooper;)V
+	METHOD t getNetHandler ()Lnone/cee; ()Lnet/minecraft/src/NetClientHandler;
+	METHOD v isFancyGraphicsEnabled ()Z ()Z
+	METHOD z getMinecraft ()Lnone/bsu; ()Lnone/Minecraft;
 CLASS none/bt none/ServerCommandKick
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/bto net/minecraft/src/GameSettings
+	FIELD D chatScale
+	FIELD E chatWidth
+	FIELD F chatHeightUnfocused
+	FIELD G chatHeightFocused
+	FIELD aa keyBindInventory
+	FIELD ac keyBindDrop
+	FIELD ae keyBindPickBlock
+	FIELD l chatVisibility
+	FIELD p chatOpacity
+	FIELD z touchScreen
+CLASS none/btt net/minecraft/src/ScreenShotHelper
+	FIELD a logger
+CLASS none/bty net/minecraft/src/FontRenderer
+	METHOD a getStringWidth (Ljava/lang/String;)I (Ljava/lang/String;)I
+	METHOD a drawStringWithShadow (Ljava/lang/String;FFI)I (Ljava/lang/String;FFI)I
+	METHOD a drawString (Ljava/lang/String;III)I (Ljava/lang/String;III)I
+CLASS none/btz net/minecraft/src/GuiIngame
+	FIELD a prevVignetteBrightness
+	FIELD f vignetteTexture
+	FIELD g widgetsTextures
+	FIELD h pumpkinBlurTexture
+	FIELD i random
+	FIELD j mc
+	FIELD n updateCounter
+	FIELD s highlightingItemStack
+	FIELD u persistantChatGui2
+	METHOD a renderGameOverlay (F)V (F)V
+	METHOD a renderVignette (FLnone/buf;)V (FLnet/minecraft/src/ScaledResolution;)V
+	METHOD a setRecordPlayingMessage (Ljava/lang/String;)V (Ljava/lang/String;)V
+	METHOD c updateTick ()V ()V
+	METHOD d getChatGUI ()Lnone/buh; ()Lnet/minecraft/src/GuiNewChat;
+	METHOD e getUpdateCounter ()I ()I
+	METHOD f getFontRenderer ()Lnone/bty; ()Lnet/minecraft/src/FontRenderer;
+	METHOD g getChatGui ()Lnone/bvo; ()Lnet/minecraft/src/GuiUnknown;
+	METHOD i renderBossHealth ()V ()V
 CLASS none/bu none/ServerCommandKill
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/bub net/minecraft/src/Gui
+	FIELD b optionsBackground
+	FIELD c statIcons
+	FIELD d icons
+	FIELD e zLevel
+	METHOD a unknownDraw2 (FFIIII)V (FFIIII)V
+	METHOD a drawHorizontalLine (IIII)V (IIII)V
+	METHOD a drawRect (IIIII)V (IIIII)V
+	METHOD a drawGradientRect (IIIIII)V (IIIIII)V
+	METHOD a unknownDraw (IILnone/cue;II)V (IILnone/cue;II)V
+	METHOD a drawCenteredString (Lnone/bty;Ljava/lang/String;III)V (Lnet/minecraft/src/FontRenderer;Ljava/lang/String;III)V
+	METHOD b drawVerticalLine (IIII)V (IIII)V
+	METHOD b drawTexturedModalRect (IIIIII)V (IIIIII)V
+	METHOD c drawString (Lnone/bty;Ljava/lang/String;III)V (Lnet/minecraft/src/FontRenderer;Ljava/lang/String;III)V
+CLASS none/buf net/minecraft/src/ScaledResolution
+	METHOD a getScaledWidth ()I ()I
+	METHOD b getScaledHeight ()I ()I
+CLASS none/bug net/minecraft/src/GuiButton
+	FIELD a buttonTextures
+	FIELD f width
+	FIELD g height
+	FIELD h xPosition
+	FIELD i yPosition
+	FIELD j displayString
+	FIELD k id
+	FIELD l enabled
+	FIELD m drawButton
+	METHOD a setButtonWidth (I)V (I)V
+	METHOD a mouseReleased (II)V (II)V
+	METHOD a drawButton (Lnone/bsu;II)V (Lnone/Minecraft;II)V
+	METHOD a getHoverState (Z)I (Z)I
+	METHOD b getButtonWidth ()I ()I
+	METHOD b mouseDragged (Lnone/bsu;II)V (Lnone/Minecraft;II)V
+	METHOD c mousePressed (Lnone/bsu;II)Z (Lnone/Minecraft;II)Z
+CLASS none/buh net/minecraft/src/GuiNewChat
+	FIELD a logger
+	FIELD f mc
+	FIELD g sentMessages
+	FIELD h chatLines
+	METHOD a clearChatMessages ()V ()V
+	METHOD a drawChat (I)V (I)V
+	METHOD a addToSentMessages (Ljava/lang/String;)V (Ljava/lang/String;)V
+	METHOD a printChatMessage (Lnone/ho;)V (Lnone/ChatMessageComponent;)V
+	METHOD a printChatMessageWithOptionalDeletion (Lnone/ho;I)V (Lnone/ChatMessageComponent;I)V
+	METHOD b scroll (I)V (I)V
+	METHOD c getSentMessages ()Ljava/util/List; ()Ljava/util/List;
+	METHOD c deleteChatLine (I)V (I)V
+	METHOD d resetScroll ()V ()V
+	METHOD e getChatOpen ()Z ()Z
+	METHOD h getChatScale ()F ()F
+CLASS none/buj net/minecraft/src/GuiDebug
+CLASS none/bul net/minecraft/src/GuiTextField
+	METHOD a updateCursorCounter ()V ()V
+	METHOD a textBoxKeyTyped (CI)Z (CI)Z
+	METHOD a mouseClicked (III)V (III)V
+	METHOD a setText (Ljava/lang/String;)V (Ljava/lang/String;)V
+	METHOD b getText ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD b setFocused (Z)V (Z)V
+	METHOD g drawTextBox ()V ()V
+CLASS none/bum
+	METHOD a mouseReleased (II)V (II)V
+	METHOD a getHoverState (Z)I (Z)I
+	METHOD b mouseDragged (Lnone/bsu;II)V (Lnone/Minecraft;II)V
+	METHOD c mousePressed (Lnone/bsu;II)Z (Lnone/Minecraft;II)Z
+CLASS none/buo net/minecraft/src/GuiUnknown2
+CLASS none/bup net/minecraft/src/GuiButtonLanguage
+	METHOD a drawButton (Lnone/bsu;II)V (Lnone/Minecraft;II)V
+CLASS none/bur
+	METHOD c mousePressed (Lnone/bsu;II)Z (Lnone/Minecraft;II)Z
+CLASS none/bus
+	METHOD a drawButton (Lnone/bsu;II)V (Lnone/Minecraft;II)V
+CLASS none/buu
+	METHOD a drawSlot (IIIIII)V (IIIIII)V
+CLASS none/buv net/minecraft/src/GuiSlot
+CLASS none/buw net/minecraft/src/GuiSmallButton
 CLASS none/bv none/ServerCommandBanList
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/bvk
+	METHOD a drawSlot (IIIIII)V (IIIIII)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+CLASS none/bvl
+	METHOD a mouseReleased (II)V (II)V
+	METHOD a getHoverState (Z)I (Z)I
+	METHOD b mouseDragged (Lnone/bsu;II)V (Lnone/Minecraft;II)V
+	METHOD c mousePressed (Lnone/bsu;II)Z (Lnone/Minecraft;II)Z
+CLASS none/bvm
+	FIELD b mc
+CLASS none/bvo net/minecraft/src/GuiUnknown
+CLASS none/bvr
+	METHOD a mouseReleased (II)V (II)V
+	METHOD a getHoverState (Z)I (Z)I
+	METHOD b getButtonWidth ()I ()I
+	METHOD b mouseDragged (Lnone/bsu;II)V (Lnone/Minecraft;II)V
+	METHOD c mousePressed (Lnone/bsu;II)Z (Lnone/Minecraft;II)Z
+CLASS none/bvs
+	METHOD a drawSlot (IIIIII)V (IIIIII)V
+CLASS none/bvt
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a mouseClicked (III)V (III)V
+	METHOD a drawGradientRect (IIIIII)V (IIIIII)V
+	METHOD a mouseClickMove (IIIJ)V (IIIJ)V
+	METHOD a drawItemStackTooltip (Lnone/amj;II)V (Lnet/minecraft/src/ItemStack;II)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD a confirmClicked (ZI)V (ZI)V
+	METHOD b initGui ()V ()V
+	METHOD b mouseMovedOrUp (III)V (III)V
+	METHOD b drawTexturedModalRect (IIIIII)V (IIIIII)V
+	METHOD b_ drawDefaultBackground (I)V (I)V
+	METHOD c drawDefaultBackground ()V ()V
+	METHOD d doesGuiPauseGame ()Z ()Z
+	METHOD e updateScreen ()V ()V
+	METHOD k handleMouseInput ()V ()V
+	METHOD l handleKeyboardInput ()V ()V
+	METHOD m onGuiClosed ()V ()V
+CLASS none/bvu
+	METHOD a drawSlot (IIIIII)V (IIIIII)V
+CLASS none/bvv
+	METHOD a drawSlot (IIIIII)V (IIIIII)V
+CLASS none/bvw
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+CLASS none/bvx net/minecraft/src/GuiChat
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a mouseClicked (III)V (III)V
+	METHOD b initGui ()V ()V
+	METHOD d doesGuiPauseGame ()Z ()Z
+	METHOD e updateScreen ()V ()V
+	METHOD k handleMouseInput ()V ()V
+	METHOD m onGuiClosed ()V ()V
+CLASS none/bvy net/minecraft/src/GuiConfirmOpenLink
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+CLASS none/bvz
+	METHOD a confirmClicked (ZI)V (ZI)V
 CLASS none/bw none/ServerCommandList
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/bwa net/minecraft/src/GuiYesNo
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD e updateScreen ()V ()V
+CLASS none/bwb
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD e updateScreen ()V ()V
+CLASS none/bwd
+	CLASS bwe
+		METHOD a drawSlot (IIIIII)V (IIIIII)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD k handleMouseInput ()V ()V
+CLASS none/bwf
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a mouseClicked (III)V (III)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD e updateScreen ()V ()V
+	METHOD m onGuiClosed ()V ()V
+CLASS none/bwg
+	CLASS bwi
+		METHOD a drawSlot (IIIIII)V (IIIIII)V
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a mouseClicked (III)V (III)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD e updateScreen ()V ()V
+	METHOD k handleMouseInput ()V ()V
+	METHOD m onGuiClosed ()V ()V
+CLASS none/bwj
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a mouseClicked (III)V (III)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD b mouseMovedOrUp (III)V (III)V
+	METHOD k handleMouseInput ()V ()V
+CLASS none/bwl
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD a confirmClicked (ZI)V (ZI)V
+	METHOD b initGui ()V ()V
+	METHOD d doesGuiPauseGame ()Z ()Z
+	METHOD e updateScreen ()V ()V
+CLASS none/bwm
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD c drawDefaultBackground ()V ()V
+	METHOD e updateScreen ()V ()V
+CLASS none/bwn
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a mouseClicked (III)V (III)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD e updateScreen ()V ()V
+	METHOD m onGuiClosed ()V ()V
+CLASS none/bwo
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+CLASS none/bwp net/minecraft/src/GuiScreenAddServer
+	FIELD a parentGui
+	FIELD f newServerData
+	FIELD g serverAddress
+	FIELD h serverName
+	FIELD q fontRenderer
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a mouseClicked (III)V (III)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD e updateScreen ()V ()V
+	METHOD m onGuiClosed ()V ()V
+CLASS none/bwq
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+CLASS none/bwr net/minecraft/src/GuiSleepMP
+	FIELD a inputField
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD f wakeEntity ()V ()V
+CLASS none/bws net/minecraft/src/GuiLanguage
+	FIELD a parentGui
+	FIELD f languageList
+	FIELD g theGameSettings
+	FIELD h languageManager
+	FIELD q fontRenderer
+	FIELD r doneButton
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD k handleMouseInput ()V ()V
+CLASS none/bwt net/minecraft/src/GuiSlotLanguage
+	METHOD a drawSlot (IIIIII)V (IIIIII)V
+CLASS none/bwv
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD a confirmClicked (ZI)V (ZI)V
+	METHOD b initGui ()V ()V
+CLASS none/bwx
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+CLASS none/bwy
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD e updateScreen ()V ()V
+CLASS none/bwz
+	CLASS bxb
+		METHOD a drawSlot (IIIIII)V (IIIIII)V
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a mouseClicked (III)V (III)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD e updateScreen ()V ()V
+	METHOD k handleMouseInput ()V ()V
+	METHOD m onGuiClosed ()V ()V
 CLASS none/bx none/ServerCommandTell
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/bxc
+	METHOD a drawScreen (IIF)V (IIF)V
+CLASS none/bxd
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD b initGui ()V ()V
+	METHOD d doesGuiPauseGame ()Z ()Z
+	METHOD e updateScreen ()V ()V
+CLASS none/bxe
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a mouseClicked (III)V (III)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD e updateScreen ()V ()V
+	METHOD m onGuiClosed ()V ()V
+CLASS none/bxf net/minecraft/src/GuiScreen
+	FIELD a logger
+	FIELD g splitter
+	FIELD i eventButton
+	FIELD j mc
+	FIELD k fontRenderer
+	FIELD l width
+	FIELD m height
+	FIELD n buttonList
+	FIELD o buttonList2
+	FIELD r lastMouseEvent
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a mouseClicked (III)V (III)V
+	METHOD a mouseClickMove (IIIJ)V (IIIJ)V
+	METHOD a drawItemStackTooltip (Lnone/amj;II)V (Lnet/minecraft/src/ItemStack;II)V
+	METHOD a setWorldAndResolution (Lnone/bsu;II)V (Lnone/Minecraft;II)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD a confirmClicked (ZI)V (ZI)V
+	METHOD b initGui ()V ()V
+	METHOD b mouseMovedOrUp (III)V (III)V
+	METHOD b_ drawDefaultBackground (I)V (I)V
+	METHOD c drawDefaultBackground ()V ()V
+	METHOD c drawBackground (I)V (I)V
+	METHOD d doesGuiPauseGame ()Z ()Z
+	METHOD e updateScreen ()V ()V
+	METHOD k handleMouseInput ()V ()V
+	METHOD l handleKeyboardInput ()V ()V
+	METHOD m onGuiClosed ()V ()V
+	METHOD p handleInput ()V ()V
+	METHOD q isCtrlKeyDown ()Z ()Z
+	METHOD r isShiftKeyDown ()Z ()Z
+CLASS none/bxg
+	CLASS bxh
+		METHOD a drawSlot (IIIIII)V (IIIIII)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD a confirmClicked (ZI)V (ZI)V
+	METHOD b initGui ()V ()V
+	METHOD k handleMouseInput ()V ()V
+CLASS none/bxi
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+CLASS none/bxj
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+CLASS none/bxm
+	CLASS bxn
+		METHOD a drawSlot (IIIIII)V (IIIIII)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD k handleMouseInput ()V ()V
+CLASS none/bxo
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+CLASS none/bxp
+	METHOD a mouseReleased (II)V (II)V
+	METHOD a getHoverState (Z)I (Z)I
+	METHOD b mouseDragged (Lnone/bsu;II)V (Lnone/Minecraft;II)V
+	METHOD c mousePressed (Lnone/bsu;II)Z (Lnone/Minecraft;II)Z
+CLASS none/bxq
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a mouseClicked (III)V (III)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD a confirmClicked (ZI)V (ZI)V
+	METHOD b initGui ()V ()V
+	METHOD d doesGuiPauseGame ()Z ()Z
+	METHOD e updateScreen ()V ()V
+CLASS none/bxr
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a mouseClicked (III)V (III)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD b mouseMovedOrUp (III)V (III)V
+	METHOD k handleMouseInput ()V ()V
+CLASS none/bxs
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD b initGui ()V ()V
+	METHOD d doesGuiPauseGame ()Z ()Z
+	METHOD e updateScreen ()V ()V
+CLASS none/bxu
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD d doesGuiPauseGame ()Z ()Z
+	METHOD e updateScreen ()V ()V
+CLASS none/bxv net/minecraft/src/GuiStats
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a drawHorizontalLine (IIII)V (IIII)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD d doesGuiPauseGame ()Z ()Z
+	METHOD k handleMouseInput ()V ()V
+CLASS none/bxw
+	METHOD a drawSlot (IIIIII)V (IIIIII)V
+CLASS none/bxy
+	METHOD a drawSlot (IIIIII)V (IIIIII)V
+CLASS none/bxz net/minecraft/src/GuiSlotStatsItem
+	FIELD u slotGuiStats
+	METHOD a drawSlot (IIIIII)V (IIIIII)V
 CLASS none/by none/ServerCommandTellRaw
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/byb
+	METHOD a drawSlot (IIIIII)V (IIIIII)V
+CLASS none/byc net/minecraft/src/GuiSlotStats
+CLASS none/byf
+	FIELD v mc
+CLASS none/byj
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a mouseClicked (III)V (III)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD b mouseMovedOrUp (III)V (III)V
+	METHOD k handleMouseInput ()V ()V
+CLASS none/byl net/minecraft/src/GuiContainer
+	FIELD B returningStackTime
+	FIELD C returningStack
+	FIELD a inventoryTextures
+	FIELD e zLevel
+	FIELD f xSize
+	FIELD g ySize
+	FIELD h inventorySlots
+	FIELD i guiLeft
+	FIELD j mc
+	FIELD k itemRenderer
+	FIELD l width
+	FIELD m height
+	FIELD q fontRenderer
+	FIELD r guiTop
+	FIELD u theSlot
+	FIELD v clickedSlot
+	FIELD w isRightMouseClick
+	FIELD x draggedStack
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawGuiContainerBackgroundLayer (FII)V (FII)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a mouseClicked (III)V (III)V
+	METHOD a mouseClickMove (IIIJ)V (IIIJ)V
+	METHOD a drawSlotInventory (Lnone/ajk;)V (Lnet/minecraft/src/Slot;)V
+	METHOD a isMouseOverSlot (Lnone/ajk;II)Z (Lnet/minecraft/src/Slot;II)Z
+	METHOD a handleMouseClick (Lnone/ajk;III)V (Lnet/minecraft/src/Slot;III)V
+	METHOD a drawItemStack (Lnone/amj;IILjava/lang/String;)V (Lnet/minecraft/src/ItemStack;IILjava/lang/String;)V
+	METHOD b initGui ()V ()V
+	METHOD b checkHotBarKeys (I)Z (I)Z
+	METHOD b drawGuiContainerForegroundLayer (II)V (II)V
+	METHOD b mouseMovedOrUp (III)V (III)V
+	METHOD c getSlotAtPosition (II)Lnone/ajk; (II)Lnet/minecraft/src/Slot;
+	METHOD c isPointInRegion (IIIIII)Z (IIIIII)Z
+	METHOD d doesGuiPauseGame ()Z ()Z
+	METHOD e updateScreen ()V ()V
+	METHOD m onGuiClosed ()V ()V
+CLASS none/bym
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawGuiContainerBackgroundLayer (FII)V (FII)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a mouseClicked (III)V (III)V
+	METHOD b initGui ()V ()V
+	METHOD b drawGuiContainerForegroundLayer (II)V (II)V
+	METHOD m onGuiClosed ()V ()V
+CLASS none/byn
+	METHOD a drawGuiContainerBackgroundLayer (FII)V (FII)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD b drawGuiContainerForegroundLayer (II)V (II)V
+	METHOD e updateScreen ()V ()V
+CLASS none/byr
+	METHOD a drawButton (Lnone/bsu;II)V (Lnone/Minecraft;II)V
+CLASS none/bys net/minecraft/src/GuiBook
+	FIELD a logger
+	FIELD f bookTextures
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a mouseClicked (III)V (III)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD e updateScreen ()V ()V
+	METHOD m onGuiClosed ()V ()V
+CLASS none/byt
+	METHOD a drawButton (Lnone/bsu;II)V (Lnone/Minecraft;II)V
+CLASS none/byu
+	METHOD a drawGuiContainerBackgroundLayer (FII)V (FII)V
+	METHOD b drawGuiContainerForegroundLayer (II)V (II)V
+CLASS none/byv
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a mouseClicked (III)V (III)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD e updateScreen ()V ()V
+	METHOD m onGuiClosed ()V ()V
+CLASS none/byw net/minecraft/src/GuiCrafting
+	FIELD f xSize
+	FIELD g ySize
+	FIELD j mc
+	FIELD l width
+	FIELD m height
+	FIELD u craftingTableGuiTextures
+	METHOD a drawGuiContainerBackgroundLayer (FII)V (FII)V
+	METHOD b drawGuiContainerForegroundLayer (II)V (II)V
+CLASS none/byx
+	METHOD a drawGuiContainerBackgroundLayer (FII)V (FII)V
+	METHOD b drawGuiContainerForegroundLayer (II)V (II)V
+CLASS none/byz net/minecraft/src/GuiContainerCreative
+	CLASS bzb
+		METHOD a isItemValid (Lnone/amj;)Z (Lnet/minecraft/src/ItemStack;)Z
+		METHOD d getStack ()Lnone/amj; ()Lnet/minecraft/src/ItemStack;
+		METHOD e getHasStack ()Z ()Z
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawGuiContainerBackgroundLayer (FII)V (FII)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a mouseClicked (III)V (III)V
+	METHOD a handleMouseClick (Lnone/ajk;III)V (Lnet/minecraft/src/Slot;III)V
+	METHOD a drawItemStackTooltip (Lnone/amj;II)V (Lnet/minecraft/src/ItemStack;II)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD b drawGuiContainerForegroundLayer (II)V (II)V
+	METHOD b mouseMovedOrUp (III)V (III)V
+	METHOD e updateScreen ()V ()V
+	METHOD k handleMouseInput ()V ()V
+	METHOD m onGuiClosed ()V ()V
 CLASS none/bz none/ServerCommandOp
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/bza
+	METHOD b canDragIntoSlot (Lnone/ajk;)Z (Lnet/minecraft/src/Slot;)Z
+CLASS none/bzc
+	METHOD a drawGuiContainerBackgroundLayer (FII)V (FII)V
+	METHOD b drawGuiContainerForegroundLayer (II)V (II)V
+CLASS none/bzd net/minecraft/src/InventoryEffectRenderer
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD b initGui ()V ()V
+CLASS none/bzf
+	METHOD a drawGuiContainerBackgroundLayer (FII)V (FII)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a mouseClicked (III)V (III)V
+	METHOD b drawGuiContainerForegroundLayer (II)V (II)V
+	METHOD e updateScreen ()V ()V
+CLASS none/bzg
+	METHOD a drawGuiContainerBackgroundLayer (FII)V (FII)V
+	METHOD b drawGuiContainerForegroundLayer (II)V (II)V
+CLASS none/bzh
+	METHOD a drawGuiContainerBackgroundLayer (FII)V (FII)V
+	METHOD b drawGuiContainerForegroundLayer (II)V (II)V
+CLASS none/bzi
+	METHOD a drawGuiContainerBackgroundLayer (FII)V (FII)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD b drawGuiContainerForegroundLayer (II)V (II)V
+CLASS none/bzj
+	METHOD a drawGuiContainerBackgroundLayer (FII)V (FII)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD b drawGuiContainerForegroundLayer (II)V (II)V
+	METHOD e updateScreen ()V ()V
+CLASS none/bzk net/minecraft/src/GuiMerchant
+	FIELD A chatMessageComponent
+	FIELD u logger
+	FIELD v merchantTextures
+	FIELD w theIMerchant
+	FIELD x nextRecipeButtonIndex
+	FIELD y previousRecipeButtonIndex
+	FIELD z currentRecipeIndex
+	METHOD a getIMerchant ()Lnone/aqb; ()Lnet/minecraft/src/IMerchant;
+	METHOD a drawGuiContainerBackgroundLayer (FII)V (FII)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD b drawGuiContainerForegroundLayer (II)V (II)V
+	METHOD e updateScreen ()V ()V
+CLASS none/bzl net/minecraft/src/GuiButtonMerchant
+	METHOD a drawButton (Lnone/bsu;II)V (Lnone/Minecraft;II)V
+CLASS none/bzm net/minecraft/src/GuiEditSign
+	FIELD a entitySign
+	FIELD f updateCounter
+	FIELD g editLine
+	FIELD h doneButton
+	FIELD q signText
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD e updateScreen ()V ()V
+	METHOD m onGuiClosed ()V ()V
+CLASS none/bzp net/minecraft/src/GuiMultiplayer
+	METHOD a keyTyped (CI)V (CI)V
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a mouseClicked (III)V (III)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD a confirmClicked (ZI)V (ZI)V
+	METHOD b initGui ()V ()V
+	METHOD b mouseMovedOrUp (III)V (III)V
+	METHOD e updateScreen ()V ()V
+	METHOD k handleMouseInput ()V ()V
+	METHOD m onGuiClosed ()V ()V
+CLASS none/bzq net/minecraft/src/GuiSlotServer
+	FIELD a mc
+CLASS none/bzx net/minecraft/src/GuiSelectResourcePack
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a mouseClicked (III)V (III)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD b mouseMovedOrUp (III)V (III)V
+	METHOD k handleMouseInput ()V ()V
 CLASS none/ca none/ServerCommandPardonIp
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/cah
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD k handleMouseInput ()V ()V
+	METHOD m onGuiClosed ()V ()V
+CLASS none/cai
+	METHOD a drawSlot (IIIIII)V (IIIIII)V
+CLASS none/caj
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+CLASS none/cak
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
+	METHOD m onGuiClosed ()V ()V
+CLASS none/can
+	METHOD a drawScreen (IIF)V (IIF)V
+	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/src/GuiButton;)V
+	METHOD b initGui ()V ()V
 CLASS none/cb none/ServerCommandPardon
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -2446,11 +3231,19 @@ CLASS none/ce none/ServerCommandPublish
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/cee net/minecraft/src/NetClientHandler
+	METHOD a addToSendQueue (Lnone/id;)V (Lnone/id;)V
 CLASS none/cel
 	METHOD g getLoadedChunkCount ()I ()I
+CLASS none/cem
+	METHOD a windowClick (IIIILnone/ahd;)Lnone/amj; (IIIILnone/ahd;)Lnet/minecraft/src/ItemStack;
 CLASS none/cen none/DimensionClient
 	METHOD a addWorldInfoToCrashReport (Lnone/b;)Lnone/j; (Lnone/CrashLogger;)Lnone/CrashLogInfo;
 	METHOD c tick ()V ()V
+CLASS none/cew net/minecraft/src/ServerData
+	FIELD a serverName
+	FIELD b serverIP
+	METHOD a setHideAddress (Lnone/cex;)V (Lnone/cex;)V
 CLASS none/cf none/ServerCommandReplaceItem
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -2475,17 +3268,20 @@ CLASS none/cfo net/minecraft/world/entity/particle/ParticleCritMagicBuilder
 CLASS none/cfp net/minecraft/world/entity/particle/ParticleCritBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cfq net/minecraft/world/entity/particle/ParticleDripLiquid
+	METHOD c getBrightness (F)F (F)F
 CLASS none/cfr net/minecraft/world/entity/particle/ParticleDripLavaBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cfs net/minecraft/world/entity/particle/ParticleDripWaterBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cft net/minecraft/world/entity/particle/ParticleEnchantmentTable
+	METHOD c getBrightness (F)F (F)F
 CLASS none/cfu net/minecraft/world/entity/particle/ParticleEnchantmentTableBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cfv net/minecraft/world/entity/particle/ParticleExplosionNormal
 CLASS none/cfw net/minecraft/world/entity/particle/ParticleExplosionNormalBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cfz net/minecraft/world/entity/particle/ParticleFireworksSpark
+	METHOD c getBrightness (F)F (F)F
 CLASS none/cg none/ServerCommandSaveAll
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -2495,6 +3291,7 @@ CLASS none/cg none/ServerCommandSaveAll
 CLASS none/cgb net/minecraft/world/entity/particle/ParticleFireworksSparkBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cgc net/minecraft/world/entity/particle/ParticleFlame
+	METHOD c getBrightness (F)F (F)F
 CLASS none/cgd net/minecraft/world/entity/particle/ParticleFlameBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cge net/minecraft/world/entity/particle/ParticleFootstep
@@ -2514,6 +3311,7 @@ CLASS none/cgm net/minecraft/world/entity/particle/ParticleExplosionHugeBuilder
 CLASS none/cgp net/minecraft/world/entity/particle/ParticleSmokeLargeBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cgq net/minecraft/world/entity/particle/ParticleLava
+	METHOD c getBrightness (F)F (F)F
 CLASS none/cgr net/minecraft/world/entity/particle/ParticleLavaBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cgs net/minecraft/world/entity/particle/ParticleMobAppearance
@@ -2536,6 +3334,7 @@ CLASS none/chd net/minecraft/world/entity/particle/ParticleCloud
 CLASS none/che net/minecraft/world/entity/particle/ParticleCloudBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/chf net/minecraft/world/entity/particle/ParticlePortal
+	METHOD c getBrightness (F)F (F)F
 CLASS none/chg net/minecraft/world/entity/particle/ParticlePortalBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/chh net/minecraft/world/entity/particle/ParticleRedstone
@@ -2580,17 +3379,38 @@ CLASS none/cih net/minecraft/world/entity/particle/ParticleWaterWakeBuilder
 CLASS none/cij net/minecraft/world/entity/particle/ParticleWaterDropBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnone/World;DDDDDD[I)Lnone/EntityParticle;
 CLASS none/cio
+	FIELD I isDead
+	FIELD a sendQueue
+	FIELD bg inventory
+	FIELD bi openContainer
 	METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
 	METHOD a sendChatToPlayer (Lnone/ho;)V (Lnone/ChatMessageComponent;)V
+	METHOD e sendChatMessage (Ljava/lang/String;)V (Ljava/lang/String;)V
+	METHOD n closeScreen ()V ()V
 CLASS none/cip
 	METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
 	METHOD a sendChatToPlayer (Lnone/ho;)V (Lnone/ChatMessageComponent;)V
+CLASS none/civ
+	METHOD a addVertexWithUV (DDDDD)V (DDDDD)V
+	METHOD b startDrawingQuads ()V ()V
+	METHOD c setColorOpaque_I (I)V (I)V
 CLASS none/cj none/ServerCommandSay
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/cji
+	METHOD j setupOverlayRendering ()V ()V
+CLASS none/cjm org/lwjgl/opengl/GL11
+	METHOD E glPushMatrix ()V ()V
+	METHOD F glPopMatrix ()V ()V
+	METHOD a glScalef (FFF)V (FFF)V
+	METHOD a glBlendFunc (IIII)V (IIII)V
+	METHOD a drawGradientRect (ZZZZ)V (ZZZZ)V
+	METHOD b glTranslatef (FFF)V (FFF)V
+	METHOD b glRotatef (FFFF)V (FFFF)V
+	METHOD c glColor4f (FFFF)V (FFFF)V
 CLASS none/ck none/ServerCommandScoreboard
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -2633,6 +3453,8 @@ CLASS none/ck none/ServerCommandScoreboard
 		ARG 0 serverCommandUser
 	METHOD p (Lnone/ae;[Ljava/lang/String;I)V
 		ARG 0 serverCommandUser
+CLASS none/ckx
+	METHOD b draw ()I ()I
 CLASS none/cl none/_cl_ServerCommand_something
 	METHOD a (Lnone/ae;Lnone/ac;ILjava/lang/String;[Ljava/lang/Object;)V
 		ARG 0 serverCommandUser
@@ -2649,6 +3471,9 @@ CLASS none/cn none/ServerCommandSetWorldSpawn
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/cno net/minecraft/src/TileEntityRenderer
+	FIELD a instance
+	METHOD a renderTileEntityAt (Lnone/bcm;DDDF)V (Lnone/TileEntity;DDDF)V
 CLASS none/co none/ServerCommandSetIdleTimeout
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -2667,6 +3492,11 @@ CLASS none/cq none/ServerCommandSeed
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/cqh
+	FIELD a zLevel
+	METHOD a renderItemOverlayIntoGUI (Lnone/bty;Lnone/amj;II)V (Lnet/minecraft/src/FontRenderer;Lnet/minecraft/src/ItemStack;II)V
+	METHOD a renderItemOverlayIntoGUI (Lnone/bty;Lnone/amj;IILjava/lang/String;)V (Lnet/minecraft/src/FontRenderer;Lnet/minecraft/src/ItemStack;IILjava/lang/String;)V
+	METHOD b renderItemAndEffectIntoGUI (Lnone/amj;II)V (Lnet/minecraft/src/ItemStack;II)V
 CLASS none/cr none/ServerCommandSpreadPlayers
 	METHOD a (Ljava/util/Random;IDDDD)[Lnone/cs;
 		ARG 0 random
@@ -2696,6 +3526,8 @@ CLASS none/cu none/ServerCommandStop
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/cug
+	METHOD a bindTexture (Lnone/oa;)V (Lnet/minecraft/src/ResourceLocation;)V
 CLASS none/cv none/ServerCommandSummon
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -2708,6 +3540,9 @@ CLASS none/cw none/ServerCommandTp
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/cwc net/minecraft/src/I18n
+	METHOD a getString (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+CLASS none/cwe net/minecraft/src/LanguageManager
 CLASS none/cxl
 	METHOD toString returnFullObjectName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS none/cy none/ServerCommandTestForBlock
@@ -2755,6 +3590,9 @@ CLASS none/da none/ServerCommandTime
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/dax net/minecraft/src/OpenGlHelper
+	FIELD q lightmapTexUnit
+	METHOD a setLightmapTextureCoords (IFF)V (IFF)V
 CLASS none/db none/ServerCommandTitle
 	FIELD a logger
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
@@ -3513,10 +4351,10 @@ CLASS none/hv
 	FIELD g isObfuscated
 	FIELD h clickEvent
 	FIELD i hoverEvent
-	METHOD a getTextColor ()Lnone/a; ()Lnone/TextColor;
+	METHOD a getTextColor ()Lnone/a; ()Lnet/minecraft/src/EnumChatFormatting;
 	METHOD a IsBold (Ljava/lang/Boolean;)Lnone/hv; (Ljava/lang/Boolean;)Lnone/hv;
 		ARG 0 isBold
-	METHOD a setTextColor (Lnone/a;)Lnone/hv; (Lnone/TextColor;)Lnone/hv;
+	METHOD a setTextColor (Lnone/a;)Lnone/hv; (Lnet/minecraft/src/EnumChatFormatting;)Lnone/hv;
 		ARG 0 textColor
 	METHOD a setClickEvent (Lnone/hm;)Lnone/hv; (Lnone/ClickEvent;)Lnone/hv;
 		ARG 0 clickEvent
@@ -3539,9 +4377,9 @@ CLASS none/hv
 	METHOD h getClickEvent ()Lnone/hm; ()Lnone/ClickEvent;
 	METHOD i getHoverEvent ()Lnone/hr; ()Lnone/HoverEvent;
 CLASS none/hw
-	METHOD a getTextColor ()Lnone/a; ()Lnone/TextColor;
+	METHOD a getTextColor ()Lnone/a; ()Lnet/minecraft/src/EnumChatFormatting;
 	METHOD a IsBold (Ljava/lang/Boolean;)Lnone/hv; (Ljava/lang/Boolean;)Lnone/hv;
-	METHOD a setTextColor (Lnone/a;)Lnone/hv; (Lnone/TextColor;)Lnone/hv;
+	METHOD a setTextColor (Lnone/a;)Lnone/hv; (Lnet/minecraft/src/EnumChatFormatting;)Lnone/hv;
 		ARG 0 textColor
 	METHOD a setClickEvent (Lnone/hm;)Lnone/hv; (Lnone/ClickEvent;)Lnone/hv;
 		ARG 0 clickEvent
@@ -3703,6 +4541,7 @@ CLASS none/lw
 	FIELD a PerformRespawn
 	FIELD b RequestStats
 	FIELD c OpenInventoryAchivement
+CLASS none/mc net/minecraft/src/Packet250CustomPayload
 CLASS none/md
 	METHOD <init> (Lnone/wv;Lnone/brw;)V
 		ARG 0 entity
@@ -3721,7 +4560,7 @@ CLASS none/mm
 	FIELD d DropAllItems
 	FIELD e DropItem
 	FIELD f ReleaseUseItem
-CLASS none/mn
+CLASS none/mn net/minecraft/src/Packet19EntityAction
 	METHOD <init> (Lnone/wv;Lnone/mo;)V
 		ARG 0 entity
 	METHOD <init> (Lnone/wv;Lnone/mo;I)V
@@ -3739,6 +4578,7 @@ CLASS none/mr
 	FIELD b Declined
 	FIELD c FailedDownload
 	FIELD d Accepted
+CLASS none/mu net/minecraft/src/Packet130UpdateSign
 CLASS none/mw
 	METHOD a (Lnone/qt;)Lnone/wv;
 		ARG 0 dimensionServer
@@ -3778,7 +4618,7 @@ CLASS none/nu
 	METHOD serialize (Lnone/nt;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement;
 		ARG 1 type
 		ARG 2 jsonSerializationContext
-CLASS none/oa none/ObjectName
+CLASS none/oa net/minecraft/src/ResourceLocation
 	FIELD a modName
 	FIELD b objectname
 	METHOD <init> (I[Ljava/lang/String;)V
@@ -3905,6 +4745,7 @@ CLASS none/qw
 		ARG 0 entity
 	METHOD f (Lnone/wv;)V
 		ARG 0 entity
+	METHOD n closeScreen ()V ()V
 CLASS none/qx
 	FIELD a dimension
 	METHOD <init> (Lnone/aqu;)V
@@ -4065,6 +4906,10 @@ CLASS none/uw none/Profiler
 	METHOD a addSection (Ljava/lang/String;)V (Ljava/lang/String;)V
 	METHOD b endSection ()V ()V
 	METHOD c startSection (Ljava/lang/String;)V (Ljava/lang/String;)V
+CLASS none/v net/minecraft/src/AllowedCharacters
+	METHOD a indexOf (C)Z (C)Z
+CLASS none/vq
+	METHOD o_ onInventoryChanged ()V ()V
 CLASS none/vt none/EnumDifficulty
 	FIELD a PEACEFUL
 	FIELD b EASY
@@ -4072,6 +4917,8 @@ CLASS none/vt none/EnumDifficulty
 	FIELD d HARD
 CLASS none/w none/OSName
 	METHOD a getOSName ()Lnone/x; ()Lnone/OSType;
+CLASS none/wa
+	METHOD o_ onInventoryChanged ()V ()V
 CLASS none/wb none/PlayerUsageSnooper
 	METHOD a startSnooper ()V ()V
 	METHOD a addData (Ljava/lang/String;Ljava/lang/Object;)V (Ljava/lang/String;Ljava/lang/Object;)V
@@ -4094,6 +4941,8 @@ CLASS none/wv none/Entity
 	FIELD u worldZ
 	METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
 	METHOD a sendChatToPlayer (Lnone/ho;)V (Lnone/ChatMessageComponent;)V
+	METHOD ai isEntityAlive ()Z ()Z
+	METHOD c getBrightness (F)F (F)F
 	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD e getEntityWorld ()Lnone/aqu; ()Lnone/World;
 CLASS none/x none/OSType
@@ -4122,6 +4971,7 @@ CLASS none/xb none/EntityRegistry
 		ARG 4 color2
 CLASS none/xk none/EntityXPOrb
 CLASS none/xm none/EntityLiving
+	METHOD ai isEntityAlive ()Z ()Z
 CLASS none/xn none/EntityMobBase
 CLASS none/xx none/EntityTamable
 CLASS none/y none/_y_IServerCommand_something
