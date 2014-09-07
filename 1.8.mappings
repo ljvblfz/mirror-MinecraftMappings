@@ -3737,10 +3737,9 @@ CLASS none/cio net/minecraft/src/EntityClientPlayerMP
 	METHOD a sendChatToPlayer (Lnone/ho;)V (Lnone/ChatMessageComponent;)V
 	METHOD a addStat (Lnone/tq;I)V (Lnet/minecraft/src/StatBase;I)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
+		ARG 1 damage
 	METHOD a dropItem (Z)Lnone/adw; (Z)Lnone/EntityItem;
 		ARG 0 dropStack
-	METHOD attackEntityFrom (Lnone/wh;F)Z
-		ARG 1 damage
 	METHOD aw isSneaking ()Z ()Z
 	METHOD bv swingItem ()V ()V
 	METHOD ca respawnPlayer ()V ()V
