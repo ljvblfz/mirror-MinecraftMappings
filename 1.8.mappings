@@ -239,7 +239,7 @@ CLASS none/adf net/minecraft/entity/EntityWither
 	METHOD a shoot (Lnone/xm;F)V (Lnet/minecraft/entity/EntityLiving;F)V
 CLASS none/adi net/minecraft/entity/EntityArmorStand
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
-	METHOD bz getActiveHotbarSlot ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
+	METHOD bz getCurrentlyHoldingItemStack ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
 	METHOD s_ onUpdate ()V ()V
 CLASS none/adj
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
@@ -458,7 +458,7 @@ CLASS none/aha none/PlayerAbilities
 CLASS none/ahb net/minecraft/inventory/InventoryPlayer
 	FIELD a mainSlots
 	FIELD b armorSlots
-	FIELD c activeHotbarSlotIndex
+	FIELD c selectedHotbarSlotIndex
 	FIELD d owningPlayer
 	METHOD a getSlot (I)Lnone/amj; (I)Lnet/minecraft/item/ItemStack;
 	METHOD a removeFromSlot (II)Lnone/amj; (II)Lnet/minecraft/item/ItemStack;
@@ -476,7 +476,7 @@ CLASS none/ahb net/minecraft/inventory/InventoryPlayer
 	METHOD c hasMergeableItemStack (Lnone/amj;)Z (Lnet/minecraft/item/ItemStack;)Z
 	METHOD d getFirstMergeableSlotIndex (Lnone/amj;)I (Lnet/minecraft/item/ItemStack;)I
 	METHOD e overflowAfterAddItemStack (Lnone/amj;)I (Lnet/minecraft/item/ItemStack;)I
-	METHOD h getActiveHotbarSlot ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
+	METHOD h getSelectedHotbarSlot ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
 	METHOD i getInventoryWidth ()I ()I
 	METHOD j getFirstEmptySlotIndex ()I ()I
 	METHOD l clear ()V ()V
@@ -495,17 +495,27 @@ CLASS none/ahd net/minecraft/src/AbstractClientPlayer
 	FIELD by abilities
 	FIELD bz xpLevel
 	FIELD f xpSeed
+	FIELD g activeItemStack
+	FIELD h itemUseTimer
 	METHOD a addXpLevels (I)V (I)V
 		ARG 0 amount
+	METHOD a playSound (Ljava/lang/String;FF)V (Ljava/lang/String;FF)V
 	METHOD a joinEntityItemWithWorld (Lnone/adw;)V (Lnet/minecraft/entity/EntityItem;)V
 	METHOD a addStat (Lnone/tq;I)V (Lnet/minecraft/src/StatBase;I)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
 	METHOD a dropItem (Z)Lnone/adw; (Z)Lnet/minecraft/entity/EntityItem;
 	METHOD b subtractXpLevels (I)V (I)V
 		ARG 0 amount
+	METHOD b doEatDrinkAnimation (Lnone/amj;I)V (Lnet/minecraft/item/ItemStack;I)V
 	METHOD bI isSleeping ()Z ()Z
+	METHOD bP getActiveItemStack ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
+	METHOD bQ getItemUseTimer ()I ()I
+	METHOD bR isUsingAnItem ()Z ()Z
+	METHOD bS getItemUseTimerRemaining ()I ()I
+	METHOD bT doReleaseItemAction ()V ()V
+	METHOD bU resetItemUseTimer ()V ()V
 	METHOD bY getActiveHotbarSlot ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
-	METHOD bz getActiveItemStack ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
+	METHOD bz getCurrentlyHoldingItemStack ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
 	METHOD ca respawnPlayer ()V ()V
 	METHOD cf getSleepTimer ()I ()I
 	METHOD ci getXpSeed ()I ()I
@@ -514,6 +524,7 @@ CLASS none/ahd net/minecraft/src/AbstractClientPlayer
 	METHOD d damageEntity (Lnone/wh;F)V (Lnet/minecraft/src/DamageSource;F)V
 	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD n closeScreen ()V ()V
+	METHOD s doSwallowAction ()V ()V
 	METHOD s_ onUpdate ()V ()V
 	METHOD t sendPlayerAbilities ()V ()V
 	METHOD u addXp (I)V (I)V
@@ -527,7 +538,12 @@ CLASS none/ahj net/minecraft/entity/EntityArrow
 CLASS none/ahk net/minecraft/entity/EntityEyeEnderSignal
 	METHOD c getBrightness (F)F (F)F
 	METHOD s_ onUpdate ()V ()V
-CLASS none/ahl
+CLASS none/ahl net/minecraft/entity/EntityBallProjectile
+	FIELD a senderEntity
+	FIELD e xTile
+	FIELD f yTile
+	FIELD g zTile
+	FIELD i inGround
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
 	METHOD c getBrightness (F)F (F)F
 	METHOD s_ onUpdate ()V ()V
@@ -577,8 +593,6 @@ CLASS none/ain
 CLASS none/aio
 	METHOD b onContainerClosed (Lnone/ahd;)V (Lnet/minecraft/src/AbstractClientPlayer;)V
 CLASS none/aiq
-	CLASS air
-		METHOD p_ getMaxStackSize ()I ()I
 	CLASS none/air
 		METHOD o_ onInventoryChanged ()V ()V
 	CLASS none/ais
@@ -675,7 +689,9 @@ CLASS none/ajy
 	METHOD a doItemUseAction (Lnone/amj;Lnone/aqu;Lnone/ahd;)Lnone/amj; (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/src/AbstractClientPlayer;)Lnet/minecraft/item/ItemStack;
 CLASS none/ajz net/minecraft/item/ItemBow
 	METHOD a doItemUseAction (Lnone/amj;Lnone/aqu;Lnone/ahd;)Lnone/amj; (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/src/AbstractClientPlayer;)Lnet/minecraft/item/ItemStack;
+	METHOD a doReleaseItemAction (Lnone/amj;Lnone/aqu;Lnone/ahd;I)V (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/src/AbstractClientPlayer;I)V
 	METHOD b doSwallowAction (Lnone/amj;Lnone/aqu;Lnone/ahd;)Lnone/amj; (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/src/AbstractClientPlayer;)Lnet/minecraft/item/ItemStack;
+	METHOD d getItemUseTimerDuration (Lnone/amj;)I (Lnet/minecraft/item/ItemStack;)I
 	METHOD e getRightClickEvent (Lnone/amj;)Lnone/ano; (Lnet/minecraft/item/ItemStack;)Lnet/minecraft/src/EnumRightClickEvents;
 CLASS none/aka net/minecraft/item/ItemStew
 	METHOD b doSwallowAction (Lnone/amj;Lnone/aqu;Lnone/ahd;)Lnone/amj; (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/src/AbstractClientPlayer;)Lnet/minecraft/item/ItemStack;
@@ -774,6 +790,7 @@ CLASS none/alk net/minecraft/item/ItemFlintAndSteel
 CLASS none/all net/minecraft/item/ItemFood
 	METHOD a doItemUseAction (Lnone/amj;Lnone/aqu;Lnone/ahd;)Lnone/amj; (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/src/AbstractClientPlayer;)Lnet/minecraft/item/ItemStack;
 	METHOD b doSwallowAction (Lnone/amj;Lnone/aqu;Lnone/ahd;)Lnone/amj; (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/src/AbstractClientPlayer;)Lnet/minecraft/item/ItemStack;
+	METHOD d getItemUseTimerDuration (Lnone/amj;)I (Lnet/minecraft/item/ItemStack;)I
 	METHOD e getRightClickEvent (Lnone/amj;)Lnone/ano; (Lnet/minecraft/item/ItemStack;)Lnet/minecraft/src/EnumRightClickEvents;
 CLASS none/aln
 	METHOD a doPlaceBlockAction (Lnone/amj;Lnone/ahd;Lnone/aqu;Lnone/dt;Lnone/ej;FFF)Z (Lnet/minecraft/item/ItemStack;Lnet/minecraft/src/AbstractClientPlayer;Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/world/Direction;FFF)Z
@@ -807,7 +824,7 @@ CLASS none/alq net/minecraft/item/Item
 	METHOD a doUseOnLivingEntityAction (Lnone/amj;Lnone/ahd;Lnone/xm;)Z (Lnet/minecraft/item/ItemStack;Lnet/minecraft/src/AbstractClientPlayer;Lnet/minecraft/entity/EntityLiving;)Z
 	METHOD a doItemUseAction (Lnone/amj;Lnone/aqu;Lnone/ahd;)Lnone/amj; (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/src/AbstractClientPlayer;)Lnet/minecraft/item/ItemStack;
 		ARG 1 dimension
-	METHOD a (Lnone/amj;Lnone/aqu;Lnone/ahd;I)V
+	METHOD a doReleaseItemAction (Lnone/amj;Lnone/aqu;Lnone/ahd;I)V (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/src/AbstractClientPlayer;I)V
 		ARG 1 dimension
 	METHOD a (Lnone/amj;Lnone/aqu;Lnone/atr;Lnone/dt;Lnone/xm;)Z
 		ARG 1 dimension
@@ -844,6 +861,7 @@ CLASS none/alq net/minecraft/item/Item
 		ARG 0 block
 	METHOD d getItem (Ljava/lang/String;)Lnone/alq; (Ljava/lang/String;)Lnet/minecraft/item/Item;
 		ARG 0 s
+	METHOD d getItemUseTimerDuration (Lnone/amj;)I (Lnet/minecraft/item/ItemStack;)I
 	METHOD d (Lnone/amj;Lnone/aqu;Lnone/ahd;)V
 		ARG 1 dimension
 	METHOD e getRightClickEvent (Lnone/amj;)Lnone/ano; (Lnet/minecraft/item/ItemStack;)Lnet/minecraft/src/EnumRightClickEvents;
@@ -869,8 +887,12 @@ CLASS none/amj net/minecraft/item/ItemStack
 		ARG 0 splitAmount
 	METHOD a setItem (Lnone/alq;)V (Lnet/minecraft/item/Item;)V
 	METHOD a isMergeable (Lnone/amj;)Z (Lnet/minecraft/item/ItemStack;)Z
+	METHOD a doItemUseAction (Lnone/aqu;Lnone/ahd;)Lnone/amj; (Lnet/minecraft/world/World;Lnet/minecraft/src/AbstractClientPlayer;)Lnet/minecraft/item/ItemStack;
+	METHOD a getMiningEfficiencyForBlock (Lnone/atr;)F (Lnet/minecraft/block/BlockType;)F
 	METHOD b getItem ()Lnone/alq; ()Lnet/minecraft/item/Item;
 	METHOD b clone (Lnone/amj;)Lnone/amj; (Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;
+	METHOD b doSwallowAction (Lnone/aqu;Lnone/ahd;)Lnone/amj; (Lnet/minecraft/world/World;Lnet/minecraft/src/AbstractClientPlayer;)Lnet/minecraft/item/ItemStack;
+	METHOD b doReleaseItemAction (Lnone/aqu;Lnone/ahd;I)V (Lnet/minecraft/world/World;Lnet/minecraft/src/AbstractClientPlayer;I)V
 	METHOD b givesSpecialDropOnBlock (Lnone/atr;)Z (Lnet/minecraft/block/BlockType;)Z
 	METHOD c getMaxStackSize ()I ()I
 	METHOD e isDamageable ()Z ()Z
@@ -878,6 +900,7 @@ CLASS none/amj net/minecraft/item/ItemStack
 	METHOD h getDamage ()I ()I
 	METHOD i getDataValue ()I ()I
 	METHOD k copy ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
+	METHOD l getItemUseTimerDuration ()I ()I
 	METHOD m getRightClickEvent ()Lnone/ano; ()Lnet/minecraft/src/EnumRightClickEvents;
 CLASS none/amk net/minecraft/item/Items
 	FIELD A mushroomStew
@@ -1076,6 +1099,7 @@ CLASS none/amm none/ItemBlockLeaves
 CLASS none/amo net/minecraft/item/ItemMilkBucket
 	METHOD a doItemUseAction (Lnone/amj;Lnone/aqu;Lnone/ahd;)Lnone/amj; (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/src/AbstractClientPlayer;)Lnet/minecraft/item/ItemStack;
 	METHOD b doSwallowAction (Lnone/amj;Lnone/aqu;Lnone/ahd;)Lnone/amj; (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/src/AbstractClientPlayer;)Lnet/minecraft/item/ItemStack;
+	METHOD d getItemUseTimerDuration (Lnone/amj;)I (Lnet/minecraft/item/ItemStack;)I
 	METHOD e getRightClickEvent (Lnone/amj;)Lnone/ano; (Lnet/minecraft/item/ItemStack;)Lnet/minecraft/src/EnumRightClickEvents;
 CLASS none/amp net/minecraft/item/ItemMinecart
 	METHOD a doPlaceBlockAction (Lnone/amj;Lnone/ahd;Lnone/aqu;Lnone/dt;Lnone/ej;FFF)Z (Lnet/minecraft/item/ItemStack;Lnet/minecraft/src/AbstractClientPlayer;Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/world/Direction;FFF)Z
@@ -1096,6 +1120,7 @@ CLASS none/amv none/ItemBlockPiston
 CLASS none/amw
 	METHOD a doItemUseAction (Lnone/amj;Lnone/aqu;Lnone/ahd;)Lnone/amj; (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/src/AbstractClientPlayer;)Lnet/minecraft/item/ItemStack;
 	METHOD b doSwallowAction (Lnone/amj;Lnone/aqu;Lnone/ahd;)Lnone/amj; (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/src/AbstractClientPlayer;)Lnet/minecraft/item/ItemStack;
+	METHOD d getItemUseTimerDuration (Lnone/amj;)I (Lnet/minecraft/item/ItemStack;)I
 	METHOD e getRightClickEvent (Lnone/amj;)Lnone/ano; (Lnet/minecraft/item/ItemStack;)Lnet/minecraft/src/EnumRightClickEvents;
 CLASS none/amy net/minecraft/item/ItemRecord
 	METHOD a doPlaceBlockAction (Lnone/amj;Lnone/ahd;Lnone/aqu;Lnone/dt;Lnone/ej;FFF)Z (Lnet/minecraft/item/ItemStack;Lnet/minecraft/src/AbstractClientPlayer;Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/world/Direction;FFF)Z
@@ -1144,6 +1169,7 @@ CLASS none/anm net/minecraft/item/ItemWeapon
 	METHOD a doItemUseAction (Lnone/amj;Lnone/aqu;Lnone/ahd;)Lnone/amj; (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/src/AbstractClientPlayer;)Lnet/minecraft/item/ItemStack;
 	METHOD a getMiningEfficiencyMultiplier (Lnone/amj;Lnone/atr;)F (Lnet/minecraft/item/ItemStack;Lnet/minecraft/block/BlockType;)F
 	METHOD b givesSpecialDropOnBlock (Lnone/atr;)Z (Lnet/minecraft/block/BlockType;)Z
+	METHOD d getItemUseTimerDuration (Lnone/amj;)I (Lnet/minecraft/item/ItemStack;)I
 	METHOD e getRightClickEvent (Lnone/amj;)Lnone/ano; (Lnet/minecraft/item/ItemStack;)Lnet/minecraft/src/EnumRightClickEvents;
 CLASS none/ann none/ItemBlockGrass
 	METHOD a getDataValueForBlockVersion (I)I (I)I
@@ -1192,6 +1218,7 @@ CLASS none/aqq
 	METHOD b getGameRuleBooleanValue (Ljava/lang/String;)Z (Ljava/lang/String;)Z
 CLASS none/aqu net/minecraft/world/World
 	FIELD c cloudColor
+	FIELD k entityList
 	FIELD n WOO_MAGIC_NUMBER
 	FIELD s rand
 	FIELD v chunkProvider
@@ -1215,6 +1242,7 @@ CLASS none/aqu net/minecraft/world/World
 		ARG 0 chunkX
 		ARG 1 chunkZ
 		ARG 2 flag
+	METHOD a playSoundAtPlayer (Lnone/ahd;Ljava/lang/String;FF)V (Lnet/minecraft/src/AbstractClientPlayer;Ljava/lang/String;FF)V
 	METHOD a addWorldAccess (Lnone/ara;)V (Lnone/ara;)V
 	METHOD a addWorldInfoToCrashReport (Lnone/b;)Lnone/j; (Lnone/CrashLogger;)Lnone/CrashLogInfo;
 	METHOD a checkBlockRangeIsInWorld (Lnone/bjb;)Z (Lnet/minecraft/world/CoordRange;)Z
@@ -4137,6 +4165,7 @@ CLASS none/cio net/minecraft/entity/EntityClientPlayerMP
 	FIELD y rotationYaw
 	FIELD z rotationPitch
 	METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
+	METHOD a playSound (Ljava/lang/String;FF)V (Ljava/lang/String;FF)V
 	METHOD a joinEntityItemWithWorld (Lnone/adw;)V (Lnet/minecraft/entity/EntityItem;)V
 	METHOD a sendChatToPlayer (Lnone/ho;)V (Lnone/ChatMessageComponent;)V
 	METHOD a addStat (Lnone/tq;I)V (Lnet/minecraft/src/StatBase;I)V
@@ -5593,6 +5622,7 @@ CLASS none/qw
 	METHOD f (Lnone/wv;)V
 		ARG 0 entity
 	METHOD n closeScreen ()V ()V
+	METHOD s doSwallowAction ()V ()V
 	METHOD s_ onUpdate ()V ()V
 	METHOD t sendPlayerAbilities ()V ()V
 CLASS none/qx
@@ -5802,6 +5832,7 @@ CLASS none/wd
 CLASS none/wh net/minecraft/src/DamageSource
 CLASS none/wv net/minecraft/entity/Entity
 	FIELD C onGround
+	FIELD I isDead
 	FIELD O fallDistance
 	FIELD V random
 	FIELD ae chunkX
@@ -5810,10 +5841,14 @@ CLASS none/wv net/minecraft/entity/Entity
 	FIELD aj portalCooldown
 	FIELD ao uuid
 	FIELD ar invulnerable
+	FIELD l riderEntity
+	FIELD m riddenEntity
+	FIELD o dimension
 	FIELD s worldX
 	FIELD t worldY
 	FIELD u worldZ
 	METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
+	METHOD a playSound (Ljava/lang/String;FF)V (Ljava/lang/String;FF)V
 	METHOD a sendChatToPlayer (Lnone/ho;)V (Lnone/ChatMessageComponent;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
 	METHOD aQ getBoundingBox ()Lnone/brt; ()Lnone/brt;
@@ -5859,13 +5894,13 @@ CLASS none/xm net/minecraft/entity/EntityLiving
 	METHOD bI isSleeping ()Z ()Z
 	METHOD bm getHealth ()F ()F
 	METHOD bv swingItem ()V ()V
-	METHOD bz getActiveHotbarSlot ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
+	METHOD bz getCurrentlyHoldingItemStack ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
 	METHOD d damageEntity (Lnone/wh;F)V (Lnet/minecraft/src/DamageSource;F)V
 	METHOD g heal (F)V (F)V
 	METHOD h setHealth (F)V (F)V
 	METHOD s_ onUpdate ()V ()V
 CLASS none/xn net/minecraft/entity/EntityMobBase
-	METHOD bz getActiveHotbarSlot ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
+	METHOD bz getCurrentlyHoldingItemStack ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
 	METHOD s_ onUpdate ()V ()V
 CLASS none/xx net/minecraft/entity/EntityTamable
 CLASS none/y none/_y_IServerCommand_something
