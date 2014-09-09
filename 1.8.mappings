@@ -505,7 +505,7 @@ CLASS none/ahd net/minecraft/src/AbstractClientPlayer
 		ARG 0 amount
 	METHOD bI isSleeping ()Z ()Z
 	METHOD bY getActiveHotbarSlot ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
-	METHOD bz getActiveHotbarSlot ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
+	METHOD bz getActiveItemStack ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
 	METHOD ca respawnPlayer ()V ()V
 	METHOD cf getSleepTimer ()I ()I
 	METHOD ci getXpSeed ()I ()I
