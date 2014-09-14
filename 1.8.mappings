@@ -1361,6 +1361,8 @@ CLASS none/are net/minecraft/world/WorldType
 CLASS none/arj
 	METHOD p getBlockStateAt (Lnone/dt;)Lnone/bec; (Lnet/minecraft/world/ChunkCoordinates;)Lnet/minecraft/block/BlockState;
 CLASS none/arl net/minecraft/world/biome/BiomeBeach
+	METHOD <init> (I)V
+		ARG 0 biomeID
 CLASS none/arm net/minecraft/world/biome/Biome
 	FIELD A frozenRiver
 	FIELD B icePlains
@@ -1393,14 +1395,23 @@ CLASS none/arm net/minecraft/world/biome/Biome
 	FIELD aa mesa
 	FIELD ab mesaPlateauForest
 	FIELD ac mesaPlateau
+	FIELD ad defaultBiome
 	FIELD ah biomeName
+	FIELD ak topBlock
+	FIELD al fillerBlock
 	FIELD an height
 	FIELD ao volatility
 	FIELD ap temperature
 	FIELD aq rainfall
+	FIELD at monsterSpawnlist
+	FIELD au creatureSpawnlist
+	FIELD av waterSpawnlist
+	FIELD aw ambientSpawnlist
 	FIELD az biomeID
 	FIELD b riverTerrainData
 	FIELD c oceanTerrainData
+	FIELD d deepOceanTerrainData
+	FIELD e plainsTerrainData
 	FIELD g hillsTerrainData
 	FIELD h plateauTerrainData
 	FIELD i extremeHillsTerrainData
@@ -1422,8 +1433,28 @@ CLASS none/arm net/minecraft/world/biome/Biome
 		ARG 0 temperature
 		ARG 1 rainfall
 	METHOD a setName (Ljava/lang/String;)Lnone/arm; (Ljava/lang/String;)Lnet/minecraft/world/biome/Biome;
+	METHOD a (Ljava/util/Random;)Lnone/bhc;
+		ARG 0 rand
+	METHOD a (Ljava/util/Random;Lnone/dt;)Lnone/awa;
+		ARG 0 rand
+	METHOD a placeBlocksInBiome (Lnone/aqu;Ljava/util/Random;Lnone/bgk;IID)V (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/block/BlockArray;IID)V
+		ARG 3 worldX
+		ARG 4 worldZ
+	METHOD a equals (Lnone/arm;)Z (Lnet/minecraft/world/biome/Biome;)Z
 	METHOD a setBiomeTerrainData (Lnone/aro;)Lnone/arm; (Lnet/minecraft/world/biome/BiomeTerrainData;)Lnet/minecraft/world/biome/Biome;
+	METHOD a getTemp (Lnone/dt;)F (Lnet/minecraft/world/ChunkCoordinates;)F
+	METHOD a getSpawnlist (Lnone/xp;)Ljava/util/List; (Lnone/EnumMobLists;)Ljava/util/List;
+	METHOD b (Ljava/util/Random;)Lnone/bhp;
+		ARG 0 rand
+	METHOD b replaceBlocks (Lnone/aqu;Ljava/util/Random;Lnone/bgk;IID)V (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/block/BlockArray;IID)V
+		ARG 3 worldX
+		ARG 4 worldZ
+		ARG 5 value
+	METHOD d createSubBiome (I)Lnone/arm; (I)Lnet/minecraft/world/biome/Biome;
+		ARG 0 biomeID
 	METHOD k createMutated ()Lnone/arm; ()Lnet/minecraft/world/biome/Biome;
+	METHOD m getTempType ()Lnone/arp; ()Lnet/minecraft/world/biome/BiomeTemperatureTypes;
+	METHOD n getBiomeArray ()[Lnone/arm; ()[Lnet/minecraft/world/biome/Biome;
 CLASS none/aro net/minecraft/world/biome/BiomeTerrainData
 	FIELD a height
 	FIELD b volatility
@@ -1432,6 +1463,7 @@ CLASS none/arp net/minecraft/world/biome/BiomeTemperatureTypes
 	FIELD b cold
 	FIELD c medium
 	FIELD d m
+CLASS none/arq none/spawnEntity
 CLASS none/ary
 	FIELD a dim
 	FIELD b rand
@@ -1439,22 +1471,97 @@ CLASS none/ary
 CLASS none/arz net/minecraft/world/WorldChunkManager
 	FIELD e spawnBiomes
 CLASS none/asa net/minecraft/world/biome/BiomeDesert
+	METHOD <init> (I)V
+		ARG 0 biomeID
+	METHOD a (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
+		ARG 1 rand
 CLASS none/asb net/minecraft/world/biome/BiomeExtremeHills
+	METHOD <init> (IZ)V
+		ARG 0 biomeID
+		ARG 1 typeFlag
+	METHOD a placeBlocksInBiome (Lnone/aqu;Ljava/util/Random;Lnone/bgk;IID)V (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/block/BlockArray;IID)V
+	METHOD b subBiome (Lnone/arm;)Lnone/asb; (Lnet/minecraft/world/biome/Biome;)Lnet/minecraft/world/biome/BiomeExtremeHills;
+	METHOD d createSubBiome (I)Lnone/arm; (I)Lnet/minecraft/world/biome/Biome;
 CLASS none/asc net/minecraft/world/WorldChunkManagerHell
 CLASS none/asd net/minecraft/world/biome/BiomeForest
+	FIELD aG typeID
+	METHOD <init> (II)V
+		ARG 0 biomeID
+		ARG 1 typeID
+	METHOD d createSubBiome (I)Lnone/arm; (I)Lnet/minecraft/world/biome/Biome;
 CLASS none/asg net/minecraft/world/biome/BiomeHell
+	METHOD <init> (I)V
+		ARG 0 biomeID
 CLASS none/ash net/minecraft/world/biome/BiomeIcy
+	FIELD aD typeFlag
+	METHOD <init> (IZ)V
+		ARG 0 biomeID
+		ARG 1 typeFlag
+	METHOD d createSubBiome (I)Lnone/arm; (I)Lnet/minecraft/world/biome/Biome;
 CLASS none/asi net/minecraft/world/biome/BiomeJungle
+	FIELD aD typeFlag
+	METHOD <init> (IZ)V
+		ARG 0 biomeID
+		ARG 1 typeFlag
 CLASS none/asj net/minecraft/world/biome/BiomeMesa
+	FIELD aF noiseField1
+	FIELD aG noiseField2
+	FIELD aH noiseField3
+	FIELD aI alreadyMesa
+	FIELD aJ hasForest
+	METHOD <init> (IZZ)V
+		ARG 0 biomeID
+		ARG 1 isAlreadyMesa
+		ARG 2 hasForest
+	METHOD a placeBlocksInBiome (Lnone/aqu;Ljava/util/Random;Lnone/bgk;IID)V (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/block/BlockArray;IID)V
+	METHOD d createSubBiome (I)Lnone/arm; (I)Lnet/minecraft/world/biome/Biome;
 CLASS none/ask net/minecraft/world/biome/BiomeMushroomIsland
+	METHOD <init> (I)V
+		ARG 0 biomeID
+CLASS none/asl net/minecraft/world/biome/BiomeMutated
+	FIELD aE baseBiome
+	METHOD <init> (ILnone/arm;)V
+		ARG 0 biomeID
+		ARG 1 baseBiome
+	METHOD a placeBlocksInBiome (Lnone/aqu;Ljava/util/Random;Lnone/bgk;IID)V (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/block/BlockArray;IID)V
+	METHOD a equals (Lnone/arm;)Z (Lnet/minecraft/world/biome/Biome;)Z
+	METHOD m getTempType ()Lnone/arp; ()Lnet/minecraft/world/biome/BiomeTemperatureTypes;
 CLASS none/asm net/minecraft/world/biome/BiomeOcean
+	METHOD <init> (I)V
+		ARG 0 biomeID
+	METHOD a placeBlocksInBiome (Lnone/aqu;Ljava/util/Random;Lnone/bgk;IID)V (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/block/BlockArray;IID)V
+	METHOD m getTempType ()Lnone/arp; ()Lnet/minecraft/world/biome/BiomeTemperatureTypes;
 CLASS none/asn net/minecraft/world/biome/BiomePlains
+	METHOD <init> (I)V
+		ARG 0 biomeID
+	METHOD d createSubBiome (I)Lnone/arm; (I)Lnet/minecraft/world/biome/Biome;
 CLASS none/asp net/minecraft/world/biome/BiomeRiver
+	METHOD <init> (I)V
+		ARG 0 biomeID
 CLASS none/asq net/minecraft/world/biome/BiomeSavanna
+	METHOD <init> (I)V
+		ARG 0 biomeID
+	METHOD d createSubBiome (I)Lnone/arm; (I)Lnet/minecraft/world/biome/Biome;
+CLASS none/asr
+	METHOD a placeBlocksInBiome (Lnone/aqu;Ljava/util/Random;Lnone/bgk;IID)V (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/block/BlockArray;IID)V
 CLASS none/ass net/minecraft/world/biome/BiomeStoneBeach
+	METHOD <init> (I)V
+		ARG 0 biomeID
 CLASS none/ast net/minecraft/world/biome/BiomeSwampland
+	METHOD <init> (I)V
+		ARG 0 biomeID
+	METHOD a placeBlocksInBiome (Lnone/aqu;Ljava/util/Random;Lnone/bgk;IID)V (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/block/BlockArray;IID)V
 CLASS none/asu net/minecraft/world/biome/BiomeTaiga
+	FIELD aI typeFlag
+	METHOD <init> (II)V
+		ARG 0 biomeID
+		ARG 1 typeFlag
+	METHOD a placeBlocksInBiome (Lnone/aqu;Ljava/util/Random;Lnone/bgk;IID)V (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/block/BlockArray;IID)V
+	METHOD d createSubBiome (I)Lnone/arm; (I)Lnet/minecraft/world/biome/Biome;
+		ARG 0 biomeID
 CLASS none/asv net/minecraft/world/biome/BiomeTheEnd
+	METHOD <init> (I)V
+		ARG 0 biomeID
 CLASS none/asy net/minecraft/block/BlockAir
 	METHOD c IsOpaque ()Z ()Z
 CLASS none/asz net/minecraft/block/BlockAnvil
@@ -1506,6 +1613,7 @@ CLASS none/atr net/minecraft/block/BlockType
 	FIELD x explosionResistance
 	METHOD H getBlockName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD K getCreativeGroup ()Lnone/akf; ()Lnet/minecraft/creative/CreativeGroups;
+	METHOD P getBlockState ()Lnone/bec; ()Lnet/minecraft/block/BlockState;
 	METHOD a getBlockTileName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD a setLightEmmisionLevel (F)Lnone/atr; (F)Lnet/minecraft/block/BlockType;
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
@@ -1917,6 +2025,7 @@ CLASS none/aty net/minecraft/block/Blocks
 	FIELD x lapis_ore
 	FIELD y lapis_block
 	FIELD z dispenser
+	METHOD a getBlockType (Ljava/lang/String;)Lnone/atr; (Ljava/lang/String;)Lnet/minecraft/block/BlockType;
 CLASS none/atz none/IGrowable
 	METHOD a (Lnone/aqu;Ljava/util/Random;Lnone/dt;Lnone/bec;)Z
 		ARG 0 dim
@@ -2476,12 +2585,37 @@ CLASS none/bfe net/minecraft/world/IChunkProvider
 		ARG 3 chunkZ
 	METHOD a getChunkFromBlockCoords (Lnone/dt;)Lnone/bfh; (Lnet/minecraft/world/ChunkCoordinates;)Lnet/minecraft/world/Chunk;
 		ARG 0 blockCoords
-	METHOD d getChunk (II)Lnone/bfh; (II)Lnet/minecraft/world/Chunk;
+	METHOD d generate (II)Lnone/bfh; (II)Lnet/minecraft/world/Chunk;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD g getLoadedChunkCount ()I ()I
 CLASS none/bff none/NibbleArray
 	FIELD a array
+	METHOD <init> ([B)V
+		ARG 0 array
+	METHOD a get ()[B ()[B
+	METHOD a getValue (I)I (I)I
+		ARG 0 address
+	METHOD a setValue (II)V (II)V
+		ARG 0 address
+		ARG 1 value
+	METHOD a getValueAtCoords (III)I (III)I
+		ARG 0 localX
+		ARG 1 localY
+		ARG 2 localZ
+	METHOD a setValueAtCoords (IIII)V (IIII)V
+		ARG 0 localX
+		ARG 1 localY
+		ARG 2 locelZ
+		ARG 3 value
+	METHOD b checkIfEven (I)Z (I)Z
+		ARG 0 raddress
+	METHOD b setOffset (III)I (III)I
+		ARG 0 localX
+		ARG 1 localY
+		ARG 2 rlocalZ
+	METHOD c shiftAddress (I)I (I)I
+		ARG 0 address
 CLASS none/bfg net/minecraft/world/EmptyChunk
 	METHOD a isChunk (II)Z (II)Z
 	METHOD a getBlockAt (Lnone/dt;)Lnone/atr; (Lnet/minecraft/world/ChunkCoordinates;)Lnet/minecraft/block/BlockType;
@@ -2555,37 +2689,65 @@ CLASS none/bfh net/minecraft/world/Chunk
 		ARG 1 worldY
 		ARG 2 localZ
 	METHOD g compareHasEntities (Z)V (Z)V
-	METHOD h getCubeArray ()[Lnone/bfm; ()[Lnet/minecraft/world/ChunkCube;
+	METHOD h getCubeArray ()[Lnone/bfm; ()[Lnet/minecraft/world/ChunkSection;
 	METHOD k getBiomeMap ()[B ()[B
 	METHOD p getDimension ()Lnone/aqu; ()Lnet/minecraft/world/World;
 	METHOD q getHeightMap ()[I ()[I
 	METHOD s getEntityStore ()[Lnone/uc; ()[Lnet/minecraft/entity/EntitySet;
-CLASS none/bfm net/minecraft/world/ChunkCube
+CLASS none/bfm net/minecraft/world/ChunkSection
 	FIELD a yLocation
+	FIELD b numBlocksInSection
 	FIELD d blockDataArray
+	FIELD e blockLightArray
+	FIELD f skyLightArray
 	METHOD <init> (IZ)V
 		ARG 0 yLocation
+		ARG 1 hasSky
+	METHOD a isSectionEmpty ()Z ()Z
 	METHOD a getBlockStateAt (III)Lnone/bec; (III)Lnet/minecraft/block/BlockState;
 		ARG 0 localX
 		ARG 1 localY
 		ARG 2 localZ
+	METHOD a setSkyLightAtCoords (IIII)V (IIII)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+		ARG 3 lightLevel
 	METHOD a setBlockStateAt (IIILnone/bec;)V (IIILnet/minecraft/block/BlockState;)V
 		ARG 0 localX
 		ARG 1 localY
 		ARG 2 localZ
 		ARG 3 state
+	METHOD a setBlockLightArray (Lnone/bff;)V (Lnone/NibbleArray;)V
 	METHOD a setBlockDataArray ([C)V ([C)V
 		ARG 0 newDataArray
 	METHOD b getBlockAt (III)Lnone/atr; (III)Lnet/minecraft/block/BlockType;
 		ARG 0 localX
 		ARG 1 localY
 		ARG 2 localZ
+	METHOD b setBlockLightAtCoords (IIII)V (IIII)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+		ARG 3 lightLevel
+	METHOD b setSkyLightArray (Lnone/bff;)V (Lnone/NibbleArray;)V
 	METHOD c getBlockMetadataAt (III)I (III)I
 		ARG 0 localX
 		ARG 1 localY
 		ARG 2 localZ
 	METHOD d getYLocation ()I ()I
+	METHOD d getSkyLightAtCoords (III)I (III)I
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD e countBlocksInSection ()V ()V
+	METHOD e getBlockLightAtCoords (III)I (III)I
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
 	METHOD g getBlockDataArray ()[C ()[C
+	METHOD h getBlockLightArray ()Lnone/bff; ()Lnone/NibbleArray;
+	METHOD i getSkyLightArray ()Lnone/bff; ()Lnone/NibbleArray;
 CLASS none/bfn
 	FIELD a aByte
 	FIELD b offset1
@@ -2675,11 +2837,17 @@ CLASS none/bgk net/minecraft/block/BlockArray
 	FIELD b defaultBlockState
 	METHOD a getBlockState (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
 		ARG 0 arrayPos
+	METHOD a getBlockState (III)Lnone/bec; (III)Lnet/minecraft/block/BlockState;
+		ARG 0 localX
+		ARG 1 localY
+		ARG 2 localZ
 	METHOD a setBlockData (IIILnone/bec;)V (IIILnet/minecraft/block/BlockState;)V
 		ARG 0 localX
 		ARG 1 localY
 		ARG 2 localZ
 	METHOD a setBlockState (ILnone/bec;)V (ILnet/minecraft/block/BlockState;)V
+		ARG 0 arrayPos
+		ARG 1 blockState
 CLASS none/bgl net/minecraft/world/biome/BiomeConfigSettingsList
 CLASS none/bgn net/minecraft/world/biome/BiomeConfig
 	FIELD A useRavines
@@ -2763,6 +2931,7 @@ CLASS none/bgn net/minecraft/world/biome/BiomeConfig
 CLASS none/bgo net/minecraft/world/biome/BiomeConfigSerialHandler
 CLASS none/bgp net/minecraft/world/ChunkGeneratorDebug
 	FIELD c dim
+	METHOD d generate (II)Lnone/bfh; (II)Lnet/minecraft/world/Chunk;
 	METHOD g getLoadedChunkCount ()I ()I
 CLASS none/bgq net/minecraft/world/ChunkGeneratorFlat
 	FIELD a dim
@@ -2771,6 +2940,7 @@ CLASS none/bgq net/minecraft/world/ChunkGeneratorFlat
 	METHOD a (Lnone/bfe;II)V
 		ARG 1 chunkX
 		ARG 2 chunkZ
+	METHOD d generate (II)Lnone/bfh; (II)Lnet/minecraft/world/Chunk;
 	METHOD g getLoadedChunkCount ()I ()I
 CLASS none/bgr net/minecraft/world/ChunkGeneratorHell
 	FIELD h dim
@@ -2780,6 +2950,7 @@ CLASS none/bgr net/minecraft/world/ChunkGeneratorHell
 	METHOD a generateTerrain (IILnone/bgk;)V (IILnet/minecraft/block/BlockArray;)V
 	METHOD a generateNoiseField ([DIIIIII)[D ([DIIIIII)[D
 	METHOD b replaceBlocks (IILnone/bgk;)V (IILnet/minecraft/block/BlockArray;)V
+	METHOD d generate (II)Lnone/bfh; (II)Lnet/minecraft/world/Chunk;
 	METHOD g getLoadedChunkCount ()I ()I
 CLASS none/bgs net/minecraft/world/generator/MapGenCaves
 CLASS none/bgt net/minecraft/world/generator/MapGenBase
@@ -2810,11 +2981,13 @@ CLASS none/bgv net/minecraft/world/ChunkGeneratorDefault
 	METHOD a (Lnone/bfe;Lnone/bfh;II)Z
 		ARG 2 chunkX
 		ARG 3 chunkZ
+	METHOD d generate (II)Lnone/bfh; (II)Lnet/minecraft/world/Chunk;
 	METHOD g getLoadedChunkCount ()I ()I
 CLASS none/bgw net/minecraft/world/ChunkGeneratorEnd
 	FIELD h rand
 	FIELD l dim
 	FIELD n biomeArray
+	METHOD d generate (II)Lnone/bfh; (II)Lnet/minecraft/world/Chunk;
 	METHOD g getLoadedChunkCount ()I ()I
 CLASS none/bh net/minecraft/server/commands/ServerCommandMe
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
@@ -4294,6 +4467,7 @@ CLASS none/cec
 CLASS none/cee net/minecraft/network/NetClientHandler
 	METHOD a addToSendQueue (Lnone/id;)V (Lnone/id;)V
 CLASS none/cel
+	METHOD d generate (II)Lnone/bfh; (II)Lnet/minecraft/world/Chunk;
 	METHOD g getLoadedChunkCount ()I ()I
 CLASS none/cem net/minecraft/src/PlayerControllerMP
 	METHOD a windowClick (IIIILnone/ahd;)Lnone/amj; (IIIILnet/minecraft/src/AbstractClientPlayer;)Lnet/minecraft/item/ItemStack;
@@ -6086,6 +6260,7 @@ CLASS none/qs
 	METHOD a (Lnone/aqu;Ljava/lang/String;Lnone/dt;)Lnone/dt;
 		ARG 0 dimension
 	METHOD c loadChunk (II)Lnone/bfh; (II)Lnet/minecraft/world/Chunk;
+	METHOD d generate (II)Lnone/bfh; (II)Lnet/minecraft/world/Chunk;
 	METHOD g getLoadedChunkCount ()I ()I
 CLASS none/qt net/minecraft/world/WorldServer
 	FIELD b theChunkProviderServer
@@ -6411,6 +6586,7 @@ CLASS none/xm net/minecraft/entity/EntityLiving
 CLASS none/xn net/minecraft/entity/EntityMobBase
 	METHOD bz getCurrentlyHoldingItemStack ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
 	METHOD s_ onUpdate ()V ()V
+CLASS none/xp none/EnumMobLists
 CLASS none/xx net/minecraft/entity/EntityTamable
 CLASS none/y none/_y_IServerCommand_something
 	METHOD a (Lnone/ae;Lnone/ac;ILjava/lang/String;[Ljava/lang/Object;)V
