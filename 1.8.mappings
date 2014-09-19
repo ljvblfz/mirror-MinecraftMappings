@@ -3562,6 +3562,13 @@ CLASS none/bs net/minecraft/server/commands/ServerCommandHelp
 	METHOD d (Lnone/ae;)Ljava/util/List;
 		ARG 0 serverCommandUser
 CLASS none/bsq net/minecraft/chat/ChatLine
+	FIELD a updateCounter
+	FIELD b component
+	FIELD c chatLineID
+	METHOD <init> (ILnone/ho;I)V
+		ARG 0 updateCounter
+		ARG 1 component
+		ARG 2 chatLineID
 	METHOD a getChatLineString ()Lnone/ho; ()Lnet/minecraft/chat/ChatMessageComponent;
 	METHOD b getUpdateCounter ()I ()I
 	METHOD c getChatLineId ()I ()I
@@ -4620,6 +4627,77 @@ CLASS none/cec
 	FIELD b mc
 CLASS none/cee net/minecraft/network/NetClientHandler
 	METHOD a addToSendQueue (Lnone/id;)V (Lnone/id;)V
+	METHOD a handlePlayerpositionAndLook (Lnone/ii;)V (Lnet/minecraft/network/packet/clientbound/PacketPlayerPositionAndLook;)V
+	METHOD a handleSpawnObject (Lnone/il;)V (Lnet/minecraft/network/packet/clientbound/PacketSpawnObject;)V
+	METHOD a handleSpawnExperienceOrb (Lnone/im;)V (Lnet/minecraft/network/packet/clientbound/PacketSpawnExperienceOrb;)V
+	METHOD a handleSpawnGlobal (Lnone/in;)V (Lnet/minecraft/network/packet/clientbound/PacketSpawnGlobal;)V
+	METHOD a handleSpawnMob (Lnone/io;)V (Lnet/minecraft/network/packet/clientbound/PacketSpawnMob;)V
+	METHOD a handleSpawnPainting (Lnone/ip;)V (Lnet/minecraft/network/packet/clientbound/PacketSpawnPainting;)V
+	METHOD a handleSpawnPlayer (Lnone/iq;)V (Lnet/minecraft/network/packet/clientbound/PacketSpawnPlayer;)V
+	METHOD a handleAnimation (Lnone/ir;)V (Lnet/minecraft/network/packet/clientbound/PacketAnimation;)V
+	METHOD a handleStatistics (Lnone/is;)V (Lnet/minecraft/network/packet/clientbound/PacketStatistics;)V
+	METHOD a handleBlockBreakAnimation (Lnone/it;)V (Lnet/minecraft/network/packet/clientbound/PacketBlockBreakAnimation;)V
+	METHOD a handleUpdateBlockEntity (Lnone/iu;)V (Lnet/minecraft/network/packet/clientbound/PacketUpdateBlockEntity;)V
+	METHOD a handleBlockAction (Lnone/iv;)V (Lnet/minecraft/network/packet/clientbound/PacketBlockAction;)V
+	METHOD a handleBlockChange (Lnone/iw;)V (Lnet/minecraft/network/packet/clientbound/PacketBlockChange;)V
+	METHOD a handleServerDifficuilty (Lnone/ix;)V (Lnet/minecraft/network/packet/clientbound/PacketServerDifficulty;)V
+	METHOD a handleTabComplete (Lnone/iy;)V (Lnet/minecraft/network/packet/clientbound/PacketTabComplete;)V
+	METHOD a handleChatMessage (Lnone/iz;)V (Lnet/minecraft/network/packet/clientbound/PacketChatMessage;)V
+	METHOD a handleMultiBlockChange (Lnone/ja;)V (Lnet/minecraft/network/packet/clientbound/PacketMultiBlockChange;)V
+	METHOD a handleConfirmTransaction (Lnone/jc;)V (Lnet/minecraft/network/packet/clientbound/PacketConfirmTransaction;)V
+	METHOD a handleCloseWindow (Lnone/jd;)V (Lnet/minecraft/network/packet/clientbound/PacketCloseWindow;)V
+	METHOD a handleOpenWindow (Lnone/je;)V (Lnet/minecraft/network/packet/clientbound/PacketOpenWindow;)V
+	METHOD a handleWindowItems (Lnone/jf;)V (Lnet/minecraft/network/packet/clientbound/PacketWindowItems;)V
+	METHOD a handleWindowProperty (Lnone/jg;)V (Lnet/minecraft/network/packet/clientbound/PacketWindowProprety;)V
+	METHOD a handleSetSlot (Lnone/jh;)V (Lnet/minecraft/network/packet/clientbound/PacketSetSlot;)V
+	METHOD a handlePluginMessage (Lnone/ji;)V (Lnet/minecraft/network/packet/clientbound/PacketPluginMessage;)V
+	METHOD a handleDisconnect (Lnone/jj;)V (Lnet/minecraft/network/packet/clientbound/PacketDisconnect;)V
+	METHOD a handleEntityStatus (Lnone/jk;)V (Lnet/minecraft/network/packet/clientbound/PacketEntityStatus;)V
+	METHOD a handleUpdateEntityNBT (Lnone/jl;)V (Lnet/minecraft/network/packet/clientbound/PacketUpdateEntityNBT;)V
+	METHOD a handleExplosion (Lnone/jm;)V (Lnet/minecraft/network/packet/clientbound/PacketExplosion;)V
+	METHOD a handleSetCompression (Lnone/jn;)V (Lnet/minecraft/network/packet/clientbound/PacketSetCompression;)V
+	METHOD a handleChangeGameState (Lnone/jo;)V (Lnet/minecraft/network/packet/clientbound/PacketChangeGameState;)V
+	METHOD a handleKeepAlive (Lnone/jp;)V (Lnet/minecraft/network/packet/clientbound/PacketKeepAlive;)V
+	METHOD a handleChunkData (Lnone/jq;)V (Lnet/minecraft/network/packet/clientbound/PacketChunkData;)V
+	METHOD a handleMapChunkBulk (Lnone/js;)V (Lnet/minecraft/network/packet/clientbound/PacketMapChunkBulk;)V
+	METHOD a handleEffect (Lnone/jt;)V (Lnet/minecraft/network/packet/clientbound/PacketEffect;)V
+	METHOD a handleParticle (Lnone/ju;)V (Lnet/minecraft/network/packet/clientbound/PacketParticle;)V
+	METHOD a handleSoundEffect (Lnone/jv;)V (Lnet/minecraft/network/packet/clientbound/PacketSoundEffect;)V
+	METHOD a handleJoinGame (Lnone/jw;)V (Lnet/minecraft/network/packet/clientbound/PacketJoinGame;)V
+	METHOD a handleMaps (Lnone/jx;)V (Lnet/minecraft/network/packet/clientbound/PacketMaps;)V
+	METHOD a handleEntity (Lnone/jy;)V (Lnet/minecraft/network/packet/clientbound/PacketEntity;)V
+	METHOD a handleSignEditorOpen (Lnone/kc;)V (Lnet/minecraft/network/packet/clientbound/PacketSignEditorOpen;)V
+	METHOD a handlePlayerAbilities (Lnone/kd;)V (Lnet/minecraft/network/packet/clientbound/PacketPlayerAbilities;)V
+	METHOD a handleCombat (Lnone/ke;)V (Lnet/minecraft/network/packet/clientbound/PacketCombat;)V
+	METHOD a handleListItem (Lnone/kh;)V (Lnet/minecraft/network/packet/clientbound/PacketPlayerListItem;)V
+	METHOD a handleUseBed (Lnone/kl;)V (Lnet/minecraft/network/packet/clientbound/PacketUseBed;)V
+	METHOD a handleDestroyEntities (Lnone/km;)V (Lnet/minecraft/network/packet/clientbound/PacketDestroyEntities;)V
+	METHOD a handleRemoveEntityEffect (Lnone/kn;)V (Lnet/minecraft/network/packet/clientbound/PacketRemoveEntityEffect;)V
+	METHOD a handleResourcePackSend (Lnone/ko;)V (Lnet/minecraft/network/packet/clientbound/PacketResourcePackSend;)V
+	METHOD a handleRespawn (Lnone/kp;)V (Lnet/minecraft/network/packet/clientbound/PacketRespawn;)V
+	METHOD a handleEntityHeadLook (Lnone/kq;)V (Lnet/minecraft/network/packet/clientbound/PacketEntityHeadLook;)V
+	METHOD a handleWorldBorder (Lnone/kr;)V (Lnet/minecraft/network/packet/clientbound/PacketWorldBorder;)V
+	METHOD a handleCamera (Lnone/ku;)V (Lnet/minecraft/network/packet/clientbound/PacketCamera;)V
+	METHOD a handleHeldItemChange (Lnone/kv;)V (Lnet/minecraft/network/packet/clientbound/PacketHeldItemChange;)V
+	METHOD a handleDisplayScoreboard (Lnone/kw;)V (Lnet/minecraft/network/packet/clientbound/PacketDisplayScoreboard;)V
+	METHOD a handleEntityMetadata (Lnone/kx;)V (Lnet/minecraft/network/packet/clientbound/PacketEntityMetadata;)V
+	METHOD a handleAttachEntity (Lnone/ky;)V (Lnet/minecraft/network/packet/clientbound/PacketAttachEntity;)V
+	METHOD a handleEntityVelocity (Lnone/kz;)V (Lnet/minecraft/network/packet/clientbound/PacketEntityVelocity;)V
+	METHOD a handleEntityEquipment (Lnone/la;)V (Lnet/minecraft/network/packet/clientbound/PacketEntityEquipment;)V
+	METHOD a handleSetExperience (Lnone/lb;)V (Lnet/minecraft/network/packet/clientbound/PacketSetExperience;)V
+	METHOD a handleUpdateHealth (Lnone/lc;)V (Lnet/minecraft/network/packet/clientbound/PacketUpdateHealth;)V
+	METHOD a handleScoreboardObjectives (Lnone/ld;)V (Lnet/minecraft/network/packet/clientbound/PacketScoreboardObjective;)V
+	METHOD a handleTeams (Lnone/le;)V (Lnet/minecraft/network/packet/clientbound/PacketTeams;)V
+	METHOD a handleUpdateScore (Lnone/lf;)V (Lnet/minecraft/network/packet/clientbound/PacketUpdateScore;)V
+	METHOD a handleSpawnPosition (Lnone/lh;)V (Lnet/minecraft/network/packet/clientbound/PacketSpawnPosition;)V
+	METHOD a handleUpdateTime (Lnone/li;)V (Lnet/minecraft/network/packet/clientbound/PacketUpdateTime;)V
+	METHOD a handleTitle (Lnone/lj;)V (Lnet/minecraft/network/packet/clientbound/PacketTitle;)V
+	METHOD a handleUpdateSign (Lnone/ll;)V (Lnet/minecraft/network/packet/clientbound/PacketUpdateSign;)V
+	METHOD a handlePlayerListHeaderFooter (Lnone/lm;)V (Lnet/minecraft/network/packet/clientbound/PacketPlayerListHeaderFooter;)V
+	METHOD a handleCollectItem (Lnone/ln;)V (Lnet/minecraft/network/packet/clientbound/PacketCollectItem;)V
+	METHOD a handleEntityTeleport (Lnone/lo;)V (Lnet/minecraft/network/packet/clientbound/PacketEntityTeleport;)V
+	METHOD a handleEntityProperties (Lnone/lp;)V (Lnet/minecraft/network/packet/clientbound/PacketEntityPropreties;)V
+	METHOD a handleEntityEffect (Lnone/lr;)V (Lnet/minecraft/network/packet/clientbound/PacketEntityEffect;)V
 CLASS none/cel
 	METHOD d generate (II)Lnone/bfh; (II)Lnet/minecraft/world/Chunk;
 	METHOD g getLoadedChunkCount ()I ()I
@@ -5260,6 +5338,7 @@ CLASS none/dk net/minecraft/server/commands/ServerCommandInvalidNumberException
 CLASS none/dl net/minecraft/server/commands/ServerCommandSyntaxException
 CLASS none/dm net/minecraft/server/commands/ServerCommandPlayerNotFoundException
 CLASS none/dn net/minecraft/server/commands/ServerCommandNotFoundException
+CLASS none/dp net/minecraft/server/commands/ServerCommandInvalidArgumentsException
 CLASS none/dt net/minecraft/world/ChunkCoordinates
 	FIELD a zeroed
 	FIELD b BITS_X
@@ -5852,7 +5931,7 @@ CLASS none/gp
 		ARG 1 byteBuf
 CLASS none/gq
 	FIELD b deflater
-CLASS none/gr net/minecraft/network/INetworkManager
+CLASS none/gr net/minecraft/network/NetworkManager
 	CLASS none/gv
 		METHOD initChannel (Lio/netty/channel/Channel;)V
 	CLASS none/gw
@@ -5889,7 +5968,7 @@ CLASS none/gy
 	FIELD d Login
 	METHOD a addIdClassMapping (Lnone/ie;Ljava/lang/Class;)Lnone/gy; (Lnet/minecraft/network/PacketDestination;Ljava/lang/Class;)Lnone/gy;
 CLASS none/ha net/minecraft/network/Packet
-CLASS none/hd
+CLASS none/hd net/minecraft/network/PacketBuffer
 	FIELD a byteBuf
 	METHOD <init> (Lio/netty/buffer/ByteBuf;)V
 		ARG 0 byteBuf
@@ -5914,11 +5993,21 @@ CLASS none/hi
 		ARG 0 channelHandlerContext
 		ARG 1 byteBuf1
 		ARG 2 byteBuf2
-CLASS none/hj net/minecraft/chat/hj
+CLASS none/hj net/minecraft/chat/BaseComponent
 	FIELD a list
-	METHOD a (Ljava/lang/String;)Lnone/ho;
+	FIELD b style
+	METHOD a getComponents ()Ljava/util/List; ()Ljava/util/List;
+	METHOD a getIterator (Ljava/lang/Iterable;)Ljava/util/Iterator; (Ljava/lang/Iterable;)Ljava/util/Iterator;
+		ARG 0 iterable
+	METHOD a appendText (Ljava/lang/String;)Lnone/ho; (Ljava/lang/String;)Lnet/minecraft/chat/ChatMessageComponent;
 		ARG 0 text
-	METHOD c chatMessageComponentToString ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD a addComponent (Lnone/ho;)Lnone/ho; (Lnet/minecraft/chat/ChatMessageComponent;)Lnet/minecraft/chat/ChatMessageComponent;
+		ARG 0 component
+	METHOD a setStyle (Lnone/hv;)Lnone/ho; (Lnet/minecraft/chat/Style;)Lnet/minecraft/chat/ChatMessageComponent;
+		ARG 0 style
+	METHOD b getStyle ()Lnone/hv; ()Lnet/minecraft/chat/Style;
+	METHOD c getUnformattedText ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD d getFormattedText ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS none/hm net/minecraft/chat/ClickEvent
 CLASS none/hn net/minecraft/client/gui/EnumClickActionTypes
 	FIELD a OpenUrl
@@ -5939,7 +6028,15 @@ CLASS none/hn net/minecraft/client/gui/EnumClickActionTypes
 		ARG 0 name
 	METHOD b getName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS none/ho net/minecraft/chat/ChatMessageComponent
-	METHOD c chatMessageComponentToString ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD a getComponents ()Ljava/util/List; ()Ljava/util/List;
+	METHOD a appendText (Ljava/lang/String;)Lnone/ho; (Ljava/lang/String;)Lnet/minecraft/chat/ChatMessageComponent;
+	METHOD a addComponent (Lnone/ho;)Lnone/ho; (Lnet/minecraft/chat/ChatMessageComponent;)Lnet/minecraft/chat/ChatMessageComponent;
+	METHOD a setStyle (Lnone/hv;)Lnone/ho; (Lnet/minecraft/chat/Style;)Lnet/minecraft/chat/ChatMessageComponent;
+	METHOD b getStyle ()Lnone/hv; ()Lnet/minecraft/chat/Style;
+	METHOD c getUnformattedText ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD d getFormattedText ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD e getComponentText ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD f cloneComponent ()Lnone/ho; ()Lnet/minecraft/chat/ChatMessageComponent;
 CLASS none/hq
 	METHOD a (Lnone/ae;Lnone/ho;Lnone/wv;)Lnone/ho;
 		ARG 0 serverCommandUser
@@ -5966,9 +6063,22 @@ CLASS none/hs net/minecraft/chat/HoverActionTypes
 	METHOD a getByName (Ljava/lang/String;)Lnone/hs; (Ljava/lang/String;)Lnet/minecraft/chat/HoverActionTypes;
 		ARG 0 name
 	METHOD b getName ()Ljava/lang/String; ()Ljava/lang/String;
-CLASS none/ht net/minecraft/chat/ht
-CLASS none/hu net/minecraft/chat/hu
-CLASS none/hv
+CLASS none/ht net/minecraft/chat/ScoreComponent
+	FIELD b name
+	FIELD c objectives
+	FIELD d text
+	METHOD b setText (Ljava/lang/String;)V (Ljava/lang/String;)V
+	METHOD e getComponentText ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD f cloneComponent ()Lnone/ho; ()Lnet/minecraft/chat/ChatMessageComponent;
+	METHOD g getName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD h getObjectives ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS none/hu net/minecraft/chat/SelectorComponent
+	FIELD b pattern
+	METHOD e getComponentText ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD f cloneComponent ()Lnone/ho; ()Lnet/minecraft/chat/ChatMessageComponent;
+	METHOD g getPattern ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS none/hv net/minecraft/chat/Style
+	FIELD a parent
 	FIELD b textColor
 	FIELD c isBold
 	FIELD d isItalic
@@ -5977,51 +6087,64 @@ CLASS none/hv
 	FIELD g isObfuscated
 	FIELD h clickEvent
 	FIELD i hoverEvent
+	FIELD j insertion
 	METHOD a getTextColor ()Lnone/a; ()Lnet/minecraft/chat/EnumChatFormatting;
-	METHOD a IsBold (Ljava/lang/Boolean;)Lnone/hv; (Ljava/lang/Boolean;)Lnone/hv;
+	METHOD a setBold (Ljava/lang/Boolean;)Lnone/hv; (Ljava/lang/Boolean;)Lnet/minecraft/chat/Style;
 		ARG 0 isBold
-	METHOD a setTextColor (Lnone/a;)Lnone/hv; (Lnet/minecraft/chat/EnumChatFormatting;)Lnone/hv;
+	METHOD a setInsertion (Ljava/lang/String;)Lnone/hv; (Ljava/lang/String;)Lnet/minecraft/chat/Style;
+	METHOD a setTextColor (Lnone/a;)Lnone/hv; (Lnet/minecraft/chat/EnumChatFormatting;)Lnet/minecraft/chat/Style;
 		ARG 0 textColor
-	METHOD a setClickEvent (Lnone/hm;)Lnone/hv; (Lnet/minecraft/chat/ClickEvent;)Lnone/hv;
+	METHOD a setClickEvent (Lnone/hm;)Lnone/hv; (Lnet/minecraft/chat/ClickEvent;)Lnet/minecraft/chat/Style;
 		ARG 0 clickEvent
-	METHOD a setHoverEvent (Lnone/hr;)Lnone/hv; (Lnet/minecraft/chat/HoverEvent;)Lnone/hv;
+	METHOD a setHoverEvent (Lnone/hr;)Lnone/hv; (Lnet/minecraft/chat/HoverEvent;)Lnet/minecraft/chat/Style;
 		ARG 0 hoverEvent
+	METHOD a setParent (Lnone/hv;)Lnone/hv; (Lnet/minecraft/chat/Style;)Lnet/minecraft/chat/Style;
 	METHOD b IsBold ()Z ()Z
-	METHOD b IsItalic (Ljava/lang/Boolean;)Lnone/hv; (Ljava/lang/Boolean;)Lnone/hv;
+	METHOD b setItalic (Ljava/lang/Boolean;)Lnone/hv; (Ljava/lang/Boolean;)Lnet/minecraft/chat/Style;
 		ARG 0 isItalic
 	METHOD c IsItalic ()Z ()Z
-	METHOD c IsStrikethrough (Ljava/lang/Boolean;)Lnone/hv; (Ljava/lang/Boolean;)Lnone/hv;
+	METHOD c setStrikethrough (Ljava/lang/Boolean;)Lnone/hv; (Ljava/lang/Boolean;)Lnet/minecraft/chat/Style;
 		ARG 0 isStrikethrough
 	METHOD d IsStrikethrough ()Z ()Z
-	METHOD d IsUnderlined (Ljava/lang/Boolean;)Lnone/hv; (Ljava/lang/Boolean;)Lnone/hv;
+	METHOD d setUnderlined (Ljava/lang/Boolean;)Lnone/hv; (Ljava/lang/Boolean;)Lnet/minecraft/chat/Style;
 		ARG 0 isUnderline
 	METHOD e IsUnderline ()Z ()Z
-	METHOD e IsObfuscated (Ljava/lang/Boolean;)Lnone/hv; (Ljava/lang/Boolean;)Lnone/hv;
+	METHOD e setObfuscated (Ljava/lang/Boolean;)Lnone/hv; (Ljava/lang/Boolean;)Lnet/minecraft/chat/Style;
 		ARG 0 isObfuscated
 	METHOD f IsObfuscated ()Z ()Z
 	METHOD g IsNotStyled ()Z ()Z
 	METHOD h getClickEvent ()Lnone/hm; ()Lnet/minecraft/chat/ClickEvent;
 	METHOD i getHoverEvent ()Lnone/hr; ()Lnet/minecraft/chat/HoverEvent;
-CLASS none/hw
+	METHOD j getInsertion ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD k getStyleString ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD m cloneWithParent ()Lnone/hv; ()Lnet/minecraft/chat/Style;
+	METHOD n cloneWithoutParent ()Lnone/hv; ()Lnet/minecraft/chat/Style;
+	METHOD o getParentStyle ()Lnone/hv; ()Lnet/minecraft/chat/Style;
+CLASS none/hw net/minecraft/chat/StyleRoot
 	METHOD a getTextColor ()Lnone/a; ()Lnet/minecraft/chat/EnumChatFormatting;
-	METHOD a IsBold (Ljava/lang/Boolean;)Lnone/hv; (Ljava/lang/Boolean;)Lnone/hv;
-	METHOD a setTextColor (Lnone/a;)Lnone/hv; (Lnet/minecraft/chat/EnumChatFormatting;)Lnone/hv;
+	METHOD a setBold (Ljava/lang/Boolean;)Lnone/hv; (Ljava/lang/Boolean;)Lnet/minecraft/chat/Style;
+	METHOD a setTextColor (Lnone/a;)Lnone/hv; (Lnet/minecraft/chat/EnumChatFormatting;)Lnet/minecraft/chat/Style;
 		ARG 0 textColor
-	METHOD a setClickEvent (Lnone/hm;)Lnone/hv; (Lnet/minecraft/chat/ClickEvent;)Lnone/hv;
+	METHOD a setClickEvent (Lnone/hm;)Lnone/hv; (Lnet/minecraft/chat/ClickEvent;)Lnet/minecraft/chat/Style;
 		ARG 0 clickEvent
-	METHOD a setHoverEvent (Lnone/hr;)Lnone/hv; (Lnet/minecraft/chat/HoverEvent;)Lnone/hv;
+	METHOD a setHoverEvent (Lnone/hr;)Lnone/hv; (Lnet/minecraft/chat/HoverEvent;)Lnet/minecraft/chat/Style;
 		ARG 0 hoverEvent
+	METHOD a setParent (Lnone/hv;)Lnone/hv; (Lnet/minecraft/chat/Style;)Lnet/minecraft/chat/Style;
 	METHOD b IsBold ()Z ()Z
-	METHOD b IsItalic (Ljava/lang/Boolean;)Lnone/hv; (Ljava/lang/Boolean;)Lnone/hv;
+	METHOD b setItalic (Ljava/lang/Boolean;)Lnone/hv; (Ljava/lang/Boolean;)Lnet/minecraft/chat/Style;
 	METHOD c IsItalic ()Z ()Z
-	METHOD c IsStrikethrough (Ljava/lang/Boolean;)Lnone/hv; (Ljava/lang/Boolean;)Lnone/hv;
+	METHOD c setStrikethrough (Ljava/lang/Boolean;)Lnone/hv; (Ljava/lang/Boolean;)Lnet/minecraft/chat/Style;
 	METHOD d IsStrikethrough ()Z ()Z
-	METHOD d IsUnderlined (Ljava/lang/Boolean;)Lnone/hv; (Ljava/lang/Boolean;)Lnone/hv;
+	METHOD d setUnderlined (Ljava/lang/Boolean;)Lnone/hv; (Ljava/lang/Boolean;)Lnet/minecraft/chat/Style;
 	METHOD e IsUnderline ()Z ()Z
-	METHOD e IsObfuscated (Ljava/lang/Boolean;)Lnone/hv; (Ljava/lang/Boolean;)Lnone/hv;
+	METHOD e setObfuscated (Ljava/lang/Boolean;)Lnone/hv; (Ljava/lang/Boolean;)Lnet/minecraft/chat/Style;
 	METHOD f IsObfuscated ()Z ()Z
 	METHOD h getClickEvent ()Lnone/hm; ()Lnet/minecraft/chat/ClickEvent;
 	METHOD i getHoverEvent ()Lnone/hr; ()Lnet/minecraft/chat/HoverEvent;
+	METHOD j getInsertion ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD k getStyleString ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD m cloneWithParent ()Lnone/hv; ()Lnet/minecraft/chat/Style;
+	METHOD n cloneWithoutParent ()Lnone/hv; ()Lnet/minecraft/chat/Style;
 CLASS none/hx
 	METHOD deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnone/hv;
 		ARG 0 jsonElement
@@ -6034,51 +6157,244 @@ CLASS none/hy net/minecraft/chat/TextComponent
 	FIELD b text
 	METHOD <init> (Ljava/lang/String;)V
 		ARG 0 text
-	METHOD e getText2 ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD e getComponentText ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD f cloneComponent ()Lnone/ho; ()Lnet/minecraft/chat/ChatMessageComponent;
+	METHOD f cloneComponent ()Lnone/hy; ()Lnet/minecraft/chat/TextComponent;
 	METHOD g getText ()Ljava/lang/String; ()Ljava/lang/String;
-CLASS none/hz net/minecraft/chat/hz
+CLASS none/hz net/minecraft/chat/TranslatableComponent
+	FIELD b list
+	FIELD c pattern
+	FIELD d key
+	FIELD e args
+	FIELD f lock
+	FIELD g langID
+	METHOD a setStyle (Lnone/hv;)Lnone/ho; (Lnet/minecraft/chat/Style;)Lnet/minecraft/chat/ChatMessageComponent;
+	METHOD e getComponentText ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD f cloneComponent ()Lnone/ho; ()Lnet/minecraft/chat/ChatMessageComponent;
+	METHOD f cloneComponent ()Lnone/hz; ()Lnet/minecraft/chat/TranslatableComponent;
+	METHOD g translateToCurrentLanguage ()V ()V
+	METHOD i getKey ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD j getArgs ()[Ljava/lang/Object; ()[Ljava/lang/Object;
+CLASS none/id
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/ie net/minecraft/network/PacketDestination
 	FIELD a ServerBound
 	FIELD b ClientBound
 CLASS none/ii net/minecraft/network/packet/clientbound/PacketPlayerPositionAndLook
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/ij
 	FIELD a X
 	FIELD b Y
 	FIELD c Z
 	FIELD d YRotation
 	FIELD e XRotation
+CLASS none/ik net/minecraft/network/INetClientHandler
+	METHOD a handlePlayerpositionAndLook (Lnone/ii;)V (Lnet/minecraft/network/packet/clientbound/PacketPlayerPositionAndLook;)V
+		ARG 0 packet
+	METHOD a handleSpawnObject (Lnone/il;)V (Lnet/minecraft/network/packet/clientbound/PacketSpawnObject;)V
+		ARG 0 packet
+	METHOD a handleSpawnExperienceOrb (Lnone/im;)V (Lnet/minecraft/network/packet/clientbound/PacketSpawnExperienceOrb;)V
+		ARG 0 packet
+	METHOD a handleSpawnGlobal (Lnone/in;)V (Lnet/minecraft/network/packet/clientbound/PacketSpawnGlobal;)V
+		ARG 0 packet
+	METHOD a handleSpawnMob (Lnone/io;)V (Lnet/minecraft/network/packet/clientbound/PacketSpawnMob;)V
+		ARG 0 packet
+	METHOD a handleSpawnPainting (Lnone/ip;)V (Lnet/minecraft/network/packet/clientbound/PacketSpawnPainting;)V
+		ARG 0 packet
+	METHOD a handleSpawnPlayer (Lnone/iq;)V (Lnet/minecraft/network/packet/clientbound/PacketSpawnPlayer;)V
+		ARG 0 packet
+	METHOD a handleAnimation (Lnone/ir;)V (Lnet/minecraft/network/packet/clientbound/PacketAnimation;)V
+		ARG 0 packet
+	METHOD a handleStatistics (Lnone/is;)V (Lnet/minecraft/network/packet/clientbound/PacketStatistics;)V
+		ARG 0 packet
+	METHOD a handleBlockBreakAnimation (Lnone/it;)V (Lnet/minecraft/network/packet/clientbound/PacketBlockBreakAnimation;)V
+		ARG 0 packet
+	METHOD a handleUpdateBlockEntity (Lnone/iu;)V (Lnet/minecraft/network/packet/clientbound/PacketUpdateBlockEntity;)V
+		ARG 0 packet
+	METHOD a handleBlockAction (Lnone/iv;)V (Lnet/minecraft/network/packet/clientbound/PacketBlockAction;)V
+		ARG 0 packet
+	METHOD a handleBlockChange (Lnone/iw;)V (Lnet/minecraft/network/packet/clientbound/PacketBlockChange;)V
+		ARG 0 packet
+	METHOD a handleServerDifficuilty (Lnone/ix;)V (Lnet/minecraft/network/packet/clientbound/PacketServerDifficulty;)V
+		ARG 0 packet
+	METHOD a handleTabComplete (Lnone/iy;)V (Lnet/minecraft/network/packet/clientbound/PacketTabComplete;)V
+		ARG 0 packet
+	METHOD a handleChatMessage (Lnone/iz;)V (Lnet/minecraft/network/packet/clientbound/PacketChatMessage;)V
+		ARG 0 packet
+	METHOD a handleMultiBlockChange (Lnone/ja;)V (Lnet/minecraft/network/packet/clientbound/PacketMultiBlockChange;)V
+		ARG 0 packet
+	METHOD a handleConfirmTransaction (Lnone/jc;)V (Lnet/minecraft/network/packet/clientbound/PacketConfirmTransaction;)V
+		ARG 0 packet
+	METHOD a handleCloseWindow (Lnone/jd;)V (Lnet/minecraft/network/packet/clientbound/PacketCloseWindow;)V
+		ARG 0 packet
+	METHOD a handleOpenWindow (Lnone/je;)V (Lnet/minecraft/network/packet/clientbound/PacketOpenWindow;)V
+		ARG 0 packet
+	METHOD a handleWindowItems (Lnone/jf;)V (Lnet/minecraft/network/packet/clientbound/PacketWindowItems;)V
+		ARG 0 packet
+	METHOD a handleWindowProperty (Lnone/jg;)V (Lnet/minecraft/network/packet/clientbound/PacketWindowProprety;)V
+		ARG 0 packet
+	METHOD a handleSetSlot (Lnone/jh;)V (Lnet/minecraft/network/packet/clientbound/PacketSetSlot;)V
+		ARG 0 packet
+	METHOD a handlePluginMessage (Lnone/ji;)V (Lnet/minecraft/network/packet/clientbound/PacketPluginMessage;)V
+		ARG 0 packet
+	METHOD a handleDisconnect (Lnone/jj;)V (Lnet/minecraft/network/packet/clientbound/PacketDisconnect;)V
+		ARG 0 packet
+	METHOD a handleEntityStatus (Lnone/jk;)V (Lnet/minecraft/network/packet/clientbound/PacketEntityStatus;)V
+		ARG 0 packet
+	METHOD a handleUpdateEntityNBT (Lnone/jl;)V (Lnet/minecraft/network/packet/clientbound/PacketUpdateEntityNBT;)V
+		ARG 0 packet
+	METHOD a handleExplosion (Lnone/jm;)V (Lnet/minecraft/network/packet/clientbound/PacketExplosion;)V
+		ARG 0 packet
+	METHOD a handleSetCompression (Lnone/jn;)V (Lnet/minecraft/network/packet/clientbound/PacketSetCompression;)V
+		ARG 0 packet
+	METHOD a handleChangeGameState (Lnone/jo;)V (Lnet/minecraft/network/packet/clientbound/PacketChangeGameState;)V
+		ARG 0 packet
+	METHOD a handleKeepAlive (Lnone/jp;)V (Lnet/minecraft/network/packet/clientbound/PacketKeepAlive;)V
+		ARG 0 packet
+	METHOD a handleChunkData (Lnone/jq;)V (Lnet/minecraft/network/packet/clientbound/PacketChunkData;)V
+		ARG 0 packet
+	METHOD a handleMapChunkBulk (Lnone/js;)V (Lnet/minecraft/network/packet/clientbound/PacketMapChunkBulk;)V
+		ARG 0 packet
+	METHOD a handleEffect (Lnone/jt;)V (Lnet/minecraft/network/packet/clientbound/PacketEffect;)V
+		ARG 0 packet
+	METHOD a handleParticle (Lnone/ju;)V (Lnet/minecraft/network/packet/clientbound/PacketParticle;)V
+		ARG 0 packet
+	METHOD a handleSoundEffect (Lnone/jv;)V (Lnet/minecraft/network/packet/clientbound/PacketSoundEffect;)V
+		ARG 0 packet
+	METHOD a handleJoinGame (Lnone/jw;)V (Lnet/minecraft/network/packet/clientbound/PacketJoinGame;)V
+		ARG 0 packet
+	METHOD a handleMaps (Lnone/jx;)V (Lnet/minecraft/network/packet/clientbound/PacketMaps;)V
+		ARG 0 packet
+	METHOD a handleEntity (Lnone/jy;)V (Lnet/minecraft/network/packet/clientbound/PacketEntity;)V
+		ARG 0 packet
+	METHOD a handleSignEditorOpen (Lnone/kc;)V (Lnet/minecraft/network/packet/clientbound/PacketSignEditorOpen;)V
+		ARG 0 packet
+	METHOD a handlePlayerAbilities (Lnone/kd;)V (Lnet/minecraft/network/packet/clientbound/PacketPlayerAbilities;)V
+		ARG 0 packet
+	METHOD a handleCombat (Lnone/ke;)V (Lnet/minecraft/network/packet/clientbound/PacketCombat;)V
+		ARG 0 packet
+	METHOD a handleListItem (Lnone/kh;)V (Lnet/minecraft/network/packet/clientbound/PacketPlayerListItem;)V
+		ARG 0 packet
+	METHOD a handleUseBed (Lnone/kl;)V (Lnet/minecraft/network/packet/clientbound/PacketUseBed;)V
+		ARG 0 packet
+	METHOD a handleDestroyEntities (Lnone/km;)V (Lnet/minecraft/network/packet/clientbound/PacketDestroyEntities;)V
+		ARG 0 packet
+	METHOD a handleRemoveEntityEffect (Lnone/kn;)V (Lnet/minecraft/network/packet/clientbound/PacketRemoveEntityEffect;)V
+		ARG 0 packet
+	METHOD a handleResourcePackSend (Lnone/ko;)V (Lnet/minecraft/network/packet/clientbound/PacketResourcePackSend;)V
+		ARG 0 packet
+	METHOD a handleRespawn (Lnone/kp;)V (Lnet/minecraft/network/packet/clientbound/PacketRespawn;)V
+		ARG 0 packet
+	METHOD a handleEntityHeadLook (Lnone/kq;)V (Lnet/minecraft/network/packet/clientbound/PacketEntityHeadLook;)V
+		ARG 0 packet
+	METHOD a handleWorldBorder (Lnone/kr;)V (Lnet/minecraft/network/packet/clientbound/PacketWorldBorder;)V
+		ARG 0 packet
+	METHOD a handleCamera (Lnone/ku;)V (Lnet/minecraft/network/packet/clientbound/PacketCamera;)V
+		ARG 0 packet
+	METHOD a handleHeldItemChange (Lnone/kv;)V (Lnet/minecraft/network/packet/clientbound/PacketHeldItemChange;)V
+		ARG 0 packet
+	METHOD a handleDisplayScoreboard (Lnone/kw;)V (Lnet/minecraft/network/packet/clientbound/PacketDisplayScoreboard;)V
+		ARG 0 packet
+	METHOD a handleEntityMetadata (Lnone/kx;)V (Lnet/minecraft/network/packet/clientbound/PacketEntityMetadata;)V
+		ARG 0 packet
+	METHOD a handleAttachEntity (Lnone/ky;)V (Lnet/minecraft/network/packet/clientbound/PacketAttachEntity;)V
+		ARG 0 packet
+	METHOD a handleEntityVelocity (Lnone/kz;)V (Lnet/minecraft/network/packet/clientbound/PacketEntityVelocity;)V
+		ARG 0 packet
+	METHOD a handleEntityEquipment (Lnone/la;)V (Lnet/minecraft/network/packet/clientbound/PacketEntityEquipment;)V
+		ARG 0 packet
+	METHOD a handleSetExperience (Lnone/lb;)V (Lnet/minecraft/network/packet/clientbound/PacketSetExperience;)V
+		ARG 0 packet
+	METHOD a handleUpdateHealth (Lnone/lc;)V (Lnet/minecraft/network/packet/clientbound/PacketUpdateHealth;)V
+		ARG 0 packet
+	METHOD a handleScoreboardObjectives (Lnone/ld;)V (Lnet/minecraft/network/packet/clientbound/PacketScoreboardObjective;)V
+		ARG 0 packet
+	METHOD a handleTeams (Lnone/le;)V (Lnet/minecraft/network/packet/clientbound/PacketTeams;)V
+		ARG 0 packet
+	METHOD a handleUpdateScore (Lnone/lf;)V (Lnet/minecraft/network/packet/clientbound/PacketUpdateScore;)V
+		ARG 0 packet
+	METHOD a handleSpawnPosition (Lnone/lh;)V (Lnet/minecraft/network/packet/clientbound/PacketSpawnPosition;)V
+		ARG 0 packet
+	METHOD a handleUpdateTime (Lnone/li;)V (Lnet/minecraft/network/packet/clientbound/PacketUpdateTime;)V
+		ARG 0 packet
+	METHOD a handleTitle (Lnone/lj;)V (Lnet/minecraft/network/packet/clientbound/PacketTitle;)V
+		ARG 0 packet
+	METHOD a handleUpdateSign (Lnone/ll;)V (Lnet/minecraft/network/packet/clientbound/PacketUpdateSign;)V
+		ARG 0 packet
+	METHOD a handlePlayerListHeaderFooter (Lnone/lm;)V (Lnet/minecraft/network/packet/clientbound/PacketPlayerListHeaderFooter;)V
+		ARG 0 packet
+	METHOD a handleCollectItem (Lnone/ln;)V (Lnet/minecraft/network/packet/clientbound/PacketCollectItem;)V
+		ARG 0 packet
+	METHOD a handleEntityTeleport (Lnone/lo;)V (Lnet/minecraft/network/packet/clientbound/PacketEntityTeleport;)V
+		ARG 0 packet
+	METHOD a handleEntityProperties (Lnone/lp;)V (Lnet/minecraft/network/packet/clientbound/PacketEntityPropreties;)V
+		ARG 0 packet
+	METHOD a handleEntityEffect (Lnone/lr;)V (Lnet/minecraft/network/packet/clientbound/PacketEntityEffect;)V
+		ARG 0 packet
 CLASS none/il net/minecraft/network/packet/clientbound/PacketSpawnObject
 	METHOD <init> (Lnone/wv;I)V
 		ARG 0 entity
 	METHOD <init> (Lnone/wv;II)V
 		ARG 0 entity
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/im net/minecraft/network/packet/clientbound/PacketSpawnExperienceOrb
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/in net/minecraft/network/packet/clientbound/PacketSpawnGlobal
 	METHOD <init> (Lnone/wv;)V
 		ARG 0 entity
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/io net/minecraft/network/packet/clientbound/PacketSpawnMob
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/ip net/minecraft/network/packet/clientbound/PacketSpawnPainting
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/iq net/minecraft/network/packet/clientbound/PacketSpawnPlayer
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/ir net/minecraft/network/packet/clientbound/PacketAnimation
 	METHOD <init> (Lnone/wv;I)V
 		ARG 0 entity
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/is net/minecraft/network/packet/clientbound/PacketStatistics
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/it net/minecraft/network/packet/clientbound/PacketBlockBreakAnimation
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/iu net/minecraft/network/packet/clientbound/PacketUpdateBlockEntity
 	FIELD c nbtMap
 	METHOD <init> (Lnone/dt;ILnone/fn;)V
 		ARG 2 nbtMap
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/iv net/minecraft/network/packet/clientbound/PacketBlockAction
 	FIELD d block
 	METHOD <init> (Lnone/dt;Lnone/atr;II)V
 		ARG 1 block
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 	METHOD d getBlock ()Lnone/atr; ()Lnet/minecraft/block/BlockType;
 CLASS none/iw net/minecraft/network/packet/clientbound/PacketBlockChange
 	METHOD <init> (Lnone/aqu;Lnone/dt;)V
 		ARG 0 dimension
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/ix net/minecraft/network/packet/clientbound/PacketServerDifficulty
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/iy net/minecraft/network/packet/clientbound/PacketTabComplete
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/iz net/minecraft/network/packet/clientbound/PacketChatMessage
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/j none/CrashLogInfo
 	FIELD a crashLogger
 	FIELD b name
@@ -6107,50 +6423,110 @@ CLASS none/j none/CrashLogInfo
 	METHOD a (Lnone/j;Lnone/dt;Lnone/bec;)V
 		ARG 0 crashLogInfo
 CLASS none/ja net/minecraft/network/packet/clientbound/PacketMultiBlockChange
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/jc net/minecraft/network/packet/clientbound/PacketConfirmTransaction
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/jd net/minecraft/network/packet/clientbound/PacketCloseWindow
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/je net/minecraft/network/packet/clientbound/PacketOpenWindow
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/jf net/minecraft/network/packet/clientbound/PacketWindowItems
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/jg net/minecraft/network/packet/clientbound/PacketWindowProprety
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/jh net/minecraft/network/packet/clientbound/PacketSetSlot
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/ji net/minecraft/network/packet/clientbound/PacketPluginMessage
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/jj net/minecraft/network/packet/clientbound/PacketDisconnect
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/jk net/minecraft/network/packet/clientbound/PacketEntityStatus
 	METHOD <init> (Lnone/wv;B)V
 		ARG 0 entity
 	METHOD a (Lnone/aqu;)Lnone/wv;
 		ARG 0 dimension
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/jl net/minecraft/network/packet/clientbound/PacketUpdateEntityNBT
 	FIELD b nbtMap
 	METHOD <init> (ILnone/fn;)V
 		ARG 1 nbtMap
 	METHOD a (Lnone/aqu;)Lnone/wv;
 		ARG 0 dimension
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/jm net/minecraft/network/packet/clientbound/PacketExplosion
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/jn net/minecraft/network/packet/clientbound/PacketSetCompression
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/jo net/minecraft/network/packet/clientbound/PacketChangeGameState
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/jp net/minecraft/network/packet/clientbound/PacketKeepAlive
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/jq net/minecraft/network/packet/clientbound/PacketChunkData
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/js net/minecraft/network/packet/clientbound/PacketMapChunkBulk
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/jt net/minecraft/network/packet/clientbound/PacketEffect
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/ju net/minecraft/network/packet/clientbound/PacketParticle
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/jv net/minecraft/network/packet/clientbound/PacketSoundEffect
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/jw net/minecraft/network/packet/clientbound/PacketJoinGame
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/jx net/minecraft/network/packet/clientbound/PacketMaps
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/jy net/minecraft/network/packet/clientbound/PacketEntity
 	METHOD a (Lnone/aqu;)Lnone/wv;
 		ARG 0 dimension
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/jz net/minecraft/network/packet/clientbound/PacketEntityRelativeMove
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/ka net/minecraft/network/packet/clientbound/PacketEntityLookAndRelativeMove
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/kb net/minecraft/network/packet/clientbound/PacketEntityLook
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/kc net/minecraft/network/packet/clientbound/PacketSignEditorOpen
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/kd net/minecraft/network/packet/clientbound/PacketPlayerAbilities
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/ke net/minecraft/network/packet/clientbound/PacketCombat
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/kg
 	FIELD a EnterCombat
 	FIELD b EndCombat
 	FIELD c EntityDied
 CLASS none/kh net/minecraft/network/packet/clientbound/PacketPlayerListItem
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/kj
 	FIELD a AddPlayer
 	FIELD b UpdateGameMode
@@ -6160,16 +6536,30 @@ CLASS none/kj
 CLASS none/kl net/minecraft/network/packet/clientbound/PacketUseBed
 	METHOD a (Lnone/aqu;)Lnone/ahd;
 		ARG 0 dimension
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/km net/minecraft/network/packet/clientbound/PacketDestroyEntities
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/kn net/minecraft/network/packet/clientbound/PacketRemoveEntityEffect
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/ko net/minecraft/network/packet/clientbound/PacketResourcePackSend
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/kp net/minecraft/network/packet/clientbound/PacketRespawn
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/kq net/minecraft/network/packet/clientbound/PacketEntityHeadLook
 	METHOD <init> (Lnone/wv;B)V
 		ARG 0 entity
 	METHOD a (Lnone/aqu;)Lnone/wv;
 		ARG 0 dimension
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/kr net/minecraft/network/packet/clientbound/PacketWorldBorder
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/kt
 	FIELD a SetSize
 	FIELD b LerpSize
@@ -6182,28 +6572,58 @@ CLASS none/ku net/minecraft/network/packet/clientbound/PacketCamera
 		ARG 0 entity
 	METHOD a (Lnone/aqu;)Lnone/wv;
 		ARG 0 dimension
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/kv net/minecraft/network/packet/clientbound/PacketHeldItemChange
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/kw net/minecraft/network/packet/clientbound/PacketDisplayScoreboard
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/kx net/minecraft/network/packet/clientbound/PacketEntityMetadata
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/ky net/minecraft/network/packet/clientbound/PacketAttachEntity
 	METHOD <init> (ILnone/wv;Lnone/wv;)V
 		ARG 1 entity1
 		ARG 2 entity2
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/kz net/minecraft/network/packet/clientbound/PacketEntityVelocity
 	METHOD <init> (Lnone/wv;)V
 		ARG 0 entity
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/la net/minecraft/network/packet/clientbound/PacketEntityEquipment
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/lb net/minecraft/network/packet/clientbound/PacketSetExperience
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/lc net/minecraft/network/packet/clientbound/PacketUpdateHealth
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/ld net/minecraft/network/packet/clientbound/PacketScoreboardObjective
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/le net/minecraft/network/packet/clientbound/PacketTeams
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/lf net/minecraft/network/packet/clientbound/PacketUpdateScore
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/lg
 	FIELD a Change
 	FIELD b Remove
 CLASS none/lh net/minecraft/network/packet/clientbound/PacketSpawnPosition
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/li net/minecraft/network/packet/clientbound/PacketUpdateTime
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/lj net/minecraft/network/packet/clientbound/PacketTitle
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/lk
 	FIELD a Title
 	FIELD b Subtitle
@@ -6214,27 +6634,104 @@ CLASS none/ll net/minecraft/network/packet/clientbound/PacketUpdateSign
 	FIELD a dimension
 	METHOD <init> (Lnone/aqu;Lnone/dt;[Lnone/ho;)V
 		ARG 0 dimension
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/lm net/minecraft/network/packet/clientbound/PacketPlayerListHeaderFooter
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/ln net/minecraft/network/packet/clientbound/PacketCollectItem
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/lo net/minecraft/network/packet/clientbound/PacketEntityTeleport
 	METHOD <init> (Lnone/wv;)V
 		ARG 0 entity
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/lp net/minecraft/network/packet/clientbound/PacketEntityPropreties
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/lr net/minecraft/network/packet/clientbound/PacketEntityEffect
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+CLASS none/ls net/minecraft/network/INetServerHandler
+	METHOD a handleTabComplete (Lnone/lt;)V (Lnet/minecraft/network/packet/serverbound/PacketTabComplete;)V
+		ARG 0 packet
+	METHOD a handleChat (Lnone/lu;)V (Lnet/minecraft/network/packet/serverbound/PacketChat;)V
+		ARG 0 packet
+	METHOD a handleClientStatus (Lnone/lv;)V (Lnet/minecraft/network/packet/serverbound/PacketClientStatus;)V
+		ARG 0 packet
+	METHOD a handleClientSettings (Lnone/lx;)V (Lnet/minecraft/network/packet/serverbound/PacketClientSettings;)V
+		ARG 0 packet
+	METHOD a handleConformTransaction (Lnone/ly;)V (Lnet/minecraft/network/packet/serverbound/PacketConfirmTransaction;)V
+		ARG 0 packet
+	METHOD a handleEnchantItem (Lnone/lz;)V (Lnet/minecraft/network/packet/serverbound/PacketEnchantItem;)V
+		ARG 0 packet
+	METHOD a handleClickWindow (Lnone/ma;)V (Lnet/minecraft/network/packet/serverbound/PacketClickWindow;)V
+		ARG 0 packet
+	METHOD a handleCloseWindow (Lnone/mb;)V (Lnet/minecraft/network/packet/serverbound/PacketCloseWindow;)V
+		ARG 0 packet
+	METHOD a handlePluginMessage (Lnone/mc;)V (Lnet/minecraft/network/packet/serverbound/PacketPluginMessage;)V
+		ARG 0 packet
+	METHOD a handleUseEntity (Lnone/md;)V (Lnet/minecraft/network/packet/serverbound/PacketUseEntity;)V
+		ARG 0 packet
+	METHOD a handleKeepAlive (Lnone/mf;)V (Lnet/minecraft/network/packet/serverbound/PacketKeepAlive;)V
+		ARG 0 packet
+	METHOD a handlePlayer (Lnone/mg;)V (Lnet/minecraft/network/packet/serverbound/PacketPlayer;)V
+		ARG 0 packet
+	METHOD a handlePlayerAbilities (Lnone/mk;)V (Lnet/minecraft/network/packet/serverbound/PacketPlayerAbilities;)V
+		ARG 0 packet
+	METHOD a handleBlockDig (Lnone/ml;)V (Lnet/minecraft/network/packet/serverbound/PacketBlockDig;)V
+		ARG 0 packet
+	METHOD a EntityAction (Lnone/mn;)V (Lnet/minecraft/network/packet/serverbound/PacketEntityAction;)V
+		ARG 0 packet
+	METHOD a handlePlayerInput (Lnone/mp;)V (Lnet/minecraft/network/packet/serverbound/PacketPlayerInput;)V
+		ARG 0 packet
+	METHOD a handleResourcePackStatus (Lnone/mq;)V (Lnet/minecraft/network/packet/serverbound/PacketResourcePackStatus;)V
+		ARG 0 packet
+	METHOD a handleHeldItemChange (Lnone/ms;)V (Lnet/minecraft/network/packet/serverbound/PacketHeldItemChange;)V
+		ARG 0 packet
+	METHOD a handleCreativeInventoryAction (Lnone/mt;)V (Lnet/minecraft/network/packet/serverbound/PacketCreativeInventoryAction;)V
+		ARG 0 packet
+	METHOD a handleUpdateSign (Lnone/mu;)V (Lnet/minecraft/network/packet/serverbound/PacketUpdateSign;)V
+		ARG 0 packet
+	METHOD a handleAnimation (Lnone/mv;)V (Lnet/minecraft/network/packet/serverbound/PacketAnimation;)V
+		ARG 0 packet
+	METHOD a handleSpectate (Lnone/mw;)V (Lnet/minecraft/network/packet/serverbound/PacketSpectate;)V
+		ARG 0 packet
+	METHOD a handleBlockPlace (Lnone/mx;)V (Lnet/minecraft/network/packet/serverbound/PacketBlockPlace;)V
+		ARG 0 packet
 CLASS none/lt net/minecraft/network/packet/serverbound/PacketTabComplete
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/lu net/minecraft/network/packet/serverbound/PacketChat
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/lv net/minecraft/network/packet/serverbound/PacketClientStatus
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/lw net/minecraft/src/EnumRespawnType
 	FIELD a PERFORM_RESPAWN
 	FIELD b REQUEST_STATS
 	FIELD c OPEN_INVENTORY_ACHIEVEMENT
 	FIELD d status
 CLASS none/lx net/minecraft/network/packet/serverbound/PacketClientSettings
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/ly net/minecraft/network/packet/serverbound/PacketConfirmTransaction
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/lz net/minecraft/network/packet/serverbound/PacketEnchantItem
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/ma net/minecraft/network/packet/serverbound/PacketClickWindow
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/mb net/minecraft/network/packet/serverbound/PacketCloseWindow
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/mc net/minecraft/network/packet/serverbound/PacketPluginMessage
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/md net/minecraft/network/packet/serverbound/PacketUseEntity
 	METHOD <init> (Lnone/wv;Lnone/brw;)V
 		ARG 0 entity
@@ -6242,17 +6739,33 @@ CLASS none/md net/minecraft/network/packet/serverbound/PacketUseEntity
 		ARG 0 entity
 	METHOD a (Lnone/aqu;)Lnone/wv;
 		ARG 0 dimension
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/me
 	FIELD a Interact
 	FIELD b Attack
 	FIELD c InteractAt
 CLASS none/mf net/minecraft/network/packet/serverbound/PacketKeepAlive
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/mg net/minecraft/network/packet/serverbound/PacketPlayer
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/mh net/minecraft/network/packet/serverbound/PacketPlayerPosition
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/mi net/minecraft/network/packet/serverbound/PacketPlayerPositionAndLook
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/mj net/minecraft/network/packet/serverbound/PacketPlayerLook
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/mk net/minecraft/network/packet/serverbound/PacketPlayerAbilities
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/ml net/minecraft/network/packet/serverbound/PacketBlockDig
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/mm net/minecraft/network/EnumBreakType
 	FIELD a START_DESTROY_BLOCK
 	FIELD b ABORT_DESTROY_BLOCK
@@ -6266,6 +6779,8 @@ CLASS none/mn net/minecraft/network/packet/serverbound/PacketEntityAction
 		ARG 0 entity
 	METHOD <init> (Lnone/wv;Lnone/mo;I)V
 		ARG 0 entity
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/mo net/minecraft/network/EnumMovementStatus
 	FIELD a START_SNEAKING
 	FIELD b STOP_SNEAKING
@@ -6276,32 +6791,73 @@ CLASS none/mo net/minecraft/network/EnumMovementStatus
 	FIELD g OPEN_INVENTORY
 	FIELD h status
 CLASS none/mp net/minecraft/network/packet/serverbound/PacketPlayerInput
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/mq net/minecraft/network/packet/serverbound/PacketResourcePackStatus
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/mr
 	FIELD a SuccessfullyLoaded
 	FIELD b Declined
 	FIELD c FailedDownload
 	FIELD d Accepted
 CLASS none/ms net/minecraft/network/packet/serverbound/PacketHeldItemChange
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/mt net/minecraft/network/packet/serverbound/PacketCreativeInventoryAction
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/mu net/minecraft/network/packet/serverbound/PacketUpdateSign
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/mv net/minecraft/network/packet/serverbound/PacketAnimation
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/mw net/minecraft/network/packet/serverbound/PacketSpectate
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 	METHOD a (Lnone/qt;)Lnone/wv;
 		ARG 0 dimensionServer
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/mx net/minecraft/network/packet/serverbound/PacketBlockPlace
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+CLASS none/mz
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+CLASS none/nd
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+CLASS none/ne
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+CLASS none/nf
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+CLASS none/ng
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/ni
 	FIELD a gameProfile
 	METHOD <init> (Lcom/mojang/authlib/GameProfile;)V
 		ARG 0 gameProfile
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/nj
 	METHOD <init> (Ljavax/crypto/SecretKey;Ljava/security/PublicKey;[B)V
 		ARG 0 secretKey
 		ARG 1 publicKey
 	METHOD a (Ljava/security/PrivateKey;)Ljavax/crypto/SecretKey;
 		ARG 0 privateKey
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 	METHOD b (Ljava/security/PrivateKey;)[B
 		ARG 0 privateKey
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+CLASS none/nn
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+CLASS none/no
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/nr
 	METHOD deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnone/nq;
 		ARG 0 jsonElement
@@ -6326,6 +6882,12 @@ CLASS none/nu
 	METHOD serialize (Lnone/nt;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement;
 		ARG 1 type
 		ARG 2 jsonSerializationContext
+CLASS none/nw
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+CLASS none/nx
+	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
+	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/oa net/minecraft/src/ResourceLocation
 	FIELD a modName
 	FIELD b objectname
@@ -6502,11 +7064,34 @@ CLASS none/rc none/NetworkListenThread
 		ARG 0 minecraftServer
 	METHOD b stopListening ()V ()V
 	METHOD c networkTick ()V ()V
-CLASS none/rj
+CLASS none/rj net/minecraft/network/NetServerHandler
 	FIELD c logger
 	FIELD d minecraftServer
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnone/gr;Lnone/qw;)V
 		ARG 0 minecraftServer
+	METHOD a handleTabComplete (Lnone/lt;)V (Lnet/minecraft/network/packet/serverbound/PacketTabComplete;)V
+	METHOD a handleChat (Lnone/lu;)V (Lnet/minecraft/network/packet/serverbound/PacketChat;)V
+	METHOD a handleClientStatus (Lnone/lv;)V (Lnet/minecraft/network/packet/serverbound/PacketClientStatus;)V
+	METHOD a handleClientSettings (Lnone/lx;)V (Lnet/minecraft/network/packet/serverbound/PacketClientSettings;)V
+	METHOD a handleConformTransaction (Lnone/ly;)V (Lnet/minecraft/network/packet/serverbound/PacketConfirmTransaction;)V
+	METHOD a handleEnchantItem (Lnone/lz;)V (Lnet/minecraft/network/packet/serverbound/PacketEnchantItem;)V
+	METHOD a handleClickWindow (Lnone/ma;)V (Lnet/minecraft/network/packet/serverbound/PacketClickWindow;)V
+	METHOD a handleCloseWindow (Lnone/mb;)V (Lnet/minecraft/network/packet/serverbound/PacketCloseWindow;)V
+	METHOD a handlePluginMessage (Lnone/mc;)V (Lnet/minecraft/network/packet/serverbound/PacketPluginMessage;)V
+	METHOD a handleUseEntity (Lnone/md;)V (Lnet/minecraft/network/packet/serverbound/PacketUseEntity;)V
+	METHOD a handleKeepAlive (Lnone/mf;)V (Lnet/minecraft/network/packet/serverbound/PacketKeepAlive;)V
+	METHOD a handlePlayer (Lnone/mg;)V (Lnet/minecraft/network/packet/serverbound/PacketPlayer;)V
+	METHOD a handlePlayerAbilities (Lnone/mk;)V (Lnet/minecraft/network/packet/serverbound/PacketPlayerAbilities;)V
+	METHOD a handleBlockDig (Lnone/ml;)V (Lnet/minecraft/network/packet/serverbound/PacketBlockDig;)V
+	METHOD a EntityAction (Lnone/mn;)V (Lnet/minecraft/network/packet/serverbound/PacketEntityAction;)V
+	METHOD a handlePlayerInput (Lnone/mp;)V (Lnet/minecraft/network/packet/serverbound/PacketPlayerInput;)V
+	METHOD a handleResourcePackStatus (Lnone/mq;)V (Lnet/minecraft/network/packet/serverbound/PacketResourcePackStatus;)V
+	METHOD a handleHeldItemChange (Lnone/ms;)V (Lnet/minecraft/network/packet/serverbound/PacketHeldItemChange;)V
+	METHOD a handleCreativeInventoryAction (Lnone/mt;)V (Lnet/minecraft/network/packet/serverbound/PacketCreativeInventoryAction;)V
+	METHOD a handleUpdateSign (Lnone/mu;)V (Lnet/minecraft/network/packet/serverbound/PacketUpdateSign;)V
+	METHOD a handleAnimation (Lnone/mv;)V (Lnet/minecraft/network/packet/serverbound/PacketAnimation;)V
+	METHOD a handleSpectate (Lnone/mw;)V (Lnet/minecraft/network/packet/serverbound/PacketSpectate;)V
+	METHOD a handleBlockPlace (Lnone/mx;)V (Lnet/minecraft/network/packet/serverbound/PacketBlockPlace;)V
 	METHOD c update ()V ()V
 CLASS none/rq
 	METHOD c update ()V ()V
