@@ -186,12 +186,14 @@ CLASS none/abo net/minecraft/entity/EntityBat
 	METHOD n getIsBatHanging ()Z ()Z
 	METHOD s_ onUpdate ()V ()V
 CLASS none/abq net/minecraft/entity/EntityAnimal
+	METHOD a handleEntityStatusPacket (B)V (B)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
 CLASS none/abr net/minecraft/entity/EntityChicken
 	METHOD aR getEyeHeight ()F ()F
 CLASS none/abs net/minecraft/entity/EntityCow
 	METHOD aR getEyeHeight ()F ()F
 CLASS none/abt net/minecraft/entity/EntityHorse
+	METHOD a handleEntityStatusPacket (B)V (B)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
 	METHOD aR getEyeHeight ()F ()F
 	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
@@ -212,8 +214,10 @@ CLASS none/ac net/minecraft/server/IServerCommand
 		ARG 0 serverCommandUser
 CLASS none/aca net/minecraft/entity/EntityPig
 CLASS none/acb net/minecraft/entity/EntityRabbit
+	METHOD a handleEntityStatusPacket (B)V (B)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
 CLASS none/acl net/minecraft/entity/EntitySheep
+	METHOD a handleEntityStatusPacket (B)V (B)V
 	METHOD aR getEyeHeight ()F ()F
 	METHOD b setDyeColor (Lnone/akv;)V (Lnet/minecraft/item/EnumDyeColor;)V
 	METHOD cj getDyeColor ()Lnone/akv; ()Lnet/minecraft/item/EnumDyeColor;
@@ -221,12 +225,15 @@ CLASS none/acn net/minecraft/entity/EntitySnowMan
 	METHOD a shoot (Lnone/xm;F)V (Lnet/minecraft/entity/EntityLiving;F)V
 	METHOD aR getEyeHeight ()F ()F
 CLASS none/aco net/minecraft/entity/EntitySquid
+	METHOD a handleEntityStatusPacket (B)V (B)V
 	METHOD aR getEyeHeight ()F ()F
 CLASS none/acq net/minecraft/entity/EntityIronGolem
+	METHOD a handleEntityStatusPacket (B)V (B)V
 CLASS none/act
 	METHOD K doTick ()V ()V
 	METHOD aX shouldDrown ()Z ()Z
 CLASS none/acu net/minecraft/entity/EntityWolf
+	METHOD a handleEntityStatusPacket (B)V (B)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
 	METHOD aR getEyeHeight ()F ()F
 	METHOD s_ onUpdate ()V ()V
@@ -248,6 +255,7 @@ CLASS none/adb net/minecraft/entity/EntityEnderdragon
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
 CLASS none/adf net/minecraft/entity/EntityWither
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
+	METHOD a mount (Lnone/wv;)V (Lnet/minecraft/entity/Entity;)V
 	METHOD a shoot (Lnone/xm;F)V (Lnet/minecraft/entity/EntityLiving;F)V
 CLASS none/adi net/minecraft/entity/EntityArmorStand
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
@@ -260,8 +268,10 @@ CLASS none/adj
 	METHOD s_ onUpdate ()V ()V
 CLASS none/adk net/minecraft/entity/EntityItemFrame
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
+	METHOD e attemptMountByPlayer (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
 CLASS none/adl net/minecraft/entity/EntityLeashKnot
 	METHOD aR getEyeHeight ()F ()F
+	METHOD e attemptMountByPlayer (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
 CLASS none/adm net/minecraft/entity/EntityPainting
 CLASS none/adn net/minecraft/entity/EnumPaintingTypes
 	FIELD A uselessValue
@@ -312,11 +322,13 @@ CLASS none/ads
 	METHOD s_ onUpdate ()V ()V
 CLASS none/adu net/minecraft/entity/EntityBoat
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
+	METHOD e attemptMountByPlayer (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
 	METHOD s_ onUpdate ()V ()V
 CLASS none/adv net/minecraft/entity/EntityFallingBlock
 	METHOD s_ onUpdate ()V ()V
 CLASS none/adw net/minecraft/entity/EntityItem
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
+	METHOD c changeDimension (I)V (I)V
 	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD s_ onUpdate ()V ()V
 CLASS none/adx net/minecraft/entity/EntityMinecartBase
@@ -324,11 +336,14 @@ CLASS none/adx net/minecraft/entity/EntityMinecartBase
 	FIELD w speedY
 	FIELD x speedZ
 	METHOD J kill ()V ()V
+	METHOD a destroyMinecartFrom (Lnone/wh;)V (Lnet/minecraft/src/DamageSource;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
 	METHOD b setPosition (DDD)V (DDD)V
 	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD o doNormalSlowdown ()V ()V
+	METHOD o applyNormalTickSlowdown ()V ()V
+	METHOD s getMinecartType ()Lnone/adz; ()Lnet/minecraft/entity/EnumMinecartType;
 	METHOD s_ onUpdate ()V ()V
+	METHOD u getCargoBlockState ()Lnone/bec; ()Lnet/minecraft/block/BlockState;
 CLASS none/adz net/minecraft/entity/EnumMinecartType
 	FIELD a RIDEABLE
 	FIELD b CHEST
@@ -344,24 +359,56 @@ CLASS none/ae none/IServerCommandUser
 	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD e getEntityWorld ()Lnone/aqu; ()Lnet/minecraft/world/World;
 CLASS none/aea net/minecraft/entity/EntityMinecartChest
+	METHOD a destroyMinecartFrom (Lnone/wh;)V (Lnet/minecraft/src/DamageSource;)V
+	METHOD s getMinecartType ()Lnone/adz; ()Lnet/minecraft/entity/EnumMinecartType;
+	METHOD u getCargoBlockState ()Lnone/bec; ()Lnet/minecraft/block/BlockState;
 CLASS none/aeb net/minecraft/entity/EntityMinecartCommandBlock
 	CLASS none/aec
 		METHOD e getEntityWorld ()Lnone/aqu; ()Lnet/minecraft/world/World;
+	FIELD a command
+	METHOD e attemptMountByPlayer (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
+	METHOD s getMinecartType ()Lnone/adz; ()Lnet/minecraft/entity/EnumMinecartType;
+	METHOD u getCargoBlockState ()Lnone/bec; ()Lnet/minecraft/block/BlockState;
 CLASS none/aed net/minecraft/entity/EntityMinecartStorage
+	FIELD a storageSlots
 	METHOD J kill ()V ()V
+	METHOD a destroyMinecartFrom (Lnone/wh;)V (Lnet/minecraft/src/DamageSource;)V
+	METHOD c changeDimension (I)V (I)V
 	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD o doNormalSlowdown ()V ()V
+	METHOD e attemptMountByPlayer (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
+	METHOD l clearStorage ()V ()V
+	METHOD o applyNormalTickSlowdown ()V ()V
 CLASS none/aee net/minecraft/entity/EntityMinecartFurnace
-	METHOD o doNormalSlowdown ()V ()V
+	FIELD a pushX
+	FIELD b pushZ
+	FIELD c fuel
+	METHOD a destroyMinecartFrom (Lnone/wh;)V (Lnet/minecraft/src/DamageSource;)V
+	METHOD e attemptMountByPlayer (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
+	METHOD o applyNormalTickSlowdown ()V ()V
+	METHOD s getMinecartType ()Lnone/adz; ()Lnet/minecraft/entity/EnumMinecartType;
 	METHOD s_ onUpdate ()V ()V
+	METHOD u getCargoBlockState ()Lnone/bec; ()Lnet/minecraft/block/BlockState;
 CLASS none/aef net/minecraft/entity/EntityMinecartHopper
+	METHOD a destroyMinecartFrom (Lnone/wh;)V (Lnet/minecraft/src/DamageSource;)V
+	METHOD e attemptMountByPlayer (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
+	METHOD s getMinecartType ()Lnone/adz; ()Lnet/minecraft/entity/EnumMinecartType;
 	METHOD s_ onUpdate ()V ()V
+	METHOD u getCargoBlockState ()Lnone/bec; ()Lnet/minecraft/block/BlockState;
 CLASS none/aeg net/minecraft/entity/EntityMinecartRideable
+	METHOD e attemptMountByPlayer (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
+	METHOD s getMinecartType ()Lnone/adz; ()Lnet/minecraft/entity/EnumMinecartType;
 CLASS none/aeh net/minecraft/entity/EntityMinecartSpawner
+	METHOD a handleEntityStatusPacket (B)V (B)V
+	METHOD s getMinecartType ()Lnone/adz; ()Lnet/minecraft/entity/EnumMinecartType;
 	METHOD s_ onUpdate ()V ()V
+	METHOD u getCargoBlockState ()Lnone/bec; ()Lnet/minecraft/block/BlockState;
 CLASS none/aej net/minecraft/entity/EntityMinecartTNT
+	METHOD a handleEntityStatusPacket (B)V (B)V
+	METHOD a destroyMinecartFrom (Lnone/wh;)V (Lnet/minecraft/src/DamageSource;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
+	METHOD s getMinecartType ()Lnone/adz; ()Lnet/minecraft/entity/EnumMinecartType;
 	METHOD s_ onUpdate ()V ()V
+	METHOD u getCargoBlockState ()Lnone/bec; ()Lnet/minecraft/block/BlockState;
 CLASS none/aek net/minecraft/entity/EntityPrimedTNT
 	METHOD aR getEyeHeight ()F ()F
 	METHOD s_ onUpdate ()V ()V
@@ -399,6 +446,7 @@ CLASS none/afm net/minecraft/entity/EntityMonster
 	METHOD s_ onUpdate ()V ()V
 CLASS none/afo net/minecraft/entity/EntityPigZombie
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
+	METHOD a mount (Lnone/wv;)V (Lnet/minecraft/entity/Entity;)V
 	METHOD s_ onUpdate ()V ()V
 CLASS none/afr none/IShootingMob
 	METHOD a shoot (Lnone/xm;F)V (Lnet/minecraft/entity/EntityLiving;F)V
@@ -425,15 +473,18 @@ CLASS none/age net/minecraft/entity/EntitySpider
 	METHOD aR getEyeHeight ()F ()F
 	METHOD s_ onUpdate ()V ()V
 CLASS none/agi net/minecraft/entity/EntityWitch
+	METHOD a handleEntityStatusPacket (B)V (B)V
 	METHOD a shoot (Lnone/xm;F)V (Lnet/minecraft/entity/EntityLiving;F)V
 	METHOD aR getEyeHeight ()F ()F
 CLASS none/agj net/minecraft/entity/EntityZombie
+	METHOD a handleEntityStatusPacket (B)V (B)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
 	METHOD aR getEyeHeight ()F ()F
 	METHOD s_ onUpdate ()V ()V
 CLASS none/agn
 	METHOD b_ getRecipes (Lnone/ahd;)Lnone/aqd; (Lnet/minecraft/entity/EntityPlayer;)Lnet/minecraft/src/MerchantRecipeList;
 CLASS none/agp net/minecraft/entity/EntityVillager
+	METHOD a handleEntityStatusPacket (B)V (B)V
 	METHOD aR getEyeHeight ()F ()F
 	METHOD b_ getRecipes (Lnone/ahd;)Lnone/aqd; (Lnet/minecraft/entity/EntityPlayer;)Lnet/minecraft/src/MerchantRecipeList;
 CLASS none/ah
@@ -543,6 +594,7 @@ CLASS none/ahd net/minecraft/entity/EntityPlayer
 	FIELD g activeItemStack
 	FIELD h itemUseTimer
 	METHOD J kill ()V ()V
+	METHOD a handleEntityStatusPacket (B)V (B)V
 	METHOD a addXpLevels (I)V (I)V
 		ARG 0 amount
 	METHOD a playSound (Ljava/lang/String;FF)V (Ljava/lang/String;FF)V
@@ -595,6 +647,8 @@ CLASS none/ahl net/minecraft/entity/EntityBallProjectile
 	METHOD c getBrightness (F)F (F)F
 	METHOD s_ onUpdate ()V ()V
 CLASS none/ahm net/minecraft/entity/EntityFireworksRicket
+	METHOD a handleEntityStatusPacket (B)V (B)V
+		ARG 0 entityStatusByte
 	METHOD c getBrightness (F)F (F)F
 	METHOD s_ onUpdate ()V ()V
 CLASS none/ahn net/minecraft/entity/EntityFireball
@@ -1349,7 +1403,7 @@ CLASS none/aqc net/minecraft/src/MerchantRecipe
 	METHOD j shouldGiveXpReward ()Z ()Z
 	METHOD k writeToTags ()Lnone/fn; ()Lnet/minecraft/nbt/NbtTagCompound;
 CLASS none/aqd net/minecraft/src/MerchantRecipeList
-CLASS none/aqf
+CLASS none/aqf none/CommandBlockCommand
 	METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
 	METHOD a sendChatToPlayer (Lnone/ho;)V (Lnet/minecraft/chat/ChatMessageComponent;)V
 	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
@@ -1673,12 +1727,14 @@ CLASS none/asv net/minecraft/world/biome/BiomeTheEnd
 	METHOD <init> (I)V
 		ARG 0 biomeID
 CLASS none/asy net/minecraft/block/BlockAir
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 CLASS none/asz net/minecraft/block/BlockAnvil
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/atb net/minecraft/block/BlockBannerBase
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 CLASS none/atd net/minecraft/block/BlockStandingBanner
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
@@ -1689,10 +1745,14 @@ CLASS none/ate net/minecraft/block/BlockWallBanner
 CLASS none/atf net/minecraft/block/BlockBarrier
 	METHOD c isOpaque ()Z ()Z
 CLASS none/ath net/minecraft/block/BlockPressurePlateAbstract
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
-CLASS none/ati net/minecraft/block/BlockAbstractRail
+CLASS none/ati net/minecraft/block/BlockRailBase
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
-CLASS none/atl none/EnumRailOrientation
+	METHOD d checkBlockIsRail (Lnone/aqu;Lnone/dt;)Z (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;)Z
+	METHOD d checkBlockIsRail (Lnone/bec;)Z (Lnet/minecraft/block/BlockState;)Z
+CLASS none/atl none/EnumRailShape
 	FIELD a NORTH_SOUTH
 	FIELD b EAST_WEST
 	FIELD c ASCENDING_EAST
@@ -1703,6 +1763,9 @@ CLASS none/atl none/EnumRailOrientation
 	FIELD h SOUTH_WEST
 	FIELD i NORTH_WEST
 	FIELD j NORTH_EAST
+	FIELD l id
+	METHOD a getId ()I ()I
+	METHOD a getRailShapeById (I)Lnone/atl; (I)Lnone/EnumRailShape;
 CLASS none/atm net/minecraft/block/BlockBeacon
 	METHOD c isOpaque ()Z ()Z
 CLASS none/atp net/minecraft/block/BlockBed
@@ -1773,7 +1836,7 @@ CLASS none/atr net/minecraft/block/BlockType
 	METHOD a (Lnone/aqu;Lnone/dt;Lnone/aqo;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
-	METHOD a (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 		ARG 0 dimension
 		ARG 1 blockCoords
 	METHOD a (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
@@ -2178,17 +2241,21 @@ CLASS none/aub net/minecraft/block/BlockBrewingStand
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/auc net/minecraft/block/BlockGrowable
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 CLASS none/aud net/minecraft/block/BlockButtonAbstract
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/auf net/minecraft/block/BlockCactus
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/aug net/minecraft/block/BlockCake
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/auh net/minecraft/block/BlockCarrots
@@ -2203,6 +2270,7 @@ CLASS none/auj net/minecraft/block/BlockChest
 CLASS none/auk net/minecraft/block/BlockClay
 CLASS none/aul net/minecraft/block/BlockCocoaBeans
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/aun net/minecraft/block/BlockColored
@@ -2229,6 +2297,7 @@ CLASS none/auw net/minecraft/block/BlockDeadBush
 CLASS none/auy net/minecraft/block/BlockDetectorRail
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
+CLASS none/auz none/DetectorRailShapePredicate
 CLASS none/ava
 	METHOD c isOpaque ()Z ()Z
 CLASS none/avb net/minecraft/block/BlockRotatable4
@@ -2244,6 +2313,7 @@ CLASS none/ave net/minecraft/block/BlockDispenser
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/avf net/minecraft/block/BlockDoor
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/avg
@@ -2284,6 +2354,7 @@ CLASS none/avr net/minecraft/block/BlockEnderChest
 CLASS none/avt net/minecraft/block/BlockFalling
 CLASS none/avu net/minecraft/block/BlockFarmland
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/avv net/minecraft/block/BlockFence
@@ -2291,10 +2362,12 @@ CLASS none/avv net/minecraft/block/BlockFence
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/avw net/minecraft/block/BlockFenceGate
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/avx net/minecraft/block/BlockFire
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/avy net/minecraft/block/BlockFlowerAbstract
@@ -2408,12 +2481,14 @@ CLASS none/axc net/minecraft/block/BlockJukebox
 CLASS none/axd net/minecraft/world/tileentity/TileEntityRecordPlayer
 CLASS none/axe net/minecraft/block/BlockLadder
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/axg net/minecraft/block/BlockLeavesAbstract
 	METHOD c isOpaque ()Z ()Z
 CLASS none/axi net/minecraft/block/BlockLever
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/axk
@@ -2427,6 +2502,7 @@ CLASS none/axk
 	FIELD h DOWN_Z
 CLASS none/axl net/minecraft/block/BlockLiquidBase
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/axm net/minecraft/block/BlockLogAbstract
@@ -2498,6 +2574,7 @@ CLASS none/ayx none/EnumWoodType
 	METHOD a getId ()I ()I
 CLASS none/ayy net/minecraft/block/BlockNetherPortal
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/az net/minecraft/server/commands/ServerCommandClear
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
@@ -2510,6 +2587,7 @@ CLASS none/azb net/minecraft/block/BlockRedstoneBlock
 CLASS none/azc net/minecraft/block/BlockRedstoneRail
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
+CLASS none/azd none/RedstoneRailShapePredicate
 CLASS none/azf net/minecraft/block/BlockPressurePlate
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
@@ -2549,6 +2627,7 @@ CLASS none/azr none/EnumRedSandstoneType
 CLASS none/azs net/minecraft/block/BlockRedstoneOre
 CLASS none/azt net/minecraft/block/BlockRedstoneWire
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/azu
@@ -2559,6 +2638,7 @@ CLASS none/azv net/minecraft/block/BlockRedstoneLamp
 CLASS none/azw net/minecraft/block/BlockRedstoneTorch
 CLASS none/azy net/minecraft/block/BlockReeds
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/azz net/minecraft/block/BlockRepeater
@@ -2620,18 +2700,22 @@ CLASS none/baf net/minecraft/block/BlockSapling
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/bah net/minecraft/block/BlockSeaLantern
 CLASS none/bai net/minecraft/block/BlockSignBase
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 CLASS none/baj net/minecraft/block/BlockSkull
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/bam net/minecraft/block/BlockSlime
 CLASS none/ban net/minecraft/block/BlockSnow
 CLASS none/bao net/minecraft/block/BlockSnowLayer
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/bap net/minecraft/block/BlockSoulSand
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 CLASS none/baq net/minecraft/block/BlockSponge
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
@@ -2686,28 +2770,34 @@ CLASS none/bbk net/minecraft/block/BlockTNT
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/bbl net/minecraft/block/BlockTorch
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/bbo net/minecraft/block/BlockDecayable
 	METHOD c isOpaque ()Z ()Z
 CLASS none/bbp net/minecraft/block/BlockTrapdoor
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/bbs net/minecraft/block/BlockTripwire
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/bbt net/minecraft/block/BlockTripwireHook
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/bbv net/minecraft/block/BlockVine
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/bbx net/minecraft/block/BlockCobbleWall
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/bby none/EnumCobblestoneType
@@ -2725,8 +2815,10 @@ CLASS none/bc net/minecraft/server/commands/ServerCommandTestForBlocks
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bcb net/minecraft/block/BlockWaterlily
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/bcc net/minecraft/block/BlockWeb
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 CLASS none/bcd net/minecraft/block/BlockWeightedPressurePlate
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
@@ -2819,6 +2911,7 @@ CLASS none/bdm net/minecraft/world/tileentity/TileEntitySkull
 CLASS none/bdn net/minecraft/world/tileentity/TileEntityAirportal
 CLASS none/bdq net/minecraft/block/BlockPistonBase
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/bds net/minecraft/block/BlockPistonHead
@@ -2833,6 +2926,7 @@ CLASS none/bdv net/minecraft/world/tileentity/TileEntityPiston
 	METHOD u getBlockMetadata ()I ()I
 CLASS none/bdx net/minecraft/block/BlockPistonExtension
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
+	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/be net/minecraft/server/commands/ServerCommandDebug
@@ -4476,8 +4570,6 @@ CLASS none/byx
 	METHOD a drawGuiContainerBackgroundLayer (FII)V (FII)V
 	METHOD b drawGuiContainerForegroundLayer (II)V (II)V
 CLASS none/byz net/minecraft/client/gui/GuiContainerCreative
-	CLASS bzb
-		METHOD e hasStack ()Z ()Z
 	CLASS none/bzb
 		METHOD a isItemValid (Lnone/amj;)Z (Lnet/minecraft/item/ItemStack;)Z
 		METHOD d getStack ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
@@ -5107,6 +5199,7 @@ CLASS none/cio net/minecraft/entity/EntityClientPlayerMP
 	METHOD a addStat (Lnone/tq;I)V (Lnet/minecraft/stats/StatBase;I)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
 		ARG 1 damage
+	METHOD a mount (Lnone/wv;)V (Lnet/minecraft/entity/Entity;)V
 	METHOD a dropItem (Z)Lnone/adw; (Z)Lnet/minecraft/entity/EntityItem;
 		ARG 0 dropStack
 	METHOD aw isSneaking ()Z ()Z
@@ -5148,8 +5241,27 @@ CLASS none/cj net/minecraft/server/commands/ServerCommandSay
 		ARG 0 serverCommandUser
 CLASS none/cja
 	METHOD p getBlockStateAt (Lnone/dt;)Lnone/bec; (Lnet/minecraft/world/ChunkCoordinates;)Lnet/minecraft/block/BlockState;
+CLASS none/cje none/EnumBlockVertices
+	FIELD a DOWN
+	FIELD b UP
+	FIELD c NORTH
+	FIELD d SOUTH
+	FIELD e WEST
+	FIELD f EAST
+	METHOD a getBlockVertex (I)Lnone/cjh; (I)Lnone/BlockVertex;
+	METHOD a getBlockVerticesFromBlockFace (Lnone/ej;)Lnone/cje; (Lnet/minecraft/src/EnumBlockFace;)Lnone/EnumBlockVertices;
 CLASS none/cjf empty/_2
-CLASS none/cjg none/EnumDirections2
+CLASS none/cjg none/BlockFaceId
+	FIELD a SOUTH
+	FIELD b UP
+	FIELD c EAST
+	FIELD d NORTH
+	FIELD e DOWN
+	FIELD f WEST
+CLASS none/cjh none/BlockVertex
+	FIELD a xFaceId
+	FIELD b yFaceId
+	FIELD c zFaceId
 CLASS none/cji net/minecraft/entity/EntityRenderer
 	METHOD a setViewEntity (Lnone/wv;)V (Lnet/minecraft/entity/Entity;)V
 	METHOD j setupOverlayRendering ()V ()V
@@ -5618,7 +5730,9 @@ CLASS none/ej net/minecraft/src/EnumBlockFace
 	FIELD d SOUTH
 	FIELD e WEST
 	FIELD f EAST
+	FIELD g id
 	FIELD m blockCoords
+	METHOD a getId ()I ()I
 	METHOD a getCWFacing (Lnone/el;)Lnone/ej; (Lnone/el;)Lnet/minecraft/src/EnumBlockFace;
 	METHOD e getYRotation ()Lnone/ej; ()Lnet/minecraft/src/EnumBlockFace;
 	METHOD f getCCWFacing ()Lnone/ej; ()Lnet/minecraft/src/EnumBlockFace;
@@ -7184,6 +7298,7 @@ CLASS none/qs
 	METHOD d generate (II)Lnone/bfh; (II)Lnet/minecraft/world/Chunk;
 	METHOD g getLoadedChunkCount ()I ()I
 CLASS none/qt net/minecraft/world/WorldServer
+	FIELD I minecraftServer
 	FIELD b theChunkProviderServer
 	FIELD t provider
 	METHOD a saveAllChunks (ZLnone/uy;)V (ZLnone/uy;)V
@@ -7192,6 +7307,7 @@ CLASS none/qt net/minecraft/world/WorldServer
 	METHOD f areAllPlayersAsleep ()Z ()Z
 	METHOD i updateEntities ()V ()V
 	METHOD o flush ()V ()V
+	METHOD r getMinecraftServer ()Lnet/minecraft/server/MinecraftServer; ()Lnet/minecraft/server/MinecraftServer;
 	METHOD s getEntityTracker ()Lnone/qn; ()Lnone/EntityTracker;
 CLASS none/qw
 	FIELD b minecraftServer
@@ -7210,7 +7326,7 @@ CLASS none/qw
 	METHOD a sendChatToPlayer (Lnone/ho;)V (Lnet/minecraft/chat/ChatMessageComponent;)V
 	METHOD a addStat (Lnone/tq;I)V (Lnet/minecraft/stats/StatBase;I)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
-	METHOD a (Lnone/wv;)V
+	METHOD a mount (Lnone/wv;)V (Lnet/minecraft/entity/Entity;)V
 		ARG 0 entity
 	METHOD a (Lnone/wv;I)V
 		ARG 0 entity
@@ -7219,6 +7335,7 @@ CLASS none/qw
 		ARG 0 nbtMap
 	METHOD b (Lnone/wv;)V
 		ARG 0 entity
+	METHOD c changeDimension (I)V (I)V
 	METHOD c (Lnone/wv;)V
 		ARG 0 entity
 	METHOD e (Lnone/wv;)V
@@ -7492,11 +7609,12 @@ CLASS none/wv net/minecraft/entity/Entity
 	FIELD K height
 	FIELD O fallDistance
 	FIELD V random
-	FIELD a noBoundingBox
+	FIELD a zeroedBoundingBox
 	FIELD ae chunkX
 	FIELD af chunkY
 	FIELD ag chunkZ
 	FIELD aj portalCooldown
+	FIELD am dimensionId
 	FIELD ao uuid
 	FIELD ar invulnerable
 	FIELD f boundingBox
@@ -7513,12 +7631,18 @@ CLASS none/wv net/minecraft/entity/Entity
 	FIELD z pitch
 	METHOD J kill ()V ()V
 	METHOD K doTick ()V ()V
+	METHOD O fallFromWorld ()V ()V
+	METHOD a handleEntityStatusPacket (B)V (B)V
+		ARG 0 entityStatusByte
 	METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
 	METHOD a playSound (Ljava/lang/String;FF)V (Ljava/lang/String;FF)V
 	METHOD a setBoundingBox (Lnone/brt;)V (Lnone/BoundingBox;)V
 	METHOD a sendChatToPlayer (Lnone/ho;)V (Lnet/minecraft/chat/ChatMessageComponent;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
+	METHOD a mount (Lnone/wv;)V (Lnet/minecraft/entity/Entity;)V
+		ARG 0 mountedEntity
 	METHOD aD getHeadPitch ()F ()F
+	METHOD aJ getUuid ()Ljava/util/UUID; ()Ljava/util/UUID;
 	METHOD aQ getBoundingBox ()Lnone/brt; ()Lnone/BoundingBox;
 	METHOD aR getEyeHeight ()F ()F
 	METHOD ai isEntityAlive ()Z ()Z
@@ -7529,8 +7653,11 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD b setYawAndPitch (FF)V (FF)V
 	METHOD b cannotDamage (Lnone/wh;)Z (Lnet/minecraft/src/DamageSource;)Z
 	METHOD c getBrightness (F)F (F)F
+	METHOD c changeDimension (I)V (I)V
+		ARG 0 dimensionId
 	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD e getEntityWorld ()Lnone/aqu; ()Lnet/minecraft/world/World;
+	METHOD e attemptMountByPlayer (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
 	METHOD f setHeadPitch (F)V (F)V
 	METHOD s_ onUpdate ()V ()V
 CLASS none/x none/OSType
@@ -7566,7 +7693,10 @@ CLASS none/xm net/minecraft/entity/EntityLiving
 	FIELD aI headPitch
 	FIELD aJ previousHeadPitch
 	METHOD K doTick ()V ()V
+	METHOD O fallFromWorld ()V ()V
+	METHOD a handleEntityStatusPacket (B)V (B)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
+	METHOD a mount (Lnone/wv;)V (Lnet/minecraft/entity/Entity;)V
 	METHOD aD getHeadPitch ()F ()F
 	METHOD aX shouldDrown ()Z ()Z
 	METHOD ai isEntityAlive ()Z ()Z
@@ -7581,10 +7711,13 @@ CLASS none/xm net/minecraft/entity/EntityLiving
 	METHOD s_ onUpdate ()V ()V
 CLASS none/xn net/minecraft/entity/EntityMobBase
 	METHOD K doTick ()V ()V
+	METHOD a handleEntityStatusPacket (B)V (B)V
 	METHOD bz getCurrentlyHoldingItemStack ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
+	METHOD e attemptMountByPlayer (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
 	METHOD s_ onUpdate ()V ()V
 CLASS none/xp none/EnumMobLists
 CLASS none/xx net/minecraft/entity/EntityTamable
+	METHOD a handleEntityStatusPacket (B)V (B)V
 CLASS none/y none/_y_IServerCommand_something
 	METHOD a (Lnone/ae;Lnone/ac;ILjava/lang/String;[Ljava/lang/Object;)V
 		ARG 0 serverCommandUser
