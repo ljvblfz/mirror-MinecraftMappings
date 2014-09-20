@@ -1628,10 +1628,20 @@ CLASS none/arp net/minecraft/world/biome/BiomeTemperatureTypes
 	FIELD c medium
 	FIELD d m
 CLASS none/arq none/spawnEntity
-CLASS none/ary
+CLASS none/ary net/minecraft/world/biome/Decorator
 	FIELD a dim
 	FIELD b rand
 	FIELD c blockCoords
+	METHOD a generateWithin (ILnone/bhp;II)V (ILnet/minecraft/world/generator/AbstractGenerator;II)V
+		ARG 0 tries
+		ARG 2 minHeight
+		ARG 3 maxHeight
+	METHOD a decorateChunk (Lnone/aqu;Ljava/util/Random;Lnone/arm;Lnone/dt;)V (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/biome/Biome;Lnet/minecraft/world/ChunkCoordinates;)V
+	METHOD a decorate (Lnone/arm;)V (Lnet/minecraft/world/biome/Biome;)V
+	METHOD b generateAround (ILnone/bhp;II)V (ILnet/minecraft/world/generator/AbstractGenerator;II)V
+		ARG 0 tries
+		ARG 2 center
+		ARG 3 heightRange
 CLASS none/arz net/minecraft/world/WorldChunkManager
 	FIELD e spawnBiomes
 CLASS none/asa net/minecraft/world/biome/BiomeDesert
@@ -1726,6 +1736,8 @@ CLASS none/asu net/minecraft/world/biome/BiomeTaiga
 CLASS none/asv net/minecraft/world/biome/BiomeTheEnd
 	METHOD <init> (I)V
 		ARG 0 biomeID
+CLASS none/asw
+	METHOD a decorate (Lnone/arm;)V (Lnet/minecraft/world/biome/Biome;)V
 CLASS none/asy net/minecraft/block/BlockAir
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
 	METHOD c isOpaque ()Z ()Z
@@ -3380,46 +3392,46 @@ CLASS none/bh net/minecraft/server/commands/ServerCommandMe
 CLASS none/bhc net/minecraft/world/generator/WorldGenerator
 CLASS none/bhd
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bhf
+CLASS none/bhf net/minecraft/world/generator/BirchTreeGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
 CLASS none/bhg
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bhh
+CLASS none/bhh net/minecraft/world/generator/BonusChestGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bhi
+CLASS none/bhi net/minecraft/world/generator/PlantGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bhj
+CLASS none/bhj net/minecraft/world/generator/CactusGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bhl
+CLASS none/bhl net/minecraft/world/generator/ClayGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bhm
+CLASS none/bhm net/minecraft/world/generator/DeadBushGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bhn
+CLASS none/bhn net/minecraft/world/generator/SandstoneWellGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bho
+CLASS none/bho net/minecraft/world/generator/DoublePlantGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bhp
+CLASS none/bhp net/minecraft/world/generator/AbstractGenerator
 	METHOD a setBlockAndMetadata (Lnone/aqu;Lnone/dt;Lnone/atr;I)V (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockType;I)V
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bhq
+CLASS none/bhq net/minecraft/world/generator/FlowerGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
 CLASS none/bhr
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bhs
+CLASS none/bhs net/minecraft/world/generator/NetherFireGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bht
+CLASS none/bht net/minecraft/world/generator/HighGlowstoneGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
 CLASS none/bhu
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bhv
+CLASS none/bhv net/minecraft/world/generator/BigMushroomGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bhw
+CLASS none/bhw net/minecraft/world/generator/IcePathGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bhx
+CLASS none/bhx net/minecraft/world/generator/IceSpikeGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
 CLASS none/bhy
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bhz
+CLASS none/bhz net/minecraft/world/generator/LowGlowstoneGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
 CLASS none/bi net/minecraft/server/commands/ServerCommandEnchant
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
@@ -3431,25 +3443,25 @@ CLASS none/bia
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
 CLASS none/bib
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bid
+CLASS none/bid net/minecraft/world/generator/MelonGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bie
+CLASS none/bie net/minecraft/world/generator/DungeonGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bif
+CLASS none/bif net/minecraft/world/generator/BulkBlockReplaceGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/big
+CLASS none/big net/minecraft/world/generator/SpruceTreeGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bih
+CLASS none/bih net/minecraft/world/generator/PumpkinGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bii
+CLASS none/bii net/minecraft/world/generator/ReedGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bij
+CLASS none/bij net/minecraft/world/generator/DarkOakTreeGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
 CLASS none/bik
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bil
+CLASS none/bil net/minecraft/world/generator/AcaciaTreeGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bim
+CLASS none/bim net/minecraft/world/generator/ObsidianTowerGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
 CLASS none/bin
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
@@ -3457,7 +3469,7 @@ CLASS none/bio
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
 CLASS none/bip
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/biq
+CLASS none/biq net/minecraft/world/generator/TallGrassGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
 CLASS none/bir net/minecraft/world/generator/WorldGenTrees
 	FIELD a minTreeHeight
@@ -3468,9 +3480,9 @@ CLASS none/bir net/minecraft/world/generator/WorldGenTrees
 		ARG 0 vinesGrow
 	METHOD a growVines (Lnone/aqu;Lnone/dt;I)V (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;I)V
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bis
+CLASS none/bis net/minecraft/world/generator/VineGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
-CLASS none/bit
+CLASS none/bit net/minecraft/world/generator/WaterlilyGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
 CLASS none/bj net/minecraft/server/commands/ServerCommandEntityData
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
@@ -3572,14 +3584,38 @@ CLASS none/bo net/minecraft/server/commands/ServerCommandDifficulty
 		ARG 0 serverCommandUser
 CLASS none/boa net/minecraft/world/generator/noisegen/NoiseGenAbstract
 CLASS none/bof none/Material
+	FIELD A cactus
+	FIELD B glue
+	FIELD C melon
+	FIELD D dragonEgg
+	FIELD E portal
+	FIELD F cake
+	FIELD G web
+	FIELD H piston
+	FIELD I barrier
 	FIELD M mapColor
 	FIELD a air
+	FIELD b grass
+	FIELD c soil
 	FIELD d wood
 	FIELD e stone
+	FIELD f iron
+	FIELD g steel
 	FIELD h water
 	FIELD i lava
 	FIELD j leaves
 	FIELD m sponge
+	FIELD n cloth
+	FIELD o fire
+	FIELD p sand
+	FIELD r carpet
+	FIELD s glass
+	FIELD t redstoneLamp
+	FIELD u tnt
+	FIELD w ice
+	FIELD x packedIce
+	FIELD y snow
+	FIELD z packedSnow
 	METHOD r getMapColor ()Lnone/boh; ()Lnet/minecraft/block/MapColor;
 CLASS none/boh net/minecraft/block/MapColor
 	FIELD A blue
