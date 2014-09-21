@@ -1034,6 +1034,7 @@ CLASS none/aln net/minecraft/item/ItemPainting
 	METHOD a doPlaceBlockAction (Lnone/amj;Lnone/ahd;Lnone/aqu;Lnone/dt;Lnone/ej;FFF)Z (Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/EntityPlayer;Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/src/EnumBlockFace;FFF)Z
 CLASS none/alo net/minecraft/item/ItemHoe
 	METHOD a doPlaceBlockAction (Lnone/amj;Lnone/ahd;Lnone/aqu;Lnone/dt;Lnone/ej;FFF)Z (Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/EntityPlayer;Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/src/EnumBlockFace;FFF)Z
+CLASS none/alp none/DirtTypeValues
 CLASS none/alq net/minecraft/item/Item
 	FIELD a itemBlocks
 	FIELD b creativeGroups
@@ -3997,8 +3998,13 @@ CLASS none/bs net/minecraft/server/commands/ServerCommandHelp
 		ARG 0 serverCommandUser
 	METHOD d (Lnone/ae;)Ljava/util/List;
 		ARG 0 serverCommandUser
-CLASS none/bsf
-	METHOD a equals (Lnone/bsf;)Z (Lnone/bsf;)Z
+CLASS none/bsf net/minecraft/chat/bsf
+	METHOD a equals (Lnone/bsf;)Z (Lnet/minecraft/chat/bsf;)Z
+CLASS none/bsg net/minecraft/chat/EnumTeamChatMessageVisibility
+	FIELD a ALWAYS
+	FIELD b NEVER
+	FIELD c HIDE_FOR_OTHER_TEAMS
+	FIELD d HIDE_FOR_OWN_TEAM
 CLASS none/bsq net/minecraft/chat/ChatLine
 	FIELD a updateCounter
 	FIELD b component
@@ -4215,6 +4221,8 @@ CLASS none/bub net/minecraft/client/gui/Gui
 	METHOD b drawVerticalLine (IIII)V (IIII)V
 	METHOD b drawTexturedModalRect (IIIIII)V (IIIIII)V
 	METHOD c drawString (Lnone/bty;Ljava/lang/String;III)V (Lnet/minecraft/client/render/FontRenderer;Ljava/lang/String;III)V
+CLASS none/buc
+	FIELD a MAP_ICONS_PNG
 CLASS none/buf net/minecraft/src/ScaledResolution
 	METHOD a getScaledWidth ()I ()I
 	METHOD b getScaledHeight ()I ()I
@@ -4295,6 +4303,8 @@ CLASS none/bvl net/minecraft/client/gui/button/bvl
 CLASS none/bvm
 	FIELD b mc
 CLASS none/bvo net/minecraft/client/gui/GuiUnknown
+	FIELD a SPECTATOR_WIDGETS_PNG
+	FIELD f WIDGETS_PNG
 CLASS none/bvr net/minecraft/client/gui/button/bvr
 	METHOD a mouseReleased (II)V (II)V
 	METHOD a getHoverState (Z)I (Z)I
@@ -4860,6 +4870,21 @@ CLASS none/cak net/minecraft/client/gui/screen/GuiScreenTwitch3
 	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/client/gui/GuiButton;)V
 	METHOD b initGui ()V ()V
 	METHOD m onGuiClosed ()V ()V
+CLASS none/cam none/EnumUnavailableStreamError
+	FIELD a NO_FBO
+	FIELD b LIBRARY_ARCH_MISMATCH
+	FIELD c LIBRARY_FAILURE
+	FIELD d UNSUPPORTED_OS_WINDOWS
+	FIELD e UNSUPPORTED_OS_MAC
+	FIELD f UNSUPPORTED_OS_OTHER
+	FIELD g ACCOUNT_NOT_MIGRATED
+	FIELD h ACCOUNT_NOT_BOUND
+	FIELD i FAILED_TWITCH_AUTH
+	FIELD j FAILED_TWITCH_AUTH_ERROR
+	FIELD k INITIALIZATION_FAILURE
+	FIELD l UNKNOWN
+	METHOD a getTranslatableReason ()Lnone/ho; ()Lnet/minecraft/chat/ChatMessageComponent;
+	METHOD b getTranslatableAdvice ()Lnone/ho; ()Lnet/minecraft/chat/ChatMessageComponent;
 CLASS none/can net/minecraft/client/gui/screen/GuiScreenTwitch4
 	METHOD a drawScreen (IIF)V (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/client/gui/GuiButton;)V
@@ -6486,7 +6511,10 @@ CLASS none/gr net/minecraft/network/NetworkManager
 		ARG 0 channelHandlerContext
 	METHOD exceptionCaught (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Throwable;)V
 		ARG 0 channelHandlerContext
+CLASS none/gs
+	METHOD b doInstanciate ()Ljava/lang/Object; ()Ljava/lang/Object;
 CLASS none/gt net/minecraft/network/gt
+	METHOD b doInstanciate ()Ljava/lang/Object; ()Ljava/lang/Object;
 CLASS none/gy
 	FIELD a Handshaking
 	FIELD b Play
@@ -7593,6 +7621,10 @@ CLASS none/rc none/NetworkListenThread
 		ARG 0 minecraftServer
 	METHOD b stopListening ()V ()V
 	METHOD c networkTick ()V ()V
+CLASS none/rd
+	METHOD b doInstanciate ()Ljava/lang/Object; ()Ljava/lang/Object;
+CLASS none/re
+	METHOD b doInstanciate ()Ljava/lang/Object; ()Ljava/lang/Object;
 CLASS none/rj net/minecraft/network/NetServerHandler
 	FIELD c logger
 	FIELD d minecraftServer
@@ -7652,6 +7684,11 @@ CLASS none/uc net/minecraft/entity/EntitySet
 	FIELD b entitySet
 	METHOD a (Ljava/lang/Class;Z)Ljava/lang/Class;
 		ARG 1 flag
+CLASS none/up none/InitiatingWrapper
+	FIELD a wrapped
+	FIELD b isInitiated
+	METHOD b doInstanciate ()Ljava/lang/Object; ()Ljava/lang/Object;
+	METHOD c instanciate ()Ljava/lang/Object; ()Ljava/lang/Object;
 CLASS none/uv none/MathUtil
 	FIELD a squareRootOfTwo
 	FIELD b sinLookupTable
