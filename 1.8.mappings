@@ -180,6 +180,8 @@ CLASS none/ab none/_ab_ServerCommand_something
 	METHOD a (Lnone/ae;[Ljava/lang/String;Lnone/ac;Ljava/lang/String;)Z
 		ARG 0 serverCommandUser
 		ARG 2 serverCommand
+CLASS none/abn
+	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
 CLASS none/abo net/minecraft/entity/EntityBat
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
@@ -189,27 +191,38 @@ CLASS none/abo net/minecraft/entity/EntityBat
 	METHOD s_ onUpdate ()V ()V
 CLASS none/abq net/minecraft/entity/EntityAnimal
 	METHOD a handleEntityStatusPacket (B)V (B)V
+	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 CLASS none/abr net/minecraft/entity/EntityChicken
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
+	METHOD a createChildFrom (Lnone/ws;)Lnone/ws; (Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/EntityAgeable;
 	METHOD aR getEyeHeight ()F ()F
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 CLASS none/abs net/minecraft/entity/EntityCow
+	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
+	METHOD a createChildFrom (Lnone/ws;)Lnone/ws; (Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/EntityAgeable;
 	METHOD aR getEyeHeight ()F ()F
 CLASS none/abt net/minecraft/entity/EntityHorse
 	METHOD a handleEntityStatusPacket (B)V (B)V
+	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
+	METHOD a createChildFrom (Lnone/ws;)Lnone/ws; (Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/EntityAgeable;
 	METHOD aR getEyeHeight ()F ()F
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD s_ onUpdate ()V ()V
+CLASS none/abw net/minecraft/entity/EntitySilent
 CLASS none/abx net/minecraft/entity/EntityMooshroom
+	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
+	METHOD a createChildFrom (Lnone/ws;)Lnone/ws; (Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/EntityAgeable;
 CLASS none/aby net/minecraft/entity/EntityOzelot
+	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
+	METHOD a createChildFrom (Lnone/ws;)Lnone/ws; (Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/EntityAgeable;
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS none/ac net/minecraft/server/IServerCommand
@@ -223,16 +236,21 @@ CLASS none/ac net/minecraft/server/IServerCommand
 	METHOD c (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/aca net/minecraft/entity/EntityPig
+	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
+	METHOD a createChildFrom (Lnone/ws;)Lnone/ws; (Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/EntityAgeable;
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 CLASS none/acb net/minecraft/entity/EntityRabbit
 	METHOD a handleEntityStatusPacket (B)V (B)V
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
+	METHOD a createChildFrom (Lnone/ws;)Lnone/ws; (Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/EntityAgeable;
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 CLASS none/acl net/minecraft/entity/EntitySheep
 	METHOD a handleEntityStatusPacket (B)V (B)V
+	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
+	METHOD a createChildFrom (Lnone/ws;)Lnone/ws; (Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/EntityAgeable;
 	METHOD aR getEyeHeight ()F ()F
 	METHOD b setDyeColor (Lnone/akv;)V (Lnet/minecraft/item/EnumDyeColor;)V
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
@@ -252,14 +270,20 @@ CLASS none/act
 	METHOD aX shouldDrown ()Z ()Z
 CLASS none/acu net/minecraft/entity/EntityWolf
 	METHOD a handleEntityStatusPacket (B)V (B)V
+	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
+	METHOD a createChildFrom (Lnone/ws;)Lnone/ws; (Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/EntityAgeable;
 	METHOD aR getEyeHeight ()F ()F
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD s_ onUpdate ()V ()V
 CLASS none/acx
 	METHOD bm getHealth ()F ()F
-CLASS none/acz
+CLASS none/acy net/minecraft/entity/ILocatableDamageHandler
+	METHOD a (Lnone/acz;Lnone/wh;F)Z
+		ARG 1 source
+		ARG 2 damage
+CLASS none/acz net/minecraft/entity/EntityDamageDelegate
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
@@ -290,7 +314,7 @@ CLASS none/adi net/minecraft/entity/EntityArmorStand
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD bz getCurrentlyHoldingItemStack ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
 	METHOD s_ onUpdate ()V ()V
-CLASS none/adj
+CLASS none/adj net/minecraft/entity/EntityAttached
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
 	METHOD b setPosition (DDD)V (DDD)V
@@ -351,12 +375,12 @@ CLASS none/adn net/minecraft/entity/EnumPaintingTypes
 		ARG 4 zMin
 		ARG 5 xMax
 		ARG 6 zMax
-CLASS none/ado
+CLASS none/ado net/minecraft/entity/EntityFishingHook
 	METHOD J kill ()V ()V
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD s_ onUpdate ()V ()V
-CLASS none/ads
+CLASS none/ads net/minecraft/entity/EntityLightningBolt
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD s_ onUpdate ()V ()V
@@ -479,10 +503,12 @@ CLASS none/aem net/minecraft/entity/EntityBlaze
 CLASS none/aeo net/minecraft/entity/EntityCaveSpider
 	METHOD aR getEyeHeight ()F ()F
 CLASS none/aep net/minecraft/entity/EntityCreeper
+	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD s_ onUpdate ()V ()V
 CLASS none/aer net/minecraft/entity/EntityEnderman
+	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
 	METHOD aR getEyeHeight ()F ()F
@@ -517,6 +543,7 @@ CLASS none/afm net/minecraft/entity/EntityMonster
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
 	METHOD s_ onUpdate ()V ()V
 CLASS none/afo net/minecraft/entity/EntityPigZombie
+	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
 	METHOD a mount (Lnone/wv;)V (Lnet/minecraft/entity/Entity;)V
@@ -556,6 +583,7 @@ CLASS none/agi net/minecraft/entity/EntityWitch
 	METHOD aR getEyeHeight ()F ()F
 CLASS none/agj net/minecraft/entity/EntityZombie
 	METHOD a handleEntityStatusPacket (B)V (B)V
+	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
 	METHOD aR getEyeHeight ()F ()F
@@ -565,7 +593,9 @@ CLASS none/agn
 	METHOD b_ getRecipes (Lnone/ahd;)Lnone/aqd; (Lnet/minecraft/entity/EntityPlayer;)Lnet/minecraft/src/MerchantRecipeList;
 CLASS none/agp net/minecraft/entity/EntityVillager
 	METHOD a handleEntityStatusPacket (B)V (B)V
+	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
+	METHOD a createChildFrom (Lnone/ws;)Lnone/ws; (Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/EntityAgeable;
 	METHOD aR getEyeHeight ()F ()F
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD b_ getRecipes (Lnone/ahd;)Lnone/aqd; (Lnet/minecraft/entity/EntityPlayer;)Lnet/minecraft/src/MerchantRecipeList;
@@ -1594,11 +1624,13 @@ CLASS none/aqu net/minecraft/world/World
 	METHOD b getBiomeAt (Lnone/dt;)Lnone/arm; (Lnet/minecraft/world/ChunkCoordinates;)Lnet/minecraft/world/biome/Biome;
 		ARG 0 blockCoords
 	METHOD c tick ()V ()V
+	METHOD d hasAirAt (Lnone/dt;)Z (Lnet/minecraft/world/ChunkCoordinates;)Z
 	METHOD d spawn (Lnone/wv;)Z (Lnet/minecraft/entity/Entity;)Z
 	METHOD e checkBlockIsInWorld (Lnone/dt;)Z (Lnet/minecraft/world/ChunkCoordinates;)Z
 	METHOD f getChunkFromBlockCoords (Lnone/dt;)Lnone/bfh; (Lnet/minecraft/world/ChunkCoordinates;)Lnet/minecraft/world/Chunk;
 	METHOD i updateEntities ()V ()V
 	METHOD p getBlockStateAt (Lnone/dt;)Lnone/bec; (Lnet/minecraft/world/ChunkCoordinates;)Lnet/minecraft/block/BlockState;
+	METHOD s getTileEntityAt (Lnone/dt;)Lnone/bcm; (Lnet/minecraft/world/ChunkCoordinates;)Lnet/minecraft/world/tileentity/TileEntity;
 CLASS none/aqz none/MinecraftException
 CLASS none/arb net/minecraft/world/WorldSettings
 	FIELD a seed
@@ -1626,7 +1658,10 @@ CLASS none/arc none/EnumGameType
 	METHOD d isCreative ()Z ()Z
 	METHOD e isSurvival ()Z ()Z
 CLASS none/ard net/minecraft/world/IBlockAccess
+	METHOD b getBiomeAt (Lnone/dt;)Lnone/arm; (Lnet/minecraft/world/ChunkCoordinates;)Lnet/minecraft/world/biome/Biome;
+	METHOD d hasAirAt (Lnone/dt;)Z (Lnet/minecraft/world/ChunkCoordinates;)Z
 	METHOD p getBlockStateAt (Lnone/dt;)Lnone/bec; (Lnet/minecraft/world/ChunkCoordinates;)Lnet/minecraft/block/BlockState;
+	METHOD s getTileEntityAt (Lnone/dt;)Lnone/bcm; (Lnet/minecraft/world/ChunkCoordinates;)Lnet/minecraft/world/tileentity/TileEntity;
 CLASS none/are net/minecraft/world/WorldType
 	FIELD b defaultWorldType
 	FIELD c flat
@@ -1640,8 +1675,11 @@ CLASS none/are net/minecraft/world/WorldType
 CLASS none/arf
 	FIELD a SKY
 	FIELD b BLOCK
-CLASS none/arj
+CLASS none/arj net/minecraft/world/ChunkCache
+	METHOD b getBiomeAt (Lnone/dt;)Lnone/arm; (Lnet/minecraft/world/ChunkCoordinates;)Lnet/minecraft/world/biome/Biome;
+	METHOD d hasAirAt (Lnone/dt;)Z (Lnet/minecraft/world/ChunkCoordinates;)Z
 	METHOD p getBlockStateAt (Lnone/dt;)Lnone/bec; (Lnet/minecraft/world/ChunkCoordinates;)Lnet/minecraft/block/BlockState;
+	METHOD s getTileEntityAt (Lnone/dt;)Lnone/bcm; (Lnet/minecraft/world/ChunkCoordinates;)Lnet/minecraft/world/tileentity/TileEntity;
 CLASS none/arl net/minecraft/world/biome/BiomeBeach
 	METHOD <init> (I)V
 		ARG 0 biomeID
@@ -2977,6 +3015,9 @@ CLASS none/bcm net/minecraft/world/tileentity/TileEntity
 	FIELD b dim
 	FIELD c blockCoords
 	FIELD e block
+	FIELD f idToClassRegistry
+	FIELD g classToIdRegistry
+	METHOD a register (Ljava/lang/Class;Ljava/lang/String;)V (Ljava/lang/Class;Ljava/lang/String;)V
 	METHOD a setDimension (Lnone/aqu;)V (Lnet/minecraft/world/World;)V
 	METHOD o_ onInventoryChanged ()V ()V
 	METHOD t checkHasDimension ()Z ()Z
@@ -3781,6 +3822,11 @@ CLASS none/bq net/minecraft/server/commands/ServerCommandGameRule
 	METHOD c (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bqc none/WorldSavedData
+CLASS none/bqd none/ByteQuartet
+	METHOD a getFirst ()B ()B
+	METHOD b getSecond ()B ()B
+	METHOD c getThird ()B ()B
+	METHOD d getFourth ()B ()B
 CLASS none/bqe none/MapData
 CLASS none/bqj net/minecraft/world/AnvilSaveConverter
 	METHOD a convertMapFormat (Ljava/lang/String;Lnone/uy;)Z (Ljava/lang/String;Lnone/uy;)Z
@@ -5091,7 +5137,7 @@ CLASS none/cec
 	FIELD a logger
 	FIELD b mc
 CLASS none/cee net/minecraft/network/NetClientHandler
-	METHOD a addToSendQueue (Lnone/id;)V (Lnone/id;)V
+	METHOD a addToSendQueue (Lnone/id;)V (Lnet/minecraft/network/IPacketBufferSerializable;)V
 	METHOD a handlePlayerpositionAndLook (Lnone/ii;)V (Lnet/minecraft/network/packet/clientbound/PacketPlayerPositionAndLook;)V
 	METHOD a handleSpawnObject (Lnone/il;)V (Lnet/minecraft/network/packet/clientbound/PacketSpawnObject;)V
 	METHOD a handleSpawnExperienceOrb (Lnone/im;)V (Lnet/minecraft/network/packet/clientbound/PacketSpawnExperienceOrb;)V
@@ -5172,6 +5218,7 @@ CLASS none/cen none/DimensionClient
 	METHOD a addWorldInfoToCrashReport (Lnone/b;)Lnone/j; (Lnone/CrashLogger;)Lnone/CrashLogInfo;
 	METHOD c tick ()V ()V
 	METHOD d spawn (Lnone/wv;)Z (Lnet/minecraft/entity/Entity;)Z
+CLASS none/ceu none/MinecraftProfileTextureValues
 CLASS none/cew net/minecraft/network/ServerData
 	FIELD a serverName
 	FIELD b serverIP
@@ -5414,7 +5461,7 @@ CLASS none/cio net/minecraft/entity/EntityClientPlayerMP
 	METHOD w getSomeString ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD y isRidingAHorse ()Z ()Z
 	METHOD z getHorseJumpPower ()F ()F
-CLASS none/cip
+CLASS none/cip net/minecraft/entity/EntityOtherPlayerMP
 	METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
 	METHOD a sendChatToPlayer (Lnone/ho;)V (Lnet/minecraft/chat/ChatMessageComponent;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
@@ -5430,7 +5477,9 @@ CLASS none/cj net/minecraft/server/commands/ServerCommandSay
 	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cja
+	FIELD f AIR
 	METHOD p getBlockStateAt (Lnone/dt;)Lnone/bec; (Lnet/minecraft/world/ChunkCoordinates;)Lnet/minecraft/block/BlockState;
+	METHOD s getTileEntityAt (Lnone/dt;)Lnone/bcm; (Lnet/minecraft/world/ChunkCoordinates;)Lnet/minecraft/world/tileentity/TileEntity;
 CLASS none/cje none/EnumBlockVertices
 	FIELD a DOWN
 	FIELD b UP
@@ -6495,6 +6544,7 @@ CLASS none/gr net/minecraft/network/NetworkManager
 	FIELD h queue
 	FIELD i channel
 	FIELD j socketAddress
+	FIELD k packetListener
 	METHOD a (Ljava/net/InetAddress;I)Lnone/gr;
 		ARG 0 inetAddress
 	METHOD a (Ljava/net/SocketAddress;)Lnone/gr;
@@ -6729,7 +6779,7 @@ CLASS none/hz net/minecraft/chat/TranslatableComponent
 	METHOD g translateToCurrentLanguage ()V ()V
 	METHOD i getKey ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD j getArgs ()[Ljava/lang/Object; ()[Ljava/lang/Object;
-CLASS none/id
+CLASS none/id net/minecraft/network/IPacketBufferSerializable
 	METHOD a read (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 	METHOD b write (Lnone/hd;)V (Lnet/minecraft/network/PacketBuffer;)V
 CLASS none/ie net/minecraft/network/PacketDestination
@@ -7475,6 +7525,8 @@ CLASS none/pc
 	METHOD <init> (Ljava/lang/String;Ljava/io/OutputStream;)V
 		ARG 1 outputStream
 CLASS none/pd net/minecraft/world/ConvertingProcessUpdate
+CLASS none/pi none/EmptyException
+	FIELD a INSTANCE
 CLASS none/pm none/IUpdatePlayerListBox
 	METHOD c update ()V ()V
 CLASS none/qj net/minecraft/server/DemoWorldServer
@@ -7545,7 +7597,7 @@ CLASS none/qt net/minecraft/world/WorldServer
 	METHOD o flush ()V ()V
 	METHOD r getMinecraftServer ()Lnet/minecraft/server/MinecraftServer; ()Lnet/minecraft/server/MinecraftServer;
 	METHOD s getEntityTracker ()Lnone/qn; ()Lnone/EntityTracker;
-CLASS none/qw
+CLASS none/qw net/minecraft/entity/EntityPlayerMP
 	FIELD b minecraftServer
 	FIELD bF logger
 	FIELD bS entity
@@ -7657,7 +7709,7 @@ CLASS none/rj net/minecraft/network/NetServerHandler
 CLASS none/rq
 	METHOD c update ()V ()V
 CLASS none/sn net/minecraft/server/ServerConfigurationManager
-	METHOD a setPacketToAllPlayersInDimension (Lnone/id;I)V (Lnone/id;I)V
+	METHOD a setPacketToAllPlayersInDimension (Lnone/id;I)V (Lnet/minecraft/network/IPacketBufferSerializable;I)V
 	METHOD a setPlayerManager ([Lnone/qt;)V ([Lnet/minecraft/world/WorldServer;)V
 	METHOD e sendPlayerInfoToAllPlayers ()V ()V
 	METHOD g getAllUsernames ()[Ljava/lang/String; ()[Ljava/lang/String;
@@ -7849,8 +7901,10 @@ CLASS none/wh net/minecraft/src/DamageSource
 	METHOD a thrown (Lnone/wv;Lnone/wv;)Lnone/wh; (Lnet/minecraft/entity/Entity;Lnet/minecraft/entity/Entity;)Lnet/minecraft/src/DamageSource;
 	METHOD a mob (Lnone/xm;)Lnone/wh; (Lnet/minecraft/entity/EntityLiving;)Lnet/minecraft/src/DamageSource;
 	METHOD b indirectMagic (Lnone/wv;Lnone/wv;)Lnone/wh; (Lnet/minecraft/entity/Entity;Lnet/minecraft/entity/Entity;)Lnet/minecraft/src/DamageSource;
-CLASS none/ws
+CLASS none/ws net/minecraft/entity/EntityAgeable
+	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
+	METHOD a createChildFrom (Lnone/ws;)Lnone/ws; (Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/EntityAgeable;
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 CLASS none/wv net/minecraft/entity/Entity
 	FIELD A previousYaw
@@ -7970,12 +8024,16 @@ CLASS none/xm net/minecraft/entity/EntityLiving
 CLASS none/xn net/minecraft/entity/EntityMobBase
 	METHOD K doTick ()V ()V
 	METHOD a handleEntityStatusPacket (B)V (B)V
+	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD bz getCurrentlyHoldingItemStack ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
 	METHOD e attemptMountByPlayer (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
 	METHOD s_ onUpdate ()V ()V
 CLASS none/xp none/EnumMobLists
+CLASS none/xu
+	FIELD bi FLEEING_SPEED_ID
+	FIELD bj FLEEING_SPEED_BONUS
 CLASS none/xx net/minecraft/entity/EntityTamable
 	METHOD a handleEntityStatusPacket (B)V (B)V
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
@@ -7984,6 +8042,20 @@ CLASS none/y none/_y_IServerCommand_something
 	METHOD a (Lnone/ae;Lnone/ac;ILjava/lang/String;[Ljava/lang/Object;)V
 		ARG 0 serverCommandUser
 		ARG 1 serverCommand
+CLASS none/ya net/minecraft/entity/attribute/AttributeModifier
+	FIELD a amount
+	FIELD b operation
+	FIELD c name
+	FIELD d identifier
+	FIELD e isSerialized
+	METHOD <init> (Ljava/util/UUID;Ljava/lang/String;DI)V
+		ARG 1 name
+		ARG 3 arithmeticOperation
+	METHOD a getUniqueIdentifier ()Ljava/util/UUID; ()Ljava/util/UUID;
+	METHOD b getName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD c getOperation ()I ()I
+	METHOD d getAmount ()D ()D
+	METHOD e isSerialized ()Z ()Z
 CLASS none/z net/minecraft/server/commands/ServerCommand
 	METHOD a doesStringStartWith (Ljava/lang/String;Ljava/lang/String;)Z (Ljava/lang/String;Ljava/lang/String;)Z
 	METHOD a (Lnone/ae;)Z
