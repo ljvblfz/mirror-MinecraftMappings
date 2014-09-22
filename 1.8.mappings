@@ -4123,12 +4123,26 @@ CLASS none/bsq net/minecraft/chat/ChatLine
 	METHOD a getChatLineString ()Lnone/ho; ()Lnet/minecraft/chat/ChatMessageComponent;
 	METHOD b getUpdateCounter ()I ()I
 	METHOD c getChatLineId ()I ()I
-CLASS none/bsr
+CLASS none/bsr net/minecraft/client/KeyBinding
+	FIELD a bindings
+	FIELD c categories
+	FIELD e defaultKey
+	FIELD f category
+	FIELD g keyCode
+	METHOD a unpressAll ()V ()V
+	METHOD b setKey (I)V (I)V
+	METHOD c getCategories ()Ljava/util/Set; ()Ljava/util/Set;
+	METHOD d hasChanged ()Z ()Z
+	METHOD e getCategory ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD f isBeingPressed ()Z ()Z
+	METHOD h defaultKey ()I ()I
 	METHOD i keyCode ()I ()I
+	METHOD j reset ()V ()V
 CLASS none/bss net/minecraft/client/render/RenderHelper
 	METHOD a disableStandardItemLighting ()V ()V
 	METHOD b enableStandardItemLighting ()V ()V
 	METHOD c enableGUIStandardItemLighting ()V ()V
+CLASS none/bst none/GL11ListHelper
 CLASS none/bsu net/minecraft/main/Minecraft
 	CLASS none/btc
 		METHOD a confirmClicked (ZI)V (ZI)V
@@ -4267,10 +4281,24 @@ CLASS none/bto net/minecraft/src/GameSettings
 	FIELD E chatWidth
 	FIELD F chatHeightUnfocused
 	FIELD G chatHeightFocused
+	FIELD U keyBindForward
+	FIELD V keyBindLeft
+	FIELD W keyBindBack
+	FIELD X keyBindRight
+	FIELD Y keyBindJump
+	FIELD Z keyBindSneak
 	FIELD aI language
+	FIELD aW options
 	FIELD aa keyBindInventory
+	FIELD ab keyBindUse
 	FIELD ac keyBindDrop
+	FIELD ad keyBindAttack
 	FIELD ae keyBindPickBlock
+	FIELD af keyBindSprint
+	FIELD ag keyBindChat
+	FIELD ah keyBindPlayerList
+	FIELD ai keyBindCommand
+	FIELD as keyBindHotbar
 	FIELD l chatVisibility
 	FIELD p chatOpacity
 	FIELD q snooperEnabled
@@ -4288,6 +4316,7 @@ CLASS none/bty net/minecraft/client/render/FontRenderer
 	METHOD a getStringWidth (Ljava/lang/String;)I (Ljava/lang/String;)I
 	METHOD a drawStringWithShadow (Ljava/lang/String;FFI)I (Ljava/lang/String;FFI)I
 	METHOD a drawString (Ljava/lang/String;III)I (Ljava/lang/String;III)I
+	METHOD a onReload (Lnone/cvk;)V (Lnet/minecraft/src/ResourceManager;)V
 	METHOD a setUnicodeFlag (Z)V (Z)V
 	METHOD b setBidiFlag (Z)V (Z)V
 CLASS none/btz net/minecraft/client/gui/GuiIngame
@@ -4324,7 +4353,7 @@ CLASS none/bub net/minecraft/client/gui/Gui
 	METHOD a drawHorizontalLine (IIII)V (IIII)V
 	METHOD a drawRect (IIIII)V (IIIII)V
 	METHOD a drawGradientRect (IIIIII)V (IIIIII)V
-	METHOD a unknownDraw (IILnone/cue;II)V (IILnone/cue;II)V
+	METHOD a unknownDraw (IILnone/cue;II)V (IILnone/TextureAtlasSprite;II)V
 	METHOD a drawCenteredString (Lnone/bty;Ljava/lang/String;III)V (Lnet/minecraft/client/render/FontRenderer;Ljava/lang/String;III)V
 	METHOD b drawVerticalLine (IIII)V (IIII)V
 	METHOD b drawTexturedModalRect (IIIIII)V (IIIIII)V
@@ -5538,7 +5567,7 @@ CLASS none/cip net/minecraft/entity/EntityOtherPlayerMP
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
 	METHOD c setArmorInSlot (ILnone/amj;)V (ILnet/minecraft/item/ItemStack;)V
 	METHOD s_ onUpdate ()V ()V
-CLASS none/civ
+CLASS none/civ none/BufferBuilder
 	METHOD a addVertexWithUV (DDDDD)V (DDDDD)V
 	METHOD b startDrawingQuads ()V ()V
 	METHOD c setColorOpaque_I (I)V (I)V
@@ -5580,6 +5609,7 @@ CLASS none/cji net/minecraft/entity/EntityRenderer
 	FIELD f RAIN_TEXTURE
 	FIELD g SNOW_TEXTURE
 	FIELD h minecraft
+	METHOD a onReload (Lnone/cvk;)V (Lnet/minecraft/src/ResourceManager;)V
 	METHOD a setViewEntity (Lnone/wv;)V (Lnet/minecraft/entity/Entity;)V
 	METHOD j setupOverlayRendering ()V ()V
 CLASS none/cjm org/lwjgl/opengl/GL11
@@ -5639,12 +5669,22 @@ CLASS none/cki
 	FIELD a MAP_BACKGROUND
 	FIELD b UNDERWATER
 	FIELD c minecraft
+CLASS none/ckn
+	FIELD b LOGGER
+	FIELD c MOON_PHASES
+	FIELD d SUN
+	FIELD e CLOUDS
+	FIELD f END_SKY
+	FIELD g FORCEFIELD
+	METHOD a onReload (Lnone/cvk;)V (Lnet/minecraft/src/ResourceManager;)V
 CLASS none/ckx
 	METHOD b draw ()I ()I
 CLASS none/cl none/_cl_ServerCommand_something
 	METHOD a (Lnone/ae;Lnone/ac;ILjava/lang/String;[Ljava/lang/Object;)V
 		ARG 0 serverCommandUser
 		ARG 1 serverCommand
+CLASS none/cll
+	METHOD a onReload (Lnone/cvk;)V (Lnet/minecraft/src/ResourceManager;)V
 CLASS none/clp
 	FIELD a DOWN
 	FIELD b UP
@@ -5768,6 +5808,7 @@ CLASS none/cqh net/minecraft/client/render/FontRenderer2
 	FIELD a zLevel
 	METHOD a renderItemOverlayIntoGUI (Lnone/bty;Lnone/amj;II)V (Lnet/minecraft/client/render/FontRenderer;Lnet/minecraft/item/ItemStack;II)V
 	METHOD a renderItemOverlayIntoGUI (Lnone/bty;Lnone/amj;IILjava/lang/String;)V (Lnet/minecraft/client/render/FontRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V
+	METHOD a onReload (Lnone/cvk;)V (Lnet/minecraft/src/ResourceManager;)V
 	METHOD b renderItemAndEffectIntoGUI (Lnone/amj;II)V (Lnet/minecraft/item/ItemStack;II)V
 CLASS none/cqs net/minecraft/client/render/RenderMagmaCube
 	FIELD a magmaCubeTextures
@@ -5850,7 +5891,29 @@ CLASS none/cu net/minecraft/server/commands/ServerCommandStop
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/cue none/TextureAtlasSprite
+	FIELD a frames
+	FIELD c isRotated
+	FIELD d x
+	FIELD e y
+	FIELD f width
+	FIELD g height
+	FIELD j name
+	FIELD l uMin
+	FIELD m uMax
+	FIELD n vMin
+	FIELD o vMax
+	FIELD p CLOCK
+	FIELD q COMPASS
+	METHOD a setFrameList (Ljava/util/List;)V (Ljava/util/List;)V
+	METHOD b setWidth (I)V (I)V
+	METHOD c getWidth ()I ()I
+	METHOD c setHeight (I)V (I)V
+	METHOD d getHeight ()I ()I
+	METHOD i getName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD k frameCount ()I ()I
 CLASS none/cug net/minecraft/src/TextureManager
+	METHOD a onReload (Lnone/cvk;)V (Lnet/minecraft/src/ResourceManager;)V
 	METHOD a bindTexture (Lnone/oa;)V (Lnet/minecraft/src/ResourceLocation;)V
 CLASS none/cv net/minecraft/server/commands/ServerCommandSummon
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
@@ -5863,13 +5926,17 @@ CLASS none/cva net/minecraft/client/render/RenderPlayer
 CLASS none/cvb net/minecraft/src/DefaultResourcePack
 	METHOD c setIcon (Lnone/oa;)Ljava/io/InputStream; (Lnet/minecraft/src/ResourceLocation;)Ljava/io/InputStream;
 CLASS none/cvg net/minecraft/src/FoliageColorReloadListener
+	METHOD a onReload (Lnone/cvk;)V (Lnet/minecraft/src/ResourceManager;)V
 CLASS none/cvh net/minecraft/src/GrassColorReloadListener
+	METHOD a onReload (Lnone/cvk;)V (Lnet/minecraft/src/ResourceManager;)V
 CLASS none/cvi net/minecraft/src/ReloadableResourceManager
-	METHOD a registerReloadListener (Lnone/cvl;)V (Lnone/cvl;)V
+	METHOD a registerReloadListener (Lnone/cvl;)V (Lnone/IResourceManagerReloadListener;)V
 CLASS none/cvk net/minecraft/src/ResourceManager
+CLASS none/cvl none/IResourceManagerReloadListener
+	METHOD a onReload (Lnone/cvk;)V (Lnet/minecraft/src/ResourceManager;)V
 CLASS none/cvo net/minecraft/src/ResourcePackRepository
 CLASS none/cvt net/minecraft/src/SimpleReloadableResourceManager
-	METHOD a registerReloadListener (Lnone/cvl;)V (Lnone/cvl;)V
+	METHOD a registerReloadListener (Lnone/cvl;)V (Lnone/IResourceManagerReloadListener;)V
 CLASS none/cw net/minecraft/server/commands/ServerCommandTp
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -5880,6 +5947,7 @@ CLASS none/cw net/minecraft/server/commands/ServerCommandTp
 CLASS none/cwc net/minecraft/src/I18n
 	METHOD a getString (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
 CLASS none/cwe net/minecraft/src/LanguageManager
+	METHOD a onReload (Lnone/cvk;)V (Lnet/minecraft/src/ResourceManager;)V
 	METHOD b isCurrentLanguageBidirectional ()Z ()Z
 CLASS none/cwk net/minecraft/src/MetadataSerializer
 	METHOD a registerMetadataSectionType (Lnone/cwj;Ljava/lang/Class;)V (Lnone/cwj;Ljava/lang/Class;)V
@@ -5894,6 +5962,8 @@ CLASS none/cwx net/minecraft/src/PackMetadataSection
 CLASS none/cwy net/minecraft/src/PackMetadataSectionSerializer
 CLASS none/cxb net/minecraft/src/TextureMetadataSection
 CLASS none/cxc net/minecraft/src/TextureMetadataSectionSerializer
+CLASS none/cxk
+	METHOD a onReload (Lnone/cvk;)V (Lnet/minecraft/src/ResourceManager;)V
 CLASS none/cxl
 	METHOD toString returnFullObjectName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS none/cxz net/minecraft/sound/EnumSoundType
@@ -5954,6 +6024,7 @@ CLASS none/cz net/minecraft/server/commands/ServerCommandTestFor
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/czh
+	METHOD a onReload (Lnone/cvk;)V (Lnet/minecraft/src/ResourceManager;)V
 	METHOD c update ()V ()V
 CLASS none/czl
 	METHOD b initializeMap ()Ljava/util/Map; ()Ljava/util/Map;
