@@ -230,10 +230,10 @@ CLASS none/ac net/minecraft/server/IServerCommand
 		ARG 0 serverCommandUser
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
-	METHOD a (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c (Lnone/ae;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/aca net/minecraft/entity/EntityPig
 	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
@@ -311,8 +311,11 @@ CLASS none/adi net/minecraft/entity/EntityArmorStand
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
 	METHOD aR getEyeHeight ()F ()F
+	METHOD at getArmorEquipment ()[Lnone/amj; ()[Lnet/minecraft/item/ItemStack;
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD bz getCurrentlyHoldingItemStack ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
+	METHOD c setArmorInSlot (ILnone/amj;)V (ILnet/minecraft/item/ItemStack;)V
+	METHOD p getEquipmentInSlot (I)Lnone/amj; (I)Lnet/minecraft/item/ItemStack;
 	METHOD s_ onUpdate ()V ()V
 CLASS none/adj net/minecraft/entity/EntityAttached
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
@@ -560,6 +563,7 @@ CLASS none/afw net/minecraft/entity/EntitySkeleton
 	METHOD a shoot (Lnone/xm;F)V (Lnet/minecraft/entity/EntityLiving;F)V
 	METHOD aR getEyeHeight ()F ()F
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
+	METHOD c setArmorInSlot (ILnone/amj;)V (ILnet/minecraft/item/ItemStack;)V
 CLASS none/afy net/minecraft/entity/EntitySlime
 	METHOD J kill ()V ()V
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
@@ -728,6 +732,7 @@ CLASS none/ahd net/minecraft/entity/EntityPlayer
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
 	METHOD a dropItem (Z)Lnone/adw; (Z)Lnet/minecraft/entity/EntityItem;
 	METHOD aR getEyeHeight ()F ()F
+	METHOD at getArmorEquipment ()[Lnone/amj; ()[Lnet/minecraft/item/ItemStack;
 	METHOD b subtractXpLevels (I)V (I)V
 		ARG 0 amount
 	METHOD b doEatDrinkAnimation (Lnone/amj;I)V (Lnet/minecraft/item/ItemStack;I)V
@@ -741,6 +746,8 @@ CLASS none/ahd net/minecraft/entity/EntityPlayer
 	METHOD bU resetItemUseTimer ()V ()V
 	METHOD bY getActiveHotbarSlot ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
 	METHOD bz getCurrentlyHoldingItemStack ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
+	METHOD c setArmorInSlot (ILnone/amj;)V (ILnet/minecraft/item/ItemStack;)V
+		ARG 0 slotIndex
 	METHOD ca respawnPlayer ()V ()V
 	METHOD cf getSleepTimer ()I ()I
 	METHOD ci getXpSeed ()I ()I
@@ -749,6 +756,8 @@ CLASS none/ahd net/minecraft/entity/EntityPlayer
 	METHOD d damageEntity (Lnone/wh;F)V (Lnet/minecraft/src/DamageSource;F)V
 	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD n closeScreen ()V ()V
+	METHOD p getEquipmentInSlot (I)Lnone/amj; (I)Lnet/minecraft/item/ItemStack;
+		ARG 0 slotIndex
 	METHOD s doSwallowAction ()V ()V
 	METHOD s_ onUpdate ()V ()V
 	METHOD t sendPlayerAbilities ()V ()V
@@ -1099,7 +1108,7 @@ CLASS none/alq net/minecraft/item/Item
 		ARG 1 dimension
 		ARG 2 block
 		ARG 3 blockCoords
-	METHOD a (Lnone/amj;Lnone/aqu;Lnone/wv;IZ)V
+	METHOD a onUpdate (Lnone/amj;Lnone/aqu;Lnone/wv;IZ)V (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/entity/Entity;IZ)V
 		ARG 1 dimension
 		ARG 2 entity
 	METHOD a getMiningEfficiencyMultiplier (Lnone/amj;Lnone/atr;)F (Lnet/minecraft/item/ItemStack;Lnet/minecraft/block/BlockType;)F
@@ -1136,6 +1145,7 @@ CLASS none/alq net/minecraft/item/Item
 	METHOD e getRightClickEvent (Lnone/amj;)Lnone/ano; (Lnet/minecraft/item/ItemStack;)Lnet/minecraft/src/EnumRightClickEvents;
 	METHOD e_ toString (Lnone/amj;)Ljava/lang/String; (Lnet/minecraft/item/ItemStack;)Ljava/lang/String;
 	METHOD j getMaxStackSize ()I ()I
+	METHOD l getMaxDurability ()I ()I
 	METHOD t registerItems ()V ()V
 CLASS none/am
 	METHOD apply (Lnone/wv;)Z
@@ -1154,25 +1164,36 @@ CLASS none/amj net/minecraft/item/ItemStack
 	FIELD f damage
 	METHOD a splitStack (I)Lnone/amj; (I)Lnet/minecraft/item/ItemStack;
 		ARG 0 splitAmount
+	METHOD a tryIncrementDamage (ILjava/util/Random;)Z (ILjava/util/Random;)Z
 	METHOD a setItem (Lnone/alq;)V (Lnet/minecraft/item/Item;)V
 	METHOD a isMergeable (Lnone/amj;)Z (Lnet/minecraft/item/ItemStack;)Z
+	METHOD a nbtEquals (Lnone/amj;Lnone/amj;)Z (Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;)Z
 	METHOD a doItemUseAction (Lnone/aqu;Lnone/ahd;)Lnone/amj; (Lnet/minecraft/world/World;Lnet/minecraft/entity/EntityPlayer;)Lnet/minecraft/item/ItemStack;
 	METHOD a onUpdate (Lnone/aqu;Lnone/wv;IZ)V (Lnet/minecraft/world/World;Lnet/minecraft/entity/Entity;IZ)V
 	METHOD a getMiningEfficiencyForBlock (Lnone/atr;)F (Lnet/minecraft/block/BlockType;)F
 	METHOD a loadItemStackFromNBT (Lnone/fn;)Lnone/amj; (Lnet/minecraft/nbt/NbtTagCompound;)Lnet/minecraft/item/ItemStack;
 	METHOD b getItem ()Lnone/alq; ()Lnet/minecraft/item/Item;
+	METHOD b setDamage (I)V (I)V
 	METHOD b clone (Lnone/amj;)Lnone/amj; (Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;
+	METHOD b deepEquals (Lnone/amj;Lnone/amj;)Z (Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;)Z
 	METHOD b doSwallowAction (Lnone/aqu;Lnone/ahd;)Lnone/amj; (Lnet/minecraft/world/World;Lnet/minecraft/entity/EntityPlayer;)Lnet/minecraft/item/ItemStack;
 	METHOD b doReleaseItemAction (Lnone/aqu;Lnone/ahd;I)V (Lnet/minecraft/world/World;Lnet/minecraft/entity/EntityPlayer;I)V
 	METHOD b givesSpecialDropOnBlock (Lnone/atr;)Z (Lnet/minecraft/block/BlockType;)Z
+	METHOD b writeTo (Lnone/fn;)Lnone/fn; (Lnet/minecraft/nbt/NbtTagCompound;)Lnet/minecraft/nbt/NbtTagCompound;
 	METHOD c getMaxStackSize ()I ()I
+	METHOD c readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
+	METHOD d equals (Lnone/amj;)Z (Lnet/minecraft/item/ItemStack;)Z
 	METHOD e isDamageable ()Z ()Z
 	METHOD g shouldDisplayDamageBar ()Z ()Z
 	METHOD h getDamage ()I ()I
 	METHOD i getDataValue ()I ()I
+	METHOD j getMaxDurability ()I ()I
 	METHOD k copy ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
 	METHOD l getItemUseTimerDuration ()I ()I
 	METHOD m getRightClickEvent ()Lnone/ano; ()Lnet/minecraft/src/EnumRightClickEvents;
+	METHOD n hasNbtData ()Z ()Z
+	METHOD o getNbtData ()Lnone/fn; ()Lnet/minecraft/nbt/NbtTagCompound;
+	METHOD p getEnchantments ()Lnone/fv; ()Lnet/minecraft/nbt/NbtLists;
 	METHOD w isEnchanted ()Z ()Z
 CLASS none/amk net/minecraft/item/Items
 	FIELD A mushroomStew
@@ -1369,6 +1390,7 @@ CLASS none/amm net/minecraft/item/ItemBlockLeaves
 	METHOD a getDataValueForBlockVersion (I)I (I)I
 	METHOD e_ toString (Lnone/amj;)Ljava/lang/String; (Lnet/minecraft/item/ItemStack;)Ljava/lang/String;
 CLASS none/amn net/minecraft/item/ItemMapFilled
+	METHOD a onUpdate (Lnone/amj;Lnone/aqu;Lnone/wv;IZ)V (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/entity/Entity;IZ)V
 CLASS none/amo net/minecraft/item/ItemMilkBucket
 	METHOD a doItemUseAction (Lnone/amj;Lnone/aqu;Lnone/ahd;)Lnone/amj; (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/entity/EntityPlayer;)Lnet/minecraft/item/ItemStack;
 	METHOD b doSwallowAction (Lnone/amj;Lnone/aqu;Lnone/ahd;)Lnone/amj; (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/entity/EntityPlayer;)Lnet/minecraft/item/ItemStack;
@@ -1479,6 +1501,7 @@ CLASS none/apd net/minecraft/enchants/EnchantmentUnbreaking
 CLASS none/ape net/minecraft/enchants/EnchantmentEfficiency
 CLASS none/apf net/minecraft/enchants/Enchantment
 	FIELD A Lure
+	FIELD B id
 	FIELD E EnchantmentMap
 	FIELD a EnchantmentArray
 	FIELD c Protection
@@ -1505,6 +1528,7 @@ CLASS none/apf net/minecraft/enchants/Enchantment
 	FIELD x Flame
 	FIELD y Infinity
 	FIELD z LuckOfTheSea
+	METHOD c getEnchantFromID (I)Lnone/apf; (I)Lnet/minecraft/enchants/Enchantment;
 CLASS none/apg net/minecraft/enchants/EnumEnchantTypes
 	FIELD a All
 	FIELD b Armor
@@ -1520,6 +1544,21 @@ CLASS none/apg net/minecraft/enchants/EnumEnchantTypes
 	FIELD l EnchantTypesArray
 	METHOD a canItemBeEnchanted (Lnone/alq;)Z (Lnet/minecraft/item/Item;)Z
 		ARG 0 item
+CLASS none/aph net/minecraft/enchants/EnchantmentHelper
+	METHOD a getEnchantLevel (ILnone/amj;)I (ILnet/minecraft/item/ItemStack;)I
+		ARG 0 enchantID
+	METHOD a getMaxEnchantmentLevelFrom (I[Lnone/amj;)I (I[Lnet/minecraft/item/ItemStack;)I
+	METHOD a getIdToLevelEnchantmentMap (Lnone/amj;)Ljava/util/Map; (Lnet/minecraft/item/ItemStack;)Ljava/util/Map;
+	METHOD a getFirstArmorWith (Lnone/apf;Lnone/xm;)Lnone/amj; (Lnet/minecraft/enchants/Enchantment;Lnet/minecraft/entity/EntityLiving;)Lnet/minecraft/item/ItemStack;
+	METHOD a getCurrentItemKnockBackLevel (Lnone/xm;)I (Lnet/minecraft/entity/EntityLiving;)I
+	METHOD b getCurrentItemFireAspectLevel (Lnone/xm;)I (Lnet/minecraft/entity/EntityLiving;)I
+	METHOD c getCurrentItemEfficiencyLevel (Lnone/xm;)I (Lnet/minecraft/entity/EntityLiving;)I
+	METHOD e hasCurrentItemSilkTouch (Lnone/xm;)Z (Lnet/minecraft/entity/EntityLiving;)Z
+	METHOD f getCurrentItemFortuneLevel (Lnone/xm;)I (Lnet/minecraft/entity/EntityLiving;)I
+	METHOD g getCurrentItemSeaLuckLevel (Lnone/xm;)I (Lnet/minecraft/entity/EntityLiving;)I
+	METHOD h getCurrentItemLureLevel (Lnone/xm;)I (Lnet/minecraft/entity/EntityLiving;)I
+	METHOD i getCurrentItemLootingLevel (Lnone/xm;)I (Lnet/minecraft/entity/EntityLiving;)I
+	METHOD j hasAquaAffinityArmor (Lnone/xm;)Z (Lnet/minecraft/entity/EntityLiving;)Z
 CLASS none/app net/minecraft/enchants/EnchantmentFireAspect
 CLASS none/apq net/minecraft/enchants/EnchantmentLure
 CLASS none/apr net/minecraft/enchants/EnchantmentKnockback
@@ -2401,7 +2440,8 @@ CLASS none/atz none/IGrowable
 CLASS none/au net/minecraft/server/commands/ServerCommandAchievement
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/aua net/minecraft/block/BlockBookshelf
 CLASS none/aub net/minecraft/block/BlockBrewingStand
@@ -2547,8 +2587,9 @@ CLASS none/aw net/minecraft/server/commands/ServerCommandBanIp
 		ARG 0 serverCommandUser
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/awa none/EnumFlowerType
 	FIELD a DANDELION
@@ -2625,8 +2666,9 @@ CLASS none/awz net/minecraft/block/BlockHugeMushroom
 CLASS none/ax net/minecraft/server/commands/ServerCommandBan
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 rserverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/axa none/EnumHugeMushroomPart
 	FIELD a NORTH_WEST
@@ -2696,8 +2738,9 @@ CLASS none/axu none/EnumStoneType
 CLASS none/ay net/minecraft/server/commands/ServerCommandBlockData
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/ayb net/minecraft/block/BlockMushroom
 CLASS none/ayc net/minecraft/block/BlockMycelium
@@ -2747,8 +2790,9 @@ CLASS none/ayy net/minecraft/block/BlockNetherPortal
 CLASS none/az net/minecraft/server/commands/ServerCommandClear
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/aza net/minecraft/block/BlockPotatoes
 CLASS none/azb net/minecraft/block/BlockRedstoneBlock
@@ -2846,8 +2890,9 @@ CLASS none/b none/CrashLogger
 CLASS none/ba net/minecraft/server/commands/ServerCommandClone
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/baa net/minecraft/block/BlockRotatable6
 CLASS none/bab net/minecraft/block/BlockSand
@@ -2979,8 +3024,9 @@ CLASS none/bbz net/minecraft/block/BlockWallSign
 CLASS none/bc net/minecraft/server/commands/ServerCommandTestForBlocks
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bcb net/minecraft/block/BlockWaterlily
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt; (Lnet/minecraft/world/World;Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)Lnone/BoundingBox;
@@ -3056,8 +3102,9 @@ CLASS none/bcz net/minecraft/world/tileentity/TileEntityEnchantTable
 CLASS none/bd net/minecraft/server/commands/ServerCommandDeOp
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bda net/minecraft/world/tileentity/TileEntityEnderChest
 	METHOD c update ()V ()V
@@ -3110,8 +3157,9 @@ CLASS none/be net/minecraft/server/commands/ServerCommandDebug
 	FIELD a logger
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 	METHOD d getWittyComment ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS none/bec net/minecraft/block/BlockState
@@ -3127,7 +3175,7 @@ CLASS none/bf net/minecraft/server/commands/ServerCommandDefaultGameMode
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bfe net/minecraft/world/IChunkProvider
 	METHOD a doesChunkExist (II)Z (II)Z
@@ -3341,8 +3389,9 @@ CLASS none/bfy
 CLASS none/bg net/minecraft/server/commands/ServerCommandEffect
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bgd net/minecraft/world/WorldProvider
 	METHOD a generateLightBrightnessTable ()V ()V
@@ -3551,8 +3600,9 @@ CLASS none/bgw net/minecraft/world/ChunkGeneratorEnd
 CLASS none/bh net/minecraft/server/commands/ServerCommandMe
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bhc net/minecraft/world/generator/WorldGenerator
 CLASS none/bhd
@@ -3601,9 +3651,11 @@ CLASS none/bhz net/minecraft/world/generator/LowGlowstoneGenerator
 CLASS none/bi net/minecraft/server/commands/ServerCommandEnchant
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c (Lnone/ae;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+	METHOD d getAllUsernames ()[Ljava/lang/String; ()[Ljava/lang/String;
 CLASS none/bia
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/ChunkCoordinates;)Z
 CLASS none/bib
@@ -3652,8 +3704,9 @@ CLASS none/bit net/minecraft/world/generator/WaterlilyGenerator
 CLASS none/bj net/minecraft/server/commands/ServerCommandEntityData
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bjb net/minecraft/world/CoordRange
 	FIELD a minX
@@ -3710,8 +3763,9 @@ CLASS none/bk net/minecraft/server/commands/ServerCommandExecute
 		METHOD e getEntityWorld ()Lnone/aqu; ()Lnet/minecraft/world/World;
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c (Lnone/ae;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bkg net/minecraft/world/generator/GenStructureMonument
 CLASS none/bkh net/minecraft/world/structure/StructureMonument
@@ -3722,8 +3776,9 @@ CLASS none/blq net/minecraft/world/structure/StructureStronghold
 CLASS none/bm net/minecraft/server/commands/ServerCommandXp
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bmg net/minecraft/world/structure/bmg
 CLASS none/bmm net/minecraft/world/generator/GenStructureBase
@@ -3734,8 +3789,9 @@ CLASS none/bmx net/minecraft/world/structure/StructureVillage
 CLASS none/bn net/minecraft/server/commands/ServerCommandFill
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bnu net/minecraft/world/generator/noisegen/Perlin3d
 CLASS none/bnv net/minecraft/world/generator/noisegen/Perlin3dOctaves
@@ -3744,8 +3800,9 @@ CLASS none/bnz net/minecraft/world/generator/noisegen/Simplex2d
 CLASS none/bo net/minecraft/server/commands/ServerCommandDifficulty
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/boa net/minecraft/world/generator/noisegen/NoiseGenAbstract
 CLASS none/bof none/Material
@@ -3810,16 +3867,18 @@ CLASS none/boh net/minecraft/block/MapColor
 CLASS none/bp net/minecraft/server/commands/ServerCommandGameMode
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 	METHOD h (Lnone/ae;Ljava/lang/String;)Lnone/arc;
 		ARG 0 serverCommandUser
 CLASS none/bq net/minecraft/server/commands/ServerCommandGameRule
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c (Lnone/ae;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bqc none/WorldSavedData
 CLASS none/bqd none/ByteQuartet
@@ -3984,8 +4043,9 @@ CLASS none/bqy net/minecraft/world/ISaveHandler
 CLASS none/br net/minecraft/server/commands/ServerCommandGive
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bra net/minecraft/world/ISaveFormat
 	METHOD a convertMapFormat (Ljava/lang/String;Lnone/uy;)Z (Ljava/lang/String;Lnone/uy;)Z
@@ -4039,8 +4099,9 @@ CLASS none/brz net/minecraft/chat/brz
 CLASS none/bs net/minecraft/server/commands/ServerCommandHelp
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 	METHOD d (Lnone/ae;)Ljava/util/List;
 		ARG 0 serverCommandUser
@@ -4194,8 +4255,9 @@ CLASS none/bsu net/minecraft/main/Minecraft
 CLASS none/bt net/minecraft/server/commands/ServerCommandKick
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/btm net/minecraft/src/SoundManager
 CLASS none/bto net/minecraft/src/GameSettings
@@ -4251,7 +4313,7 @@ CLASS none/bu net/minecraft/server/commands/ServerCommandKill
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bub net/minecraft/client/gui/Gui
 	FIELD b optionsBackground
@@ -4333,8 +4395,9 @@ CLASS none/buw net/minecraft/client/gui/button/GuiSmallButton
 CLASS none/bv net/minecraft/server/commands/ServerCommandBanList
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bvh net/minecraft/client/gui/bvh
 	FIELD f mc
@@ -4405,7 +4468,7 @@ CLASS none/bw net/minecraft/server/commands/ServerCommandList
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bwa net/minecraft/client/gui/GuiYesNo
 	METHOD a drawScreen (IIF)V (IIF)V
@@ -4545,8 +4608,9 @@ CLASS none/bwz
 CLASS none/bx net/minecraft/server/commands/ServerCommandTell
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c (Lnone/ae;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bxc
 	METHOD a drawScreen (IIF)V (IIF)V
@@ -4677,8 +4741,9 @@ CLASS none/bxz net/minecraft/client/gui/GuiSlotStatsItem
 CLASS none/by net/minecraft/server/commands/ServerCommandTellRaw
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/byb
 	METHOD a drawSlot (IIIIII)V (IIIIII)V
@@ -4807,8 +4872,9 @@ CLASS none/byz net/minecraft/client/gui/GuiContainerCreative
 CLASS none/bz net/minecraft/server/commands/ServerCommandOp
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bza
 	METHOD b canDragIntoSlot (Lnone/ajk;)Z (Lnet/minecraft/src/Slot;)Z
@@ -4896,8 +4962,9 @@ CLASS none/bzx net/minecraft/client/gui/screen/GuiSelectResourcePack
 CLASS none/ca net/minecraft/server/commands/ServerCommandPardonIp
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cah net/minecraft/client/gui/screen/GuiScreenTwitch1
 	METHOD a drawScreen (IIF)V (IIF)V
@@ -4939,8 +5006,9 @@ CLASS none/caw net/minecraft/chat/caw
 CLASS none/cb net/minecraft/server/commands/ServerCommandPardon
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cbf net/minecraft/main/MinecraftInitializer
 	FIELD a mcProxy
@@ -5002,8 +5070,9 @@ CLASS none/cbz net/minecraft/client/render/models/ModelBoat
 CLASS none/cc net/minecraft/server/commands/ServerCommandParticle
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c (Lnone/ae;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cca net/minecraft/client/render/models/ModelBook
 	METHOD a setRotationAngles (FFFFFFLnone/wv;)V (FFFFFFLnet/minecraft/entity/Entity;)V
@@ -5076,8 +5145,9 @@ CLASS none/ccz net/minecraft/client/render/ModelSign
 CLASS none/cd net/minecraft/server/commands/ServerCommandPlaySound
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cda net/minecraft/client/render/models/ModelSilverfish
 	METHOD a setRotationAngles (FFFFFFLnone/wv;)V (FFFFFFLnet/minecraft/entity/Entity;)V
@@ -5131,7 +5201,7 @@ CLASS none/ce net/minecraft/server/commands/ServerCommandPublish
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c (Lnone/ae;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cec
 	FIELD a logger
@@ -5226,8 +5296,9 @@ CLASS none/cew net/minecraft/network/ServerData
 CLASS none/cf net/minecraft/server/commands/ServerCommandReplaceItem
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c (Lnone/ae;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cff net/minecraft/world/entity/particle/ParticleItem
 CLASS none/cfg net/minecraft/world/entity/particle/ParticleBarrierBuilder
@@ -5272,7 +5343,7 @@ CLASS none/cg net/minecraft/server/commands/ServerCommandSaveAll
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cga
 	METHOD s_ onUpdate ()V ()V
@@ -5327,7 +5398,7 @@ CLASS none/ch net/minecraft/server/commands/ServerCommandSaveOff
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/chc none/IParticleBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnet/minecraft/world/World;DDDDDD[I)Lnet/minecraft/entity/EntityParticle;
@@ -5378,7 +5449,7 @@ CLASS none/ci net/minecraft/server/commands/ServerCommandSaveOn
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c (Lnone/ae;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cia net/minecraft/world/entity/particle/chw
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw; (ILnet/minecraft/world/World;DDDDDD[I)Lnet/minecraft/entity/EntityParticle;
@@ -5465,6 +5536,7 @@ CLASS none/cip net/minecraft/entity/EntityOtherPlayerMP
 	METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
 	METHOD a sendChatToPlayer (Lnone/ho;)V (Lnet/minecraft/chat/ChatMessageComponent;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
+	METHOD c setArmorInSlot (ILnone/amj;)V (ILnet/minecraft/item/ItemStack;)V
 	METHOD s_ onUpdate ()V ()V
 CLASS none/civ
 	METHOD a addVertexWithUV (DDDDD)V (DDDDD)V
@@ -5473,8 +5545,9 @@ CLASS none/civ
 CLASS none/cj net/minecraft/server/commands/ServerCommandSay
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cja
 	FIELD f AIR
@@ -5522,12 +5595,13 @@ CLASS none/cjm org/lwjgl/opengl/GL11
 CLASS none/ck net/minecraft/server/commands/ServerCommandScoreboard
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD b (Lnone/ae;[Ljava/lang/String;)Z
 		ARG 0 serverCommandUser
 	METHOD b (Lnone/ae;[Ljava/lang/String;I)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c (Lnone/ae;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 	METHOD c (Lnone/ae;[Ljava/lang/String;I)V
 		ARG 0 serverCommandUser
@@ -5594,16 +5668,18 @@ CLASS none/cls none/EnumDirections
 CLASS none/cm net/minecraft/server/commands/ServerCommandSetBlock
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cmd empty/_3
 CLASS none/cmz none/EnumCameraType
 CLASS none/cn net/minecraft/server/commands/ServerCommandSetWorldSpawn
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cnk net/minecraft/client/render/TileEntityBannerRenderer
 	FIELD d BANNER_BASE
@@ -5627,13 +5703,14 @@ CLASS none/co net/minecraft/server/commands/ServerCommandSetIdleTimeout
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cp net/minecraft/server/commands/ServerCommandSpawnPoint
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cpe net/minecraft/client/render/RenderArmorStand
 	METHOD a rotateCorpse (Lnone/xm;FFF)V (Lnet/minecraft/entity/EntityLiving;FFF)V
@@ -5678,7 +5755,7 @@ CLASS none/cq net/minecraft/server/commands/ServerCommandSeed
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cqa net/minecraft/client/render/RenderGiant
 CLASS none/cqc net/minecraft/client/render/RenderGuardian
@@ -5712,7 +5789,7 @@ CLASS none/cr net/minecraft/server/commands/ServerCommandSpreadPlayers
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cra net/minecraft/client/render/RenderMooshroom
 CLASS none/crb net/minecraft/client/render/RenderOcelot
@@ -5761,8 +5838,9 @@ CLASS none/csz net/minecraft/client/render/RenderWolfCollar
 CLASS none/ct net/minecraft/server/commands/ServerCommandStats
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/ctc
 	METHOD a rotateCorpse (Lnone/xm;FFF)V (Lnet/minecraft/entity/EntityLiving;FFF)V
@@ -5770,15 +5848,16 @@ CLASS none/cu net/minecraft/server/commands/ServerCommandStop
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cug net/minecraft/src/TextureManager
 	METHOD a bindTexture (Lnone/oa;)V (Lnet/minecraft/src/ResourceLocation;)V
 CLASS none/cv net/minecraft/server/commands/ServerCommandSummon
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cva net/minecraft/client/render/RenderPlayer
 CLASS none/cvb net/minecraft/src/DefaultResourcePack
@@ -5794,8 +5873,9 @@ CLASS none/cvt net/minecraft/src/SimpleReloadableResourceManager
 CLASS none/cw net/minecraft/server/commands/ServerCommandTp
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cwc net/minecraft/src/I18n
 	METHOD a getString (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
@@ -5829,8 +5909,9 @@ CLASS none/cxz net/minecraft/sound/EnumSoundType
 CLASS none/cy net/minecraft/server/commands/ServerCommandTestForBlock
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cyk net/minecraft/server/IntegratedServer
 	METHOD a loadAllWorlds (Ljava/lang/String;Ljava/lang/String;JLnone/are;Ljava/lang/String;)V (Ljava/lang/String;Ljava/lang/String;JLnet/minecraft/world/WorldType;Ljava/lang/String;)V
@@ -5868,8 +5949,9 @@ CLASS none/cyy net/minecraft/sound/EnumMusicType
 CLASS none/cz net/minecraft/server/commands/ServerCommandTestFor
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/czh
 	METHOD c update ()V ()V
@@ -5878,8 +5960,9 @@ CLASS none/czl
 CLASS none/da net/minecraft/server/commands/ServerCommandTime
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/daa none/ChatController
 CLASS none/dax net/minecraft/client/render/OpenGlHelper
@@ -5892,38 +5975,43 @@ CLASS none/db net/minecraft/server/commands/ServerCommandTitle
 	FIELD a logger
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/dc net/minecraft/server/commands/ServerCommandToggleDownFall
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/dd net/minecraft/server/commands/ServerCommandTrigger
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/de net/minecraft/server/commands/ServerCommandWeather
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverComamndUser
 CLASS none/df net/minecraft/server/commands/ServerCommandWhiteList
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/dg net/minecraft/server/commands/ServerCommandWorldBorder
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
-	METHOD c getUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
+	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnone/IServerCommandUser;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/di net/minecraft/server/commands/ServerCommandException
 	FIELD a errorObjectArray
@@ -6357,6 +6445,8 @@ CLASS none/fv net/minecraft/nbt/NbtLists
 	METHOD a getNbtTypeId ()B ()B
 	METHOD a remove (I)Lnone/gd; (I)Lnet/minecraft/nbt/Nbt;
 		ARG 0 index
+	METHOD a setTag (ILnone/gd;)V (ILnet/minecraft/nbt/Nbt;)V
+		ARG 0 index
 	METHOD a inputData (Ljava/io/DataInput;ILnone/fx;)V (Ljava/io/DataInput;ILnet/minecraft/nbt/NbtSizeUtil;)V
 		ARG 0 dataInput
 		ARG 1 depth
@@ -6368,6 +6458,7 @@ CLASS none/fv net/minecraft/nbt/NbtLists
 	METHOD b clone ()Lnone/gd; ()Lnet/minecraft/nbt/Nbt;
 	METHOD b getAsNbtMap (I)Lnone/fn; (I)Lnet/minecraft/nbt/NbtTagCompound;
 		ARG 0 index
+	METHOD c getSize ()I ()I
 	METHOD c getAsIntArray (I)[I (I)[I
 		ARG 0 index
 	METHOD c_ isEmpty ()Z ()Z
@@ -7953,6 +8044,7 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD aQ getBoundingBox ()Lnone/brt; ()Lnone/BoundingBox;
 	METHOD aR getEyeHeight ()F ()F
 	METHOD ai isEntityAlive ()Z ()Z
+	METHOD at getArmorEquipment ()[Lnone/amj; ()[Lnet/minecraft/item/ItemStack;
 	METHOD av isRiding ()Z ()Z
 	METHOD aw isSneaking ()Z ()Z
 	METHOD ax isSprinting ()Z ()Z
@@ -7963,6 +8055,7 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD c getBrightness (F)F (F)F
 	METHOD c changeDimension (I)V (I)V
 		ARG 0 dimensionId
+	METHOD c setArmorInSlot (ILnone/amj;)V (ILnet/minecraft/item/ItemStack;)V
 	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD e getEntityWorld ()Lnone/aqu; ()Lnet/minecraft/world/World;
 	METHOD e attemptMountByPlayer (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
@@ -8011,24 +8104,30 @@ CLASS none/xm net/minecraft/entity/EntityLiving
 	METHOD aD getHeadPitch ()F ()F
 	METHOD aX shouldDrown ()Z ()Z
 	METHOD ai isEntityAlive ()Z ()Z
+	METHOD at getArmorEquipment ()[Lnone/amj; ()[Lnet/minecraft/item/ItemStack;
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD bI isSleeping ()Z ()Z
 	METHOD bm getHealth ()F ()F
 	METHOD bv swingItem ()V ()V
 	METHOD bz getCurrentlyHoldingItemStack ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
+	METHOD c setArmorInSlot (ILnone/amj;)V (ILnet/minecraft/item/ItemStack;)V
 	METHOD d damageEntity (Lnone/wh;F)V (Lnet/minecraft/src/DamageSource;F)V
 	METHOD f setHeadPitch (F)V (F)V
 	METHOD g heal (F)V (F)V
 	METHOD h setHealth (F)V (F)V
+	METHOD p getEquipmentInSlot (I)Lnone/amj; (I)Lnet/minecraft/item/ItemStack;
 	METHOD s_ onUpdate ()V ()V
 CLASS none/xn net/minecraft/entity/EntityMobBase
 	METHOD K doTick ()V ()V
 	METHOD a handleEntityStatusPacket (B)V (B)V
 	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
+	METHOD at getArmorEquipment ()[Lnone/amj; ()[Lnet/minecraft/item/ItemStack;
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD bz getCurrentlyHoldingItemStack ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
+	METHOD c setArmorInSlot (ILnone/amj;)V (ILnet/minecraft/item/ItemStack;)V
 	METHOD e attemptMountByPlayer (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
+	METHOD p getEquipmentInSlot (I)Lnone/amj; (I)Lnet/minecraft/item/ItemStack;
 	METHOD s_ onUpdate ()V ()V
 CLASS none/xp none/EnumMobLists
 CLASS none/xu
@@ -8057,6 +8156,17 @@ CLASS none/ya net/minecraft/entity/attribute/AttributeModifier
 	METHOD d getAmount ()D ()D
 	METHOD e isSerialized ()Z ()Z
 CLASS none/z net/minecraft/server/commands/ServerCommand
+	METHOD a getAsInt (Ljava/lang/String;)I (Ljava/lang/String;)I
+	METHOD a getAsDoubleWithinRange (Ljava/lang/String;DD)D (Ljava/lang/String;DD)D
+		ARG 1 min
+		ARG 2 max
+	METHOD a getAsIntWithMinimum (Ljava/lang/String;I)I (Ljava/lang/String;I)I
+	METHOD a getAsIntWithinRange (Ljava/lang/String;II)I (Ljava/lang/String;II)I
+		ARG 1 min
+		ARG 2 max
+	METHOD a getAsLongWithinRange (Ljava/lang/String;JJ)J (Ljava/lang/String;JJ)J
+		ARG 1 min
+		ARG 2 max
 	METHOD a doesStringStartWith (Ljava/lang/String;Ljava/lang/String;)Z (Ljava/lang/String;Ljava/lang/String;)Z
 	METHOD a (Lnone/ae;)Z
 		ARG 0 serverCommandUser
@@ -8074,18 +8184,21 @@ CLASS none/z net/minecraft/server/commands/ServerCommand
 		ARG 0 serverCommandUser
 	METHOD a (Lnone/ae;[Ljava/lang/String;IZ)Lnone/dt;
 		ARG 0 serverCommandUser
-	METHOD a (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
+	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List; (Lnone/IServerCommandUser;[Ljava/lang/String;Lnet/minecraft/world/ChunkCoordinates;)Ljava/util/List;
 		ARG 0 serverCommandUser
+	METHOD b getAsLong (Ljava/lang/String;)J (Ljava/lang/String;)J
 	METHOD b (Lnone/ae;)Lnone/qw;
 		ARG 0 serverCommandUser
 	METHOD b (Lnone/ae;Ljava/lang/String;)Lnone/wv;
 		ARG 0 serverCommandUser
 	METHOD b (Lnone/ae;[Ljava/lang/String;IZ)Lnone/ho;
 		ARG 0 serverCommandUser
+	METHOD c getAsDouble (Ljava/lang/String;)D (Ljava/lang/String;)D
 	METHOD c (Lnone/ae;Ljava/lang/String;)Ljava/util/List;
 		ARG 0 serverCommandUser
 	METHOD compareTo (Lnone/ac;)I
 		ARG 0 serverCommand
+	METHOD d getAsBoolean (Ljava/lang/String;)Z (Ljava/lang/String;)Z
 	METHOD d (Lnone/ae;Ljava/lang/String;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 	METHOD e (Lnone/ae;Ljava/lang/String;)Ljava/lang/String;
