@@ -320,8 +320,9 @@ CLASS none/adi net/minecraft/entity/EntityArmorStand
 CLASS none/adj net/minecraft/entity/EntityAttached
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
-	METHOD b setPosition (DDD)V (DDD)V
+	METHOD b updatePosition (DDD)V (DDD)V
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
+	METHOD d applyMotion (DDD)V (DDD)V
 	METHOD s_ onUpdate ()V ()V
 CLASS none/adk net/minecraft/entity/EntityItemFrame
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
@@ -334,6 +335,7 @@ CLASS none/adl net/minecraft/entity/EntityLeashKnot
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD e attemptMountByPlayer (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
 CLASS none/adm net/minecraft/entity/EntityPainting
+	METHOD a updateKinetics (DDDFFIZ)V (DDDFFIZ)V
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 CLASS none/adn net/minecraft/entity/EnumPaintingTypes
@@ -379,19 +381,53 @@ CLASS none/adn net/minecraft/entity/EnumPaintingTypes
 		ARG 5 xMax
 		ARG 6 zMax
 CLASS none/ado net/minecraft/entity/EntityFishingHook
+	FIELD aA lastSyncedZ
+	FIELD aB lastSyncedYaw
+	FIELD aC lastSyncedPitch
+	FIELD aD velocityX
+	FIELD aE velocityY
+	FIELD aF velocityZ
+	FIELD ax networkLagTicks
+	FIELD ay lastSyncedX
+	FIELD az lastSyncedY
 	METHOD J kill ()V ()V
+	METHOD a updateKinetics (DDDFFIZ)V (DDDFFIZ)V
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
+	METHOD i setVelocity (DDD)V (DDD)V
 	METHOD s_ onUpdate ()V ()V
 CLASS none/ads net/minecraft/entity/EntityLightningBolt
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD s_ onUpdate ()V ()V
 CLASS none/adu net/minecraft/entity/EntityBoat
+	FIELD ap velocityY
+	FIELD aq velocityZ
+	FIELD c networkLagTicks
+	FIELD d lastSyncedX
+	FIELD e lastSyncedY
+	FIELD f lastSyncedZ
+	FIELD g lastSyncedYaw
+	FIELD h lastSyncedPitch
+	FIELD i velocityX
+	FIELD v motionX
+	FIELD w motionY
+	FIELD x motionZ
+	METHOD a updateKinetics (DDDFFIZ)V (DDDFFIZ)V
+		ARG 0 newPosX
+		ARG 1 newPosY
+		ARG 2 newPosZ
+		ARG 3 newYaw
+		ARG 4 newPitch
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
+	METHOD an getRiderMountHeight ()D ()D
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD e attemptMountByPlayer (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
+	METHOD i setVelocity (DDD)V (DDD)V
+		ARG 0 velocityX
+		ARG 1 velocityY
+		ARG 2 velocityZ
 	METHOD s_ onUpdate ()V ()V
 CLASS none/adv net/minecraft/entity/EntityFallingBlock
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
@@ -405,16 +441,52 @@ CLASS none/adw net/minecraft/entity/EntityItem
 	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD s_ onUpdate ()V ()V
 CLASS none/adx net/minecraft/entity/EntityMinecartBase
-	FIELD v speedX
-	FIELD w speedY
-	FIELD x speedZ
+	FIELD ap velocityX
+	FIELD aq velocityY
+	FIELD ar velocityZ
+	FIELD c railConnections
+	FIELD d networkLagTicks
+	FIELD e lastSyncedX
+	FIELD f lastSyncedY
+	FIELD g lastSyncedZ
+	FIELD h lastSyncedYaw
+	FIELD i lastSyncedPitch
+	FIELD v motionX
+	FIELD w motionY
+	FIELD x motionZ
 	METHOD J kill ()V ()V
+	METHOD a getPositionOnRails (DDDD)Lnone/brw; (DDDD)Lnone/Vec3;
+		ARG 0 posX
+		ARG 1 posY
+		ARG 2 posZ
+		ARG 3 distanceMultiplier
+	METHOD a updateKinetics (DDDFFIZ)V (DDDFFIZ)V
+		ARG 0 newPosX
+		ARG 1 newPosY
+		ARG 2 newPosZ
+		ARG 3 newYaw
+		ARG 4 newPitch
+	METHOD a activate (IIIZ)V (IIIZ)V
+	METHOD a doMotionOnRails (Lnone/dt;Lnone/bec;)V (Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)V
+		ARG 1 railBlockState
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD a destroyMinecartFrom (Lnone/wh;)V (Lnet/minecraft/src/DamageSource;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
-	METHOD b setPosition (DDD)V (DDD)V
+	METHOD an getRiderMountHeight ()D ()D
+	METHOD b updatePosition (DDD)V (DDD)V
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD i setVelocity (DDD)V (DDD)V
+		ARG 0 velocityX
+		ARG 1 velocityY
+		ARG 2 velocityZ
+	METHOD i applyCollisionWithEntity (Lnone/wv;)V (Lnet/minecraft/entity/Entity;)V
+	METHOD k getPositionOnRails (DDD)Lnone/brw; (DDD)Lnone/Vec3;
+		ARG 0 posX
+		ARG 1 posY
+		ARG 2 posZ
+	METHOD m getSpeedLimit ()D ()D
+	METHOD n doMotionOffRails ()V ()V
 	METHOD o applyNormalTickSlowdown ()V ()V
 	METHOD s getMinecartType ()Lnone/adz; ()Lnet/minecraft/entity/EnumMinecartType;
 	METHOD s_ onUpdate ()V ()V
@@ -441,9 +513,11 @@ CLASS none/aeb net/minecraft/entity/EntityMinecartCommandBlock
 	CLASS none/aec
 		METHOD e getEntityWorld ()Lnone/aqu; ()Lnet/minecraft/world/World;
 	FIELD a command
+	METHOD a activate (IIIZ)V (IIIZ)V
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD e attemptMountByPlayer (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
+	METHOD j getCommand ()Lnone/aqf; ()Lnone/CommandBlockCommand;
 	METHOD s getMinecartType ()Lnone/adz; ()Lnet/minecraft/entity/EnumMinecartType;
 	METHOD u getCargoBlockState ()Lnone/bec; ()Lnet/minecraft/block/BlockState;
 CLASS none/aed net/minecraft/entity/EntityMinecartStorage
@@ -461,15 +535,18 @@ CLASS none/aee net/minecraft/entity/EntityMinecartFurnace
 	FIELD a pushX
 	FIELD b pushZ
 	FIELD c fuel
+	METHOD a doMotionOnRails (Lnone/dt;Lnone/bec;)V (Lnet/minecraft/world/ChunkCoordinates;Lnet/minecraft/block/BlockState;)V
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD a destroyMinecartFrom (Lnone/wh;)V (Lnet/minecraft/src/DamageSource;)V
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD e attemptMountByPlayer (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
+	METHOD m getSpeedLimit ()D ()D
 	METHOD o applyNormalTickSlowdown ()V ()V
 	METHOD s getMinecartType ()Lnone/adz; ()Lnet/minecraft/entity/EnumMinecartType;
 	METHOD s_ onUpdate ()V ()V
 	METHOD u getCargoBlockState ()Lnone/bec; ()Lnet/minecraft/block/BlockState;
 CLASS none/aef net/minecraft/entity/EntityMinecartHopper
+	METHOD a activate (IIIZ)V (IIIZ)V
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD a destroyMinecartFrom (Lnone/wh;)V (Lnet/minecraft/src/DamageSource;)V
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
@@ -478,6 +555,7 @@ CLASS none/aef net/minecraft/entity/EntityMinecartHopper
 	METHOD s_ onUpdate ()V ()V
 	METHOD u getCargoBlockState ()Lnone/bec; ()Lnet/minecraft/block/BlockState;
 CLASS none/aeg net/minecraft/entity/EntityMinecartRideable
+	METHOD a activate (IIIZ)V (IIIZ)V
 	METHOD e attemptMountByPlayer (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
 	METHOD s getMinecartType ()Lnone/adz; ()Lnet/minecraft/entity/EnumMinecartType;
 CLASS none/aeh net/minecraft/entity/EntityMinecartSpawner
@@ -488,14 +566,19 @@ CLASS none/aeh net/minecraft/entity/EntityMinecartSpawner
 	METHOD s_ onUpdate ()V ()V
 	METHOD u getCargoBlockState ()Lnone/bec; ()Lnet/minecraft/block/BlockState;
 CLASS none/aej net/minecraft/entity/EntityMinecartTNT
+	FIELD a fuse
 	METHOD a handleEntityStatusPacket (B)V (B)V
+	METHOD a activate (IIIZ)V (IIIZ)V
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD a destroyMinecartFrom (Lnone/wh;)V (Lnet/minecraft/src/DamageSource;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
+	METHOD j prime ()V ()V
+	METHOD l getFuse ()I ()I
 	METHOD s getMinecartType ()Lnone/adz; ()Lnet/minecraft/entity/EnumMinecartType;
 	METHOD s_ onUpdate ()V ()V
 	METHOD u getCargoBlockState ()Lnone/bec; ()Lnet/minecraft/block/BlockState;
+	METHOD y isPrimed ()Z ()Z
 CLASS none/aek net/minecraft/entity/EntityPrimedTNT
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD aR getEyeHeight ()F ()F
@@ -571,6 +654,7 @@ CLASS none/afy net/minecraft/entity/EntitySlime
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD cd createChildSlime ()Lnone/afy; ()Lnet/minecraft/entity/EntitySlime;
 	METHOD ck getSlimeSize ()I ()I
+	METHOD i applyCollisionWithEntity (Lnone/wv;)V (Lnet/minecraft/entity/Entity;)V
 	METHOD s_ onUpdate ()V ()V
 CLASS none/ag
 	FIELD a SuccessCount
@@ -768,13 +852,27 @@ CLASS none/ahg net/minecraft/chat/EnumChatVisibility
 	FIELD b SYSTEM
 	FIELD c HIDDEN
 CLASS none/ahj net/minecraft/entity/EntityArrow
+	FIELD a pickupBehavior
+	FIELD ap life
+	FIELD ar damage
+	FIELD b shake
+	FIELD c shooterEntity
+	FIELD d xTile
+	FIELD e yTile
+	FIELD f zTile
+	FIELD g inTile
+	FIELD h inData
+	FIELD i inGround
+	METHOD a updateKinetics (DDDFFIZ)V (DDDFFIZ)V
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
+	METHOD i setVelocity (DDD)V (DDD)V
 	METHOD s_ onUpdate ()V ()V
 CLASS none/ahk net/minecraft/entity/EntityEyeEnderSignal
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD c getBrightness (F)F (F)F
+	METHOD i setVelocity (DDD)V (DDD)V
 	METHOD s_ onUpdate ()V ()V
 CLASS none/ahl net/minecraft/entity/EntityBallProjectile
 	FIELD a senderEntity
@@ -793,6 +891,7 @@ CLASS none/ahm net/minecraft/entity/EntityFireworksRicket
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD c getBrightness (F)F (F)F
+	METHOD i setVelocity (DDD)V (DDD)V
 	METHOD s_ onUpdate ()V ()V
 CLASS none/ahn net/minecraft/entity/EntityFireball
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
@@ -805,6 +904,7 @@ CLASS none/ahr net/minecraft/entity/EntityThrowable
 	METHOD a onHit (Lnone/bru;)V (Lnet/minecraft/world/HitResult;)V
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
+	METHOD i setVelocity (DDD)V (DDD)V
 	METHOD s_ onUpdate ()V ()V
 CLASS none/ahs net/minecraft/entity/EntityThrownEgg
 	METHOD a onHit (Lnone/bru;)V (Lnet/minecraft/world/HitResult;)V
@@ -1592,6 +1692,7 @@ CLASS none/aqc net/minecraft/src/MerchantRecipe
 CLASS none/aqd net/minecraft/src/MerchantRecipeList
 CLASS none/aqf none/CommandBlockCommand
 	METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
+	METHOD a execute (Lnone/aqu;)V (Lnet/minecraft/world/World;)V
 	METHOD a sendChatToPlayer (Lnone/ho;)V (Lnet/minecraft/chat/ChatMessageComponent;)V
 	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS none/aql
@@ -2196,6 +2297,7 @@ CLASS none/atr net/minecraft/block/BlockType
 		ARG 0 dimension
 		ARG 1 blockCoords
 	METHOD r getMaterial ()Lnone/bof; ()Lnone/Material;
+	METHOD t isSolid ()Z ()Z
 CLASS none/ats net/minecraft/sound/SoundInfoGlass
 	METHOD a getDigSoundInfo ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD b getPlacementSound ()Ljava/lang/String; ()Ljava/lang/String;
@@ -2797,6 +2899,8 @@ CLASS none/az net/minecraft/server/commands/ServerCommandClear
 CLASS none/aza net/minecraft/block/BlockPotatoes
 CLASS none/azb net/minecraft/block/BlockRedstoneBlock
 CLASS none/azc net/minecraft/block/BlockRedstoneRail
+	FIELD M poweredRail
+	FIELD b activatorRail
 	METHOD a getBlockStateForMetadata (I)Lnone/bec; (I)Lnet/minecraft/block/BlockState;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I (Lnet/minecraft/block/BlockState;)I
 CLASS none/azd none/RedstoneRailShapePredicate
@@ -5562,6 +5666,7 @@ CLASS none/cio net/minecraft/entity/EntityClientPlayerMP
 	METHOD y isRidingAHorse ()Z ()Z
 	METHOD z getHorseJumpPower ()F ()F
 CLASS none/cip net/minecraft/entity/EntityOtherPlayerMP
+	METHOD a updateKinetics (DDDFFIZ)V (DDDFFIZ)V
 	METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
 	METHOD a sendChatToPlayer (Lnone/ho;)V (Lnet/minecraft/chat/ChatMessageComponent;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
@@ -6260,7 +6365,7 @@ CLASS none/ew none/EnumParticleType
 	FIELD n SPELL
 	FIELD o SPELL_INSTANT
 	FIELD p SPELL_MOB
-	FIELD q SPEDD_MOB_AMBIENT
+	FIELD q SPELL_MOB_AMBIENT
 	FIELD r SPELL_WITCH
 	FIELD s DRIP_WATER
 	FIELD t DRIP_LAVA
@@ -7912,7 +8017,7 @@ CLASS none/uv none/MathUtil
 	METHOD a findMaxAbsoluteValue (DD)D (DD)D
 		ARG 0 value1
 		ARG 1 value2
-	METHOD a findFirstDoubleInMiddle (DDD)D (DDD)D
+	METHOD a reduceToRange (DDD)D (DDD)D
 		ARG 0 value
 		ARG 1 knownLower
 		ARG 2 knownUpper
@@ -8095,6 +8200,9 @@ CLASS none/wv net/minecraft/entity/Entity
 	FIELD s worldX
 	FIELD t worldY
 	FIELD u worldZ
+	FIELD v motionX
+	FIELD w motionY
+	FIELD x motionZ
 	FIELD y yaw
 	FIELD z pitch
 	METHOD J kill ()V ()V
@@ -8102,6 +8210,12 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD O fallFromWorld ()V ()V
 	METHOD a handleEntityStatusPacket (B)V (B)V
 		ARG 0 entityStatusByte
+	METHOD a updateKinetics (DDDFFIZ)V (DDDFFIZ)V
+		ARG 0 newPosX
+		ARG 1 newPosY
+		ARG 2 newPosZ
+		ARG 3 newYaw
+		ARG 4 newPitch
 	METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
 	METHOD a playSound (Ljava/lang/String;FF)V (Ljava/lang/String;FF)V
 	METHOD a setBoundingBox (Lnone/brt;)V (Lnone/BoundingBox;)V
@@ -8115,22 +8229,32 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD aQ getBoundingBox ()Lnone/brt; ()Lnone/BoundingBox;
 	METHOD aR getEyeHeight ()F ()F
 	METHOD ai isEntityAlive ()Z ()Z
+	METHOD an getRiderMountHeight ()D ()D
 	METHOD at getArmorEquipment ()[Lnone/amj; ()[Lnet/minecraft/item/ItemStack;
 	METHOD av isRiding ()Z ()Z
 	METHOD aw isSneaking ()Z ()Z
 	METHOD ax isSprinting ()Z ()Z
-	METHOD b setPosition (DDD)V (DDD)V
-	METHOD b setYawAndPitch (FF)V (FF)V
+	METHOD b updatePosition (DDD)V (DDD)V
+	METHOD b updateYawAndPitch (FF)V (FF)V
 	METHOD b writeTo (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD b cannotDamage (Lnone/wh;)Z (Lnet/minecraft/src/DamageSource;)Z
 	METHOD c getBrightness (F)F (F)F
 	METHOD c changeDimension (I)V (I)V
 		ARG 0 dimensionId
 	METHOD c setArmorInSlot (ILnone/amj;)V (ILnet/minecraft/item/ItemStack;)V
+	METHOD d applyMotion (DDD)V (DDD)V
+		ARG 0 moveX
+		ARG 1 moveY
+		ARG 2 moveZ
 	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD e getEntityWorld ()Lnone/aqu; ()Lnet/minecraft/world/World;
 	METHOD e attemptMountByPlayer (Lnone/ahd;)Z (Lnet/minecraft/entity/EntityPlayer;)Z
 	METHOD f setHeadPitch (F)V (F)V
+	METHOD i setVelocity (DDD)V (DDD)V
+		ARG 0 velocityX
+		ARG 1 velocityY
+		ARG 2 velocityZ
+	METHOD i applyCollisionWithEntity (Lnone/wv;)V (Lnet/minecraft/entity/Entity;)V
 	METHOD s_ onUpdate ()V ()V
 CLASS none/x none/OSType
 	FIELD a Linux
@@ -8166,9 +8290,16 @@ CLASS none/xm net/minecraft/entity/EntityLiving
 	FIELD aH previousHeadYaw
 	FIELD aI headPitch
 	FIELD aJ previousHeadPitch
+	FIELD ba networkLagTicks
+	FIELD bb lastSyncedX
+	FIELD bc lastSyncedY
+	FIELD bd lastSyncedZ
+	FIELD be lastSyncedYaw
+	FIELD bf lastSyncedPitch
 	METHOD K doTick ()V ()V
 	METHOD O fallFromWorld ()V ()V
 	METHOD a handleEntityStatusPacket (B)V (B)V
+	METHOD a updateKinetics (DDDFFIZ)V (DDDFFIZ)V
 	METHOD a readFrom (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/src/DamageSource;F)Z
 	METHOD a mount (Lnone/wv;)V (Lnet/minecraft/entity/Entity;)V
