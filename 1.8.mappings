@@ -225,6 +225,7 @@ CLASS none/abt net/minecraft/entity/passive/EntityHorse
 	METHOD a handleEntityStatusPacket (B)V (B)V
 	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/player/EntityPlayer;)Z
 	METHOD a readFromNBT (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
+	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq; (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD a handleDeathFrom (Lnone/wh;)V (Lnet/minecraft/util/DamageSource;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/util/DamageSource;F)Z
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws; (Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/EntityAgeable;
@@ -247,6 +248,7 @@ CLASS none/abx net/minecraft/entity/passive/EntityMooshroom
 CLASS none/aby net/minecraft/entity/passive/EntityOcelot
 	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/player/EntityPlayer;)Z
 	METHOD a readFromNBT (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
+	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq; (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/util/DamageSource;F)Z
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws; (Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/EntityAgeable;
 	METHOD b writeToNBT (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
@@ -277,6 +279,7 @@ CLASS none/aca net/minecraft/entity/passive/EntityPig
 CLASS none/acb net/minecraft/entity/passive/EntityRabbit
 	METHOD a handleEntityStatusPacket (B)V (B)V
 	METHOD a readFromNBT (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
+	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq; (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/util/DamageSource;F)Z
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws; (Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/EntityAgeable;
 	METHOD b writeToNBT (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
@@ -287,6 +290,7 @@ CLASS none/acl net/minecraft/entity/passive/EntitySheep
 	METHOD a handleEntityStatusPacket (B)V (B)V
 	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/player/EntityPlayer;)Z
 	METHOD a readFromNBT (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
+	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq; (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws; (Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/EntityAgeable;
 	METHOD aR getEyeHeight ()F ()F
 	METHOD b setDyeColor (Lnone/akv;)V (Lnet/minecraft/item/EnumDyeColor;)V
@@ -395,6 +399,7 @@ CLASS none/adl net/minecraft/entity/EntityLeashKnot
 CLASS none/adm net/minecraft/entity/item/EntityPainting
 	METHOD a updateKinetics (DDDFFIZ)V (DDDFFIZ)V
 	METHOD a readFromNBT (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
+	METHOD b setLocationAndAngles (DDDFF)V (DDDFF)V
 	METHOD b writeToNBT (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 CLASS none/adn net/minecraft/entity/item/EntityPaintingEnumArt
 	FIELD A uselessValue
@@ -654,6 +659,7 @@ CLASS none/aem net/minecraft/entity/monster/EntityBlaze
 	METHOD e onHitGround (FF)V (FF)V
 	METHOD z getIdleSound ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS none/aeo net/minecraft/entity/monster/EntityCaveSpider
+	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq; (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD aR getEyeHeight ()F ()F
 CLASS none/aep net/minecraft/entity/monster/EntityCreeper
 	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/player/EntityPlayer;)Z
@@ -719,6 +725,7 @@ CLASS none/afm net/minecraft/entity/monster/EntityMob
 CLASS none/afo net/minecraft/entity/monster/EntityPigZombie
 	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/player/EntityPlayer;)Z
 	METHOD a readFromNBT (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
+	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq; (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/util/DamageSource;F)Z
 	METHOD a mount (Lnone/wv;)V (Lnet/minecraft/entity/Entity;)V
 	METHOD b writeToNBT (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
@@ -745,6 +752,7 @@ CLASS none/aft net/minecraft/entity/monster/EntitySilverfish
 	METHOD z getIdleSound ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS none/afw net/minecraft/entity/monster/EntitySkeleton
 	METHOD a readFromNBT (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
+	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq; (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD a handleDeathFrom (Lnone/wh;)V (Lnet/minecraft/util/DamageSource;)V
 	METHOD a shoot (Lnone/xm;F)V (Lnet/minecraft/entity/EntityLiving;F)V
 	METHOD aR getEyeHeight ()F ()F
@@ -756,6 +764,7 @@ CLASS none/afw net/minecraft/entity/monster/EntitySkeleton
 CLASS none/afy net/minecraft/entity/monster/EntitySlime
 	METHOD J kill ()V ()V
 	METHOD a readFromNBT (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
+	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq; (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD aR getEyeHeight ()F ()F
 	METHOD b writeToNBT (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD bn getHurtSound ()Ljava/lang/String; ()Ljava/lang/String;
@@ -771,6 +780,7 @@ CLASS none/ag net/minecraft/command/EnumResultStatsType
 	FIELD d AFFECTED_ITEMS
 	FIELD e QUERY_RESULT
 CLASS none/age net/minecraft/entity/monster/EntitySpider
+	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq; (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD aB onInsideWeb ()V ()V
 	METHOD aR getEyeHeight ()F ()F
 	METHOD bn getHurtSound ()Ljava/lang/String; ()Ljava/lang/String;
@@ -788,6 +798,7 @@ CLASS none/agj net/minecraft/entity/monster/EntityZombie
 	METHOD a handleEntityStatusPacket (B)V (B)V
 	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/player/EntityPlayer;)Z
 	METHOD a readFromNBT (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
+	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq; (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD a handleDeathFrom (Lnone/wh;)V (Lnet/minecraft/util/DamageSource;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/util/DamageSource;F)Z
 	METHOD aR getEyeHeight ()F ()F
@@ -802,6 +813,7 @@ CLASS none/agp net/minecraft/entity/passive/EntityVillager
 	METHOD a handleEntityStatusPacket (B)V (B)V
 	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/player/EntityPlayer;)Z
 	METHOD a readFromNBT (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
+	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq; (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD a handleDeathFrom (Lnone/wh;)V (Lnet/minecraft/util/DamageSource;)V
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws; (Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/EntityAgeable;
 	METHOD aR getEyeHeight ()F ()F
@@ -1859,6 +1871,8 @@ CLASS none/aqf net/minecraft/command/server/CommandBlockLogic
 	METHOD a execute (Lnone/aqu;)V (Lnet/minecraft/world/World;)V
 	METHOD a sendChatToPlayer (Lnone/ho;)V (Lnet/minecraft/chat/ChatMessageComponent;)V
 	METHOD d_ getCommandServerName ()Ljava/lang/String; ()Ljava/lang/String;
+CLASS none/aqi
+	METHOD a setMobID (Ljava/lang/String;)V (Ljava/lang/String;)V
 CLASS none/aql net/minecraft/block/EnumBlockTextureType
 	FIELD a SOLID
 	FIELD b CUTOUT_MIPPED
@@ -3785,6 +3799,7 @@ CLASS none/bde net/minecraft/tileentity/TileEntityHopper
 	METHOD c update ()V ()V
 	METHOD o_ onInventoryChanged ()V ()V
 CLASS none/bdg net/minecraft/tileentity/TileEntityMobSpawner
+	METHOD b getSpawnerLogic ()Lnone/aqi; ()Lnone/aqi;
 	METHOD c update ()V ()V
 CLASS none/bdi net/minecraft/tileentity/TileEntityMusic
 CLASS none/bdj net/minecraft/tileentity/TileEntitySign
@@ -3875,6 +3890,10 @@ CLASS none/bf net/minecraft/command/CommandDefaultGameMode
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnet/minecraft/command/ICommandSender;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/bfa
+	FIELD a GROWING
+	FIELD b SHRINKING
+	FIELD c STATIONARY
 CLASS none/bfe net/minecraft/world/IChunkProvider
 	METHOD a doesChunkExist (II)Z (II)Z
 		ARG 0 chunkX
@@ -4155,7 +4174,7 @@ CLASS none/bge net/minecraft/world/WorldProviderHell
 	METHOD e canRespawnHere ()Z ()Z
 	METHOD k getDimensionName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD l getDimensionSuffix ()Ljava/lang/String; ()Ljava/lang/String;
-CLASS none/bgg
+CLASS none/bgg net/minecraft/world/WorldProviderSurface
 	METHOD k getDimensionName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD l getDimensionSuffix ()Ljava/lang/String; ()Ljava/lang/String;
 CLASS none/bgh
@@ -4467,7 +4486,7 @@ CLASS none/bjb net/minecraft/world/gen/structure/StructureBoundingBox
 		ARG 3 x2
 		ARG 4 y2
 		ARG 5 z2
-	METHOD a (IIIIIIIIILnone/ej;)Lnone/bjb;
+	METHOD a getComponentToAddBoundingBox (IIIIIIIIILnone/ej;)Lnone/bjb; (IIIIIIIIILnet/minecraft/block/EnumBlockFace;)Lnet/minecraft/world/gen/structure/StructureBoundingBox;
 		ARG 0 x1
 		ARG 1 y1
 		ARG 2 z1
@@ -4486,9 +4505,65 @@ CLASS none/bjb net/minecraft/world/gen/structure/StructureBoundingBox
 	METHOD e zSize ()I ()I
 	METHOD g writeRangeToNBT ()Lnone/ft; ()Lnet/minecraft/nbt/NbtIntArray;
 CLASS none/bjd net/minecraft/world/gen/structure/Mineshaft
+CLASS none/bjg net/minecraft/world/gen/structure/ComponentMineshaftCorridor
+	FIELD a hasRails
+	FIELD b hasSpiders
+	FIELD c spawnerPlaced
+	FIELD d sectionCount
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
+CLASS none/bjh
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
+CLASS none/bji
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
+CLASS none/bjj
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
 CLASS none/bjk net/minecraft/world/gen/structure/MineshaftStart
 CLASS none/bjl net/minecraft/world/gen/structure/NetherBridge
 CLASS none/bjm net/minecraft/world/structure/NetherBridgeStart
+CLASS none/bjn net/minecraft/world/gen/structure/ComponentNetherFortress
+CLASS none/bjp net/minecraft/world/gen/structure/ComponentNetherBridgeCrossing3
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
+CLASS none/bjq net/minecraft/world/gen/structure/ComponentNetherBridgeEnd
+	FIELD b fillSeed
+	FIELD l boundingBox
+	FIELD m coordBaseMode
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/bjr net/minecraft/world/gen/structure/ComponentNetherBridgeStraight
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
+CLASS none/bjs net/minecraft/world/gen/structure/ComponentNetherBridgeCorridor3
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
+CLASS none/bjt net/minecraft/world/gen/structure/ComponentNetherBridgeCorridor4
+	FIELD l boundingBox
+	FIELD m coordBaseMode
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
+CLASS none/bju net/minecraft/world/gen/structure/ComponentNetherBridgeEntrance
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
+CLASS none/bjv net/minecraft/world/gen/structure/ComponentNetherBridgeCrossing2
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
+CLASS none/bjw net/minecraft/world/gen/structure/ComponentNetherBridgeCorridor
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
+CLASS none/bjx net/minecraft/world/gen/structure/ComponentNetherBridgeCorridor5
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
+CLASS none/bjy net/minecraft/world/gen/structure/ComponentNetherBridgeCorridor2
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
+CLASS none/bjz net/minecraft/world/gen/structure/ComponentNetherBridgeNetherStalkRoom
+	FIELD l boundingBox
+	FIELD m coordBaseMode
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
 CLASS none/bk net/minecraft/command/CommandExecuteAt
 	CLASS none/bl
 		METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z (ILjava/lang/String;)Z
@@ -4501,12 +4576,79 @@ CLASS none/bk net/minecraft/command/CommandExecuteAt
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnet/minecraft/command/ICommandSender;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/bka net/minecraft/world/gen/structure/ComponentNetherBridgeThrone
+	FIELD b hasSpawner
+	FIELD l boundingBox
+	FIELD m coordBaseMode
+	METHOD a createValidComponent (Ljava/util/List;Ljava/util/Random;IIIILnone/ej;)Lnone/bka; (Ljava/util/List;Ljava/util/Random;IIIILnet/minecraft/block/EnumBlockFace;)Lnet/minecraft/world/gen/structure/ComponentNetherBridgeThrone;
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/bkb net/minecraft/world/gen/structure/ComponentNetherBridgePiece
+	METHOD a isAboveGround (Lnone/bjb;)Z (Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a getNextComponentNormal (Lnone/bkf;Ljava/util/List;Ljava/util/Random;IIZ)Lnone/bms; (Lnet/minecraft/world/gen/structure/ComponentNetherBridgeStartPiece;Ljava/util/List;Ljava/util/Random;IIZ)Lnet/minecraft/world/gen/structure/StructureComponent;
+	METHOD b getNextComponentX (Lnone/bkf;Ljava/util/List;Ljava/util/Random;IIZ)Lnone/bms; (Lnet/minecraft/world/gen/structure/ComponentNetherBridgeStartPiece;Ljava/util/List;Ljava/util/Random;IIZ)Lnet/minecraft/world/gen/structure/StructureComponent;
+	METHOD c getNextComponentZ (Lnone/bkf;Ljava/util/List;Ljava/util/Random;IIZ)Lnone/bms; (Lnet/minecraft/world/gen/structure/ComponentNetherBridgeStartPiece;Ljava/util/List;Ljava/util/Random;IIZ)Lnet/minecraft/world/gen/structure/StructureComponent;
+CLASS none/bkd net/minecraft/world/gen/structure/ComponentNetherBridgeCrossing
+	FIELD l boundingBox
+	FIELD m coordBaseMode
+	METHOD a createValidComponent (Ljava/util/List;Ljava/util/Random;IIILnone/ej;I)Lnone/bkd; (Ljava/util/List;Ljava/util/Random;IIILnet/minecraft/block/EnumBlockFace;I)Lnet/minecraft/world/gen/structure/ComponentNetherBridgeCrossing;
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
+CLASS none/bke
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
+CLASS none/bkf net/minecraft/world/gen/structure/ComponentNetherBridgeStartPiece
 CLASS none/bkg net/minecraft/world/gen/structure/OceanMonument
 CLASS none/bkh net/minecraft/world/gen/structure/OceanMonumentStart
+CLASS none/bkr
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/bkt
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/bku
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/bkv
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/bkw
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/bkx
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/bky
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/bkz
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/bla
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/blb net/minecraft/world/gen/structure/StructureGuardianTemple
+CLASS none/blc
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/bld
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/ble
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
 CLASS none/blg net/minecraft/world/gen/structure/ScatteredFeature
 CLASS none/blh net/minecraft/world/gen/structure/ScatteredFeatureStart
+CLASS none/blk
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/bll
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/bln net/minecratf/world/gen/structure/ComponentScatteredFeature
+CLASS none/blo net/minecraft/world/gen/structure/ComponentScatteredFeatureSwampHut
+	FIELD e hasWitch
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
 CLASS none/blp net/minecraft/world/gen/structure/Stronghold
 CLASS none/blq net/minecraft/world/structure/StrongholdStart
+CLASS none/blv
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
+CLASS none/blw
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/blx
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
+CLASS none/bly
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
+CLASS none/blz
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
 CLASS none/bm net/minecraft/command/CommandXP
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -4514,12 +4656,47 @@ CLASS none/bm net/minecraft/command/CommandXP
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnet/minecraft/command/ICommandSender;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/bmb
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
+CLASS none/bmc
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
+CLASS none/bmd
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
+CLASS none/bme
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
 CLASS none/bmg net/minecraft/world/structure/bmg
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
+CLASS none/bmi
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
+CLASS none/bmj
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
+CLASS none/bml
+	FIELD a OPENING
+	FIELD b WOOD_DOOR
+	FIELD c GRATES
+	FIELD d IRON_DOOR
 CLASS none/bmm net/minecraft/world/gen/GenStructureBase
 CLASS none/bmq net/minecraft/world/gen/structure/StructureIO
 	FIELD a logger
 CLASS none/bms net/minecraft/world/gen/structure/StructureComponent
+	METHOD a getXWithOffset (II)I (II)I
+	METHOD a findIntersecting (Ljava/util/List;Lnone/bjb;)Lnone/bms; (Ljava/util/List;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Lnet/minecraft/world/gen/structure/StructureComponent;
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a fillWithBlocks (Lnone/aqu;Lnone/bec;IIILnone/bjb;)V (Lnet/minecraft/world/World;Lnet/minecraft/block/IBlockState;IIILnet/minecraft/world/gen/structure/StructureBoundingBox;)V
+	METHOD a fillWithBlocks (Lnone/aqu;Lnone/bjb;IIIIIILnone/bec;Lnone/bec;Z)V (Lnet/minecraft/world/World;Lnet/minecraft/world/gen/structure/StructureBoundingBox;IIIIIILnet/minecraft/block/IBlockState;Lnet/minecraft/block/IBlockState;Z)V
+	METHOD a getMetadataWithOffset (Lnone/atr;I)I (Lnet/minecraft/block/Block;I)I
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
 	METHOD b writeStructureToNBT ()Lnone/fn; ()Lnet/minecraft/nbt/NbtTagCompound;
+	METHOD b getZWithOffset (II)I (II)I
+	METHOD b fillCurrentPositionBlocksDownwards (Lnone/aqu;Lnone/bec;IIILnone/bjb;)V (Lnet/minecraft/world/World;Lnet/minecraft/block/IBlockState;IIILnet/minecraft/world/gen/structure/StructureBoundingBox;)V
+	METHOD d getYWithOffset (I)I (I)I
 CLASS none/bmw net/minecraft/world/gen/GenStructureVillage
 CLASS none/bmx net/minecraft/world/structure/StructureVillage
 CLASS none/bn net/minecraft/command/CommandFill
@@ -4529,6 +4706,40 @@ CLASS none/bn net/minecraft/command/CommandFill
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnet/minecraft/command/ICommandSender;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/bna
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/bnb net/minecraft/world/gen/structure/ComponentVillageField
+	FIELD a cropTypeA
+	FIELD b cropTypeB
+	FIELD c cropTypeC
+	FIELD d cropTypeD
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/bnc
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/bnd
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/bnf
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/bng
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/bnh
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/bni net/minecraft/world/gen/structure/ComponentVillageChurch
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/bnj
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/bnl
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
+CLASS none/bnm
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+CLASS none/bnn net/minecraft/world/gen/structure/ComponentVillage
+	METHOD a fillWithBlocks (Lnone/aqu;Lnone/bec;IIILnone/bjb;)V (Lnet/minecraft/world/World;Lnet/minecraft/block/IBlockState;IIILnet/minecraft/world/gen/structure/StructureBoundingBox;)V
+	METHOD a fillWithBlocks (Lnone/aqu;Lnone/bjb;IIIIIILnone/bec;Lnone/bec;Z)V (Lnet/minecraft/world/World;Lnet/minecraft/world/gen/structure/StructureBoundingBox;IIIIIILnet/minecraft/block/IBlockState;Lnet/minecraft/block/IBlockState;Z)V
+	METHOD b fillCurrentPositionBlocksDownwards (Lnone/aqu;Lnone/bec;IIILnone/bjb;)V (Lnet/minecraft/world/World;Lnet/minecraft/block/IBlockState;IIILnet/minecraft/world/gen/structure/StructureBoundingBox;)V
+CLASS none/bnp
+	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z (Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;)Z
+	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V (Lnet/minecraft/world/gen/structure/StructureComponent;Ljava/util/List;Ljava/util/Random;)V
 CLASS none/bnu net/minecraft/world/gen/noisegen/Perlin3d
 CLASS none/bnv net/minecraft/world/gen/noisegen/Perlin3dOctaves
 CLASS none/bnw net/minecraft/world/gen/noisegen/Simplex2dOctaves
@@ -4642,6 +4853,14 @@ CLASS none/boh net/minecraft/block/Color
 		ARG 0 colorModifier
 CLASS none/boi net/minecraft/block/material/MaterialPortal
 	METHOD c isSolidGround ()Z ()Z
+CLASS none/boy none/IntCache
+	FIELD a intCacheSize
+	FIELD b freeSmallArrays
+	FIELD c inUseSmallArrays
+	FIELD d freeLargeArrays
+	FIELD e inUseLargeArrays
+	METHOD a resetIntCache ()V ()V
+	METHOD a getIntCache (I)[I (I)[I
 CLASS none/bp net/minecraft/command/CommandGameMode
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -5082,6 +5301,66 @@ CLASS none/bto net/minecraft/client/settings/GameSettings
 	FIELD q snooperEnabled
 	FIELD r fullscreen
 	FIELD z touchScreen
+	METHOD a setOptionValue (Lnone/btr;I)V (Lnet/minecraft/options/EnumOptions;I)V
+	METHOD b saveOptions ()V ()V
+	METHOD c getKeyBinding (Lnone/btr;)Ljava/lang/String; (Lnet/minecraft/options/EnumOptions;)Ljava/lang/String;
+CLASS none/btr net/minecraft/options/EnumOptions
+	FIELD A CHAT_WIDTH
+	FIELD B CHAT_HEIGHT_FOCUSED
+	FIELD C CHAT_HEIGHT_UNFOCUSED
+	FIELD D MIPMAP_LEVELS
+	FIELD E FORCE_UNICODE_FONT
+	FIELD F STREAM_BYTES_PER_PIXEL
+	FIELD G STREAM_VOLUME_MIC
+	FIELD H STREAM_VOLUME_SYSTEM
+	FIELD I STREAM_KBPS
+	FIELD J STREAM_FPS
+	FIELD K STREAM_COMPRESSION
+	FIELD L STREAM_SEND_METADATA
+	FIELD M STREAM_CHAT_ENABLED
+	FIELD N STREAM_CHAT_USER_FILTER
+	FIELD O STREAM_MIC_TOGGLE_BEHAVIOR
+	FIELD P BLOCK_ALTERNATIVES
+	FIELD Q REDUCED_DEBUG_INFO
+	FIELD R enumBoolean2
+	FIELD S enumBoolean
+	FIELD T enumString
+	FIELD U enumFloat
+	FIELD V enumFloat2
+	FIELD W enumFloat3
+	FIELD a INVERT_MOUSE
+	FIELD b SENSITIVITY
+	FIELD c FOV
+	FIELD d GAMMA
+	FIELD e SATURATION
+	FIELD f RENDER_DISTANCE
+	FIELD g VIEW_BOBBING
+	FIELD h ANAGLYPH
+	FIELD i FRAMERATE_LIMIT
+	FIELD j FBO_ENABLE
+	FIELD k RENDER_CLOUDS
+	FIELD l GRAPHICS
+	FIELD m AMBIANT_OCCLUSION
+	FIELD n GUI_SCALE
+	FIELD o PARTICLES
+	FIELD p CHAT_VISIBILITY
+	FIELD q CHAT_COLOR
+	FIELD r CHAT_LINKS
+	FIELD s CHAT_OPACITY
+	FIELD t CHAT_LINKS_PROMPT
+	FIELD u SNOOPER_ENABLED
+	FIELD v USE_FULLSCREEN
+	FIELD w ENABLE_VSYNC
+	FIELD x USE_VBO
+	FIELD y TOUCHSCREEN
+	FIELD z CHAT_SCALE
+	METHOD a getEnumBoolean2 ()Z ()Z
+	METHOD a setEnumFloat3 (F)V (F)V
+	METHOD a getEnumOptions (I)Lnone/btr; (I)Lnet/minecraft/options/EnumOptions;
+	METHOD b getEnumBoolean ()Z ()Z
+	METHOD c getEnumOrdinal ()I ()I
+	METHOD d getEnumString ()Ljava/lang/String; ()Ljava/lang/String;
+	METHOD f getEnumFloat3 ()F ()F
 CLASS none/bts net/minecraft/client/LoadingScreenRenderer
 CLASS none/btt net/minecraft/util/ScreenShotHelper
 	FIELD a logger
@@ -5199,6 +5478,7 @@ CLASS none/buu
 	METHOD a drawSlot (IIIIII)V (IIIIII)V
 CLASS none/buv net/minecraft/client/gui/IGuiSlot
 CLASS none/buw net/minecraft/client/gui/button/GuiSmallButton
+	METHOD c returnEnumOptions ()Lnone/btr; ()Lnet/minecraft/options/EnumOptions;
 CLASS none/bv net/minecraft/command/CommandBanPlayerList
 	METHOD a (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -5209,6 +5489,7 @@ CLASS none/bv net/minecraft/command/CommandBanPlayerList
 CLASS none/bvh net/minecraft/client/gui/bvh
 	FIELD f mc
 CLASS none/bvk
+	FIELD a mc
 	METHOD a drawSlot (IIIIII)V (IIIIII)V
 	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/client/gui/GuiButton;)V
 CLASS none/bvl net/minecraft/client/gui/button/bvl
@@ -5252,7 +5533,7 @@ CLASS none/bvu
 	METHOD a drawSlot (IIIIII)V (IIIIII)V
 CLASS none/bvv
 	METHOD a drawSlot (IIIIII)V (IIIIII)V
-CLASS none/bvw net/minecraft/client/gui/screen/bvw
+CLASS none/bvw net/minecraft/client/gui/screen/ScreenChatOptions
 	METHOD a drawScreen (IIF)V (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/client/gui/GuiButton;)V
 	METHOD b initGui ()V ()V
@@ -5386,7 +5667,11 @@ CLASS none/bws net/minecraft/client/gui/GuiLanguage
 	METHOD k handleMouseInput ()V ()V
 CLASS none/bwt net/minecraft/client/gui/GuiSlotLanguage
 	METHOD a drawSlot (IIIIII)V (IIIIII)V
-CLASS none/bwv
+CLASS none/bwv net/minecraft/client/gui/GuiOptions
+	FIELD a screenTitle
+	FIELD f relevantOptions
+	FIELD g parentScreen
+	FIELD h options
 	METHOD a drawScreen (IIF)V (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/client/gui/GuiButton;)V
 	METHOD a confirmClicked (ZI)V (ZI)V
@@ -5479,13 +5764,9 @@ CLASS none/bxi
 	METHOD a drawScreen (IIF)V (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/client/gui/GuiButton;)V
 	METHOD b initGui ()V ()V
-CLASS none/bxj
-	METHOD a drawScreen (IIF)V (IIF)V
-	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/client/gui/GuiButton;)V
-	METHOD b initGui ()V ()V
 CLASS none/bxk empty/_1
 CLASS none/bxl net/minecraft/client/gui/button/bxl
-CLASS none/bxm
+CLASS none/bxm net/minecraft/client/gui/GuiSnooper
 	CLASS none/bxn
 		METHOD a drawSlot (IIIIII)V (IIIIII)V
 	METHOD a drawScreen (IIF)V (IIF)V
@@ -5510,7 +5791,7 @@ CLASS none/bxq net/minecraft/client/gui/GuiMainMenu
 	METHOD b initGui ()V ()V
 	METHOD d doesGuiPauseGame ()Z ()Z
 	METHOD e updateScreen ()V ()V
-CLASS none/bxr
+CLASS none/bxr net/minecraft/client/gui/GuiVideoSettings
 	METHOD a drawScreen (IIF)V (IIF)V
 	METHOD a mouseClicked (III)V (III)V
 	METHOD a actionPerformed (Lnone/bug;)V (Lnet/minecraft/client/gui/GuiButton;)V
@@ -5558,7 +5839,7 @@ CLASS none/byc net/minecraft/client/gui/GuiSlotStats
 CLASS none/byf
 	FIELD v mc
 CLASS none/byh net/minecraft/client/gui/byh
-CLASS none/byj net/minecraft/client/gui/screen/byj
+CLASS none/byj net/minecraft/client/gui/screen/GuiControls
 	METHOD a keyTyped (CI)V (CI)V
 	METHOD a drawScreen (IIF)V (IIF)V
 	METHOD a mouseClicked (III)V (III)V
@@ -5705,7 +5986,7 @@ CLASS none/bzg
 CLASS none/bzh
 	METHOD a drawGuiContainerBackgroundLayer (FII)V (FII)V
 	METHOD b drawGuiContainerForegroundLayer (II)V (II)V
-CLASS none/bzi
+CLASS none/bzi net/minecraft/client/gui/GuiHorse
 	METHOD a drawGuiContainerBackgroundLayer (FII)V (FII)V
 	METHOD a drawScreen (IIF)V (IIF)V
 	METHOD b drawGuiContainerForegroundLayer (II)V (II)V
@@ -6351,7 +6632,7 @@ CLASS none/cip net/minecraft/entity/EntityOtherPlayerMP
 	METHOD a attackEntityFrom (Lnone/wh;F)Z (Lnet/minecraft/util/DamageSource;F)Z
 	METHOD c setArmorInSlot (ILnone/amj;)V (ILnet/minecraft/item/ItemStack;)V
 	METHOD s_ onUpdate ()V ()V
-CLASS none/civ net/minecraft/client/renderer/WorldRenderer
+CLASS none/civ net/minecraft/client/render/WorldRenderer
 	METHOD a addVertexWithUV (DDDDD)V (DDDDD)V
 	METHOD b startDrawingQuads ()V ()V
 	METHOD c setColorOpaque_I (I)V (I)V
@@ -6366,15 +6647,15 @@ CLASS none/cja
 	FIELD f AIR
 	METHOD p getBlockStateAt (Lnone/dt;)Lnone/bec; (Lnet/minecraft/util/BlockPos;)Lnet/minecraft/block/IBlockState;
 	METHOD s getTileEntityAt (Lnone/dt;)Lnone/bcm; (Lnet/minecraft/util/BlockPos;)Lnet/minecraft/tileentity/TileEntity;
-CLASS none/cje net/minecraft/client/renderer/EnumBlockVertices
+CLASS none/cje net/minecraft/client/render/EnumBlockVertices
 	FIELD a DOWN
 	FIELD b UP
 	FIELD c NORTH
 	FIELD d SOUTH
 	FIELD e WEST
 	FIELD f EAST
-	METHOD a getBlockVertex (I)Lnone/cjh; (I)Lnet/minecraft/client/renderer/BlockVertex;
-	METHOD a getBlockVerticesFromBlockFace (Lnone/ej;)Lnone/cje; (Lnet/minecraft/block/EnumBlockFace;)Lnet/minecraft/client/renderer/EnumBlockVertices;
+	METHOD a getBlockVertex (I)Lnone/cjh; (I)Lnet/minecraft/client/render/BlockVertex;
+	METHOD a getBlockVerticesFromBlockFace (Lnone/ej;)Lnone/cje; (Lnet/minecraft/block/EnumBlockFace;)Lnet/minecraft/client/render/EnumBlockVertices;
 CLASS none/cjf empty/_2
 CLASS none/cjg net/minecraft/block/BlockFacingId
 	FIELD a SOUTH
@@ -6383,7 +6664,7 @@ CLASS none/cjg net/minecraft/block/BlockFacingId
 	FIELD d NORTH
 	FIELD e DOWN
 	FIELD f WEST
-CLASS none/cjh net/minecraft/client/renderer/BlockVertex
+CLASS none/cjh net/minecraft/client/render/BlockVertex
 	FIELD a xFaceId
 	FIELD b yFaceId
 	FIELD c zFaceId
@@ -6605,6 +6886,7 @@ CLASS none/cqs net/minecraft/client/render/RenderMagmaCube
 	METHOD a scaleMagmaCube (Lnone/afl;F)V (Lnet/minecraft/entity/monster/EntityMagmaCube;F)V
 CLASS none/cqt net/minecraft/client/render/RenderLeashKnot
 	FIELD a LEAD_KNOT_PNG
+CLASS none/cqu net/minecraft/client/render/RenderLightningBolt
 CLASS none/cqv
 	METHOD a rotateCorpse (Lnone/xm;FFF)V (Lnet/minecraft/entity/EntityLiving;FFF)V
 CLASS none/cqx net/minecraft/client/render/RenderMinecartBase
@@ -6834,7 +7116,7 @@ CLASS none/da net/minecraft/command/CommandTime
 	METHOD c getServerCommandName ()Ljava/lang/String; ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String; (Lnet/minecraft/command/ICommandSender;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-CLASS none/daa net/minecraft/client/stream/ChatController
+CLASS none/daa tv/twitch/ChatController
 CLASS none/dax net/minecraft/client/render/OpenGlHelper
 	FIELD O vboAvailable
 	FIELD S shadersAvailable
@@ -8691,6 +8973,8 @@ CLASS none/qw net/minecraft/entity/player/EntityPlayerMP
 	METHOD t sendPlayerAbilities ()V ()V
 CLASS none/qx
 	FIELD a dimension
+	FIELD b player
+	FIELD c gameType
 	METHOD <init> (Lnone/aqu;)V
 		ARG 0 dimension
 	METHOD a (Lnone/ahd;Lnone/aqu;Lnone/amj;)Z
@@ -9122,6 +9406,7 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD aw isSneaking ()Z ()Z
 	METHOD ax isSprinting ()Z ()Z
 	METHOD b updatePosition (DDD)V (DDD)V
+	METHOD b setLocationAndAngles (DDDFF)V (DDDFF)V
 	METHOD b updateYawAndPitch (FF)V (FF)V
 	METHOD b writeToNBT (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD b cannotDamage (Lnone/wh;)Z (Lnet/minecraft/util/DamageSource;)Z
@@ -9229,6 +9514,7 @@ CLASS none/xn net/minecraft/entity/EntityMobBase
 	METHOD a handleEntityStatusPacket (B)V (B)V
 	METHOD a doInteractionWith (Lnone/ahd;)Z (Lnet/minecraft/entity/player/EntityPlayer;)Z
 	METHOD a readFromNBT (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
+	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq; (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD at getArmorEquipment ()[Lnone/amj; ()[Lnet/minecraft/item/ItemStack;
 	METHOD b writeToNBT (Lnone/fn;)V (Lnet/minecraft/nbt/NbtTagCompound;)V
 	METHOD bz getCurrentlyHoldingItemStack ()Lnone/amj; ()Lnet/minecraft/item/ItemStack;
