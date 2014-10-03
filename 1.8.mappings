@@ -2395,7 +2395,6 @@ CLASS none/pc
 	FIELD a logger
 	METHOD <init> (Ljava/lang/String;Ljava/io/OutputStream;)V
 		ARG 1 outputStream
-CLASS none/pd net/minecraft/world/ConvertingProcessUpdate
 CLASS none/pi net/minecraft/network/ThreadQuickExitException
 	FIELD a INSTANCE
 CLASS none/pm net/minecraft/server/gui/IUpdatePlayerListBox
@@ -2459,7 +2458,6 @@ CLASS none/qs
 CLASS none/qt net/minecraft/world/WorldServer
 	FIELD I minecraftServer
 	FIELD b theChunkProviderServer
-	FIELD t provider
 	METHOD a createExplosion (Lnone/wv;DDDFZZ)Lnone/aqo;
 	METHOD a saveAllChunks (ZLnone/uy;)V
 	METHOD b getDimension ()Lnone/aqu;
@@ -2848,6 +2846,7 @@ CLASS none/wv net/minecraft/entity/Entity
 	FIELD A previousYaw
 	FIELD B previousPitch
 	FIELD C onGround
+	FIELD G markedForKnockback
 	FIELD H insideWeb
 	FIELD I isDead
 	FIELD J width
@@ -2979,11 +2978,12 @@ CLASS none/xk net/minecraft/entity/EntityXPOrb
 CLASS none/xl
 	METHOD e onHitGround (FF)V
 CLASS none/xm net/minecraft/entity/EntityLiving
-	FIELD G markedForKnockback
 	FIELD aG headYaw
 	FIELD aH previousHeadYaw
 	FIELD aI headPitch
 	FIELD aJ previousHeadPitch
+	FIELD aX moveStrafing
+	FIELD aY moveForward
 	FIELD as hurtTime
 	FIELD av deathTime
 	FIELD ba networkLagTicks
@@ -3387,9 +3387,6 @@ CLASS none/adu net/minecraft/entity/item/EntityBoat
 	FIELD g lastSyncedYaw
 	FIELD h lastSyncedPitch
 	FIELD i velocityX
-	FIELD v motionX
-	FIELD w motionY
-	FIELD x motionZ
 	METHOD a updateKinetics (DDDFFIZ)V
 		ARG 0 newPosX
 		ARG 1 newPosY
@@ -3420,7 +3417,6 @@ CLASS none/adw net/minecraft/entity/item/EntityItem
 	METHOD d_ getCommandServerName ()Ljava/lang/String;
 	METHOD s_ onUpdate ()V
 CLASS none/adx net/minecraft/entity/item/EntityMinecart
-	FIELD al portalTimer
 	FIELD ap velocityX
 	FIELD aq velocityY
 	FIELD ar velocityZ
@@ -3431,9 +3427,6 @@ CLASS none/adx net/minecraft/entity/item/EntityMinecart
 	FIELD g lastSyncedZ
 	FIELD h lastSyncedYaw
 	FIELD i lastSyncedPitch
-	FIELD v motionX
-	FIELD w motionY
-	FIELD x motionZ
 	METHOD J kill ()V
 	METHOD a getPositionOnRails (DDDD)Lnone/brw;
 		ARG 0 posX
@@ -3617,8 +3610,6 @@ CLASS none/afg net/minecraft/entity/monster/EntityGuardian
 	METHOD cl isElder ()Z
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/afl net/minecraft/entity/monster/EntityMagmaCube
-	FIELD b squishFactor
-	FIELD c prevSquishFactor
 	METHOD c getBrightness (F)F
 	METHOD cd createChildSlime ()Lnone/afy;
 	METHOD e onHitGround (FF)V
@@ -3667,6 +3658,8 @@ CLASS none/afw net/minecraft/entity/monster/EntitySkeleton
 	METHOD c setArmorInSlot (ILnone/amj;)V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/afy net/minecraft/entity/monster/EntitySlime
+	FIELD b squishFactor
+	FIELD c prevSquishFactor
 	METHOD J kill ()V
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
@@ -3782,6 +3775,7 @@ CLASS none/ahd net/minecraft/entity/player/EntityPlayer
 	FIELD bB xpProgress
 	FIELD bE fishingHook
 	FIELD bg inventory
+	FIELD bi openContainer
 	FIELD bu inBed
 	FIELD by abilities
 	FIELD bz xpLevel
@@ -3900,7 +3894,6 @@ CLASS none/ahm net/minecraft/entity/item/EntityFireworksRocket
 	METHOD s_ onUpdate ()V
 CLASS none/ahn net/minecraft/entity/projectile/EntityLargeFireball
 	FIELD e explosionPower
-	FIELD o world
 	METHOD a onHit (Lnone/bru;)V
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD b writeToNBT (Lnone/fn;)V
@@ -6877,6 +6870,12 @@ CLASS none/bfx net/minecraft/world/chunk/storage/RegionFileCache
 CLASS none/bfy
 	FIELD a logger
 CLASS none/bgd net/minecraft/world/WorldProvider
+	FIELD b worldObj
+	FIELD c worldChunkMgr
+	FIELD d isHellWorld
+	FIELD e hasNoSky
+	FIELD f lightBrightnessTable
+	FIELD g dimensionId
 	METHOD a generateLightBrightnessTable ()V
 	METHOD a canCoordinateBeSpawn (II)Z
 	METHOD a calculateCelestialAngle (JF)F
@@ -6890,12 +6889,6 @@ CLASS none/bgd net/minecraft/world/WorldProvider
 	METHOD l getDimensionSuffix ()Ljava/lang/String;
 	METHOD q dimensionId ()I
 CLASS none/bge net/minecraft/world/WorldProviderHell
-	FIELD b worldObj
-	FIELD c worldChunkMgr
-	FIELD d isHellWorld
-	FIELD e hasNoSky
-	FIELD f lightBrightnessTable
-	FIELD g dimensionId
 	METHOD a generateLightBrightnessTable ()V
 	METHOD a canCoordinateBeSpawn (II)Z
 	METHOD a calculateCelestialAngle (JF)F
@@ -7241,8 +7234,6 @@ CLASS none/bjp net/minecraft/world/gen/structure/ComponentNetherBridgeCrossing3
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
 CLASS none/bjq net/minecraft/world/gen/structure/ComponentNetherBridgeEnd
 	FIELD b fillSeed
-	FIELD l boundingBox
-	FIELD m coordBaseMode
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 CLASS none/bjr net/minecraft/world/gen/structure/ComponentNetherBridgeStraight
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
@@ -7251,8 +7242,6 @@ CLASS none/bjs net/minecraft/world/gen/structure/ComponentNetherBridgeCorridor3
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
 CLASS none/bjt net/minecraft/world/gen/structure/ComponentNetherBridgeCorridor4
-	FIELD l boundingBox
-	FIELD m coordBaseMode
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
 CLASS none/bju net/minecraft/world/gen/structure/ComponentNetherBridgeEntrance
@@ -7271,14 +7260,10 @@ CLASS none/bjy net/minecraft/world/gen/structure/ComponentNetherBridgeCorridor2
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
 CLASS none/bjz net/minecraft/world/gen/structure/ComponentNetherBridgeNetherStalkRoom
-	FIELD l boundingBox
-	FIELD m coordBaseMode
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
 CLASS none/bka net/minecraft/world/gen/structure/ComponentNetherBridgeThrone
 	FIELD b hasSpawner
-	FIELD l boundingBox
-	FIELD m coordBaseMode
 	METHOD a createValidComponent (Ljava/util/List;Ljava/util/Random;IIIILnone/ej;)Lnone/bka;
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 CLASS none/bkb net/minecraft/world/gen/structure/ComponentNetherBridgePiece
@@ -7287,8 +7272,6 @@ CLASS none/bkb net/minecraft/world/gen/structure/ComponentNetherBridgePiece
 	METHOD b getNextComponentX (Lnone/bkf;Ljava/util/List;Ljava/util/Random;IIZ)Lnone/bms;
 	METHOD c getNextComponentZ (Lnone/bkf;Ljava/util/List;Ljava/util/Random;IIZ)Lnone/bms;
 CLASS none/bkd net/minecraft/world/gen/structure/ComponentNetherBridgeCrossing
-	FIELD l boundingBox
-	FIELD m coordBaseMode
 	METHOD a createValidComponent (Ljava/util/List;Ljava/util/Random;IIILnone/ej;I)Lnone/bkd;
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
@@ -7378,6 +7361,8 @@ CLASS none/bmm net/minecraft/world/gen/GenStructureBase
 CLASS none/bmq net/minecraft/world/gen/structure/StructureIO
 	FIELD a logger
 CLASS none/bms net/minecraft/world/gen/structure/StructureComponent
+	FIELD l boundingBox
+	FIELD m coordBaseMode
 	METHOD a getXWithOffset (II)I
 	METHOD a findIntersecting (Ljava/util/List;Lnone/bjb;)Lnone/bms;
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
@@ -8164,6 +8149,7 @@ CLASS none/bvw net/minecraft/client/gui/screen/ScreenChatOptions
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
 CLASS none/bvx net/minecraft/client/gui/GuiChat
+	FIELD a inputField
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a mouseClicked (III)V
@@ -8255,7 +8241,6 @@ CLASS none/bwp net/minecraft/client/gui/GuiScreenAddServer
 	FIELD f newServerData
 	FIELD g serverAddress
 	FIELD h serverName
-	FIELD q fontRenderer
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a mouseClicked (III)V
@@ -8269,7 +8254,6 @@ CLASS none/bwq
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
 CLASS none/bwr net/minecraft/client/gui/GuiSleepMP
-	FIELD a inputField
 	METHOD a keyTyped (CI)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
@@ -8279,14 +8263,11 @@ CLASS none/bws net/minecraft/client/gui/GuiLanguage
 	FIELD f languageList
 	FIELD g theGameSettings
 	FIELD h languageManager
-	FIELD q fontRenderer
 	FIELD r doneButton
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
 	METHOD k handleMouseInput ()V
-CLASS none/bwt net/minecraft/client/gui/GuiSlotLanguage
-	METHOD a drawSlot (IIIIII)V
 CLASS none/bwv net/minecraft/client/gui/GuiOptions
 	FIELD a screenTitle
 	FIELD f relevantOptions
@@ -8343,6 +8324,7 @@ CLASS none/bxf net/minecraft/client/gui/GuiScreen
 	FIELD m height
 	FIELD n buttonList
 	FIELD o buttonList2
+	FIELD q signText
 	FIELD r lastMouseEvent
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
@@ -8378,7 +8360,6 @@ CLASS none/bxi
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
 CLASS none/bxk empty/_1
-CLASS none/bxl net/minecraft/client/gui/button/bxl
 CLASS none/bxm net/minecraft/client/gui/GuiSnooper
 	CLASS bxn
 		METHOD a drawSlot (IIIIII)V
@@ -8390,11 +8371,6 @@ CLASS none/bxo net/minecraft/client/gui/screen/bxo
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
-CLASS none/bxp net/minecraft/client/gui/bxp
-	METHOD a mouseReleased (II)V
-	METHOD a getHoverState (Z)I
-	METHOD b mouseDragged (Lnone/bsu;II)V
-	METHOD c mousePressed (Lnone/bsu;II)Z
 CLASS none/bxq net/minecraft/client/gui/GuiMainMenu
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
@@ -8432,19 +8408,8 @@ CLASS none/bxv net/minecraft/client/gui/GuiStats
 	METHOD b initGui ()V
 	METHOD d doesGuiPauseGame ()Z
 	METHOD k handleMouseInput ()V
-CLASS none/bxw
-	METHOD a drawSlot (IIIIII)V
-CLASS none/bxy
-	METHOD a drawSlot (IIIIII)V
-CLASS none/bxz net/minecraft/client/gui/GuiSlotStatsItem
-	FIELD u slotGuiStats
-	METHOD a drawSlot (IIIIII)V
-CLASS none/byb
-	METHOD a drawSlot (IIIIII)V
-CLASS none/byc net/minecraft/client/gui/GuiSlotStats
 CLASS none/byf
 	FIELD v mc
-CLASS none/byh net/minecraft/client/gui/byh
 CLASS none/byj net/minecraft/client/gui/screen/GuiControls
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
@@ -8457,16 +8422,10 @@ CLASS none/byl net/minecraft/client/gui/GuiContainer
 	FIELD B returningStackTime
 	FIELD C returningStack
 	FIELD a inventoryTextures
-	FIELD e zLevel
 	FIELD f xSize
 	FIELD g ySize
 	FIELD h inventorySlots
 	FIELD i guiLeft
-	FIELD j mc
-	FIELD k itemRenderer
-	FIELD l width
-	FIELD m height
-	FIELD q fontRenderer
 	FIELD r guiTop
 	FIELD u theSlot
 	FIELD v clickedSlot
@@ -8504,9 +8463,6 @@ CLASS none/byn
 	METHOD b initGui ()V
 	METHOD b drawGuiContainerForegroundLayer (II)V
 	METHOD e updateScreen ()V
-CLASS none/byo net/minecraft/client/gui/button/byo
-CLASS none/byp net/minecraft/client/gui/button/byp
-CLASS none/byq net/minecraft/client/gui/button/byq
 CLASS none/byr net/minecraft/client/gui/button/byr
 	METHOD a drawButton (Lnone/bsu;II)V
 CLASS none/bys net/minecraft/client/gui/screen/GuiScreenBook
@@ -8534,11 +8490,6 @@ CLASS none/byv net/minecraft/client/gui/screen/byv
 	METHOD e updateScreen ()V
 	METHOD m onGuiClosed ()V
 CLASS none/byw net/minecraft/client/gui/GuiCrafting
-	FIELD f xSize
-	FIELD g ySize
-	FIELD j mc
-	FIELD l width
-	FIELD m height
 	FIELD u craftingTableGuiTextures
 	METHOD a drawGuiContainerBackgroundLayer (FII)V
 	METHOD b drawGuiContainerForegroundLayer (II)V
@@ -8618,7 +8569,6 @@ CLASS none/bzm net/minecraft/client/gui/screen/GuiEditSign
 	FIELD f updateCounter
 	FIELD g editLine
 	FIELD h doneButton
-	FIELD q signText
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
@@ -8652,8 +8602,6 @@ CLASS none/cah net/minecraft/client/gui/screen/GuiScreenTwitch1
 	METHOD b initGui ()V
 	METHOD k handleMouseInput ()V
 	METHOD m onGuiClosed ()V
-CLASS none/cai
-	METHOD a drawSlot (IIIIII)V
 CLASS none/caj net/minecraft/client/gui/screen/GuiScreenTwitch2
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
@@ -9107,11 +9055,7 @@ CLASS none/cim
 	FIELD c jump
 	FIELD d sneak
 CLASS none/cio net/minecraft/entity/EntityClientPlayerMP
-	FIELD C onGround
-	FIELD I isDead
 	FIELD a sendQueue
-	FIELD aX moveStrafing
-	FIELD aY moveForward
 	FIELD b movementInput
 	FIELD bI oldPosX
 	FIELD bJ oldMinY
@@ -9123,16 +9067,7 @@ CLASS none/cio net/minecraft/entity/EntityClientPlayerMP
 	FIELD bQ hasSetHealth
 	FIELD bR someString
 	FIELD bT horseJumpPower
-	FIELD bg inventory
-	FIELD bi openContainer
-	FIELD by capabilities
 	FIELD c mc
-	FIELD m ridingEntity
-	FIELD o world
-	FIELD s posX
-	FIELD u posZ
-	FIELD y rotationYaw
-	FIELD z rotationPitch
 	METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z
 	METHOD a playSound (Ljava/lang/String;FF)V
 	METHOD a joinEntityItemWithWorld (Lnone/adw;)V
@@ -9485,7 +9420,6 @@ CLASS none/cyk net/minecraft/server/IntegratedServer
 	METHOD y onTick ()V
 CLASS none/cyq
 	FIELD c updateTime
-	FIELD systemTime time
 	METHOD c updateTime ()V
 CLASS none/cyx net/minecraft/client/audio/MusicTicker
 	FIELD a random
@@ -9511,6 +9445,30 @@ CLASS none/dax net/minecraft/client/render/OpenGlHelper
 	FIELD q lightmapTexUnit
 	METHOD a initializeTextures ()V
 	METHOD a setLightmapTextureCoords (IFF)V
+CLASS none/bws$bwt net/minecraft/client/gui/GuiSlotLanguage
+	METHOD a drawSlot (IIIIII)V
+CLASS none/bxj$bxl net/minecraft/client/gui/button/bxl
+CLASS none/bxo$bxp net/minecraft/client/gui/bxp
+	METHOD a mouseReleased (II)V
+	METHOD a getHoverState (Z)I
+	METHOD b mouseDragged (Lnone/bsu;II)V
+	METHOD c mousePressed (Lnone/bsu;II)Z
+CLASS none/bxv$bxw
+	METHOD a drawSlot (IIIIII)V
+CLASS none/bxv$bxy
+	METHOD a drawSlot (IIIIII)V
+CLASS none/bxv$bxz net/minecraft/client/gui/GuiSlotStatsItem
+	FIELD u slotGuiStats
+	METHOD a drawSlot (IIIIII)V
+CLASS none/bxv$byb
+	METHOD a drawSlot (IIIIII)V
+CLASS none/bxv$byc net/minecraft/client/gui/GuiSlotStats
+CLASS none/byf$byh net/minecraft/client/gui/byh
+CLASS none/byn$byo net/minecraft/client/gui/button/byo
+CLASS none/byn$byp net/minecraft/client/gui/button/byp
+CLASS none/byn$byq net/minecraft/client/gui/button/byq
+CLASS none/cah$cai
+	METHOD a drawSlot (IIIIII)V
 CLASS net/minecraft/server/MinecraftServer
 	FIELD A canSpawnAnimals
 	FIELD B canSpawnNPCs
@@ -9660,3 +9618,4 @@ CLASS net/minecraft/server/MinecraftServer
 	METHOD x systemExitNow ()V
 	METHOD y onTick ()V
 	METHOD z updateTimeLightAndEntities ()V
+CLASS net/minecraft/server/MinecraftServer$pd net/minecraft/world/ConvertingProcessUpdate
