@@ -4786,7 +4786,7 @@ CLASS none/aqu net/minecraft/level/Level
 	METHOD f getChunkFromBlockCoords (Lnone/dt;)Lnone/bfh;
 	METHOD i updateEntities ()V
 	METHOD p getBlockStateAt (Lnone/dt;)Lnone/bec;
-	METHOD s getTileEntityAt (Lnone/dt;)Lnone/bcm;
+	METHOD s getBlockEntityAt (Lnone/dt;)Lnone/bcm;
 CLASS none/aqz net/minecraft/level/MinecraftException
 CLASS none/arb net/minecraft/level/LevelSettings
 	FIELD a seed
@@ -4817,7 +4817,7 @@ CLASS none/ard net/minecraft/level/IBlockAccess
 	METHOD b getBiomeAt (Lnone/dt;)Lnone/arm;
 	METHOD d hasAirAt (Lnone/dt;)Z
 	METHOD p getBlockStateAt (Lnone/dt;)Lnone/bec;
-	METHOD s getTileEntityAt (Lnone/dt;)Lnone/bcm;
+	METHOD s getBlockEntityAt (Lnone/dt;)Lnone/bcm;
 CLASS none/are net/minecraft/level/LevelType
 	FIELD b defaultLevelType
 	FIELD c flat
@@ -4835,7 +4835,7 @@ CLASS none/arj net/minecraft/level/ChunkCache
 	METHOD b getBiomeAt (Lnone/dt;)Lnone/arm;
 	METHOD d hasAirAt (Lnone/dt;)Z
 	METHOD p getBlockStateAt (Lnone/dt;)Lnone/bec;
-	METHOD s getTileEntityAt (Lnone/dt;)Lnone/bcm;
+	METHOD s getBlockEntityAt (Lnone/dt;)Lnone/bcm;
 CLASS none/arl net/minecraft/level/biome/BiomeBeach
 	METHOD <init> (I)V
 		ARG 0 biomeID
@@ -5972,7 +5972,7 @@ CLASS none/axc net/minecraft/block/BlockJukebox
 	FIELD a hasRecord
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
-CLASS none/axd net/minecraft/tileentity/TileEntityJukebox
+CLASS none/axd net/minecraft/blockentity/BlockEntityJukebox
 CLASS none/axe net/minecraft/block/BlockLadder
 	FIELD a facing
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
@@ -6480,13 +6480,13 @@ CLASS none/bcg net/minecraft/block/BlockCarpet
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
 CLASS none/bch net/minecraft/block/BlockYellowFlower
-CLASS none/bci net/minecraft/tileentity/TileEntityBanner
+CLASS none/bci net/minecraft/blockentity/BlockEntityBanner
 CLASS none/bcj
 	FIELD J BRICKS
 	FIELD K SKULL
 	FIELD L FLOWER
 	FIELD M MOJANG
-CLASS none/bck net/minecraft/tileentity/TileEntityBeacon
+CLASS none/bck net/minecraft/blockentity/BlockEntityBeacon
 	METHOD a getSlot (I)Lnone/amj;
 	METHOD a removeFromSlot (II)Lnone/amj;
 	METHOD a setSlotContent (ILnone/amj;)V
@@ -6495,7 +6495,7 @@ CLASS none/bck net/minecraft/tileentity/TileEntityBeacon
 	METHOD l clear ()V
 	METHOD n_ getSize ()I
 	METHOD p_ getMaxStackSize ()I
-CLASS none/bcm net/minecraft/tileentity/TileEntity
+CLASS none/bcm net/minecraft/blockentity/BlockEntity
 	FIELD a logger
 	FIELD b dim
 	FIELD c blockCoords
@@ -6510,9 +6510,9 @@ CLASS none/bcm net/minecraft/tileentity/TileEntity
 	METHOD v getBlockCoords ()Lnone/dt;
 	METHOD w getBlock ()Lnone/atr;
 	METHOD z getDimension ()Lnone/aqu;
-CLASS none/bcq net/minecraft/tileentity/TileEntityCauldron
+CLASS none/bcq net/minecraft/blockentity/BlockEntityCauldron
 	METHOD c update ()V
-CLASS none/bcr net/minecraft/tileentity/TileEntityChest
+CLASS none/bcr net/minecraft/blockentity/BlockEntityChest
 	METHOD a getSlot (I)Lnone/amj;
 	METHOD a removeFromSlot (II)Lnone/amj;
 	METHOD a setSlotContent (ILnone/amj;)V
@@ -6521,13 +6521,13 @@ CLASS none/bcr net/minecraft/tileentity/TileEntityChest
 	METHOD l clear ()V
 	METHOD n_ getSize ()I
 	METHOD p_ getMaxStackSize ()I
-CLASS none/bct net/minecraft/tileentity/TileEntityCommandBlock
+CLASS none/bct net/minecraft/blockentity/BlockEntityCommandBlock
 	CLASS bcu
 		METHOD e getEntityLevel ()Lnone/aqu;
-CLASS none/bcv net/minecraft/tileentity/TileEntityComparator
-CLASS none/bcw net/minecraft/tileentity/TileEntityDaylightDetector
+CLASS none/bcv net/minecraft/blockentity/BlockEntityComparator
+CLASS none/bcw net/minecraft/blockentity/BlockEntityDaylightDetector
 	METHOD c update ()V
-CLASS none/bcx net/minecraft/tileentity/TileEntityTrap
+CLASS none/bcx net/minecraft/blockentity/BlockEntityTrap
 	METHOD a getSlot (I)Lnone/amj;
 	METHOD a removeFromSlot (II)Lnone/amj;
 	METHOD a setSlotContent (ILnone/amj;)V
@@ -6535,22 +6535,22 @@ CLASS none/bcx net/minecraft/tileentity/TileEntityTrap
 	METHOD l clear ()V
 	METHOD n_ getSize ()I
 	METHOD p_ getMaxStackSize ()I
-CLASS none/bcy net/minecraft/tileentity/TileEntityDropper
-CLASS none/bcz net/minecraft/tileentity/TileEntityEnchantmentTable
+CLASS none/bcy net/minecraft/blockentity/BlockEntityDropper
+CLASS none/bcz net/minecraft/blockentity/BlockEntityEnchantmentTable
 	METHOD c update ()V
-CLASS none/bda net/minecraft/tileentity/TileEntityEnderChest
+CLASS none/bda net/minecraft/blockentity/BlockEntityEnderChest
 	METHOD c update ()V
-CLASS none/bdb net/minecraft/tileentity/TileEntityFlowerPot
-CLASS none/bdc net/minecraft/tileentity/TileEntityFurnace
+CLASS none/bdb net/minecraft/blockentity/BlockEntityFlowerPot
+CLASS none/bdc net/minecraft/blockentity/BlockEntityFurnace
 	METHOD c update ()V
-CLASS none/bde net/minecraft/tileentity/TileEntityHopper
+CLASS none/bde net/minecraft/blockentity/BlockEntityHopper
 	METHOD c update ()V
 	METHOD o_ onInventoryChanged ()V
-CLASS none/bdg net/minecraft/tileentity/TileEntityMobSpawner
+CLASS none/bdg net/minecraft/blockentity/BlockEntityMobSpawner
 	METHOD b getSpawnerLogic ()Lnone/aqi;
 	METHOD c update ()V
-CLASS none/bdi net/minecraft/tileentity/TileEntityMusic
-CLASS none/bdj net/minecraft/tileentity/TileEntitySign
+CLASS none/bdi net/minecraft/blockentity/BlockEntityMusic
+CLASS none/bdj net/minecraft/blockentity/BlockEntitySign
 	CLASS bdk
 		METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z
 		METHOD a sendChatToPlayer (Lnone/ho;)V
@@ -6564,8 +6564,8 @@ CLASS none/bdj net/minecraft/tileentity/TileEntitySign
 	FIELD a signText
 	FIELD f lineBeingEdited
 	METHOD a setEditable (Z)V
-CLASS none/bdm net/minecraft/tileentity/TileEntitySkull
-CLASS none/bdn net/minecraft/tileentity/TileEntityAirportal
+CLASS none/bdm net/minecraft/blockentity/BlockEntitySkull
+CLASS none/bdn net/minecraft/blockentity/BlockEntityAirportal
 CLASS none/bdq net/minecraft/block/BlockPistonBase
 	FIELD a facing
 	FIELD b extended
@@ -6588,7 +6588,7 @@ CLASS none/bds net/minecraft/block/BlockPistonHead
 CLASS none/bdu net/minecraft/block/EnumPistonType
 	FIELD a DEFAULT
 	FIELD b STICKY
-CLASS none/bdv net/minecraft/tileentity/TileEntityPiston
+CLASS none/bdv net/minecraft/blockentity/BlockEntityPiston
 	METHOD c update ()V
 	METHOD u getBlockMetadata ()I
 CLASS none/bdx net/minecraft/block/BlockPistonMoving
@@ -6608,7 +6608,7 @@ CLASS none/bei
 	FIELD a dim
 	FIELD b blockCoords
 	FIELD c blockState
-	FIELD d tileEntity
+	FIELD d blockEntity
 CLASS none/bel
 	FIELD a dim
 CLASS none/bes net/minecraft/block/BlockPropertyManager
@@ -6701,7 +6701,7 @@ CLASS none/bfh net/minecraft/level/Chunk
 	FIELD i level
 	FIELD j heightMap
 	FIELD k isGapLightingUpdated
-	FIELD l tileEntityMap
+	FIELD l blockEntityMap
 	FIELD m entityStore
 	FIELD n chunkExists
 	FIELD o isLightPopulated
@@ -6854,7 +6854,7 @@ CLASS none/bfu net/minecraft/level/chunk/storage/AnvilConverterData
 	FIELD f data
 	FIELD g blocks
 	FIELD h entityList
-	FIELD i tileEntityList
+	FIELD i blockEntityList
 	FIELD j tileTickList
 	FIELD k chunkXPos
 	FIELD l chunkZPos
@@ -9114,7 +9114,7 @@ CLASS none/civ net/minecraft/client/render/LevelRenderer
 CLASS none/cja
 	FIELD f AIR
 	METHOD p getBlockStateAt (Lnone/dt;)Lnone/bec;
-	METHOD s getTileEntityAt (Lnone/dt;)Lnone/bcm;
+	METHOD s getBlockEntityAt (Lnone/dt;)Lnone/bcm;
 CLASS none/cje net/minecraft/client/render/EnumBlockVertices
 	FIELD a DOWN
 	FIELD b UP
@@ -9198,12 +9198,12 @@ CLASS none/cmz net/minecraft/entity/player/EnumCameraType
 	FIELD c FIRST_PERSON
 	FIELD d HEAD
 	FIELD e GUI
-CLASS none/cnk net/minecraft/client/render/TileEntityBannerRenderer
+CLASS none/cnk net/minecraft/client/render/BlockEntityBannerRenderer
 	FIELD d BANNER_BASE
-CLASS none/cno net/minecraft/client/render/TileEntityRenderer
+CLASS none/cno net/minecraft/client/render/BlockEntityRenderer
 	FIELD a instance
-	METHOD a renderTileEntityAt (Lnone/bcm;DDDF)V
-CLASS none/cnp net/minecraft/client/render/TileEntitySpecialRenderer
+	METHOD a renderBlockEntityAt (Lnone/bcm;DDDF)V
+CLASS none/cnp net/minecraft/client/render/BlockEntitySpecialRenderer
 	METHOD b getFontRenderer ()Lnone/bty;
 CLASS none/cnq
 	FIELD c TRAPPED_DOUBLE_PNG
@@ -9212,10 +9212,10 @@ CLASS none/cnq
 	FIELD f TRAPPED_PNG
 	FIELD g CHRISTMAS_PNG
 	FIELD h CHEST_PNG
-CLASS none/cnv net/minecraft/client/render/TileEntitySignRenderer
+CLASS none/cnv net/minecraft/client/render/BlockEntitySignRenderer
 	FIELD c signTextures
 	FIELD d modelSign
-	METHOD a renderTileEntitySignAt (Lnone/bdj;DDDFI)V
+	METHOD a renderBlockEntitySignAt (Lnone/bdj;DDDFI)V
 CLASS none/cpe net/minecraft/client/render/RenderArmorStand
 	METHOD a rotateCorpse (Lnone/xm;FFF)V
 CLASS none/cpg net/minecraft/client/render/RenderArrow
