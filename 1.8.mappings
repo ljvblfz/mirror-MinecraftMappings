@@ -5140,7 +5140,7 @@ CLASS none/asu net/minecraft/level/biome/BiomeTaiga
 CLASS none/asv net/minecraft/level/biome/BiomeTheEnd
 	METHOD <init> (I)V
 		ARG 0 biomeID
-CLASS none/asw
+CLASS none/asw net/minecraft/level/decorator/EndDecorator
 	METHOD a decorate (Lnone/arm;)V
 CLASS none/asy net/minecraft/block/BlockAir
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
@@ -7581,6 +7581,7 @@ CLASS none/bis net/minecraft/level/gen/feature/Vines
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
 CLASS none/bit net/minecraft/level/gen/feature/LilyPads
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
+CLASS none/biv net/minecraft/level/gen/FlatGeneratorInfo
 CLASS none/bjb net/minecraft/level/gen/structure/StructureBoundingBox
 	FIELD a minX
 	FIELD b minY
@@ -7729,7 +7730,7 @@ CLASS none/blk
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 CLASS none/bll
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
-CLASS none/bln net/minecratf/level/gen/structure/ComponentScatteredFeature
+CLASS none/bln net/minecraft/level/gen/structure/ComponentScatteredFeature
 CLASS none/blo net/minecraft/level/gen/structure/ComponentScatteredFeatureSwampHut
 	FIELD e hasWitch
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
@@ -7807,7 +7808,7 @@ CLASS none/bnd
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 CLASS none/bnf
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
-CLASS none/bng
+CLASS none/bng net/minecraft/level/gen/structure/ComponentVillageHouse4
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 CLASS none/bnh
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
@@ -8157,6 +8158,15 @@ CLASS none/bsg net/minecraft/chat/EnumTeamChatMessageVisibility
 	FIELD b NEVER
 	FIELD c HIDE_FOR_OTHER_TEAMS
 	FIELD d HIDE_FOR_OWN_TEAM
+CLASS none/bsh
+	METHOD c getDisplayName ()Lnone/bsl;
+CLASS none/bsi none/ScoreBoardObjective
+	METHOD c getDisplayName ()Lnone/bsl;
+CLASS none/bsj
+	METHOD c getDisplayName ()Lnone/bsl;
+CLASS none/bsk
+	METHOD c getDisplayName ()Lnone/bsl;
+CLASS none/bsl none/ScoreboardHealthDisplayer
 CLASS none/bsq net/minecraft/chat/ChatLine
 	FIELD a updateCounter
 	FIELD b component
@@ -8410,6 +8420,9 @@ CLASS none/btv net/minecraft/util/Timer
 CLASS none/btw net/minecraft/util/Session
 	METHOD a getSessionID ()Ljava/lang/String;
 	METHOD c getUsername ()Ljava/lang/String;
+CLASS none/btx net/minecraft/util/AccountType
+	FIELD a MINECRAFT
+	FIELD b MOJANG
 CLASS none/bty net/minecraft/client/render/FontRenderer
 	METHOD a getStringWidth (Ljava/lang/String;)I
 	METHOD a drawStringWithShadow (Ljava/lang/String;FFI)I
@@ -8509,11 +8522,14 @@ CLASS none/bur net/minecraft/client/gui/button/bur
 	METHOD c mousePressed (Lnone/bsu;II)Z
 CLASS none/bus net/minecraft/client/gui/button/bus
 	METHOD a drawButton (Lnone/bsu;II)V
+CLASS none/but none/butEnum
 CLASS none/buu
 	METHOD a drawSlot (IIIIII)V
 CLASS none/buv net/minecraft/client/gui/IGuiSlot
 CLASS none/buw net/minecraft/client/gui/button/GuiSmallButton
 	METHOD c returnEnumOptions ()Lnone/btr;
+CLASS none/buy
+	FIELD a mc
 CLASS none/bvh net/minecraft/client/gui/bvh
 	FIELD f mc
 CLASS none/bvk
@@ -8592,8 +8608,8 @@ CLASS none/bwb net/minecraft/client/gui/GuiConnecting
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
 	METHOD e updateScreen ()V
-CLASS none/bwd
-	CLASS bwe
+CLASS none/bwd net/minecraft/client/gui/screen/GuiCreateFlatWorld
+	CLASS bwe net/minecraft/client/gui/GuiCreateFlatWorldListSlot
 		METHOD a drawSlot (IIIIII)V
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
@@ -9736,6 +9752,7 @@ CLASS none/crz net/minecraft/client/render/RenderZombie
 	METHOD a rotateCorpse (Lnone/xm;FFF)V
 CLASS none/csr
 	FIELD a SHEEP_FUR_PNG
+CLASS none/csu net/minecraft/client/render/RenderSpiderEyes
 CLASS none/csz net/minecraft/client/render/RenderWolfCollar
 CLASS none/ctc
 	METHOD a rotateCorpse (Lnone/xm;FFF)V
@@ -9837,9 +9854,15 @@ CLASS none/cyk net/minecraft/server/IntegratedServer
 	METHOD u initiateShutdown ()V
 	METHOD w getDataDirectory ()Ljava/io/File;
 	METHOD y onTick ()V
+CLASS none/cyo empty/_6
+CLASS none/cyp
+	FIELD a atomicInteger
+	FIELD b logger
 CLASS none/cyq
 	FIELD c updateTime
 	METHOD c updateTime ()V
+CLASS none/cyr none/ThreadLanServerDetector
+CLASS none/cyt none/ThreadLanServerPing
 CLASS none/cyx net/minecraft/client/audio/MusicTicker
 	FIELD a random
 	FIELD b mc
@@ -9852,12 +9875,71 @@ CLASS none/cyy net/minecraft/sound/EnumMusicType
 	FIELD e NETHER
 	FIELD f END_BOSS
 	FIELD g END
-CLASS none/czh
+CLASS none/cza net/minecraft/client/sound/SoundSystem
+	FIELD a marker
+	FIELD b logger
+CLASS none/czg
+	FIELD b random
+	FIELD c resourceLocation
+	FIELD d soundType
+	METHOD <init> (Lnone/oa;DDLnone/cxz;)V
+		ARG 0 resourceLocation
+	METHOD c getResourceLocation ()Lnone/oa;
+	METHOD d getSoundType ()Lnone/cxz;
+CLASS none/czh net/minecraft/client/sound/czh
 	METHOD a onReload (Lnone/cvk;)V
 	METHOD c update ()V
 CLASS none/czl
 	METHOD b initializeMap ()Ljava/util/Map;
+CLASS none/czp none/AchievementUnlocker
+CLASS none/czr none/PlayerKiller
+CLASS none/czu tv/twitch/TwitchBroadcaster
+	FIELD A serverConnector
+	FIELD D logger
+	METHOD w getServerConnector ()Lnone/dai;
+CLASS none/czx tv/twitch/czx
+CLASS none/czy tv/twitch/EnumTwitchStatus
+	FIELD a UNINITIALIZED
+	FIELD b INITIALIZED
+	FIELD c AUTHENTICATING
+	FIELD d AUTHENTICATED
+	FIELD e LOGGING_IN
+	FIELD f LOGGED_IN
+	FIELD g FINDING_SERVER
+	FIELD h RECEIVED_SERVER
+	FIELD i READY
+	FIELD j STARTING
+	FIELD k BROADCASTING
+	FIELD l STOPPING
+	FIELD m PAUSING
+	FIELD n INGEST_TESTING
+CLASS none/czz tv/twitch/czz
 CLASS none/daa tv/twitch/ChatController
+CLASS none/dac net/minecraft/chat/dac
+CLASS none/dad none/dadEnum
+CLASS none/daf none/dafEnum
+CLASS none/dag none/dagEnum
+CLASS none/dah net/minecraft/chat/dah
+CLASS none/dai tv/twitch/ServerConnector
+CLASS none/dal tv/twitch/dal
+CLASS none/dam tv/twitch/dam
+CLASS none/dan tv/twitch/EnumConnectionState
+	FIELD a UNINITIALIZED
+	FIELD b STARTING
+	FIELD c CONNECTING
+	FIELD d TESTING_SERVER
+	FIELD e TESTING_SERVER_DONE
+	FIELD f FINISHED
+	FIELD g CANCELLING
+	FIELD h CANCELLED
+	FIELD i FAILED
+CLASS none/dao tv/twitch/dao
+CLASS none/dap tv/twitch/EnumTwitchError
+	FIELD a ERROR
+	FIELD b INVALID_TOKEN
+CLASS none/daq tv/twitch/TwitchAuthenticator
+	FIELD b logger
+CLASS none/dat tv/twitch/dat
 CLASS none/dax net/minecraft/client/render/OpenGlHelper
 	FIELD O vboAvailable
 	FIELD S shadersAvailable
