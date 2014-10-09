@@ -3965,7 +3965,7 @@ CLASS none/ahl net/minecraft/entity/projectile/EntityFireball
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD c getBrightness (F)F
 	METHOD s_ onUpdate ()V
-CLASS none/ahm net/minecraft/entity/item/EntityFireworkRocket
+CLASS none/ahm net/minecraft/entity/item/EntityFireworksRocket
 	METHOD a handleEntityStatusPacket (B)V
 		ARG 0 entityStatusByte
 	METHOD a readFromNBT (Lnone/fn;)V
@@ -5329,7 +5329,7 @@ CLASS none/atr net/minecraft/block/Block
 		ARG 0 dimension
 		ARG 1 blockCoords
 		ARG 5 entity
-	METHOD a onEntityEnterBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
+	METHOD a onEntityEntersBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
 		ARG 3 entity
@@ -5741,7 +5741,7 @@ CLASS none/aud net/minecraft/block/BlockButton
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
-	METHOD a onEntityEnterBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
+	METHOD a onEntityEntersBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
 	METHOD a getPowerEmittedFromLocationFacing (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
 	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD b getPowerTransmittedToSolidBlockAt (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
@@ -5755,7 +5755,7 @@ CLASS none/auf net/minecraft/block/BlockCactus
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
-	METHOD a onEntityEnterBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
+	METHOD a onEntityEntersBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
 	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c isOpaque ()Z
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
@@ -5784,7 +5784,7 @@ CLASS none/aui net/minecraft/block/BlockCauldron
 	FIELD a level
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
-	METHOD a onEntityEnterBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
+	METHOD a onEntityEntersBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD c isOpaque ()Z
@@ -5876,7 +5876,7 @@ CLASS none/auy net/minecraft/block/BlockDetectorRail
 	FIELD M powered
 	FIELD b shape
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
-	METHOD a onEntityEnterBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
+	METHOD a onEntityEntersBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
 	METHOD a getPowerEmittedFromLocationFacing (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
 	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD b getPowerTransmittedToSolidBlockAt (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
@@ -5980,7 +5980,7 @@ CLASS none/avo net/minecraft/block/BlockEnchantingTable
 CLASS none/avp net/minecraft/block/BlockEndPortal
 	METHOD a getDropCount (Ljava/util/Random;)I
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
-	METHOD a onEntityEnterBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
+	METHOD a onEntityEntersBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD c isOpaque ()Z
 	METHOD d hasFullCubeHitbox ()Z
@@ -6376,7 +6376,7 @@ CLASS none/ayy net/minecraft/block/BlockNetherPortal
 	METHOD a getDropCount (Ljava/util/Random;)I
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
-	METHOD a onEntityEnterBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
+	METHOD a onEntityEntersBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
@@ -6576,7 +6576,7 @@ CLASS none/bao net/minecraft/block/BlockSnowLayer
 	METHOD f isBlockOverwrittenOnBlockPlacement (Lnone/aqu;Lnone/dt;)Z
 CLASS none/bap net/minecraft/block/BlockSoulSand
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
-	METHOD a onEntityEnterBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
+	METHOD a onEntityEntersBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
 CLASS none/baq net/minecraft/block/BlockSponge
 	FIELD a wet
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
@@ -6702,7 +6702,7 @@ CLASS none/bbk net/minecraft/block/BlockTNT
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
-	METHOD a onEntityEnterBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
+	METHOD a onEntityEntersBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 CLASS none/bbl net/minecraft/block/BlockTorch
 	FIELD a facing
@@ -6743,7 +6743,7 @@ CLASS none/bbs net/minecraft/block/BlockTripwire
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
-	METHOD a onEntityEnterBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
+	METHOD a onEntityEntersBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
@@ -6813,7 +6813,7 @@ CLASS none/bcb net/minecraft/block/BlockLilyPad
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 CLASS none/bcc net/minecraft/block/BlockWeb
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
-	METHOD a onEntityEnterBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
+	METHOD a onEntityEntersBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD c isOpaque ()Z
 	METHOD d hasFullCubeHitbox ()Z
@@ -7809,6 +7809,7 @@ CLASS none/bnd
 CLASS none/bnf
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 CLASS none/bng net/minecraft/level/gen/structure/ComponentVillageHouse4
+	FIELD a isRoofAccessible
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 CLASS none/bnh
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
@@ -7834,11 +7835,11 @@ CLASS none/bnw net/minecraft/level/gen/noisegen/Simplex2dOctaves
 CLASS none/bnz net/minecraft/level/gen/noisegen/Simplex2d
 CLASS none/boa net/minecraft/level/gen/noisegen/NoiseGenAbstract
 CLASS none/boc net/minecraft/block/material/MaterialLogic
-	METHOD c isSolid ()Z
+	METHOD c isSolidGround ()Z
 CLASS none/bod net/minecraft/block/material/MaterialGas
-	METHOD c isSolid ()Z
+	METHOD c isSolidGround ()Z
 CLASS none/boe net/minecraft/block/material/MaterialLiquid
-	METHOD c isSolid ()Z
+	METHOD c isSolidGround ()Z
 CLASS none/bof net/minecraft/block/material/Material
 	FIELD A cactus
 	FIELD B glue
@@ -7882,7 +7883,7 @@ CLASS none/bof net/minecraft/block/material/Material
 	FIELD x packedIce
 	FIELD y snow
 	FIELD z packedSnow
-	METHOD c isSolid ()Z
+	METHOD c isSolidGround ()Z
 	METHOD f setRequiresTool ()Lnone/bof;
 	METHOD g setCanBurn ()Lnone/bof;
 	METHOD h canBurn ()Z
@@ -7890,10 +7891,10 @@ CLASS none/bof net/minecraft/block/material/Material
 	METHOD j isReplaceable ()Z
 	METHOD l requiresNoTool ()Z
 	METHOD m getMobilityFlag ()I
-	METHOD r getColor ()Lnone/boh;
+	METHOD r getMapColor ()Lnone/boh;
 	METHOD s setTranslucent ()Lnone/bof;
 CLASS none/bog net/minecraft/block/material/MaterialWeb
-	METHOD c isSolid ()Z
+	METHOD c isSolidGround ()Z
 CLASS none/boh net/minecraft/block/Color
 	FIELD A BLUE
 	FIELD B BROWN
@@ -7933,7 +7934,7 @@ CLASS none/boh net/minecraft/block/Color
 	METHOD a returnColor (I)I
 		ARG 0 colorModifier
 CLASS none/boi net/minecraft/block/material/MaterialPortal
-	METHOD c isSolid ()Z
+	METHOD c isSolidGround ()Z
 CLASS none/boy none/IntCache
 	FIELD a intCacheSize
 	FIELD b freeSmallArrays
@@ -8159,14 +8160,16 @@ CLASS none/bsg net/minecraft/chat/EnumTeamChatMessageVisibility
 	FIELD c HIDE_FOR_OTHER_TEAMS
 	FIELD d HIDE_FOR_OWN_TEAM
 CLASS none/bsh
-	METHOD c getDisplayName ()Lnone/bsl;
+	METHOD c getDisplayType ()Lnone/bsl;
 CLASS none/bsi none/ScoreBoardObjective
-	METHOD c getDisplayName ()Lnone/bsl;
+	METHOD c getDisplayType ()Lnone/bsl;
 CLASS none/bsj
-	METHOD c getDisplayName ()Lnone/bsl;
+	METHOD c getDisplayType ()Lnone/bsl;
 CLASS none/bsk
-	METHOD c getDisplayName ()Lnone/bsl;
+	METHOD c getDisplayType ()Lnone/bsl;
 CLASS none/bsl none/ScoreboardHealthDisplayer
+	FIELD a INTEGER
+	FIELD b HEARTS
 CLASS none/bsq net/minecraft/chat/ChatLine
 	FIELD a updateCounter
 	FIELD b component
@@ -8523,6 +8526,12 @@ CLASS none/bur net/minecraft/client/gui/button/bur
 CLASS none/bus net/minecraft/client/gui/button/bus
 	METHOD a drawButton (Lnone/bsu;II)V
 CLASS none/but none/butEnum
+	FIELD a LOCKED
+	FIELD b LOCKED_HOVER
+	FIELD c LOCKED_DISABLED
+	FIELD d UNLOCKED
+	FIELD e UNLOCKED_HOVER
+	FIELD f UNLOCKED_DISABLED
 CLASS none/buu
 	METHOD a drawSlot (IIIIII)V
 CLASS none/buv net/minecraft/client/gui/IGuiSlot
@@ -8611,11 +8620,21 @@ CLASS none/bwb net/minecraft/client/gui/GuiConnecting
 CLASS none/bwd net/minecraft/client/gui/screen/GuiCreateFlatWorld
 	CLASS bwe net/minecraft/client/gui/GuiCreateFlatWorldListSlot
 		METHOD a drawSlot (IIIIII)V
+	FIELD a guiCreateWorld
+	FIELD f flatGeneratorInfo
+	FIELD g customizationTitle
+	FIELD h layerMaterialLabel
+	FIELD i heightLabel
+	FIELD s buttonAddLayer
+	FIELD t buttonEditLayer
+	FIELD u buttonRemoveLayer
+	METHOD a getFlatGeneratorInfo ()Ljava/lang/String;
 	METHOD a drawScreen (IIF)V
+	METHOD a setFlatGeneratorInfo (Ljava/lang/String;)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
 	METHOD k handleMouseInput ()V
-CLASS none/bwf
+CLASS none/bwf net/minecraft/client/gui/screen/GuiCreateWorld
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a mouseClicked (III)V
@@ -9590,6 +9609,7 @@ CLASS none/cjm org/lwjgl/opengl/GL11
 	METHOD b glTranslatef (FFF)V
 	METHOD b glRotatef (FFFF)V
 	METHOD c glColor4f (FFFF)V
+CLASS none/cjq org/lwjgl/opengl/cjq
 CLASS none/cki
 	FIELD a MAP_BACKGROUND
 	FIELD b UNDERWATER
@@ -9606,7 +9626,7 @@ CLASS none/ckx
 	METHOD b draw ()I
 CLASS none/cll
 	METHOD a onReload (Lnone/cvk;)V
-CLASS none/clp
+CLASS none/clp none/clpEnum
 	FIELD a DOWN
 	FIELD b UP
 	FIELD c NORTH
@@ -9894,9 +9914,9 @@ CLASS none/czl
 CLASS none/czp none/AchievementUnlocker
 CLASS none/czr none/PlayerKiller
 CLASS none/czu tv/twitch/TwitchBroadcaster
-	FIELD A serverConnector
+	FIELD A serverConnecter
 	FIELD D logger
-	METHOD w getServerConnector ()Lnone/dai;
+	METHOD w getServerConnecter ()Lnone/dai;
 CLASS none/czx tv/twitch/czx
 CLASS none/czy tv/twitch/EnumTwitchStatus
 	FIELD a UNINITIALIZED
@@ -9905,36 +9925,48 @@ CLASS none/czy tv/twitch/EnumTwitchStatus
 	FIELD d AUTHENTICATED
 	FIELD e LOGGING_IN
 	FIELD f LOGGED_IN
-	FIELD g FINDING_SERVER
-	FIELD h RECEIVED_SERVER
-	FIELD i READY
+	FIELD g FINDING_INGEST_SERVER
+	FIELD h RECEIVED_INGEST_SERVERS
+	FIELD i READY_TO_BROADCAST
 	FIELD j STARTING
 	FIELD k BROADCASTING
 	FIELD l STOPPING
-	FIELD m PAUSING
+	FIELD m PAUSED
 	FIELD n INGEST_TESTING
-CLASS none/czz tv/twitch/czz
+CLASS none/czz tw/twitch/czz
 CLASS none/daa tv/twitch/ChatController
 CLASS none/dac net/minecraft/chat/dac
 CLASS none/dad none/dadEnum
+	FIELD a CREATED
+	FIELD b CONNECTING
+	FIELD c CONNECTED
+	FIELD d DISCONNECTING
+	FIELD e DISCONNECTED
 CLASS none/daf none/dafEnum
+	FIELD a UNINITIALIZED
+	FIELD b INITIALIZING
+	FIELD c INITIALIZED
+	FIELD d SHUTTINGDOWN
 CLASS none/dag none/dagEnum
+	FIELD a NONE
+	FIELD b URL
+	FIELD c TEXTUREATLAS
 CLASS none/dah net/minecraft/chat/dah
-CLASS none/dai tv/twitch/ServerConnector
+CLASS none/dai tv/twitch/ServerConnecter
 CLASS none/dal tv/twitch/dal
 CLASS none/dam tv/twitch/dam
-CLASS none/dan tv/twitch/EnumConnectionState
+CLASS none/dan tv/twitch/ConnectionStateEnum
 	FIELD a UNINITIALIZED
 	FIELD b STARTING
-	FIELD c CONNECTING
+	FIELD c CONNECTING_TO_SERVER
 	FIELD d TESTING_SERVER
-	FIELD e TESTING_SERVER_DONE
+	FIELD e DONE_TESTING_SERVER
 	FIELD f FINISHED
 	FIELD g CANCELLING
 	FIELD h CANCELLED
 	FIELD i FAILED
 CLASS none/dao tv/twitch/dao
-CLASS none/dap tv/twitch/EnumTwitchError
+CLASS none/dap tv/twitch/TwitchErrorEnum
 	FIELD a ERROR
 	FIELD b INVALID_TOKEN
 CLASS none/daq tv/twitch/TwitchAuthenticator
