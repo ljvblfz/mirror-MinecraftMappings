@@ -1,4 +1,7 @@
 CLASS none/a net/minecraft/util/EnumChatFormatting
+	FIELD A format
+	FIELD B stringValue
+	FIELD C intValue
 	FIELD a BLACK
 	FIELD b DARK_BLUE
 	FIELD c DARK_GREEN
@@ -21,13 +24,61 @@ CLASS none/a net/minecraft/util/EnumChatFormatting
 	FIELD t UNDERLINE
 	FIELD u ITALIC
 	FIELD v RESET
+	FIELD w ID_TO_FORMAT
+	FIELD x PATTERN
+	FIELD y name
+	FIELD z character
+	METHOD <init> (Ljava/lang/String;ILjava/lang/String;CI)V
+		ARG 2 colorName
+		ARG 3 character
+		ARG 4 intValue
+	METHOD <init> (Ljava/lang/String;ILjava/lang/String;CZ)V
+		ARG 2 colorName
+		ARG 3 character
+		ARG 4 format
+	METHOD <init> (Ljava/lang/String;ILjava/lang/String;CZI)V
+		ARG 2 colorName
+		ARG 3 character
+		ARG 4 format
+	METHOD a fromIntValue (I)Lnone/a;
+		ARG 0 intValue
+	METHOD a stripColor (Ljava/lang/String;)Ljava/lang/String;
+		ARG 0 input
+	METHOD a getAllFormats (ZZ)Ljava/util/Collection;
+		ARG 0 colors
+		ARG 1 formats
+	METHOD b getIntValue ()I
+	METHOD b fromName (Ljava/lang/String;)Lnone/a;
+		ARG 0 name
+	METHOD c isFormat ()Z
+	METHOD c toId (Ljava/lang/String;)Ljava/lang/String;
+		ARG 0 name
+	METHOD d isColor ()Z
+	METHOD e getLowerCaseName ()Ljava/lang/String;
+	METHOD toString toString ()Ljava/lang/String;
+	METHOD values values ()[Lnone/a;
 CLASS none/b net/minecraft/crash/CrashReport
+	CLASS c
+		METHOD call call ()Ljava/lang/String;
+	CLASS d
+		METHOD call call ()Ljava/lang/String;
+	CLASS e
+		METHOD call call ()Ljava/lang/String;
+	CLASS f
+		METHOD call call ()Ljava/lang/String;
+	CLASS g
+		METHOD call call ()Ljava/lang/String;
+	CLASS h
+		METHOD call call ()Ljava/lang/String;
+	CLASS i
+		METHOD call call ()Ljava/lang/String;
 	FIELD a logger
 	FIELD b message
 	FIELD c cause
 	FIELD d crashLogInfo
 	FIELD e crashLogInfoList
 	FIELD f logFile
+	FIELD g processedStackTrace
 	FIELD h stackTraceElementsArray
 	METHOD <init> (Ljava/lang/String;Ljava/lang/Throwable;)V
 		ARG 0 message
@@ -37,7 +88,7 @@ CLASS none/b net/minecraft/crash/CrashReport
 		ARG 0 logFile
 	METHOD a makeCategory (Ljava/lang/String;)Lnone/j;
 		ARG 0 name
-	METHOD a (Ljava/lang/String;I)Lnone/j;
+	METHOD a createCategory (Ljava/lang/String;I)Lnone/j;
 		ARG 0 name
 		ARG 1 depth
 	METHOD a buildCrashReport (Ljava/lang/StringBuilder;)V
@@ -61,6 +112,7 @@ CLASS none/j net/minecraft/crash/CrashReportCategory
 		ARG 0 crashLogger
 		ARG 1 name
 	METHOD a getStackTraceElementsArray ()[Ljava/lang/StackTraceElement;
+	METHOD a getStackLength (I)I
 	METHOD a (Ljava/lang/StackTraceElement;Ljava/lang/StackTraceElement;)Z
 		ARG 0 stackTraceElement1
 		ARG 1 stackTraceElement2
@@ -93,7 +145,11 @@ CLASS none/u net/minecraft/crash/CrashReportException
 		ARG 0 crashLogger
 	METHOD a getCrashLogger ()Lnone/b;
 CLASS none/v net/minecraft/chat/AllowedCharacters
-	METHOD a indexOf (C)Z
+	FIELD a allowedCharacters
+	METHOD a isAllowed (C)Z
+		ARG 0 c
+	METHOD a filter (Ljava/lang/String;)Ljava/lang/String;
+		ARG 0 s
 CLASS none/w net/minecraft/util/Util
 	METHOD a getOSName ()Lnone/x;
 CLASS none/x net/minecraft/util/OSType
@@ -108,6 +164,7 @@ CLASS none/y net/minecraft/command/IAdminCommand
 		ARG 0 serverCommandUser
 		ARG 1 serverCommand
 CLASS none/z net/minecraft/command/CommandBase
+	METHOD a getPermissionLevel ()I
 	METHOD a getAsInt (Ljava/lang/String;)I
 	METHOD a getAsDoubleWithinRange (Ljava/lang/String;DD)D
 		ARG 1 min
@@ -145,6 +202,7 @@ CLASS none/z net/minecraft/command/CommandBase
 		ARG 0 serverCommandUser
 	METHOD b (Lnone/ae;[Ljava/lang/String;IZ)Lnone/ho;
 		ARG 0 serverCommandUser
+	METHOD b isUsername ([Ljava/lang/String;I)Z
 	METHOD c getAsDouble (Ljava/lang/String;)D
 	METHOD c (Lnone/ae;Ljava/lang/String;)Ljava/util/List;
 		ARG 0 serverCommandUser
@@ -178,10 +236,11 @@ CLASS none/ab net/minecraft/command/CommandHandler
 CLASS none/ac net/minecraft/command/ICommand
 	METHOD a (Lnone/ae;)Z
 		ARG 0 serverCommandUser
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 		ARG 0 serverCommandUser
+	METHOD b isUsername ([Ljava/lang/String;I)Z
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
@@ -263,58 +322,68 @@ CLASS none/am net/minecraft/command/PlayerSelectorPredicate
 	METHOD apply (Lnone/wv;)Z
 		ARG 0 entity
 CLASS none/au net/minecraft/command/CommandAchievement
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
+	METHOD b isUsername ([Ljava/lang/String;I)Z
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/aw net/minecraft/command/CommandBanIp
 	FIELD a IPRegexPatern
+	METHOD a getPermissionLevel ()I
 	METHOD a (Lnone/ae;Ljava/lang/String;Ljava/lang/String;)V
 		ARG 0 serverCommandUser
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/ax net/minecraft/command/CommandBanPlayer
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 rserverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/ay net/minecraft/command/CommandBlockData
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/az net/minecraft/command/CommandClearInventory
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
+	METHOD b isUsername ([Ljava/lang/String;I)Z
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/ba net/minecraft/command/CommandClone
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bc net/minecraft/command/CommandCompare
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bd net/minecraft/command/CommandDeOp
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
@@ -322,7 +391,8 @@ CLASS none/bd net/minecraft/command/CommandDeOp
 		ARG 0 serverCommandUser
 CLASS none/be net/minecraft/command/CommandDebug
 	FIELD a logger
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
@@ -330,37 +400,49 @@ CLASS none/be net/minecraft/command/CommandDebug
 		ARG 0 serverCommandUser
 	METHOD d getWittyComment ()Ljava/lang/String;
 CLASS none/bf net/minecraft/command/CommandDefaultGameMode
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bg net/minecraft/command/CommandEffect
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
+	METHOD b isUsername ([Ljava/lang/String;I)Z
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bh net/minecraft/command/CommandEmote
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bi net/minecraft/command/CommandEnchant
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+		ARG 1 args
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
+		ARG 0 sender
+		ARG 1 args
+	METHOD b isUsername ([Ljava/lang/String;I)Z
+		ARG 0 args
+		ARG 1 index
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 	METHOD d getAllUsernames ()[Ljava/lang/String;
 CLASS none/bj net/minecraft/command/CommandEntityData
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
+	METHOD b isUsername ([Ljava/lang/String;I)Z
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
@@ -370,58 +452,70 @@ CLASS none/bk net/minecraft/command/CommandExecuteAt
 		METHOD a sendChatToPlayer (Lnone/ho;)V
 		METHOD d_ getCommandServerName ()Ljava/lang/String;
 		METHOD e getEntityLevel ()Lnone/aqu;
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
+	METHOD b isUsername ([Ljava/lang/String;I)Z
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bm net/minecraft/command/CommandXP
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
+	METHOD b isUsername ([Ljava/lang/String;I)Z
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bn net/minecraft/command/CommandFill
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bo net/minecraft/command/CommandDifficulty
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bp net/minecraft/command/CommandGameMode
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
+	METHOD b isUsername ([Ljava/lang/String;I)Z
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 	METHOD h (Lnone/ae;Ljava/lang/String;)Lnone/arc;
 		ARG 0 serverCommandUser
 CLASS none/bq net/minecraft/command/CommandGameRule
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/br net/minecraft/command/CommandGive
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
+	METHOD b isUsername ([Ljava/lang/String;I)Z
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bs net/minecraft/command/CommandHelp
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
@@ -430,126 +524,146 @@ CLASS none/bs net/minecraft/command/CommandHelp
 	METHOD d (Lnone/ae;)Ljava/util/List;
 		ARG 0 serverCommandUser
 CLASS none/bt net/minecraft/command/CommandKick
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bu net/minecraft/command/CommandKill
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+	METHOD b isUsername ([Ljava/lang/String;I)Z
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bv net/minecraft/command/CommandBanPlayerList
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bw net/minecraft/command/CommandList
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bx net/minecraft/command/CommandTell
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
+	METHOD b isUsername ([Ljava/lang/String;I)Z
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/by net/minecraft/command/CommandTellRaw
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
+	METHOD b isUsername ([Ljava/lang/String;I)Z
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/bz net/minecraft/command/CommandOp
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/ca net/minecraft/command/CommandPardonIp
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cb net/minecraft/command/CommandPardon
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cc net/minecraft/command/CommandParticle
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cd net/minecraft/command/CommandPlaySound
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
+	METHOD b isUsername ([Ljava/lang/String;I)Z
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/ce net/minecraft/command/CommandPublish
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cf net/minecraft/command/CommandReplaceItem
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
+	METHOD b isUsername ([Ljava/lang/String;I)Z
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cg net/minecraft/command/CommandSaveAll
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/ch net/minecraft/command/CommandSaveOff
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/ci net/minecraft/command/CommandSaveOn
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cj net/minecraft/command/CommandSay
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/ck net/minecraft/command/CommandScoreboard
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD b (Lnone/ae;[Ljava/lang/String;)Z
 		ARG 0 serverCommandUser
 	METHOD b (Lnone/ae;[Ljava/lang/String;I)V
 		ARG 0 serverCommandUser
+	METHOD b isUsername ([Ljava/lang/String;I)Z
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
@@ -590,44 +704,51 @@ CLASS none/cl net/minecraft/command/ServerCommandManager
 		ARG 0 serverCommandUser
 		ARG 1 serverCommand
 CLASS none/cm net/minecraft/command/CommandSetBlock
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cn net/minecraft/command/CommandSetLevelSpawn
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/co net/minecraft/command/CommandSetIdleTimeout
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cp net/minecraft/command/CommandSpawnPoint
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
+	METHOD b isUsername ([Ljava/lang/String;I)Z
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cq net/minecraft/command/CommandSeed
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cr net/minecraft/command/CommandSpreadPlayers
+	METHOD a getPermissionLevel ()I
 	METHOD a (Ljava/util/Random;IDDDD)[Lnone/cs;
 		ARG 0 random
 	METHOD a (Lnone/ae;Ljava/util/List;Lnone/cs;DDLnone/aqu;Z)V
 		ARG 0 serverCommandUser
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
@@ -640,48 +761,57 @@ CLASS none/cs
 		ARG 3 max
 		ARG 4 max2
 CLASS none/ct net/minecraft/command/CommandStats
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
+	METHOD b isUsername ([Ljava/lang/String;I)Z
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cu net/minecraft/command/CommandStop
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cv net/minecraft/command/CommandSummon
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cw net/minecraft/command/CommandTp
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
+	METHOD b isUsername ([Ljava/lang/String;I)Z
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cy net/minecraft/command/CommandTestForBlock
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/cz net/minecraft/command/CommandTestFor
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
+	METHOD b isUsername ([Ljava/lang/String;I)Z
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/da net/minecraft/command/CommandTime
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
@@ -689,41 +819,48 @@ CLASS none/da net/minecraft/command/CommandTime
 		ARG 0 serverCommandUser
 CLASS none/db net/minecraft/command/CommandTitle
 	FIELD a logger
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
+	METHOD b isUsername ([Ljava/lang/String;I)Z
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/dc net/minecraft/command/CommandToggleDownFall
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/dd net/minecraft/command/CommandTrigger
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/de net/minecraft/command/CommandWeather
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverComamndUser
 CLASS none/df net/minecraft/command/CommandWhiteList
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/dg net/minecraft/command/CommandLevelBorder
-	METHOD a (Lnone/ae;[Ljava/lang/String;)V
+	METHOD a getPermissionLevel ()I
+	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
 	METHOD c getServerCommandName ()Ljava/lang/String;
@@ -751,10 +888,16 @@ CLASS none/dt net/minecraft/util/BlockPos
 	FIELD h X_BITMASK
 	FIELD i Y_BITMASK
 	FIELD j Z_BITMASK
+	METHOD <init> (DDD)V
+		ARG 0 levelX
+		ARG 1 levelY
+		ARG 2 levelZ
 	METHOD <init> (III)V
 		ARG 0 levelX
 		ARG 1 levelY
 		ARG 2 levelZ
+	METHOD <init> (Lnone/brw;)V
+		ARG 0 vec
 	METHOD <init> (Lnone/fd;)V
 		ARG 0 location
 	METHOD <init> (Lnone/wv;)V
@@ -773,22 +916,34 @@ CLASS none/dt net/minecraft/util/BlockPos
 	METHOD a fromLong (J)Lnone/dt;
 		ARG 0 l
 	METHOD a addDirection (Lnone/ej;)Lnone/dt;
+		ARG 0 face
 	METHOD a addDirection (Lnone/ej;I)Lnone/dt;
+		ARG 0 face
+		ARG 1 blocks
 	METHOD a add (Lnone/fd;)Lnone/dt;
 		ARG 0 location
 	METHOD b below ()Lnone/dt;
 	METHOD b above (I)Lnone/dt;
+		ARG 0 blocks
 	METHOD b subtract (Lnone/fd;)Lnone/dt;
+		ARG 0 vec
 	METHOD c north ()Lnone/dt;
 	METHOD c below (I)Lnone/dt;
+		ARG 0 blocks
 	METHOD d south ()Lnone/dt;
 	METHOD d north (I)Lnone/dt;
+		ARG 0 blocks
+	METHOD d (Lnone/fd;)Lnone/dt;
+		ARG 0 vec
 	METHOD e west ()Lnone/dt;
 	METHOD e south (I)Lnone/dt;
+		ARG 0 blocks
 	METHOD f east ()Lnone/dt;
 	METHOD f west (I)Lnone/dt;
+		ARG 0 blocks
 	METHOD g asLong ()J
 	METHOD g east (I)Lnone/dt;
+		ARG 0 blocks
 CLASS none/dy
 	FIELD b x
 	FIELD c y
@@ -816,7 +971,11 @@ CLASS none/eh net/minecraft/util/RegistryNamedspaced
 	METHOD a getRegistryItem (Ljava/lang/Object;)Ljava/lang/Object;
 		ARG 0 registryItemKey
 CLASS none/ei net/minecraft/util/RegistryDefaulted
+	FIELD a defaultValue
+	METHOD <init> (Ljava/lang/Object;)V
+		ARG 0 defaultValue
 	METHOD a getRegistryItem (Ljava/lang/Object;)Ljava/lang/Object;
+		ARG 0 registryItemKey
 CLASS none/ej net/minecraft/block/EnumFacing
 	FIELD a DOWN
 	FIELD b UP
@@ -830,6 +989,9 @@ CLASS none/ej net/minecraft/block/EnumFacing
 	METHOD a getCWFacing (Lnone/el;)Lnone/ej;
 	METHOD e getYRotation ()Lnone/ej;
 	METHOD f getCCWFacing ()Lnone/ej;
+	METHOD g getXOffset ()I
+	METHOD h getYOffset ()I
+	METHOD i getZOffset ()I
 	METHOD l getName ()Ljava/lang/String;
 	METHOD n getXRotation ()Lnone/ej;
 	METHOD p getZRotation ()Lnone/ej;
@@ -888,7 +1050,7 @@ CLASS none/ev net/minecraft/util/RegistryNamespaced
 		ARG 0 registryItemKey
 	METHOD d containsKey (Ljava/lang/Object;)Z
 		ARG 0 registryItemKey
-	METHOD iterator ()Ljava/util/Iterator;
+	METHOD iterator iterator ()Ljava/util/Iterator;
 CLASS none/ew net/minecraft/util/EnumParticleType
 	FIELD A FLAME
 	FIELD B LAVA
@@ -966,7 +1128,7 @@ CLASS none/fb net/minecraft/util/RegistrySimple
 	METHOD c getRegistryKeys ()Ljava/util/Set;
 	METHOD d containsKey (Ljava/lang/Object;)Z
 		ARG 0 registryItemKey
-	METHOD iterator ()Ljava/util/Iterator;
+	METHOD iterator iterator ()Ljava/util/Iterator;
 CLASS none/fd net/minecraft/util/Vec3i
 	FIELD a x
 	FIELD b y
@@ -984,16 +1146,36 @@ CLASS none/fd net/minecraft/util/Vec3i
 		ARG 0 x
 		ARG 1 y
 		ARG 2 z
+	METHOD compareTo compareTo (Lnone/fd;)I
+		ARG 0 vec
 	METHOD d distanceSquared2 (DDD)D
 		ARG 0 x
 		ARG 1 y
 		ARG 2 z
+	METHOD d (Lnone/fd;)Lnone/fd;
+		ARG 0 vec
+	METHOD equals equals (Ljava/lang/Object;)Z
+		ARG 0 o
+	METHOD hashCode hashCode ()I
 	METHOD i distanceSquared (Lnone/fd;)D
 		ARG 0 location
 	METHOD n getX ()I
 	METHOD o getY ()I
 	METHOD p getZ ()I
-CLASS none/fi net/minecraft/util/StatCollector
+	METHOD toString toString ()Ljava/lang/String;
+CLASS none/fi net/minecraft/util/Translator
+	FIELD a translator
+	FIELD b fallbackTranslator
+	METHOD a getLastUpdateTime ()J
+	METHOD a translateKey (Ljava/lang/String;)Ljava/lang/String;
+		ARG 0 key
+	METHOD a translateKeyFormat (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+		ARG 0 key
+		ARG 1 params
+	METHOD b translateFallback (Ljava/lang/String;)Ljava/lang/String;
+		ARG 0 key
+	METHOD c isKeyTranslated (Ljava/lang/String;)Z
+		ARG 0 key
 CLASS none/fj net/minecraft/util/StringTranslate
 	FIELD a numericVariablePattern
 	FIELD b equalSignSplitter
@@ -2595,7 +2777,25 @@ CLASS none/sn net/minecraft/server/ServerConfigurationManager
 	METHOD r getAvailablePlayerDat ()[Ljava/lang/String;
 	METHOD v removeAllPlayers ()V
 CLASS none/tk net/minecraft/stats/Achievement
+	FIELD a column
+	FIELD b row
+	FIELD c required
+	FIELD d displayItem
+	FIELD k descriptionKey
+	FIELD l itemRenderer
+	FIELD m special
+	METHOD <init> (Ljava/lang/String;Ljava/lang/String;IILnone/amj;Lnone/tk;)V
+		ARG 0 key
+		ARG 1 name
+		ARG 2 column
+		ARG 3 row
+		ARG 4 displayItem
+		ARG 5 required
 	METHOD a itemRenderer (Lnone/tm;)Lnone/tk;
+	METHOD b setSpecial ()Lnone/tk;
+	METHOD e getNameComponent ()Lnone/ho;
+	METHOD f getDescription ()Ljava/lang/String;
+	METHOD g isSpecial ()Z
 CLASS none/tl net/minecraft/stats/Achievements
 	FIELD A blazeRod
 	FIELD B potion
@@ -2610,6 +2810,11 @@ CLASS none/tl net/minecraft/stats/Achievements
 	FIELD K fullBeacon
 	FIELD L exploreAllBiomes
 	FIELD M overpowered
+	FIELD a minColumn
+	FIELD b minRow
+	FIELD c maxColumn
+	FIELD d maxRow
+	FIELD e achievementList
 	FIELD f openInventory
 	FIELD g mineWood
 	FIELD h buildWorkBench
@@ -2637,6 +2842,7 @@ CLASS none/to net/minecraft/stats/StatItem
 	METHOD a getItem ()Lnone/alq;
 CLASS none/tq net/minecraft/stats/Stat
 	FIELD f isIndependent
+	METHOD e getNameComponent ()Lnone/ho;
 CLASS none/ty net/minecraft/stats/Stats
 	FIELD A animalsBred
 	FIELD B playerKills
@@ -2773,10 +2979,13 @@ CLASS none/uw net/minecraft/profiler/Profiler
 	METHOD a addSection (Ljava/lang/String;)V
 	METHOD b endSection ()V
 	METHOD c startSection (Ljava/lang/String;)V
+CLASS none/uy net/minecraft/util/IProgressBar
 CLASS none/va net/minecraft/block/IEnumBlockPropertyValue
 	METHOD l getName ()Ljava/lang/String;
 CLASS none/vb
 	METHOD b isNullOrEmpty (Ljava/lang/String;)Z
+CLASS none/vk net/minecraft/util/Weighted
+	FIELD a weight
 CLASS none/vq net/minecraft/inventory/IInventoryPlayer
 	METHOD a getSlot (I)Lnone/amj;
 	METHOD a removeFromSlot (II)Lnone/amj;
@@ -3005,7 +3214,7 @@ CLASS none/wv net/minecraft/entity/Entity
 		ARG 2 velocityZ
 	METHOD i applyCollisionWithEntity (Lnone/wv;)V
 	METHOD s_ onUpdate ()V
-	METHOD toString toString ()Ljava/lang/String;
+	METHOD toString ()Ljava/lang/String;
 CLASS none/xb net/minecraft/entity/EntityRegistry
 	FIELD a colorMap
 	FIELD b logger
@@ -3027,11 +3236,18 @@ CLASS none/xb net/minecraft/entity/EntityRegistry
 	METHOD a spawnEntity (Ljava/lang/String;Lnone/aqu;)Lnone/wv;
 		ARG 0 name
 CLASS none/xk net/minecraft/entity/EntityXPOrb
+	FIELD b age
+	FIELD d health
+	FIELD e experience
 	METHOD W checkEntityIsInWater ()Z
+	METHOD a roundExpToLevel (I)I
+		ARG 0 exp
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD f applyFireTickDamage (I)V
+	METHOD j getExperience ()I
+	METHOD l getLevels ()I
 	METHOD s_ onUpdate ()V
 CLASS none/xl
 	METHOD e onHitGround (FF)V
@@ -4128,6 +4344,7 @@ CLASS none/ajq net/minecraft/item/ItemArmorStand
 CLASS none/ajr net/minecraft/item/ItemAxe
 	METHOD a getMiningEfficiencyMultiplier (Lnone/amj;Lnone/atr;)F
 CLASS none/ajs net/minecraft/item/ItemBanner
+	METHOD a addCreativeStackTo (Lnone/alq;Lnone/akf;Ljava/util/List;)V
 	METHOD a doPlaceBlockAction (Lnone/amj;Lnone/ahd;Lnone/aqu;Lnone/dt;Lnone/ej;FFF)Z
 	METHOD c getCreativeGroups ()Lnone/akf;
 CLASS none/ajt net/minecraft/item/ItemBed
@@ -4135,6 +4352,7 @@ CLASS none/ajt net/minecraft/item/ItemBed
 CLASS none/aju net/minecraft/item/ItemBlock
 	FIELD a blockType
 	METHOD a toString ()Ljava/lang/String;
+	METHOD a addCreativeStackTo (Lnone/alq;Lnone/akf;Ljava/util/List;)V
 	METHOD a doPlaceBlockAction (Lnone/amj;Lnone/ahd;Lnone/aqu;Lnone/dt;Lnone/ej;FFF)Z
 	METHOD c getCreativeGroups ()Lnone/akf;
 	METHOD c setName (Ljava/lang/String;)Lnone/alq;
@@ -4159,6 +4377,7 @@ CLASS none/akb net/minecraft/item/ItemBucket
 CLASS none/akc net/minecraft/item/ItemCarrotOnAStick
 	METHOD a onRightClick (Lnone/amj;Lnone/aqu;Lnone/ahd;)Lnone/amj;
 CLASS none/akd net/minecraft/item/ItemCoal
+	METHOD a addCreativeStackTo (Lnone/alq;Lnone/akf;Ljava/util/List;)V
 	METHOD e_ toString (Lnone/amj;)Ljava/lang/String;
 CLASS none/ake net/minecraft/item/ItemMap
 CLASS none/akf net/minecraft/creativetab/CreativeTab
@@ -4175,19 +4394,66 @@ CLASS none/akf net/minecraft/creativetab/CreativeTab
 	FIELD k brewing
 	FIELD l materials
 	FIELD m inventory
+	FIELD n index
+	FIELD o id
 	FIELD p imageName
+	FIELD q scrollable
+	FIELD r showName
+	FIELD s enchantmentTypes
+	FIELD t iconStack
+	METHOD <init> (ILjava/lang/String;)V
+		ARG 0 index
+		ARG 1 id
+	METHOD a getIndex ()I
+	METHOD a setImageName (Ljava/lang/String;)Lnone/akf;
+		ARG 0 imageName
+	METHOD a addItemsTo (Ljava/util/List;)V
+		ARG 0 items
+	METHOD a addEnchantedBooksTo (Ljava/util/List;[Lnone/apg;)V
+		ARG 0 items
+		ARG 1 enchantmentTypes
+	METHOD a hasEnchantmentType (Lnone/apg;)Z
+		ARG 0 enchantmentType
+	METHOD a setEnchantmentTypes ([Lnone/apg;)Lnone/akf;
+		ARG 0 enchantmentTypes
+	METHOD b getId ()Ljava/lang/String;
+	METHOD c getUnlocalizedName ()Ljava/lang/String;
+	METHOD d getIconStack ()Lnone/amj;
+	METHOD e getIconItem ()Lnone/alq;
+	METHOD f getIconData ()I
+	METHOD g getImageName ()Ljava/lang/String;
+	METHOD h showName ()Z
+	METHOD i setShowName ()Lnone/akf;
+	METHOD j isScrollable ()Z
+	METHOD k setScrollable ()Lnone/akf;
+	METHOD l getColumn ()I
+	METHOD m isInFirstRow ()Z
+	METHOD n getEnchantmentTypes ()[Lnone/apg;
 CLASS none/akg net/minecraft/creativetab/BuildingBlocks
+	METHOD e getIconItem ()Lnone/alq;
 CLASS none/akh net/minecraft/creativetab/Brewing
+	METHOD e getIconItem ()Lnone/alq;
 CLASS none/aki net/minecraft/creativetab/Materials
+	METHOD e getIconItem ()Lnone/alq;
 CLASS none/akj net/minecraft/creativetab/Inventory
+	METHOD e getIconItem ()Lnone/alq;
 CLASS none/akk net/minecraft/creativetab/Decorations
+	METHOD e getIconItem ()Lnone/alq;
+	METHOD f getIconData ()I
 CLASS none/akl net/minecraft/creativetab/Redstone
+	METHOD e getIconItem ()Lnone/alq;
 CLASS none/akm net/minecraft/creativetab/Transportation
+	METHOD e getIconItem ()Lnone/alq;
 CLASS none/akn net/minecraft/creativetab/Misc
+	METHOD e getIconItem ()Lnone/alq;
 CLASS none/ako net/minecraft/creativetab/Search
+	METHOD e getIconItem ()Lnone/alq;
 CLASS none/akp net/minecraft/creative/Food
+	METHOD e getIconItem ()Lnone/alq;
 CLASS none/akq net/minecraft/creative/Tools
+	METHOD e getIconItem ()Lnone/alq;
 CLASS none/akr net/minecraft/creative/Combat
+	METHOD e getIconItem ()Lnone/alq;
 CLASS none/aks net/minecraft/item/ItemTool
 	FIELD a miningEfficiencyMultiplier
 	FIELD b itemMaterialTypes
@@ -4224,6 +4490,7 @@ CLASS none/akv net/minecraft/item/EnumDyeColor
 	METHOD e getMapColor ()Lnone/boh;
 	METHOD l getName ()Ljava/lang/String;
 CLASS none/akw net/minecraft/item/ItemDye
+	METHOD a addCreativeStackTo (Lnone/alq;Lnone/akf;Ljava/util/List;)V
 	METHOD a doPlaceBlockAction (Lnone/amj;Lnone/ahd;Lnone/aqu;Lnone/dt;Lnone/ej;FFF)Z
 	METHOD a doUseOnLivingEntityAction (Lnone/amj;Lnone/ahd;Lnone/xm;)Z
 	METHOD e_ toString (Lnone/amj;)Ljava/lang/String;
@@ -4235,6 +4502,8 @@ CLASS none/aky net/minecraft/item/ItemEgg
 CLASS none/akz net/minecraft/item/ItemMapEmpty
 	METHOD a onRightClick (Lnone/amj;Lnone/aqu;Lnone/ahd;)Lnone/amj;
 CLASS none/ala net/minecraft/item/ItemEnchantedBook
+	METHOD a addEnchantment (Lnone/amj;Lnone/apo;)V
+	METHOD a create (Lnone/apo;)Lnone/amj;
 CLASS none/alb net/minecraft/item/ItemEnderEye
 	METHOD a doPlaceBlockAction (Lnone/amj;Lnone/ahd;Lnone/aqu;Lnone/dt;Lnone/ej;FFF)Z
 	METHOD a onRightClick (Lnone/amj;Lnone/aqu;Lnone/ahd;)Lnone/amj;
@@ -4248,6 +4517,7 @@ CLASS none/alf net/minecraft/item/ItemFireworkCharge
 CLASS none/alg net/minecraft/item/ItemFireworks
 	METHOD a doPlaceBlockAction (Lnone/amj;Lnone/ahd;Lnone/aqu;Lnone/dt;Lnone/ej;FFF)Z
 CLASS none/alh net/minecraft/item/ItemFish
+	METHOD a addCreativeStackTo (Lnone/alq;Lnone/akf;Ljava/util/List;)V
 	METHOD e_ toString (Lnone/amj;)Ljava/lang/String;
 CLASS none/ali net/minecraft/item/EnumFishType
 	FIELD a COD
@@ -4264,6 +4534,7 @@ CLASS none/all net/minecraft/item/ItemFood
 	METHOD d getItemUseTimerDuration (Lnone/amj;)I
 	METHOD e getRightClickAction (Lnone/amj;)Lnone/ano;
 CLASS none/alm net/minecraft/item/ItemGoldenApple
+	METHOD a addCreativeStackTo (Lnone/alq;Lnone/akf;Ljava/util/List;)V
 CLASS none/aln net/minecraft/item/ItemPainting
 	METHOD a doPlaceBlockAction (Lnone/amj;Lnone/ahd;Lnone/aqu;Lnone/dt;Lnone/ej;FFF)Z
 CLASS none/alo net/minecraft/item/ItemHoe
@@ -4288,9 +4559,10 @@ CLASS none/alq net/minecraft/item/Item
 		ARG 2 registryItem
 	METHOD a setCreativeGroups (Lnone/akf;)Lnone/alq;
 		ARG 0 creativeGroups
-	METHOD a (Lnone/alq;Lnone/akf;Ljava/util/List;)V
+	METHOD a addCreativeStackTo (Lnone/alq;Lnone/akf;Ljava/util/List;)V
 		ARG 0 item
 		ARG 1 creativeGroups
+		ARG 2 items
 	METHOD a doPlaceBlockAction (Lnone/amj;Lnone/ahd;Lnone/aqu;Lnone/dt;Lnone/ej;FFF)Z
 		ARG 2 dimension
 		ARG 3 blockCoords
@@ -4353,10 +4625,14 @@ CLASS none/ami net/minecraft/item/ItemMaterialTypes
 CLASS none/amj net/minecraft/item/ItemStack
 	FIELD b count
 	FIELD d item
+	FIELD e nbt
 	FIELD f damage
+	METHOD A getRepairCost ()I
+	METHOD B getAttributeModifiers ()Lcom/google/common/collect/Multimap;
 	METHOD a splitStack (I)Lnone/amj;
 		ARG 0 splitAmount
 	METHOD a tryIncrementDamage (ILjava/util/Random;)Z
+	METHOD a addNbtTag (Ljava/lang/String;Lnone/gd;)V
 	METHOD a setItem (Lnone/alq;)V
 	METHOD a isMergeable (Lnone/amj;)Z
 	METHOD a nbtEquals (Lnone/amj;Lnone/amj;)Z
@@ -4373,8 +4649,11 @@ CLASS none/amj net/minecraft/item/ItemStack
 	METHOD b givesSpecialDropOnBlock (Lnone/atr;)Z
 	METHOD b writeTo (Lnone/fn;)Lnone/fn;
 	METHOD c getMaxStackSize ()I
+	METHOD c setRepairCost (I)V
+		ARG 0 repairCost
 	METHOD c readFrom (Lnone/fn;)V
 	METHOD d equals (Lnone/amj;)Z
+	METHOD d setNbt (Lnone/fn;)V
 	METHOD e isDamageable ()Z
 	METHOD g shouldDisplayDamageBar ()Z
 	METHOD h getDamage ()I
@@ -4606,6 +4885,7 @@ CLASS none/amu net/minecraft/item/ItemPickaxe
 CLASS none/amv net/minecraft/item/ItemBlockPiston
 	METHOD a getDataValueForBlockVersion (I)I
 CLASS none/amw net/minecraft/item/ItemPotion
+	METHOD a addCreativeStackTo (Lnone/alq;Lnone/akf;Ljava/util/List;)V
 	METHOD a onRightClick (Lnone/amj;Lnone/aqu;Lnone/ahd;)Lnone/amj;
 	METHOD b doSwallowAction (Lnone/amj;Lnone/aqu;Lnone/ahd;)Lnone/amj;
 	METHOD d getItemUseTimerDuration (Lnone/amj;)I
@@ -4636,6 +4916,7 @@ CLASS none/anf net/minecraft/item/ItemSign
 CLASS none/anh net/minecraft/item/ItemSkull
 	FIELD a skullType
 	METHOD a getDataValueForBlockVersion (I)I
+	METHOD a addCreativeStackTo (Lnone/alq;Lnone/akf;Ljava/util/List;)V
 	METHOD a doPlaceBlockAction (Lnone/amj;Lnone/ahd;Lnone/aqu;Lnone/dt;Lnone/ej;FFF)Z
 	METHOD e_ toString (Lnone/amj;)Ljava/lang/String;
 CLASS none/ani net/minecraft/item/ItemBlockSlab
@@ -4653,6 +4934,7 @@ CLASS none/anj net/minecraft/item/ItemBlockSnowLayer
 CLASS none/ank net/minecraft/item/ItemSnowball
 	METHOD a onRightClick (Lnone/amj;Lnone/aqu;Lnone/ahd;)Lnone/amj;
 CLASS none/anl net/minecraft/item/ItemSpawnEgg
+	METHOD a addCreativeStackTo (Lnone/alq;Lnone/akf;Ljava/util/List;)V
 	METHOD a doPlaceBlockAction (Lnone/amj;Lnone/ahd;Lnone/aqu;Lnone/dt;Lnone/ej;FFF)Z
 	METHOD a onRightClick (Lnone/amj;Lnone/aqu;Lnone/ahd;)Lnone/amj;
 CLASS none/anm net/minecraft/item/ItemSword
@@ -4685,17 +4967,27 @@ CLASS none/aop
 		ARG 0 craftingResult
 	METHOD b addShapelessRecipe (Lnone/amj;[Ljava/lang/Object;)V
 CLASS none/aoy net/minecraft/enchantment/EnchantmentPower
+	METHOD b getMaxLevel ()I
 CLASS none/aoz net/minecraft/enchantment/EnchantmentFlame
+	METHOD b getMaxLevel ()I
 CLASS none/apa net/minecraft/enchantment/EnchantmentInfinity
+	METHOD b getMaxLevel ()I
 CLASS none/apb net/minecraft/enchantment/EnchantmentPunch
+	METHOD b getMaxLevel ()I
 CLASS none/apc net/minecraft/enchantment/EnchantmentDamage
+	METHOD a getUnlocalizedName ()Ljava/lang/String;
+	METHOD b getMaxLevel ()I
 CLASS none/apd net/minecraft/enchantment/EnchantmentUnbreaking
+	METHOD b getMaxLevel ()I
 CLASS none/ape net/minecraft/enchantment/EnchantmentEfficiency
+	METHOD b getMaxLevel ()I
 CLASS none/apf net/minecraft/enchantment/Enchantment
 	FIELD A Lure
 	FIELD B id
+	FIELD C type
 	FIELD E EnchantmentMap
 	FIELD a EnchantmentArray
+	FIELD b enchantments
 	FIELD c Protection
 	FIELD d FireProtection
 	FIELD e FeatherFalling
@@ -4720,7 +5012,10 @@ CLASS none/apf net/minecraft/enchantment/Enchantment
 	FIELD x Flame
 	FIELD y Infinity
 	FIELD z LuckOfTheSea
+	METHOD a getUnlocalizedName ()Ljava/lang/String;
+	METHOD b getMaxLevel ()I
 	METHOD c getEnchantFromID (I)Lnone/apf;
+	METHOD d getEnchantmentWeight ()I
 CLASS none/apg net/minecraft/enchantment/EnumEnchantmentType
 	FIELD a All
 	FIELD b Armor
@@ -4751,19 +5046,37 @@ CLASS none/aph net/minecraft/enchantment/EnchantmentHelper
 	METHOD h getCurrentItemLureLevel (Lnone/xm;)I
 	METHOD i getCurrentItemLootingLevel (Lnone/xm;)I
 	METHOD j hasAquaAffinityArmor (Lnone/xm;)Z
+CLASS none/apo net/minecraft/enchantment/EnchantmentInstance
+	FIELD b enchantment
+	FIELD c level
+	METHOD <init> (Lnone/apf;I)V
+		ARG 0 enchantment
+		ARG 1 level
 CLASS none/app net/minecraft/enchantment/EnchantmentFireAspect
+	METHOD b getMaxLevel ()I
 CLASS none/apq net/minecraft/enchantment/EnchantmentLure
+	METHOD b getMaxLevel ()I
 CLASS none/apr net/minecraft/enchantment/EnchantmentKnockback
+	METHOD b getMaxLevel ()I
 CLASS none/aps net/minecraft/enchantment/EnchantmentLootBonus
+	METHOD b getMaxLevel ()I
 CLASS none/apt net/minecraft/enchantment/EnchantmentWaterBreathing
+	METHOD b getMaxLevel ()I
 CLASS none/apu net/minecraft/enchantment/EnchantmentProtection
+	FIELD E TYPES
+	METHOD a getUnlocalizedName ()Ljava/lang/String;
 	METHOD a getModifiedBlastDamage (Lnone/wv;D)D
 	METHOD a getModifiedFireDamage (Lnone/wv;I)I
 		ARG 1 fireDamage
+	METHOD b getMaxLevel ()I
 CLASS none/apv net/minecraft/enchantment/EnchantmentThorns
+	METHOD b getMaxLevel ()I
 CLASS none/apw net/minecraft/enchantment/EnchantmentSilkTouch
+	METHOD b getMaxLevel ()I
 CLASS none/apx net/minecraft/enchantment/EnchantmentDepthStrider
+	METHOD b getMaxLevel ()I
 CLASS none/apy net/minecraft/enchantment/EnchantmentAquaAffinity
+	METHOD b getMaxLevel ()I
 CLASS none/aqb net/minecraft/entity/IMerchant
 	METHOD b_ getRecipes (Lnone/ahd;)Lnone/aqd;
 CLASS none/aqc net/minecraft/village/MerchantRecipe
@@ -4776,6 +5089,7 @@ CLASS none/aqc net/minecraft/village/MerchantRecipe
 	METHOD a getItemToBuy ()Lnone/amj;
 	METHOD a incrementMaxTradeUsesOf (I)V
 	METHOD a readFromTags (Lnone/fn;)V
+		ARG 0 nbt
 	METHOD b getSecondItemToBuy ()Lnone/amj;
 	METHOD c hasSecondItemToBuy ()Z
 	METHOD d getItemToSell ()Lnone/amj;
@@ -5144,6 +5458,7 @@ CLASS none/asw net/minecraft/level/decorator/EndDecorator
 	METHOD a decorate (Lnone/arm;)V
 CLASS none/asy net/minecraft/block/BlockAir
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
+	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD b getHardness ()I
 	METHOD c isOpaque ()Z
 CLASS none/asz net/minecraft/block/BlockAnvil
@@ -5158,7 +5473,11 @@ CLASS none/atb net/minecraft/block/BlockBannerBase
 	FIELD a facing
 	FIELD b rotation
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
+	METHOD a onBreak (Lnone/aqu;Lnone/ahd;Lnone/dt;Lnone/bec;Lnone/bcm;)V
+	METHOD a (Lnone/aqu;Lnone/dt;)Lnone/brt;
+		ARG 0 level
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
+	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD c isOpaque ()Z
@@ -5172,6 +5491,7 @@ CLASS none/ate net/minecraft/block/BlockWallBanner
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 CLASS none/atf net/minecraft/block/BlockBarrier
+	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD b getHardness ()I
 	METHOD c isOpaque ()Z
 CLASS none/atg net/minecraft/block/BlockContainer
@@ -5187,6 +5507,7 @@ CLASS none/ath net/minecraft/block/BlockPressurePlate
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD d hasFullCubeHitbox ()Z
 	METHOD g canEmitPower ()Z
+	METHOD i getMobilityFlag ()I
 CLASS none/ati net/minecraft/block/BlockRailBase
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
@@ -5195,6 +5516,7 @@ CLASS none/ati net/minecraft/block/BlockRailBase
 	METHOD d hasFullCubeHitbox ()Z
 	METHOD d checkBlockIsRail (Lnone/aqu;Lnone/dt;)Z
 	METHOD d checkBlockIsRail (Lnone/bec;)Z
+	METHOD i getMobilityFlag ()I
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/atl net/minecraft/block/EnumRailShape
 	FIELD a NORTH_SOUTH
@@ -5223,6 +5545,7 @@ CLASS none/atp net/minecraft/block/BlockBed
 	FIELD a part
 	FIELD b occupied
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
+	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
@@ -5230,12 +5553,19 @@ CLASS none/atp net/minecraft/block/BlockBed
 	METHOD c isOpaque ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD i getMobilityFlag ()I
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/atq net/minecraft/block/EnumBedPart
 	FIELD a HEAD
 	FIELD b FOOT
 	METHOD l getName ()Ljava/lang/String;
 CLASS none/atr net/minecraft/block/Block
+	FIELD B minX
+	FIELD C minY
+	FIELD D minZ
+	FIELD E maxX
+	FIELD F maxY
+	FIELD G maxZ
 	FIELD H sound
 	FIELD J material
 	FIELD M blockState
@@ -5259,17 +5589,27 @@ CLASS none/atr net/minecraft/block/Block
 	FIELD q SOUND_SLIME
 	FIELD r isOpaque
 	FIELD u lightEmmisionLevel
-	FIELD v canClimbedOver
+	FIELD v canClimbOver
 	FIELD w hardness
 	FIELD x explosionResistance
+	FIELD y stats
 	METHOD <init> (Lnone/bof;)V
 		ARG 0 material
 	METHOD H getBlockName ()Ljava/lang/String;
+	METHOD I hasStats ()Z
+	METHOD J disableStats ()Lnone/atr;
 	METHOD K getCreativeGroup ()Lnone/akf;
 	METHOD P getBlockState ()Lnone/bec;
 	METHOD R registerBlocks ()V
 	METHOD a getTileName ()Ljava/lang/String;
 	METHOD a setLightEmmisionLevel (F)Lnone/atr;
+	METHOD a setBounds (FFFFFF)V
+		ARG 0 minX
+		ARG 1 minY
+		ARG 2 minZ
+		ARG 3 maxX
+		ARG 4 maxY
+		ARG 5 maxZ
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 		ARG 0 metadata
 	METHOD a registerBlock (ILjava/lang/String;Lnone/atr;)V
@@ -5287,7 +5627,7 @@ CLASS none/atr net/minecraft/block/Block
 	METHOD a getFromItemBlock (Lnone/alq;)Lnone/atr;
 	METHOD a (Lnone/aqu;)I
 		ARG 0 dimension
-	METHOD a (Lnone/aqu;Lnone/ahd;Lnone/dt;Lnone/bec;Lnone/bcm;)V
+	METHOD a onBreak (Lnone/aqu;Lnone/ahd;Lnone/dt;Lnone/bec;Lnone/bcm;)V
 		ARG 0 dimension
 		ARG 2 blockCoords
 	METHOD a (Lnone/aqu;Lnone/dt;)Lnone/brt;
@@ -5296,8 +5636,8 @@ CLASS none/atr net/minecraft/block/Block
 	METHOD a (Lnone/aqu;Lnone/dt;Lnone/ahd;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
-	METHOD a (Lnone/aqu;Lnone/dt;Lnone/amj;)V
-		ARG 0 dimension
+	METHOD a dropItem (Lnone/aqu;Lnone/dt;Lnone/amj;)V
+		ARG 0 level
 		ARG 1 blockCoords
 	METHOD a (Lnone/aqu;Lnone/dt;Lnone/aqo;)V
 		ARG 0 dimension
@@ -5305,9 +5645,10 @@ CLASS none/atr net/minecraft/block/Block
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 		ARG 0 dimension
 		ARG 1 blockCoords
-	METHOD a (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
-		ARG 0 dimension
+	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
+		ARG 0 level
 		ARG 1 blockCoords
+		ARG 3 chance
 	METHOD a (Lnone/aqu;Lnone/dt;Lnone/bec;II)Z
 		ARG 0 dimension
 		ARG 1 blockCoords
@@ -5394,13 +5735,13 @@ CLASS none/atr net/minecraft/block/Block
 		ARG 0 dimension
 		ARG 1 blockCoords
 	METHOD b (Lnone/aqu;Lnone/dt;I)V
-		ARG 0 dimension
+		ARG 0 level
 		ARG 1 blockCoords
 	METHOD b (Lnone/aqu;Lnone/dt;Lnone/bec;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
-	METHOD b (Lnone/aqu;Lnone/dt;Lnone/bec;I)V
-		ARG 0 dimension
+	METHOD b dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;I)V
+		ARG 0 level
 		ARG 1 blockCoords
 	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 		ARG 0 dimension
@@ -5452,8 +5793,10 @@ CLASS none/atr net/minecraft/block/Block
 	METHOD g getHardness (Lnone/aqu;Lnone/dt;)F
 		ARG 0 level
 		ARG 1 position
-	METHOD g (Lnone/bec;)Lnone/boh;
+	METHOD g getColor (Lnone/bec;)Lnone/boh;
 		ARG 0 blockState
+	METHOD i getMobilityFlag ()I
+	METHOD i getItemStack (Lnone/bec;)Lnone/amj;
 	METHOD j (Lnone/aqu;Lnone/dt;)I
 		ARG 0 rdimension
 		ARG 1 blockCoords
@@ -5532,7 +5875,7 @@ CLASS none/aty net/minecraft/block/Blocks
 	FIELD aC redstone_ore
 	FIELD aD lit_redstone_torch
 	FIELD aE unlit_redstone_torch
-	FIELD aF edstone_torch
+	FIELD aF redstone_torch
 	FIELD aG stone_button
 	FIELD aH snow_layer
 	FIELD aI ice
@@ -5713,12 +6056,22 @@ CLASS none/atz net/minecraft/block/IGrowable
 		ARG 2 blockCoords
 CLASS none/aua net/minecraft/block/BlockBookshelf
 	METHOD a getDropCount (Ljava/util/Random;)I
+		ARG 0 random
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
+		ARG 0 blockState
+		ARG 1 random
 CLASS none/aub net/minecraft/block/BlockBrewingStand
 	FIELD a hasBottle
+	FIELD b random
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
+		ARG 0 level
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
+		ARG 0 level
+	METHOD a (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/brt;Ljava/util/List;Lnone/wv;)V
+		ARG 0 level
+		ARG 1 blockPos
+		ARG 2 blockState
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getHardness ()I
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
@@ -5812,6 +6165,7 @@ CLASS none/aul net/minecraft/block/BlockCocoaBeans
 	FIELD a age
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
+	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
@@ -5823,6 +6177,7 @@ CLASS none/aun net/minecraft/block/BlockColored
 	FIELD a color
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD g getColor (Lnone/bec;)Lnone/boh;
 CLASS none/auo net/minecraft/block/BlockCommandBlock
 	FIELD a triggered
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
@@ -5852,6 +6207,7 @@ CLASS none/aus net/minecraft/block/BlockCraftingTable
 CLASS none/auu net/minecraft/block/BlockCrops
 	FIELD a age
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
+	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
@@ -5870,6 +6226,7 @@ CLASS none/auv net/minecraft/block/BlockDaylightDetector
 	METHOD d hasFullCubeHitbox ()Z
 	METHOD g canEmitPower ()Z
 CLASS none/auw net/minecraft/block/BlockDeadBush
+	METHOD a onBreak (Lnone/aqu;Lnone/ahd;Lnone/dt;Lnone/bec;Lnone/bcm;)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD f isBlockOverwrittenOnBlockPlacement (Lnone/aqu;Lnone/dt;)Z
 CLASS none/auy net/minecraft/block/BlockDetectorRail
@@ -5931,6 +6288,7 @@ CLASS none/avf net/minecraft/block/BlockDoor
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD i getMobilityFlag ()I
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/avg net/minecraft/block/EnumDoorPart
 	FIELD a UPPER
@@ -5944,6 +6302,7 @@ CLASS none/avi net/minecraft/block/BlockDoublePlant
 	FIELD a variant
 	FIELD b half
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
+	METHOD a onBreak (Lnone/aqu;Lnone/ahd;Lnone/dt;Lnone/bec;Lnone/bcm;)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
@@ -5984,6 +6343,7 @@ CLASS none/avp net/minecraft/block/BlockEndPortal
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD c isOpaque ()Z
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD g getColor (Lnone/bec;)Lnone/boh;
 CLASS none/avq net/minecraft/block/BlockEndPortalFrame
 	FIELD a facing
 	FIELD b eyeInserted
@@ -6057,6 +6417,7 @@ CLASS none/avx net/minecraft/block/BlockFire
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD g getColor (Lnone/bec;)Lnone/boh;
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/avy net/minecraft/block/BlockFlower
 	FIELD a type
@@ -6135,6 +6496,7 @@ CLASS none/awl net/minecraft/block/BlockGlass
 CLASS none/awm net/minecraft/block/BlockGlowstone
 	METHOD a getDropCount (Ljava/util/Random;)I
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
+	METHOD g getColor (Lnone/bec;)Lnone/boh;
 CLASS none/awn net/minecraft/block/BlockGrass
 	FIELD a snowy
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
@@ -6158,9 +6520,11 @@ CLASS none/awt net/minecraft/block/BlockTransparentCube
 	METHOD c isOpaque ()Z
 CLASS none/awu net/minecraft/block/BlockWoodenSlab
 CLASS none/awv net/minecraft/block/BlockHardenedClay
+	METHOD g getColor (Lnone/bec;)Lnone/boh;
 CLASS none/aww net/minecraft/block/BlockHayBlock
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD i getItemStack (Lnone/bec;)Lnone/amj;
 CLASS none/awx net/minecraft/block/BlockHopper
 	FIELD a facing
 	FIELD b enabled
@@ -6198,16 +6562,27 @@ CLASS none/axa net/minecraft/block/EnumHugeMushroomVariant
 	METHOD l getName ()Ljava/lang/String;
 CLASS none/axb net/minecraft/block/BlockIce
 	METHOD a getDropCount (Ljava/util/Random;)I
+	METHOD a onBreak (Lnone/aqu;Lnone/ahd;Lnone/dt;Lnone/bec;Lnone/bcm;)V
 	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD i getMobilityFlag ()I
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/axc net/minecraft/block/BlockJukebox
 	FIELD a hasRecord
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
+	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD b getHardness ()I
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 CLASS none/axd net/minecraft/blockentity/BlockEntityJukebox
+	FIELD a record
+	METHOD a getrecord ()Lnone/amj;
+	METHOD a setRecord (Lnone/amj;)V
+		ARG 0 record
+	METHOD a load (Lnone/fn;)V
+		ARG 0 nbt
+	METHOD b save (Lnone/fn;)V
+		ARG 0 nbt
 CLASS none/axe net/minecraft/block/BlockLadder
 	FIELD a facing
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
@@ -6222,6 +6597,7 @@ CLASS none/axg net/minecraft/block/BlockLeaves
 	FIELD a decayable
 	FIELD b checkDecay
 	METHOD a getDropCount (Ljava/util/Random;)I
+	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c isOpaque ()Z
@@ -6275,9 +6651,11 @@ CLASS none/axp net/minecraft/block/BlockMelon
 	METHOD a getDropCount (Ljava/util/Random;)I
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 CLASS none/axq net/minecraft/block/BlockCompressed
+	METHOD g getColor (Lnone/bec;)Lnone/boh;
 CLASS none/axr net/minecraft/block/BlockMobSpawner
 	METHOD a getDropCount (Ljava/util/Random;)I
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
+	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getHardness ()I
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
@@ -6287,7 +6665,9 @@ CLASS none/axs net/minecraft/block/BlockSilverfish
 	FIELD a variant
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getDropCount (Ljava/util/Random;)I
+	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD i getItemStack (Lnone/bec;)Lnone/amj;
 CLASS none/axu net/minecraft/block/EnumSilverfishVariant
 	FIELD a STONE
 	FIELD b COBBLESTONE
@@ -6305,24 +6685,30 @@ CLASS none/ayc net/minecraft/block/BlockMycelium
 	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 CLASS none/ayd net/minecraft/block/BlockNetherrack
+	METHOD g getColor (Lnone/bec;)Lnone/boh;
 CLASS none/aye net/minecraft/block/BlockNetherWart
 	FIELD a age
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getDropCount (Ljava/util/Random;)I
+	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 CLASS none/ayf net/minecraft/block/BlockNetherBrick
+	METHOD g getColor (Lnone/bec;)Lnone/boh;
 CLASS none/ayg net/minecraft/block/BlockLeaves2
 	FIELD P variant
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
+	METHOD a onBreak (Lnone/aqu;Lnone/ahd;Lnone/dt;Lnone/bec;Lnone/bcm;)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD i getItemStack (Lnone/bec;)Lnone/amj;
 CLASS none/ayh net/minecraft/block/BlockLeaves2WoodTypeValidPredicate
 CLASS none/ayi net/minecraft/block/BlockLog2
 	FIELD b variant
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD i getItemStack (Lnone/bec;)Lnone/amj;
 CLASS none/ayj net/minecraft/block/BlockLog2WoodTypeValidPredicate
 CLASS none/ayl net/minecraft/block/BlockStoneSlabNew
 	FIELD M variant
@@ -6341,18 +6727,23 @@ CLASS none/ayn net/minecraft/block/BlockNoteBlock
 	METHOD b getHardness ()I
 CLASS none/ayo net/minecraft/block/BlockObsidian
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
+	METHOD g getColor (Lnone/bec;)Lnone/boh;
 CLASS none/ayp net/minecraft/block/BlockOldLeaves
 	FIELD P variant
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
+	METHOD a onBreak (Lnone/aqu;Lnone/ahd;Lnone/dt;Lnone/bec;Lnone/bcm;)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD i getItemStack (Lnone/bec;)Lnone/amj;
 CLASS none/ayq net/minecraft/block/BlockOldLeavesWoodTypeValid
 CLASS none/ayr net/minecraft/block/BlockOldLog
 	FIELD b variant
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD i getItemStack (Lnone/bec;)Lnone/amj;
 CLASS none/ays net/minecraft/block/BlockOldLogWoodTypeValidPredicate
 CLASS none/ayu net/minecraft/block/BlockOre
 	METHOD a getDropCount (Ljava/util/Random;)I
+	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 CLASS none/ayv net/minecraft/block/BlockPackedIce
 	METHOD a getDropCount (Ljava/util/Random;)I
@@ -6383,6 +6774,7 @@ CLASS none/ayy net/minecraft/block/BlockNetherPortal
 	METHOD d hasFullCubeHitbox ()Z
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/aza net/minecraft/block/BlockPotatoes
+	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 CLASS none/azb net/minecraft/block/BlockRedstoneBlock
 	METHOD a getPowerEmittedFromLocationFacing (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
 	METHOD g canEmitPower ()Z
@@ -6417,6 +6809,8 @@ CLASS none/azl net/minecraft/block/BlockQuartzBlock
 	FIELD a variant
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD g getColor (Lnone/bec;)Lnone/boh;
+	METHOD i getItemStack (Lnone/bec;)Lnone/amj;
 CLASS none/azn net/minecraft/block/EnumQuartzBlockVariant
 	FIELD a DEFAULT
 	FIELD b CHISELED
@@ -6441,9 +6835,11 @@ CLASS none/azr net/minecraft/block/EnumRedSandstoneType
 	METHOD l getName ()Ljava/lang/String;
 CLASS none/azs net/minecraft/block/BlockRedstoneOre
 	METHOD a getDropCount (Ljava/util/Random;)I
+	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD i getItemStack (Lnone/bec;)Lnone/amj;
 CLASS none/azt net/minecraft/block/BlockRedstoneWire
 	FIELD M southConnection
 	FIELD N westConnection
@@ -6478,6 +6874,7 @@ CLASS none/azv net/minecraft/block/BlockRedstoneLamp
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD i getItemStack (Lnone/bec;)Lnone/amj;
 CLASS none/azw net/minecraft/block/BlockRedstoneTorch
 	FIELD M powered
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
@@ -6514,6 +6911,7 @@ CLASS none/bab net/minecraft/block/BlockSand
 	FIELD a variant
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD g getColor (Lnone/bec;)Lnone/boh;
 CLASS none/bac net/minecraft/block/EnumSandVariant
 	FIELD a SAND
 	FIELD b RED_SAND
@@ -6536,6 +6934,7 @@ CLASS none/baf net/minecraft/block/BlockSapling
 CLASS none/bah net/minecraft/block/BlockSeaLantern
 	METHOD a getDropCount (Ljava/util/Random;)I
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
+	METHOD g getColor (Lnone/bec;)Lnone/boh;
 CLASS none/bai net/minecraft/block/BlockSignBase
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
@@ -6550,6 +6949,7 @@ CLASS none/baj net/minecraft/block/BlockSkull
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
+	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD c isOpaque ()Z
@@ -6565,6 +6965,7 @@ CLASS none/bao net/minecraft/block/BlockSnowLayer
 	FIELD a layers
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getDropCount (Ljava/util/Random;)I
+	METHOD a onBreak (Lnone/aqu;Lnone/ahd;Lnone/dt;Lnone/bec;Lnone/bcm;)V
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
@@ -6588,6 +6989,7 @@ CLASS none/bar net/minecraft/block/BlockStainedGlass
 	METHOD a getDropCount (Ljava/util/Random;)I
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD g getColor (Lnone/bec;)Lnone/boh;
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/bas net/minecraft/block/BlockStainedGlassPane
 	FIELD a color
@@ -6605,6 +7007,7 @@ CLASS none/bat net/minecraft/block/BlockStairs
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD g getColor (Lnone/bec;)Lnone/boh;
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/bau
 	FIELD a TOP
@@ -6629,6 +7032,7 @@ CLASS none/bay net/minecraft/block/BlockPlantStem
 	FIELD a age
 	FIELD b facing
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
+	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
@@ -6679,6 +7083,7 @@ CLASS none/bbg net/minecraft/block/EnumStoneSlabVariant
 CLASS none/bbh net/minecraft/block/BlockTallGrass
 	FIELD a type
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
+	METHOD a onBreak (Lnone/aqu;Lnone/ahd;Lnone/dt;Lnone/bec;Lnone/bcm;)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD f isBlockOverwrittenOnBlockPlacement (Lnone/aqu;Lnone/dt;)Z
@@ -6776,6 +7181,7 @@ CLASS none/bbv net/minecraft/block/BlockVine
 	FIELD b north
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getDropCount (Ljava/util/Random;)I
+	METHOD a onBreak (Lnone/aqu;Lnone/ahd;Lnone/dt;Lnone/bec;Lnone/bcm;)V
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
@@ -6839,6 +7245,8 @@ CLASS none/bcg net/minecraft/block/BlockCarpet
 	METHOD d hasFullCubeHitbox ()Z
 CLASS none/bch net/minecraft/block/BlockYellowFlower
 CLASS none/bci net/minecraft/blockentity/BlockEntityBanner
+	METHOD a load (Lnone/fn;)V
+	METHOD b save (Lnone/fn;)V
 CLASS none/bcj
 	FIELD J BRICKS
 	FIELD K SKULL
@@ -6848,7 +7256,9 @@ CLASS none/bck net/minecraft/blockentity/BlockEntityBeacon
 	METHOD a getSlot (I)Lnone/amj;
 	METHOD a removeFromSlot (II)Lnone/amj;
 	METHOD a setSlotContent (ILnone/amj;)V
+	METHOD a load (Lnone/fn;)V
 	METHOD b getSlotContent (I)Lnone/amj;
+	METHOD b save (Lnone/fn;)V
 	METHOD c update ()V
 	METHOD l clear ()V
 	METHOD n_ getSize ()I
@@ -6862,6 +7272,8 @@ CLASS none/bcm net/minecraft/blockentity/BlockEntity
 	FIELD g classToIdRegistry
 	METHOD a register (Ljava/lang/Class;Ljava/lang/String;)V
 	METHOD a setDimension (Lnone/aqu;)V
+	METHOD a load (Lnone/fn;)V
+	METHOD b save (Lnone/fn;)V
 	METHOD o_ onInventoryChanged ()V
 	METHOD t checkHasDimension ()Z
 	METHOD u getBlockMetadata ()I
@@ -6869,12 +7281,16 @@ CLASS none/bcm net/minecraft/blockentity/BlockEntity
 	METHOD w getBlock ()Lnone/atr;
 	METHOD z getDimension ()Lnone/aqu;
 CLASS none/bcq net/minecraft/blockentity/BlockEntityCauldron
+	METHOD a load (Lnone/fn;)V
+	METHOD b save (Lnone/fn;)V
 	METHOD c update ()V
 CLASS none/bcr net/minecraft/blockentity/BlockEntityChest
 	METHOD a getSlot (I)Lnone/amj;
 	METHOD a removeFromSlot (II)Lnone/amj;
 	METHOD a setSlotContent (ILnone/amj;)V
+	METHOD a load (Lnone/fn;)V
 	METHOD b getSlotContent (I)Lnone/amj;
+	METHOD b save (Lnone/fn;)V
 	METHOD c update ()V
 	METHOD l clear ()V
 	METHOD n_ getSize ()I
@@ -6882,32 +7298,53 @@ CLASS none/bcr net/minecraft/blockentity/BlockEntityChest
 CLASS none/bct net/minecraft/blockentity/BlockEntityCommandBlock
 	CLASS bcu
 		METHOD e getEntityLevel ()Lnone/aqu;
+	METHOD a load (Lnone/fn;)V
+	METHOD b save (Lnone/fn;)V
 CLASS none/bcv net/minecraft/blockentity/BlockEntityComparator
+	METHOD a load (Lnone/fn;)V
+	METHOD b save (Lnone/fn;)V
 CLASS none/bcw net/minecraft/blockentity/BlockEntityDaylightDetector
 	METHOD c update ()V
-CLASS none/bcx net/minecraft/blockentity/BlockEntityTrap
+CLASS none/bcx net/minecraft/blockentity/BlockEntityDispenser
 	METHOD a getSlot (I)Lnone/amj;
 	METHOD a removeFromSlot (II)Lnone/amj;
 	METHOD a setSlotContent (ILnone/amj;)V
+	METHOD a load (Lnone/fn;)V
 	METHOD b getSlotContent (I)Lnone/amj;
+	METHOD b save (Lnone/fn;)V
 	METHOD l clear ()V
 	METHOD n_ getSize ()I
 	METHOD p_ getMaxStackSize ()I
 CLASS none/bcy net/minecraft/blockentity/BlockEntityDropper
 CLASS none/bcz net/minecraft/blockentity/BlockEntityEnchantmentTable
+	METHOD a load (Lnone/fn;)V
+	METHOD b save (Lnone/fn;)V
 	METHOD c update ()V
 CLASS none/bda net/minecraft/blockentity/BlockEntityEnderChest
 	METHOD c update ()V
 CLASS none/bdb net/minecraft/blockentity/BlockEntityFlowerPot
+	METHOD a load (Lnone/fn;)V
+	METHOD b save (Lnone/fn;)V
 CLASS none/bdc net/minecraft/blockentity/BlockEntityFurnace
+	METHOD a load (Lnone/fn;)V
+	METHOD b save (Lnone/fn;)V
 	METHOD c update ()V
 CLASS none/bde net/minecraft/blockentity/BlockEntityHopper
+	METHOD a load (Lnone/fn;)V
+	METHOD b save (Lnone/fn;)V
 	METHOD c update ()V
 	METHOD o_ onInventoryChanged ()V
+CLASS none/bdf
+	METHOD a load (Lnone/fn;)V
+	METHOD b save (Lnone/fn;)V
 CLASS none/bdg net/minecraft/blockentity/BlockEntityMobSpawner
+	METHOD a load (Lnone/fn;)V
 	METHOD b getSpawnerLogic ()Lnone/aqi;
+	METHOD b save (Lnone/fn;)V
 	METHOD c update ()V
-CLASS none/bdi net/minecraft/blockentity/BlockEntityMusic
+CLASS none/bdi net/minecraft/blockentity/BlockEntityNoteBlock
+	METHOD a load (Lnone/fn;)V
+	METHOD b save (Lnone/fn;)V
 CLASS none/bdj net/minecraft/blockentity/BlockEntitySign
 	CLASS bdk
 		METHOD a canCommandSenderUseCommand (ILjava/lang/String;)Z
@@ -6921,9 +7358,13 @@ CLASS none/bdj net/minecraft/blockentity/BlockEntitySign
 		METHOD e getEntityLevel ()Lnone/aqu;
 	FIELD a signText
 	FIELD f lineBeingEdited
+	METHOD a load (Lnone/fn;)V
 	METHOD a setEditable (Z)V
+	METHOD b save (Lnone/fn;)V
 CLASS none/bdm net/minecraft/blockentity/BlockEntitySkull
-CLASS none/bdn net/minecraft/blockentity/BlockEntityAirportal
+	METHOD a load (Lnone/fn;)V
+	METHOD b save (Lnone/fn;)V
+CLASS none/bdn net/minecraft/blockentity/BlockEntityEndPortal
 CLASS none/bdq net/minecraft/block/BlockPistonBase
 	FIELD a facing
 	FIELD b extended
@@ -6950,12 +7391,15 @@ CLASS none/bdu net/minecraft/block/EnumPistonType
 	FIELD b STICKY
 	METHOD l getName ()Ljava/lang/String;
 CLASS none/bdv net/minecraft/blockentity/BlockEntityPiston
+	METHOD a load (Lnone/fn;)V
+	METHOD b save (Lnone/fn;)V
 	METHOD c update ()V
 	METHOD u getBlockMetadata ()I
 CLASS none/bdx net/minecraft/block/BlockPistonMoving
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
+	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
@@ -6972,7 +7416,7 @@ CLASS none/bec net/minecraft/block/IBlockState
 		ARG 0 property
 	METHOD c getBlock ()Lnone/atr;
 CLASS none/bed
-	METHOD toString toString ()Ljava/lang/String;
+	METHOD toString ()Ljava/lang/String;
 CLASS none/beg
 	FIELD a block
 	FIELD b blockProperties
@@ -7835,11 +8279,18 @@ CLASS none/bnw net/minecraft/level/gen/noisegen/Simplex2dOctaves
 CLASS none/bnz net/minecraft/level/gen/noisegen/Simplex2d
 CLASS none/boa net/minecraft/level/gen/noisegen/NoiseGenAbstract
 CLASS none/boc net/minecraft/block/material/MaterialLogic
+	METHOD <init> (Lnone/boh;)V
+		ARG 0 color
 	METHOD c isSolidGround ()Z
 CLASS none/bod net/minecraft/block/material/MaterialGas
+	METHOD <init> (Lnone/boh;)V
+		ARG 0 color
 	METHOD c isSolidGround ()Z
 CLASS none/boe net/minecraft/block/material/MaterialLiquid
+	METHOD <init> (Lnone/boh;)V
+		ARG 0 color
 	METHOD c isSolidGround ()Z
+	METHOD d isLiquid ()Z
 CLASS none/bof net/minecraft/block/material/Material
 	FIELD A cactus
 	FIELD B glue
@@ -7883,17 +8334,26 @@ CLASS none/bof net/minecraft/block/material/Material
 	FIELD x packedIce
 	FIELD y snow
 	FIELD z packedSnow
+	METHOD <init> (Lnone/boh;)V
+		ARG 0 color
 	METHOD c isSolidGround ()Z
+	METHOD d isLiquid ()Z
 	METHOD f setRequiresTool ()Lnone/bof;
 	METHOD g setCanBurn ()Lnone/bof;
 	METHOD h canBurn ()Z
 	METHOD i setReplaceable ()Lnone/bof;
 	METHOD j isReplaceable ()Z
+	METHOD k isOpaque ()Z
 	METHOD l requiresNoTool ()Z
 	METHOD m getMobilityFlag ()I
+	METHOD n setNoPush ()Lnone/bof;
+	METHOD o setImmovable ()Lnone/bof;
+	METHOD p setAdventureModeExempt ()Lnone/bof;
 	METHOD r getMapColor ()Lnone/boh;
 	METHOD s setTranslucent ()Lnone/bof;
 CLASS none/bog net/minecraft/block/material/MaterialWeb
+	METHOD <init> (Lnone/boh;)V
+		ARG 0 color
 	METHOD c isSolidGround ()Z
 CLASS none/boh net/minecraft/block/Color
 	FIELD A BLUE
@@ -7934,6 +8394,8 @@ CLASS none/boh net/minecraft/block/Color
 	METHOD a returnColor (I)I
 		ARG 0 colorModifier
 CLASS none/boi net/minecraft/block/material/MaterialPortal
+	METHOD <init> (Lnone/boh;)V
+		ARG 0 color
 	METHOD c isSolidGround ()Z
 CLASS none/boy none/IntCache
 	FIELD a intCacheSize
@@ -7943,6 +8405,7 @@ CLASS none/boy none/IntCache
 	FIELD e inUseLargeArrays
 	METHOD a resetIntCache ()V
 	METHOD a getIntCache (I)[I
+	METHOD b getDebugInfo ()Ljava/lang/String;
 CLASS none/bqc net/minecraft/level/LevelSavedData
 CLASS none/bqd net/minecraft/util/Vec4b
 	METHOD a getFirst ()B
@@ -8118,12 +8581,46 @@ CLASS none/brt net/minecraft/util/AxisAlignedBB
 	FIELD d maxX
 	FIELD e maxY
 	FIELD f maxZ
+	METHOD <init> (DDDDDD)V
+		ARG 0 minX
+		ARG 1 minY
+		ARG 2 minZ
+		ARG 3 maxX
+		ARG 4 maxY
+		ARG 5 maxZ
+	METHOD <init> (Lnone/dt;Lnone/dt;)V
+		ARG 0 min
+		ARG 1 max
 	METHOD a moveBoundOutward (DDD)Lnone/brt;
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
 	METHOD a create (DDDDDD)Lnone/brt;
+		ARG 0 minX
+		ARG 1 minY
+		ARG 2 minZ
+		ARG 3 maxX
+		ARG 4 maxY
+		ARG 5 maxZ
 	METHOD a union (Lnone/brt;)Lnone/brt;
+		ARG 0 aabb
+	METHOD a (Lnone/brt;D)D
+		ARG 0 aabb
+	METHOD a contains (Lnone/brw;)Z
+		ARG 0 vec
 	METHOD b expand (DDD)Lnone/brt;
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
 	METHOD c shift (DDD)Lnone/brt;
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
 	METHOD d contract (DDD)Lnone/brt;
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD toString toString ()Ljava/lang/String;
 CLASS none/bru net/minecraft/level/HitAction
 	FIELD a hitType
 	FIELD b hitBlockFace
@@ -8189,7 +8686,9 @@ CLASS none/bsr net/minecraft/client/KeyBinding
 	FIELD g keyCode
 	METHOD a unpressAll ()V
 	METHOD b setKey (I)V
+		ARG 0 keyCode
 	METHOD c getCategories ()Ljava/util/Set;
+	METHOD compareTo compareTo (Lnone/bsr;)I
 	METHOD d hasChanged ()Z
 	METHOD e getCategory ()Ljava/lang/String;
 	METHOD f isBeingPressed ()Z
@@ -8201,6 +8700,19 @@ CLASS none/bss net/minecraft/client/render/RenderHelper
 	METHOD b enableStandardItemLighting ()V
 	METHOD c enableGUIStandardItemLighting ()V
 CLASS none/bst net/minecraft/client/GLAllocation
+	METHOD a genLists (I)I
+		ARG 0 count
+	METHOD a deleteLists (II)V
+		ARG 0 baseList
+		ARG 1 count
+	METHOD b deleteList (I)V
+		ARG 0 list
+	METHOD c allocateBytes (I)Ljava/nio/ByteBuffer;
+		ARG 0 capacity
+	METHOD f allocateInts (I)Ljava/nio/IntBuffer;
+		ARG 0 capacity
+	METHOD h allocateFloats (I)Ljava/nio/FloatBuffer;
+		ARG 0 capacity
 CLASS none/bsu net/minecraft/main/Minecraft
 	CLASS btc
 		METHOD a confirmClicked (ZI)V
@@ -8426,6 +8938,13 @@ CLASS none/btw net/minecraft/util/Session
 CLASS none/btx net/minecraft/util/AccountType
 	FIELD a MINECRAFT
 	FIELD b MOJANG
+	FIELD c ID_TO_TYPE
+	FIELD d id
+	METHOD <init> (Ljava/lang/String;ILjava/lang/String;)V
+		ARG 2 id
+	METHOD a fromId (Ljava/lang/String;)Lnone/btx;
+		ARG 0 id
+	METHOD values values ()[Lnone/btx;
 CLASS none/bty net/minecraft/client/render/FontRenderer
 	METHOD a getStringWidth (Ljava/lang/String;)I
 	METHOD a drawStringWithShadow (Ljava/lang/String;FFI)I
@@ -8523,9 +9042,12 @@ CLASS none/bup net/minecraft/client/gui/button/GuiButtonLanguage
 	METHOD a drawButton (Lnone/bsu;II)V
 CLASS none/bur net/minecraft/client/gui/button/bur
 	METHOD c mousePressed (Lnone/bsu;II)Z
-CLASS none/bus net/minecraft/client/gui/button/bus
+CLASS none/bus net/minecraft/client/gui/button/GuiButtonLock
+	FIELD o locked
 	METHOD a drawButton (Lnone/bsu;II)V
-CLASS none/but none/butEnum
+	METHOD b setLocked (Z)V
+	METHOD c isLocked ()Z
+CLASS none/but net/minecraft/client/gui/button/EnumLockButtonState
 	FIELD a LOCKED
 	FIELD b LOCKED_HOVER
 	FIELD c LOCKED_DISABLED
@@ -8618,7 +9140,7 @@ CLASS none/bwb net/minecraft/client/gui/GuiConnecting
 	METHOD b initGui ()V
 	METHOD e updateScreen ()V
 CLASS none/bwd net/minecraft/client/gui/screen/GuiCreateFlatWorld
-	CLASS bwe net/minecraft/client/gui/GuiCreateFlatWorldListSlot
+	CLASS bwe GuiCreateFlatWorldListSlot
 		METHOD a drawSlot (IIIIII)V
 	FIELD a guiCreateWorld
 	FIELD f flatGeneratorInfo
@@ -8953,6 +9475,7 @@ CLASS none/byz net/minecraft/client/gui/GuiContainerCreative
 		METHOD a isItemValid (Lnone/amj;)Z
 		METHOD d getStack ()Lnone/amj;
 		METHOD e getHasStack ()Z
+	FIELD w tabIndex
 	METHOD a keyTyped (CI)V
 	METHOD a drawGuiContainerBackgroundLayer (FII)V
 	METHOD a drawScreen (IIF)V
@@ -9340,6 +9863,7 @@ CLASS none/cel
 	METHOD d generate (II)Lnone/bfh;
 	METHOD g getLoadedChunkCount ()I
 CLASS none/cem net/minecraft/client/multiplayer/PlayerControllerMP
+	FIELD i gameMode
 	METHOD a windowClick (IIIILnone/ahd;)Lnone/amj;
 CLASS none/cen net/minecraft/client/multiplayer/LevelClient
 	METHOD a addLevelInfoToCrashReport (Lnone/b;)Lnone/j;
@@ -9437,7 +9961,7 @@ CLASS none/cgw net/minecraft/entity/EntityParticle
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD s_ onUpdate ()V
-	METHOD toString toString ()Ljava/lang/String;
+	METHOD toString ()Ljava/lang/String;
 CLASS none/cgx net/minecraft/client/render/EffectRenderer
 CLASS none/chc net/minecraft/client/particle/IParticleFactory
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
@@ -9933,7 +10457,7 @@ CLASS none/czy tv/twitch/EnumTwitchStatus
 	FIELD l STOPPING
 	FIELD m PAUSED
 	FIELD n INGEST_TESTING
-CLASS none/czz tw/twitch/czz
+CLASS none/czz tv/twitch/czz
 CLASS none/daa tv/twitch/ChatController
 CLASS none/dac net/minecraft/chat/dac
 CLASS none/dad none/dadEnum
@@ -9952,7 +10476,7 @@ CLASS none/dag none/dagEnum
 	FIELD b URL
 	FIELD c TEXTUREATLAS
 CLASS none/dah net/minecraft/chat/dah
-CLASS none/dai tv/twitch/ServerConnecter
+CLASS none/dai tv/twitch/ServerConnector
 CLASS none/dal tv/twitch/dal
 CLASS none/dam tv/twitch/dam
 CLASS none/dan tv/twitch/ConnectionStateEnum
@@ -10152,3 +10676,5 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD y onTick ()V
 	METHOD z updateTimeLightAndEntities ()V
 CLASS net/minecraft/server/MinecraftServer$pd net/minecraft/level/ConvertingProcessUpdate
+CLASS net/minecraft/client/ClientBrandRetriever net/minecraft/client/ClientBrandRetriever
+	METHOD getClientModName getClientModName ()Ljava/lang/String;
