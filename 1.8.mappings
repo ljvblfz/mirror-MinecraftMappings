@@ -287,7 +287,7 @@ CLASS none/z net/minecraft/command/CommandBase
 	METHOD c getEntityStrict (Lnone/ae;Ljava/lang/String;)Ljava/util/List;
 		ARG 0 sender
 		ARG 1 input
-	METHOD compareTo compareTo (Lnone/ac;)I
+	METHOD compareTo (Lnone/ac;)I
 		ARG 0 command
 	METHOD d getAsBoolean (Ljava/lang/String;)Z
 		ARG 0 s
@@ -405,43 +405,43 @@ CLASS none/ag net/minecraft/command/EnumResultStatsType
 		ARG 0 id
 	METHOD b getId ()Ljava/lang/String;
 	METHOD c getIds ()[Ljava/lang/String;
-	METHOD values values ()[Lnone/ag;
+	METHOD values ()[Lnone/ag;
 CLASS none/ah net/minecraft/command/EntitySelector
 	CLASS ai
-		METHOD apply apply (Lnone/wv;)Z
+		METHOD apply (Lnone/wv;)Z
 			ARG 0 entity
 	CLASS aj
-		METHOD apply apply (Lnone/wv;)Z
+		METHOD apply (Lnone/wv;)Z
 			ARG 0 entity
 	CLASS ak
-		METHOD apply apply (Lnone/wv;)Z
+		METHOD apply (Lnone/wv;)Z
 			ARG 0 entity
 	CLASS al
-		METHOD compare compare (Lnone/wv;Lnone/wv;)I
+		METHOD compare (Lnone/wv;Lnone/wv;)I
 			ARG 0 entity1
 			ARG 1 entity2
 	CLASS an
-		METHOD apply apply (Lnone/wv;)Z
+		METHOD apply (Lnone/wv;)Z
 			ARG 0 entity
 	CLASS ao
-		METHOD apply apply (Lnone/wv;)Z
+		METHOD apply (Lnone/wv;)Z
 			ARG 0 entity
 	CLASS ap
-		METHOD apply apply (Lnone/wv;)Z
+		METHOD apply (Lnone/wv;)Z
 			ARG 0 entity
 	CLASS aq
-		METHOD apply apply (Lnone/wv;)Z
+		METHOD apply (Lnone/wv;)Z
 			ARG 0 entity
 	CLASS ar
-		METHOD apply apply (Lnone/wv;)Z
+		METHOD apply (Lnone/wv;)Z
 			ARG 0 entity
 	CLASS as
 		FIELD c minimumRadiusSquared
 		FIELD e radiusSquared
-		METHOD apply apply (Lnone/wv;)Z
+		METHOD apply (Lnone/wv;)Z
 			ARG 0 entity
 	CLASS at
-		METHOD apply apply (Lnone/wv;)Z
+		METHOD apply (Lnone/wv;)Z
 			ARG 0 entity
 	FIELD a SELECTOR_PATTERN
 	FIELD b INT_LIST_PATTERN
@@ -526,7 +526,7 @@ CLASS none/ah net/minecraft/command/EntitySelector
 	METHOD h containsPosition (Ljava/util/Map;)Z
 		ARG 0 params
 CLASS none/am net/minecraft/util/EntityIsPlayerPredicate
-	METHOD apply apply (Lnone/wv;)Z
+	METHOD apply (Lnone/wv;)Z
 		ARG 0 entity
 CLASS none/au net/minecraft/command/CommandAchievement
 	METHOD a getPermissionLevel ()I
@@ -1199,6 +1199,10 @@ CLASS none/dy
 	FIELD b x
 	FIELD c y
 	FIELD d z
+	METHOD <init> (III)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
 	METHOD n getX ()I
 	METHOD o getY ()I
 	METHOD p getZ ()I
@@ -1206,7 +1210,7 @@ CLASS none/dz net/minecraft/dispenser/IBlockSource
 CLASS none/ea net/minecraft/block/BlockSourceImpl
 CLASS none/eb net/minecraft/util/Cartesian
 CLASS none/ec empty/_5
-CLASS none/eg net/minecraft/dispenser/BehaviorDefaultDispenseItem
+CLASS none/eg net/minecraft/dispenser/DispenseBehaviorDefault
 CLASS none/eh net/minecraft/util/RegistryNamedspaced
 	FIELD d defaultKey
 	FIELD e currentRegistryItem
@@ -1262,7 +1266,7 @@ CLASS none/en net/minecraft/block/EnumBlockPlacementDirection
 	FIELD b VERTICAL
 	METHOD a (Ljava/util/Random;)Lnone/ej;
 		ARG 0 random
-CLASS none/eo net/minecraft/dispenser/IBehaviorDispenseItem
+CLASS none/eo net/minecraft/dispenser/IDispenseBehavior
 CLASS none/eq net/minecraft/util/IObjectIntIterable
 CLASS none/er net/minecraft/util/ObjectIntIdentityMap
 	FIELD a identityHashMap
@@ -1803,7 +1807,7 @@ CLASS none/go net/minecraft/network/NettyEncryptionEncoder
 	FIELD a encryptionCodec
 	METHOD <init> (Ljavax/crypto/Cipher;)V
 		ARG 0 cipher
-	METHOD encode (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Lio/netty/buffer/ByteBuf;)V
+	METHOD encode encode (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Lio/netty/buffer/ByteBuf;)V
 		ARG 0 channelHandlerContext
 		ARG 1 byteBuf1
 		ARG 2 byteBuf2
@@ -1823,39 +1827,85 @@ CLASS none/gq net/minecraft/network/NettyCompressionEncoder
 	FIELD c threshold
 	METHOD a setCompressionThreshold (I)V
 CLASS none/gr net/minecraft/network/NetworkManager
+	CLASS gu
+		METHOD run run ()V
 	CLASS gv
-		METHOD initChannel (Lio/netty/channel/Channel;)V
+		METHOD initChannel initChannel (Lio/netty/channel/Channel;)V
+			ARG 0 channel
 	CLASS gw
-		METHOD initChannel (Lio/netty/channel/Channel;)V
+		METHOD initChannel initChannel (Lio/netty/channel/Channel;)V
 			ARG 0 channel
 	FIELD a markerNetwork
 	FIELD b markerNetworkPackets
 	FIELD c attributeKey
+	FIELD d clientEventLoopFactory
+	FIELD e localClientEventLoopFactory
 	FIELD f logger
+	FIELD g packetDirection
 	FIELD h queue
 	FIELD i channel
 	FIELD j socketAddress
-	FIELD k packetListener
-	METHOD a (Ljava/net/InetAddress;I)Lnone/gr;
+	FIELD k handler
+	FIELD l disconnectReason
+	FIELD m encrypted
+	FIELD n disconnected
+	METHOD <init> (Lnone/ie;)V
+		ARG 0 packetDirection
+	METHOD a update ()V
+	METHOD a setCompressionThreshold (I)V
+		ARG 0 compressionThreshold
+	METHOD a connect (Ljava/net/InetAddress;I)Lnone/gr;
 		ARG 0 inetAddress
-	METHOD a (Ljava/net/SocketAddress;)Lnone/gr;
+		ARG 1 port
+	METHOD a connect (Ljava/net/SocketAddress;)Lnone/gr;
 		ARG 0 socketAddress
-	METHOD a (Ljavax/crypto/SecretKey;)V
+	METHOD a setSecretKey (Ljavax/crypto/SecretKey;)V
 		ARG 0 secretKey
-	METHOD a (Lnone/id;Lio/netty/util/concurrent/GenericFutureListener;[Lio/netty/util/concurrent/GenericFutureListener;)V
-		ARG 1 genericFutureListener
-	METHOD channelActive (Lio/netty/channel/ChannelHandlerContext;)V
+	METHOD a setState (Lnone/gy;)V
+		ARG 0 state
+	METHOD a setNetHandler (Lnone/hg;)V
+		ARG 0 handler
+	METHOD a disconnect (Lnone/ho;)V
+		ARG 0 reason
+	METHOD a send (Lnone/id;)V
+		ARG 0 packet
+	METHOD a send (Lnone/id;Lio/netty/util/concurrent/GenericFutureListener;[Lio/netty/util/concurrent/GenericFutureListener;)V
+		ARG 0 packet
+		ARG 1 futureListener
+		ARG 2 futureListeners
+	METHOD a send (Lnone/id;[Lio/netty/util/concurrent/GenericFutureListener;)V
+		ARG 0 packet
+		ARG 1 futureListeners
+	METHOD b getSocketAddress ()Ljava/net/SocketAddress;
+	METHOD c isLocal ()Z
+	METHOD channelActive channelActive (Lio/netty/channel/ChannelHandlerContext;)V
 		ARG 0 channelHandlerContext
-	METHOD channelInactive (Lio/netty/channel/ChannelHandlerContext;)V
+	METHOD channelInactive channelInactive (Lio/netty/channel/ChannelHandlerContext;)V
 		ARG 0 channelHandlerContext
-	METHOD channelRead0 (Lio/netty/channel/ChannelHandlerContext;Lnone/id;)V
+	METHOD channelRead0 channelRead0 (Lio/netty/channel/ChannelHandlerContext;Lnone/id;)V
 		ARG 0 channelHandlerContext
-	METHOD exceptionCaught (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Throwable;)V
+	METHOD exceptionCaught exceptionCaught (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Throwable;)V
 		ARG 0 channelHandlerContext
-CLASS none/gs
-	METHOD b doInstanciate ()Ljava/lang/Object;
-CLASS none/gt net/minecraft/network/gt
-	METHOD b doInstanciate ()Ljava/lang/Object;
+	METHOD f isEncrypted ()Z
+	METHOD g isConnected ()Z
+	METHOD h isDisconnected ()Z
+	METHOD i getNetHandler ()Lnone/hg;
+	METHOD j getDisconnectReason ()Lnone/ho;
+	METHOD k disableAutoRead ()V
+	METHOD l processDisconnect ()V
+	METHOD m processSendQueue ()V
+CLASS none/gs net/minecraft/network/ClientEventLoopFactory
+	METHOD b createEventLoop ()Lio/netty/channel/nio/NioEventLoopGroup;
+	METHOD b createEventLoop ()Ljava/lang/Object;
+CLASS none/gt net/minecraft/network/LocalClientEventLoopFactory
+	METHOD b createEventLoop ()Lio/netty/channel/local/LocalEventLoopGroup;
+	METHOD b createEventLoop ()Ljava/lang/Object;
+CLASS none/gx net/minecraft/network/QueuedPacketWrite
+	FIELD a packet
+	FIELD b listeners
+	METHOD <init> (Lnone/id;[Lio/netty/util/concurrent/GenericFutureListener;)V
+		ARG 0 packet
+		ARG 1 listeners
 CLASS none/gy net/minecraft/network/EnumConnectionState
 	FIELD a Handshaking
 	FIELD b Play
@@ -1865,13 +1915,35 @@ CLASS none/gy net/minecraft/network/EnumConnectionState
 	FIELD f STATES_BY_CLASS
 	FIELD g id
 	FIELD h directionMaps
-	METHOD a addIdClassMapping (Lnone/ie;Ljava/lang/Class;)Lnone/gy;
+	METHOD <init> (Ljava/lang/String;II)V
+		ARG 0 name
+		ARG 1 ordinal
+		ARG 2 id
+	METHOD a getId ()I
+	METHOD a fromId (I)Lnone/gy;
+		ARG 0 id
+	METHOD a fromPacket (Lnone/id;)Lnone/gy;
+		ARG 0 packet
+	METHOD a createPacket (Lnone/ie;I)Lnone/id;
+		ARG 0 direction
+		ARG 1 id
+	METHOD a registerPacket (Lnone/ie;Ljava/lang/Class;)Lnone/gy;
+		ARG 0 direction
+		ARG 1 packetClass
+	METHOD a getPacketId (Lnone/ie;Lnone/id;)Ljava/lang/Integer;
+		ARG 0 direction
+		ARG 1 packet
+	METHOD values values ()[Lnone/gy;
+CLASS none/gz net/minecraft/network/EnumConnectionStateHandshake
 CLASS none/ha net/minecraft/network/Packet
 CLASS none/hd net/minecraft/network/PacketBuffer
 	FIELD a byteBuf
 	METHOD <init> (Lio/netty/buffer/ByteBuf;)V
 		ARG 0 byteBuf
+	METHOD a writeString (Ljava/lang/String;)Lnone/hd;
 	METHOD a write (Lnone/ho;)V
+	METHOD readInt readInt ()I
+	METHOD release release ()Z
 CLASS none/he net/minecraft/util/MessageDeserializer
 	FIELD a logger
 	FIELD b markerPacketReceived
@@ -1888,6 +1960,7 @@ CLASS none/hf net/minecraft/util/MessageSerializer
 		ARG 2 byteBuf
 CLASS none/hg net/minecraft/network/INetHandler
 	METHOD a onDisconnect (Lnone/ho;)V
+		ARG 0 reason
 CLASS none/hh net/minecraft/util/MessageDeserializer2
 	METHOD decode (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Ljava/util/List;)V
 		ARG 0 channelHandlerContext
@@ -2080,24 +2153,46 @@ CLASS none/hz net/minecraft/chat/TranslatableComponent
 	METHOD i getKey ()Ljava/lang/String;
 	METHOD j getArgs ()[Ljava/lang/Object;
 CLASS none/ia net/minecraft/util/ChatComponentTranslationFormatException
-CLASS none/id net/minecraft/network/IPacketBufferSerializable
+CLASS none/id net/minecraft/network/IPacket
 	METHOD a read (Lnone/hd;)V
 		ARG 0 packetBuffer
+	METHOD a handle (Lnone/hg;)V
+		ARG 0 handler
 	METHOD b write (Lnone/hd;)V
 		ARG 0 packetBuffer
 CLASS none/ie net/minecraft/network/EnumPacketDirection
 	FIELD a ServerBound
 	FIELD b ClientBound
 CLASS none/ig net/minecraft/network/PacketThreadUtil
+	CLASS ih
+		METHOD run run ()V
+	METHOD a ensureMainThread (Lnone/id;Lnone/hg;Lnone/vn;)V
+		ARG 0 packet
+		ARG 1 handler
+		ARG 2 queue
 CLASS none/ii net/minecraft/network/packet/clientbound/PacketPlayerPositionAndLook
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
-CLASS none/ij
+CLASS none/ij net/minecraft/network/EnumPositionComponent
 	FIELD a X
 	FIELD b Y
 	FIELD c Z
 	FIELD d YRotation
 	FIELD e XRotation
+	FIELD f bit
+	METHOD <init> (Ljava/lang/String;II)V
+		ARG 0 name
+		ARG 1 ordinal
+		ARG 2 bit
+	METHOD a getBitMask ()I
+	METHOD a getComponents (I)Ljava/util/Set;
+		ARG 0 flag
+	METHOD a getComponentsFlag (Ljava/util/Set;)I
+		ARG 0 components
+	METHOD b isSet (I)Z
+		ARG 0 flag
+	METHOD values values ()[Lnone/ij;
 CLASS none/ik net/minecraft/network/INetClientHandler
 	METHOD a handlePlayerpositionAndLook (Lnone/ii;)V
 		ARG 0 packet
@@ -2217,9 +2312,9 @@ CLASS none/ik net/minecraft/network/INetClientHandler
 		ARG 0 packet
 	METHOD a handleUpdateHealth (Lnone/lc;)V
 		ARG 0 packet
-	METHOD a handleScoreboardObjectives (Lnone/ld;)V
+	METHOD a handleUpdateObjective (Lnone/ld;)V
 		ARG 0 packet
-	METHOD a handleTeams (Lnone/le;)V
+	METHOD a handleUpdateTeam (Lnone/le;)V
 		ARG 0 packet
 	METHOD a handleUpdateScore (Lnone/lf;)V
 		ARG 0 packet
@@ -2247,88 +2342,138 @@ CLASS none/il net/minecraft/network/packet/clientbound/PacketSpawnObject
 	METHOD <init> (Lnone/wv;II)V
 		ARG 0 entity
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
+	METHOD b getX ()I
 	METHOD b write (Lnone/hd;)V
+	METHOD c getY ()I
+	METHOD d getZ ()I
+	METHOD e getVelocityX ()I
+	METHOD f getVelocityY ()I
+	METHOD g getVelocityZ ()I
+	METHOD j getType ()I
 CLASS none/im net/minecraft/network/packet/clientbound/PacketSpawnExperienceOrb
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
+	METHOD b getX ()I
 	METHOD b write (Lnone/hd;)V
+	METHOD c getY ()I
+	METHOD d getZ ()I
 CLASS none/in net/minecraft/network/packet/clientbound/PacketSpawnGlobal
 	METHOD <init> (Lnone/wv;)V
 		ARG 0 entity
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/io net/minecraft/network/packet/clientbound/PacketSpawnMob
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/ip net/minecraft/network/packet/clientbound/PacketSpawnPainting
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/iq net/minecraft/network/packet/clientbound/PacketSpawnPlayer
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/ir net/minecraft/network/packet/clientbound/PacketAnimation
 	METHOD <init> (Lnone/wv;I)V
 		ARG 0 entity
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/is net/minecraft/network/packet/clientbound/PacketStatistics
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/it net/minecraft/network/packet/clientbound/PacketBlockBreakAnimation
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/iu net/minecraft/network/packet/clientbound/PacketUpdateBlockEntity
 	FIELD c nbtMap
 	METHOD <init> (Lnone/dt;ILnone/fn;)V
 		ARG 2 nbtMap
+	METHOD a getPosition ()Lnone/dt;
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
+	METHOD b getUpdateType ()I
 	METHOD b write (Lnone/hd;)V
+	METHOD c getNbt ()Lnone/fn;
 CLASS none/iv net/minecraft/network/packet/clientbound/PacketBlockAction
 	FIELD d block
 	METHOD <init> (Lnone/dt;Lnone/atr;II)V
 		ARG 1 block
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 	METHOD d getBlock ()Lnone/atr;
 CLASS none/iw net/minecraft/network/packet/clientbound/PacketBlockChange
 	METHOD <init> (Lnone/aqu;Lnone/dt;)V
 		ARG 0 dimension
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/ix net/minecraft/network/packet/clientbound/PacketServerDifficulty
+	METHOD a isDifficultyLocked ()Z
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
+	METHOD b getDifficulty ()Lnone/vt;
 	METHOD b write (Lnone/hd;)V
 CLASS none/iy net/minecraft/network/packet/clientbound/PacketTabComplete
+	METHOD a getCompletions ()[Ljava/lang/String;
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/iz net/minecraft/network/packet/clientbound/PacketChatMessage
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/ja net/minecraft/network/packet/clientbound/PacketMultiBlockChange
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/jc net/minecraft/network/packet/clientbound/PacketConfirmTransaction
+	METHOD a getWindowId ()I
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
+	METHOD b getAction ()S
 	METHOD b write (Lnone/hd;)V
+	METHOD c isAccepted ()Z
 CLASS none/jd net/minecraft/network/packet/clientbound/PacketCloseWindow
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/je net/minecraft/network/packet/clientbound/PacketOpenWindow
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/jf net/minecraft/network/packet/clientbound/PacketWindowItems
+	METHOD a getWindowId ()I
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
+	METHOD b getItems ()[Lnone/amj;
 	METHOD b write (Lnone/hd;)V
-CLASS none/jg net/minecraft/network/packet/clientbound/PacketWindowProprety
+CLASS none/jg net/minecraft/network/packet/clientbound/PacketWindowProperty
+	METHOD a getWindowId ()I
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
+	METHOD b getPropertyId ()I
 	METHOD b write (Lnone/hd;)V
+	METHOD c getPropertyValue ()I
 CLASS none/jh net/minecraft/network/packet/clientbound/PacketSetSlot
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/ji net/minecraft/network/packet/clientbound/PacketPluginMessage
+	METHOD a getChannel ()Ljava/lang/String;
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
+	METHOD b getPayload ()Lnone/hd;
 	METHOD b write (Lnone/hd;)V
 CLASS none/jj net/minecraft/network/packet/clientbound/PacketDisconnect
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/jk net/minecraft/network/packet/clientbound/PacketEntityStatus
 	METHOD <init> (Lnone/wv;B)V
@@ -2336,100 +2481,158 @@ CLASS none/jk net/minecraft/network/packet/clientbound/PacketEntityStatus
 	METHOD a (Lnone/aqu;)Lnone/wv;
 		ARG 0 dimension
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/jl net/minecraft/network/packet/clientbound/PacketUpdateEntityNBT
 	FIELD b nbtMap
 	METHOD <init> (ILnone/fn;)V
 		ARG 1 nbtMap
-	METHOD a (Lnone/aqu;)Lnone/wv;
+	METHOD a getNbt ()Lnone/fn;
+	METHOD a getEntity (Lnone/aqu;)Lnone/wv;
 		ARG 0 dimension
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/jm net/minecraft/network/packet/clientbound/PacketExplosion
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/jn net/minecraft/network/packet/clientbound/PacketSetCompression
+	METHOD a getCompressionThreshold ()I
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/jo net/minecraft/network/packet/clientbound/PacketChangeGameState
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/jp net/minecraft/network/packet/clientbound/PacketKeepAlive
+	METHOD a getKeepAliveId ()I
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/jq net/minecraft/network/packet/clientbound/PacketChunkData
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/js net/minecraft/network/packet/clientbound/PacketMapChunkBulk
+	METHOD a getChunkCount ()I
+	METHOD a getX (I)I
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
+	METHOD b getY (I)I
 	METHOD b write (Lnone/hd;)V
 CLASS none/jt net/minecraft/network/packet/clientbound/PacketEffect
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/ju net/minecraft/network/packet/clientbound/PacketParticle
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/jv net/minecraft/network/packet/clientbound/PacketSoundEffect
+	METHOD a getEffect ()Ljava/lang/String;
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
+	METHOD b getX ()D
 	METHOD b write (Lnone/hd;)V
+	METHOD c getY ()D
+	METHOD d getZ ()D
+	METHOD e getVolume ()F
+	METHOD f getPitch ()F
 CLASS none/jw net/minecraft/network/packet/clientbound/PacketJoinGame
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
+	METHOD c getGameType ()Lnone/arc;
+	METHOD e getDifficulty ()Lnone/vt;
 CLASS none/jx net/minecraft/network/packet/clientbound/PacketMaps
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/jy net/minecraft/network/packet/clientbound/PacketEntity
 	METHOD a (Lnone/aqu;)Lnone/wv;
 		ARG 0 dimension
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/jz net/minecraft/network/packet/clientbound/PacketEntityRelativeMove
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/ka net/minecraft/network/packet/clientbound/PacketEntityLookAndRelativeMove
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/kb net/minecraft/network/packet/clientbound/PacketEntityLook
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/kc net/minecraft/network/packet/clientbound/PacketSignEditorOpen
+	METHOD a getPosition ()Lnone/dt;
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/kd net/minecraft/network/packet/clientbound/PacketPlayerAbilities
+	METHOD a isInvulnerable ()Z
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
+	METHOD b isFlying ()Z
 	METHOD b write (Lnone/hd;)V
+	METHOD c canFly ()Z
+	METHOD d canBuildInstantly ()Z
+	METHOD e getFlySpeed ()F
+	METHOD f getWalkSpeed ()F
 CLASS none/ke net/minecraft/network/packet/clientbound/PacketCombat
+	FIELD a state
+	FIELD b playerId
+	FIELD c entityId
+	FIELD d duration
+	FIELD e message
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
-CLASS none/kg
-	FIELD a EnterCombat
-	FIELD b EndCombat
-	FIELD c EntityDied
+CLASS none/kg net/minecraft/network/EnumCombatState
+	FIELD a ENTER_COMBAT
+	FIELD b END_COMBAT
+	FIELD c ENTITY_DIED
 CLASS none/kh net/minecraft/network/packet/clientbound/PacketPlayerListItem
+	METHOD a getEntries ()Ljava/util/List;
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
+	METHOD b getAction ()Lnone/kj;
 	METHOD b write (Lnone/hd;)V
-CLASS none/kj
-	FIELD a AddPlayer
-	FIELD b UpdateGameMode
-	FIELD c UpdateLatency
-	FIELD d UpdateDisplayName
-	FIELD e RemovePlayer
+CLASS none/kj net/minecraft/network/EnumPlayerListAction
+	FIELD a ADD_PLAYER
+	FIELD b UPDATE_GAME_MODE
+	FIELD c UPDATE_LATENCY
+	FIELD d UPDATE_DISPLAY_NAME
+	FIELD e REMOVE_PLAYER
 CLASS none/kl net/minecraft/network/packet/clientbound/PacketUseBed
 	METHOD a (Lnone/aqu;)Lnone/ahd;
 		ARG 0 dimension
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/km net/minecraft/network/packet/clientbound/PacketDestroyEntities
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/kn net/minecraft/network/packet/clientbound/PacketRemoveEntityEffect
+	METHOD a getEntityId ()I
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
+	METHOD b getEffect ()I
 	METHOD b write (Lnone/hd;)V
 CLASS none/ko net/minecraft/network/packet/clientbound/PacketResourcePackSend
+	METHOD a getURL ()Ljava/lang/String;
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
+	METHOD b getHash ()Ljava/lang/String;
 	METHOD b write (Lnone/hd;)V
 CLASS none/kp net/minecraft/network/packet/clientbound/PacketRespawn
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/kq net/minecraft/network/packet/clientbound/PacketEntityHeadLook
 	METHOD <init> (Lnone/wv;B)V
@@ -2437,9 +2640,12 @@ CLASS none/kq net/minecraft/network/packet/clientbound/PacketEntityHeadLook
 	METHOD a (Lnone/aqu;)Lnone/wv;
 		ARG 0 dimension
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/kr net/minecraft/network/packet/clientbound/PacketLevelBorder
+	METHOD a applyBorderUpdate (Lnone/bfb;)V
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/kt net/minecraft/level/EnumLevelBorderAction
 	FIELD a SET_SIZE
@@ -2451,88 +2657,147 @@ CLASS none/kt net/minecraft/level/EnumLevelBorderAction
 CLASS none/ku net/minecraft/network/packet/clientbound/PacketCamera
 	METHOD <init> (Lnone/wv;)V
 		ARG 0 entity
-	METHOD a (Lnone/aqu;)Lnone/wv;
+	METHOD a getEntity (Lnone/aqu;)Lnone/wv;
 		ARG 0 dimension
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/kv net/minecraft/network/packet/clientbound/PacketHeldItemChange
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/kw net/minecraft/network/packet/clientbound/PacketDisplayScoreboard
+	METHOD a getDisplaySlot ()I
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
+	METHOD b getObjective ()Ljava/lang/String;
 	METHOD b write (Lnone/hd;)V
 CLASS none/kx net/minecraft/network/packet/clientbound/PacketEntityMetadata
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/ky net/minecraft/network/packet/clientbound/PacketAttachEntity
 	METHOD <init> (ILnone/wv;Lnone/wv;)V
 		ARG 1 entity1
 		ARG 2 entity2
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/kz net/minecraft/network/packet/clientbound/PacketEntityVelocity
 	METHOD <init> (Lnone/wv;)V
 		ARG 0 entity
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/la net/minecraft/network/packet/clientbound/PacketEntityEquipment
+	METHOD a getItem ()Lnone/amj;
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
+	METHOD b getEntityId ()I
 	METHOD b write (Lnone/hd;)V
+	METHOD c getSlot ()I
 CLASS none/lb net/minecraft/network/packet/clientbound/PacketSetExperience
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/lc net/minecraft/network/packet/clientbound/PacketUpdateHealth
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
-CLASS none/ld net/minecraft/network/packet/clientbound/PacketScoreboardObjective
+CLASS none/ld net/minecraft/network/packet/clientbound/PacketUpdateObjective
+	METHOD a getName ()Ljava/lang/String;
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
+	METHOD b getDisplayName ()Ljava/lang/String;
 	METHOD b write (Lnone/hd;)V
-CLASS none/le net/minecraft/network/packet/clientbound/PacketTeams
+	METHOD c getAction ()I
+	METHOD d getType ()Lnone/bsl;
+CLASS none/le net/minecraft/network/packet/clientbound/PacketUpdateTeam
+	METHOD a getName ()Ljava/lang/String;
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
+	METHOD b getDisplayName ()Ljava/lang/String;
 	METHOD b write (Lnone/hd;)V
+	METHOD c getPrefix ()Ljava/lang/String;
+	METHOD d getSuffix ()Ljava/lang/String;
+	METHOD e getPlayers ()Ljava/util/Collection;
+	METHOD f getAction ()I
+	METHOD g getFriendlyFireFlag ()I
+	METHOD h getColor ()I
+	METHOD i getNameVisibility ()Ljava/lang/String;
 CLASS none/lf net/minecraft/network/packet/clientbound/PacketUpdateScore
+	METHOD a getPlayer ()Ljava/lang/String;
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
+	METHOD b getObjective ()Ljava/lang/String;
 	METHOD b write (Lnone/hd;)V
-CLASS none/lg
+	METHOD c getScore ()I
+	METHOD d getAction ()Lnone/lg;
+CLASS none/lg net/minecraft/network/EnumScoreUpdate
 	FIELD a Change
 	FIELD b Remove
 CLASS none/lh net/minecraft/network/packet/clientbound/PacketSpawnPosition
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/li net/minecraft/network/packet/clientbound/PacketUpdateTime
+	METHOD a getLevelAge ()J
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
+	METHOD b getTime ()J
 	METHOD b write (Lnone/hd;)V
 CLASS none/lj net/minecraft/network/packet/clientbound/PacketTitle
+	METHOD a getUpdateType ()Lnone/lk;
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
+	METHOD b getText ()Lnone/ho;
 	METHOD b write (Lnone/hd;)V
-CLASS none/lk
-	FIELD a Title
-	FIELD b Subtitle
-	FIELD c Times
-	FIELD d Clear
-	FIELD e Reset
+	METHOD c getFadeIn ()I
+	METHOD d getStay ()I
+	METHOD e getFadeOut ()I
+CLASS none/lk net/minecraft/network/EnumTitleUpdate
+	FIELD a TITLE
+	FIELD b SUBTITLE
+	FIELD c TIMES
+	FIELD d CLEAR
+	FIELD e RESET
+	METHOD a getValueNames ()[Ljava/lang/String;
+	METHOD a fromName (Ljava/lang/String;)Lnone/lk;
+		ARG 0 name
+	METHOD values values ()[Lnone/lk;
 CLASS none/ll net/minecraft/network/packet/clientbound/PacketUpdateSign
 	FIELD a dimension
 	METHOD <init> (Lnone/aqu;Lnone/dt;[Lnone/ho;)V
 		ARG 0 dimension
+	METHOD a getPosition ()Lnone/dt;
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
+	METHOD b getText ()[Lnone/ho;
 	METHOD b write (Lnone/hd;)V
 CLASS none/lm net/minecraft/network/packet/clientbound/PacketPlayerListHeaderFooter
+	METHOD a getHeader ()Lnone/ho;
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
+	METHOD b getFooter ()Lnone/ho;
 	METHOD b write (Lnone/hd;)V
 CLASS none/ln net/minecraft/network/packet/clientbound/PacketCollectItem
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/lo net/minecraft/network/packet/clientbound/PacketEntityTeleport
 	METHOD <init> (Lnone/wv;)V
 		ARG 0 entity
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/lp net/minecraft/network/packet/clientbound/PacketEntityPropreties
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/lr net/minecraft/network/packet/clientbound/PacketEntityEffect
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
+	METHOD b getEntityId ()I
 	METHOD b write (Lnone/hd;)V
 CLASS none/ls net/minecraft/network/INetServerHandler
 	METHOD a handleTabComplete (Lnone/lt;)V
@@ -2583,12 +2848,15 @@ CLASS none/ls net/minecraft/network/INetServerHandler
 		ARG 0 packet
 CLASS none/lt net/minecraft/network/packet/serverbound/PacketTabComplete
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/lu net/minecraft/network/packet/serverbound/PacketChat
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/lv net/minecraft/network/packet/serverbound/PacketClientStatus
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/lw none/EnumRespawnType
 	FIELD a PERFORM_RESPAWN
@@ -2597,21 +2865,27 @@ CLASS none/lw none/EnumRespawnType
 	FIELD d status
 CLASS none/lx net/minecraft/network/packet/serverbound/PacketClientSettings
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/ly net/minecraft/network/packet/serverbound/PacketConfirmTransaction
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/lz net/minecraft/network/packet/serverbound/PacketEnchantItem
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/ma net/minecraft/network/packet/serverbound/PacketClickWindow
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/mb net/minecraft/network/packet/serverbound/PacketCloseWindow
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/mc net/minecraft/network/packet/serverbound/PacketPluginMessage
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/md net/minecraft/network/packet/serverbound/PacketUseEntity
 	METHOD <init> (Lnone/wv;Lnone/brw;)V
@@ -2621,6 +2895,7 @@ CLASS none/md net/minecraft/network/packet/serverbound/PacketUseEntity
 	METHOD a (Lnone/aqu;)Lnone/wv;
 		ARG 0 dimension
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/me
 	FIELD a Interact
@@ -2628,24 +2903,31 @@ CLASS none/me
 	FIELD c InteractAt
 CLASS none/mf net/minecraft/network/packet/serverbound/PacketKeepAlive
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/mg net/minecraft/network/packet/serverbound/PacketPlayer
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/mh net/minecraft/network/packet/serverbound/PacketPlayerPosition
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/mi net/minecraft/network/packet/serverbound/PacketPlayerPositionAndLook
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/mj net/minecraft/network/packet/serverbound/PacketPlayerLook
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/mk net/minecraft/network/packet/serverbound/PacketPlayerAbilities
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/ml net/minecraft/network/packet/serverbound/PacketBlockDig
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/mm net/minecraft/network/EnumBreakType
 	FIELD a START_DESTROY_BLOCK
@@ -2661,6 +2943,7 @@ CLASS none/mn net/minecraft/network/packet/serverbound/PacketEntityAction
 	METHOD <init> (Lnone/wv;Lnone/mo;I)V
 		ARG 0 entity
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/mo net/minecraft/network/EnumMovementStatus
 	FIELD a START_SNEAKING
@@ -2673,34 +2956,42 @@ CLASS none/mo net/minecraft/network/EnumMovementStatus
 	FIELD h status
 CLASS none/mp net/minecraft/network/packet/serverbound/PacketPlayerInput
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/mq net/minecraft/network/packet/serverbound/PacketResourcePackStatus
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
-CLASS none/mr
+CLASS none/mr net/minecraft/network/EnumResourcePackStatus
 	FIELD a SuccessfullyLoaded
 	FIELD b Declined
 	FIELD c FailedDownload
 	FIELD d Accepted
 CLASS none/ms net/minecraft/network/packet/serverbound/PacketHeldItemChange
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/mt net/minecraft/network/packet/serverbound/PacketCreativeInventoryAction
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/mu net/minecraft/network/packet/serverbound/PacketUpdateSign
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/mv net/minecraft/network/packet/serverbound/PacketAnimation
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/mw net/minecraft/network/packet/serverbound/PacketSpectate
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD a (Lnone/qt;)Lnone/wv;
 		ARG 0 dimensionServer
 	METHOD b write (Lnone/hd;)V
 CLASS none/mx net/minecraft/network/packet/serverbound/PacketBlockPlace
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/mz net/minecraft/network/handshake/client/C00Handshake
 	FIELD a protocolVersion
@@ -2709,6 +3000,7 @@ CLASS none/mz net/minecraft/network/handshake/client/C00Handshake
 	FIELD d requestedState
 	METHOD a getRequestedState ()Lnone/gy;
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b getProtocolVersion ()I
 	METHOD b write (Lnone/hd;)V
 CLASS none/na net/minecraft/network/handshake/INetHandlerHandshakeServer
@@ -2721,6 +3013,7 @@ CLASS none/nc net/minecraft/network/login/INetHandlerLoginClient
 CLASS none/nd net/minecraft/network/login/server/S02PacketLoginSuccess
 	FIELD a profile
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD a processPacket (Lnone/nc;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/ne net/minecraft/network/login/server/S01PacketEncryptionRequest
@@ -2728,24 +3021,28 @@ CLASS none/ne net/minecraft/network/login/server/S01PacketEncryptionRequest
 	FIELD b publicKey
 	FIELD c buffer
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD a processPacket (Lnone/nc;)V
 	METHOD b getPublicKey ()Ljava/security/PublicKey;
 	METHOD b write (Lnone/hd;)V
 	METHOD c getBuffer ()[B
 CLASS none/nf net/minecraft/network/login/server/S03PacketEnableCompression
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD a processPacket (Lnone/nc;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/ng
 	FIELD a chatComponent
 	METHOD a getChatComponent ()Lnone/ho;
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/ni
 	FIELD a gameProfile
 	METHOD <init> (Lcom/mojang/authlib/GameProfile;)V
 		ARG 0 gameProfile
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/nj
 	METHOD <init> (Ljavax/crypto/SecretKey;Ljava/security/PublicKey;[B)V
@@ -2754,14 +3051,17 @@ CLASS none/nj
 	METHOD a (Ljava/security/PrivateKey;)Ljavax/crypto/SecretKey;
 		ARG 0 privateKey
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b (Ljava/security/PrivateKey;)[B
 		ARG 0 privateKey
 	METHOD b write (Lnone/hd;)V
 CLASS none/nn
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/no
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/nr
 	METHOD deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnone/nq;
@@ -2797,9 +3097,11 @@ CLASS none/nu
 		ARG 2 jsonSerializationContext
 CLASS none/nw
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/nx
 	METHOD a read (Lnone/hd;)V
+	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/oa net/minecraft/util/ResourceLocation
 	FIELD a modName
@@ -2809,30 +3111,56 @@ CLASS none/oa net/minecraft/util/ResourceLocation
 	METHOD a returnObjectName ()Ljava/lang/String;
 	METHOD b returnModName ()Ljava/lang/String;
 	METHOD toString returnFullObjectName ()Ljava/lang/String;
-CLASS none/od net/minecraft/stats/StatList
+CLASS none/od net/minecraft/bootstrap/Bootstrap
 	FIELD a printStream
+	FIELD b initialized
 	FIELD c logger
+	METHOD a isInitialized ()Z
+	METHOD a println (Ljava/lang/String;)V
+		ARG 0 x
+	METHOD b registerDispenseBehaviors ()V
 	METHOD c nopInit ()V
-CLASS none/oe
+	METHOD d setupDebug ()V
+CLASS none/oe net/minecraft/dispenser/DispenseBehaviorArrow
 	METHOD a (Lnone/aqu;Lnone/ex;)Lnone/aho;
 		ARG 0 dimension
-CLASS none/on
+CLASS none/of net/minecraft/dispenser/DispenseBehaviorFilledBucket
+CLASS none/og net/minecraft/dispenser/DispenseBehaviorEmptyBucket
+CLASS none/oh net/minecraft/dispenser/DispenseBehaviorFlintAndSteel
+CLASS none/oi net/minecraft/dispenser/DispenseBehaviorDye
+CLASS none/oj net/minecraft/dispenser/DispenseBehaviorTnt
+CLASS none/ok net/minecraft/dispenser/DispenseBehaviorSkull
+CLASS none/ol net/minecraft/dispenser/DispenseBehaviorPumpkin
+CLASS none/om net/minecraft/dispenser/DispenseBehaviorCommandBlock
+CLASS none/on net/minecraft/dispenser/DispenseBehaviorEgg
 	METHOD a (Lnone/aqu;Lnone/ex;)Lnone/aho;
 		ARG 0 dimension
-CLASS none/oo
+CLASS none/oo net/minecraft/dispenser/DispenseBehaviorSnowball
 	METHOD a (Lnone/aqu;Lnone/ex;)Lnone/aho;
 		ARG 0 dimension
-CLASS none/op
+CLASS none/op net/minecraft/dispenser/DispenseBehaviorExperienceBottle
 	METHOD a (Lnone/aqu;Lnone/ex;)Lnone/aho;
 		ARG 0 dimension
-CLASS none/oq
+CLASS none/oq net/minecraft/dispenser/DispenseBehaviorPotion
 	CLASS or
 		METHOD a (Lnone/aqu;Lnone/ex;)Lnone/aho;
 			ARG 0 dimension
-CLASS none/pc
+CLASS none/os net/minecraft/dispenser/DispenseBehaviorSpawnEgg
+CLASS none/ot net/minecraft/dispenser/DispenseBehaviorFireworks
+CLASS none/ou net/minecraft/dispenser/DispenseBehaviorFireCharge
+CLASS none/ov net/minecraft/dispenser/DispenseBehaviorBoat
+CLASS none/pc net/minecraft/util/StackInfoPrintStream
 	FIELD a logger
+	FIELD b prefix
 	METHOD <init> (Ljava/lang/String;Ljava/io/OutputStream;)V
+		ARG 0 prefix
 		ARG 1 outputStream
+	METHOD a printWithStackInfo (Ljava/lang/String;)V
+		ARG 0 x
+	METHOD println println (Ljava/lang/Object;)V
+		ARG 0 x
+	METHOD println println (Ljava/lang/String;)V
+		ARG 0 x
 CLASS none/pi net/minecraft/network/ThreadQuickExitException
 	FIELD a INSTANCE
 CLASS none/pk
@@ -2853,7 +3181,7 @@ CLASS none/pm net/minecraft/server/gui/IUpdatePlayerListBox
 CLASS none/qj net/minecraft/server/DemoLevelServer
 CLASS none/qk
 	METHOD <init> (Lnone/aqu;)V
-		ARG 0 dimension
+		ARG 0 level
 	METHOD a (Lnone/ahd;Lnone/aqu;Lnone/amj;)Z
 		ARG 1 dimension
 	METHOD a (Lnone/ahd;Lnone/aqu;Lnone/amj;Lnone/dt;Lnone/ej;FFF)Z
@@ -2898,9 +3226,10 @@ CLASS none/qq
 		ARG 0 dimensionServer
 CLASS none/qs
 	FIELD b logger
-	FIELD i dimensionServer
+	FIELD e provider
+	FIELD i level
 	METHOD <init> (Lnone/qt;Lnone/bfq;Lnone/bfe;)V
-		ARG 0 dimensionServer
+		ARG 0 level
 	METHOD a (Lnone/aqu;Ljava/lang/String;Lnone/dt;)Lnone/dt;
 		ARG 0 dimension
 	METHOD c loadChunk (II)Lnone/bfh;
@@ -2909,8 +3238,10 @@ CLASS none/qs
 CLASS none/qt net/minecraft/level/LevelServer
 	FIELD I minecraftServer
 	FIELD b theChunkProviderServer
+	METHOD a runTask (Ljava/lang/Runnable;)Lcom/google/common/util/concurrent/ListenableFuture;
 	METHOD a createExplosion (Lnone/wv;DDDFZZ)Lnone/aqo;
 	METHOD a saveAllChunks (ZLnone/uy;)V
+	METHOD aH isInMainThread ()Z
 	METHOD b getDimension ()Lnone/aqu;
 	METHOD c tick ()V
 	METHOD f areAllPlayersAsleep ()Z
@@ -2930,6 +3261,7 @@ CLASS none/qw net/minecraft/entity/player/EntityPlayerMP
 		ARG 2 block
 	METHOD a addXpLevels (I)V
 	METHOD a canUseCommand (ILjava/lang/String;)Z
+	METHOD a openSignEditor (Lnone/bdj;)V
 	METHOD a trySleepInBed (Lnone/dt;)Lnone/ahf;
 	METHOD a readFromNBT (Lnone/fn;)V
 		ARG 0 nbtMap
@@ -2961,7 +3293,7 @@ CLASS none/qw net/minecraft/entity/player/EntityPlayerMP
 	METHOD t sendPlayerAbilities ()V
 	METHOD v isSpectating ()Z
 CLASS none/qx
-	FIELD a dimension
+	FIELD a level
 	FIELD b player
 	FIELD c gameType
 	METHOD <init> (Lnone/aqu;)V
@@ -2970,8 +3302,12 @@ CLASS none/qx
 		ARG 1 dimension
 	METHOD a (Lnone/ahd;Lnone/aqu;Lnone/amj;Lnone/dt;Lnone/ej;FFF)Z
 		ARG 1 dimension
+	METHOD a (Lnone/arc;)V
+		ARG 0 gameType
 	METHOD a (Lnone/qt;)V
-		ARG 0 dimension
+		ARG 0 level
+	METHOD b (Lnone/arc;)V
+		ARG 0 gameType
 CLASS none/qy
 	FIELD a entity1
 	FIELD p logger
@@ -2988,16 +3324,20 @@ CLASS none/rb
 		ARG 0 minecraftServer
 	METHOD a processHandshake (Lnone/mz;)V
 CLASS none/rc net/minecraft/network/NetworkSystem
+	FIELD a serverEventLoopFactory
+	FIELD b localServerEventLoopFactory
 	FIELD d logger
 	FIELD e minecraftServer
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;)V
 		ARG 0 minecraftServer
 	METHOD b stopListening ()V
 	METHOD c networkTick ()V
-CLASS none/rd
-	METHOD b doInstanciate ()Ljava/lang/Object;
-CLASS none/re
-	METHOD b doInstanciate ()Ljava/lang/Object;
+CLASS none/rd net/minecraft/network/ServerEventLoopFactory
+	METHOD b createEventLoop ()Lio/netty/channel/nio/NioEventLoopGroup;
+	METHOD b createEventLoop ()Ljava/lang/Object;
+CLASS none/re net/minecraft/network/LocalServerEventLoopFactory
+	METHOD b createEventLoop ()Lio/netty/channel/local/LocalEventLoopGroup;
+	METHOD b createEventLoop ()Ljava/lang/Object;
 CLASS none/rj net/minecraft/network/NetServerHandler
 	FIELD c logger
 	FIELD d minecraftServer
@@ -3108,6 +3448,7 @@ CLASS none/tl net/minecraft/stats/Achievements
 	FIELD x diamondsToYou
 	FIELD y portal
 	FIELD z ghast
+	METHOD a initialize ()V
 CLASS none/tm net/minecraft/item/ItemRenderer
 CLASS none/to net/minecraft/stats/StatItem
 	FIELD a item
@@ -3149,16 +3490,17 @@ CLASS none/ty net/minecraft/stats/Stats
 	FIELD x damageTaken
 	FIELD y deaths
 	FIELD z mobKills
+	METHOD a initialize ()V
 CLASS none/uc net/minecraft/entity/EntitySet
 	FIELD a entityMap
 	FIELD b entitySet
 	METHOD a (Ljava/lang/Class;Z)Ljava/lang/Class;
 		ARG 1 flag
-CLASS none/up net/minecraft/util/LazyLoadBase
-	FIELD a wrapped
-	FIELD b isInitiated
-	METHOD b doInstanciate ()Ljava/lang/Object;
-	METHOD c instanciate ()Ljava/lang/Object;
+CLASS none/up net/minecraft/network/EventLoopFactory
+	FIELD a eventLoop
+	FIELD b isCreated
+	METHOD b createEventLoop ()Ljava/lang/Object;
+	METHOD c create ()Ljava/lang/Object;
 CLASS none/uv net/minecraft/util/MathHelper
 	FIELD a squareRootOfTwo
 	FIELD b sinLookupTable
@@ -3255,10 +3597,20 @@ CLASS none/uw net/minecraft/profiler/Profiler
 CLASS none/uy net/minecraft/util/IProgressBar
 CLASS none/va net/minecraft/block/IEnumBlockPropertyValue
 	METHOD l getName ()Ljava/lang/String;
-CLASS none/vb
+CLASS none/vb net/minecraft/util/StringUtil
+	FIELD a FORMATTING_PATTERN
+	METHOD a ticksToTimeString (I)Ljava/lang/String;
+		ARG 0 ticks
+	METHOD a stripFormatting (Ljava/lang/String;)Ljava/lang/String;
+		ARG 0 s
 	METHOD b isNullOrEmpty (Ljava/lang/String;)Z
+		ARG 0 s
 CLASS none/vk net/minecraft/util/Weighted
 	FIELD a weight
+CLASS none/vn net/minecraft/util/TaskQueue
+	METHOD a runTask (Ljava/lang/Runnable;)Lcom/google/common/util/concurrent/ListenableFuture;
+		ARG 0 task
+	METHOD aH isInMainThread ()Z
 CLASS none/vq net/minecraft/inventory/IInventoryPlayer
 	METHOD a getSlot (I)Lnone/amj;
 	METHOD a removeFromSlot (II)Lnone/amj;
@@ -3268,7 +3620,7 @@ CLASS none/vq net/minecraft/inventory/IInventoryPlayer
 	METHOD b getSlotContent (I)Lnone/amj;
 	METHOD l clear ()V
 	METHOD n_ getSize ()I
-	METHOD o_ onInventoryChanged ()V
+	METHOD o_ onChanged ()V
 	METHOD p_ getMaxStackSize ()I
 CLASS none/vt net/minecraft/level/EnumDifficulty
 	FIELD a PEACEFUL
@@ -3285,7 +3637,7 @@ CLASS none/wa
 	METHOD b getSlotContent (I)Lnone/amj;
 	METHOD l clear ()V
 	METHOD n_ getSize ()I
-	METHOD o_ onInventoryChanged ()V
+	METHOD o_ onChanged ()V
 	METHOD p_ getMaxStackSize ()I
 CLASS none/wb net/minecraft/profiler/PlayerUsageSnooper
 	METHOD a startSnooper ()V
@@ -3524,16 +3876,16 @@ CLASS none/xe net/minecraft/util/EntityPredicates
 	FIELD c HAS_PLAYER_INVENTORY
 	FIELD d NOT_SPECTATING
 CLASS none/xf net/minecraft/util/EntityAlivePredicate
-	METHOD apply apply (Lnone/wv;)Z
+	METHOD apply (Lnone/wv;)Z
 		ARG 0 entity
 CLASS none/xg net/minecraft/util/EntityNotRiddenPredicate
-	METHOD apply apply (Lnone/wv;)Z
+	METHOD apply (Lnone/wv;)Z
 		ARG 0 entity
 CLASS none/xh net/minecraft/util/EntityHasPlayerInventoryPredicate
-	METHOD apply apply (Lnone/wv;)Z
+	METHOD apply (Lnone/wv;)Z
 		ARG 0 entity
 CLASS none/xi net/minecraft/util/EntityNotSpectatingPredicate
-	METHOD apply apply (Lnone/wv;)Z
+	METHOD apply (Lnone/wv;)Z
 		ARG 0 entity
 CLASS none/xk net/minecraft/entity/EntityXPOrb
 	FIELD b age
@@ -3600,6 +3952,7 @@ CLASS none/xm net/minecraft/entity/EntityLiving
 	METHOD g heal (F)V
 	METHOD h setHealth (F)V
 	METHOD j getModifiedOxygenAfterConsumption (I)I
+	METHOD l removeEffect (I)V
 	METHOD p getEquipmentInSlot (I)Lnone/amj;
 	METHOD s_ onUpdate ()V
 CLASS none/xn net/minecraft/entity/EntityMobBase
@@ -4370,7 +4723,7 @@ CLASS none/ahb net/minecraft/entity/player/InventoryPlayer
 	METHOD m getTotalArmorValue ()I
 	METHOD n dropAllContent ()V
 	METHOD n_ getSize ()I
-	METHOD o_ onInventoryChanged ()V
+	METHOD o_ onChanged ()V
 	METHOD p getItemStack ()Lnone/amj;
 	METHOD p_ getMaxStackSize ()I
 CLASS none/ahd net/minecraft/entity/player/EntityPlayer
@@ -4381,6 +4734,7 @@ CLASS none/ahd net/minecraft/entity/player/EntityPlayer
 	FIELD bE fishingHook
 	FIELD bF profile
 	FIELD bg inventory
+	FIELD bh inventoryContainer
 	FIELD bi openContainer
 	FIELD bu inBed
 	FIELD by abilities
@@ -4399,6 +4753,7 @@ CLASS none/ahd net/minecraft/entity/player/EntityPlayer
 	METHOD a joinEntityItemWithLevel (Lnone/adw;)V
 	METHOD a dropItemStack (Lnone/amj;Z)Lnone/adw;
 	METHOD a dropItemStack (Lnone/amj;ZZ)Lnone/adw;
+	METHOD a openSignEditor (Lnone/bdj;)V
 	METHOD a trySleepInBed (Lnone/dt;)Lnone/ahf;
 		ARG 0 bedCoords
 	METHOD a readFromNBT (Lnone/fn;)V
@@ -4549,20 +4904,25 @@ CLASS none/ahz net/minecraft/entity/player/FoodStats
 CLASS none/aib net/minecraft/inventory/Container
 	FIELD c inventorySlots
 	FIELD d windowId
+	METHOD a setItems ([Lnone/amj;)V
+	METHOD b setProperty (II)V
 	METHOD b onContainerClosed (Lnone/ahd;)V
 	METHOD b canDragIntoSlot (Lnone/ajk;)Z
 CLASS none/aid
 	CLASS aie
-		METHOD o_ onInventoryChanged ()V
+		METHOD o_ onChanged ()V
 	CLASS aif
 		METHOD a isItemValid (Lnone/amj;)Z
+	METHOD b setProperty (II)V
 	METHOD b onContainerClosed (Lnone/ahd;)V
 CLASS none/aig
 	CLASS aih
 		METHOD a isItemValid (Lnone/amj;)Z
+	METHOD b setProperty (II)V
 CLASS none/aii
 	CLASS aij
 		METHOD a isItemValid (Lnone/amj;)Z
+	METHOD b setProperty (II)V
 CLASS none/aik
 	METHOD a isItemValid (Lnone/amj;)Z
 CLASS none/aim
@@ -4574,20 +4934,23 @@ CLASS none/ain
 	METHOD b getSlotContent (I)Lnone/amj;
 	METHOD l clear ()V
 	METHOD n_ getSize ()I
-	METHOD o_ onInventoryChanged ()V
+	METHOD o_ onChanged ()V
 	METHOD p_ getMaxStackSize ()I
 CLASS none/aio
 	METHOD b onContainerClosed (Lnone/ahd;)V
 CLASS none/aiq
 	CLASS air
-		METHOD o_ onInventoryChanged ()V
+		METHOD o_ onChanged ()V
 	CLASS ais
 		METHOD a isItemValid (Lnone/amj;)Z
 	CLASS ait
 		METHOD a isItemValid (Lnone/amj;)Z
+	METHOD b setProperty (II)V
 	METHOD b onContainerClosed (Lnone/ahd;)V
 CLASS none/aiu
 	METHOD a isItemValid (Lnone/amj;)Z
+CLASS none/aiv
+	METHOD b setProperty (II)V
 CLASS none/aiw
 	METHOD a isItemValid (Lnone/amj;)Z
 CLASS none/aix
@@ -4609,9 +4972,10 @@ CLASS none/aje
 	METHOD b getSlotContent (I)Lnone/amj;
 	METHOD l clear ()V
 	METHOD n_ getSize ()I
-	METHOD o_ onInventoryChanged ()V
+	METHOD o_ onChanged ()V
 	METHOD p_ getMaxStackSize ()I
 CLASS none/ajf net/minecraft/inventory/ContainerMerchant
+	METHOD b setProperty (II)V
 	METHOD b onContainerClosed (Lnone/ahd;)V
 	METHOD d setCurrentRecipeIndex (I)V
 CLASS none/ajg
@@ -4624,7 +4988,7 @@ CLASS none/aji
 	METHOD b getSlotContent (I)Lnone/amj;
 	METHOD l clear ()V
 	METHOD n_ getSize ()I
-	METHOD o_ onInventoryChanged ()V
+	METHOD o_ onChanged ()V
 	METHOD p_ getMaxStackSize ()I
 CLASS none/ajj
 	METHOD a isItemValid (Lnone/amj;)Z
@@ -5460,6 +5824,8 @@ CLASS none/aqu net/minecraft/level/Level
 	METHOD Q getGameRules ()Lnone/aqq;
 	METHOD Z getScoreboardManager ()Lnone/bsd;
 	METHOD a playSoundAtLocation (DDDLjava/lang/String;FF)V
+	METHOD a playSoundEffect (DDDLjava/lang/String;FFZ)V
+	METHOD a getEntity (I)Lnone/wv;
 	METHOD a getChunk (II)Lnone/bfh;
 	METHOD a checkBlockRangeIsInLevel (IIIIIIZ)Z
 		ARG 0 minLevelX
@@ -5500,6 +5866,7 @@ CLASS none/aqu net/minecraft/level/Level
 	METHOD a playSoundAtEntity (Lnone/wv;Ljava/lang/String;FF)V
 	METHOD a setAllowedSpawnTypes (ZZ)V
 	METHOD aa getDifficulty ()Lnone/vt;
+	METHOD af getLevelBorder ()Lnone/bfb;
 	METHOD b getDimension ()Lnone/aqu;
 	METHOD b getPlayers (Ljava/lang/Class;Lcom/google/common/base/Predicate;)Ljava/util/List;
 	METHOD b checkBlockRangeIsInLevel (Lnone/bjb;Z)Z
@@ -5507,6 +5874,7 @@ CLASS none/aqu net/minecraft/level/Level
 	METHOD b getBiomeAt (Lnone/dt;)Lnone/arm;
 		ARG 0 blockCoords
 	METHOD c tick ()V
+	METHOD c calculateCelestialAngle (F)F
 	METHOD c updateSurroundingBlocks (Lnone/dt;Lnone/atr;)V
 	METHOD c getPowerReceivedFromLocationFacing (Lnone/dt;Lnone/ej;)I
 	METHOD d hasAirAt (Lnone/dt;)Z
@@ -6590,6 +6958,7 @@ CLASS none/avd net/minecraft/block/EnumDirtVariant
 	FIELD c PODZOL
 	METHOD l getName ()Ljava/lang/String;
 CLASS none/ave net/minecraft/block/BlockDispenser
+	FIELD M DISPENSE_BEHAVIORS
 	FIELD a facing
 	FIELD b triggered
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
@@ -6739,12 +7108,15 @@ CLASS none/avx net/minecraft/block/BlockFire
 	METHOD a getDropCount (Ljava/util/Random;)I
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a registerBurnable (Lnone/atr;II)V
+		ARG 0 block
 	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c isOpaque ()Z
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
 	METHOD g getColor (Lnone/bec;)Lnone/boh;
+	METHOD j registerBurnables ()V
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/avy net/minecraft/block/BlockFlower
 	FIELD a type
@@ -7598,10 +7970,11 @@ CLASS none/bcm net/minecraft/blockentity/BlockEntity
 	FIELD f idToClassRegistry
 	FIELD g classToIdRegistry
 	METHOD a register (Ljava/lang/Class;Ljava/lang/String;)V
-	METHOD a setDimension (Lnone/aqu;)V
+	METHOD a setLevel (Lnone/aqu;)V
+	METHOD a setPosition (Lnone/dt;)V
 	METHOD a load (Lnone/fn;)V
 	METHOD b save (Lnone/fn;)V
-	METHOD o_ onInventoryChanged ()V
+	METHOD o_ onChanged ()V
 	METHOD t checkHasDimension ()Z
 	METHOD u getBlockMetadata ()I
 	METHOD v getBlockCoords ()Lnone/dt;
@@ -7662,7 +8035,7 @@ CLASS none/bde net/minecraft/blockentity/BlockEntityHopper
 	METHOD a load (Lnone/fn;)V
 	METHOD b save (Lnone/fn;)V
 	METHOD c update ()V
-	METHOD o_ onInventoryChanged ()V
+	METHOD o_ onChanged ()V
 CLASS none/bdf
 	METHOD a load (Lnone/fn;)V
 	METHOD b save (Lnone/fn;)V
@@ -7697,8 +8070,11 @@ CLASS none/bdj net/minecraft/blockentity/BlockEntitySign
 		METHOD t_ shouldReceiveCommandFeedback ()Z
 	FIELD a signText
 	FIELD f lineBeingEdited
+	FIELD g editable
 	METHOD a load (Lnone/fn;)V
 	METHOD a setEditable (Z)V
+		ARG 0 editable
+	METHOD b isEditable ()Z
 	METHOD b save (Lnone/fn;)V
 CLASS none/bdm net/minecraft/blockentity/BlockEntitySkull
 	METHOD a load (Lnone/fn;)V
@@ -8781,6 +9157,7 @@ CLASS none/bql
 	METHOD d setInitialized (Z)V
 	METHOD e getSpawnZ ()I
 	METHOD e setVersion (I)V
+	METHOD e setDifficultyLocked (Z)V
 	METHOD f getTime ()J
 	METHOD f setThunderTime (I)V
 	METHOD g getDayTime ()J
@@ -8863,6 +9240,7 @@ CLASS none/bqo net/minecraft/level/LevelInfo
 	METHOD a setLevelType (Lnone/are;)V
 	METHOD a setSpawnPoint (Lnone/dt;)V
 	METHOD a setDifficulty (Lnone/vt;)V
+		ARG 0 difficulty
 	METHOD a setThundering (Z)V
 	METHOD b getSeed ()J
 	METHOD b setBorderSizeLerpTarget (D)V
@@ -8881,6 +9259,8 @@ CLASS none/bqo net/minecraft/level/LevelInfo
 	METHOD e setBorderSafeZone (D)V
 	METHOD e setVersion (I)V
 	METHOD e setBorderSizeLerpTime (J)V
+	METHOD e setDifficultyLocked (Z)V
+		ARG 0 difficultyLocked
 	METHOD f getTime ()J
 	METHOD f setBorderDamagePerBlock (D)V
 	METHOD f setThunderTime (I)V
@@ -9090,7 +9470,7 @@ CLASS none/bsa net/minecraft/scoreboard/Score
 	METHOD f getManager ()Lnone/bsd;
 	METHOD g isLocked ()Z
 CLASS none/bsb net/minecraft/scoreboard/ScoreAlphabeticalComparator
-	METHOD compare compare (Lnone/bsa;Lnone/bsa;)I
+	METHOD compare (Lnone/bsa;Lnone/bsa;)I
 		ARG 0 score1
 		ARG 1 score2
 CLASS none/bsd net/minecraft/scoreboard/ScoreboardManager
@@ -9228,7 +9608,7 @@ CLASS none/bsg net/minecraft/scoreboard/team/EnumTeamVisibility
 	METHOD a getIds ()[Ljava/lang/String;
 	METHOD a fromId (Ljava/lang/String;)Lnone/bsg;
 		ARG 0 id
-	METHOD values values ()[Lnone/bsg;
+	METHOD values ()[Lnone/bsg;
 CLASS none/bsh net/minecraft/scoreboard/criteria/TeamSpecificCriteria
 	FIELD j name
 	METHOD <init> (Ljava/lang/String;Lnone/a;)V
@@ -9282,7 +9662,7 @@ CLASS none/bsl net/minecraft/scoreboard/EnumScoreType
 	METHOD a getId ()Ljava/lang/String;
 	METHOD a fromId (Ljava/lang/String;)Lnone/bsl;
 		ARG 0 id
-	METHOD values values ()[Lnone/bsl;
+	METHOD values ()[Lnone/bsl;
 CLASS none/bsm net/minecraft/scoreboard/criteria/StatCriteria
 	FIELD j stat
 	METHOD <init> (Lnone/tq;)V
@@ -9353,6 +9733,7 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	FIELD Z renderViewEntity
 	FIELD a isRunningOnMac
 	FIELD aG mcSessionService
+	FIELD aK thread
 	FIELD aN debugProfilerName
 	FIELD aa mcLogAgent
 	FIELD ab isGamePaused
@@ -9383,8 +9764,8 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	FIELD c playerController
 	FIELD d displayWidth
 	FIELD e displayHeight
-	FIELD f theLevel
-	FIELD h thePlayer
+	FIELD f level
+	FIELD h player
 	FIELD i pointedEntityLiving
 	FIELD j effectRenderer
 	FIELD k fontRenderer
@@ -9425,11 +9806,13 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	METHOD V getCurrentMusicType ()Lnone/cyy;
 	METHOD Y getMinecraftSessionService ()Lcom/mojang/authlib/minecraft/MinecraftSessionService;
 	METHOD a run ()V
+	METHOD a runTask (Ljava/lang/Runnable;)Lcom/google/common/util/concurrent/ListenableFuture;
 	METHOD a setCrashReporter (Lnone/b;)V
 	METHOD a displayGuiScreen (Lnone/bxf;)V
 	METHOD a setServerData (Lnone/cew;)V
 	METHOD a addServerStatsToSnooper (Lnone/wb;)V
 	METHOD a setViewEntity (Lnone/wv;)V
+	METHOD aH isInMainThread ()Z
 	METHOD aa getViewEntity ()Lnone/wv;
 	METHOD ac isSnooperEnabled ()Z
 	METHOD af getFontRenderer ()Lnone/cqh;
@@ -9482,6 +9865,7 @@ CLASS none/bto net/minecraft/client/settings/GameSettings
 	FIELD ah keyBindPlayerList
 	FIELD ai keyBindCommand
 	FIELD as keyBindHotbar
+	FIELD av difficulty
 	FIELD l chatVisibility
 	FIELD p chatOpacity
 	FIELD q snooperEnabled
@@ -9582,14 +9966,17 @@ CLASS none/btz net/minecraft/client/gui/GuiIngame
 	FIELD n updateCounter
 	FIELD s highlightingItemStack
 	FIELD u persistantChatGui2
+	METHOD a resetTitleTiming ()V
 	METHOD a renderGameOverlay (F)V
 	METHOD a renderVignette (FLnone/buf;)V
 	METHOD a setRecordPlayingMessage (Ljava/lang/String;)V
+	METHOD a updateTitle (Ljava/lang/String;Ljava/lang/String;III)V
 	METHOD c updateTick ()V
 	METHOD d getChatGUI ()Lnone/buh;
 	METHOD e getUpdateCounter ()I
 	METHOD f getFontRenderer ()Lnone/bty;
 	METHOD g getChatGui ()Lnone/bvo;
+	METHOD h getPlayerList ()Lnone/bvh;
 	METHOD i renderBossHealth ()V
 CLASS none/bub net/minecraft/client/gui/Gui
 	FIELD b optionsBackground
@@ -9683,6 +10070,8 @@ CLASS none/buy
 	FIELD a mc
 CLASS none/bvh net/minecraft/client/gui/bvh
 	FIELD f mc
+	METHOD a setFooter (Lnone/ho;)V
+	METHOD b setHeader (Lnone/ho;)V
 CLASS none/bvk
 	FIELD a mc
 	METHOD a drawSlot (IIIIII)V
@@ -10397,85 +10786,159 @@ CLASS none/cec
 	METHOD a handleEncryptionRequest (Lnone/nf;)V
 	METHOD a handleDisconnect (Lnone/ng;)V
 CLASS none/cee net/minecraft/network/NetClientHandler
+	CLASS cef
+		METHOD onFailure onFailure (Ljava/lang/Throwable;)V
+			ARG 0 t
+		METHOD onSuccess onSuccess (Ljava/lang/Object;)V
+			ARG 0 o
+	CLASS ceg
+		METHOD onFailure onFailure (Ljava/lang/Throwable;)V
+			ARG 0 t
+		METHOD onSuccess onSuccess (Ljava/lang/Object;)V
+			ARG 0 o
+	CLASS ceh
+		METHOD run run ()V
+	FIELD b logger
+	FIELD c manager
+	FIELD d profile
+	FIELD f minecraft
+	FIELD g level
+	METHOD <init> (Lnone/bsu;Lnone/bxf;Lnone/gr;Lcom/mojang/authlib/GameProfile;)V
+		ARG 0 minecraft
 	METHOD a addToSendQueue (Lnone/id;)V
 	METHOD a handlePlayerpositionAndLook (Lnone/ii;)V
 	METHOD a handleSpawnObject (Lnone/il;)V
+		ARG 0 packet
 	METHOD a handleSpawnExperienceOrb (Lnone/im;)V
 	METHOD a handleSpawnGlobal (Lnone/in;)V
+		ARG 0 packet
 	METHOD a handleSpawnMob (Lnone/io;)V
 	METHOD a handleSpawnPainting (Lnone/ip;)V
+		ARG 0 packet
 	METHOD a handleSpawnPlayer (Lnone/iq;)V
 	METHOD a handleAnimation (Lnone/ir;)V
 	METHOD a handleStatistics (Lnone/is;)V
+		ARG 0 packet
 	METHOD a handleBlockBreakAnimation (Lnone/it;)V
+		ARG 0 packet
 	METHOD a handleUpdateBlockEntity (Lnone/iu;)V
+		ARG 0 packet
 	METHOD a handleBlockAction (Lnone/iv;)V
+		ARG 0 packet
 	METHOD a handleBlockChange (Lnone/iw;)V
 	METHOD a handleServerDifficuilty (Lnone/ix;)V
+		ARG 0 packet
 	METHOD a handleTabComplete (Lnone/iy;)V
+		ARG 0 packet
 	METHOD a handleChatMessage (Lnone/iz;)V
 	METHOD a handleMultiBlockChange (Lnone/ja;)V
 	METHOD a handleConfirmTransaction (Lnone/jc;)V
+		ARG 0 packet
 	METHOD a handleCloseWindow (Lnone/jd;)V
+		ARG 0 packet
 	METHOD a handleOpenWindow (Lnone/je;)V
+		ARG 0 packet
 	METHOD a handleWindowItems (Lnone/jf;)V
+		ARG 0 packet
 	METHOD a handleWindowProperty (Lnone/jg;)V
+		ARG 0 packet
 	METHOD a handleSetSlot (Lnone/jh;)V
+		ARG 0 packet
 	METHOD a handlePluginMessage (Lnone/ji;)V
+		ARG 0 packet
 	METHOD a handleDisconnect (Lnone/jj;)V
 	METHOD a handleEntityStatus (Lnone/jk;)V
+		ARG 0 packet
 	METHOD a handleUpdateEntityNBT (Lnone/jl;)V
+		ARG 0 packet
 	METHOD a handleExplosion (Lnone/jm;)V
+		ARG 0 packet
 	METHOD a handleSetCompression (Lnone/jn;)V
+		ARG 0 packet
 	METHOD a handleChangeGameState (Lnone/jo;)V
+		ARG 0 packet
 	METHOD a handleKeepAlive (Lnone/jp;)V
+		ARG 0 packet
 	METHOD a handleChunkData (Lnone/jq;)V
 	METHOD a handleMapChunkBulk (Lnone/js;)V
+		ARG 0 packet
 	METHOD a handleEffect (Lnone/jt;)V
+		ARG 0 packet
 	METHOD a handleParticle (Lnone/ju;)V
 	METHOD a handleSoundEffect (Lnone/jv;)V
+		ARG 0 packet
 	METHOD a handleJoinGame (Lnone/jw;)V
+		ARG 0 packet
 	METHOD a handleMaps (Lnone/jx;)V
+		ARG 0 packet
 	METHOD a handleEntity (Lnone/jy;)V
 	METHOD a handleSignEditorOpen (Lnone/kc;)V
+		ARG 0 packet
 	METHOD a handlePlayerAbilities (Lnone/kd;)V
+		ARG 0 packet
 	METHOD a handleCombat (Lnone/ke;)V
+		ARG 0 packet
 	METHOD a handleListItem (Lnone/kh;)V
+		ARG 0 packet
 	METHOD a handleUseBed (Lnone/kl;)V
 	METHOD a handleDestroyEntities (Lnone/km;)V
 	METHOD a handleRemoveEntityEffect (Lnone/kn;)V
+		ARG 0 packet
 	METHOD a handleResourcePackSend (Lnone/ko;)V
+		ARG 0 packet
 	METHOD a handleRespawn (Lnone/kp;)V
+		ARG 0 packet
 	METHOD a handleEntityHeadLook (Lnone/kq;)V
 	METHOD a handleLevelBorder (Lnone/kr;)V
+		ARG 0 packet
 	METHOD a handleCamera (Lnone/ku;)V
+		ARG 0 packet
 	METHOD a handleHeldItemChange (Lnone/kv;)V
 	METHOD a handleDisplayScoreboard (Lnone/kw;)V
+		ARG 0 packet
 	METHOD a handleEntityMetadata (Lnone/kx;)V
 	METHOD a handleAttachEntity (Lnone/ky;)V
+		ARG 0 packet
 	METHOD a handleEntityVelocity (Lnone/kz;)V
+		ARG 0 packet
 	METHOD a handleEntityEquipment (Lnone/la;)V
+		ARG 0 packet
 	METHOD a handleSetExperience (Lnone/lb;)V
+		ARG 0 packet
 	METHOD a handleUpdateHealth (Lnone/lc;)V
-	METHOD a handleScoreboardObjectives (Lnone/ld;)V
-	METHOD a handleTeams (Lnone/le;)V
+		ARG 0 packet
+	METHOD a handleUpdateObjective (Lnone/ld;)V
+		ARG 0 packet
+	METHOD a handleUpdateTeam (Lnone/le;)V
+		ARG 0 packet
 	METHOD a handleUpdateScore (Lnone/lf;)V
+		ARG 0 packet
 	METHOD a handleSpawnPosition (Lnone/lh;)V
 	METHOD a handleUpdateTime (Lnone/li;)V
+		ARG 0 packet
 	METHOD a handleTitle (Lnone/lj;)V
+		ARG 0 packet
 	METHOD a handleUpdateSign (Lnone/ll;)V
+		ARG 0 packet
 	METHOD a handlePlayerListHeaderFooter (Lnone/lm;)V
+		ARG 0 packet
 	METHOD a handleCollectItem (Lnone/ln;)V
 	METHOD a handleEntityTeleport (Lnone/lo;)V
 	METHOD a handleEntityProperties (Lnone/lp;)V
 	METHOD a handleEntityEffect (Lnone/lr;)V
+		ARG 0 packet
+CLASS none/cek net/minecraft/network/EnumTitleUpdateSwitch
+	FIELD a indices
 CLASS none/cel
 	METHOD d generate (II)Lnone/bfh;
 	METHOD g getLoadedChunkCount ()I
 CLASS none/cem net/minecraft/client/multiplayer/PlayerControllerMP
 	FIELD i gameMode
 	METHOD a windowClick (IIIILnone/ahd;)Lnone/amj;
+	METHOD a setGameType (Lnone/arc;)V
 CLASS none/cen net/minecraft/client/multiplayer/LevelClient
+	METHOD a playSoundEffect (DDDLjava/lang/String;FFZ)V
+	METHOD a getEntity (I)Lnone/wv;
 	METHOD a addLevelInfoToCrashReport (Lnone/b;)Lnone/j;
 	METHOD c tick ()V
 	METHOD d spawn (Lnone/wv;)Z
@@ -10484,6 +10947,17 @@ CLASS none/cew net/minecraft/network/ServerData
 	FIELD a serverName
 	FIELD b serverIP
 	METHOD a setHideAddress (Lnone/cex;)V
+	METHOD b getResourcePackSetting ()Lnone/cex;
+CLASS none/cex net/minecraft/network/EnumResourcePackSetting
+	FIELD a ENABLED
+	FIELD b DISABLED
+	FIELD c PROMPT
+	FIELD d name
+	METHOD <init> (Ljava/lang/String;ILjava/lang/String;)V
+		ARG 0 name
+		ARG 1 ordinal
+		ARG 2 id
+	METHOD a getName ()Lnone/ho;
 CLASS none/cff net/minecraft/level/entity/particle/ParticleItem
 CLASS none/cfg net/minecraft/level/entity/particle/ParticleBarrierBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
@@ -10659,6 +11133,7 @@ CLASS none/cio net/minecraft/entity/EntityClientPlayerMP
 	METHOD a canUseCommand (ILjava/lang/String;)Z
 	METHOD a playSound (Ljava/lang/String;FF)V
 	METHOD a joinEntityItemWithLevel (Lnone/adw;)V
+	METHOD a openSignEditor (Lnone/bdj;)V
 	METHOD a sendChat (Lnone/ho;)V
 	METHOD a addStat (Lnone/tq;I)V
 	METHOD a openInventory (Lnone/vq;)V
@@ -10683,6 +11158,7 @@ CLASS none/cio net/minecraft/entity/EntityClientPlayerMP
 		ARG 0 health
 	METHOD n closeScreen ()V
 	METHOD p sendMotionUpdates ()V
+	METHOD q closeWindow ()V
 	METHOD r sendHorseJump ()V
 	METHOD s_ onUpdate ()V
 	METHOD t sendPlayerAbilities ()V
@@ -10936,6 +11412,14 @@ CLASS none/cue net/minecraft/client/renderer/texture/TextureAtlasSprite
 CLASS none/cug net/minecraft/client/renderer/texture/TextureManager
 	METHOD a onReload (Lnone/cvk;)V
 	METHOD a bindTexture (Lnone/oa;)V
+CLASS none/cum net/minecraft/client/renderer/texture/ClockSprite
+CLASS none/cun net/minecraft/client/renderer/texture/CompassSprite
+	FIELD j angle
+	METHOD a (Lnone/aqu;DDDZZ)V
+		ARG 0 level
+		ARG 1 playerX
+		ARG 2 playerZ
+		ARG 3 playerYaw
 CLASS none/cva net/minecraft/client/render/RenderPlayer
 CLASS none/cvb net/minecraft/client/resources/DefaultResourcePack
 	METHOD c setIcon (Lnone/oa;)Ljava/io/InputStream;
@@ -10949,6 +11433,7 @@ CLASS none/cvk net/minecraft/client/resources/IResourceManager
 CLASS none/cvl net/minecraft/client/resources/IResourceManagerReloadListener
 	METHOD a onReload (Lnone/cvk;)V
 CLASS none/cvo net/minecraft/client/resources/ResourcePackRepository
+	METHOD a fetchResourcePack (Ljava/lang/String;Ljava/lang/String;)Lcom/google/common/util/concurrent/ListenableFuture;
 CLASS none/cvt net/minecraft/client/resources/SimpleReloadableResourceManager
 	METHOD a registerReloadListener (Lnone/cvl;)V
 CLASS none/cwc net/minecraft/client/resources/I18n
@@ -11195,6 +11680,8 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD Z deleteLevelAndStopServer ()V
 	METHOD a levelServerForDimension (I)Lnone/qt;
 	METHOD a canUseCommand (ILjava/lang/String;)Z
+	METHOD a runTask (Ljava/lang/Runnable;)Lcom/google/common/util/concurrent/ListenableFuture;
+		ARG 0 task
 	METHOD a convertMapIfNeeded (Ljava/lang/String;)V
 	METHOD a loadAllLevels (Ljava/lang/String;Ljava/lang/String;JLnone/are;Ljava/lang/String;)V
 	METHOD a setKeyPair (Ljava/security/KeyPair;)V
@@ -11214,6 +11701,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD a setDifficultyForAllLevels (Lnone/vt;)V
 	METHOD a addServerStatsToSnooper (Lnone/wb;)V
 	METHOD a saveAllLevels (Z)V
+	METHOD aH isInMainThread ()Z
 	METHOD aI getMaxLevelHeight ()I
 	METHOD a_ outputPercentRemaining (Ljava/lang/String;I)V
 	METHOD a_ setTexturePack (Ljava/lang/String;Ljava/lang/String;)V
@@ -11283,4 +11771,4 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD z updateTimeLightAndEntities ()V
 CLASS net/minecraft/server/MinecraftServer$pd net/minecraft/level/ConvertingProcessUpdate
 CLASS net/minecraft/client/ClientBrandRetriever net/minecraft/client/ClientBrandRetriever
-	METHOD getClientModName ()Ljava/lang/String;
+	METHOD getClientModName getClientModName ()Ljava/lang/String;
