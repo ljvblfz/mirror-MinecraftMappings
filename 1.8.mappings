@@ -634,12 +634,17 @@ CLASS none/bf net/minecraft/command/CommandDefaultGameMode
 CLASS none/bg net/minecraft/command/CommandEffect
 	METHOD a getPermissionLevel ()I
 	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
-		ARG 0 serverCommandUser
+		ARG 0 sender
+		ARG 1 args
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
+		ARG 0 sender
+		ARG 1 args
+		ARG 2 blockPos
 	METHOD b isUsername ([Ljava/lang/String;I)Z
 	METHOD c getName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
-		ARG 0 serverCommandUser
+		ARG 0 sender
+	METHOD d getAllUsernames ()[Ljava/lang/String;
 CLASS none/bh net/minecraft/command/CommandEmote
 	METHOD a getPermissionLevel ()I
 	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
@@ -719,10 +724,16 @@ CLASS none/bo net/minecraft/command/CommandDifficulty
 	METHOD a getPermissionLevel ()I
 	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
+		ARG 1 args
 	METHOD a getCompletionOptions (Lnone/ae;[Ljava/lang/String;Lnone/dt;)Ljava/util/List;
+		ARG 0 sender
+		ARG 1 args
+		ARG 2 blockPos
 	METHOD c getName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+	METHOD e nameToDifficulty (Ljava/lang/String;)Lnone/vt;
+		ARG 0 name
 CLASS none/bp net/minecraft/command/CommandGameMode
 	METHOD a getPermissionLevel ()I
 	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
@@ -3103,14 +3114,25 @@ CLASS none/nx
 	METHOD a read (Lnone/hd;)V
 	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
-CLASS none/oa net/minecraft/util/ResourceLocation
-	FIELD a modName
-	FIELD b objectname
+CLASS none/oa net/minecraft/util/Namespace
+	FIELD a owner
+	FIELD b name
 	METHOD <init> (I[Ljava/lang/String;)V
 		ARG 0 index
-	METHOD a returnObjectName ()Ljava/lang/String;
-	METHOD b returnModName ()Ljava/lang/String;
-	METHOD toString returnFullObjectName ()Ljava/lang/String;
+		ARG 1 components
+	METHOD <init> (Ljava/lang/String;)V
+		ARG 0 fullName
+	METHOD <init> (Ljava/lang/String;Ljava/lang/String;)V
+		ARG 0 owner
+		ARG 1 name
+	METHOD a getName ()Ljava/lang/String;
+	METHOD a getComponents (Ljava/lang/String;)[Ljava/lang/String;
+		ARG 0 fullName
+	METHOD b getOwner ()Ljava/lang/String;
+	METHOD equals equals (Ljava/lang/Object;)Z
+		ARG 0 o
+	METHOD hashCode hashCode ()I
+	METHOD toString getFullName ()Ljava/lang/String;
 CLASS none/od net/minecraft/bootstrap/Bootstrap
 	FIELD a printStream
 	FIELD b initialized
@@ -3496,6 +3518,30 @@ CLASS none/uc net/minecraft/entity/EntitySet
 	FIELD b entitySet
 	METHOD a (Ljava/lang/Class;Z)Ljava/lang/Class;
 		ARG 1 flag
+CLASS none/ul net/minecraft/util/CaseInsensitiveHashMap
+	FIELD a wrapped
+	METHOD clear clear ()V
+	METHOD containsKey containsKey (Ljava/lang/Object;)Z
+		ARG 0 key
+	METHOD containsValue containsValue (Ljava/lang/Object;)Z
+		ARG 0 value
+	METHOD entrySet entrySet ()Ljava/util/Set;
+	METHOD get get (Ljava/lang/Object;)Ljava/lang/Object;
+		ARG 0 key
+	METHOD isEmpty isEmpty ()Z
+	METHOD keySet keySet ()Ljava/util/Set;
+	METHOD put put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+		ARG 0 key
+		ARG 1 value
+	METHOD put put (Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;
+		ARG 0 key
+		ARG 1 value
+	METHOD putAll putAll (Ljava/util/Map;)V
+		ARG 0 map
+	METHOD remove remove (Ljava/lang/Object;)Ljava/lang/Object;
+		ARG 0 key
+	METHOD size size ()I
+	METHOD values values ()Ljava/util/Collection;
 CLASS none/up net/minecraft/network/EventLoopFactory
 	FIELD a eventLoop
 	FIELD b isCreated
@@ -3627,8 +3673,18 @@ CLASS none/vt net/minecraft/level/EnumDifficulty
 	FIELD b EASY
 	FIELD c NORMAL
 	FIELD d HARD
+	FIELD e values
 	FIELD f id
+	FIELD g name
+	METHOD <init> (Ljava/lang/String;IILjava/lang/String;)V
+		ARG 0 name
+		ARG 1 ordinal
+		ARG 2 id
 	METHOD a getId ()I
+	METHOD a fromId (I)Lnone/vt;
+		ARG 0 id
+	METHOD b getName ()Ljava/lang/String;
+	METHOD values values ()[Lnone/vt;
 CLASS none/vz net/minecraft/inventory/IInventory
 CLASS none/wa
 	METHOD a getSlot (I)Lnone/amj;
@@ -3703,6 +3759,188 @@ CLASS none/wj net/minecraft/util/damageSource/ProjectileDamageSource
 	METHOD b getDeathMessage (Lnone/xm;)Lnone/ho;
 		ARG 0 entity
 	METHOD j getDamager ()Lnone/wv;
+CLASS none/wl net/minecraft/potion/PotionAbsorption
+	METHOD <init> (ILnone/oa;ZI)V
+		ARG 0 id
+		ARG 1 namespace
+		ARG 2 negative
+		ARG 3 liquidColor
+	METHOD a removeModifiersFrom (Lnone/xm;Lnone/yc;I)V
+		ARG 0 entity
+		ARG 1 attributes
+		ARG 2 strength
+	METHOD b applyModifiersTo (Lnone/xm;Lnone/yc;I)V
+		ARG 0 entity
+		ARG 1 attributes
+		ARG 2 strength
+CLASS none/wm net/minecraft/potion/PotionStrength
+	METHOD <init> (ILnone/oa;ZI)V
+		ARG 0 id
+		ARG 1 namespace
+		ARG 2 negative
+		ARG 3 liquidColor
+	METHOD a getModifierStrength (ILnone/ya;)D
+		ARG 0 strength
+		ARG 1 modifier
+CLASS none/wn net/minecraft/potion/PotionHealthBoost
+	METHOD <init> (ILnone/oa;ZI)V
+		ARG 0 id
+		ARG 1 namespace
+		ARG 2 negative
+		ARG 3 liquidColor
+	METHOD a removeModifiersFrom (Lnone/xm;Lnone/yc;I)V
+		ARG 0 entity
+		ARG 1 attributes
+		ARG 2 strength
+CLASS none/wo net/minecraft/potion/PotionInstant
+	METHOD <init> (ILnone/oa;ZI)V
+		ARG 0 id
+		ARG 1 namespace
+		ARG 2 negative
+		ARG 3 liquidColor
+	METHOD a isReady (II)Z
+		ARG 0 duration
+		ARG 1 strength
+	METHOD b isInstant ()Z
+CLASS none/wp net/minecraft/potion/Potion
+	FIELD H id
+	FIELD I POTION_MAP
+	FIELD J modifiers
+	FIELD K negative
+	FIELD L liquidColor
+	FIELD M unlocalizedName
+	FIELD N statusIcon
+	FIELD O effectiveness
+	FIELD P usable
+	FIELD a POTIONS
+	FIELD c SPEED
+	FIELD d SLOWNESS
+	FIELD e HASTE
+	FIELD f MINING_FATIGUE
+	FIELD g STRENGTH
+	FIELD h INSTANT_HEALTH
+	FIELD i INSTANT_DAMAGE
+	FIELD j JUMP_BOOST
+	FIELD k NAUSEA
+	FIELD l REGENERATION
+	FIELD m RESISTANCE
+	FIELD n FIRE_RESISTANCE
+	FIELD o WATER_BREATHING
+	FIELD p INVISIBILITY
+	FIELD q BLINDNESS
+	FIELD r NIGHT_VISION
+	FIELD s HUNGER
+	FIELD t WEAKNESS
+	FIELD u POISON
+	FIELD v WITHER
+	FIELD w HEALTH_BOOST
+	FIELD x ABSORPTION
+	FIELD y SATURATION
+	METHOD <init> (ILnone/oa;ZI)V
+		ARG 0 id
+		ARG 1 namespace
+		ARG 2 negative
+		ARG 3 liquidColor
+	METHOD a getUnlocalizedName ()Ljava/lang/String;
+	METHOD a setEffectiveness (D)Lnone/wp;
+		ARG 0 effectiveness
+	METHOD a isReady (II)Z
+		ARG 0 duration
+		ARG 1 strength
+	METHOD a getModifierStrength (ILnone/ya;)D
+		ARG 0 strength
+		ARG 1 modifier
+	METHOD a getTimeString (Lnone/wq;)Ljava/lang/String;
+		ARG 0 potionEffect
+	METHOD a applyAttack (Lnone/wv;Lnone/wv;Lnone/xm;ID)V
+		ARG 0 potion
+		ARG 1 thrower
+		ARG 2 target
+		ARG 3 strength
+		ARG 4 distance
+	METHOD a apply (Lnone/xm;I)V
+		ARG 0 target
+		ARG 1 strength
+	METHOD a removeModifiersFrom (Lnone/xm;Lnone/yc;I)V
+		ARG 0 entity
+		ARG 1 attributes
+		ARG 2 strength
+	METHOD a addAttributeModifier (Lnone/xy;Ljava/lang/String;DI)Lnone/wp;
+		ARG 0 attribute
+		ARG 1 uuid
+		ARG 2 amount
+		ARG 3 arithmeticOperation
+	METHOD b isInstant ()Z
+	METHOD b setStatusIcon (II)Lnone/wp;
+		ARG 0 iconX
+		ARG 1 iconY
+	METHOD b getEffect (Ljava/lang/String;)Lnone/wp;
+		ARG 0 name
+	METHOD b applyModifiersTo (Lnone/xm;Lnone/yc;I)V
+		ARG 0 entity
+		ARG 1 attributes
+		ARG 2 strength
+	METHOD c getEffectNames ()[Ljava/lang/String;
+	METHOD c setUnlocalizedName (Ljava/lang/String;)Lnone/wp;
+		ARG 0 unlocalizedName
+	METHOD d getId ()I
+	METHOD e hasStatusIcon ()Z
+	METHOD f getStatusIcon ()I
+	METHOD g isNegative ()Z
+	METHOD h getEffectiveness ()D
+	METHOD j isUsable ()Z
+	METHOD k getLiquidColor ()I
+	METHOD l getAttributeModifiers ()Ljava/util/Map;
+CLASS none/wq net/minecraft/potion/PotionEffect
+	FIELD a logger
+	FIELD b potionId
+	FIELD c duration
+	FIELD d strength
+	FIELD e splash
+	FIELD f ambient
+	FIELD g infinite
+	FIELD h showParticles
+	METHOD <init> (II)V
+		ARG 0 potionId
+		ARG 1 duration
+	METHOD <init> (III)V
+		ARG 0 potionId
+		ARG 1 duration
+		ARG 2 strength
+	METHOD <init> (IIIZZ)V
+		ARG 0 potionId
+		ARG 1 duration
+		ARG 2 strength
+		ARG 3 ambient
+		ARG 4 showParticles
+	METHOD <init> (Lnone/wq;)V
+		ARG 0 effect
+	METHOD a getPotionId ()I
+	METHOD a save (Lnone/fn;)Lnone/fn;
+		ARG 0 nbt
+	METHOD a combine (Lnone/wq;)V
+		ARG 0 effect
+	METHOD a applyIfReady (Lnone/xm;)Z
+		ARG 0 target
+	METHOD a setSplash (Z)V
+		ARG 0 splash
+	METHOD b getDuration ()I
+	METHOD b load (Lnone/fn;)Lnone/wq;
+		ARG 0 nbt
+	METHOD b apply (Lnone/xm;)V
+		ARG 0 target
+	METHOD b setInfinite (Z)V
+		ARG 0 infinite
+	METHOD c getStrength ()I
+	METHOD e isAmbient ()Z
+	METHOD equals equals (Ljava/lang/Object;)Z
+		ARG 0 o
+	METHOD f getShowParticles ()Z
+	METHOD g getUnlocalizedName ()Ljava/lang/String;
+	METHOD h isInfinite ()Z
+	METHOD hashCode hashCode ()I
+	METHOD i decrementDuration ()I
+	METHOD toString toString ()Ljava/lang/String;
 CLASS none/ws net/minecraft/entity/EntityAgeable
 	METHOD a doInteractionWith (Lnone/ahd;)Z
 		ARG 0 player
@@ -3919,6 +4157,7 @@ CLASS none/xm net/minecraft/entity/EntityLiving
 	FIELD be lastSyncedYaw
 	FIELD bf lastSyncedPitch
 	FIELD bh hurtByTimestamp
+	FIELD bm absorptionHealth
 	METHOD K onTick ()V
 	METHOD O fallFromLevel ()V
 	METHOD a handleEntityStatusPacket (B)V
@@ -3937,6 +4176,9 @@ CLASS none/xm net/minecraft/entity/EntityLiving
 	METHOD bI isInBed ()Z
 	METHOD bM getAbsorptionHealth ()F
 	METHOD bN getTeam ()Lnone/bsf;
+	METHOD bj clearEffects ()V
+	METHOD bk getEffects ()Ljava/util/Collection;
+	METHOD bl isUndead ()Z
 	METHOD bm getHealth ()F
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
@@ -3952,6 +4194,9 @@ CLASS none/xm net/minecraft/entity/EntityLiving
 	METHOD g heal (F)V
 	METHOD h setHealth (F)V
 	METHOD j getModifiedOxygenAfterConsumption (I)I
+	METHOD k hasEffect (I)Z
+	METHOD l setAbsorptionHealth (F)V
+		ARG 0 absorptionHealth
 	METHOD l removeEffect (I)V
 	METHOD p getEquipmentInSlot (I)Lnone/amj;
 	METHOD s_ onUpdate ()V
@@ -4016,12 +4261,26 @@ CLASS none/xy net/minecraft/entity/attribute/IAttribute
 	METHOD a setBase (D)D
 		ARG 0 newBase
 	METHOD b getBase ()D
+	METHOD c shouldWatch ()Z
 	METHOD d getAttribute ()Lnone/xy;
-CLASS none/xz
+CLASS none/xz net/minecraft/entity/attribute/IAttributeInstance
 	METHOD a getAttribute ()Lnone/xy;
 	METHOD a setBase (D)V
 		ARG 0 value
+	METHOD a getModifiersByOperation (I)Ljava/util/Collection;
+		ARG 0 operation
+	METHOD a getModifier (Ljava/util/UUID;)Lnone/ya;
+		ARG 0 uuid
+	METHOD a hasModifier (Lnone/ya;)Z
+		ARG 0 modifier
 	METHOD b getBase ()D
+	METHOD b addModifier (Lnone/ya;)V
+		ARG 0 modifier
+	METHOD c getModifiers ()Ljava/util/Collection;
+	METHOD c removeModifier (Lnone/ya;)V
+		ARG 0 modifier
+	METHOD d clearModifiers ()V
+	METHOD e getValue ()D
 CLASS none/ya net/minecraft/entity/attribute/AttributeModifier
 	FIELD a amount
 	FIELD b operation
@@ -4045,21 +4304,95 @@ CLASS none/yb net/minecraft/entity/attribute/AttributeBase
 		ARG 2 base
 	METHOD a getName ()Ljava/lang/String;
 	METHOD b getBase ()D
+	METHOD c shouldWatch ()Z
 	METHOD d getAttribute ()Lnone/xy;
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 0 object
-CLASS none/ye
+CLASS none/yc net/minecraft/entity/attribute/AttributeMapBase
+	FIELD a byAttribute
+	FIELD b byName
+	FIELD c byParentAttribute
+	METHOD a getAttributes ()Ljava/util/Collection;
+	METHOD a removeModifiers (Lcom/google/common/collect/Multimap;)V
+		ARG 0 modifiers
+	METHOD a getAttribute (Ljava/lang/String;)Lnone/xz;
+		ARG 0 name
+	METHOD a getAttribute (Lnone/xy;)Lnone/xz;
+		ARG 0 attribute
+	METHOD a onAttributeChanged (Lnone/xz;)V
+		ARG 0 attribute
+	METHOD b readdModifiers (Lcom/google/common/collect/Multimap;)V
+		ARG 0 modifiers
+	METHOD b addAttribute (Lnone/xy;)Lnone/xz;
+		ARG 0 attribute
+	METHOD c createInstance (Lnone/xy;)Lnone/xz;
+		ARG 0 attribute
+CLASS none/ye net/minecraft/entity/attribute/AttributeInstance
+	FIELD a map
+	FIELD b attribute
+	FIELD c modifiersByOperation
+	FIELD d modifiersByName
+	FIELD e modifiers
+	FIELD f base
+	FIELD g dirty
+	FIELD h calculatedValue
+	METHOD <init> (Lnone/yc;Lnone/xy;)V
+		ARG 0 map
+		ARG 1 attribute
 	METHOD a getAttribute ()Lnone/xy;
 	METHOD a setBase (D)V
+		ARG 0 base
+	METHOD a getModifiersByOperation (I)Ljava/util/Collection;
+		ARG 0 operation
+	METHOD a getModifier (Ljava/util/UUID;)Lnone/ya;
+		ARG 0 uuid
+	METHOD a hasModifier (Lnone/ya;)Z
+		ARG 0 modifier
 	METHOD b getBase ()D
+	METHOD b getAllModifiersByOperation (I)Ljava/util/Collection;
+		ARG 0 operation
+	METHOD b addModifier (Lnone/ya;)V
+		ARG 0 modifier
+	METHOD c getModifiers ()Ljava/util/Collection;
+	METHOD c removeModifier (Lnone/ya;)V
+		ARG 0 modifier
+	METHOD d clearModifiers ()V
+	METHOD e getValue ()D
+	METHOD f onChanged ()V
+	METHOD g getModifiedValue ()D
+CLASS none/yf net/minecraft/entity/attribute/AttributeMap
+	FIELD d byDisplayName
+	FIELD e watched
+	METHOD a getAttribute (Ljava/lang/String;)Lnone/xz;
+	METHOD a getAttribute (Ljava/lang/String;)Lnone/ye;
+		ARG 0 name
+	METHOD a getAttribute (Lnone/xy;)Lnone/xz;
+		ARG 0 attribute
+	METHOD a getAttribute (Lnone/xy;)Lnone/ye;
+		ARG 0 attribute
+	METHOD a onAttributeChanged (Lnone/xz;)V
+		ARG 0 attribute
+	METHOD b getWatched ()Ljava/util/Set;
+	METHOD b addAttribute (Lnone/xy;)Lnone/xz;
+		ARG 0 attribute
+	METHOD c getWatchCandidates ()Ljava/util/Collection;
+	METHOD c createInstance (Lnone/xy;)Lnone/xz;
+		ARG 0 attribute
 CLASS none/yg net/minecraft/entity/attribute/Attribute
 	FIELD a minValue
 	FIELD b maxValue
+	FIELD c displayName
 	METHOD <init> (Lnone/xy;Ljava/lang/String;DDD)V
+		ARG 0 attribute
+		ARG 1 name
+		ARG 2 base
 		ARG 3 min
 		ARG 4 max
 	METHOD a setBase (D)D
+		ARG 0 reduceToRange
 	METHOD a setDisplayName (Ljava/lang/String;)Lnone/yg;
+		ARG 0 displayName
+	METHOD g getDisplayName ()Ljava/lang/String;
 CLASS none/abl
 	METHOD a load (Lnone/fn;)V
 	METHOD b save (Lnone/fn;)V
@@ -4797,6 +5130,7 @@ CLASS none/ahd net/minecraft/entity/player/EntityPlayer
 	METHOD d_ getName ()Ljava/lang/String;
 	METHOD e onHitGround (FF)V
 	METHOD e_ getNameComponent ()Lnone/ho;
+	METHOD l setAbsorptionHealth (F)V
 	METHOD n closeScreen ()V
 	METHOD p getEquipmentInSlot (I)Lnone/amj;
 		ARG 0 slotIndex
@@ -6443,6 +6777,7 @@ CLASS none/atr net/minecraft/block/Block
 		ARG 1 blockCoords
 		ARG 3 random
 	METHOD b (Lnone/ard;Lnone/dt;)Z
+		ARG 0 blockAccess
 		ARG 1 blockCoords
 	METHOD b getPowerTransmittedToSolidBlockAt (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
 		ARG 1 blockCoords
@@ -11457,7 +11792,9 @@ CLASS none/cxc net/minecraft/client/resources/data/TextureMetadataSectionSeriali
 CLASS none/cxk
 	METHOD a onReload (Lnone/cvk;)V
 CLASS none/cxl
-	METHOD toString returnFullObjectName ()Ljava/lang/String;
+	METHOD equals equals (Ljava/lang/Object;)Z
+	METHOD hashCode hashCode ()I
+	METHOD toString getFullName ()Ljava/lang/String;
 CLASS none/cxz net/minecraft/sound/EnumSoundType
 	FIELD a MASTER
 	FIELD b MUSIC
