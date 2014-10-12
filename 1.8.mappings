@@ -1177,11 +1177,11 @@ CLASS none/dt net/minecraft/util/BlockPos
 		ARG 2 z
 	METHOD a fromLong (J)Lnone/dt;
 		ARG 0 l
-	METHOD a addDirection (Lnone/ej;)Lnone/dt;
-		ARG 0 face
+	METHOD a getNeighbourFacing (Lnone/ej;)Lnone/dt;
+		ARG 0 facing
 	METHOD a addDirection (Lnone/ej;I)Lnone/dt;
-		ARG 0 face
-		ARG 1 blocks
+		ARG 0 facing
+		ARG 1 offset
 	METHOD a add (Lnone/fd;)Lnone/dt;
 		ARG 0 location
 	METHOD b below ()Lnone/dt;
@@ -1250,14 +1250,23 @@ CLASS none/ej net/minecraft/block/EnumFacing
 	FIELD e WEST
 	FIELD f EAST
 	FIELD g id
+	FIELD h opposite
+	FIELD j name
+	FIELD k axis
+	FIELD l axisDirection
 	FIELD m blockCoords
+	METHOD <init> (Ljava/lang/String;IIIILjava/lang/String;Lnone/em;Lnone/el;Lnone/fd;)V
 	METHOD a getId ()I
 	METHOD a getCWFacing (Lnone/el;)Lnone/ej;
+	METHOD b getFacingFromCompassDirection (I)Lnone/ej;
+	METHOD c getAxisDirection ()Lnone/em;
+	METHOD d getOpposite ()Lnone/ej;
 	METHOD e getYRotation ()Lnone/ej;
 	METHOD f getCCWFacing ()Lnone/ej;
 	METHOD g getXOffset ()I
 	METHOD h getYOffset ()I
 	METHOD i getZOffset ()I
+	METHOD k getAxis ()Lnone/el;
 	METHOD l getName ()Ljava/lang/String;
 	METHOD n getXRotation ()Lnone/ej;
 	METHOD p getZRotation ()Lnone/ej;
@@ -1265,6 +1274,8 @@ CLASS none/el net/minecraft/block/EnumRotatedPillarAxis
 	FIELD a X
 	FIELD b Y
 	FIELD c Z
+	METHOD b isVertical ()Z
+	METHOD c isHorizontal ()Z
 	METHOD l getName ()Ljava/lang/String;
 CLASS none/em net/minecraft/level/AxisDirection
 	FIELD a POSITIVE
@@ -1292,10 +1303,10 @@ CLASS none/er net/minecraft/util/ObjectIntIdentityMap
 CLASS none/es net/minecraft/dispenser/ILocatableSource
 CLASS none/et net/minecraft/dispenser/ILocation
 CLASS none/eu net/minecraft/util/MapPopulator
-	METHOD a (Ljava/lang/Iterable;Ljava/lang/Iterable;Ljava/util/Map;)Ljava/util/Map;
+	METHOD a populate (Ljava/lang/Iterable;Ljava/lang/Iterable;Ljava/util/Map;)Ljava/util/Map;
 		ARG 0 iterable1
 		ARG 1 iterable2
-	METHOD b (Ljava/lang/Iterable;Ljava/lang/Iterable;)Ljava/util/Map;
+	METHOD b populate (Ljava/lang/Iterable;Ljava/lang/Iterable;)Ljava/util/Map;
 		ARG 0 iterable1
 		ARG 1 iterable2
 CLASS none/ev net/minecraft/util/RegistryNamespaced
@@ -1818,7 +1829,7 @@ CLASS none/go net/minecraft/network/NettyEncryptionEncoder
 	FIELD a encryptionCodec
 	METHOD <init> (Ljavax/crypto/Cipher;)V
 		ARG 0 cipher
-	METHOD encode encode (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Lio/netty/buffer/ByteBuf;)V
+	METHOD encode (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Lio/netty/buffer/ByteBuf;)V
 		ARG 0 channelHandlerContext
 		ARG 1 byteBuf1
 		ARG 2 byteBuf2
@@ -1839,12 +1850,12 @@ CLASS none/gq net/minecraft/network/NettyCompressionEncoder
 	METHOD a setCompressionThreshold (I)V
 CLASS none/gr net/minecraft/network/NetworkManager
 	CLASS gu
-		METHOD run run ()V
+		METHOD run ()V
 	CLASS gv
-		METHOD initChannel initChannel (Lio/netty/channel/Channel;)V
+		METHOD initChannel (Lio/netty/channel/Channel;)V
 			ARG 0 channel
 	CLASS gw
-		METHOD initChannel initChannel (Lio/netty/channel/Channel;)V
+		METHOD initChannel (Lio/netty/channel/Channel;)V
 			ARG 0 channel
 	FIELD a markerNetwork
 	FIELD b markerNetworkPackets
@@ -1889,13 +1900,13 @@ CLASS none/gr net/minecraft/network/NetworkManager
 		ARG 1 futureListeners
 	METHOD b getSocketAddress ()Ljava/net/SocketAddress;
 	METHOD c isLocal ()Z
-	METHOD channelActive channelActive (Lio/netty/channel/ChannelHandlerContext;)V
+	METHOD channelActive (Lio/netty/channel/ChannelHandlerContext;)V
 		ARG 0 channelHandlerContext
-	METHOD channelInactive channelInactive (Lio/netty/channel/ChannelHandlerContext;)V
+	METHOD channelInactive (Lio/netty/channel/ChannelHandlerContext;)V
 		ARG 0 channelHandlerContext
-	METHOD channelRead0 channelRead0 (Lio/netty/channel/ChannelHandlerContext;Lnone/id;)V
+	METHOD channelRead0 (Lio/netty/channel/ChannelHandlerContext;Lnone/id;)V
 		ARG 0 channelHandlerContext
-	METHOD exceptionCaught exceptionCaught (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Throwable;)V
+	METHOD exceptionCaught (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Throwable;)V
 		ARG 0 channelHandlerContext
 	METHOD f isEncrypted ()Z
 	METHOD g isConnected ()Z
@@ -1944,7 +1955,7 @@ CLASS none/gy net/minecraft/network/EnumConnectionState
 	METHOD a getPacketId (Lnone/ie;Lnone/id;)Ljava/lang/Integer;
 		ARG 0 direction
 		ARG 1 packet
-	METHOD values values ()[Lnone/gy;
+	METHOD values ()[Lnone/gy;
 CLASS none/gz net/minecraft/network/EnumConnectionStateHandshake
 CLASS none/ha net/minecraft/network/Packet
 CLASS none/hd net/minecraft/network/PacketBuffer
@@ -1953,8 +1964,8 @@ CLASS none/hd net/minecraft/network/PacketBuffer
 		ARG 0 byteBuf
 	METHOD a writeString (Ljava/lang/String;)Lnone/hd;
 	METHOD a write (Lnone/ho;)V
-	METHOD readInt readInt ()I
-	METHOD release release ()Z
+	METHOD readInt ()I
+	METHOD release ()Z
 CLASS none/he net/minecraft/util/MessageDeserializer
 	FIELD a logger
 	FIELD b markerPacketReceived
@@ -2176,7 +2187,7 @@ CLASS none/ie net/minecraft/network/EnumPacketDirection
 	FIELD b ClientBound
 CLASS none/ig net/minecraft/network/PacketThreadUtil
 	CLASS ih
-		METHOD run run ()V
+		METHOD run ()V
 	METHOD a ensureMainThread (Lnone/id;Lnone/hg;Lnone/vn;)V
 		ARG 0 packet
 		ARG 1 handler
@@ -2203,7 +2214,7 @@ CLASS none/ij net/minecraft/network/EnumPositionComponent
 		ARG 0 components
 	METHOD b isSet (I)Z
 		ARG 0 flag
-	METHOD values values ()[Lnone/ij;
+	METHOD values ()[Lnone/ij;
 CLASS none/ik net/minecraft/network/INetClientHandler
 	METHOD a handlePlayerpositionAndLook (Lnone/ii;)V
 		ARG 0 packet
@@ -2775,7 +2786,7 @@ CLASS none/lk net/minecraft/network/EnumTitleUpdate
 	METHOD a getValueNames ()[Ljava/lang/String;
 	METHOD a fromName (Ljava/lang/String;)Lnone/lk;
 		ARG 0 name
-	METHOD values values ()[Lnone/lk;
+	METHOD values ()[Lnone/lk;
 CLASS none/ll net/minecraft/network/packet/clientbound/PacketUpdateSign
 	FIELD a dimension
 	METHOD <init> (Lnone/aqu;Lnone/dt;[Lnone/ho;)V
@@ -3129,9 +3140,9 @@ CLASS none/oa net/minecraft/util/Namespace
 	METHOD a getComponents (Ljava/lang/String;)[Ljava/lang/String;
 		ARG 0 fullName
 	METHOD b getOwner ()Ljava/lang/String;
-	METHOD equals equals (Ljava/lang/Object;)Z
+	METHOD equals (Ljava/lang/Object;)Z
 		ARG 0 o
-	METHOD hashCode hashCode ()I
+	METHOD hashCode ()I
 	METHOD toString getFullName ()Ljava/lang/String;
 CLASS none/od net/minecraft/bootstrap/Bootstrap
 	FIELD a printStream
@@ -3179,9 +3190,9 @@ CLASS none/pc net/minecraft/util/StackInfoPrintStream
 		ARG 1 outputStream
 	METHOD a printWithStackInfo (Ljava/lang/String;)V
 		ARG 0 x
-	METHOD println println (Ljava/lang/Object;)V
+	METHOD println (Ljava/lang/Object;)V
 		ARG 0 x
-	METHOD println println (Ljava/lang/String;)V
+	METHOD println (Ljava/lang/String;)V
 		ARG 0 x
 CLASS none/pi net/minecraft/network/ThreadQuickExitException
 	FIELD a INSTANCE
@@ -3259,8 +3270,14 @@ CLASS none/qs
 	METHOD g getLoadedChunkCount ()I
 CLASS none/qt net/minecraft/level/LevelServer
 	FIELD I minecraftServer
+	FIELD L lastSyncedTickNextTick
+	FIELD M tickNextTick
+	FIELD V tickNow
 	FIELD b theChunkProviderServer
 	METHOD a runTask (Ljava/lang/Runnable;)Lcom/google/common/util/concurrent/ListenableFuture;
+	METHOD a scheduleBlockTick (Lnone/dt;Lnone/atr;I)V
+	METHOD a scheduleBlockTick (Lnone/dt;Lnone/atr;II)V
+		ARG 2 delayTicks
 	METHOD a createExplosion (Lnone/wv;DDDFZZ)Lnone/aqo;
 	METHOD a saveAllChunks (ZLnone/uy;)V
 	METHOD aH isInMainThread ()Z
@@ -3520,28 +3537,28 @@ CLASS none/uc net/minecraft/entity/EntitySet
 		ARG 1 flag
 CLASS none/ul net/minecraft/util/CaseInsensitiveHashMap
 	FIELD a wrapped
-	METHOD clear clear ()V
-	METHOD containsKey containsKey (Ljava/lang/Object;)Z
+	METHOD clear ()V
+	METHOD containsKey (Ljava/lang/Object;)Z
 		ARG 0 key
-	METHOD containsValue containsValue (Ljava/lang/Object;)Z
+	METHOD containsValue (Ljava/lang/Object;)Z
 		ARG 0 value
-	METHOD entrySet entrySet ()Ljava/util/Set;
-	METHOD get get (Ljava/lang/Object;)Ljava/lang/Object;
+	METHOD entrySet ()Ljava/util/Set;
+	METHOD get (Ljava/lang/Object;)Ljava/lang/Object;
 		ARG 0 key
-	METHOD isEmpty isEmpty ()Z
-	METHOD keySet keySet ()Ljava/util/Set;
-	METHOD put put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
-		ARG 0 key
-		ARG 1 value
-	METHOD put put (Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;
+	METHOD isEmpty ()Z
+	METHOD keySet ()Ljava/util/Set;
+	METHOD put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 		ARG 0 key
 		ARG 1 value
-	METHOD putAll putAll (Ljava/util/Map;)V
+	METHOD put (Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;
+		ARG 0 key
+		ARG 1 value
+	METHOD putAll (Ljava/util/Map;)V
 		ARG 0 map
-	METHOD remove remove (Ljava/lang/Object;)Ljava/lang/Object;
+	METHOD remove (Ljava/lang/Object;)Ljava/lang/Object;
 		ARG 0 key
-	METHOD size size ()I
-	METHOD values values ()Ljava/util/Collection;
+	METHOD size ()I
+	METHOD values ()Ljava/util/Collection;
 CLASS none/up net/minecraft/network/EventLoopFactory
 	FIELD a eventLoop
 	FIELD b isCreated
@@ -3684,7 +3701,7 @@ CLASS none/vt net/minecraft/level/EnumDifficulty
 	METHOD a fromId (I)Lnone/vt;
 		ARG 0 id
 	METHOD b getName ()Ljava/lang/String;
-	METHOD values values ()[Lnone/vt;
+	METHOD values ()[Lnone/vt;
 CLASS none/vz net/minecraft/inventory/IInventory
 CLASS none/wa
 	METHOD a getSlot (I)Lnone/amj;
@@ -3933,14 +3950,14 @@ CLASS none/wq net/minecraft/potion/PotionEffect
 		ARG 0 infinite
 	METHOD c getStrength ()I
 	METHOD e isAmbient ()Z
-	METHOD equals equals (Ljava/lang/Object;)Z
+	METHOD equals (Ljava/lang/Object;)Z
 		ARG 0 o
 	METHOD f getShowParticles ()Z
 	METHOD g getUnlocalizedName ()Ljava/lang/String;
 	METHOD h isInfinite ()Z
-	METHOD hashCode hashCode ()I
+	METHOD hashCode ()I
 	METHOD i decrementDuration ()I
-	METHOD toString toString ()Ljava/lang/String;
+	METHOD toString ()Ljava/lang/String;
 CLASS none/ws net/minecraft/entity/EntityAgeable
 	METHOD a doInteractionWith (Lnone/ahd;)Z
 		ARG 0 player
@@ -4028,6 +4045,7 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD aJ getUuid ()Ljava/util/UUID;
 	METHOD aL customName ()Ljava/lang/String;
 	METHOD aM isCustomNameVisible ()Z
+	METHOD aO getFacing ()Lnone/ej;
 	METHOD aQ getBoundingBox ()Lnone/brt;
 	METHOD aR getEyeHeight ()F
 	METHOD ab isInLava ()Z
@@ -4200,7 +4218,7 @@ CLASS none/xm net/minecraft/entity/EntityLiving
 	METHOD l removeEffect (I)V
 	METHOD p getEquipmentInSlot (I)Lnone/amj;
 	METHOD s_ onUpdate ()V
-CLASS none/xn net/minecraft/entity/EntityMobBase
+CLASS none/xn net/minecraft/entity/EntityMob
 	METHOD K onTick ()V
 	METHOD a handleEntityStatusPacket (B)V
 	METHOD a doInteractionWith (Lnone/ahd;)Z
@@ -4577,6 +4595,7 @@ CLASS none/adi net/minecraft/entity/item/EntityArmorStand
 CLASS none/adj net/minecraft/entity/EntityHanging
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD aO getFacing ()Lnone/ej;
 	METHOD b updatePosition (DDD)V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD d applyMotion (DDD)V
@@ -4901,7 +4920,7 @@ CLASS none/afl net/minecraft/entity/monster/EntityMagmaCube
 	METHOD c getBrightness (F)F
 	METHOD cd createChildSlime ()Lnone/afy;
 	METHOD e onHitGround (FF)V
-CLASS none/afm net/minecraft/entity/monster/EntityMob
+CLASS none/afm net/minecraft/entity/monster/EntityMonster
 	METHOD P getSwimSound ()Ljava/lang/String;
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
 	METHOD bn getHurtSound ()Ljava/lang/String;
@@ -5646,7 +5665,9 @@ CLASS none/amj net/minecraft/item/ItemStack
 	METHOD B getAttributeModifiers ()Lcom/google/common/collect/Multimap;
 	METHOD a splitStack (I)Lnone/amj;
 		ARG 0 splitAmount
-	METHOD a tryIncrementDamage (ILjava/util/Random;)Z
+	METHOD a shouldBreakAfterDamage (ILjava/util/Random;)Z
+	METHOD a applyDamage (ILnone/xm;)V
+		ARG 0 amount
 	METHOD a addNbtTag (Ljava/lang/String;Lnone/gd;)V
 	METHOD a setItem (Lnone/alq;)V
 	METHOD a isMergeable (Lnone/amj;)Z
@@ -6139,6 +6160,7 @@ CLASS none/aqs
 	FIELD c NUMERICAL_VALUE
 CLASS none/aqu net/minecraft/level/Level
 	FIELD B profiler
+	FIELD C scoreboardManager
 	FIELD D isRemote
 	FIELD c cloudColor
 	FIELD j players
@@ -6147,8 +6169,10 @@ CLASS none/aqu net/minecraft/level/Level
 	FIELD s rand
 	FIELD t levelProvider
 	FIELD v chunkProvider
+	FIELD w saveHandler
 	FIELD x levelInfo
 	METHOD A getPowerSuppliedToBlockAt (Lnone/dt;)I
+	METHOD G getTerrainType ()Lnone/are;
 	METHOD K getTotalLevelTime ()J
 	METHOD L getLevelTime ()J
 	METHOD M getSpawnPoint ()Lnone/dt;
@@ -6177,6 +6201,7 @@ CLASS none/aqu net/minecraft/level/Level
 	METHOD a getEntities (Ljava/lang/Class;Lnone/brt;Lcom/google/common/base/Predicate;)Ljava/util/List;
 	METHOD a playSoundAtPlayer (Lnone/ahd;Ljava/lang/String;FF)V
 	METHOD a addLevelAccess (Lnone/ara;)V
+	METHOD a checkBlockIsValidAttachmentSurface (Lnone/ard;Lnone/dt;)Z
 	METHOD a addLevelInfoToCrashReport (Lnone/b;)Lnone/j;
 	METHOD a checkBlockRangeIsInLevel (Lnone/bjb;)Z
 	METHOD a isBlockInLevel (Lnone/dt;)Z
@@ -6185,6 +6210,9 @@ CLASS none/aqu net/minecraft/level/Level
 	METHOD a checkBlockRangeIsInLevel (Lnone/dt;IZ)Z
 		ARG 1 range
 		ARG 2 flag
+	METHOD a scheduleBlockTick (Lnone/dt;Lnone/atr;I)V
+		ARG 2 delayTicks
+	METHOD a scheduleBlockTick (Lnone/dt;Lnone/atr;II)V
 	METHOD a updateSurroundingBlocksExcludingFacing (Lnone/dt;Lnone/atr;Lnone/ej;)V
 		ARG 2 excludedFacing
 	METHOD a tryPlaceBlock (Lnone/dt;Lnone/bec;I)Z
@@ -6216,10 +6244,13 @@ CLASS none/aqu net/minecraft/level/Level
 	METHOD d spawn (Lnone/wv;)Z
 	METHOD e checkBlockIsInLevel (Lnone/dt;)Z
 	METHOD f getChunkFromBlockCoords (Lnone/dt;)Lnone/bfh;
+	METHOD g tryRemoveBlock (Lnone/dt;)Z
 	METHOD i updateEntities ()V
 	METHOD p getBlockStateAt (Lnone/dt;)Lnone/bec;
 	METHOD s getBlockEntityAt (Lnone/dt;)Lnone/bcm;
+	METHOD v getLeverChunkManager ()Lnone/arz;
 	METHOD y getPowerEmittedFromSolidBlockAt (Lnone/dt;)I
+	METHOD z checkBlockIsPowered (Lnone/dt;)Z
 CLASS none/aqz net/minecraft/level/MinecraftException
 CLASS none/arb net/minecraft/level/LevelSettings
 	FIELD a seed
@@ -6228,6 +6259,7 @@ CLASS none/arb net/minecraft/level/LevelSettings
 	FIELD d hardcoreModeEnabled
 	FIELD e levelType
 	FIELD f allowCommands
+	METHOD b setAllowCommands ()Lnone/arb;
 	METHOD d getSeed ()J
 	METHOD e getGameType ()Lnone/arc;
 	METHOD f isHardcoreModeEnabled ()Z
@@ -6247,6 +6279,7 @@ CLASS none/arc net/minecraft/level/EnumGameType
 	METHOD d isCreative ()Z
 	METHOD e isSurvival ()Z
 CLASS none/ard net/minecraft/level/IBlockAccess
+	METHOD G getTerrainType ()Lnone/are;
 	METHOD a getPowerTransmittedFromLocationFacing (Lnone/dt;Lnone/ej;)I
 	METHOD b getBiomeAt (Lnone/dt;)Lnone/arm;
 	METHOD d hasAirAt (Lnone/dt;)Z
@@ -6262,15 +6295,22 @@ CLASS none/are net/minecraft/level/LevelType
 	FIELD k generatorVersion
 	METHOD a getLevelTypeName ()Ljava/lang/String;
 	METHOD d getGeneratorVersion ()I
-CLASS none/arf
+CLASS none/arf net/minecraft/level/EnumCeiling
 	FIELD a SKY
 	FIELD b BLOCK
 CLASS none/arj net/minecraft/level/ChunkCache
+	METHOD G getTerrainType ()Lnone/are;
 	METHOD a getPowerTransmittedFromLocationFacing (Lnone/dt;Lnone/ej;)I
 	METHOD b getBiomeAt (Lnone/dt;)Lnone/arm;
 	METHOD d hasAirAt (Lnone/dt;)Z
 	METHOD p getBlockStateAt (Lnone/dt;)Lnone/bec;
 	METHOD s getBlockEntityAt (Lnone/dt;)Lnone/bcm;
+CLASS none/ark net/minecraft/level/ScheduledBlockTick
+	FIELD a blockPos
+	FIELD b scheduledTime
+	FIELD e block
+	METHOD a getBlock ()Lnone/atr;
+	METHOD a setScheduledTime (J)Lnone/ark;
 CLASS none/arl net/minecraft/level/biome/BiomeBeach
 	METHOD <init> (I)V
 		ARG 0 biomeID
@@ -6495,9 +6535,12 @@ CLASS none/asz net/minecraft/block/BlockAnvil
 	FIELD b damage
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD c isOpaque ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/atb net/minecraft/block/BlockBannerBase
 	FIELD a facing
 	FIELD b rotation
@@ -6515,10 +6558,13 @@ CLASS none/atd net/minecraft/block/BlockStandingBanner
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/ate net/minecraft/block/BlockWallBanner
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/atf net/minecraft/block/BlockBarrier
 	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD b getHardness ()I
@@ -6526,20 +6572,40 @@ CLASS none/atf net/minecraft/block/BlockBarrier
 CLASS none/atg net/minecraft/block/BlockContainer
 	METHOD b getHardness ()I
 CLASS none/ath net/minecraft/block/BlockPressurePlate
+	METHOD a getScheduledDelay (Lnone/aqu;)I
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
+	METHOD a (Lnone/aqu;Lnone/dt;Lnone/bec;I)V
+	METHOD a onRandomTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
 	METHOD a onEntityEnterBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD a getPowerEmittedFromLocationFacing (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD a getPowerOutputState (Lnone/bec;I)Lnone/bec;
+	METHOD a getPressurePlateTriggerBoundsAt (Lnone/dt;)Lnone/brt;
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD b getPowerTransmittedToSolidBlockAt (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
 	METHOD c isOpaque ()Z
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e getWeightOnPressurePlateAt (Lnone/aqu;Lnone/dt;)I
 	METHOD g canEmitPower ()Z
+	METHOD h updateTargetingHitbox ()V
 	METHOD i getMobilityFlag ()I
 CLASS none/ati net/minecraft/block/BlockRailBase
+	CLASS atk
+		FIELD b level
+		FIELD c blockPos
+		FIELD d railBlock
+		FIELD e blockState
+		FIELD f shouldUpdateNeighbours
+		FIELD g connections
+		METHOD a initConnections (Lnone/atl;)V
+	FIELD a shouldUpdateNeighbours
+	METHOD <init> (Z)V
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a getHitResult (Lnone/aqu;Lnone/dt;Lnone/brw;Lnone/brw;)Lnone/bru;
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD c isOpaque ()Z
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD d hasFullCubeHitbox ()Z
@@ -6547,6 +6613,7 @@ CLASS none/ati net/minecraft/block/BlockRailBase
 	METHOD d checkBlockIsRail (Lnone/bec;)Z
 	METHOD i getMobilityFlag ()I
 	METHOD k getBlockTextureType ()Lnone/aql;
+	METHOD l getShapeProperty ()Lnone/bex;
 CLASS none/atl net/minecraft/block/EnumRailShape
 	FIELD a NORTH_SOUTH
 	FIELD b EAST_WEST
@@ -6577,11 +6644,14 @@ CLASS none/atp net/minecraft/block/BlockBed
 	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
+	METHOD a updateState (Lnone/bec;Lnone/ard;Lnone/dt;)Lnone/bec;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD c isOpaque ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD i getMobilityFlag ()I
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/atq net/minecraft/block/EnumBedPart
@@ -6597,7 +6667,8 @@ CLASS none/atr net/minecraft/block/Block
 	FIELD G maxZ
 	FIELD H sound
 	FIELD J material
-	FIELD M blockState
+	FIELD L propertyManager
+	FIELD M defaultState
 	FIELD N name
 	FIELD a AIR
 	FIELD b creativeTab
@@ -6617,6 +6688,7 @@ CLASS none/atr net/minecraft/block/Block
 	FIELD p SOUND_ANVIL
 	FIELD q SOUND_SLIME
 	FIELD r isOpaque
+	FIELD s opacity
 	FIELD u lightEmmisionLevel
 	FIELD v canClimbOver
 	FIELD w hardness
@@ -6628,7 +6700,8 @@ CLASS none/atr net/minecraft/block/Block
 	METHOD I hasStats ()Z
 	METHOD J disableStats ()Lnone/atr;
 	METHOD K getCreativeGroup ()Lnone/akf;
-	METHOD P getBlockState ()Lnone/bec;
+	METHOD O getPropertyManager ()Lnone/bed;
+	METHOD P getDefaultState ()Lnone/bec;
 	METHOD R registerBlocks ()V
 	METHOD a getTileName ()Ljava/lang/String;
 	METHOD a setLightEmmisionLevel (F)Lnone/atr;
@@ -6654,7 +6727,7 @@ CLASS none/atr net/minecraft/block/Block
 	METHOD a setCreativeGroup (Lnone/akf;)Lnone/atr;
 		ARG 0 group
 	METHOD a getFromItemBlock (Lnone/alq;)Lnone/atr;
-	METHOD a (Lnone/aqu;)I
+	METHOD a getScheduledDelay (Lnone/aqu;)I
 		ARG 0 dimension
 	METHOD a onBreak (Lnone/aqu;Lnone/ahd;Lnone/dt;Lnone/bec;Lnone/bcm;)V
 		ARG 0 dimension
@@ -6681,7 +6754,7 @@ CLASS none/atr net/minecraft/block/Block
 	METHOD a (Lnone/aqu;Lnone/dt;Lnone/bec;II)Z
 		ARG 0 dimension
 		ARG 1 blockCoords
-	METHOD a (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD a onRandomTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
 		ARG 3 random
@@ -6695,7 +6768,7 @@ CLASS none/atr net/minecraft/block/Block
 		ARG 0 dimension
 		ARG 1 blockCoords
 		ARG 3 block
-	METHOD a (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/brt;Ljava/util/List;Lnone/wv;)V
+	METHOD a checkCollision (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/brt;Ljava/util/List;Lnone/wv;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
 		ARG 5 entity
@@ -6706,16 +6779,16 @@ CLASS none/atr net/minecraft/block/Block
 	METHOD a (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/xm;Lnone/amj;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
-	METHOD a (Lnone/aqu;Lnone/dt;Lnone/brw;Lnone/brw;)Lnone/bru;
+	METHOD a getHitResult (Lnone/aqu;Lnone/dt;Lnone/brw;Lnone/brw;)Lnone/bru;
 		ARG 0 dimension
 		ARG 1 blockCoords
 	METHOD a (Lnone/aqu;Lnone/dt;Lnone/ej;)Z
 		ARG 0 dimension
 		ARG 1 blockCoords
-	METHOD a (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
 		ARG 0 dimension
 		ARG 1 blockCoords
-		ARG 2 blockFace
+		ARG 2 facing
 	METHOD a (Lnone/aqu;Lnone/dt;Lnone/ej;Lnone/amj;)Z
 		ARG 0 dimension
 		ARG 1 blockCoords
@@ -6734,9 +6807,9 @@ CLASS none/atr net/minecraft/block/Block
 	METHOD a (Lnone/aqu;Lnone/wv;)V
 		ARG 0 dimension
 		ARG 1 entity
-	METHOD a (Lnone/ard;Lnone/dt;)V
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 		ARG 1 blockCoords
-	METHOD a (Lnone/ard;Lnone/dt;I)I
+	METHOD a getColor (Lnone/ard;Lnone/dt;I)I
 		ARG 1 blockCoords
 	METHOD a getPowerEmittedFromLocationFacing (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
 		ARG 1 blockCoords
@@ -6744,14 +6817,14 @@ CLASS none/atr net/minecraft/block/Block
 		ARG 1 blockCoords
 	METHOD a getBlockIndex (Lnone/atr;)I
 		ARG 0 block
-	METHOD a (Lnone/atr;Lnone/atr;)Z
+	METHOD a areBlocksEqual (Lnone/atr;Lnone/atr;)Z
 		ARG 0 block1
 		ARG 1 block2
 	METHOD a setSoundInfo (Lnone/atx;)Lnone/atr;
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 		ARG 0 blockState
 		ARG 1 random
-	METHOD a (Lnone/bec;Lnone/ard;Lnone/dt;)Lnone/bec;
+	METHOD a updateState (Lnone/bec;Lnone/ard;Lnone/dt;)Lnone/bec;
 		ARG 0 blockState
 		ARG 2 blockCoords
 	METHOD a (Lnone/wv;)F
@@ -6772,7 +6845,7 @@ CLASS none/atr net/minecraft/block/Block
 	METHOD b dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;I)V
 		ARG 0 level
 		ARG 1 blockCoords
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
 		ARG 3 random
@@ -6814,6 +6887,8 @@ CLASS none/atr net/minecraft/block/Block
 		ARG 1 blockCoords
 	METHOD d (Lnone/ard;Lnone/dt;)I
 		ARG 1 blockCoords
+	METHOD e initPropertyManager ()Lnone/bed;
+	METHOD e setOpacity (I)Lnone/atr;
 	METHOD f isBlockOverwrittenOnBlockPlacement (Lnone/aqu;Lnone/dt;)Z
 		ARG 0 dimension
 		ARG 1 blockCorods
@@ -6825,19 +6900,22 @@ CLASS none/atr net/minecraft/block/Block
 		ARG 1 position
 	METHOD g getColor (Lnone/bec;)Lnone/boh;
 		ARG 0 blockState
+	METHOD h updateTargetingHitbox ()V
 	METHOD i getMobilityFlag ()I
 	METHOD i getItemStack (Lnone/bec;)Lnone/amj;
 	METHOD j (Lnone/aqu;Lnone/dt;)I
 		ARG 0 rdimension
 		ARG 1 blockCoords
+	METHOD j setDefaultState (Lnone/bec;)V
 	METHOD k getBlockTextureType ()Lnone/aql;
-	METHOD k (Lnone/aqu;Lnone/dt;)V
+	METHOD k onSnowAt (Lnone/aqu;Lnone/dt;)V
 		ARG 0 dimension
 		ARG 1 blockCoords
 	METHOD l (Lnone/aqu;Lnone/dt;)I
 		ARG 0 dimension
 		ARG 1 blockCoords
 	METHOD m checkIsOpaque ()Z
+	METHOD n getOpacity ()I
 	METHOD p getLightEmmisionLevel ()I
 	METHOD r getMaterial ()Lnone/bof;
 	METHOD t isSolid ()Z
@@ -7098,7 +7176,7 @@ CLASS none/aub net/minecraft/block/BlockBrewingStand
 		ARG 0 level
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 		ARG 0 level
-	METHOD a (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/brt;Ljava/util/List;Lnone/wv;)V
+	METHOD a checkCollision (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/brt;Ljava/util/List;Lnone/wv;)V
 		ARG 0 level
 		ARG 1 blockPos
 		ARG 2 blockState
@@ -7108,42 +7186,52 @@ CLASS none/aub net/minecraft/block/BlockBrewingStand
 	METHOD c isOpaque ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
+	METHOD h updateTargetingHitbox ()V
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/auc net/minecraft/block/BlockGrowable
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c isOpaque ()Z
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD d hasFullCubeHitbox ()Z
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/aud net/minecraft/block/BlockButton
+	FIELD M wooden
 	FIELD a facing
 	FIELD b powered
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
+	METHOD a getScheduledDelay (Lnone/aqu;)I
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
+	METHOD a onRandomTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
 	METHOD a onEntityEnterBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD a getPowerEmittedFromLocationFacing (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD b getPowerTransmittedToSolidBlockAt (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
 	METHOD c isOpaque ()Z
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD g canEmitPower ()Z
+	METHOD h updateTargetingHitbox ()V
 CLASS none/auf net/minecraft/block/BlockCactus
 	FIELD a age
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
 	METHOD a onEntityEnterBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c isOpaque ()Z
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/aug net/minecraft/block/BlockCake
 	FIELD a bites
@@ -7152,6 +7240,7 @@ CLASS none/aug net/minecraft/block/BlockCake
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD b (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;)V
@@ -7161,24 +7250,32 @@ CLASS none/aug net/minecraft/block/BlockCake
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
+	METHOD h updateTargetingHitbox ()V
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/auh net/minecraft/block/BlockCarrots
 CLASS none/aui net/minecraft/block/BlockCauldron
-	FIELD a level
+	FIELD a liquidLevel
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
+	METHOD a checkCollision (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/brt;Ljava/util/List;Lnone/wv;)V
 	METHOD a onEntityEnterBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD c isOpaque ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
+	METHOD h updateTargetingHitbox ()V
+	METHOD k onSnowAt (Lnone/aqu;Lnone/dt;)V
 CLASS none/auj net/minecraft/block/BlockChest
 	FIELD a facing
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD a getPowerEmittedFromLocationFacing (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
 	METHOD b getHardness ()I
 	METHOD b getPowerTransmittedToSolidBlockAt (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
@@ -7186,6 +7283,7 @@ CLASS none/auj net/minecraft/block/BlockChest
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD g canEmitPower ()Z
 CLASS none/auk net/minecraft/block/BlockClay
 	METHOD a getDropCount (Ljava/util/Random;)I
@@ -7197,37 +7295,46 @@ CLASS none/aul net/minecraft/block/BlockCocoaBeans
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c isOpaque ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/aun net/minecraft/block/BlockColored
 	FIELD a color
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD g getColor (Lnone/bec;)Lnone/boh;
 CLASS none/auo net/minecraft/block/BlockCommandBlock
 	FIELD a triggered
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getDropCount (Ljava/util/Random;)I
+	METHOD a getScheduledDelay (Lnone/aqu;)I
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
 	METHOD b getHardness ()I
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/aup net/minecraft/block/BlockComparator
 	FIELD a powered
 	FIELD b mode
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/aur net/minecraft/block/EnumComparatorMode
 	FIELD a COMPARE
 	FIELD b SUBTRACT
@@ -7240,13 +7347,15 @@ CLASS none/auu net/minecraft/block/BlockCrops
 	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/auv net/minecraft/block/BlockDaylightDetector
 	FIELD a power
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD a getPowerEmittedFromLocationFacing (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getHardness ()I
@@ -7254,6 +7363,7 @@ CLASS none/auv net/minecraft/block/BlockDaylightDetector
 	METHOD c isOpaque ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD g canEmitPower ()Z
 CLASS none/auw net/minecraft/block/BlockDeadBush
 	METHOD a onBreak (Lnone/aqu;Lnone/ahd;Lnone/dt;Lnone/bec;Lnone/bcm;)V
@@ -7263,21 +7373,30 @@ CLASS none/auy net/minecraft/block/BlockDetectorRail
 	FIELD M powered
 	FIELD b shape
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
+	METHOD a getScheduledDelay (Lnone/aqu;)I
+	METHOD a onRandomTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD a onEntityEnterBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
 	METHOD a getPowerEmittedFromLocationFacing (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD b getPowerTransmittedToSolidBlockAt (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD g canEmitPower ()Z
+	METHOD l getShapeProperty ()Lnone/bex;
 CLASS none/auz net/minecraft/block/BlockDetectorRailShapeValidPredicate
-CLASS none/ava
+CLASS none/ava net/minecraft/block/BlockRepeaterBase
+	FIELD M lit
+	METHOD <init> (Z)V
+	METHOD a onRandomTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
 	METHOD a getPowerEmittedFromLocationFacing (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD b getPowerTransmittedToSolidBlockAt (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
 	METHOD c isOpaque ()Z
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD d isAttachmentValid (Lnone/aqu;Lnone/dt;)Z
 	METHOD g canEmitPower ()Z
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/avb net/minecraft/block/BlockDirectional
@@ -7286,7 +7405,9 @@ CLASS none/avc net/minecraft/block/BlockDirt
 	FIELD a variant
 	FIELD b snowy
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
+	METHOD a updateState (Lnone/bec;Lnone/ard;Lnone/dt;)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/avd net/minecraft/block/EnumDirtVariant
 	FIELD a DIRT
 	FIELD b COARSE_DIRT
@@ -7297,12 +7418,15 @@ CLASS none/ave net/minecraft/block/BlockDispenser
 	FIELD a facing
 	FIELD b triggered
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
+	METHOD a getScheduledDelay (Lnone/aqu;)I
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
 	METHOD b getHardness ()I
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/avf net/minecraft/block/BlockDoor
 	FIELD M hinge
 	FIELD N powered
@@ -7313,12 +7437,16 @@ CLASS none/avf net/minecraft/block/BlockDoor
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a getHitResult (Lnone/aqu;Lnone/dt;Lnone/brw;Lnone/brw;)Lnone/bru;
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
+	METHOD a updateState (Lnone/bec;Lnone/ard;Lnone/dt;)Lnone/bec;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD c isOpaque ()Z
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD i getMobilityFlag ()I
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/avg net/minecraft/block/EnumDoorPart
@@ -7334,9 +7462,13 @@ CLASS none/avi net/minecraft/block/BlockDoublePlant
 	FIELD b half
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a onBreak (Lnone/aqu;Lnone/ahd;Lnone/dt;Lnone/bec;Lnone/bcm;)V
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
+	METHOD a getColor (Lnone/ard;Lnone/dt;I)I
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
+	METHOD a updateState (Lnone/bec;Lnone/ard;Lnone/dt;)Lnone/bec;
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD f isBlockOverwrittenOnBlockPlacement (Lnone/aqu;Lnone/dt;)Z
 CLASS none/avj net/minecraft/block/EnumDoublePlantHalf
 	FIELD a UPPER
@@ -7351,16 +7483,17 @@ CLASS none/avk net/minecraft/block/EnumDoublePlantVariant
 	FIELD f PAEONIA
 	METHOD l getName ()Ljava/lang/String;
 CLASS none/avl net/minecraft/block/BlockDragonEgg
+	METHOD a getScheduledDelay (Lnone/aqu;)I
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c isOpaque ()Z
 	METHOD d hasFullCubeHitbox ()Z
 CLASS none/avm net/minecraft/block/BlockDropper
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
 CLASS none/avn net/minecraft/block/BlockLiquidFlowing
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 CLASS none/avo net/minecraft/block/BlockEnchantingTable
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
@@ -7370,7 +7503,9 @@ CLASS none/avo net/minecraft/block/BlockEnchantingTable
 CLASS none/avp net/minecraft/block/BlockEndPortal
 	METHOD a getDropCount (Ljava/util/Random;)I
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
+	METHOD a checkCollision (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/brt;Ljava/util/List;Lnone/wv;)V
 	METHOD a onEntityEnterBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD c isOpaque ()Z
 	METHOD d hasFullCubeHitbox ()Z
@@ -7379,25 +7514,32 @@ CLASS none/avq net/minecraft/block/BlockEndPortalFrame
 	FIELD a facing
 	FIELD b eyeInserted
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
+	METHOD a checkCollision (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/brt;Ljava/util/List;Lnone/wv;)V
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD c isOpaque ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
+	METHOD h updateTargetingHitbox ()V
 CLASS none/avr net/minecraft/block/BlockEnderChest
 	FIELD a facing
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getDropCount (Ljava/util/Random;)I
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getHardness ()I
 	METHOD c isOpaque ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/avs
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
 CLASS none/avt net/minecraft/block/BlockFalling
+	METHOD a getScheduledDelay (Lnone/aqu;)I
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 CLASS none/avu net/minecraft/block/BlockFarmland
 	FIELD a moisture
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
@@ -7405,19 +7547,24 @@ CLASS none/avu net/minecraft/block/BlockFarmland
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c isOpaque ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/avv net/minecraft/block/BlockFence
 	FIELD M south
 	FIELD N west
 	FIELD a north
 	FIELD b east
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
+	METHOD a checkCollision (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/brt;Ljava/util/List;Lnone/wv;)V
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
+	METHOD a updateState (Lnone/bec;Lnone/ard;Lnone/dt;)Lnone/bec;
 	METHOD c isOpaque ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/avw net/minecraft/block/BlockFenceGate
 	FIELD M inWall
 	FIELD a open
@@ -7426,10 +7573,14 @@ CLASS none/avw net/minecraft/block/BlockFenceGate
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
+	METHOD a updateState (Lnone/bec;Lnone/ard;Lnone/dt;)Lnone/bec;
 	METHOD c isOpaque ()Z
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/avx net/minecraft/block/BlockFire
 	FIELD M alt
 	FIELD N north
@@ -7441,15 +7592,18 @@ CLASS none/avx net/minecraft/block/BlockFire
 	FIELD b flip
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getDropCount (Ljava/util/Random;)I
+	METHOD a getScheduledDelay (Lnone/aqu;)I
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
 	METHOD a registerBurnable (Lnone/atr;II)V
 		ARG 0 block
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD a updateState (Lnone/bec;Lnone/ard;Lnone/dt;)Lnone/bec;
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c isOpaque ()Z
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD g getColor (Lnone/bec;)Lnone/boh;
 	METHOD j registerBurnables ()V
 	METHOD k getBlockTextureType ()Lnone/aql;
@@ -7457,6 +7611,7 @@ CLASS none/avy net/minecraft/block/BlockFlower
 	FIELD a type
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD l getType ()Lnone/bex;
 CLASS none/awa net/minecraft/block/EnumFlowerType
 	FIELD a DANDELION
@@ -7479,13 +7634,17 @@ CLASS none/awd net/minecraft/block/BlockFlowerPot
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a getColor (Lnone/ard;Lnone/dt;I)I
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
+	METHOD a updateState (Lnone/bec;Lnone/ard;Lnone/dt;)Lnone/bec;
 	METHOD b getHardness ()I
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD c isOpaque ()Z
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
+	METHOD h updateTargetingHitbox ()V
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/awf net/minecraft/block/EnumFlowerPotContent
 	FIELD a EMPTY
@@ -7512,17 +7671,22 @@ CLASS none/awf net/minecraft/block/EnumFlowerPotContent
 	FIELD v CACTUS
 	METHOD l getName ()Ljava/lang/String;
 CLASS none/awg net/minecraft/block/BlockDoubleStoneSlabs2
+	METHOD j isDoubleSlab ()Z
 CLASS none/awh net/minecraft/block/BlockStoneDoubleSlab
+	METHOD j isDoubleSlab ()Z
 CLASS none/awi net/minecraft/block/BlockWoodenDoubleSlab
+	METHOD j isDoubleSlab ()Z
 CLASS none/awj net/minecraft/block/BlockFurnace
 	FIELD a facing
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getHardness ()I
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/awl net/minecraft/block/BlockGlass
 	METHOD a getDropCount (Ljava/util/Random;)I
 	METHOD d hasFullCubeHitbox ()Z
@@ -7533,31 +7697,44 @@ CLASS none/awm net/minecraft/block/BlockGlowstone
 	METHOD g getColor (Lnone/bec;)Lnone/boh;
 CLASS none/awn net/minecraft/block/BlockGrass
 	FIELD a snowy
+	METHOD a getColor (Lnone/ard;Lnone/dt;I)I
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD a updateState (Lnone/bec;Lnone/ard;Lnone/dt;)Lnone/bec;
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/awo net/minecraft/block/BlockGravel
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 CLASS none/awp net/minecraft/block/BlockStoneSlabs2
+	METHOD j isDoubleSlab ()Z
 CLASS none/awq net/minecraft/block/BlockSlab
 	FIELD a half
 	METHOD a getDropCount (Ljava/util/Random;)I
+	METHOD a checkCollision (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/brt;Ljava/util/List;Lnone/wv;)V
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD c isOpaque ()Z
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD h updateTargetingHitbox ()V
+	METHOD j isDoubleSlab ()Z
 CLASS none/awr net/minecraft/block/EnumSlabHalf
 	FIELD a TOP
 	FIELD b BOTTOM
 	METHOD l getName ()Ljava/lang/String;
 CLASS none/aws net/minecraft/block/BlockStoneSlab
+	METHOD j isDoubleSlab ()Z
 CLASS none/awt net/minecraft/block/BlockTransparentCube
 	METHOD c isOpaque ()Z
 CLASS none/awu net/minecraft/block/BlockWoodenSlab
+	METHOD j isDoubleSlab ()Z
 CLASS none/awv net/minecraft/block/BlockHardenedClay
 	METHOD g getColor (Lnone/bec;)Lnone/boh;
 CLASS none/aww net/minecraft/block/BlockHayBlock
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD i getItemStack (Lnone/bec;)Lnone/amj;
 CLASS none/awx net/minecraft/block/BlockHopper
 	FIELD a facing
@@ -7566,19 +7743,25 @@ CLASS none/awx net/minecraft/block/BlockHopper
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a checkCollision (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/brt;Ljava/util/List;Lnone/wv;)V
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD b getHardness ()I
 	METHOD c isOpaque ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/awy net/minecraft/block/BlockHopperFacingValidPredicate
 CLASS none/awz net/minecraft/block/BlockHugeMushroom
 	FIELD a variant
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getDropCount (Ljava/util/Random;)I
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/axa net/minecraft/block/EnumHugeMushroomVariant
 	FIELD a NORTH_WEST
 	FIELD b NORTH
@@ -7597,7 +7780,7 @@ CLASS none/axa net/minecraft/block/EnumHugeMushroomVariant
 CLASS none/axb net/minecraft/block/BlockIce
 	METHOD a getDropCount (Ljava/util/Random;)I
 	METHOD a onBreak (Lnone/aqu;Lnone/ahd;Lnone/dt;Lnone/bec;Lnone/bcm;)V
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD i getMobilityFlag ()I
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/axc net/minecraft/block/BlockJukebox
@@ -7608,6 +7791,7 @@ CLASS none/axc net/minecraft/block/BlockJukebox
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD b getHardness ()I
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/axd net/minecraft/blockentity/BlockEntityJukebox
 	FIELD a record
 	METHOD a getrecord ()Lnone/amj;
@@ -7622,18 +7806,22 @@ CLASS none/axe net/minecraft/block/BlockLadder
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD c isOpaque ()Z
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/axg net/minecraft/block/BlockLeaves
 	FIELD a decayable
 	FIELD b checkDecay
 	METHOD a getDropCount (Ljava/util/Random;)I
 	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
+	METHOD a getColor (Lnone/ard;Lnone/dt;I)I
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c isOpaque ()Z
 	METHOD k getBlockTextureType ()Lnone/aql;
 	METHOD u isSolidCube ()Z
@@ -7644,12 +7832,15 @@ CLASS none/axi net/minecraft/block/BlockLever
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD a getPowerEmittedFromLocationFacing (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
 	METHOD b getPowerTransmittedToSolidBlockAt (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
 	METHOD c isOpaque ()Z
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD g canEmitPower ()Z
 CLASS none/axk net/minecraft/block/EnumLeverFacing
 	FIELD a DOWN_X
@@ -7665,16 +7856,20 @@ CLASS none/axl net/minecraft/block/BlockLiquidBase
 	FIELD b level
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getDropCount (Ljava/util/Random;)I
+	METHOD a getScheduledDelay (Lnone/aqu;)I
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a getColor (Lnone/ard;Lnone/dt;I)I
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getHardness ()I
 	METHOD c isOpaque ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/axm net/minecraft/block/BlockLog
 	FIELD a axis
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
 CLASS none/axo net/minecraft/block/EnumLogAxis
 	FIELD a X
 	FIELD b Y
@@ -7701,6 +7896,7 @@ CLASS none/axs net/minecraft/block/BlockSilverfish
 	METHOD a getDropCount (Ljava/util/Random;)I
 	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD i getItemStack (Lnone/bec;)Lnone/amj;
 CLASS none/axu net/minecraft/block/EnumSilverfishVariant
 	FIELD a STONE
@@ -7711,13 +7907,15 @@ CLASS none/axu net/minecraft/block/EnumSilverfishVariant
 	FIELD f CHISELED_STONEBRICK
 	METHOD l getName ()Ljava/lang/String;
 CLASS none/ayb net/minecraft/block/BlockMushroom
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 CLASS none/ayc net/minecraft/block/BlockMycelium
 	FIELD a snowy
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD a updateState (Lnone/bec;Lnone/ard;Lnone/dt;)Lnone/bec;
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/ayd net/minecraft/block/BlockNetherrack
 	METHOD g getColor (Lnone/bec;)Lnone/boh;
 CLASS none/aye net/minecraft/block/BlockNetherWart
@@ -7727,8 +7925,9 @@ CLASS none/aye net/minecraft/block/BlockNetherWart
 	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/ayf net/minecraft/block/BlockNetherBrick
 	METHOD g getColor (Lnone/bec;)Lnone/boh;
 CLASS none/ayg net/minecraft/block/BlockLeaves2
@@ -7736,12 +7935,14 @@ CLASS none/ayg net/minecraft/block/BlockLeaves2
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a onBreak (Lnone/aqu;Lnone/ahd;Lnone/dt;Lnone/bec;Lnone/bcm;)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD i getItemStack (Lnone/bec;)Lnone/amj;
 CLASS none/ayh net/minecraft/block/BlockLeaves2WoodTypeValidPredicate
 CLASS none/ayi net/minecraft/block/BlockLog2
 	FIELD b variant
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD i getItemStack (Lnone/bec;)Lnone/amj;
 CLASS none/ayj net/minecraft/block/BlockLog2WoodTypeValidPredicate
 CLASS none/ayl net/minecraft/block/BlockStoneSlabNew
@@ -7751,6 +7952,7 @@ CLASS none/ayl net/minecraft/block/BlockStoneSlabNew
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/aym
 	FIELD a RED_SANDSTONE
 	METHOD l getName ()Ljava/lang/String;
@@ -7766,13 +7968,16 @@ CLASS none/ayp net/minecraft/block/BlockOldLeaves
 	FIELD P variant
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a onBreak (Lnone/aqu;Lnone/ahd;Lnone/dt;Lnone/bec;Lnone/bcm;)V
+	METHOD a getColor (Lnone/ard;Lnone/dt;I)I
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD i getItemStack (Lnone/bec;)Lnone/amj;
 CLASS none/ayq net/minecraft/block/BlockOldLeavesWoodTypeValid
 CLASS none/ayr net/minecraft/block/BlockOldLog
 	FIELD b variant
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD i getItemStack (Lnone/bec;)Lnone/amj;
 CLASS none/ays net/minecraft/block/BlockOldLogWoodTypeValidPredicate
 CLASS none/ayu net/minecraft/block/BlockOre
@@ -7785,6 +7990,7 @@ CLASS none/ayw net/minecraft/block/BlockPlanks
 	FIELD a variant
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/ayx net/minecraft/block/EnumWoodType
 	FIELD a OAK
 	FIELD b SPRUCE
@@ -7802,10 +8008,12 @@ CLASS none/ayy net/minecraft/block/BlockNetherPortal
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
 	METHOD a onEntityEnterBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/aza net/minecraft/block/BlockPotatoes
 	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
@@ -7817,12 +8025,17 @@ CLASS none/azc net/minecraft/block/BlockRedstoneRail
 	FIELD b shape
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
+	METHOD l getShapeProperty ()Lnone/bex;
 CLASS none/azd net/minecraft/block/BlockRedstoneRailShapeValidPredicate
 CLASS none/azf net/minecraft/block/BlockPressurePlateRegular
 	FIELD a powered
 	FIELD b triggerCategory
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
+	METHOD a getPowerOutputState (Lnone/bec;I)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
+	METHOD e getWeightOnPressurePlateAt (Lnone/aqu;Lnone/dt;)I
 CLASS none/azh net/minecraft/block/EnumPressurePlateTriggerCategory
 	FIELD a EVERYTHING
 	FIELD b MOBS
@@ -7830,6 +8043,7 @@ CLASS none/azi net/minecraft/block/BlockPrismarine
 	FIELD a variant
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/azj net/minecraft/block/EnumPrismarineVariant
 	FIELD a ROUGH
 	FIELD b BRICKS
@@ -7837,12 +8051,16 @@ CLASS none/azj net/minecraft/block/EnumPrismarineVariant
 	METHOD l getName ()Ljava/lang/String;
 CLASS none/azk net/minecraft/block/BlockPumpkin
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/azl net/minecraft/block/BlockQuartzBlock
 	FIELD a variant
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD g getColor (Lnone/bec;)Lnone/boh;
 	METHOD i getItemStack (Lnone/bec;)Lnone/amj;
 CLASS none/azn net/minecraft/block/EnumQuartzBlockVariant
@@ -7857,11 +8075,14 @@ CLASS none/azo net/minecraft/block/BlockRail
 	FIELD b shape
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
+	METHOD l getShapeProperty ()Lnone/bex;
 CLASS none/azp net/minecraft/block/BlockRedFlower
 CLASS none/azq net/minecraft/block/BlockRedSandstone
 	FIELD a type
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/azr net/minecraft/block/EnumRedSandstoneType
 	FIELD a DEFAULT
 	FIELD b CHISELED
@@ -7869,10 +8090,11 @@ CLASS none/azr net/minecraft/block/EnumRedSandstoneType
 	METHOD l getName ()Ljava/lang/String;
 CLASS none/azs net/minecraft/block/BlockRedstoneOre
 	METHOD a getDropCount (Ljava/util/Random;)I
+	METHOD a getScheduledDelay (Lnone/aqu;)I
 	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD i getItemStack (Lnone/bec;)Lnone/amj;
 CLASS none/azt net/minecraft/block/BlockRedstoneWire
 	FIELD M southConnection
@@ -7887,15 +8109,21 @@ CLASS none/azt net/minecraft/block/BlockRedstoneWire
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
 	METHOD a getUpdatedRedstoneWireState (Lnone/aqu;Lnone/dt;Lnone/dt;Lnone/bec;)Lnone/bec;
+	METHOD a getColor (Lnone/ard;Lnone/dt;I)I
 	METHOD a getPowerEmittedFromLocationFacing (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
+	METHOD a updateState (Lnone/bec;Lnone/ard;Lnone/dt;)Lnone/bec;
+	METHOD b getRedstoneWireColor (I)I
+		ARG 0 power
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD b getPowerTransmittedToSolidBlockAt (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
 	METHOD c isOpaque ()Z
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
-	METHOD c getWireConnectionAt (Lnone/ard;Lnone/dt;Lnone/ej;)Lnone/azu;
+	METHOD c getWireConnectionFacing (Lnone/ard;Lnone/dt;Lnone/ej;)Lnone/azu;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
+	METHOD e updateRedstoneWire (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/bec;
 	METHOD g canEmitPower ()Z
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/azu net/minecraft/block/EnumRedstoneWireConnection
@@ -7904,18 +8132,21 @@ CLASS none/azu net/minecraft/block/EnumRedstoneWireConnection
 	FIELD c NONE
 	METHOD l getName ()Ljava/lang/String;
 CLASS none/azv net/minecraft/block/BlockRedstoneLamp
+	FIELD a lit
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD i getItemStack (Lnone/bec;)Lnone/amj;
 CLASS none/azw net/minecraft/block/BlockRedstoneTorch
 	FIELD M powered
+	METHOD a getScheduledDelay (Lnone/aqu;)I
+	METHOD a onRandomTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
 	METHOD a getPowerEmittedFromLocationFacing (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD b getPowerTransmittedToSolidBlockAt (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
 	METHOD g canEmitPower ()Z
 CLASS none/azy net/minecraft/block/BlockReeds
@@ -7923,13 +8154,15 @@ CLASS none/azy net/minecraft/block/BlockReeds
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a getColor (Lnone/ard;Lnone/dt;I)I
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c isOpaque ()Z
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/azz net/minecraft/block/BlockRepeater
 	FIELD a locked
@@ -7937,14 +8170,17 @@ CLASS none/azz net/minecraft/block/BlockRepeater
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
+	METHOD a updateState (Lnone/bec;Lnone/ard;Lnone/dt;)Lnone/bec;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/baa net/minecraft/block/BlockRotatedPillar
 	FIELD M axis
 CLASS none/bab net/minecraft/block/BlockSand
 	FIELD a variant
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD g getColor (Lnone/bec;)Lnone/boh;
 CLASS none/bac net/minecraft/block/EnumSandVariant
 	FIELD a SAND
@@ -7954,6 +8190,7 @@ CLASS none/bad net/minecraft/block/BlockSandStone
 	FIELD a type
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/bae net/minecraft/block/EnumSandstoneType
 	FIELD a DEFAULT
 	FIELD b CHISELED
@@ -7963,8 +8200,9 @@ CLASS none/baf net/minecraft/block/BlockSapling
 	FIELD a type
 	FIELD b stage
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/bah net/minecraft/block/BlockSeaLantern
 	METHOD a getDropCount (Ljava/util/Random;)I
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
@@ -7984,17 +8222,20 @@ CLASS none/baj net/minecraft/block/BlockSkull
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD c isOpaque ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/bam net/minecraft/block/BlockSlime
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/ban net/minecraft/block/BlockSnow
 	METHOD a getDropCount (Ljava/util/Random;)I
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 CLASS none/bao net/minecraft/block/BlockSnowLayer
 	FIELD a layers
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
@@ -8002,13 +8243,17 @@ CLASS none/bao net/minecraft/block/BlockSnowLayer
 	METHOD a onBreak (Lnone/aqu;Lnone/ahd;Lnone/dt;Lnone/bec;Lnone/bcm;)V
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b updateTargetingHitboxForHeight (I)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c isOpaque ()Z
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD f isBlockOverwrittenOnBlockPlacement (Lnone/aqu;Lnone/dt;)Z
+	METHOD h updateTargetingHitbox ()V
 CLASS none/bap net/minecraft/block/BlockSoulSand
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onEntityEnterBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
@@ -8017,33 +8262,47 @@ CLASS none/baq net/minecraft/block/BlockSponge
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/bar net/minecraft/block/BlockStainedGlass
 	FIELD a color
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getDropCount (Ljava/util/Random;)I
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD g getColor (Lnone/bec;)Lnone/boh;
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/bas net/minecraft/block/BlockStainedGlassPane
 	FIELD a color
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/bat net/minecraft/block/BlockStairs
 	FIELD M shape
+	FIELD N airSpaces
+	FIELD O parentBlock
+	FIELD P parentBlockState
+	FIELD Q ignoreAirSpaceCollisions
 	FIELD a facing
 	FIELD b half
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
+	METHOD a getScheduledDelay (Lnone/aqu;)I
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD a checkCollision (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/brt;Ljava/util/List;Lnone/wv;)V
+	METHOD a getHitResult (Lnone/aqu;Lnone/dt;Lnone/brw;Lnone/brw;)Lnone/bru;
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
+	METHOD a updateState (Lnone/bec;Lnone/ard;Lnone/dt;)Lnone/bec;
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c isOpaque ()Z
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD g getColor (Lnone/bec;)Lnone/boh;
 	METHOD k getBlockTextureType ()Lnone/aql;
-CLASS none/bau
+CLASS none/bau net/minecraft/block/EnumStairsHalf
 	FIELD a TOP
 	FIELD b BOTTOM
 	METHOD l getName ()Ljava/lang/String;
@@ -8059,24 +8318,31 @@ CLASS none/baw net/minecraft/block/BlockStandingSign
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/bax net/minecraft/block/BlockLiquidStill
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 CLASS none/bay net/minecraft/block/BlockPlantStem
 	FIELD a age
 	FIELD b facing
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
+	METHOD a getColor (Lnone/ard;Lnone/dt;I)I
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
+	METHOD a updateState (Lnone/bec;Lnone/ard;Lnone/dt;)Lnone/bec;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
+	METHOD h updateTargetingHitbox ()V
 CLASS none/baz net/minecraft/block/BlockPlantStemFacingValidPredicate
 CLASS none/bba net/minecraft/block/BlockStone
 	FIELD a variant
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/bbb net/minecraft/block/EnumStoneVariant
 	FIELD a STONE
 	FIELD b GRANITE
@@ -8090,6 +8356,7 @@ CLASS none/bbc net/minecraft/block/BlockStonebrick
 	FIELD a variant
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/bbd net/minecraft/block/EnumStoneBrickVariant
 	FIELD a DEFAULT
 	FIELD b MOSSY
@@ -8104,6 +8371,7 @@ CLASS none/bbf net/minecraft/block/BlockStoneSlabAbstract
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/bbg net/minecraft/block/EnumStoneSlabVariant
 	FIELD a STONE
 	FIELD b SANDSTONE
@@ -8118,8 +8386,10 @@ CLASS none/bbh net/minecraft/block/BlockTallGrass
 	FIELD a type
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a onBreak (Lnone/aqu;Lnone/ahd;Lnone/dt;Lnone/bec;Lnone/bcm;)V
+	METHOD a getColor (Lnone/ard;Lnone/dt;I)I
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD f isBlockOverwrittenOnBlockPlacement (Lnone/aqu;Lnone/dt;)Z
 CLASS none/bbi net/minecraft/block/EnumFoliageType
 	FIELD a DEAD_BUSH
@@ -8131,10 +8401,15 @@ CLASS none/bbj net/minecraft/block/BlockWindow
 	FIELD N south
 	FIELD O west
 	FIELD b north
+	METHOD a checkCollision (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/brt;Ljava/util/List;Lnone/wv;)V
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
+	METHOD a updateState (Lnone/bec;Lnone/ard;Lnone/dt;)Lnone/bec;
 	METHOD c isOpaque ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
+	METHOD h updateTargetingHitbox ()V
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/bbk net/minecraft/block/BlockTNT
 	FIELD a explode
@@ -8143,15 +8418,20 @@ CLASS none/bbk net/minecraft/block/BlockTNT
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
 	METHOD a onEntityEnterBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/bbl net/minecraft/block/BlockTorch
 	FIELD a facing
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a getHitResult (Lnone/aqu;Lnone/dt;Lnone/brw;Lnone/brw;)Lnone/bru;
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
 	METHOD c isOpaque ()Z
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD d isAttachableAt (Lnone/aqu;Lnone/dt;)Z
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/bbm net/minecraft/block/BlockTorchFacingValidPredicate
 CLASS none/bbo net/minecraft/block/BlockDecayable
@@ -8164,9 +8444,14 @@ CLASS none/bbp net/minecraft/block/BlockTrapdoor
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a getHitResult (Lnone/aqu;Lnone/dt;Lnone/brw;Lnone/brw;)Lnone/bru;
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD c isOpaque ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
+	METHOD h updateTargetingHitbox ()V
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/bbr
 	METHOD l getName ()Ljava/lang/String;
@@ -8181,14 +8466,18 @@ CLASS none/bbs net/minecraft/block/BlockTripwire
 	FIELD b suspended
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
+	METHOD a onRandomTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
 	METHOD a onEntityEnterBlock (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/wv;)V
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
+	METHOD a updateState (Lnone/bec;Lnone/ard;Lnone/dt;)Lnone/bec;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c isOpaque ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/bbt net/minecraft/block/BlockTripwireHook
 	FIELD M attached
@@ -8197,14 +8486,19 @@ CLASS none/bbt net/minecraft/block/BlockTripwireHook
 	FIELD b powered
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
+	METHOD a onRandomTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD a getPowerEmittedFromLocationFacing (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD a updateState (Lnone/bec;Lnone/ard;Lnone/dt;)Lnone/bec;
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD b getPowerTransmittedToSolidBlockAt (Lnone/ard;Lnone/dt;Lnone/bec;Lnone/ej;)I
 	METHOD c isOpaque ()Z
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD g canEmitPower ()Z
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/bbv net/minecraft/block/BlockVine
@@ -8218,12 +8512,18 @@ CLASS none/bbv net/minecraft/block/BlockVine
 	METHOD a onBreak (Lnone/aqu;Lnone/ahd;Lnone/dt;Lnone/bec;Lnone/bcm;)V
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
+	METHOD a getColor (Lnone/ard;Lnone/dt;I)I
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
-	METHOD b onUpdateTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD a updateState (Lnone/bec;Lnone/ard;Lnone/dt;)Lnone/bec;
+	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c isOpaque ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD f isBlockOverwrittenOnBlockPlacement (Lnone/aqu;Lnone/dt;)Z
+	METHOD h updateTargetingHitbox ()V
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/bbx net/minecraft/block/BlockWall
 	FIELD M east
@@ -8234,9 +8534,12 @@ CLASS none/bbx net/minecraft/block/BlockWall
 	FIELD b north
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
+	METHOD a updateState (Lnone/bec;Lnone/ard;Lnone/dt;)Lnone/bec;
 	METHOD c isOpaque ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/bby net/minecraft/block/EnumWallVariant
 	FIELD a NORMAL
 	FIELD b MOSSY
@@ -8247,9 +8550,13 @@ CLASS none/bbz net/minecraft/block/BlockWallSign
 	FIELD a facing
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/bcb net/minecraft/block/BlockLilyPad
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
+	METHOD a checkCollision (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/brt;Ljava/util/List;Lnone/wv;)V
+	METHOD a getColor (Lnone/ard;Lnone/dt;I)I
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 CLASS none/bcc net/minecraft/block/BlockWeb
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
@@ -8261,7 +8568,11 @@ CLASS none/bcc net/minecraft/block/BlockWeb
 CLASS none/bcd net/minecraft/block/BlockPressurePlateWeighted
 	FIELD a power
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
+	METHOD a getScheduledDelay (Lnone/aqu;)I
+	METHOD a getPowerOutputState (Lnone/bec;I)Lnone/bec;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
+	METHOD e getWeightOnPressurePlateAt (Lnone/aqu;Lnone/dt;)I
 CLASS none/bce net/minecraft/block/BlockButtonWood
 CLASS none/bcf net/minecraft/block/BlockSlabWood
 	FIELD b variant
@@ -8269,14 +8580,18 @@ CLASS none/bcf net/minecraft/block/BlockSlabWood
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/bcg net/minecraft/block/BlockCarpet
 	FIELD a color
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD c isOpaque ()Z
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
+	METHOD h updateTargetingHitbox ()V
 CLASS none/bch net/minecraft/block/BlockYellowFlower
 CLASS none/bci net/minecraft/blockentity/BlockEntityBanner
 	METHOD a load (Lnone/fn;)V
@@ -8421,9 +8736,14 @@ CLASS none/bdq net/minecraft/block/BlockPistonBase
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a checkCollision (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/brt;Ljava/util/List;Lnone/wv;)V
+	METHOD a getStateAfterPlacement (Lnone/aqu;Lnone/dt;Lnone/ej;FFFILnone/xm;)Lnone/bec;
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD c isOpaque ()Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
+	METHOD h updateTargetingHitbox ()V
 CLASS none/bds net/minecraft/block/BlockPistonHead
 	FIELD M isShort
 	FIELD a facing
@@ -8431,11 +8751,14 @@ CLASS none/bds net/minecraft/block/BlockPistonHead
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a getDropCount (Ljava/util/Random;)I
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a checkCollision (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/brt;Ljava/util/List;Lnone/wv;)V
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD c isOpaque ()Z
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/bdu net/minecraft/block/EnumPistonType
 	FIELD a DEFAULT
 	FIELD b STICKY
@@ -8452,26 +8775,46 @@ CLASS none/bdx net/minecraft/block/BlockPistonMoving
 	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
+	METHOD a getHitResult (Lnone/aqu;Lnone/dt;Lnone/brw;Lnone/brw;)Lnone/bru;
+	METHOD a updateCollisionHitbox (Lnone/ard;Lnone/dt;)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD c isOpaque ()Z
 	METHOD c isPlacingAllowedAt (Lnone/aqu;Lnone/dt;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD e initPropertyManager ()Lnone/bed;
+CLASS none/bea net/minecraft/block/BlockStateBase
+	FIELD a joiner
+	METHOD a cycleProperty (Lnone/bex;)Lnone/bec;
 CLASS none/bec net/minecraft/block/IBlockState
+	METHOD a getPropertiesKeySet ()Ljava/util/Collection;
+	METHOD a cycleProperty (Lnone/bex;)Lnone/bec;
+		ARG 0 property
 	METHOD a setProperty (Lnone/bex;Ljava/lang/Comparable;)Lnone/bec;
 		ARG 0 property
 		ARG 1 value
+	METHOD b getProperties ()Lcom/google/common/collect/ImmutableMap;
 	METHOD b getProperty (Lnone/bex;)Ljava/lang/Comparable;
 		ARG 0 property
 	METHOD c getBlock ()Lnone/atr;
-CLASS none/bed
+CLASS none/bed net/minecraft/block/BlockPropertyManager
+	FIELD c block
+	FIELD d properties
+	FIELD e states
+	METHOD b getDefaultState ()Lnone/bec;
+	METHOD c getBlock ()Lnone/atr;
+	METHOD d getProperties ()Ljava/util/Collection;
 	METHOD toString ()Ljava/lang/String;
-CLASS none/beg
+CLASS none/beg net/minecraft/block/BlockState
 	FIELD a block
-	FIELD b blockProperties
+	FIELD b properties
+	FIELD c possibleStates
+	METHOD a getPropertiesKeySet ()Ljava/util/Collection;
+	METHOD a initPossibleStates (Ljava/util/Map;)V
 	METHOD a setProperty (Lnone/bex;Ljava/lang/Comparable;)Lnone/bec;
 		ARG 1 value
+	METHOD b getProperties ()Lcom/google/common/collect/ImmutableMap;
 	METHOD b getProperty (Lnone/bex;)Ljava/lang/Comparable;
 	METHOD c getBlock ()Lnone/atr;
 CLASS none/bei
@@ -8592,7 +8935,7 @@ CLASS none/bfg net/minecraft/level/EmptyChunk
 	METHOD a removeEntity (Lnone/wv;I)V
 	METHOD b generateSkylightMap ()V
 	METHOD b getHeightAtCoords (II)I
-	METHOD b getBlockAtPosition (Lnone/dt;)I
+	METHOD b getBlockOpacityAt (Lnone/dt;)I
 	METHOD b removeEntity (Lnone/wv;)V
 	METHOD c onChunkLoad ()V
 	METHOD c getAreLevelsEmpty (II)Z
@@ -8608,14 +8951,14 @@ CLASS none/bfh net/minecraft/level/Chunk
 	FIELD e biomeMap
 	FIELD f rainfallMap
 	FIELD g skylightUpdateMap
-	FIELD h isChunkLoaded
+	FIELD h chunkLoaded
 	FIELD i level
 	FIELD j heightMap
 	FIELD k isGapLightingUpdated
 	FIELD l blockEntityMap
 	FIELD m entityStore
-	FIELD n chunkExists
-	FIELD o isLightPopulated
+	FIELD n terrainPopulated
+	FIELD o lightPopulated
 	FIELD q isModified
 	FIELD r hasEntities
 	FIELD s lastSaveTime
@@ -8658,7 +9001,7 @@ CLASS none/bfh net/minecraft/level/Chunk
 		ARG 0 localX
 		ARG 1 localZ
 	METHOD b setLastSaveTime (J)V
-	METHOD b getBlockAtPosition (Lnone/dt;)I
+	METHOD b getBlockOpacityAt (Lnone/dt;)I
 	METHOD b removeEntity (Lnone/wv;)V
 	METHOD c onChunkLoad ()V
 	METHOD c getAreLevelsEmpty (II)Z
@@ -8666,6 +9009,7 @@ CLASS none/bfh net/minecraft/level/Chunk
 		ARG 1 upper
 	METHOD c checkSkylightNeighborHeight (III)V
 	METHOD c setInhabitedTime (J)V
+	METHOD c setChunkLoaded (Z)V
 	METHOD d onChunkUnload ()V
 	METHOD d propagateSkylightOcclusion (II)V
 		ARG 0 localX
@@ -8674,15 +9018,17 @@ CLASS none/bfh net/minecraft/level/Chunk
 		ARG 0 localX
 		ARG 1 levelY
 		ARG 2 localZ
-	METHOD d doesChunkExist (Z)V
+	METHOD d setTerrainPopulated (Z)V
 	METHOD e setChunkModified ()V
 	METHOD e getBlockIDAtLocalCoords (III)I
+	METHOD e setLightPopulated (Z)V
 	METHOD f isEmpty ()Z
 	METHOD f getBlockAtLocalCoords (III)Lnone/atr;
 		ARG 0 localX
 		ARG 1 localY
 		ARG 2 localZ
 	METHOD f getHeightAtCoords (Lnone/dt;)I
+	METHOD f setModified (Z)V
 	METHOD g getBlockStoreY ()I
 	METHOD g (III)I
 		ARG 0 localX
@@ -8691,9 +9037,15 @@ CLASS none/bfh net/minecraft/level/Chunk
 	METHOD g compareHasEntities (Z)V
 	METHOD h getCubeArray ()[Lnone/bfm;
 	METHOD k getBiomeMap ()[B
+	METHOD o isChunkLoaded ()Z
 	METHOD p getDimension ()Lnone/aqu;
 	METHOD q getHeightMap ()[I
+	METHOD r getBlockEntityMap ()Ljava/util/Map;
 	METHOD s getEntityStore ()[Lnone/uc;
+	METHOD t isTerrainPopulated ()Z
+	METHOD u isLightPopulated ()Z
+	METHOD v getHeightMapMinimum ()I
+	METHOD w getInhabitedTime ()J
 CLASS none/bfl net/minecraft/level/chunk/EnumCreateEntityType
 CLASS none/bfm net/minecraft/level/storage/ChunkSection
 	FIELD a yLocation
@@ -8798,6 +9150,7 @@ CLASS none/bgd net/minecraft/level/LevelProvider
 	METHOD e canRespawnHere ()Z
 	METHOD k getDimensionName ()Ljava/lang/String;
 	METHOD l getDimensionSuffix ()Ljava/lang/String;
+	METHOD m getLevelChunkManager ()Lnone/arz;
 	METHOD q dimensionId ()I
 CLASS none/bge net/minecraft/level/LevelProviderHell
 	METHOD a generateLightBrightnessTable ()V
@@ -9672,6 +10025,7 @@ CLASS none/brt net/minecraft/util/AxisAlignedBB
 		ARG 0 x
 		ARG 1 y
 		ARG 2 z
+	METHOD b intersects (Lnone/brt;)Z
 	METHOD c shift (DDD)Lnone/brt;
 		ARG 0 x
 		ARG 1 y
@@ -9687,6 +10041,7 @@ CLASS none/bru net/minecraft/level/HitAction
 	FIELD c pos
 	FIELD d hitEntity
 	FIELD e blockPos
+	METHOD a getBlockPos ()Lnone/dt;
 CLASS none/brv net/minecraft/entity/EnumHitType
 	FIELD a MISS
 	FIELD b BLOCK
@@ -11222,17 +11577,17 @@ CLASS none/cec
 	METHOD a handleDisconnect (Lnone/ng;)V
 CLASS none/cee net/minecraft/network/NetClientHandler
 	CLASS cef
-		METHOD onFailure onFailure (Ljava/lang/Throwable;)V
+		METHOD onFailure (Ljava/lang/Throwable;)V
 			ARG 0 t
-		METHOD onSuccess onSuccess (Ljava/lang/Object;)V
+		METHOD onSuccess (Ljava/lang/Object;)V
 			ARG 0 o
 	CLASS ceg
-		METHOD onFailure onFailure (Ljava/lang/Throwable;)V
+		METHOD onFailure (Ljava/lang/Throwable;)V
 			ARG 0 t
-		METHOD onSuccess onSuccess (Ljava/lang/Object;)V
+		METHOD onSuccess (Ljava/lang/Object;)V
 			ARG 0 o
 	CLASS ceh
-		METHOD run run ()V
+		METHOD run ()V
 	FIELD b logger
 	FIELD c manager
 	FIELD d profile
@@ -12086,8 +12441,8 @@ CLASS none/cxc net/minecraft/client/resources/data/TextureMetadataSectionSeriali
 CLASS none/cxk
 	METHOD a onReload (Lnone/cvk;)V
 CLASS none/cxl
-	METHOD equals equals (Ljava/lang/Object;)Z
-	METHOD hashCode hashCode ()I
+	METHOD equals (Ljava/lang/Object;)Z
+	METHOD hashCode ()I
 	METHOD toString getFullName ()Ljava/lang/String;
 CLASS none/cxz net/minecraft/sound/EnumSoundType
 	FIELD a MASTER
@@ -12407,4 +12762,4 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD z updateTimeLightAndEntities ()V
 CLASS net/minecraft/server/MinecraftServer$pd net/minecraft/level/ConvertingProcessUpdate
 CLASS net/minecraft/client/ClientBrandRetriever net/minecraft/client/ClientBrandRetriever
-	METHOD getClientModName getClientModName ()Ljava/lang/String;
+	METHOD getClientModName ()Ljava/lang/String;
