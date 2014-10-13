@@ -1270,6 +1270,7 @@ CLASS none/ej net/minecraft/block/EnumFacing
 	METHOD l getName ()Ljava/lang/String;
 	METHOD n getXRotation ()Lnone/ej;
 	METHOD p getZRotation ()Lnone/ej;
+	METHOD values facings ()[Lnone/ej;
 CLASS none/el net/minecraft/block/EnumRotatedPillarAxis
 	FIELD a X
 	FIELD b Y
@@ -3220,6 +3221,14 @@ CLASS none/qk
 	METHOD a (Lnone/ahd;Lnone/aqu;Lnone/amj;Lnone/dt;Lnone/ej;FFF)Z
 		ARG 1 dimension
 CLASS none/ql net/minecraft/level/LevelServerMulti
+	CLASS qm
+		METHOD a onSizeChange (Lnone/bfb;D)V
+		METHOD a onCenterChange (Lnone/bfb;DD)V
+		METHOD a onTransitionStart (Lnone/bfb;DDJ)V
+		METHOD a onWarningTimeChange (Lnone/bfb;I)V
+		METHOD b onDamageAmountChange (Lnone/bfb;D)V
+		METHOD b onWarningDistanceChange (Lnone/bfb;I)V
+		METHOD c onDamageBufferChange (Lnone/bfb;D)V
 	FIELD a dimensionServer
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnone/bqy;ILnone/qt;Lnone/uw;)V
 		ARG 3 dimensionServer
@@ -3267,6 +3276,7 @@ CLASS none/qs
 		ARG 0 dimension
 	METHOD c loadChunk (II)Lnone/bfh;
 	METHOD d generate (II)Lnone/bfh;
+	METHOD f makeString ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
 CLASS none/qt net/minecraft/level/LevelServer
 	FIELD I minecraftServer
@@ -3275,17 +3285,25 @@ CLASS none/qt net/minecraft/level/LevelServer
 	FIELD V tickNow
 	FIELD b theChunkProviderServer
 	METHOD a runTask (Ljava/lang/Runnable;)Lcom/google/common/util/concurrent/ListenableFuture;
+	METHOD a initialize (Lnone/arb;)V
+	METHOD a isBlockTickPending (Lnone/dt;Lnone/atr;)Z
 	METHOD a scheduleBlockTick (Lnone/dt;Lnone/atr;I)V
 	METHOD a scheduleBlockTick (Lnone/dt;Lnone/atr;II)V
 		ARG 2 delayTicks
 	METHOD a createExplosion (Lnone/wv;DDDFZZ)Lnone/aqo;
+	METHOD a tickUpdates (Z)Z
 	METHOD a saveAllChunks (ZLnone/uy;)V
 	METHOD aH isInMainThread ()Z
 	METHOD b getDimension ()Lnone/aqu;
 	METHOD c tick ()V
+	METHOD c addEntity (Lnone/wv;)Z
 	METHOD f areAllPlayersAsleep ()Z
+	METHOD h updateBlocks ()V
 	METHOD i updateEntities ()V
+	METHOD k createChunkProvider ()Lnone/bfe;
 	METHOD o flush ()V
+	METHOD p updateWeather ()V
+	METHOD q getRenderDistanceChunks ()I
 	METHOD r getMinecraftServer ()Lnet/minecraft/server/MinecraftServer;
 	METHOD s getEntityTracker ()Lnone/qn;
 CLASS none/qw net/minecraft/entity/player/EntityPlayerMP
@@ -3411,6 +3429,14 @@ CLASS none/ro
 CLASS none/rq
 	METHOD c update ()V
 CLASS none/sn net/minecraft/server/ServerConfigurationManager
+	CLASS so
+		METHOD a onSizeChange (Lnone/bfb;D)V
+		METHOD a onCenterChange (Lnone/bfb;DD)V
+		METHOD a onTransitionStart (Lnone/bfb;DDJ)V
+		METHOD a onWarningTimeChange (Lnone/bfb;I)V
+		METHOD b onDamageAmountChange (Lnone/bfb;D)V
+		METHOD b onWarningDistanceChange (Lnone/bfb;I)V
+		METHOD c onDamageBufferChange (Lnone/bfb;D)V
 	FIELD e players
 	METHOD a getPlayer (Ljava/lang/String;)Lnone/qw;
 	METHOD a getPlayerFromUuid (Ljava/util/UUID;)Lnone/qw;
@@ -6151,28 +6177,95 @@ CLASS none/aql net/minecraft/block/EnumBlockTextureType
 	FIELD b CUTOUT_MIPPED
 	FIELD c CUTOUT
 	FIELD d TRANSLUCENT
+CLASS none/aqm net/minecraft/level/ChunkCoordIntPair
+	FIELD a chunkX
+	FIELD b chunkZ
+	METHOD <init> (II)V
+		ARG 0 chunkX
+		ARG 1 chunkZ
+	METHOD a getCenterX ()I
+	METHOD a getCenterBlock (I)Lnone/dt;
+		ARG 0 levelY
+	METHOD a chunkXZ2Int (II)J
+		ARG 0 chunkX
+		ARG 1 chunkZ
+	METHOD a getLocalBlock (III)Lnone/dt;
+		ARG 0 localX
+		ARG 1 levelY
+		ARG 2 localZ
+	METHOD b getCenterZ ()I
+	METHOD c getMinX ()I
+	METHOD d getMinZ ()I
+	METHOD e getMaxX ()I
+	METHOD f getMaxZ ()I
 CLASS none/aqq net/minecraft/level/GameRules
 	METHOD a addRule (Ljava/lang/String;Ljava/lang/String;Lnone/aqs;)V
 	METHOD b getGameRuleBooleanValue (Ljava/lang/String;)Z
-CLASS none/aqs
+CLASS none/aqs net/minecraft/level/GameRulesEnumValueType
 	FIELD a ANY_VALUE
 	FIELD b BOOLEAN_VALUE
 	FIELD c NUMERICAL_VALUE
 CLASS none/aqu net/minecraft/level/Level
+	FIELD A villageCollectionObj
 	FIELD B profiler
 	FIELD C scoreboardManager
-	FIELD D isRemote
+	FIELD D isClient
+	FIELD E activeChunkSet
+	FIELD F spawnHostileMobs
+	FIELD G spawnPeacefulMobs
+	FIELD H lightUpdateBlockList
+	FIELD I lastLightningBolt
+	FIELD J theCalendar
+	FIELD K ambientTickCountdown
+	FIELD L processingLoadedBlocks
+	FIELD M levelBorder
+	FIELD a addedBlockEntitiesList
+	FIELD b blockEntitesToBeRemoved
 	FIELD c cloudColor
+	FIELD d skylightReduction
+	FIELD e doScheduledUpdatesImmediately
+	FIELD f loadedEntityList
+	FIELD g unloadedEntityList
+	FIELD h loadedBlockEntityList
+	FIELD i tickableBlockEntities
 	FIELD j players
 	FIELD k entityList
+	FIELD l entitiesById
+	FIELD m blockUpdateLCGSeed
 	FIELD n WOO_MAGIC_NUMBER
+	FIELD o prevRainingStrength
+	FIELD p rainingStrength
+	FIELD q prevThunderingStrength
+	FIELD r thunderingStrength
 	FIELD s rand
 	FIELD t levelProvider
+	FIELD u levelAccesses
 	FIELD v chunkProvider
 	FIELD w saveHandler
 	FIELD x levelInfo
+	FIELD y findingSpawnPoint
+	FIELD z mapStorage
+	METHOD A getChunkProviderName ()Ljava/lang/String;
 	METHOD A getPowerSuppliedToBlockAt (Lnone/dt;)I
+		ARG 0 pos
+	METHOD B calculateInitialSkylight ()V
+	METHOD B setSpawnPoint (Lnone/dt;)V
+		ARG 0 spawnPoint
+	METHOD C calculateInitialWeather ()V
+	METHOD C (Lnone/dt;)Z
+		ARG 0 pos
+	METHOD D setActivePlayerChunksAndCheckLight ()V
+	METHOD D (Lnone/dt;)Z
+		ARG 0 pos
+	METHOD E getLoadedEntityList ()Ljava/util/List;
+	METHOD E getDifficultyForLocation (Lnone/dt;)Lnone/vu;
+		ARG 0 pos
+	METHOD F isBlockWater (Lnone/dt;)Z
+		ARG 0 pos
 	METHOD G getTerrainType ()Lnone/are;
+	METHOD H sendQuittingDisconnectingPacket ()V
+	METHOD I checkSessionLock ()V
+	METHOD J getSeed ()J
 	METHOD K getTotalLevelTime ()J
 	METHOD L getLevelTime ()J
 	METHOD M getSpawnPoint ()Lnone/dt;
@@ -6180,11 +6273,29 @@ CLASS none/aqu net/minecraft/level/Level
 	METHOD O getSaveHandler ()Lnone/bqy;
 	METHOD P getLevelInfo ()Lnone/bqo;
 	METHOD Q getGameRules ()Lnone/aqq;
+	METHOD R isThundering ()Z
+	METHOD S isRaining ()Z
+	METHOD T getMapStorage ()Lnone/brn;
+	METHOD U getHeight ()I
+	METHOD V getActualHeight ()I
+	METHOD W hasExtendedLevels ()Z
+	METHOD X getSeaLevel ()D
+	METHOD Y getCurrentDate ()Ljava/util/Calendar;
 	METHOD Z getScoreboardManager ()Lnone/bsd;
 	METHOD a playSoundAtLocation (DDDLjava/lang/String;FF)V
 	METHOD a playSoundEffect (DDDLjava/lang/String;FFZ)V
+	METHOD a (F)I
+		ARG 0 weight
 	METHOD a getEntity (I)Lnone/wv;
+		ARG 0 id
 	METHOD a getChunk (II)Lnone/bfh;
+		ARG 0 chunkX
+		ARG 1 chunkZ
+	METHOD a markBlocksDirtyVertical (IIII)V
+		ARG 0 levelX
+		ARG 1 levelZ
+		ARG 2 minY
+		ARG 3 maxY
 	METHOD a checkBlockRangeIsInLevel (IIIIIIZ)Z
 		ARG 0 minLevelX
 		ARG 1 minLevelY
@@ -6192,30 +6303,129 @@ CLASS none/aqu net/minecraft/level/Level
 		ARG 3 maxLevelX
 		ARG 4 maxLevelY
 		ARG 5 maxLevelZ
+	METHOD a (IILnone/bfh;)V
+		ARG 2 chunk
 	METHOD a checkChunkExists (IIZ)Z
 		ARG 0 chunkX
 		ARG 1 chunkZ
-		ARG 2 flag
+		ARG 2 ignoreEmptyChunk
+	METHOD a (ILnone/dt;I)V
+		ARG 1 pos
+	METHOD a (J)V
+		ARG 0 time
 	METHOD a getEntities (Ljava/lang/Class;Lcom/google/common/base/Predicate;)Ljava/util/List;
 	METHOD a getEntities (Ljava/lang/Class;Lnone/brt;)Ljava/util/List;
+		ARG 1 aaBB
 	METHOD a getEntities (Ljava/lang/Class;Lnone/brt;Lcom/google/common/base/Predicate;)Ljava/util/List;
+		ARG 1 aaBB
+	METHOD a (Ljava/lang/Class;Lnone/brt;Lnone/wv;)Lnone/wv;
+		ARG 1 aaBB
+		ARG 2 ent
+	METHOD a (Ljava/lang/String;Lnone/dt;)Lnone/dt;
+		ARG 1 rpos
+	METHOD a (Lnone/ahd;ILnone/dt;I)V
+		ARG 0 entPlayer
+		ARG 2 pos
 	METHOD a playSoundAtPlayer (Lnone/ahd;Ljava/lang/String;FF)V
+		ARG 0 entPlayer
+	METHOD a (Lnone/ahd;Lnone/dt;)Z
+		ARG 0 entPlayer
+		ARG 1 pos
+	METHOD a (Lnone/ahd;Lnone/dt;Lnone/ej;)Z
+		ARG 0 entPlayer
+		ARG 1 pos
+		ARG 2 facing
 	METHOD a addLevelAccess (Lnone/ara;)V
+	METHOD a initialize (Lnone/arb;)V
 	METHOD a checkBlockIsValidAttachmentSurface (Lnone/ard;Lnone/dt;)Z
+		ARG 1 pos
+	METHOD a getLightFromNeighbors (Lnone/arf;Lnone/dt;)I
+		ARG 0 ceiling
+		ARG 1 pos
+	METHOD a setLightAt (Lnone/arf;Lnone/dt;I)V
+		ARG 0 ceiling
+		ARG 1 pos
+		ARG 2 lightValue
+	METHOD a tickBlockAtPosImmediately (Lnone/atr;Lnone/dt;Ljava/util/Random;)V
+		ARG 0 block
+		ARG 1 pos
+		ARG 2 rand
+	METHOD a canBlockBePlaced (Lnone/atr;Lnone/dt;ZLnone/ej;Lnone/wv;Lnone/amj;)Z
+		ARG 0 block
+		ARG 1 pos
+		ARG 3 facing
+		ARG 4 ent
+		ARG 5 itemStack
 	METHOD a addLevelInfoToCrashReport (Lnone/b;)Lnone/j;
+	METHOD a (Lnone/bcm;)Z
+		ARG 0 blockEnt
+	METHOD a (Lnone/bfh;Z)Ljava/util/List;
+		ARG 0 chunk
 	METHOD a checkBlockRangeIsInLevel (Lnone/bjb;)Z
+		ARG 0 sBB
+	METHOD a (Lnone/bjb;Z)Ljava/util/List;
+		ARG 0 sBB
+	METHOD a (Lnone/brt;)Ljava/util/List;
+		ARG 0 aaBB
+	METHOD a isAnyMaterialInRegion (Lnone/brt;Lnone/bof;)Z
+		ARG 0 aaBB
+		ARG 1 material
+	METHOD a (Lnone/brt;Lnone/bof;Lnone/wv;)Z
+		ARG 0 aaBB
+		ARG 1 material
+		ARG 2 ent
+	METHOD a (Lnone/brt;Lnone/wv;)Z
+		ARG 0 aaBB
+		ARG 1 ent
+	METHOD a (Lnone/brw;Lnone/brt;)F
+		ARG 0 vec
+		ARG 1 aaBB
+	METHOD a raytraceBlocks (Lnone/brw;Lnone/brw;)Lnone/bru;
+		ARG 0 vec3_1
+		ARG 1 vec3_2
+	METHOD a raytraceBlocks (Lnone/brw;Lnone/brw;Z)Lnone/bru;
+		ARG 0 vec3_1
+		ARG 1 vec3_2
+	METHOD a raytraceBlocks (Lnone/brw;Lnone/brw;ZZZ)Lnone/bru;
+		ARG 0 asdfsadfads
+		ARG 1 end
 	METHOD a isBlockInLevel (Lnone/dt;)Z
+		ARG 0 pos
 	METHOD a checkBlockRangeIsInLevel (Lnone/dt;I)Z
+		ARG 0 pos
 		ARG 1 range
 	METHOD a checkBlockRangeIsInLevel (Lnone/dt;IZ)Z
+		ARG 0 pos
 		ARG 1 range
 		ARG 2 flag
+	METHOD a (Lnone/dt;Ljava/lang/String;)V
+		ARG 0 pos
+	METHOD a (Lnone/dt;Lnone/arf;)I
+		ARG 0 pos
+		ARG 1 ceiling
+	METHOD a isBlockTickPending (Lnone/dt;Lnone/atr;)Z
+		ARG 0 pos
+		ARG 1 block
 	METHOD a scheduleBlockTick (Lnone/dt;Lnone/atr;I)V
+		ARG 0 pos
+		ARG 1 block
 		ARG 2 delayTicks
 	METHOD a scheduleBlockTick (Lnone/dt;Lnone/atr;II)V
+		ARG 0 pos
+		ARG 1 block
 	METHOD a updateSurroundingBlocksExcludingFacing (Lnone/dt;Lnone/atr;Lnone/ej;)V
+		ARG 0 pos
+		ARG 1 block
 		ARG 2 excludedFacing
+	METHOD a (Lnone/dt;Lnone/bcm;)V
+		ARG 0 pos
+		ARG 1 blockEnt
+	METHOD a setBlockState (Lnone/dt;Lnone/bec;)Z
+		ARG 0 pos
+		ARG 1 blockState
 	METHOD a tryPlaceBlock (Lnone/dt;Lnone/bec;I)Z
+		ARG 0 pos
+		ARG 1 blockState
 	METHOD a checkBlockRangeIsInLevel (Lnone/dt;Lnone/dt;)Z
 		ARG 0 minBlockCoords
 		ARG 1 maxBlockCoords
@@ -6224,33 +6434,220 @@ CLASS none/aqu net/minecraft/level/Level
 		ARG 1 maxBlockCoords
 		ARG 2 flag
 	METHOD a getPowerTransmittedFromLocationFacing (Lnone/dt;Lnone/ej;)I
+		ARG 0 pos
+		ARG 1 facing
+	METHOD a isBlockLoaded (Lnone/dt;Z)Z
+		ARG 0 pos
+	METHOD a (Lnone/wv;)V
+		ARG 0 ent
+	METHOD a (Lnone/wv;B)V
+		ARG 0 ent
+	METHOD a (Lnone/wv;D)Lnone/ahd;
+		ARG 0 ent
+	METHOD a (Lnone/wv;DDDFZ)Lnone/aqo;
+		ARG 0 ent
 	METHOD a createExplosion (Lnone/wv;DDDFZZ)Lnone/aqo;
+		ARG 0 ent
+	METHOD a (Lnone/wv;F)Lnone/brw;
+		ARG 0 rent
+		ARG 1 time
 	METHOD a playSoundAtEntity (Lnone/wv;Ljava/lang/String;FF)V
+		ARG 0 ent
+	METHOD a (Lnone/wv;Lnone/brt;)Ljava/util/List;
+		ARG 0 ent
+		ARG 1 aaBB
+	METHOD a (Lnone/wv;Lnone/brt;Lcom/google/common/base/Predicate;)Ljava/util/List;
+		ARG 1 aaBB
+	METHOD a (Lnone/wv;Z)V
+		ARG 0 ent
+	METHOD a tickUpdates (Z)Z
 	METHOD a setAllowedSpawnTypes (ZZ)V
 	METHOD aa getDifficulty ()Lnone/vt;
+	METHOD ab getSkylightReduction ()I
+	METHOD ac getLastLightningBolt ()I
+	METHOD ad isFindingSpawnPoint ()Z
+	METHOD ae getVillageCollectionObj ()Lnone/abl;
 	METHOD af getLevelBorder ()Lnone/bfb;
 	METHOD b getDimension ()Lnone/aqu;
+	METHOD b (F)F
+		ARG 0 weight
+	METHOD b setSkylightReduction (I)V
+		ARG 0 skylightReduction
+	METHOD b (II)I
+		ARG 0 levelX
+		ARG 1 levelZ
+	METHOD b (J)V
+		ARG 0 dayTime
 	METHOD b getPlayers (Ljava/lang/Class;Lcom/google/common/base/Predicate;)Ljava/util/List;
+	METHOD b getPlayerEntityByUUID (Ljava/util/UUID;)Lnone/ahd;
+		ARG 0 uuid
+	METHOD b getLightAt (Lnone/arf;Lnone/dt;)I
+		ARG 0 ceiling
+		ARG 1 pos
+	METHOD b (Lnone/bcm;)V
+		ARG 0 blockEnt
 	METHOD b checkBlockRangeIsInLevel (Lnone/bjb;Z)Z
+		ARG 0 sBB
 		ARG 1 rflag
+	METHOD b (Lnone/brt;)Z
+		ARG 0 aaBB
+	METHOD b (Lnone/brt;Lnone/bof;)Z
+		ARG 0 aaBB
+		ARG 1 material
 	METHOD b getBiomeAt (Lnone/dt;)Lnone/arm;
 		ARG 0 blockCoords
+	METHOD b getCombinedLight (Lnone/dt;I)I
+		ARG 0 pos
+		ARG 1 lightValue
+	METHOD b (Lnone/dt;Lnone/atr;)V
+		ARG 0 pos
+		ARG 1 block
+	METHOD b (Lnone/dt;Lnone/atr;II)V
+		ARG 0 pos
+		ARG 1 block
+	METHOD b (Lnone/dt;Lnone/bcm;)V
+		ARG 0 pos
+		ARG 1 blockEnt
+	METHOD b (Lnone/dt;Lnone/dt;)V
+		ARG 0 pos
+		ARG 1 pos2
+	METHOD b isSidePowered (Lnone/dt;Lnone/ej;)Z
+		ARG 0 pos
+		ARG 1 facing
+	METHOD b (Lnone/dt;Z)Z
+		ARG 0 pos
+		ARG 1 dropItems
+	METHOD b (Lnone/wv;)V
+		ARG 0 ent
+	METHOD b (Lnone/wv;Lnone/brt;)Ljava/util/List;
+		ARG 0 ent
+		ARG 1 aaBB
 	METHOD c tick ()V
 	METHOD c calculateCelestialAngle (F)F
+		ARG 0 time
+	METHOD c setLastLightningBolt (I)V
+		ARG 0 lastLightningBolt
+	METHOD c isChunkInRangeOfSpawn (II)Z
+		ARG 0 chunkX
+		ARG 1 chunkZ
+	METHOD c checkLightFor (Lnone/arf;Lnone/dt;)Z
+		ARG 0 ceiling
+		ARG 1 pos
+	METHOD c checkBlocksCollision (Lnone/brt;)Z
+		ARG 0 aaBB
+	METHOD c (Lnone/dt;)Lnone/atr;
+		ARG 0 pos
 	METHOD c updateSurroundingBlocks (Lnone/dt;Lnone/atr;)V
+		ARG 0 pos
+		ARG 1 block
+	METHOD c (Lnone/dt;Lnone/atr;II)V
+		ARG 0 pos
+		ARG 1 block
 	METHOD c getPowerReceivedFromLocationFacing (Lnone/dt;Lnone/ej;)I
+		ARG 0 pos
+		ARG 1 facing
+	METHOD c (Lnone/dt;Z)I
+		ARG 0 pos
+	METHOD c addEntity (Lnone/wv;)Z
+		ARG 0 ent
+	METHOD d (F)F
+		ARG 0 time
+	METHOD d isAnyLiquidInRegion (Lnone/brt;)Z
+		ARG 0 aaBB
 	METHOD d hasAirAt (Lnone/dt;)Z
+		ARG 0 pos
 	METHOD d updateBlock (Lnone/dt;Lnone/atr;)V
+		ARG 0 pos
+		ARG 1 block
+	METHOD d (Lnone/dt;Z)Z
+		ARG 0 pos
 	METHOD d spawn (Lnone/wv;)Z
+		ARG 0 ent
+	METHOD e getCloudColor (F)Lnone/brw;
+		ARG 0 time
+	METHOD e isAnyLavaInRegion (Lnone/brt;)Z
+		ARG 0 aaBB
 	METHOD e checkBlockIsInLevel (Lnone/dt;)Z
+		ARG 0 pos
+	METHOD e updateComparatorOuputLevel (Lnone/dt;Lnone/atr;)V
+		ARG 0 pos
+		ARG 1 block
+	METHOD e canBlockFreeze (Lnone/dt;Z)Z
+		ARG 0 pos
+		ARG 1 checkFreeze
+	METHOD e removeEntity (Lnone/wv;)V
+		ARG 0 ent
+	METHOD f getFogColor (F)Lnone/brw;
+		ARG 0 time
 	METHOD f getChunkFromBlockCoords (Lnone/dt;)Lnone/bfh;
+		ARG 0 pos
+	METHOD f canSnowAt (Lnone/dt;Z)Z
+		ARG 0 pos
+	METHOD f forceRemovePlayerEntity (Lnone/wv;)V
+		ARG 0 ent
+	METHOD g getStarBrightness (F)F
+		ARG 0 time
 	METHOD g tryRemoveBlock (Lnone/dt;)Z
+		ARG 0 pos
+	METHOD g updateEntity (Lnone/wv;)V
+		ARG 0 ent
+	METHOD h updateBlocks ()V
+	METHOD h getThunderStrength (F)F
+		ARG 0 weight
+	METHOD h (Lnone/dt;)V
+		ARG 0 pos
+	METHOD h addEntityAndNearbyChunks (Lnone/wv;)V
+		ARG 0 entity
 	METHOD i updateEntities ()V
+	METHOD i setThunderStrength (F)V
+		ARG 0 strength
+	METHOD i canSeeSky (Lnone/dt;)Z
+		ARG 0 pos
+	METHOD j getRainStrength (F)F
+		ARG 0 weight
+	METHOD j (Lnone/dt;)Z
+		ARG 0 pos
+	METHOD k createChunkProvider ()Lnone/bfe;
+	METHOD k setRainStrength (F)V
+		ARG 0 strength
+	METHOD k (Lnone/dt;)I
+		ARG 0 pos
+	METHOD l (Lnone/dt;)I
+		ARG 0 pos
+	METHOD m (Lnone/dt;)Lnone/dt;
+		ARG 0 pos
+	METHOD n (Lnone/dt;)V
+		ARG 0 pos
+	METHOD o (Lnone/dt;)F
+		ARG 0 pos
+	METHOD p updateWeather ()V
 	METHOD p getBlockStateAt (Lnone/dt;)Lnone/bec;
+		ARG 0 pos
+	METHOD q getRenderDistanceChunks ()I
+	METHOD q getRainfallHeight (Lnone/dt;)Lnone/dt;
+		ARG 0 pos
+	METHOD r getTopSolidOrLiquidBlock (Lnone/dt;)Lnone/dt;
+		ARG 0 pos
 	METHOD s getBlockEntityAt (Lnone/dt;)Lnone/bcm;
+		ARG 0 pos
+	METHOD t removeBlockEntity (Lnone/dt;)V
+		ARG 0 pos
+	METHOD u (Lnone/dt;)Z
+		ARG 0 pos
 	METHOD v getLeverChunkManager ()Lnone/arz;
+	METHOD v canBlockFreezeCheck (Lnone/dt;)Z
+		ARG 0 pos
+	METHOD w canBlockFreezeWithoutCheck (Lnone/dt;)Z
+		ARG 0 pos
+	METHOD x getMoonPhase ()I
+	METHOD x checkLight (Lnone/dt;)Z
+		ARG 0 pos
+	METHOD y getCurrentMoonPhaseFactor ()F
 	METHOD y getPowerEmittedFromSolidBlockAt (Lnone/dt;)I
+		ARG 0 pos
+	METHOD z getDebugLoadedEntities ()Ljava/lang/String;
 	METHOD z checkBlockIsPowered (Lnone/dt;)Z
+		ARG 0 rpos
 CLASS none/aqz net/minecraft/level/MinecraftException
 CLASS none/arb net/minecraft/level/LevelSettings
 	FIELD a seed
@@ -6280,11 +6677,21 @@ CLASS none/arc net/minecraft/level/EnumGameType
 	METHOD e isSurvival ()Z
 CLASS none/ard net/minecraft/level/IBlockAccess
 	METHOD G getTerrainType ()Lnone/are;
+	METHOD W hasExtendedLevels ()Z
 	METHOD a getPowerTransmittedFromLocationFacing (Lnone/dt;Lnone/ej;)I
+		ARG 0 pos
+		ARG 1 facing
 	METHOD b getBiomeAt (Lnone/dt;)Lnone/arm;
+		ARG 0 pos
+	METHOD b getCombinedLight (Lnone/dt;I)I
+		ARG 0 pos
+		ARG 1 light
 	METHOD d hasAirAt (Lnone/dt;)Z
+		ARG 0 rpos
 	METHOD p getBlockStateAt (Lnone/dt;)Lnone/bec;
+		ARG 0 pos
 	METHOD s getBlockEntityAt (Lnone/dt;)Lnone/bcm;
+		ARG 0 pos
 CLASS none/are net/minecraft/level/LevelType
 	FIELD b defaultLevelType
 	FIELD c flat
@@ -6298,13 +6705,38 @@ CLASS none/are net/minecraft/level/LevelType
 CLASS none/arf net/minecraft/level/EnumCeiling
 	FIELD a SKY
 	FIELD b BLOCK
+	FIELD c id
+	METHOD <init> (Ljava/lang/String;II)V
+		ARG 0 name
 CLASS none/arj net/minecraft/level/ChunkCache
+	FIELD a chunkX
+	FIELD b chunkZ
+	FIELD c cache
+	FIELD d hasExtendedLevels
+	FIELD e level
+	METHOD <init> (Lnone/aqu;Lnone/dt;Lnone/dt;I)V
+		ARG 1 pos1
+		ARG 2 pos2
+		ARG 3 radius
 	METHOD G getTerrainType ()Lnone/are;
+	METHOD W hasExtendedLevels ()Z
+	METHOD a getLightForExt (Lnone/arf;Lnone/dt;)I
+		ARG 1 pos
 	METHOD a getPowerTransmittedFromLocationFacing (Lnone/dt;Lnone/ej;)I
+		ARG 0 pos
+		ARG 1 facing
+	METHOD b getLightForPos (Lnone/arf;Lnone/dt;)I
+		ARG 1 pos
 	METHOD b getBiomeAt (Lnone/dt;)Lnone/arm;
+		ARG 0 pos
+	METHOD b getCombinedLight (Lnone/dt;I)I
+		ARG 0 pos
 	METHOD d hasAirAt (Lnone/dt;)Z
+		ARG 0 pos
 	METHOD p getBlockStateAt (Lnone/dt;)Lnone/bec;
+		ARG 0 pos
 	METHOD s getBlockEntityAt (Lnone/dt;)Lnone/bcm;
+		ARG 0 pos
 CLASS none/ark net/minecraft/level/ScheduledBlockTick
 	FIELD a blockPos
 	FIELD b scheduledTime
@@ -6314,7 +6746,7 @@ CLASS none/ark net/minecraft/level/ScheduledBlockTick
 CLASS none/arl net/minecraft/level/biome/BiomeBeach
 	METHOD <init> (I)V
 		ARG 0 biomeID
-CLASS none/arm net/minecraft/level/biome/Biome
+CLASS none/arm net/minecraft/level/biome/BiomeBase
 	FIELD A frozenRiver
 	FIELD B icePlains
 	FIELD C iceMountains
@@ -7534,8 +7966,9 @@ CLASS none/avr net/minecraft/block/BlockEnderChest
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
 	METHOD e initPropertyManager ()Lnone/bed;
-CLASS none/avs
+CLASS none/avs net/minecraft/block/IBlockEntityProvider
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
+		ARG 0 level
 CLASS none/avt net/minecraft/block/BlockFalling
 	METHOD a getScheduledDelay (Lnone/aqu;)I
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
@@ -8877,10 +9310,99 @@ CLASS none/bex net/minecraft/block/IBlockProperty
 		ARG 0 value
 	METHOD b getClass ()Ljava/lang/Class;
 	METHOD c getPossibleValues ()Ljava/util/Collection;
-CLASS none/bfa
+CLASS none/bez net/minecraft/level/border/IBorderListener
+	METHOD a onSizeChange (Lnone/bfb;D)V
+		ARG 0 border
+		ARG 1 size
+	METHOD a onCenterChange (Lnone/bfb;DD)V
+		ARG 0 border
+		ARG 1 centerX
+		ARG 2 centerZ
+	METHOD a onTransitionStart (Lnone/bfb;DDJ)V
+		ARG 0 border
+		ARG 1 startSize
+		ARG 2 endSize
+		ARG 3 transitionTime
+	METHOD a onWarningTimeChange (Lnone/bfb;I)V
+		ARG 0 border
+		ARG 1 warningTime
+	METHOD b onDamageAmountChange (Lnone/bfb;D)V
+		ARG 0 border
+		ARG 1 damageAmount
+	METHOD b onWarningDistanceChange (Lnone/bfb;I)V
+		ARG 0 border
+		ARG 1 warningDistance
+	METHOD c onDamageBufferChange (Lnone/bfb;D)V
+		ARG 0 border
+		ARG 1 damageBuffer
+CLASS none/bfa net/minecraft/level/border/EnumBorderStatus
 	FIELD a GROWING
 	FIELD b SHRINKING
 	FIELD c STATIONARY
+	FIELD d id
+	METHOD a getStatus ()I
+CLASS none/bfb net/minecraft/level/border/LevelBorder
+	FIELD a listeners
+	FIELD b centerX
+	FIELD c centerZ
+	FIELD d startSize
+	FIELD e endSize
+	FIELD f endTime
+	FIELD g startTime
+	FIELD h borderSize
+	FIELD i damageAmount
+	FIELD j damageBuffer
+	FIELD k warningTime
+	FIELD l warningDistance
+	METHOD a getStatus ()Lnone/bfa;
+	METHOD a setTransition (D)V
+		ARG 0 size
+	METHOD a setTransition (DDJ)V
+		ARG 0 startSize
+		ARG 1 endSize
+		ARG 2 transitionTime
+	METHOD a setSize (I)V
+		ARG 0 borderSize
+	METHOD a contains (Lnone/aqm;)Z
+		ARG 0 ccip
+	METHOD a addListener (Lnone/bez;)V
+		ARG 0 listener
+	METHOD a contains (Lnone/brt;)Z
+		ARG 0 aabb
+	METHOD a contains (Lnone/dt;)Z
+		ARG 0 pos
+	METHOD a getNearestDistance (Lnone/wv;)D
+		ARG 0 ent
+	METHOD b getMinX ()D
+	METHOD b setDamageBuffer (D)V
+		ARG 0 damageBuffer
+	METHOD b getNearestDistance (DD)D
+		ARG 0 levelX
+		ARG 1 levelZ
+	METHOD b setWarningTime (I)V
+		ARG 0 warningTime
+	METHOD c getMinZ ()D
+	METHOD c setDamageAmount (D)V
+		ARG 0 damageAmount
+	METHOD c setCenter (DD)V
+		ARG 0 centerX
+		ARG 1 centerZ
+	METHOD c setWarningDistance (I)V
+		ARG 0 warningDistance
+	METHOD d getMaxX ()D
+	METHOD e getMaxZ ()D
+	METHOD f getCenterX ()D
+	METHOD g getCenterZ ()D
+	METHOD h getSize ()D
+	METHOD i getTimeToTarget ()J
+	METHOD j getTargetSize ()D
+	METHOD k getListeners ()Ljava/util/List;
+	METHOD l getBorderSize ()I
+	METHOD m getDamageBuffer ()D
+	METHOD n getDamageAmount ()D
+	METHOD o getTransitionSpeed ()D
+	METHOD p getWarningTime ()I
+	METHOD q getWarningDistance ()I
 CLASS none/bfe net/minecraft/level/IChunkProvider
 	METHOD a doesChunkExist (II)Z
 		ARG 0 chunkX
@@ -8899,6 +9421,7 @@ CLASS none/bfe net/minecraft/level/IChunkProvider
 	METHOD d generate (II)Lnone/bfh;
 		ARG 0 chunkX
 		ARG 1 chunkZ
+	METHOD f makeString ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
 CLASS none/bff net/minecraft/level/chunk/NibbleArray
 	FIELD a array
@@ -8927,27 +9450,37 @@ CLASS none/bff net/minecraft/level/chunk/NibbleArray
 		ARG 2 rlocalZ
 	METHOD c shiftAddress (I)I
 		ARG 0 address
-CLASS none/bfg net/minecraft/level/EmptyChunk
+CLASS none/bfg net/minecraft/level/chunk/EmptyChunk
 	METHOD a generateHeightMap ()V
 	METHOD a isChunk (II)Z
+	METHOD a getRandForSeed (J)Ljava/util/Random;
+	METHOD a getLightAt (Lnone/arf;Lnone/dt;)I
+	METHOD a setLightAt (Lnone/arf;Lnone/dt;I)V
+	METHOD a setBlockEntity (Lnone/bcm;)V
 	METHOD a getBlockAt (Lnone/dt;)Lnone/atr;
+	METHOD a setLightAt (Lnone/dt;I)I
+	METHOD a setBlockEntityAt (Lnone/dt;Lnone/bcm;)V
+	METHOD a getBlockEntityAt (Lnone/dt;Lnone/bfl;)Lnone/bcm;
 	METHOD a addEntity (Lnone/wv;)V
 	METHOD a removeEntity (Lnone/wv;I)V
+	METHOD a needsSaving (Z)Z
 	METHOD b generateSkylightMap ()V
 	METHOD b getHeightAtCoords (II)I
 	METHOD b getBlockOpacityAt (Lnone/dt;)I
 	METHOD b removeEntity (Lnone/wv;)V
 	METHOD c onChunkLoad ()V
 	METHOD c getAreLevelsEmpty (II)Z
-	METHOD c getBlockMetadataAt (Lnone/dt;)I
+	METHOD c getBlockMetadata (Lnone/dt;)I
 	METHOD d onChunkUnload ()V
+	METHOD d canSeeSky (Lnone/dt;)Z
 	METHOD e setChunkModified ()V
+	METHOD e removeBlockEntityAt (Lnone/dt;)V
 	METHOD f isEmpty ()Z
-CLASS none/bfh net/minecraft/level/Chunk
+CLASS none/bfh net/minecraft/level/chunk/Chunk
 	FIELD a chunkX
 	FIELD b chunkZ
 	FIELD c logger
-	FIELD d chunkCube
+	FIELD d chunkSections
 	FIELD e biomeMap
 	FIELD f rainfallMap
 	FIELD g skylightUpdateMap
@@ -8965,12 +9498,14 @@ CLASS none/bfh net/minecraft/level/Chunk
 	FIELD t heightMapMinimum
 	FIELD u inhabitedTime
 	FIELD v queuedLighting
+	FIELD w queuedBlockEntities
 	METHOD <init> (Lnone/aqu;II)V
 		ARG 0 level
 		ARG 1 chunkX
 		ARG 2 chunkZ
 	METHOD <init> (Lnone/aqu;Lnone/bgk;II)V
 		ARG 0 level
+		ARG 1 primer
 		ARG 2 chunkX
 		ARG 3 chunkZ
 	METHOD a generateHeightMap ()V
@@ -8984,31 +9519,78 @@ CLASS none/bfh net/minecraft/level/Chunk
 	METHOD a updateSkylightNeighborHeight (IIII)V
 		ARG 0 levelX
 		ARG 1 levelZ
-		ARG 2 minLevelY
-		ARG 3 maxLevelY
+		ARG 2 minY
+		ARG 3 maxY
+	METHOD a getRandForSeed (J)Ljava/util/Random;
+		ARG 0 seed
+	METHOD a (Ljava/lang/Class;Lnone/brt;Ljava/util/List;Lcom/google/common/base/Predicate;)V
+		ARG 1 aabb
+	METHOD a getLightAt (Lnone/arf;Lnone/dt;)I
+		ARG 0 ceiling
+		ARG 1 pos
+	METHOD a setLightAt (Lnone/arf;Lnone/dt;I)V
+		ARG 0 ceiling
+		ARG 1 pos
+		ARG 2 lightValue
+	METHOD a setBlockEntity (Lnone/bcm;)V
 	METHOD a populateChunk (Lnone/bfe;Lnone/bfe;II)V
+		ARG 0 chunkProvider
+		ARG 1 chunkProvider2
+		ARG 2 chunkX
+		ARG 3 chunkZ
 	METHOD a getBlockAt (Lnone/dt;)Lnone/atr;
 		ARG 0 location
+	METHOD a setLightAt (Lnone/dt;I)I
+		ARG 0 pos
+		ARG 1 lightValue
 	METHOD a getBiome (Lnone/dt;Lnone/arz;)Lnone/arm;
+		ARG 0 pos
+		ARG 1 chunkManager
+	METHOD a setBlockEntityAt (Lnone/dt;Lnone/bcm;)V
+	METHOD a setBlockState (Lnone/dt;Lnone/bec;)Lnone/bec;
+		ARG 0 pos
+		ARG 1 blockState
+	METHOD a getBlockEntityAt (Lnone/dt;Lnone/bfl;)Lnone/bcm;
+		ARG 0 pos
+	METHOD a checkLightsOnSide (Lnone/ej;)V
+		ARG 0 facing
 	METHOD a addEntity (Lnone/wv;)V
+		ARG 0 ent
 	METHOD a removeEntity (Lnone/wv;I)V
+		ARG 0 ent
 		ARG 1 cubeY
+	METHOD a (Lnone/wv;Lnone/brt;Ljava/util/List;Lcom/google/common/base/Predicate;)V
+		ARG 0 ent
+		ARG 1 aabb
+	METHOD a needsSaving (Z)Z
 	METHOD a setBiomeMap ([B)V
+	METHOD a readChunkIn ([BIZ)V
+		ARG 1 chunkSectionMap
+		ARG 2 hasBiomes
 	METHOD a setHeightMap ([I)V
 		ARG 0 newHeightmap
+	METHOD a setChunkSections ([Lnone/bfm;)V
 	METHOD b generateSkylightMap ()V
 	METHOD b getHeightAtCoords (II)I
 		ARG 0 localX
 		ARG 1 localZ
 	METHOD b setLastSaveTime (J)V
 	METHOD b getBlockOpacityAt (Lnone/dt;)I
+		ARG 0 pos
 	METHOD b removeEntity (Lnone/wv;)V
+		ARG 0 ent
+	METHOD b updateQueuedStuff (Z)V
 	METHOD c onChunkLoad ()V
 	METHOD c getAreLevelsEmpty (II)Z
 		ARG 0 lower
 		ARG 1 upper
 	METHOD c checkSkylightNeighborHeight (III)V
+		ARG 0 levelX
+		ARG 1 levelZ
+		ARG 2 minY
 	METHOD c setInhabitedTime (J)V
+	METHOD c getBlockMetadata (Lnone/dt;)I
+		ARG 0 pos
 	METHOD c setChunkLoaded (Z)V
 	METHOD d onChunkUnload ()V
 	METHOD d propagateSkylightOcclusion (II)V
@@ -9018,9 +9600,18 @@ CLASS none/bfh net/minecraft/level/Chunk
 		ARG 0 localX
 		ARG 1 levelY
 		ARG 2 localZ
+	METHOD d canSeeSky (Lnone/dt;)Z
+		ARG 0 pos
 	METHOD d setTerrainPopulated (Z)V
 	METHOD e setChunkModified ()V
+	METHOD e checkLightInColumn (II)Z
+		ARG 0 localX
+		ARG 1 localZ
 	METHOD e getBlockIDAtLocalCoords (III)I
+		ARG 0 localX
+		ARG 1 localY
+		ARG 2 localZ
+	METHOD e removeBlockEntityAt (Lnone/dt;)V
 	METHOD e setLightPopulated (Z)V
 	METHOD f isEmpty ()Z
 	METHOD f getBlockAtLocalCoords (III)Lnone/atr;
@@ -9028,15 +9619,29 @@ CLASS none/bfh net/minecraft/level/Chunk
 		ARG 1 localY
 		ARG 2 localZ
 	METHOD f getHeightAtCoords (Lnone/dt;)I
+		ARG 0 pos
 	METHOD f setModified (Z)V
 	METHOD g getBlockStoreY ()I
-	METHOD g (III)I
+	METHOD g getBlockMetadata (III)I
 		ARG 0 localX
 		ARG 1 levelY
 		ARG 2 localZ
+	METHOD g getBlockState (Lnone/dt;)Lnone/bec;
+		ARG 0 pos
 	METHOD g compareHasEntities (Z)V
 	METHOD h getCubeArray ()[Lnone/bfm;
+	METHOD h getRainfallHeight (Lnone/dt;)Lnone/dt;
+		ARG 0 pos
+	METHOD h recheckGaps (Z)V
+		ARG 0 stopProfiler
+	METHOD i isPopulated ()Z
+	METHOD i createNewBlockEntity (Lnone/dt;)Lnone/bcm;
+		ARG 0 pos
+	METHOD j getChunkCoordIntPair ()Lnone/aqm;
 	METHOD k getBiomeMap ()[B
+	METHOD l resetRelightChecks ()V
+	METHOD m processRelightChecks ()V
+	METHOD n queueRelightChecks ()V
 	METHOD o isChunkLoaded ()Z
 	METHOD p getDimension ()Lnone/aqu;
 	METHOD q getHeightMap ()[I
@@ -9046,8 +9651,12 @@ CLASS none/bfh net/minecraft/level/Chunk
 	METHOD u isLightPopulated ()Z
 	METHOD v getHeightMapMinimum ()I
 	METHOD w getInhabitedTime ()J
-CLASS none/bfl net/minecraft/level/chunk/EnumCreateEntityType
-CLASS none/bfm net/minecraft/level/storage/ChunkSection
+	METHOD y setFullSkylightUpdate ()V
+CLASS none/bfl net/minecraft/level/chunk/ChunkEnumCreateEntityType
+	FIELD a IMMEDIATE
+	FIELD b QUEUED
+	FIELD c CHECK
+CLASS none/bfm net/minecraft/level/chunk/storage/ChunkSection
 	FIELD a yLocation
 	FIELD b numBlocksInSection
 	FIELD d blockDataArray
@@ -9101,7 +9710,7 @@ CLASS none/bfm net/minecraft/level/storage/ChunkSection
 	METHOD g getBlockDataArray ()[C
 	METHOD h getBlockLightArray ()Lnone/bff;
 	METHOD i getSkyLightArray ()Lnone/bff;
-CLASS none/bfn
+CLASS none/bfn net/minecraft/level/chunk/storage/NibbleArrayReader
 	FIELD a aByte
 	FIELD b offset1
 	FIELD c offset2
@@ -9142,6 +9751,8 @@ CLASS none/bgd net/minecraft/level/LevelProvider
 	METHOD a generateLightBrightnessTable ()V
 	METHOD a canCoordinateBeSpawn (II)Z
 	METHOD a calculateCelestialAngle (JF)F
+		ARG 0 elapsedTime
+		ARG 1 offsetTime
 	METHOD b registerLevelChunkManager ()V
 	METHOD b getFogColor (FF)Lnone/brw;
 	METHOD b doesXZShowFog (II)Z
@@ -9151,8 +9762,12 @@ CLASS none/bgd net/minecraft/level/LevelProvider
 	METHOD k getDimensionName ()Ljava/lang/String;
 	METHOD l getDimensionSuffix ()Ljava/lang/String;
 	METHOD m getLevelChunkManager ()Lnone/arz;
+	METHOD o hasSky ()Z
 	METHOD q dimensionId ()I
 CLASS none/bge net/minecraft/level/LevelProviderHell
+	CLASS bgf
+		METHOD f getCenterX ()D
+		METHOD g getCenterZ ()D
 	METHOD a generateLightBrightnessTable ()V
 	METHOD a canCoordinateBeSpawn (II)Z
 	METHOD a calculateCelestialAngle (JF)F
@@ -9280,6 +9895,7 @@ CLASS none/bgo net/minecraft/level/gen/ChunkProviderSettingsSerializer
 CLASS none/bgp net/minecraft/level/ChunkProviderDebug
 	FIELD c dim
 	METHOD d generate (II)Lnone/bfh;
+	METHOD f makeString ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
 CLASS none/bgq net/minecraft/level/ChunkProviderFlat
 	FIELD a dim
@@ -9289,6 +9905,7 @@ CLASS none/bgq net/minecraft/level/ChunkProviderFlat
 		ARG 1 chunkX
 		ARG 2 chunkZ
 	METHOD d generate (II)Lnone/bfh;
+	METHOD f makeString ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
 CLASS none/bgr net/minecraft/level/ChunkProviderHell
 	FIELD h dim
@@ -9299,6 +9916,7 @@ CLASS none/bgr net/minecraft/level/ChunkProviderHell
 	METHOD a generateNoiseField ([DIIIIII)[D
 	METHOD b replaceBlocks (IILnone/bgk;)V
 	METHOD d generate (II)Lnone/bfh;
+	METHOD f makeString ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
 CLASS none/bgs net/minecraft/level/gen/MapGenCaves
 CLASS none/bgt net/minecraft/level/gen/MapGenBase
@@ -9330,6 +9948,7 @@ CLASS none/bgv net/minecraft/level/gen/ChunkProviderGenerate
 		ARG 2 chunkX
 		ARG 3 chunkZ
 	METHOD d generate (II)Lnone/bfh;
+	METHOD f makeString ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
 CLASS none/bgw net/minecraft/level/ChunkProviderEnd
 	FIELD h rand
@@ -9338,6 +9957,7 @@ CLASS none/bgw net/minecraft/level/ChunkProviderEnd
 	METHOD <init> (Lnone/aqu;J)V
 		ARG 0 level
 	METHOD d generate (II)Lnone/bfh;
+	METHOD f makeString ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
 CLASS none/bhc net/minecraft/level/gen/feature/LevelGenAbstractTree
 CLASS none/bhd
@@ -9890,6 +10510,7 @@ CLASS none/bqo net/minecraft/level/LevelInfo
 	FIELD a defaultDifficulty
 	FIELD b seed
 	FIELD c levelType
+	FIELD d generatorOptions
 	FIELD e spawnX
 	FIELD f spawnY
 	FIELD g spawnZ
@@ -9897,6 +10518,8 @@ CLASS none/bqo net/minecraft/level/LevelInfo
 	FIELD i dayTime
 	FIELD j lastPlayed
 	FIELD k sizeOnDisk
+	FIELD l player
+	FIELD m dimension
 	FIELD n levelName
 	FIELD o version
 	FIELD p clearWeatherTime
@@ -9927,6 +10550,7 @@ CLASS none/bqo net/minecraft/level/LevelInfo
 	METHOD a setGameType (Lnone/arc;)V
 	METHOD a setLevelType (Lnone/are;)V
 	METHOD a setSpawnPoint (Lnone/dt;)V
+	METHOD a writeInfoToNBT (Lnone/fn;Lnone/fn;)V
 	METHOD a setDifficulty (Lnone/vt;)V
 		ARG 0 difficulty
 	METHOD a setThundering (Z)V
@@ -10035,14 +10659,31 @@ CLASS none/brt net/minecraft/util/AxisAlignedBB
 		ARG 1 y
 		ARG 2 z
 	METHOD toString ()Ljava/lang/String;
-CLASS none/bru net/minecraft/level/HitAction
+CLASS none/bru net/minecraft/util/RaytraceHitResult
 	FIELD a hitType
 	FIELD b hitBlockFace
-	FIELD c pos
+	FIELD c hitVector
 	FIELD d hitEntity
 	FIELD e blockPos
+	METHOD <init> (Lnone/brv;Lnone/brw;Lnone/ej;Lnone/dt;)V
+		ARG 0 type
+		ARG 1 vec
+		ARG 2 facing
+		ARG 3 pos
+	METHOD <init> (Lnone/brw;Lnone/ej;)V
+		ARG 0 vec
+		ARG 1 facing
+	METHOD <init> (Lnone/brw;Lnone/ej;Lnone/dt;)V
+		ARG 0 vec
+		ARG 1 facing
+		ARG 2 pos
+	METHOD <init> (Lnone/wv;)V
+		ARG 0 ent
+	METHOD <init> (Lnone/wv;Lnone/brw;)V
+		ARG 0 ent
+		ARG 1 vec
 	METHOD a getBlockPos ()Lnone/dt;
-CLASS none/brv net/minecraft/entity/EnumHitType
+CLASS none/brv net/minecraft/util/EnumHitType
 	FIELD a MISS
 	FIELD b BLOCK
 	FIELD c ENTITY
@@ -11721,17 +12362,24 @@ CLASS none/cek net/minecraft/network/EnumTitleUpdateSwitch
 	FIELD a indices
 CLASS none/cel
 	METHOD d generate (II)Lnone/bfh;
+	METHOD f makeString ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
 CLASS none/cem net/minecraft/client/multiplayer/PlayerControllerMP
 	FIELD i gameMode
 	METHOD a windowClick (IIIILnone/ahd;)Lnone/amj;
 	METHOD a setGameType (Lnone/arc;)V
 CLASS none/cen net/minecraft/client/multiplayer/LevelClient
+	METHOD H sendQuittingDisconnectingPacket ()V
 	METHOD a playSoundEffect (DDDLjava/lang/String;FFZ)V
 	METHOD a getEntity (I)Lnone/wv;
 	METHOD a addLevelInfoToCrashReport (Lnone/b;)Lnone/j;
 	METHOD c tick ()V
 	METHOD d spawn (Lnone/wv;)Z
+	METHOD e removeEntity (Lnone/wv;)V
+	METHOD h updateBlocks ()V
+	METHOD k createChunkProvider ()Lnone/bfe;
+	METHOD p updateWeather ()V
+	METHOD q getRenderDistanceChunks ()I
 CLASS none/ceu none/MinecraftProfileTextureValues
 CLASS none/cew net/minecraft/network/ServerData
 	FIELD a serverName
@@ -12077,6 +12725,7 @@ CLASS none/ciy net/minecraft/client/renderers/LevelVertexBufferUploader
 	METHOD a draw (Lnone/civ;I)I
 CLASS none/cja
 	FIELD f AIR
+	METHOD b getCombinedLight (Lnone/dt;I)I
 	METHOD p getBlockStateAt (Lnone/dt;)Lnone/bec;
 	METHOD s getBlockEntityAt (Lnone/dt;)Lnone/bcm;
 CLASS none/cje net/minecraft/client/renderers/EnumBlockVertices
