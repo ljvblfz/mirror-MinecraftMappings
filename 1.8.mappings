@@ -9802,7 +9802,7 @@ CLASS none/boi net/minecraft/block/material/MaterialPortal
 	METHOD <init> (Lnone/boh;)V
 		ARG 0 color
 	METHOD c isSolid ()Z
-CLASS none/boy none/IntCache
+CLASS none/boy net/minecraft/level/gen/layer/IntCache
 	FIELD a intCacheSize
 	FIELD b freeSmallArrays
 	FIELD c inUseSmallArrays
@@ -11275,7 +11275,7 @@ CLASS none/cak net/minecraft/client/gui/screen/GuiScreenTwitch3
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
 	METHOD m onGuiClosed ()V
-CLASS none/cam net/minecraft/stream/EnumUnavailableStreamError
+CLASS none/cam net/minecraft/client/stream/EnumUnavailableStreamError
 	FIELD a NO_FBO
 	FIELD b LIBRARY_ARCH_MISMATCH
 	FIELD c LIBRARY_FAILURE
@@ -12520,6 +12520,20 @@ CLASS none/czl
 	METHOD b initializeMap ()Ljava/util/Map;
 CLASS none/czp none/AchievementUnlocker
 CLASS none/czr none/PlayerKiller
+CLASS none/czs net/minecraft/client/stream/Metadata
+	FIELD a encodedPayload
+	FIELD b name
+	FIELD c description
+	FIELD d payload
+	METHOD <init> (Ljava/lang/String;)V
+		ARG 0 name
+	METHOD a getDescriptionElseName ()Ljava/lang/String;
+	METHOD a setDescription (Ljava/lang/String;)V
+	METHOD a loadPayload (Ljava/lang/String;Ljava/lang/String;)V
+		ARG 0 key
+		ARG 1 value
+	METHOD b encode ()Ljava/lang/String;
+	METHOD c getName ()Ljava/lang/String;
 CLASS none/czu tv/twitch/TwitchBroadcaster
 	FIELD A serverConnector
 	FIELD D logger
@@ -12549,8 +12563,15 @@ CLASS none/dad net/minecraft/client/stream/ChatControllerEnumChannelState
 	FIELD c Connected
 	FIELD d Disconnecting
 	FIELD e Disconnected
-CLASS none/daf none/dafEnum
-CLASS none/dag none/dagEnum
+CLASS none/daf net/minecraft/client/stream/ChatControllerEnumChatState
+	FIELD a UNINITIALIZED
+	FIELD b INITIALIZING
+	FIELD c INITIALIZED
+	FIELD d SHUTTING_DOWN
+CLASS none/dag net/minecraft/client/stream/ChatControllerEnumEmoticonMode
+	FIELD a NONE
+	FIELD b URL
+	FIELD c TEXTUREATLAS
 CLASS none/dah net/minecraft/chat/dah
 CLASS none/dai tv/twitch/ServerConnector
 CLASS none/dal tv/twitch/dal
