@@ -11310,7 +11310,7 @@ CLASS none/bst net/minecraft/client/GLAllocation
 		ARG 0 capacity
 CLASS none/bsu net/minecraft/main/Minecraft
 	CLASS btc
-		METHOD a confirmClicked (ZI)V
+		METHOD a onChoice (ZI)V
 	FIELD I logger
 	FIELD J locationMojangPng
 	FIELD K macDisplayModes
@@ -11639,7 +11639,7 @@ CLASS none/bum net/minecraft/client/gui/button/bum
 	METHOD a getHoverState (Z)I
 	METHOD b mouseDragged (Lnone/bsu;II)V
 	METHOD c mousePressed (Lnone/bsu;II)Z
-CLASS none/buo net/minecraft/client/gui/GuiUnknown2
+CLASS none/buo net/minecraft/client/gui/GuiLabel
 CLASS none/bup net/minecraft/client/gui/button/GuiButtonLanguage
 	METHOD a drawButton (Lnone/bsu;II)V
 CLASS none/bur net/minecraft/client/gui/button/bur
@@ -11663,7 +11663,7 @@ CLASS none/buw net/minecraft/client/gui/button/GuiSmallButton
 	METHOD c returnEnumOptions ()Lnone/btr;
 CLASS none/buy
 	FIELD a mc
-CLASS none/bvh net/minecraft/client/gui/bvh
+CLASS none/bvh net/minecraft/client/gui/GuiScoreboard
 	FIELD f mc
 	METHOD a setFooter (Lnone/ho;)V
 	METHOD b setHeader (Lnone/ho;)V
@@ -11678,7 +11678,7 @@ CLASS none/bvl net/minecraft/client/gui/button/bvl
 	METHOD c mousePressed (Lnone/bsu;II)Z
 CLASS none/bvm
 	FIELD b mc
-CLASS none/bvo net/minecraft/client/gui/GuiUnknown
+CLASS none/bvo net/minecraft/client/gui/GuiSpectatorWidgets
 	FIELD a SPECTATOR_WIDGETS_PNG
 	FIELD f WIDGETS_PNG
 CLASS none/bvr net/minecraft/client/gui/button/bvr
@@ -11689,7 +11689,7 @@ CLASS none/bvr net/minecraft/client/gui/button/bvr
 	METHOD c mousePressed (Lnone/bsu;II)Z
 CLASS none/bvs
 	METHOD a drawSlot (IIIIII)V
-CLASS none/bvt net/minecraft/client/gui/bvt
+CLASS none/bvt net/minecraft/client/gui/GuiRealms
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a mouseClicked (III)V
@@ -11697,7 +11697,7 @@ CLASS none/bvt net/minecraft/client/gui/bvt
 	METHOD a mouseClickMove (IIIJ)V
 	METHOD a drawItemStackTooltip (Lnone/amj;II)V
 	METHOD a actionPerformed (Lnone/bug;)V
-	METHOD a confirmClicked (ZI)V
+	METHOD a onChoice (ZI)V
 	METHOD b initGui ()V
 	METHOD b mouseMovedOrUp (III)V
 	METHOD b drawTexturedModalRect (IIIIII)V
@@ -11730,9 +11730,13 @@ CLASS none/bvy net/minecraft/client/gui/GuiConfirmOpenLink
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
-CLASS none/bvz
-	METHOD a confirmClicked (ZI)V
+CLASS none/bvz net/minecraft/client/gui/IChoiceListener
+	METHOD a onChoice (ZI)V
+		ARG 0 choice
+		ARG 1 choiceId
 CLASS none/bwa net/minecraft/client/gui/GuiYesNo
+	FIELD a choiceListener
+	FIELD i choiceId
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
@@ -11758,7 +11762,7 @@ CLASS none/bwf net/minecraft/client/gui/GuiNewWorld
 	METHOD b initGui ()V
 	METHOD e updateScreen ()V
 	METHOD m onGuiClosed ()V
-CLASS none/bwg net/minecraft/client/gui/bwg
+CLASS none/bwg net/minecraft/client/gui/GuiCustomWorldPresets
 	CLASS bwi
 		METHOD a drawSlot (IIIIII)V
 	METHOD a keyTyped (CI)V
@@ -11769,7 +11773,7 @@ CLASS none/bwg net/minecraft/client/gui/bwg
 	METHOD e updateScreen ()V
 	METHOD k handleMouseInput ()V
 	METHOD m onGuiClosed ()V
-CLASS none/bwj net/minecraft/client/gui/bwj
+CLASS none/bwj net/minecraft/client/gui/GuiWorldSettings
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a mouseClicked (III)V
@@ -11777,21 +11781,21 @@ CLASS none/bwj net/minecraft/client/gui/bwj
 	METHOD b initGui ()V
 	METHOD b mouseMovedOrUp (III)V
 	METHOD k handleMouseInput ()V
-CLASS none/bwl
+CLASS none/bwl net/minecraft/client/gui/GuiDeath
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
-	METHOD a confirmClicked (ZI)V
+	METHOD a onChoice (ZI)V
 	METHOD b initGui ()V
 	METHOD d doesGuiPauseGame ()Z
 	METHOD e updateScreen ()V
-CLASS none/bwm
+CLASS none/bwm net/minecraft/client/gui/GuiDemoHelp
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
 	METHOD c drawDefaultBackground ()V
 	METHOD e updateScreen ()V
-CLASS none/bwn
+CLASS none/bwn net/minecraft/client/gui/GuiDirectConnect
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a mouseClicked (III)V
@@ -11799,7 +11803,7 @@ CLASS none/bwn
 	METHOD b initGui ()V
 	METHOD e updateScreen ()V
 	METHOD m onGuiClosed ()V
-CLASS none/bwo
+CLASS none/bwo net/minecraft/client/gui/GuiConnectionLost
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
@@ -11816,7 +11820,7 @@ CLASS none/bwp net/minecraft/client/gui/GuiAddServer
 	METHOD b initGui ()V
 	METHOD e updateScreen ()V
 	METHOD m onGuiClosed ()V
-CLASS none/bwq
+CLASS none/bwq net/minecraft/client/gui/GuiError
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
@@ -11843,19 +11847,19 @@ CLASS none/bwv net/minecraft/client/gui/GuiOptions
 	FIELD h options
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
-	METHOD a confirmClicked (ZI)V
+	METHOD a onChoice (ZI)V
 	METHOD b initGui ()V
 CLASS none/bwx net/minecraft/client/gui/GuiMemoryErrorScreen
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
-CLASS none/bwy
+CLASS none/bwy net/minecraft/client/gui/GuiIngameMenu
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
 	METHOD e updateScreen ()V
-CLASS none/bwz
+CLASS none/bwz net/minecraft/client/gui/GuiWorldPresets
 	CLASS bxb
 		METHOD a drawSlot (IIIIII)V
 	METHOD a keyTyped (CI)V
@@ -11866,15 +11870,15 @@ CLASS none/bwz
 	METHOD e updateScreen ()V
 	METHOD k handleMouseInput ()V
 	METHOD m onGuiClosed ()V
-CLASS none/bxc
+CLASS none/bxc net/minecraft/client/gui/GuiResourcePackProgress
 	METHOD a drawScreen (IIF)V
-CLASS none/bxd
+CLASS none/bxd net/minecraft/client/gui/GuiDownloadingTerrain
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD b initGui ()V
 	METHOD d doesGuiPauseGame ()Z
 	METHOD e updateScreen ()V
-CLASS none/bxe
+CLASS none/bxe net/minecraft/client/gui/GuiRenameWorld
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a mouseClicked (III)V
@@ -11901,7 +11905,7 @@ CLASS none/bxf net/minecraft/client/gui/GuiScreen
 	METHOD a drawItemStackTooltip (Lnone/amj;II)V
 	METHOD a setLevelAndResolution (Lnone/bsu;II)V
 	METHOD a actionPerformed (Lnone/bug;)V
-	METHOD a confirmClicked (ZI)V
+	METHOD a onChoice (ZI)V
 	METHOD b initGui ()V
 	METHOD b mouseMovedOrUp (III)V
 	METHOD b_ drawDefaultBackground (I)V
@@ -11915,18 +11919,19 @@ CLASS none/bxf net/minecraft/client/gui/GuiScreen
 	METHOD p handleInput ()V
 	METHOD q isCtrlKeyDown ()Z
 	METHOD r isShiftKeyDown ()Z
-CLASS none/bxg
+CLASS none/bxg net/minecraft/client/gui/GuiSelectWorld
 	CLASS bxh
 		METHOD a drawSlot (IIIIII)V
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
-	METHOD a confirmClicked (ZI)V
+	METHOD a onChoice (ZI)V
 	METHOD b initGui ()V
 	METHOD k handleMouseInput ()V
-CLASS none/bxi
+CLASS none/bxi net/minecraft/client/gui/GuiLanServer
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
+CLASS none/bxj net/minecraft/client/gui/GuiSkinCustomization
 CLASS none/bxk empty/_1
 CLASS none/bxm net/minecraft/client/gui/GuiSnooper
 	CLASS bxn
@@ -11935,7 +11940,7 @@ CLASS none/bxm net/minecraft/client/gui/GuiSnooper
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
 	METHOD k handleMouseInput ()V
-CLASS none/bxo net/minecraft/client/gui/bxo
+CLASS none/bxo net/minecraft/client/gui/GuiSoundOptions
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
@@ -11944,7 +11949,7 @@ CLASS none/bxq net/minecraft/client/gui/GuiMainMenu
 	METHOD a drawScreen (IIF)V
 	METHOD a mouseClicked (III)V
 	METHOD a actionPerformed (Lnone/bug;)V
-	METHOD a confirmClicked (ZI)V
+	METHOD a onChoice (ZI)V
 	METHOD b initGui ()V
 	METHOD d doesGuiPauseGame ()Z
 	METHOD e updateScreen ()V
@@ -11955,14 +11960,34 @@ CLASS none/bxr net/minecraft/client/gui/GuiVideoSettings
 	METHOD b initGui ()V
 	METHOD b mouseMovedOrUp (III)V
 	METHOD k handleMouseInput ()V
-CLASS none/bxs
+CLASS none/bxs net/minecraft/client/gui/GuiCredits
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD b initGui ()V
 	METHOD d doesGuiPauseGame ()Z
 	METHOD e updateScreen ()V
 CLASS none/bxt net/minecraft/client/gui/GuiAchievement
-CLASS none/bxu
+	FIELD a namespace
+	FIELD f minecraft
+	FIELD g screenWidth
+	FIELD h screenHeight
+	FIELD i title
+	FIELD j subtitle
+	FIELD k achievement
+	FIELD l startTime
+	FIELD m fontRenderer
+	FIELD n info
+	METHOD <init> (Lnone/bsu;)V
+		ARG 0 minecraft
+	METHOD a render ()V
+	METHOD a setAchievementReceived (Lnone/tk;)V
+		ARG 0 achievement
+	METHOD b reset ()V
+	METHOD b setAchievementInfo (Lnone/tk;)V
+		ARG 0 achievement
+	METHOD c setupRendering ()V
+CLASS none/bxu net/minecraft/client/gui/GuiAchievements
+	METHOD a onLoaded ()V
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
@@ -11970,12 +11995,19 @@ CLASS none/bxu
 	METHOD d doesGuiPauseGame ()Z
 	METHOD e updateScreen ()V
 CLASS none/bxv net/minecraft/client/gui/GuiStats
+	FIELD a parent
+	METHOD <init> (Lnone/bxf;Lnone/tz;)V
+		ARG 0 parent
+	METHOD a onLoaded ()V
 	METHOD a drawScreen (IIF)V
 	METHOD a drawHorizontalLine (IIII)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
 	METHOD d doesGuiPauseGame ()Z
 	METHOD k handleMouseInput ()V
+CLASS none/byd net/minecraft/client/gui/ILoadableGui
+	FIELD c_ LOADING_BAR
+	METHOD a onLoaded ()V
 CLASS none/byf
 	FIELD v mc
 CLASS none/byj net/minecraft/client/gui/GuiControls
@@ -12017,7 +12049,7 @@ CLASS none/byl net/minecraft/client/gui/GuiContainer
 	METHOD d doesGuiPauseGame ()Z
 	METHOD e updateScreen ()V
 	METHOD m onGuiClosed ()V
-CLASS none/bym
+CLASS none/bym net/minecraft/client/gui/GuiAnvil
 	METHOD a keyTyped (CI)V
 	METHOD a drawGuiContainerBackgroundLayer (FII)V
 	METHOD a drawScreen (IIF)V
@@ -12025,7 +12057,7 @@ CLASS none/bym
 	METHOD b initGui ()V
 	METHOD b drawGuiContainerForegroundLayer (II)V
 	METHOD m onGuiClosed ()V
-CLASS none/byn
+CLASS none/byn net/minecraft/client/gui/GuiBeacon
 	METHOD a drawGuiContainerBackgroundLayer (FII)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
@@ -12045,10 +12077,10 @@ CLASS none/bys net/minecraft/client/gui/GuiBook
 	METHOD m onGuiClosed ()V
 CLASS none/byt net/minecraft/client/gui/button/byt
 	METHOD a drawButton (Lnone/bsu;II)V
-CLASS none/byu
+CLASS none/byu net/minecraft/client/gui/GuiBrewingStand
 	METHOD a drawGuiContainerBackgroundLayer (FII)V
 	METHOD b drawGuiContainerForegroundLayer (II)V
-CLASS none/byv net/minecraft/client/gui/byv
+CLASS none/byv net/minecraft/client/gui/GuiCommandBlock
 	FIELD a logger
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
@@ -12061,7 +12093,7 @@ CLASS none/byw net/minecraft/client/gui/GuiCrafting
 	FIELD u craftingTableGuiTextures
 	METHOD a drawGuiContainerBackgroundLayer (FII)V
 	METHOD b drawGuiContainerForegroundLayer (II)V
-CLASS none/byx
+CLASS none/byx net/minecraft/client/gui/GuiCraftingTable
 	METHOD a drawGuiContainerBackgroundLayer (FII)V
 	METHOD b drawGuiContainerForegroundLayer (II)V
 CLASS none/byz net/minecraft/client/gui/GuiContainerCreative
@@ -12083,14 +12115,15 @@ CLASS none/byz net/minecraft/client/gui/GuiContainerCreative
 	METHOD e updateScreen ()V
 	METHOD k handleMouseInput ()V
 	METHOD m onGuiClosed ()V
-CLASS none/bza
+CLASS none/bza net/minecraft/client/gui/GuiCreativeTab
 	METHOD b canDragIntoSlot (Lnone/ajk;)Z
-CLASS none/bzc
+CLASS none/bzc net/minecraft/client/gui/GuiDispenser
 	METHOD a drawGuiContainerBackgroundLayer (FII)V
 	METHOD b drawGuiContainerForegroundLayer (II)V
 CLASS none/bzd net/minecraft/client/renderers/InventoryEffectRenderer
 	METHOD a drawScreen (IIF)V
 	METHOD b initGui ()V
+CLASS none/bze net/minecraft/util/EnchantmentWordPicker
 CLASS none/bzf net/minecraft/client/gui/GuiContainerEnchanting
 	FIELD C ENCHANT_TABLE_PNG
 	FIELD D ENCHANT_BOOK_PNG
@@ -12099,10 +12132,10 @@ CLASS none/bzf net/minecraft/client/gui/GuiContainerEnchanting
 	METHOD a mouseClicked (III)V
 	METHOD b drawGuiContainerForegroundLayer (II)V
 	METHOD e updateScreen ()V
-CLASS none/bzg
+CLASS none/bzg net/minecraft/client/gui/GuiFurnace
 	METHOD a drawGuiContainerBackgroundLayer (FII)V
 	METHOD b drawGuiContainerForegroundLayer (II)V
-CLASS none/bzh
+CLASS none/bzh net/minecraft/client/gui/GuiHopper
 	METHOD a drawGuiContainerBackgroundLayer (FII)V
 	METHOD b drawGuiContainerForegroundLayer (II)V
 CLASS none/bzi net/minecraft/client/gui/GuiHorse
@@ -12150,7 +12183,7 @@ CLASS none/bzp net/minecraft/client/gui/GuiMultiplayer
 	METHOD a drawScreen (IIF)V
 	METHOD a mouseClicked (III)V
 	METHOD a actionPerformed (Lnone/bug;)V
-	METHOD a confirmClicked (ZI)V
+	METHOD a onChoice (ZI)V
 	METHOD b initGui ()V
 	METHOD b mouseMovedOrUp (III)V
 	METHOD e updateScreen ()V
@@ -12622,6 +12655,9 @@ CLASS none/cee net/minecraft/network/NetClientHandler
 	METHOD a handleEntityProperties (Lnone/lp;)V
 	METHOD a handleEntityEffect (Lnone/lr;)V
 		ARG 0 packet
+CLASS none/ceh
+	CLASS cei
+		METHOD a onChoice (ZI)V
 CLASS none/cek net/minecraft/network/EnumTitleUpdateSwitch
 	FIELD a indices
 CLASS none/cel
