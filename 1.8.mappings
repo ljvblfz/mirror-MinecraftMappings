@@ -1270,7 +1270,7 @@ CLASS none/ej net/minecraft/block/EnumFacing
 	METHOD l getName ()Ljava/lang/String;
 	METHOD n getXRotation ()Lnone/ej;
 	METHOD p getZRotation ()Lnone/ej;
-	METHOD values values ()[Lnone/ej;
+	METHOD values ()[Lnone/ej;
 CLASS none/el net/minecraft/block/EnumRotatedPillarAxis
 	FIELD a X
 	FIELD b Y
@@ -3245,19 +3245,53 @@ CLASS none/pc net/minecraft/util/StackInfoPrintStream
 		ARG 0 x
 CLASS none/pi net/minecraft/network/ThreadQuickExitException
 	FIELD a INSTANCE
-CLASS none/pk
+CLASS none/pk net/minecraft/scoreboard/ServerScoreboardManager
+	FIELD a server
+	FIELD b watchedObjectives
+	FIELD c data
+	METHOD <init> (Lnet/minecraft/server/MinecraftServer;)V
+		ARG 0 server
 	METHOD a setObjectiveInSlot (ILnone/bry;)V
+		ARG 0 slot
+		ARG 1 objective
 	METHOD a onPlayerRemoved (Ljava/lang/String;)V
+		ARG 0 player
 	METHOD a addPlayerToTeam (Ljava/lang/String;Ljava/lang/String;)Z
+		ARG 0 player
+		ARG 1 team
 	METHOD a onPlayerRemovedFrom (Ljava/lang/String;Lnone/bry;)V
+		ARG 0 player
+		ARG 1 objective
 	METHOD a removePlayerFromTeam (Ljava/lang/String;Lnone/brz;)V
+		ARG 0 player
+		ARG 1 team
 	METHOD a onObjectiveAdded (Lnone/bry;)V
+		ARG 0 objective
 	METHOD a onTeamAdded (Lnone/brz;)V
+		ARG 0 team
 	METHOD a onScoreChanged (Lnone/bsa;)V
+		ARG 0 score
+	METHOD a setData (Lnone/bse;)V
+		ARG 0 data
+	METHOD b flagForSave ()V
 	METHOD b onObjectiveUpdate (Lnone/bry;)V
+		ARG 0 objective
 	METHOD b onTeamChanged (Lnone/brz;)V
+		ARG 0 team
 	METHOD c onObjectiveRemoved (Lnone/bry;)V
+		ARG 0 objective
 	METHOD c onTeamRemoved (Lnone/brz;)V
+		ARG 0 team
+	METHOD d getObjectiveAddPackets (Lnone/bry;)Ljava/util/List;
+		ARG 0 objective
+	METHOD e watch (Lnone/bry;)V
+		ARG 0 objective
+	METHOD f getObjectiveRemovePackets (Lnone/bry;)Ljava/util/List;
+		ARG 0 objective
+	METHOD g unwatch (Lnone/bry;)V
+		ARG 0 objective
+	METHOD h getSlotCount (Lnone/bry;)I
+		ARG 0 objective
 CLASS none/pm net/minecraft/server/gui/IUpdatePlayerListBox
 	METHOD c update ()V
 CLASS none/qj net/minecraft/server/DemoLevelServer
@@ -3355,6 +3389,7 @@ CLASS none/qt net/minecraft/level/LevelServer
 	METHOD r getMinecraftServer ()Lnet/minecraft/server/MinecraftServer;
 	METHOD s getEntityTracker ()Lnone/qn;
 CLASS none/qw net/minecraft/entity/player/EntityPlayerMP
+	FIELD a netServerHandler
 	FIELD b minecraftServer
 	FIELD bF logger
 	FIELD bS entity
@@ -3444,10 +3479,14 @@ CLASS none/re net/minecraft/network/LocalServerEventLoopFactory
 	METHOD b createEventLoop ()Lio/netty/channel/local/LocalEventLoopGroup;
 	METHOD b createEventLoop ()Ljava/lang/Object;
 CLASS none/rj net/minecraft/network/NetServerHandler
+	FIELD a manager
+	FIELD b player
 	FIELD c logger
-	FIELD d minecraftServer
+	FIELD d server
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnone/gr;Lnone/qw;)V
 		ARG 0 minecraftServer
+	METHOD a send (Lnone/id;)V
+		ARG 0 packet
 	METHOD a handleTabComplete (Lnone/lt;)V
 	METHOD a handleChat (Lnone/lu;)V
 	METHOD a handleClientStatus (Lnone/lv;)V
@@ -3489,6 +3528,7 @@ CLASS none/sn net/minecraft/server/ServerConfigurationManager
 	METHOD a getPlayer (Ljava/lang/String;)Lnone/qw;
 	METHOD a getPlayerFromUuid (Ljava/util/UUID;)Lnone/qw;
 	METHOD a broadcastMessage (Lnone/ho;)V
+	METHOD a sendPacketToAll (Lnone/id;)V
 	METHOD a setPacketToAllPlayersInDimension (Lnone/id;I)V
 	METHOD a setPlayerManager ([Lnone/qt;)V
 	METHOD e sendPlayerInfoToAllPlayers ()V
@@ -3776,6 +3816,9 @@ CLASS none/vt net/minecraft/level/EnumDifficulty
 		ARG 0 id
 	METHOD b getName ()Ljava/lang/String;
 	METHOD values ()[Lnone/vt;
+CLASS none/vu
+	METHOD a (Lnone/vt;JJF)F
+		ARG 0 difficulty
 CLASS none/vz net/minecraft/inventory/IInventory
 CLASS none/wa
 	METHOD a getSlot (I)Lnone/amj;
@@ -4310,6 +4353,10 @@ CLASS none/xn net/minecraft/entity/EntityMob
 	METHOD p getEquipmentInSlot (I)Lnone/amj;
 	METHOD s_ onUpdate ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
+CLASS none/xo net/minecraft/entity/EnumMobType
+	FIELD a ON_GROUND
+	FIELD b IN_AIR
+	FIELD c IN_WATER
 CLASS none/xp net/minecraft/entity/EnumCreatureType
 	FIELD a MONSTER
 	FIELD b CREATURE
@@ -4329,7 +4376,11 @@ CLASS none/xp net/minecraft/entity/EnumCreatureType
 	METHOD b getMaxAmountInWorld ()I
 	METHOD d isPeacefulCreature ()Z
 	METHOD e isAnimal ()Z
-CLASS none/xu
+CLASS none/xr net/minecraft/entity/MobTypes
+	FIELD a MOB_TYPES
+	METHOD a getMobType (Ljava/lang/Class;)Lnone/xo;
+		ARG 0 mobClass
+CLASS none/xu net/minecraft/entity/EntityCreature
 	FIELD bi FLEEING_SPEED_ID
 	FIELD bj FLEEING_SPEED_BONUS
 CLASS none/xv net/minecraft/entity/DataWatcher
@@ -10635,8 +10686,18 @@ CLASS none/boy net/minecraft/level/gen/layer/IntCache
 	METHOD a getIntCache (I)[I
 	METHOD b getDebugInfo ()Ljava/lang/String;
 CLASS none/bqc net/minecraft/level/LevelSavedData
+	FIELD a name
+	FIELD b requiresSave
+	METHOD <init> (Ljava/lang/String;)V
+		ARG 0 name
 	METHOD a load (Lnone/fn;)V
+		ARG 0 nbt
+	METHOD a setRequiresSave (Z)V
+		ARG 0 requiresSave
 	METHOD b save (Lnone/fn;)V
+		ARG 0 nbt
+	METHOD c setRequiresSave ()V
+	METHOD d requiresSave ()Z
 CLASS none/bqd net/minecraft/util/Vec4b
 	METHOD a getFirst ()B
 	METHOD b getSecond ()B
@@ -11628,7 +11689,7 @@ CLASS none/bvr net/minecraft/client/gui/button/bvr
 	METHOD c mousePressed (Lnone/bsu;II)Z
 CLASS none/bvs
 	METHOD a drawSlot (IIIIII)V
-CLASS none/bvt net/minecraft/client/gui/screen/bvt
+CLASS none/bvt net/minecraft/client/gui/bvt
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a mouseClicked (III)V
@@ -11651,7 +11712,7 @@ CLASS none/bvu
 	METHOD a drawSlot (IIIIII)V
 CLASS none/bvv
 	METHOD a drawSlot (IIIIII)V
-CLASS none/bvw net/minecraft/client/gui/screen/ScreenChatOptions
+CLASS none/bvw net/minecraft/client/gui/GuiChatOptions
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
@@ -11682,14 +11743,14 @@ CLASS none/bwb net/minecraft/client/gui/GuiConnecting
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
 	METHOD e updateScreen ()V
-CLASS none/bwd net/minecraft/client/gui/screen/GuiCreateFlatWorld
+CLASS none/bwd net/minecraft/client/gui/GuiCreateFlatWorld
 	CLASS bwe GuiCreateFlatWorldListSlot
 		METHOD a drawSlot (IIIIII)V
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
 	METHOD k handleMouseInput ()V
-CLASS none/bwf
+CLASS none/bwf net/minecraft/client/gui/GuiNewWorld
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a mouseClicked (III)V
@@ -11697,7 +11758,7 @@ CLASS none/bwf
 	METHOD b initGui ()V
 	METHOD e updateScreen ()V
 	METHOD m onGuiClosed ()V
-CLASS none/bwg net/minecraft/client/gui/screen/bwg
+CLASS none/bwg net/minecraft/client/gui/bwg
 	CLASS bwi
 		METHOD a drawSlot (IIIIII)V
 	METHOD a keyTyped (CI)V
@@ -11708,7 +11769,7 @@ CLASS none/bwg net/minecraft/client/gui/screen/bwg
 	METHOD e updateScreen ()V
 	METHOD k handleMouseInput ()V
 	METHOD m onGuiClosed ()V
-CLASS none/bwj net/minecraft/client/gui/screen/bwj
+CLASS none/bwj net/minecraft/client/gui/bwj
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a mouseClicked (III)V
@@ -11743,7 +11804,7 @@ CLASS none/bwo
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
-CLASS none/bwp net/minecraft/client/gui/GuiScreenAddServer
+CLASS none/bwp net/minecraft/client/gui/GuiAddServer
 	FIELD a parentGui
 	FIELD f newServerData
 	FIELD g serverAddress
@@ -11874,7 +11935,7 @@ CLASS none/bxm net/minecraft/client/gui/GuiSnooper
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
 	METHOD k handleMouseInput ()V
-CLASS none/bxo net/minecraft/client/gui/screen/bxo
+CLASS none/bxo net/minecraft/client/gui/bxo
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
@@ -11917,7 +11978,7 @@ CLASS none/bxv net/minecraft/client/gui/GuiStats
 	METHOD k handleMouseInput ()V
 CLASS none/byf
 	FIELD v mc
-CLASS none/byj net/minecraft/client/gui/screen/GuiControls
+CLASS none/byj net/minecraft/client/gui/GuiControls
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a mouseClicked (III)V
@@ -11972,7 +12033,7 @@ CLASS none/byn
 	METHOD e updateScreen ()V
 CLASS none/byr net/minecraft/client/gui/button/byr
 	METHOD a drawButton (Lnone/bsu;II)V
-CLASS none/bys net/minecraft/client/gui/screen/GuiScreenBook
+CLASS none/bys net/minecraft/client/gui/GuiBook
 	FIELD a logger
 	FIELD f bookTextures
 	METHOD a keyTyped (CI)V
@@ -11987,7 +12048,7 @@ CLASS none/byt net/minecraft/client/gui/button/byt
 CLASS none/byu
 	METHOD a drawGuiContainerBackgroundLayer (FII)V
 	METHOD b drawGuiContainerForegroundLayer (II)V
-CLASS none/byv net/minecraft/client/gui/screen/byv
+CLASS none/byv net/minecraft/client/gui/byv
 	FIELD a logger
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
@@ -12072,7 +12133,7 @@ CLASS none/bzk net/minecraft/client/gui/GuiMerchant
 	METHOD e updateScreen ()V
 CLASS none/bzl net/minecraft/client/gui/button/GuiButtonMerchant
 	METHOD a drawButton (Lnone/bsu;II)V
-CLASS none/bzm net/minecraft/client/gui/screen/GuiEditSign
+CLASS none/bzm net/minecraft/client/gui/GuiEditSign
 	FIELD a entitySign
 	FIELD f updateCounter
 	FIELD g editLine
@@ -12097,24 +12158,24 @@ CLASS none/bzp net/minecraft/client/gui/GuiMultiplayer
 	METHOD m onGuiClosed ()V
 CLASS none/bzq net/minecraft/client/gui/GuiSlotServer
 	FIELD a mc
-CLASS none/bzx net/minecraft/client/gui/screen/GuiSelectResourcePack
+CLASS none/bzx net/minecraft/client/gui/GuiSelectResourcePack
 	METHOD a drawScreen (IIF)V
 	METHOD a mouseClicked (III)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
 	METHOD b mouseMovedOrUp (III)V
 	METHOD k handleMouseInput ()V
-CLASS none/cah net/minecraft/client/gui/screen/GuiScreenTwitch1
+CLASS none/cah net/minecraft/client/gui/GuiTwitchIngest
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
 	METHOD k handleMouseInput ()V
 	METHOD m onGuiClosed ()V
-CLASS none/caj net/minecraft/client/gui/screen/GuiScreenTwitch2
+CLASS none/caj net/minecraft/client/gui/GuiTwitchTitle
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
-CLASS none/cak net/minecraft/client/gui/screen/GuiScreenTwitch3
+CLASS none/cak net/minecraft/client/gui/GuiTwitchUnavailable
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
@@ -12134,7 +12195,7 @@ CLASS none/cam net/minecraft/client/stream/EnumUnavailableStreamError
 	FIELD l UNKNOWN
 	METHOD a getTranslatableReason ()Lnone/ho;
 	METHOD b getTranslatableAdvice ()Lnone/ho;
-CLASS none/can net/minecraft/client/gui/screen/GuiScreenTwitch4
+CLASS none/can net/minecraft/client/gui/GuiTwitchUsers
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
