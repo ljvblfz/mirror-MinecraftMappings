@@ -12655,9 +12655,6 @@ CLASS none/cee net/minecraft/network/NetClientHandler
 	METHOD a handleEntityProperties (Lnone/lp;)V
 	METHOD a handleEntityEffect (Lnone/lr;)V
 		ARG 0 packet
-CLASS none/ceh
-	CLASS cei
-		METHOD a onChoice (ZI)V
 CLASS none/cek net/minecraft/network/EnumTitleUpdateSwitch
 	FIELD a indices
 CLASS none/cel
@@ -13058,7 +13055,7 @@ CLASS none/cji net/minecraft/entity/EntityRenderer
 	METHOD a onReload (Lnone/cvk;)V
 	METHOD a setViewEntity (Lnone/wv;)V
 	METHOD j setupOverlayRendering ()V
-CLASS none/cjm org/lwjgl/opengl/GL11
+CLASS none/cjm net/minecraft/client/OpenGL
 	METHOD E glPushMatrix ()V
 	METHOD F glPopMatrix ()V
 	METHOD a glScalef (FFF)V
@@ -13572,6 +13569,9 @@ CLASS none/byn$byp net/minecraft/client/gui/button/byp
 CLASS none/byn$byq net/minecraft/client/gui/button/byq
 CLASS none/cah$cai
 	METHOD a drawSlot (IIIIII)V
+CLASS none/cee$ceh
+	CLASS cei
+		METHOD a onChoice (ZI)V
 CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD A canSpawnAnimals
 	FIELD B canSpawnNPCs
