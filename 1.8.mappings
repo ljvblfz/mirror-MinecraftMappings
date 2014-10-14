@@ -1270,7 +1270,7 @@ CLASS none/ej net/minecraft/block/EnumFacing
 	METHOD l getName ()Ljava/lang/String;
 	METHOD n getXRotation ()Lnone/ej;
 	METHOD p getZRotation ()Lnone/ej;
-	METHOD values values ()[Lnone/ej;
+	METHOD values ()[Lnone/ej;
 CLASS none/el net/minecraft/block/EnumRotatedPillarAxis
 	FIELD a X
 	FIELD b Y
