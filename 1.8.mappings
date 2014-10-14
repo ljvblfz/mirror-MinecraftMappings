@@ -2929,7 +2929,7 @@ CLASS none/lv net/minecraft/network/packet/serverbound/PacketClientStatus
 	METHOD a read (Lnone/hd;)V
 	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
-CLASS none/lw none/EnumRespawnType
+CLASS none/lw net/minecraft/network/EnumClientStatus
 	FIELD a PERFORM_RESPAWN
 	FIELD b REQUEST_STATS
 	FIELD c OPEN_INVENTORY_ACHIEVEMENT
@@ -12677,7 +12677,7 @@ CLASS none/cen net/minecraft/client/multiplayer/LevelClient
 	METHOD k createChunkProvider ()Lnone/bfe;
 	METHOD p updateWeather ()V
 	METHOD q getRenderDistanceChunks ()I
-CLASS none/ceu none/MinecraftProfileTextureValues
+CLASS none/ceu
 CLASS none/cew net/minecraft/network/ServerData
 	FIELD a serverName
 	FIELD b serverIP
@@ -13434,8 +13434,8 @@ CLASS none/cyp
 CLASS none/cyq
 	FIELD c updateTime
 	METHOD c updateTime ()V
-CLASS none/cyr none/ThreadLanServerDetector
-CLASS none/cyt none/ThreadLanServerPing
+CLASS none/cyr net/minecraft/network/ThreadLanServerDetector
+CLASS none/cyt net/minecraft/network/ThreadLanServerPing
 CLASS none/cyx net/minecraft/client/audio/MusicTicker
 	FIELD a random
 	FIELD b mc
@@ -13464,8 +13464,10 @@ CLASS none/czh net/minecraft/client/sound/czh
 	METHOD c update ()V
 CLASS none/czl
 	METHOD b initializeMap ()Ljava/util/Map;
-CLASS none/czp none/AchievementUnlocker
-CLASS none/czr none/PlayerKiller
+CLASS none/czp net/minecraft/client/stream/AchievementMetadata
+	METHOD <init> (Lnone/tk;)V
+		ARG 0 achievement
+CLASS none/czr net/minecraft/client/stream/PlayerDeathMetadata
 CLASS none/czs net/minecraft/client/stream/Metadata
 	FIELD a encodedPayload
 	FIELD b name
