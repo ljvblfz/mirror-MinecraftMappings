@@ -1270,7 +1270,7 @@ CLASS none/ej net/minecraft/block/EnumFacing
 	METHOD l getName ()Ljava/lang/String;
 	METHOD n getXRotation ()Lnone/ej;
 	METHOD p getZRotation ()Lnone/ej;
-	METHOD values facings ()[Lnone/ej;
+	METHOD values values ()[Lnone/ej;
 CLASS none/el net/minecraft/block/EnumRotatedPillarAxis
 	FIELD a X
 	FIELD b Y
@@ -1488,9 +1488,9 @@ CLASS none/fl net/minecraft/nbt/NbtByteArray
 		ARG 0 dataOutput
 	METHOD b clone ()Lnone/gd;
 	METHOD c getDataValue ()[B
-	METHOD equals equals (Ljava/lang/Object;)Z
-	METHOD hashCode hashCode ()I
-	METHOD toString toString ()Ljava/lang/String;
+	METHOD equals (Ljava/lang/Object;)Z
+	METHOD hashCode ()I
+	METHOD toString ()Ljava/lang/String;
 CLASS none/fm net/minecraft/nbt/NbtByte
 	FIELD b dataValue
 	METHOD <init> (B)V
@@ -1506,12 +1506,12 @@ CLASS none/fm net/minecraft/nbt/NbtByte
 	METHOD c getAsLong ()J
 	METHOD d getAsInt ()I
 	METHOD e getAsShort ()S
-	METHOD equals equals (Ljava/lang/Object;)Z
+	METHOD equals (Ljava/lang/Object;)Z
 	METHOD f getAsByte ()B
 	METHOD g getAsDouble ()D
 	METHOD h getAsFloat ()F
-	METHOD hashCode hashCode ()I
-	METHOD toString toString ()Ljava/lang/String;
+	METHOD hashCode ()I
+	METHOD toString ()Ljava/lang/String;
 CLASS none/fn net/minecraft/nbt/NbtTagCompound
 	FIELD b logger
 	FIELD c dataMap
@@ -1584,14 +1584,14 @@ CLASS none/fn net/minecraft/nbt/NbtTagCompound
 		ARG 0 nbtMapKey
 	METHOD e getAsShort (Ljava/lang/String;)S
 		ARG 0 nbtMapKey
-	METHOD equals equals (Ljava/lang/Object;)Z
+	METHOD equals (Ljava/lang/Object;)Z
 	METHOD f getAsInt (Ljava/lang/String;)I
 		ARG 0 nbtMapKey
 	METHOD g getAsLong (Ljava/lang/String;)J
 		ARG 0 nbtMapKey
 	METHOD h getAsFloat (Ljava/lang/String;)F
 		ARG 0 nbtMapKey
-	METHOD hashCode hashCode ()I
+	METHOD hashCode ()I
 	METHOD i getAsDouble (Ljava/lang/String;)D
 		ARG 0 nbtMapKey
 	METHOD j getAsString (Ljava/lang/String;)Ljava/lang/String;
@@ -1606,7 +1606,7 @@ CLASS none/fn net/minecraft/nbt/NbtTagCompound
 		ARG 0 nbtMapKey
 	METHOD o remove (Ljava/lang/String;)V
 		ARG 0 nbtMapKey
-	METHOD toString toString ()Ljava/lang/String;
+	METHOD toString ()Ljava/lang/String;
 CLASS none/fq net/minecraft/nbt/NbtDouble
 	FIELD b dataValue
 	METHOD <init> (D)V
@@ -1621,12 +1621,12 @@ CLASS none/fq net/minecraft/nbt/NbtDouble
 	METHOD c getAsLong ()J
 	METHOD d getAsInt ()I
 	METHOD e getAsShort ()S
-	METHOD equals equals (Ljava/lang/Object;)Z
+	METHOD equals (Ljava/lang/Object;)Z
 	METHOD f getAsByte ()B
 	METHOD g getAsDouble ()D
 	METHOD h getAsFloat ()F
-	METHOD hashCode hashCode ()I
-	METHOD toString toString ()Ljava/lang/String;
+	METHOD hashCode ()I
+	METHOD toString ()Ljava/lang/String;
 CLASS none/fr net/minecraft/nbt/NbtEnd
 	METHOD a getNbtTypeId ()B
 	METHOD a inputData (Ljava/io/DataInput;ILnone/fx;)V
@@ -1635,7 +1635,7 @@ CLASS none/fr net/minecraft/nbt/NbtEnd
 	METHOD a outputData (Ljava/io/DataOutput;)V
 		ARG 0 dataOutput
 	METHOD b clone ()Lnone/gd;
-	METHOD toString toString ()Ljava/lang/String;
+	METHOD toString ()Ljava/lang/String;
 CLASS none/fs net/minecraft/nbt/NbtFloat
 	FIELD b dataValue
 	METHOD <init> (F)V
@@ -1650,12 +1650,12 @@ CLASS none/fs net/minecraft/nbt/NbtFloat
 	METHOD c getAsLong ()J
 	METHOD d getAsInt ()I
 	METHOD e getAsShort ()S
-	METHOD equals equals (Ljava/lang/Object;)Z
+	METHOD equals (Ljava/lang/Object;)Z
 	METHOD f getAsByte ()B
 	METHOD g getAsDouble ()D
 	METHOD h getAsFloat ()F
-	METHOD hashCode hashCode ()I
-	METHOD toString toString ()Ljava/lang/String;
+	METHOD hashCode ()I
+	METHOD toString ()Ljava/lang/String;
 CLASS none/ft net/minecraft/nbt/NbtIntArray
 	FIELD b dataValue
 	METHOD <init> ([I)V
@@ -1668,9 +1668,9 @@ CLASS none/ft net/minecraft/nbt/NbtIntArray
 		ARG 0 dataOutput
 	METHOD b clone ()Lnone/gd;
 	METHOD c getDataValue ()[I
-	METHOD equals equals (Ljava/lang/Object;)Z
-	METHOD hashCode hashCode ()I
-	METHOD toString toString ()Ljava/lang/String;
+	METHOD equals (Ljava/lang/Object;)Z
+	METHOD hashCode ()I
+	METHOD toString ()Ljava/lang/String;
 CLASS none/fu net/minecraft/nbt/NbtInt
 	FIELD b dataValue
 	METHOD <init> (I)V
@@ -1682,12 +1682,12 @@ CLASS none/fu net/minecraft/nbt/NbtInt
 	METHOD c getAsLong ()J
 	METHOD d getAsInt ()I
 	METHOD e getAsShort ()S
-	METHOD equals equals (Ljava/lang/Object;)Z
+	METHOD equals (Ljava/lang/Object;)Z
 	METHOD f getAsByte ()B
 	METHOD g getAsDouble ()D
 	METHOD h getAsFloat ()F
-	METHOD hashCode hashCode ()I
-	METHOD toString toString ()Ljava/lang/String;
+	METHOD hashCode ()I
+	METHOD toString ()Ljava/lang/String;
 CLASS none/fv net/minecraft/nbt/NbtList
 	FIELD b logger
 	FIELD c nbtList
@@ -1716,14 +1716,14 @@ CLASS none/fv net/minecraft/nbt/NbtList
 		ARG 0 index
 	METHOD e getAsFloat (I)F
 		ARG 0 index
-	METHOD equals equals (Ljava/lang/Object;)Z
+	METHOD equals (Ljava/lang/Object;)Z
 	METHOD f getListNbtTypeId ()I
 	METHOD f getAsString (I)Ljava/lang/String;
 		ARG 0 index
 	METHOD g getAsNbt (I)Lnone/gd;
 		ARG 0 index
-	METHOD hashCode hashCode ()I
-	METHOD toString toString ()Ljava/lang/String;
+	METHOD hashCode ()I
+	METHOD toString ()Ljava/lang/String;
 CLASS none/fw net/minecraft/nbt/NbtLong
 	FIELD b dataValue
 	METHOD <init> (J)V
@@ -1735,12 +1735,12 @@ CLASS none/fw net/minecraft/nbt/NbtLong
 	METHOD c getAsLong ()J
 	METHOD d getAsInt ()I
 	METHOD e getAsShort ()S
-	METHOD equals equals (Ljava/lang/Object;)Z
+	METHOD equals (Ljava/lang/Object;)Z
 	METHOD f getAsByte ()B
 	METHOD g getAsDouble ()D
 	METHOD h getAsFloat ()F
-	METHOD hashCode hashCode ()I
-	METHOD toString toString ()Ljava/lang/String;
+	METHOD hashCode ()I
+	METHOD toString ()Ljava/lang/String;
 CLASS none/fx net/minecraft/nbt/NbtSizeUtil
 	FIELD a nbtSizeUtilDefault
 	FIELD b maxSize
@@ -1801,12 +1801,12 @@ CLASS none/gb net/minecraft/nbt/NbtShort
 	METHOD c getAsLong ()J
 	METHOD d getAsInt ()I
 	METHOD e getAsShort ()S
-	METHOD equals equals (Ljava/lang/Object;)Z
+	METHOD equals (Ljava/lang/Object;)Z
 	METHOD f getAsByte ()B
 	METHOD g getAsDouble ()D
 	METHOD h getAsFloat ()F
-	METHOD hashCode hashCode ()I
-	METHOD toString toString ()Ljava/lang/String;
+	METHOD hashCode ()I
+	METHOD toString ()Ljava/lang/String;
 CLASS none/gc net/minecraft/nbt/NbtStrings
 	FIELD b dataValue
 	METHOD <init> (Ljava/lang/String;)V
@@ -1820,9 +1820,9 @@ CLASS none/gc net/minecraft/nbt/NbtStrings
 	METHOD a_ getNbtString ()Ljava/lang/String;
 	METHOD b clone ()Lnone/gd;
 	METHOD c_ isEmpty ()Z
-	METHOD equals equals (Ljava/lang/Object;)Z
-	METHOD hashCode hashCode ()I
-	METHOD toString toString ()Ljava/lang/String;
+	METHOD equals (Ljava/lang/Object;)Z
+	METHOD hashCode ()I
+	METHOD toString ()Ljava/lang/String;
 CLASS none/gd net/minecraft/nbt/Nbt
 	FIELD a NBTTypes
 	METHOD a getNbtTypeId ()B
@@ -1837,9 +1837,9 @@ CLASS none/gd net/minecraft/nbt/Nbt
 	METHOD a_ getNbtString ()Ljava/lang/String;
 	METHOD b clone ()Lnone/gd;
 	METHOD c_ isEmpty ()Z
-	METHOD equals equals (Ljava/lang/Object;)Z
-	METHOD hashCode hashCode ()I
-	METHOD toString toString ()Ljava/lang/String;
+	METHOD equals (Ljava/lang/Object;)Z
+	METHOD hashCode ()I
+	METHOD toString ()Ljava/lang/String;
 CLASS none/ge net/minecraft/nbt/NbtNumeric
 	METHOD c getAsLong ()J
 	METHOD d getAsInt ()I
@@ -4489,12 +4489,53 @@ CLASS none/yg net/minecraft/entity/attribute/Attribute
 	METHOD a setDisplayName (Ljava/lang/String;)Lnone/yg;
 		ARG 0 displayName
 	METHOD g getDisplayName ()Ljava/lang/String;
+CLASS none/yp net/minecraft/entity/ai/GoalAvoidEntity
+CLASS none/yr net/minecraft/entity/ai/GoalBeg
+CLASS none/ys net/minecraft/entity/ai/GoalBreakDoor
+CLASS none/yt net/minecraft/entity/ai/GoalMate
+CLASS none/yu net/minecraft/entity/ai/GoalPlayerControl
+CLASS none/yv net/minecraft/entity/ai/GoalDoorInteract
+CLASS none/yw net/minecraft/entity/ai/GoalEatGrass
+CLASS none/yx net/minecraft/entity/ai/GoalFleeSun
+CLASS none/yy net/minecraft/entity/ai/GoalSwimming
+CLASS none/yz net/minecraft/entity/ai/GoalFollowOwner
+CLASS none/za net/minecraft/entity/ai/GoalFollowParent
 CLASS none/zb net/minecraft/entity/ai/Goal
 CLASS none/zc net/minecraft/entity/ai/EntityGoals
 	METHOD a add (ILnone/zb;)V
+CLASS none/ze net/minecraft/entity/ai/GoalPlantCrops
+CLASS none/zg net/minecraft/entity/ai/GoalLeapAtTarget
+CLASS none/zh net/minecraft/entity/ai/GoalWatchEntity
+CLASS none/zi net/minecraft/entity/ai/GoalWatchTradingPlayer
+CLASS none/zj net/minecraft/entity/ai/GoalVillagerReproduce
 CLASS none/zk net/minecraft/entity/ai/GoalMeleeAttack
 	METHOD a (Lnone/xm;)D
 		ARG 0 entity
+CLASS none/zl net/minecraft/entity/ai/GoalMoveIndoors
+CLASS none/zm net/minecraft/entity/ai/GoalMoveThroughVillage
+CLASS none/zn net/minecraft/entity/ai/GoalMoveToBlock
+CLASS none/zp net/minecraft/entity/ai/GoalMoveToTarget
+CLASS none/zq net/minecraft/entity/ai/GoalOcelotAttack
+CLASS none/zr net/minecraft/entity/ai/GoalOcelotSit
+	METHOD a (Lnone/aqu;Lnone/dt;)Z
+		ARG 0 level
+		ARG 1 blockPos
+CLASS none/zs net/minecraft/entity/ai/GoalWatchVillager
+CLASS none/zt net/minecraft/entity/ai/GoalOpenDoor
+CLASS none/zu net/minecraft/entity/ai/GoalPanic
+CLASS none/zv net/minecraft/entity/ai/GoalVillagerPlay
+CLASS none/zx net/minecraft/entity/ai/GoalIdleLook
+CLASS none/zy net/minecraft/entity/ai/GoalWander
+CLASS none/zz net/minecraft/entity/ai/GoalArrowAttack
+CLASS none/aaa net/minecraft/entity/ai/GoalRestrictOpenDoor
+CLASS none/aab net/minecraft/entity/ai/GoalCheckSun
+CLASS none/aad net/minecraft/entity/ai/GoalSit
+CLASS none/aae net/minecraft/entity/ai/GoalCreeperSwell
+CLASS none/aaf net/minecraft/entity/ai/GoalFollowGolem
+CLASS none/aag net/minecraft/entity/ai/GoalTempt
+CLASS none/aah net/minecraft/entity/ai/GoalTradePlayer
+CLASS none/aai net/minecraft/entity/ai/GoalExchangeProduce
+CLASS none/aak net/minecraft/entity/ai/GoalDefendVillage
 CLASS none/aaq net/minecraft/entity/ai/GoalFollowEntity
 CLASS none/abl
 	METHOD a load (Lnone/fn;)V
