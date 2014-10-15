@@ -3604,9 +3604,12 @@ CLASS none/tk net/minecraft/stats/Achievement
 		ARG 5 required
 	METHOD a itemRenderer (Lnone/tm;)Lnone/tk;
 	METHOD b setSpecial ()Lnone/tk;
+	METHOD d isAchievement ()Z
 	METHOD e getNameComponent ()Lnone/ho;
 	METHOD f getDescription ()Ljava/lang/String;
 	METHOD g isSpecial ()Z
+	METHOD h register ()Lnone/tq;
+	METHOD i setIndependent ()Lnone/tq;
 CLASS none/tl net/minecraft/stats/Achievements
 	FIELD A blazeRod
 	FIELD B potion
@@ -3649,13 +3652,48 @@ CLASS none/tl net/minecraft/stats/Achievements
 	FIELD z ghast
 	METHOD a initialize ()V
 CLASS none/tm net/minecraft/item/ItemRenderer
+CLASS none/tn net/minecraft/stats/tn
+	METHOD h register ()Lnone/tq;
 CLASS none/to net/minecraft/stats/StatItem
 	FIELD a item
 	METHOD a getItem ()Lnone/alq;
 CLASS none/tq net/minecraft/stats/Stat
-	FIELD e name
+	FIELD b formatter
+	FIELD c criteria
+	FIELD e id
 	FIELD f isIndependent
+	FIELD g numberFormatter
+	FIELD h timeFormatter
+	FIELD i distanceFormatter
+	FIELD k numberFormat
+	FIELD l decimalFormat
+	METHOD <init> (Ljava/lang/String;Lnone/ho;)V
+		ARG 0 id
+	METHOD <init> (Ljava/lang/String;Lnone/ho;Lnone/tv;)V
+		ARG 0 id
+		ARG 2 formatter
+	METHOD a format (I)Ljava/lang/String;
+	METHOD d isAchievement ()Z
 	METHOD e getNameComponent ()Lnone/ho;
+	METHOD equals equals (Ljava/lang/Object;)Z
+	METHOD h register ()Lnone/tq;
+	METHOD hashCode hashCode ()I
+	METHOD i setIndependent ()Lnone/tq;
+	METHOD k getCriteria ()Lnone/bsk;
+	METHOD toString toString ()Ljava/lang/String;
+CLASS none/tr net/minecraft/stats/StatNumberFormatter
+	METHOD a format (I)Ljava/lang/String;
+		ARG 0 n
+CLASS none/ts net/minecraft/stats/StatTimeFormatter
+	METHOD a format (I)Ljava/lang/String;
+		ARG 0 n
+CLASS none/tt net/minecraft/stats/StatDistanceFormatter
+	METHOD a format (I)Ljava/lang/String;
+		ARG 0 n
+CLASS none/tu
+	METHOD a format (I)Ljava/lang/String;
+CLASS none/tv net/minecraft/stats/StatFormatter
+	METHOD a format (I)Ljava/lang/String;
 CLASS none/ty net/minecraft/stats/Stats
 	FIELD A animalsBred
 	FIELD B playerKills
@@ -3668,6 +3706,7 @@ CLASS none/ty net/minecraft/stats/Stats
 	FIELD I craftItem
 	FIELD J useItem
 	FIELD K breakItem
+	FIELD a statMap
 	FIELD f leaveGame
 	FIELD g playOneMinute
 	FIELD h timeSinceDeath
@@ -3690,6 +3729,11 @@ CLASS none/ty net/minecraft/stats/Stats
 	FIELD y deaths
 	FIELD z mobKills
 	METHOD a initialize ()V
+	METHOD a getStat (Ljava/lang/String;)Lnone/tq;
+	METHOD a createKillStat (Lnone/xc;)Lnone/tq;
+		ARG 0 entity
+	METHOD b createKilledByStat (Lnone/xc;)Lnone/tq;
+		ARG 0 entity
 CLASS none/uc net/minecraft/entity/EntitySet
 	FIELD a entityMap
 	FIELD b entitySet
@@ -4281,6 +4325,8 @@ CLASS none/xb net/minecraft/entity/EntityRegistry
 	FIELD e idToClass
 	FIELD f classToId
 	FIELD g nameToId
+	METHOD a getClass (I)Ljava/lang/Class;
+		ARG 0 id
 	METHOD a registerEntity (Ljava/lang/Class;Ljava/lang/String;I)V
 		ARG 0 clazz
 		ARG 1 name
@@ -4294,7 +4340,13 @@ CLASS none/xb net/minecraft/entity/EntityRegistry
 	METHOD a spawnEntity (Ljava/lang/String;Lnone/aqu;)Lnone/wv;
 		ARG 0 name
 	METHOD a isEntityOfType (Lnone/wv;Ljava/lang/String;)Z
+	METHOD b getName (I)Ljava/lang/String;
+		ARG 0 id
 	METHOD b isValidEntity (Ljava/lang/String;)Z
+CLASS none/xc
+	FIELD a entityId
+	FIELD d killStat
+	FIELD e killedByStat
 CLASS none/xe net/minecraft/util/EntityPredicates
 	FIELD a ALIVE
 	FIELD b NOT_RIDDEN
@@ -14049,9 +14101,43 @@ CLASS none/czs net/minecraft/client/stream/Metadata
 	METHOD b encode ()Ljava/lang/String;
 	METHOD c getName ()Ljava/lang/String;
 CLASS none/czu tv/twitch/TwitchBroadcaster
+	CLASS czv
+		METHOD getIngestServersCallback getIngestServersCallback (Ltv/twitch/ErrorCode;Ltv/twitch/broadcast/IngestList;)V
+		METHOD getStreamInfoCallback getStreamInfoCallback (Ltv/twitch/ErrorCode;Ltv/twitch/broadcast/StreamInfo;)V
+		METHOD getUserInfoCallback getUserInfoCallback (Ltv/twitch/ErrorCode;Ltv/twitch/broadcast/UserInfo;)V
+		METHOD loginCallback loginCallback (Ltv/twitch/ErrorCode;Ltv/twitch/broadcast/ChannelInfo;)V
+		METHOD requestAuthTokenCallback requestAuthTokenCallback (Ltv/twitch/ErrorCode;Ltv/twitch/AuthToken;)V
+		METHOD runCommercialCallback runCommercialCallback (Ltv/twitch/ErrorCode;)V
 	FIELD A serverConnector
 	FIELD D logger
+	FIELD G errorCode
+	FIELD g audioEnabled
+	FIELD h core
+	FIELD i stream
+	FIELD o status
+	FIELD q videoParams
+	FIELD r audioParams
+	FIELD u authToken
+	FIELD v channelInfo
+	FIELD w userInfo
+	FIELD x streamInfo
+	METHOD A getErrorCode ()Ltv/twitch/ErrorCode;
+	METHOD B getPixelFormat ()Ltv/twitch/broadcast/PixelFormat;
+	METHOD a (Lnone/czy;)V
+		ARG 0 status
+	METHOD a logIfError (Ltv/twitch/ErrorCode;)Z
+	METHOD a startBroadcast (Ltv/twitch/broadcast/VideoParams;)Z
+		ARG 0 videoParams
+	METHOD d logError (Ljava/lang/String;)V
+	METHOD e logWarning (Ljava/lang/String;)V
+	METHOD j getStreamInfo ()Ltv/twitch/broadcast/StreamInfo;
+	METHOD l getChannelInfo ()Ltv/twitch/broadcast/ChannelInfo;
+	METHOD m isBroadcasting ()Z
+	METHOD n isReady ()Z
+	METHOD p isPausing ()Z
 	METHOD w getServerConnector ()Lnone/dai;
+	METHOD x getStreamTime ()J
+	METHOD y getAudioEnabled ()Z
 CLASS none/czx tv/twitch/czx
 CLASS none/czy tv/twitch/EnumTwitchStatus
 	FIELD a UNINITIALIZED
@@ -14106,6 +14192,12 @@ CLASS none/dap tv/twitch/EnumTwitchError
 	FIELD b INVALID_TOKEN
 CLASS none/daq tv/twitch/TwitchAuthenticator
 	FIELD b logger
+	FIELD c broadcaster
+	FIELD d chatController
+	FIELD f minecraft
+	FIELD q error
+	METHOD <init> (Lnone/bsu;Lcom/mojang/authlib/properties/Property;)V
+		ARG 0 minecraft
 CLASS none/dat tv/twitch/dat
 CLASS none/dax net/minecraft/client/renderers/OpenGlHelper
 	FIELD O vboAvailable
