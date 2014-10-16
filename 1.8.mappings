@@ -1346,7 +1346,9 @@ CLASS none/ew net/minecraft/util/EnumParticleType
 	FIELD N WATER_DROP
 	FIELD O ITEM_TAKE
 	FIELD P MOB_APPEARANCE
+	FIELD Q particleName
 	FIELD R particleID
+	FIELD S null
 	FIELD U particleNameMap
 	FIELD a EXPLOSION_NORMAL
 	FIELD b EXPLOSION_LARGE
@@ -1374,6 +1376,9 @@ CLASS none/ew net/minecraft/util/EnumParticleType
 	FIELD x NOTE
 	FIELD y PORTAL
 	FIELD z ENCHANTMENT_TABLE
+	METHOD <init> (Ljava/lang/String;ILjava/lang/String;IZ)V
+		ARG 0 codeName
+		ARG 3 particleID
 	METHOD <init> (Ljava/lang/String;ILjava/lang/String;IZI)V
 		ARG 0 codeName
 		ARG 2 commandName
@@ -2012,9 +2017,169 @@ CLASS none/hd net/minecraft/network/PacketBuffer
 	METHOD <init> (Lio/netty/buffer/ByteBuf;)V
 		ARG 0 byteBuf
 	METHOD a writeString (Ljava/lang/String;)Lnone/hd;
-	METHOD a write (Lnone/ho;)V
-	METHOD readInt ()I
-	METHOD release ()Z
+		ARG 0 s
+	METHOD a writeUUID (Ljava/util/UUID;)V
+		ARG 0 uuid
+	METHOD a writeItemStack (Lnone/amj;)V
+	METHOD a writeBlockPos (Lnone/dt;)V
+		ARG 0 blockPos
+	METHOD a writeNBT (Lnone/fn;)V
+		ARG 0 nbt
+	METHOD a writeChatMessageComponent (Lnone/ho;)V
+	METHOD alloc alloc ()Lio/netty/buffer/ByteBufAllocator;
+	METHOD array array ()[B
+	METHOD arrayOffset arrayOffset ()I
+	METHOD bytesBefore bytesBefore (B)I
+	METHOD bytesBefore bytesBefore (IB)I
+	METHOD bytesBefore bytesBefore (IIB)I
+	METHOD c readBlockPos ()Lnone/dt;
+	METHOD c readString (I)Ljava/lang/String;
+		ARG 0 lengthLimit
+	METHOD capacity capacity ()I
+	METHOD capacity capacity (I)Lio/netty/buffer/ByteBuf;
+		ARG 0 n
+	METHOD clear clear ()Lio/netty/buffer/ByteBuf;
+	METHOD compareTo compareTo (Lio/netty/buffer/ByteBuf;)I
+	METHOD copy copy ()Lio/netty/buffer/ByteBuf;
+	METHOD copy copy (II)Lio/netty/buffer/ByteBuf;
+	METHOD d readChatMessageComponent ()Lnone/ho;
+	METHOD discardReadBytes discardReadBytes ()Lio/netty/buffer/ByteBuf;
+	METHOD discardSomeReadBytes discardSomeReadBytes ()Lio/netty/buffer/ByteBuf;
+	METHOD duplicate duplicate ()Lio/netty/buffer/ByteBuf;
+	METHOD ensureWritable ensureWritable (I)Lio/netty/buffer/ByteBuf;
+	METHOD ensureWritable ensureWritable (IZ)I
+	METHOD equals equals (Ljava/lang/Object;)Z
+	METHOD forEachByte forEachByte (IILio/netty/buffer/ByteBufProcessor;)I
+	METHOD forEachByte forEachByte (Lio/netty/buffer/ByteBufProcessor;)I
+	METHOD forEachByteDesc forEachByteDesc (IILio/netty/buffer/ByteBufProcessor;)I
+	METHOD forEachByteDesc forEachByteDesc (Lio/netty/buffer/ByteBufProcessor;)I
+	METHOD g readUUID ()Ljava/util/UUID;
+	METHOD getBoolean getBoolean (I)Z
+	METHOD getByte getByte (I)B
+	METHOD getBytes getBytes (ILio/netty/buffer/ByteBuf;)Lio/netty/buffer/ByteBuf;
+	METHOD getBytes getBytes (ILio/netty/buffer/ByteBuf;I)Lio/netty/buffer/ByteBuf;
+	METHOD getBytes getBytes (ILio/netty/buffer/ByteBuf;II)Lio/netty/buffer/ByteBuf;
+	METHOD getBytes getBytes (ILjava/io/OutputStream;I)Lio/netty/buffer/ByteBuf;
+	METHOD getBytes getBytes (ILjava/nio/ByteBuffer;)Lio/netty/buffer/ByteBuf;
+	METHOD getBytes getBytes (ILjava/nio/channels/GatheringByteChannel;I)I
+	METHOD getBytes getBytes (I[B)Lio/netty/buffer/ByteBuf;
+	METHOD getBytes getBytes (I[BII)Lio/netty/buffer/ByteBuf;
+	METHOD getChar getChar (I)C
+	METHOD getDouble getDouble (I)D
+	METHOD getFloat getFloat (I)F
+	METHOD getInt getInt (I)I
+	METHOD getLong getLong (I)J
+	METHOD getMedium getMedium (I)I
+	METHOD getShort getShort (I)S
+	METHOD getUnsignedByte getUnsignedByte (I)S
+	METHOD getUnsignedInt getUnsignedInt (I)J
+	METHOD getUnsignedMedium getUnsignedMedium (I)I
+	METHOD getUnsignedShort getUnsignedShort (I)I
+	METHOD h readNBT ()Lnone/fn;
+	METHOD hasArray hasArray ()Z
+	METHOD hasMemoryAddress hasMemoryAddress ()Z
+	METHOD hashCode hashCode ()I
+	METHOD i readItemStack ()Lnone/amj;
+	METHOD indexOf indexOf (IIB)I
+	METHOD internalNioBuffer internalNioBuffer (II)Ljava/nio/ByteBuffer;
+	METHOD isDirect isDirect ()Z
+	METHOD isReadable isReadable ()Z
+	METHOD isReadable isReadable (I)Z
+	METHOD isWritable isWritable ()Z
+	METHOD isWritable isWritable (I)Z
+	METHOD markReaderIndex markReaderIndex ()Lio/netty/buffer/ByteBuf;
+	METHOD markWriterIndex markWriterIndex ()Lio/netty/buffer/ByteBuf;
+	METHOD maxCapacity maxCapacity ()I
+	METHOD maxWritableBytes maxWritableBytes ()I
+	METHOD memoryAddress memoryAddress ()J
+	METHOD nioBuffer nioBuffer ()Ljava/nio/ByteBuffer;
+	METHOD nioBuffer nioBuffer (II)Ljava/nio/ByteBuffer;
+	METHOD nioBufferCount nioBufferCount ()I
+	METHOD nioBuffers nioBuffers ()[Ljava/nio/ByteBuffer;
+	METHOD nioBuffers nioBuffers (II)[Ljava/nio/ByteBuffer;
+	METHOD order order ()Ljava/nio/ByteOrder;
+	METHOD order order (Ljava/nio/ByteOrder;)Lio/netty/buffer/ByteBuf;
+		ARG 0 byteOrder
+	METHOD readBoolean readBoolean ()Z
+	METHOD readByte readByte ()B
+	METHOD readBytes readBytes (I)Lio/netty/buffer/ByteBuf;
+	METHOD readBytes readBytes (Lio/netty/buffer/ByteBuf;)Lio/netty/buffer/ByteBuf;
+	METHOD readBytes readBytes (Lio/netty/buffer/ByteBuf;I)Lio/netty/buffer/ByteBuf;
+	METHOD readBytes readBytes (Lio/netty/buffer/ByteBuf;II)Lio/netty/buffer/ByteBuf;
+	METHOD readBytes readBytes (Ljava/io/OutputStream;I)Lio/netty/buffer/ByteBuf;
+	METHOD readBytes readBytes (Ljava/nio/ByteBuffer;)Lio/netty/buffer/ByteBuf;
+	METHOD readBytes readBytes (Ljava/nio/channels/GatheringByteChannel;I)I
+	METHOD readBytes readBytes ([B)Lio/netty/buffer/ByteBuf;
+	METHOD readBytes readBytes ([BII)Lio/netty/buffer/ByteBuf;
+	METHOD readChar readChar ()C
+	METHOD readDouble readDouble ()D
+	METHOD readFloat readFloat ()F
+	METHOD readInt readInt ()I
+	METHOD readLong readLong ()J
+	METHOD readMedium readMedium ()I
+	METHOD readShort readShort ()S
+	METHOD readSlice readSlice (I)Lio/netty/buffer/ByteBuf;
+	METHOD readUnsignedByte readUnsignedByte ()S
+	METHOD readUnsignedInt readUnsignedInt ()J
+	METHOD readUnsignedMedium readUnsignedMedium ()I
+	METHOD readUnsignedShort readUnsignedShort ()I
+	METHOD readableBytes readableBytes ()I
+	METHOD readerIndex readerIndex ()I
+	METHOD readerIndex readerIndex (I)Lio/netty/buffer/ByteBuf;
+	METHOD refCnt refCnt ()I
+	METHOD release release ()Z
+	METHOD release release (I)Z
+	METHOD resetReaderIndex resetReaderIndex ()Lio/netty/buffer/ByteBuf;
+	METHOD resetWriterIndex resetWriterIndex ()Lio/netty/buffer/ByteBuf;
+	METHOD retain retain ()Lio/netty/buffer/ByteBuf;
+	METHOD retain retain (I)Lio/netty/buffer/ByteBuf;
+	METHOD setBoolean setBoolean (IZ)Lio/netty/buffer/ByteBuf;
+	METHOD setByte setByte (II)Lio/netty/buffer/ByteBuf;
+	METHOD setBytes setBytes (ILio/netty/buffer/ByteBuf;)Lio/netty/buffer/ByteBuf;
+	METHOD setBytes setBytes (ILio/netty/buffer/ByteBuf;I)Lio/netty/buffer/ByteBuf;
+	METHOD setBytes setBytes (ILio/netty/buffer/ByteBuf;II)Lio/netty/buffer/ByteBuf;
+	METHOD setBytes setBytes (ILjava/io/InputStream;I)I
+	METHOD setBytes setBytes (ILjava/nio/ByteBuffer;)Lio/netty/buffer/ByteBuf;
+	METHOD setBytes setBytes (ILjava/nio/channels/ScatteringByteChannel;I)I
+	METHOD setBytes setBytes (I[B)Lio/netty/buffer/ByteBuf;
+	METHOD setBytes setBytes (I[BII)Lio/netty/buffer/ByteBuf;
+	METHOD setChar setChar (II)Lio/netty/buffer/ByteBuf;
+	METHOD setDouble setDouble (ID)Lio/netty/buffer/ByteBuf;
+	METHOD setFloat setFloat (IF)Lio/netty/buffer/ByteBuf;
+	METHOD setIndex setIndex (II)Lio/netty/buffer/ByteBuf;
+	METHOD setInt setInt (II)Lio/netty/buffer/ByteBuf;
+	METHOD setLong setLong (IJ)Lio/netty/buffer/ByteBuf;
+	METHOD setMedium setMedium (II)Lio/netty/buffer/ByteBuf;
+	METHOD setShort setShort (II)Lio/netty/buffer/ByteBuf;
+	METHOD setZero setZero (II)Lio/netty/buffer/ByteBuf;
+	METHOD skipBytes skipBytes (I)Lio/netty/buffer/ByteBuf;
+	METHOD slice slice ()Lio/netty/buffer/ByteBuf;
+	METHOD slice slice (II)Lio/netty/buffer/ByteBuf;
+	METHOD toString toString ()Ljava/lang/String;
+	METHOD toString toString (IILjava/nio/charset/Charset;)Ljava/lang/String;
+	METHOD toString toString (Ljava/nio/charset/Charset;)Ljava/lang/String;
+	METHOD unwrap unwrap ()Lio/netty/buffer/ByteBuf;
+	METHOD writableBytes writableBytes ()I
+	METHOD writeBoolean writeBoolean (Z)Lio/netty/buffer/ByteBuf;
+	METHOD writeByte writeByte (I)Lio/netty/buffer/ByteBuf;
+	METHOD writeBytes writeBytes (Lio/netty/buffer/ByteBuf;)Lio/netty/buffer/ByteBuf;
+	METHOD writeBytes writeBytes (Lio/netty/buffer/ByteBuf;I)Lio/netty/buffer/ByteBuf;
+	METHOD writeBytes writeBytes (Lio/netty/buffer/ByteBuf;II)Lio/netty/buffer/ByteBuf;
+	METHOD writeBytes writeBytes (Ljava/io/InputStream;I)I
+	METHOD writeBytes writeBytes (Ljava/nio/ByteBuffer;)Lio/netty/buffer/ByteBuf;
+	METHOD writeBytes writeBytes (Ljava/nio/channels/ScatteringByteChannel;I)I
+	METHOD writeBytes writeBytes ([B)Lio/netty/buffer/ByteBuf;
+	METHOD writeBytes writeBytes ([BII)Lio/netty/buffer/ByteBuf;
+	METHOD writeChar writeChar (I)Lio/netty/buffer/ByteBuf;
+	METHOD writeDouble writeDouble (D)Lio/netty/buffer/ByteBuf;
+	METHOD writeFloat writeFloat (F)Lio/netty/buffer/ByteBuf;
+	METHOD writeInt writeInt (I)Lio/netty/buffer/ByteBuf;
+	METHOD writeLong writeLong (J)Lio/netty/buffer/ByteBuf;
+	METHOD writeMedium writeMedium (I)Lio/netty/buffer/ByteBuf;
+	METHOD writeShort writeShort (I)Lio/netty/buffer/ByteBuf;
+	METHOD writeZero writeZero (I)Lio/netty/buffer/ByteBuf;
+	METHOD writerIndex writerIndex ()I
+	METHOD writerIndex writerIndex (I)Lio/netty/buffer/ByteBuf;
 CLASS none/he net/minecraft/util/MessageDeserializer
 	FIELD a logger
 	FIELD b markerPacketReceived
@@ -3736,7 +3901,7 @@ CLASS none/ty net/minecraft/stats/Stats
 	METHOD b createKilledByStat (Lnone/xc;)Lnone/tq;
 		ARG 0 entity
 CLASS none/ua
-	METHOD delegate delegate ()Ljava/util/Set;
+	METHOD delegate ()Ljava/util/Set;
 CLASS none/uc net/minecraft/entity/EntitySet
 	FIELD a entityMap
 	FIELD b entitySet
@@ -4217,7 +4382,9 @@ CLASS none/wv net/minecraft/entity/Entity
 	FIELD am dimensionId
 	FIELD ao uuid
 	FIELD ar invulnerable
+	FIELD c id
 	FIELD f boundingBox
+	FIELD g outsideWorldBorder
 	FIELD i fire
 	FIELD l riderEntity
 	FIELD m riddenEntity
@@ -4234,6 +4401,7 @@ CLASS none/wv net/minecraft/entity/Entity
 	FIELD y yaw
 	FIELD z pitch
 	METHOD F getEntityId ()I
+	METHOD G onKillCommand ()V
 	METHOD H getDataWatcher ()Lnone/xv;
 	METHOD J kill ()V
 	METHOD K onTick ()V
@@ -4246,6 +4414,8 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD V isInWater ()Z
 	METHOD W checkEntityIsInWater ()Z
 	METHOD X onEnterWater ()V
+	METHOD Y checkDoSprintEffect ()V
+	METHOD Z doSprintEffect ()V
 	METHOD a handleEntityStatusPacket (B)V
 		ARG 0 entityStatusByte
 	METHOD a updateKinetics (DDDFFIZ)V
@@ -4261,7 +4431,10 @@ CLASS none/wv net/minecraft/entity/Entity
 		ARG 0 bolt
 	METHOD a setResultStat (Lnone/ag;I)V
 		ARG 0 type
+	METHOD a setLevel (Lnone/aqu;)V
+		ARG 0 level
 	METHOD a isInMaterial (Lnone/bof;)Z
+		ARG 0 material
 	METHOD a setBoundingBox (Lnone/brt;)V
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a sendChat (Lnone/ho;)V
@@ -4279,6 +4452,8 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD aO getFacing ()Lnone/ej;
 	METHOD aQ getBoundingBox ()Lnone/brt;
 	METHOD aR getEyeHeight ()F
+	METHOD aS getOutsideWorldBorder ()Z
+	METHOD aa getSplashSound ()Ljava/lang/String;
 	METHOD ab isInLava ()Z
 	METHOD ac markForKnockback ()V
 	METHOD ai isEntityAlive ()Z
@@ -4290,6 +4465,9 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD aw isSneaking ()Z
 	METHOD ax isSprinting ()Z
 	METHOD b updatePosition (DDD)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
 	METHOD b setLocationAndAngles (DDDFF)V
 	METHOD b updateYawAndPitch (FF)V
 	METHOD b distanceSquared (Lnone/dt;)D
@@ -4309,6 +4487,10 @@ CLASS none/wv net/minecraft/entity/Entity
 		ARG 0 moveX
 		ARG 1 moveY
 		ARG 2 moveZ
+	METHOD d setEntityId (I)V
+		ARG 0 id
+	METHOD d replaceItem (ILnone/amj;)Z
+		ARG 0 slot
 	METHOD d onCollide (Lnone/ahd;)V
 	METHOD d_ getName ()Ljava/lang/String;
 	METHOD e getEntityLevel ()Lnone/aqu;
@@ -4320,6 +4502,7 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD e saveToNbt (Lnone/fn;)V
 		ARG 0 compound
 	METHOD e_ getNameComponent ()Lnone/ho;
+	METHOD equals equals (Ljava/lang/Object;)Z
 	METHOD f getEntity ()Lnone/wv;
 	METHOD f distance (DDD)D
 	METHOD f setHeadPitch (F)V
@@ -4332,6 +4515,8 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD h setOxygen (I)V
 		ARG 0 oxygenLevel
 	METHOD h distanceSquared (Lnone/wv;)D
+	METHOD h setOutsideWorldBorder (Z)V
+	METHOD hashCode hashCode ()I
 	METHOD i setVelocity (DDD)V
 		ARG 0 velocityX
 		ARG 1 velocityY
@@ -4340,7 +4525,7 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD k_ hasCustomName ()Z
 	METHOD s_ onUpdate ()V
 	METHOD t_ shouldReceiveCommandFeedback ()Z
-	METHOD toString ()Ljava/lang/String;
+	METHOD toString toString ()Ljava/lang/String;
 CLASS none/xb net/minecraft/entity/EntityRegistry
 	FIELD a colorMap
 	FIELD b logger
@@ -4422,6 +4607,7 @@ CLASS none/xm net/minecraft/entity/EntityLiving
 	FIELD bf lastSyncedPitch
 	FIELD bh hurtByTimestamp
 	FIELD bm absorptionHealth
+	METHOD G onKillCommand ()V
 	METHOD K onTick ()V
 	METHOD O fallFromLevel ()V
 	METHOD a handleEntityStatusPacket (B)V
@@ -4437,6 +4623,7 @@ CLASS none/xm net/minecraft/entity/EntityLiving
 	METHOD ac markForKnockback ()V
 	METHOD ai isEntityAlive ()Z
 	METHOD at getArmorEquipment ()[Lnone/amj;
+	METHOD b getDroppedXp (Lnone/ahd;)I
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD b getPotion (Lnone/wp;)Lnone/wq;
 	METHOD bI isInBed ()Z
@@ -4468,6 +4655,7 @@ CLASS none/xm net/minecraft/entity/EntityLiving
 	METHOD s_ onUpdate ()V
 CLASS none/xn net/minecraft/entity/EntityMob
 	FIELD bg goals2
+	FIELD bj inventory
 	FIELD i goals
 	METHOD K onTick ()V
 	METHOD a handleEntityStatusPacket (B)V
@@ -4475,9 +4663,11 @@ CLASS none/xn net/minecraft/entity/EntityMob
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD at getArmorEquipment ()[Lnone/amj;
+	METHOD b getDroppedXp (Lnone/ahd;)I
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bz getCurrentlyHoldingItemStack ()Lnone/amj;
 	METHOD c setArmorInSlot (ILnone/amj;)V
+	METHOD d replaceItem (ILnone/amj;)Z
 	METHOD e attemptMountByPlayer (Lnone/ahd;)Z
 	METHOD n assGoals ()V
 	METHOD p getEquipmentInSlot (I)Lnone/amj;
@@ -4514,9 +4704,19 @@ CLASS none/xu net/minecraft/entity/EntityCreature
 	FIELD bi FLEEING_SPEED_ID
 	FIELD bj FLEEING_SPEED_BONUS
 CLASS none/xv net/minecraft/entity/DataWatcher
+	FIELD a entity
+	FIELD b empty
+	FIELD c typeMap
+	FIELD d dataMap
+	FIELD f lock
+	METHOD <init> (Lnone/wv;)V
+		ARG 0 entity
 	METHOD a getByte (I)B
 		ARG 0 dataId
 	METHOD a (II)V
+	METHOD a addData (ILjava/lang/Object;)V
+		ARG 0 id
+		ARG 1 object
 	METHOD b getShort (I)S
 		ARG 0 dataId
 	METHOD b set (ILjava/lang/Object;)V
@@ -4528,6 +4728,19 @@ CLASS none/xv net/minecraft/entity/DataWatcher
 		ARG 0 dataId
 	METHOD f getItemStack (I)Lnone/amj;
 		ARG 0 dataId
+	METHOD j getData (I)Lnone/xw;
+		ARG 0 id
+CLASS none/xw net/minecraft/entity/xw
+	FIELD a typeID
+	FIELD b id
+	FIELD c object
+	METHOD <init> (IILjava/lang/Object;)V
+		ARG 0 typeID
+		ARG 1 id
+	METHOD a getID ()I
+	METHOD a setObject (Ljava/lang/Object;)V
+	METHOD b getObject ()Ljava/lang/Object;
+	METHOD c getTypeID ()I
 CLASS none/xx net/minecraft/entity/EntityTamable
 	METHOD a handleEntityStatusPacket (B)V
 	METHOD a readFromNBT (Lnone/fn;)V
@@ -4744,11 +4957,13 @@ CLASS none/abq net/minecraft/entity/passive/EntityAnimal
 	METHOD a doInteractionWith (Lnone/ahd;)Z
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD b getDroppedXp (Lnone/ahd;)I
 	METHOD b writeToNBT (Lnone/fn;)V
 CLASS none/abr net/minecraft/entity/passive/EntityChicken
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws;
 	METHOD aR getEyeHeight ()F
+	METHOD b getDroppedXp (Lnone/ahd;)I
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
@@ -4773,6 +4988,7 @@ CLASS none/abt net/minecraft/entity/passive/EntityHorse
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
+	METHOD d replaceItem (ILnone/amj;)Z
 	METHOD d_ getName ()Ljava/lang/String;
 	METHOD e onHitGround (FF)V
 	METHOD s_ onUpdate ()V
@@ -4808,6 +5024,7 @@ CLASS none/aca net/minecraft/entity/passive/EntityPig
 	METHOD e onHitGround (FF)V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/acb net/minecraft/entity/passive/EntityRabbit
+	METHOD Y checkDoSprintEffect ()V
 	METHOD a handleEntityStatusPacket (B)V
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
@@ -4848,9 +5065,10 @@ CLASS none/acq net/minecraft/entity/monster/EntityIronGolem
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD j getModifiedOxygenAfterConsumption (I)I
-CLASS none/act
+CLASS none/act net/minecraft/entity/EntityUnderwaterCreature
 	METHOD K onTick ()V
 	METHOD aX breathesUnderwater ()Z
+	METHOD b getDroppedXp (Lnone/ahd;)I
 CLASS none/acu net/minecraft/entity/passive/EntityWolf
 	METHOD a handleEntityStatusPacket (B)V
 	METHOD a doInteractionWith (Lnone/ahd;)Z
@@ -4880,6 +5098,7 @@ CLASS none/ada net/minecraft/entity/item/EntityEnderCrystal
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD s_ onUpdate ()V
 CLASS none/adb net/minecraft/entity/boss/EntityDragon
+	METHOD G onKillCommand ()V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD n assGoals ()V
@@ -4897,6 +5116,7 @@ CLASS none/adf net/minecraft/entity/boss/EntityWither
 	METHOD n assGoals ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/adi net/minecraft/entity/item/EntityArmorStand
+	METHOD G onKillCommand ()V
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
 	METHOD aR getEyeHeight ()F
@@ -4904,6 +5124,7 @@ CLASS none/adi net/minecraft/entity/item/EntityArmorStand
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bz getCurrentlyHoldingItemStack ()Lnone/amj;
 	METHOD c setArmorInSlot (ILnone/amj;)V
+	METHOD d replaceItem (ILnone/amj;)Z
 	METHOD p getEquipmentInSlot (I)Lnone/amj;
 	METHOD s_ onUpdate ()V
 CLASS none/adj net/minecraft/entity/EntityHanging
@@ -5280,6 +5501,7 @@ CLASS none/afl net/minecraft/entity/monster/EntityMagmaCube
 CLASS none/afm net/minecraft/entity/monster/EntityMonster
 	METHOD P getSwimSound ()Ljava/lang/String;
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD aa getSplashSound ()Ljava/lang/String;
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD s_ onUpdate ()V
@@ -5362,6 +5584,7 @@ CLASS none/agj net/minecraft/entity/monster/EntityZombie
 	METHOD a handleDeathFrom (Lnone/wh;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
 	METHOD aR getEyeHeight ()F
+	METHOD b getDroppedXp (Lnone/ahd;)I
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
@@ -5383,6 +5606,7 @@ CLASS none/agp net/minecraft/entity/passive/EntityVillager
 	METHOD b_ getRecipes (Lnone/ahd;)Lnone/aqd;
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
+	METHOD d replaceItem (ILnone/amj;)Z
 	METHOD e_ getNameComponent ()Lnone/ho;
 	METHOD n assGoals ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
@@ -5495,10 +5719,12 @@ CLASS none/ahd net/minecraft/entity/player/EntityPlayer
 	METHOD a dropItemFromSelectedHotbarSlot (Z)Lnone/adw;
 	METHOD aB onInsideWeb ()V
 	METHOD aR getEyeHeight ()F
+	METHOD aa getSplashSound ()Ljava/lang/String;
 	METHOD ar getPortalCooldownTicks ()I
 	METHOD at getArmorEquipment ()[Lnone/amj;
 	METHOD b subtractXpLevels (I)V
 		ARG 0 amount
+	METHOD b getDroppedXp (Lnone/ahd;)I
 	METHOD b doEatDrinkAnimation (Lnone/amj;I)V
 	METHOD b shouldDropSpecialDrop (Lnone/atr;)Z
 		ARG 0 block
@@ -5526,6 +5752,7 @@ CLASS none/ahd net/minecraft/entity/player/EntityPlayer
 	METHOD ci getXpSeed ()I
 	METHOD ck getFoodStats ()Lnone/ahz;
 	METHOD cn getEnderChestContainer ()Lnone/ajh;
+	METHOD d replaceItem (ILnone/amj;)Z
 	METHOD d damageEntity (Lnone/wh;F)V
 	METHOD d_ getName ()Ljava/lang/String;
 	METHOD e onHitGround (FF)V
@@ -6834,6 +7061,7 @@ CLASS none/aqu net/minecraft/level/Level
 	METHOD a addLevelInfoToCrashReport (Lnone/b;)Lnone/j;
 	METHOD a (Lnone/bcm;)Z
 		ARG 0 blockEnt
+	METHOD a isInsideBorder (Lnone/bfb;Lnone/wv;)Z
 	METHOD a (Lnone/bfh;Z)Ljava/util/List;
 		ARG 0 chunk
 	METHOD a checkBlockRangeIsInLevel (Lnone/bjb;)Z
@@ -7555,7 +7783,7 @@ CLASS none/atl net/minecraft/block/EnumRailShape
 	METHOD l getName ()Ljava/lang/String;
 CLASS none/atm net/minecraft/block/BlockBeacon
 	CLASS atn
-		METHOD run run ()V
+		METHOD run ()V
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
@@ -13509,10 +13737,30 @@ CLASS none/cgu net/minecraft/level/entity/particle/ParticleNote
 CLASS none/cgv net/minecraft/level/entity/particle/ParticleNoteBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cgw net/minecraft/entity/EntityParticle
+	FIELD ap colorR
+	FIELD aq colorG
+	FIELD ar colorB
+	FIELD as alpha
+	FIELD at texture
+	FIELD b textureX
+	FIELD c textureY
+	FIELD f age
+	FIELD g maxAge
+	METHOD a setTex (Lnone/cue;)V
 	METHOD a readFromNBT (Lnone/fn;)V
+	METHOD b getR ()F
+	METHOD b setColor (FFF)V
+		ARG 0 colorR
+		ARG 1 colorG
+		ARG 2 colorB
 	METHOD b writeToNBT (Lnone/fn;)V
+	METHOD g getG ()F
+	METHOD i getB ()F
+	METHOD j getAlpha ()F
+	METHOD k incrementTextureIndexX ()V
+	METHOD k setMiscTex (I)V
 	METHOD s_ onUpdate ()V
-	METHOD toString ()Ljava/lang/String;
+	METHOD toString toString ()Ljava/lang/String;
 CLASS none/cgx net/minecraft/client/renderers/EffectRenderer
 CLASS none/chc net/minecraft/client/particle/IParticleFactory
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
