@@ -3410,6 +3410,7 @@ CLASS none/qt net/minecraft/level/LevelServer
 	METHOD aH isInMainThread ()Z
 	METHOD b getDimension ()Lnone/aqu;
 	METHOD c tick ()V
+	METHOD c sendEvent (Lnone/dt;Lnone/atr;II)V
 	METHOD c addEntity (Lnone/wv;)Z
 	METHOD f areAllPlayersAsleep ()Z
 	METHOD h updateBlocks ()V
@@ -3675,12 +3676,12 @@ CLASS none/tq net/minecraft/stats/Stat
 	METHOD a format (I)Ljava/lang/String;
 	METHOD d isAchievement ()Z
 	METHOD e getNameComponent ()Lnone/ho;
-	METHOD equals equals (Ljava/lang/Object;)Z
+	METHOD equals (Ljava/lang/Object;)Z
 	METHOD h register ()Lnone/tq;
-	METHOD hashCode hashCode ()I
+	METHOD hashCode ()I
 	METHOD i setIndependent ()Lnone/tq;
 	METHOD k getCriteria ()Lnone/bsk;
-	METHOD toString toString ()Ljava/lang/String;
+	METHOD toString ()Ljava/lang/String;
 CLASS none/tr net/minecraft/stats/StatNumberFormatter
 	METHOD a format (I)Ljava/lang/String;
 		ARG 0 n
@@ -3734,6 +3735,8 @@ CLASS none/ty net/minecraft/stats/Stats
 		ARG 0 entity
 	METHOD b createKilledByStat (Lnone/xc;)Lnone/tq;
 		ARG 0 entity
+CLASS none/ua
+	METHOD delegate delegate ()Ljava/util/Set;
 CLASS none/uc net/minecraft/entity/EntitySet
 	FIELD a entityMap
 	FIELD b entitySet
@@ -3769,9 +3772,9 @@ CLASS none/up net/minecraft/network/EventLoopFactory
 	METHOD b createEventLoop ()Ljava/lang/Object;
 	METHOD c create ()Ljava/lang/Object;
 CLASS none/uv net/minecraft/util/MathHelper
-	FIELD a squareRootOfTwo
-	FIELD b sinLookupTable
-	FIELD c logBaseTwoDeBruijnMultiplyBitPosition
+	FIELD a SQRT_TWO
+	FIELD b SIN_LOOKUP
+	FIELD c LOG_BASE_TWO_DE_BRUIJN_MULTIPLY_BIT_POSITION
 	METHOD a squareRoot (D)F
 		ARG 0 value
 	METHOD a findMaxAbsoluteValue (DD)D
@@ -3884,7 +3887,15 @@ CLASS none/vq net/minecraft/inventory/IInventoryPlayer
 		ARG 0 slotIndex
 		ARG 1 amount
 	METHOD a setSlotContent (ILnone/amj;)V
+	METHOD a canViewInventory (Lnone/ahd;)Z
+	METHOD a_ getField (I)I
 	METHOD b getSlotContent (I)Lnone/amj;
+	METHOD b setField (II)V
+		ARG 1 value
+	METHOD b canPlaceItem (ILnone/amj;)Z
+	METHOD b onInventoryOpened (Lnone/ahd;)V
+	METHOD c onInventoryClosed (Lnone/ahd;)V
+	METHOD g getFieldAmount ()I
 	METHOD l clear ()V
 	METHOD n_ getSize ()I
 	METHOD o_ onChanged ()V
@@ -3909,13 +3920,22 @@ CLASS none/vt net/minecraft/level/EnumDifficulty
 CLASS none/vu
 	METHOD a (Lnone/vt;JJF)F
 		ARG 0 difficulty
+CLASS none/vv
+	METHOD k getBlockID ()Ljava/lang/String;
 CLASS none/vz net/minecraft/inventory/IInventory
 	METHOD k_ hasCustomName ()Z
 CLASS none/wa
 	METHOD a getSlot (I)Lnone/amj;
 	METHOD a removeFromSlot (II)Lnone/amj;
 	METHOD a setSlotContent (ILnone/amj;)V
+	METHOD a canViewInventory (Lnone/ahd;)Z
+	METHOD a_ getField (I)I
 	METHOD b getSlotContent (I)Lnone/amj;
+	METHOD b setField (II)V
+	METHOD b canPlaceItem (ILnone/amj;)Z
+	METHOD b onInventoryOpened (Lnone/ahd;)V
+	METHOD c onInventoryClosed (Lnone/ahd;)V
+	METHOD g getFieldAmount ()I
 	METHOD l clear ()V
 	METHOD n_ getSize ()I
 	METHOD o_ onChanged ()V
@@ -4292,6 +4312,7 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD d onCollide (Lnone/ahd;)V
 	METHOD d_ getName ()Ljava/lang/String;
 	METHOD e getEntityLevel ()Lnone/aqu;
+	METHOD e distanceSquared (DDD)D
 	METHOD e onHitGround (FF)V
 	METHOD e setOnFire (I)V
 		ARG 0 timeInSeconds
@@ -4300,14 +4321,17 @@ CLASS none/wv net/minecraft/entity/Entity
 		ARG 0 compound
 	METHOD e_ getNameComponent ()Lnone/ho;
 	METHOD f getEntity ()Lnone/wv;
+	METHOD f distance (DDD)D
 	METHOD f setHeadPitch (F)V
 	METHOD f applyFireTickDamage (I)V
 	METHOD f readFromNbt (Lnone/fn;)V
 		ARG 0 compound
 	METHOD g getBooleanFromDataWatcher (I)Z
+	METHOD g distance (Lnone/wv;)F
 	METHOD g setCustomNameVisible (Z)V
 	METHOD h setOxygen (I)V
 		ARG 0 oxygenLevel
+	METHOD h distanceSquared (Lnone/wv;)D
 	METHOD i setVelocity (DDD)V
 		ARG 0 velocityX
 		ARG 1 velocityY
@@ -5387,6 +5411,7 @@ CLASS none/ahb net/minecraft/entity/player/InventoryPlayer
 		ARG 1 amount
 	METHOD a setSlotContent (ILnone/amj;)V
 		ARG 0 slotIndex
+	METHOD a canViewInventory (Lnone/ahd;)Z
 	METHOD a removeOneItem (Lnone/alq;)Z
 	METHOD a getFirstSlotIndexContainingItem (Lnone/alq;I)I
 	METHOD a doPickBlock (Lnone/alq;IZZ)V
@@ -5395,20 +5420,26 @@ CLASS none/ahb net/minecraft/entity/player/InventoryPlayer
 	METHOD a getMiningEfficiency (Lnone/atr;)F
 		ARG 0 block
 	METHOD a saveTo (Lnone/fv;)Lnone/fv;
+	METHOD a_ getField (I)I
 	METHOD b getSlotContent (I)Lnone/amj;
 		ARG 0 slotIndex
+	METHOD b setField (II)V
+	METHOD b canPlaceItem (ILnone/amj;)Z
 	METHOD b cloneFrom (Lnone/ahb;)V
+	METHOD b onInventoryOpened (Lnone/ahd;)V
 	METHOD b hasItem (Lnone/alq;)Z
 	METHOD b setItemStack (Lnone/amj;)V
 	METHOD b shouldDropSpecialDrop (Lnone/atr;)Z
 		ARG 0 block
 	METHOD b loadFrom (Lnone/fv;)V
+	METHOD c onInventoryClosed (Lnone/ahd;)V
 	METHOD c getFirstSlotIndexContainingItem (Lnone/alq;)I
 	METHOD c hasMergeableItemStack (Lnone/amj;)Z
 	METHOD d onMouseScroll (I)V
 		ARG 0 direction
 	METHOD d getFirstMergeableSlotIndex (Lnone/amj;)I
 	METHOD e overflowAfterAddItemStack (Lnone/amj;)I
+	METHOD g getFieldAmount ()I
 	METHOD h getSelectedHotbarSlot ()Lnone/amj;
 	METHOD i getInventoryWidth ()I
 	METHOD j getFirstEmptySlotIndex ()I
@@ -5649,7 +5680,14 @@ CLASS none/ain
 	METHOD a getSlot (I)Lnone/amj;
 	METHOD a removeFromSlot (II)Lnone/amj;
 	METHOD a setSlotContent (ILnone/amj;)V
+	METHOD a canViewInventory (Lnone/ahd;)Z
+	METHOD a_ getField (I)I
 	METHOD b getSlotContent (I)Lnone/amj;
+	METHOD b setField (II)V
+	METHOD b canPlaceItem (ILnone/amj;)Z
+	METHOD b onInventoryOpened (Lnone/ahd;)V
+	METHOD c onInventoryClosed (Lnone/ahd;)V
+	METHOD g getFieldAmount ()I
 	METHOD l clear ()V
 	METHOD n_ getSize ()I
 	METHOD o_ onChanged ()V
@@ -5687,7 +5725,14 @@ CLASS none/aje
 	METHOD a getSlot (I)Lnone/amj;
 	METHOD a removeFromSlot (II)Lnone/amj;
 	METHOD a setSlotContent (ILnone/amj;)V
+	METHOD a canViewInventory (Lnone/ahd;)Z
+	METHOD a_ getField (I)I
 	METHOD b getSlotContent (I)Lnone/amj;
+	METHOD b setField (II)V
+	METHOD b canPlaceItem (ILnone/amj;)Z
+	METHOD b onInventoryOpened (Lnone/ahd;)V
+	METHOD c onInventoryClosed (Lnone/ahd;)V
+	METHOD g getFieldAmount ()I
 	METHOD l clear ()V
 	METHOD n_ getSize ()I
 	METHOD o_ onChanged ()V
@@ -5699,11 +5744,21 @@ CLASS none/ajf net/minecraft/inventory/ContainerMerchant
 CLASS none/ajg
 	METHOD a isItemValid (Lnone/amj;)Z
 CLASS none/ajh net/minecraft/inventory/InventoryEnderChest
+	METHOD a canViewInventory (Lnone/ahd;)Z
+	METHOD b onInventoryOpened (Lnone/ahd;)V
+	METHOD c onInventoryClosed (Lnone/ahd;)V
 CLASS none/aji
 	METHOD a getSlot (I)Lnone/amj;
 	METHOD a removeFromSlot (II)Lnone/amj;
 	METHOD a setSlotContent (ILnone/amj;)V
+	METHOD a canViewInventory (Lnone/ahd;)Z
+	METHOD a_ getField (I)I
 	METHOD b getSlotContent (I)Lnone/amj;
+	METHOD b setField (II)V
+	METHOD b canPlaceItem (ILnone/amj;)Z
+	METHOD b onInventoryOpened (Lnone/ahd;)V
+	METHOD c onInventoryClosed (Lnone/ahd;)V
+	METHOD g getFieldAmount ()I
 	METHOD l clear ()V
 	METHOD n_ getSize ()I
 	METHOD o_ onChanged ()V
@@ -6962,7 +7017,7 @@ CLASS none/aqu net/minecraft/level/Level
 	METHOD c updateSurroundingBlocks (Lnone/dt;Lnone/atr;)V
 		ARG 0 pos
 		ARG 1 block
-	METHOD c (Lnone/dt;Lnone/atr;II)V
+	METHOD c sendEvent (Lnone/dt;Lnone/atr;II)V
 		ARG 0 pos
 		ARG 1 block
 	METHOD c getPowerReceivedFromLocationFacing (Lnone/dt;Lnone/ej;)I
@@ -7400,6 +7455,8 @@ CLASS none/asz net/minecraft/block/BlockAnvil
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD d hasFullCubeHitbox ()Z
 	METHOD e initPropertyManager ()Lnone/bed;
+CLASS none/ata
+	METHOD k getBlockID ()Ljava/lang/String;
 CLASS none/atb net/minecraft/block/BlockBannerBase
 	FIELD a facing
 	FIELD b rotation
@@ -7497,6 +7554,8 @@ CLASS none/atl net/minecraft/block/EnumRailShape
 	METHOD a getRailShapeById (I)Lnone/atl;
 	METHOD l getName ()Ljava/lang/String;
 CLASS none/atm net/minecraft/block/BlockBeacon
+	CLASS atn
+		METHOD run run ()V
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
 	METHOD a onUpdate (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/atr;)V
@@ -8356,6 +8415,8 @@ CLASS none/aur net/minecraft/block/EnumComparatorMode
 	METHOD l getName ()Ljava/lang/String;
 CLASS none/aus net/minecraft/block/BlockCraftingTable
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
+CLASS none/aut
+	METHOD k getBlockID ()Ljava/lang/String;
 CLASS none/auu net/minecraft/block/BlockCrops
 	FIELD a age
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
@@ -9855,14 +9916,41 @@ CLASS none/bcj
 	FIELD L FLOWER
 	FIELD M MOJANG
 CLASS none/bck net/minecraft/blockentity/BlockEntityBeacon
+	FIELD i valid
+	FIELD j pyramidHeight
+	FIELD k primaryEffectID
+	FIELD l secondaryEffectID
+	FIELD m item
+	FIELD n name
+	METHOD A applyEffects ()V
+	METHOD B checkPyramid ()V
 	METHOD a getSlot (I)Lnone/amj;
+		ARG 0 slot
 	METHOD a removeFromSlot (II)Lnone/amj;
 	METHOD a setSlotContent (ILnone/amj;)V
+		ARG 0 slot
+		ARG 1 item
+	METHOD a setName (Ljava/lang/String;)V
+		ARG 0 name
+	METHOD a canViewInventory (Lnone/ahd;)Z
 	METHOD a load (Lnone/fn;)V
+	METHOD a_ getField (I)I
 	METHOD b getSlotContent (I)Lnone/amj;
+		ARG 0 slot
+	METHOD b setField (II)V
+		ARG 1 value
+	METHOD b canPlaceItem (ILnone/amj;)Z
+	METHOD b onInventoryOpened (Lnone/ahd;)V
 	METHOD b save (Lnone/fn;)V
 	METHOD c update ()V
+	METHOD c onEvent (II)Z
+	METHOD c onInventoryClosed (Lnone/ahd;)V
+	METHOD d_ getName ()Ljava/lang/String;
+	METHOD g getFieldAmount ()I
+	METHOD k getBlockID ()Ljava/lang/String;
+	METHOD k_ hasName ()Z
 	METHOD l clear ()V
+	METHOD m updateTick ()V
 	METHOD n_ getSize ()I
 	METHOD p_ getMaxStackSize ()I
 CLASS none/bcm net/minecraft/blockentity/BlockEntity
@@ -9877,6 +9965,7 @@ CLASS none/bcm net/minecraft/blockentity/BlockEntity
 	METHOD a setPosition (Lnone/dt;)V
 	METHOD a load (Lnone/fn;)V
 	METHOD b save (Lnone/fn;)V
+	METHOD c onEvent (II)Z
 	METHOD o_ onChanged ()V
 	METHOD t checkHasDimension ()Z
 	METHOD u getBlockMetadata ()I
@@ -9887,14 +9976,27 @@ CLASS none/bcq net/minecraft/blockentity/BlockEntityCauldron
 	METHOD a load (Lnone/fn;)V
 	METHOD b save (Lnone/fn;)V
 	METHOD c update ()V
+	METHOD k getBlockID ()Ljava/lang/String;
 CLASS none/bcr net/minecraft/blockentity/BlockEntityChest
+	FIELD l viewers
 	METHOD a getSlot (I)Lnone/amj;
 	METHOD a removeFromSlot (II)Lnone/amj;
 	METHOD a setSlotContent (ILnone/amj;)V
+	METHOD a canViewInventory (Lnone/ahd;)Z
 	METHOD a load (Lnone/fn;)V
+	METHOD a_ getField (I)I
 	METHOD b getSlotContent (I)Lnone/amj;
+	METHOD b setField (II)V
+	METHOD b canPlaceItem (ILnone/amj;)Z
+	METHOD b onInventoryOpened (Lnone/ahd;)V
 	METHOD b save (Lnone/fn;)V
 	METHOD c update ()V
+	METHOD c onEvent (II)Z
+		ARG 0 eventID
+		ARG 1 value
+	METHOD c onInventoryClosed (Lnone/ahd;)V
+	METHOD g getFieldAmount ()I
+	METHOD k getBlockID ()Ljava/lang/String;
 	METHOD l clear ()V
 	METHOD n_ getSize ()I
 	METHOD p_ getMaxStackSize ()I
@@ -9911,33 +10013,63 @@ CLASS none/bcv net/minecraft/blockentity/BlockEntityComparator
 CLASS none/bcw net/minecraft/blockentity/BlockEntityDaylightDetector
 	METHOD c update ()V
 CLASS none/bcx net/minecraft/blockentity/BlockEntityDispenser
+	FIELD a name
+	FIELD g inventory
 	METHOD a getSlot (I)Lnone/amj;
 	METHOD a removeFromSlot (II)Lnone/amj;
 	METHOD a setSlotContent (ILnone/amj;)V
+	METHOD a canViewInventory (Lnone/ahd;)Z
 	METHOD a load (Lnone/fn;)V
+	METHOD a_ getField (I)I
 	METHOD b getSlotContent (I)Lnone/amj;
+	METHOD b setField (II)V
+	METHOD b canPlaceItem (ILnone/amj;)Z
+	METHOD b onInventoryOpened (Lnone/ahd;)V
 	METHOD b save (Lnone/fn;)V
+	METHOD c onInventoryClosed (Lnone/ahd;)V
+	METHOD d_ getName ()Ljava/lang/String;
+	METHOD g getFieldAmount ()I
+	METHOD k getBlockID ()Ljava/lang/String;
+	METHOD k_ hasName ()Z
 	METHOD l clear ()V
 	METHOD n_ getSize ()I
 	METHOD p_ getMaxStackSize ()I
 CLASS none/bcy net/minecraft/blockentity/BlockEntityDropper
+	METHOD d_ getName ()Ljava/lang/String;
+	METHOD k getBlockID ()Ljava/lang/String;
 CLASS none/bcz net/minecraft/blockentity/BlockEntityEnchantmentTable
+	FIELD o random
+	FIELD p name
 	METHOD a load (Lnone/fn;)V
 	METHOD b save (Lnone/fn;)V
 	METHOD c update ()V
+	METHOD k getBlockID ()Ljava/lang/String;
+	METHOD k_ hasName ()Z
 CLASS none/bda net/minecraft/blockentity/BlockEntityEnderChest
 	METHOD c update ()V
+	METHOD c onEvent (II)Z
 CLASS none/bdb net/minecraft/blockentity/BlockEntityFlowerPot
+	FIELD a item
+	FIELD f metadata
+	METHOD <init> (Lnone/alq;I)V
+		ARG 0 item
+		ARG 1 metadata
+	METHOD a setItem (Lnone/alq;I)V
+		ARG 0 item
+		ARG 1 metadata
 	METHOD a load (Lnone/fn;)V
+	METHOD b getItem ()Lnone/alq;
 	METHOD b save (Lnone/fn;)V
 CLASS none/bdc net/minecraft/blockentity/BlockEntityFurnace
 	METHOD a load (Lnone/fn;)V
 	METHOD b save (Lnone/fn;)V
 	METHOD c update ()V
+	METHOD k getBlockID ()Ljava/lang/String;
 CLASS none/bde net/minecraft/blockentity/BlockEntityHopper
 	METHOD a load (Lnone/fn;)V
 	METHOD b save (Lnone/fn;)V
 	METHOD c update ()V
+	METHOD k getBlockID ()Ljava/lang/String;
 	METHOD o_ onChanged ()V
 CLASS none/bdf
 	METHOD a load (Lnone/fn;)V
@@ -9947,6 +10079,7 @@ CLASS none/bdg net/minecraft/blockentity/BlockEntityMobSpawner
 	METHOD b getSpawnerLogic ()Lnone/aqi;
 	METHOD b save (Lnone/fn;)V
 	METHOD c update ()V
+	METHOD c onEvent (II)Z
 CLASS none/bdi net/minecraft/blockentity/BlockEntityNoteBlock
 	METHOD a load (Lnone/fn;)V
 	METHOD b save (Lnone/fn;)V
@@ -13508,6 +13641,12 @@ CLASS none/cip net/minecraft/entity/EntityOtherPlayerMP
 	METHOD c getPosition ()Lnone/dt;
 	METHOD c setArmorInSlot (ILnone/amj;)V
 	METHOD s_ onUpdate ()V
+CLASS none/ciq
+	METHOD k getBlockID ()Ljava/lang/String;
+CLASS none/cir
+	METHOD a_ getField (I)I
+	METHOD b setField (II)V
+	METHOD g getFieldAmount ()I
 CLASS none/civ net/minecraft/client/renderers/BufferBuilder
 	CLASS cix State
 		FIELD b stateRawBuffer
@@ -13989,7 +14128,14 @@ CLASS none/cwc net/minecraft/client/resources/I18n
 CLASS none/cwe net/minecraft/client/resources/LanguageManager
 	METHOD a onReload (Lnone/cvk;)V
 	METHOD b isCurrentLanguageBidirectional ()Z
+CLASS none/cwh new/minecraft/client/resources/data/MetadataSectionSerializer
+CLASS none/cwj net/minecraft/client/resource/data/IMetadataSectionSerializer
 CLASS none/cwk net/minecraft/client/resources/data/MetadataSerializer
+	FIELD a registry
+	FIELD b gsonBuilder
+	FIELD c gson
+	METHOD a (Ljava/lang/String;Lcom/google/gson/JsonObject;)Lnone/cwi;
+		ARG 0 metadataSectionName
 	METHOD a registerMetadataSectionType (Lnone/cwj;Ljava/lang/Class;)V
 CLASS none/cwl empty/_4
 CLASS none/cwo net/minecraft/client/resources/data/AnimationMetadataSection
@@ -14102,12 +14248,12 @@ CLASS none/czs net/minecraft/client/stream/Metadata
 	METHOD c getName ()Ljava/lang/String;
 CLASS none/czu tv/twitch/TwitchBroadcaster
 	CLASS czv
-		METHOD getIngestServersCallback getIngestServersCallback (Ltv/twitch/ErrorCode;Ltv/twitch/broadcast/IngestList;)V
-		METHOD getStreamInfoCallback getStreamInfoCallback (Ltv/twitch/ErrorCode;Ltv/twitch/broadcast/StreamInfo;)V
-		METHOD getUserInfoCallback getUserInfoCallback (Ltv/twitch/ErrorCode;Ltv/twitch/broadcast/UserInfo;)V
-		METHOD loginCallback loginCallback (Ltv/twitch/ErrorCode;Ltv/twitch/broadcast/ChannelInfo;)V
-		METHOD requestAuthTokenCallback requestAuthTokenCallback (Ltv/twitch/ErrorCode;Ltv/twitch/AuthToken;)V
-		METHOD runCommercialCallback runCommercialCallback (Ltv/twitch/ErrorCode;)V
+		METHOD getIngestServersCallback (Ltv/twitch/ErrorCode;Ltv/twitch/broadcast/IngestList;)V
+		METHOD getStreamInfoCallback (Ltv/twitch/ErrorCode;Ltv/twitch/broadcast/StreamInfo;)V
+		METHOD getUserInfoCallback (Ltv/twitch/ErrorCode;Ltv/twitch/broadcast/UserInfo;)V
+		METHOD loginCallback (Ltv/twitch/ErrorCode;Ltv/twitch/broadcast/ChannelInfo;)V
+		METHOD requestAuthTokenCallback (Ltv/twitch/ErrorCode;Ltv/twitch/AuthToken;)V
+		METHOD runCommercialCallback (Ltv/twitch/ErrorCode;)V
 	FIELD A serverConnector
 	FIELD D logger
 	FIELD G errorCode
