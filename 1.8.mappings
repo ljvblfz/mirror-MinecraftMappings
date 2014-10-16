@@ -1406,8 +1406,21 @@ CLASS none/ez net/minecraft/util/IRegistry
 		ARG 0 registryItemKey
 		ARG 1 registryItem
 CLASS none/fa net/minecraft/util/Rotations
+	FIELD a xRotation
+	FIELD b yRotation
+	FIELD c zRotation
+	METHOD <init> (FFF)V
+		ARG 0 xRotation
+		ARG 1 yRotation
+		ARG 2 zRotation
 	METHOD <init> (Lnone/fv;)V
 		ARG 0 nbtLists
+	METHOD a asNBT ()Lnone/fv;
+	METHOD b getRotationX ()F
+	METHOD c getRotationY ()F
+	METHOD d getRotationZ ()F
+	METHOD equals equals (Ljava/lang/Object;)Z
+		ARG 0 o
 CLASS none/fb net/minecraft/util/RegistrySimple
 	FIELD a logger
 	FIELD c registryMap
@@ -4368,6 +4381,7 @@ CLASS none/wv net/minecraft/entity/Entity
 	FIELD J width
 	FIELD K height
 	FIELD O fallDistance
+	FIELD T noGravity
 	FIELD V random
 	FIELD Y inWater
 	FIELD a zeroedBoundingBox
@@ -4464,6 +4478,7 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD av isRiding ()Z
 	METHOD aw isSneaking ()Z
 	METHOD ax isSprinting ()Z
+	METHOD ay getInvisible ()Z
 	METHOD b updatePosition (DDD)V
 		ARG 0 x
 		ARG 1 y
@@ -4501,6 +4516,7 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD e attemptMountByPlayer (Lnone/ahd;)Z
 	METHOD e saveToNbt (Lnone/fn;)V
 		ARG 0 compound
+	METHOD e setInvisible (Z)V
 	METHOD e_ getNameComponent ()Lnone/ho;
 	METHOD equals equals (Ljava/lang/Object;)Z
 	METHOD f getEntity ()Lnone/wv;
@@ -5116,17 +5132,76 @@ CLASS none/adf net/minecraft/entity/boss/EntityWither
 	METHOD n assGoals ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/adi net/minecraft/entity/item/EntityArmorStand
+	FIELD a DEFAULT_HEAD_ROTATIONS
+	FIELD b DEFAULT_BODY_ROTATIONS
+	FIELD bg disabledSlots
+	FIELD bh headRotations
+	FIELD bi bodyRotations
+	FIELD bj leftArmRotations
+	FIELD bk rightArmRotations
+	FIELD bl leftLegRotations
+	FIELD bm rightLegRotations
+	FIELD c DEFAULT_LEFT_ARM_ROTATIONS
+	FIELD d DEFAULT_RIGHT_ARM_ROTATIONS
+	FIELD e DEFAULT_LEFT_LEG_ROTATIONS
+	FIELD f DEFAULT_RIGHT_LEG_ROTATIONS
+	FIELD g inventory
+	FIELD h invisible
+	METHOD <init> (Lnone/aqu;)V
+		ARG 0 level
+	METHOD <init> (Lnone/aqu;DDD)V
+		ARG 0 level
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
 	METHOD G onKillCommand ()V
+	METHOD a setHeadRotations (Lnone/fa;)V
+		ARG 0 headRotations
 	METHOD a readFromNBT (Lnone/fn;)V
+		ARG 0 nbtTagCompound
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a setSmall (Z)V
+		ARG 0 b
 	METHOD aR getEyeHeight ()F
 	METHOD at getArmorEquipment ()[Lnone/amj;
+	METHOD b setBodyRotations (Lnone/fa;)V
+		ARG 0 bodyRotations
 	METHOD b writeToNBT (Lnone/fn;)V
+		ARG 0 nbtTagCompound
 	METHOD bz getCurrentlyHoldingItemStack ()Lnone/amj;
 	METHOD c setArmorInSlot (ILnone/amj;)V
+	METHOD c setLeftArmRotations (Lnone/fa;)V
+		ARG 0 leftArmRotations
 	METHOD d replaceItem (ILnone/amj;)Z
+	METHOD d setRightArmRotations (Lnone/fa;)V
+		ARG 0 rightArmRotations
+	METHOD e setLeftLegRotations (Lnone/fa;)V
+		ARG 0 leftLegRotations
+	METHOD e setInvisible (Z)V
+		ARG 0 invisible
+	METHOD f setRightLegRotations (Lnone/fa;)V
+		ARG 0 rightLegRotations
+	METHOD h setPose (Lnone/fn;)V
+		ARG 0 nbtTagCompound
+	METHOD j setNoGravity (Z)V
+		ARG 0 b
+	METHOD k setShowArms (Z)V
+		ARG 0 b
+	METHOD l setNoBasePlate (Z)V
+		ARG 0 b
+	METHOD n getSmall ()Z
+	METHOD p getNoGravity ()Z
 	METHOD p getEquipmentInSlot (I)Lnone/amj;
+	METHOD q getShowArms ()Z
+	METHOD r getNoBasePlate ()Z
+	METHOD s getHeadRotations ()Lnone/fa;
 	METHOD s_ onUpdate ()V
+	METHOD t getBodyRotations ()Lnone/fa;
+	METHOD u getLeftArmRotations ()Lnone/fa;
+	METHOD v getRightArmRotations ()Lnone/fa;
+	METHOD w getLeftLegRotations ()Lnone/fa;
+	METHOD x getRightLegRotations ()Lnone/fa;
+	METHOD y getPose ()Lnone/fn;
 CLASS none/adj net/minecraft/entity/EntityHanging
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
