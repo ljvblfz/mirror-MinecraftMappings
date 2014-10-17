@@ -2983,8 +2983,8 @@ CLASS none/lf net/minecraft/network/play/packet/clientbound/PacketUpdateScore
 	METHOD c getScore ()I
 	METHOD d getAction ()Lnone/lg;
 CLASS none/lg net/minecraft/network/play/data/EnumScoreUpdate
-	FIELD a Change
-	FIELD b Remove
+	FIELD a CHANGE
+	FIELD b REMOVE
 CLASS none/lh net/minecraft/network/play/packet/clientbound/PacketSpawnPosition
 	METHOD a read (Lnone/hd;)V
 	METHOD a handle (Lnone/hg;)V
@@ -4096,8 +4096,12 @@ CLASS none/vt net/minecraft/level/EnumDifficulty
 	METHOD b getName ()Ljava/lang/String;
 	METHOD values ()[Lnone/vt;
 CLASS none/vu
-	METHOD a (Lnone/vt;JJF)F
+	FIELD a difficultyEnum
+	FIELD b difficulty
+	METHOD a calculateDifficulty (Lnone/vt;JJF)F
 		ARG 0 difficulty
+	METHOD b getDifficulty ()F
+	METHOD c getDifficultyMultiplier ()F
 CLASS none/vv
 	METHOD k getBlockID ()Ljava/lang/String;
 CLASS none/vz net/minecraft/inventory/IInventory
@@ -4370,6 +4374,7 @@ CLASS none/ws net/minecraft/entity/EntityAgeable
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws;
 	METHOD b writeToNBT (Lnone/fn;)V
+	METHOD i_ isBaby ()Z
 	METHOD n assGoals ()V
 CLASS none/wv net/minecraft/entity/Entity
 	FIELD A previousYaw
@@ -4662,17 +4667,21 @@ CLASS none/xm net/minecraft/entity/EntityLiving
 	METHOD f setHeadPitch (F)V
 	METHOD g heal (F)V
 	METHOD h setHealth (F)V
+	METHOD i_ isBaby ()Z
 	METHOD j getModifiedOxygenAfterConsumption (I)I
 	METHOD k hasEffect (I)Z
 	METHOD l setAbsorptionHealth (F)V
 		ARG 0 absorptionHealth
 	METHOD l removeEffect (I)V
+	METHOD m (I)V
+		ARG 0 effectID
 	METHOD p getEquipmentInSlot (I)Lnone/amj;
 	METHOD s_ onUpdate ()V
 CLASS none/xn net/minecraft/entity/EntityMob
 	FIELD bg goals2
 	FIELD bj inventory
 	FIELD i goals
+	METHOD C canDespawn ()Z
 	METHOD K onTick ()V
 	METHOD a handleEntityStatusPacket (B)V
 	METHOD a doInteractionWith (Lnone/ahd;)Z
@@ -4969,6 +4978,7 @@ CLASS none/abo net/minecraft/entity/passive/EntityBat
 	METHOD s_ onUpdate ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/abq net/minecraft/entity/passive/EntityAnimal
+	METHOD C canDespawn ()Z
 	METHOD a handleEntityStatusPacket (B)V
 	METHOD a doInteractionWith (Lnone/ahd;)Z
 	METHOD a readFromNBT (Lnone/fn;)V
@@ -4976,6 +4986,7 @@ CLASS none/abq net/minecraft/entity/passive/EntityAnimal
 	METHOD b getDroppedXp (Lnone/ahd;)I
 	METHOD b writeToNBT (Lnone/fn;)V
 CLASS none/abr net/minecraft/entity/passive/EntityChicken
+	METHOD C canDespawn ()Z
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws;
 	METHOD aR getEyeHeight ()F
@@ -5010,6 +5021,7 @@ CLASS none/abt net/minecraft/entity/passive/EntityHorse
 	METHOD s_ onUpdate ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/abw net/minecraft/entity/monster/EntityGolem
+	METHOD C canDespawn ()Z
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD e onHitGround (FF)V
@@ -5018,6 +5030,7 @@ CLASS none/abx net/minecraft/entity/passive/EntityMooshroom
 	METHOD a doInteractionWith (Lnone/ahd;)Z
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws;
 CLASS none/aby net/minecraft/entity/passive/EntityOcelot
+	METHOD C canDespawn ()Z
 	METHOD a doInteractionWith (Lnone/ahd;)Z
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
@@ -5082,10 +5095,12 @@ CLASS none/acq net/minecraft/entity/monster/EntityIronGolem
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD j getModifiedOxygenAfterConsumption (I)I
 CLASS none/act net/minecraft/entity/EntityUnderwaterCreature
+	METHOD C canDespawn ()Z
 	METHOD K onTick ()V
 	METHOD aX breathesUnderwater ()Z
 	METHOD b getDroppedXp (Lnone/ahd;)I
 CLASS none/acu net/minecraft/entity/passive/EntityWolf
+	METHOD C canDespawn ()Z
 	METHOD a handleEntityStatusPacket (B)V
 	METHOD a doInteractionWith (Lnone/ahd;)Z
 	METHOD a readFromNBT (Lnone/fn;)V
@@ -5183,6 +5198,7 @@ CLASS none/adi net/minecraft/entity/item/EntityArmorStand
 		ARG 0 rightLegRotations
 	METHOD h setPose (Lnone/fn;)V
 		ARG 0 nbtTagCompound
+	METHOD i_ isBaby ()Z
 	METHOD j setNoGravity (Z)V
 		ARG 0 b
 	METHOD k setShowArms (Z)V
@@ -5652,23 +5668,34 @@ CLASS none/agi net/minecraft/entity/monster/EntityWitch
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/agj net/minecraft/entity/monster/EntityZombie
+	FIELD bm conversionTime
+	METHOD C canDespawn ()Z
 	METHOD a handleEntityStatusPacket (B)V
+	METHOD a setConversionTime (I)V
 	METHOD a doInteractionWith (Lnone/ahd;)Z
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD a handleDeathFrom (Lnone/wh;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a setCanBreakDoors (Z)V
 	METHOD aR getEyeHeight ()F
 	METHOD b getDroppedXp (Lnone/ahd;)I
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
+	METHOD cl getCanBreakDoors ()Z
+	METHOD cm isVillager ()Z
+	METHOD cn isConverting ()Z
+	METHOD i_ isBaby ()Z
+	METHOD l setBaby (Z)V
+	METHOD m setVillager (Z)V
 	METHOD n assGoals ()V
 	METHOD s_ onUpdate ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/agn
 	METHOD b_ getRecipes (Lnone/ahd;)Lnone/aqd;
 CLASS none/agp net/minecraft/entity/passive/EntityVillager
+	METHOD C canDespawn ()Z
 	METHOD a handleEntityStatusPacket (B)V
 	METHOD a applyLightningDamage (Lnone/ads;)V
 	METHOD a doInteractionWith (Lnone/ahd;)Z
@@ -5764,6 +5791,7 @@ CLASS none/ahd net/minecraft/entity/player/EntityPlayer
 	FIELD bu inBed
 	FIELD by abilities
 	FIELD bz xpLevel
+	FIELD c spawnPos
 	FIELD f xpSeed
 	FIELD g activeItemStack
 	FIELD h itemUseTimer
@@ -5814,6 +5842,7 @@ CLASS none/ahd net/minecraft/entity/player/EntityPlayer
 	METHOD bS getItemUseTimerRemaining ()I
 	METHOD bT doReleaseItemAction ()V
 	METHOD bU resetItemUseTimer ()V
+	METHOD bW getScore ()I
 	METHOD bY getActiveHotbarSlot ()Lnone/amj;
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
@@ -9447,6 +9476,7 @@ CLASS none/ayl net/minecraft/block/BlockStoneSlabNew
 CLASS none/aym
 	FIELD a RED_SANDSTONE
 	METHOD l getName ()Ljava/lang/String;
+	METHOD toString ()Ljava/lang/String;
 CLASS none/ayn net/minecraft/block/BlockNoteBlock
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
 	METHOD a onBlockHit (Lnone/aqu;Lnone/dt;Lnone/ahd;)V
@@ -10050,7 +10080,14 @@ CLASS none/bbp net/minecraft/block/BlockTrapdoor
 	METHOD h updateTargetingHitbox ()V
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/bbr
+	FIELD a TOP
+	FIELD b BOTTOM
+	FIELD c value
+	METHOD <init> (Ljava/lang/String;ILjava/lang/String;)V
+		ARG 0 id
+		ARG 2 value
 	METHOD l getName ()Ljava/lang/String;
+	METHOD toString ()Ljava/lang/String;
 CLASS none/bbs net/minecraft/block/BlockTripwire
 	FIELD M attached
 	FIELD N disarmed
@@ -12306,6 +12343,7 @@ CLASS none/bsq net/minecraft/chat/ChatLine
 CLASS none/bsr net/minecraft/client/KeyBinding
 	FIELD a bindings
 	FIELD c categories
+	FIELD d keyName
 	FIELD e defaultKey
 	FIELD f category
 	FIELD g keyCode
@@ -12317,6 +12355,7 @@ CLASS none/bsr net/minecraft/client/KeyBinding
 	METHOD d hasChanged ()Z
 	METHOD e getCategory ()Ljava/lang/String;
 	METHOD f isBeingPressed ()Z
+	METHOD g getKeyName ()Ljava/lang/String;
 	METHOD h defaultKey ()I
 	METHOD i keyCode ()I
 	METHOD j reset ()V
@@ -12375,7 +12414,7 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	FIELD am serverName
 	FIELD an serverPort
 	FIELD ao joinPlayerCounter
-	FIELD ap inGameHasFocus
+	FIELD ap is64bit
 	FIELD aq isDemo
 	FIELD ar myNetworkManager
 	FIELD as integratedServerIsRunning
@@ -12427,7 +12466,8 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	METHOD O getResourceManager ()Lnone/cvk;
 	METHOD P getResourcePackRepository ()Lnone/cvo;
 	METHOD Q getLanguageManager ()Lnone/cwe;
-	METHOD S getHasFocus ()Z
+	METHOD S is64bit ()Z
+	METHOD T isPaused ()Z
 	METHOD V getCurrentMusicType ()Lnone/cyy;
 	METHOD Y getMinecraftSessionService ()Lcom/mojang/authlib/minecraft/MinecraftSessionService;
 	METHOD a run ()V
@@ -12468,17 +12508,48 @@ CLASS none/btm net/minecraft/util/MouseHelper
 CLASS none/bto net/minecraft/client/settings/GameSettings
 	FIELD A overrideWidth
 	FIELD B overrideHeight
+	FIELD C heldItemTooltips
 	FIELD D chatScale
 	FIELD E chatWidth
 	FIELD F chatHeightUnfocused
 	FIELD G chatHeightFocused
+	FIELD H showInventoryAchievementHint
+	FIELD I mipmapLevels
+	FIELD J streamBytesPerPixel
+	FIELD K streamMicVolume
+	FIELD L streamSystemVolume
+	FIELD M streamKbps
+	FIELD N streamFps
+	FIELD O streamCompression
+	FIELD P streamSendMetadata
+	FIELD Q streamPreferredServer
+	FIELD R streamChatEnabled
+	FIELD S streamChatUserFilter
+	FIELD T streamMicToggleBehavior
 	FIELD U keyBindForward
 	FIELD V keyBindLeft
 	FIELD W keyBindBack
 	FIELD X keyBindRight
 	FIELD Y keyBindJump
 	FIELD Z keyBindSneak
+	FIELD a mouseSensitivity
+	FIELD aA lastServer
+	FIELD aD fov
+	FIELD aE gamma
+	FIELD aF saturation
+	FIELD aG guiScale
+	FIELD aH particles
 	FIELD aI language
+	FIELD aJ forceUnicodeFont
+	FIELD aK LOGGER
+	FIELD aL GSON
+	FIELD aN GUI_SCALE_SETTING_NAMES
+	FIELD aO PARTICLES_SETTING_NAMES
+	FIELD aP AO_SETTING_NAMES
+	FIELD aQ STREAM_COMPRESSION_SETTING_NAMES
+	FIELD aR STREAM_CHAT_ENABLED_SETTING_NAMES
+	FIELD aS STREAM_CHAT_USER_FILTER_SETTING_NAMES
+	FIELD aT STREAM_MIC_TOGGLE_BEHAVIOR_SETTING_NAMES
 	FIELD aW options
 	FIELD aa keyBindInventory
 	FIELD ab keyBindUse
@@ -12489,14 +12560,49 @@ CLASS none/bto net/minecraft/client/settings/GameSettings
 	FIELD ag keyBindChat
 	FIELD ah keyBindPlayerList
 	FIELD ai keyBindCommand
+	FIELD aj keyBindScreenshot
+	FIELD ak keyBindTogglePerspective
+	FIELD al keyBindToggleCamera
+	FIELD am keyBindFullscreen
+	FIELD an keyBindSpectatorOutlines
+	FIELD ao keyBindStreamStartStop
+	FIELD ap keyBindStreamPauseUnpause
+	FIELD aq keyBindStreamCommercial
+	FIELD ar keyBindStreamToggleMic
 	FIELD as keyBindHotbar
+	FIELD au minecraft
 	FIELD av difficulty
+	FIELD b invertMouse
+	FIELD c renderDistance
+	FIELD d bobView
+	FIELD e anaglyph3D
+	FIELD f fboEnable
+	FIELD g maxFps
+	FIELD h clouds
+	FIELD i fancyGraphics
+	FIELD j ambientOcclusion
 	FIELD l chatVisibility
+	FIELD m chatColors
+	FIELD n chatLinks
+	FIELD o chatLinksPrompt
 	FIELD p chatOpacity
 	FIELD q snooperEnabled
 	FIELD r fullscreen
+	FIELD s enableVsync
+	FIELD t useVBO
+	FIELD u allowBlockAlternatives
+	FIELD v reducedDebugInfo
+	FIELD w hideServerAddress
+	FIELD x advancedItemTooltips
+	FIELD y pauseOnLostFocus
 	FIELD z touchScreen
+	METHOD a setOptionValue (Lnone/btr;F)V
+		ARG 0 option
+		ARG 1 value
 	METHOD a setOptionValue (Lnone/btr;I)V
+	METHOD a getLocalizedSettingName ([Ljava/lang/String;I)Ljava/lang/String;
+		ARG 0 names
+		ARG 1 settingValue
 	METHOD b saveOptions ()V
 	METHOD c getKeyBinding (Lnone/btr;)Ljava/lang/String;
 CLASS none/btr net/minecraft/options/EnumOptions
@@ -12535,7 +12641,7 @@ CLASS none/btr net/minecraft/options/EnumOptions
 	FIELD j FBO_ENABLE
 	FIELD k RENDER_CLOUDS
 	FIELD l GRAPHICS
-	FIELD m AMBIANT_OCCLUSION
+	FIELD m AMBIENT_OCCLUSION
 	FIELD n GUI_SCALE
 	FIELD o PARTICLES
 	FIELD p CHAT_VISIBILITY
@@ -12656,6 +12762,19 @@ CLASS none/buh net/minecraft/client/gui/GuiNewChat
 	METHOD e getChatOpen ()Z
 	METHOD h getChatScale ()F
 CLASS none/buj net/minecraft/client/gui/GuiDebug
+	FIELD a minecraft
+	FIELD f fontRenderer
+	METHOD <init> (Lnone/bsu;)V
+		ARG 0 minecraft
+	METHOD a drawTopLeftDebugMenu ()V
+	METHOD a bytesToMegabytes (J)J
+		ARG 0 bytes
+	METHOD a drawDebug (Lnone/buf;)V
+		ARG 0 scaledResolution
+	METHOD b getDebugMenuTopLeftItemList ()Ljava/util/List;
+	METHOD b drawTopRightDebugMenu (Lnone/buf;)V
+		ARG 0 scaledResolution
+	METHOD c getDebugMenuTopRightItemList ()Ljava/util/List;
 CLASS none/bul net/minecraft/client/gui/GuiTextField
 	METHOD a updateCursorCounter ()V
 	METHOD a textBoxKeyTyped (CI)Z
@@ -13729,9 +13848,11 @@ CLASS none/cez
 		METHOD a handleStatusResponse (Lnone/no;)V
 			ARG 0 packet
 CLASS none/cff net/minecraft/level/entity/particle/ParticleItem
+	METHOD a getParticleType ()I
 CLASS none/cfg net/minecraft/level/entity/particle/ParticleBarrierBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cfh net/minecraft/level/entity/particle/ParticleItemCrack
+	METHOD a getParticleType ()I
 CLASS none/cfi net/minecraft/level/entity/particle/ParticleItemCrackBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cfj net/minecraft/level/entity/particle/ParticleSlimeBuilder
@@ -13768,6 +13889,7 @@ CLASS none/cfz net/minecraft/level/entity/particle/ParticleFireworksSpark
 	METHOD c getBrightness (F)F
 	METHOD s_ onUpdate ()V
 CLASS none/cga
+	METHOD a getParticleType ()I
 	METHOD s_ onUpdate ()V
 CLASS none/cgb net/minecraft/level/entity/particle/ParticleFireworksSparkBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
@@ -13777,6 +13899,7 @@ CLASS none/cgc net/minecraft/level/entity/particle/ParticleFlame
 CLASS none/cgd net/minecraft/level/entity/particle/ParticleFlameBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cge net/minecraft/level/entity/particle/ParticleFootstep
+	METHOD a getParticleType ()I
 	METHOD s_ onUpdate ()V
 CLASS none/cgf net/minecraft/level/entity/particle/ParticleFootstepBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
@@ -13787,14 +13910,17 @@ CLASS none/cgh net/minecraft/level/entity/particle/ParticleVillagerAngryBuilder
 CLASS none/cgi net/minecraft/level/entity/particle/ParticleHeartBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cgj net/minecraft/level/entity/particle/ParticleExplosionLarge
+	METHOD a getParticleType ()I
 	METHOD s_ onUpdate ()V
 CLASS none/cgk net/minecraft/level/entity/particle/ParticleExplosionLargeBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cgl net/minecraft/level/entity/particle/ParticleExplosionHuge
+	METHOD a getParticleType ()I
 	METHOD s_ onUpdate ()V
 CLASS none/cgm net/minecraft/level/entity/particle/ParticleExplosionHugeBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cgn
+	METHOD a getParticleType ()I
 	METHOD s_ onUpdate ()V
 CLASS none/cgp net/minecraft/level/entity/particle/ParticleSmokeLargeBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
@@ -13804,6 +13930,7 @@ CLASS none/cgq net/minecraft/level/entity/particle/ParticleLava
 CLASS none/cgr net/minecraft/level/entity/particle/ParticleLavaBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cgs net/minecraft/level/entity/particle/ParticleMobAppearance
+	METHOD a getParticleType ()I
 	METHOD s_ onUpdate ()V
 CLASS none/cgt net/minecraft/level/entity/particle/ParticleMobAppearanceBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
@@ -13821,6 +13948,7 @@ CLASS none/cgw net/minecraft/entity/EntityParticle
 	FIELD c textureY
 	FIELD f age
 	FIELD g maxAge
+	METHOD a getParticleType ()I
 	METHOD a setTex (Lnone/cue;)V
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD b getR ()F
@@ -13837,6 +13965,17 @@ CLASS none/cgw net/minecraft/entity/EntityParticle
 	METHOD s_ onUpdate ()V
 	METHOD toString toString ()Ljava/lang/String;
 CLASS none/cgx net/minecraft/client/renderers/EffectRenderer
+	CLASS cgy
+		METHOD call call ()Ljava/lang/String;
+	CLASS cgz
+		METHOD call call ()Ljava/lang/String;
+	FIELD a level
+	FIELD f random
+	FIELD g particleMap
+	METHOD a (ILnone/chc;)V
+		ARG 0 id
+	METHOD b getParticleCount ()Ljava/lang/String;
+	METHOD d tickParticle (Lnone/cgw;)V
 CLASS none/chc net/minecraft/client/particle/IParticleFactory
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 		ARG 1 level
@@ -13889,9 +14028,11 @@ CLASS none/cib net/minecraft/level/entity/particle/ParticleBlockDust
 CLASS none/cic net/minecraft/level/entity/particle/ParticleBlockDustBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cid net/minecraft/level/entity/particle/ParticleBlockCrack
+	METHOD a getParticleType ()I
 CLASS none/cie net/minecraft/level/entity/particle/ParticleBlockCrackBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cif
+	METHOD a getParticleType ()I
 	METHOD s_ onUpdate ()V
 CLASS none/cig
 	METHOD s_ onUpdate ()V
@@ -14323,6 +14464,19 @@ CLASS none/csu net/minecraft/client/renderers/RenderSpiderEyes
 CLASS none/csz net/minecraft/client/renderers/RenderWolfCollar
 CLASS none/ctc
 	METHOD a rotateCorpse (Lnone/xm;FFF)V
+CLASS none/ctx
+	FIELD b width
+	FIELD c height
+	METHOD compareTo (Lnone/ctx;)I
+	METHOD toString ()Ljava/lang/String;
+CLASS none/cty
+	FIELD a originX
+	FIELD b originY
+	FIELD c width
+	FIELD d height
+	FIELD e subSlots
+	FIELD f texture
+	METHOD toString ()Ljava/lang/String;
 CLASS none/cue net/minecraft/client/renderers/texture/TextureAtlasSprite
 	FIELD a frames
 	FIELD c isRotated
@@ -14448,11 +14602,34 @@ CLASS none/cvt net/minecraft/client/resources/SimpleReloadableResourceManager
 	METHOD a registerReloadListener (Lnone/cvl;)V
 CLASS none/cwc net/minecraft/client/resources/I18n
 	METHOD a getString (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+CLASS none/cwd net/minecraft/client/resources/data/LanguageMetadata
+	FIELD a id
+	FIELD b region
+	FIELD c name
+	FIELD d bidirectional
+	METHOD <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)V
+		ARG 0 id
+		ARG 1 region
+		ARG 2 name
+		ARG 3 bidirectional
+	METHOD a getID ()Ljava/lang/String;
+	METHOD b isBidirectional ()Z
+	METHOD compareTo (Lnone/cwd;)I
+		ARG 0 languageMetadata
+	METHOD equals (Ljava/lang/Object;)Z
+		ARG 0 o
+	METHOD hashCode ()I
+	METHOD toString ()Ljava/lang/String;
 CLASS none/cwe net/minecraft/client/resources/LanguageManager
+	FIELD b LOGGER
+	FIELD c serializer
+	FIELD d currentLanguageCode
+	FIELD e languageMap
 	METHOD a onReload (Lnone/cvk;)V
 	METHOD b isCurrentLanguageBidirectional ()Z
-CLASS none/cwh new/minecraft/client/resources/data/MetadataSectionSerializer
-CLASS none/cwj net/minecraft/client/resource/data/IMetadataSectionSerializer
+	METHOD c getCurrentLanguage ()Lnone/cwd;
+CLASS none/cwh net/minecraft/client/resources/data/MetadataSectionSerializer
+CLASS none/cwj net/minecraft/client/resources/data/IMetadataSectionSerializer
 CLASS none/cwk net/minecraft/client/resources/data/MetadataSerializer
 	FIELD a registry
 	FIELD b gsonBuilder
@@ -14467,6 +14644,7 @@ CLASS none/cwr net/minecraft/client/resources/data/FontMetadataSection
 CLASS none/cws net/minecraft/client/resources/data/FontMetadataSectionSerializer
 CLASS none/cwu net/minecraft/client/resources/data/LanguageMetadataSection
 CLASS none/cwv net/minecraft/client/resources/data/LanguageMetadataSectionSerializer
+	METHOD deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnone/cwu;
 CLASS none/cwx net/minecraft/client/resources/data/PackMetadataSection
 CLASS none/cwy net/minecraft/client/resources/data/PackMetadataSectionSerializer
 CLASS none/cxb net/minecraft/client/resources/data/TextureMetadataSection
@@ -14477,6 +14655,9 @@ CLASS none/cxl
 	METHOD equals (Ljava/lang/Object;)Z
 	METHOD hashCode ()I
 	METHOD toString getFullName ()Ljava/lang/String;
+CLASS none/cxq
+	FIELD b null
+	METHOD compareTo (Lnone/cxq;)I
 CLASS none/cxz net/minecraft/sound/EnumSoundType
 	FIELD a MASTER
 	FIELD b MUSIC
@@ -14861,7 +15042,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD z updateTimeLightAndEntities ()V
 CLASS net/minecraft/server/MinecraftServer$pd net/minecraft/level/ConvertingProcessUpdate
 CLASS net/minecraft/client/ClientBrandRetriever net/minecraft/client/ClientBrandRetriever
-	METHOD getClientModName ()Ljava/lang/String;
+	METHOD getClientModName getClientModName ()Ljava/lang/String;
 CLASS net/minecraft/realms/RealmsServerStatusPinger
 	CLASS daw
 		METHOD a handlePingResponse (Lnone/nn;)V
