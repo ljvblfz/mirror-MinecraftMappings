@@ -4060,7 +4060,7 @@ CLASS none/ux net/minecraft/profiler/ProfilerEntry
 		ARG 1 sectionPercent
 		ARG 2 processPercent
 	METHOD a getEntryColor ()I
-	METHOD compareTo compareTo (Lnone/ux;)I
+	METHOD compareTo (Lnone/ux;)I
 		ARG 0 profilerEntry
 CLASS none/uy net/minecraft/util/IProgressBar
 CLASS none/va net/minecraft/block/IEnumBlockPropertyValue
@@ -6374,10 +6374,12 @@ CLASS none/alp net/minecraft/item/ItemHoeSwitchDirtType
 CLASS none/alq net/minecraft/item/Item
 	FIELD a itemBlocks
 	FIELD b creativeTab
+	FIELD c maxDurability
 	FIELD e registryComplex
 	FIELD f uuid
 	FIELD g random
 	FIELD h maxStackSize
+	FIELD j hasMetadata
 	FIELD l name
 	METHOD a toString ()Ljava/lang/String;
 	METHOD a getDataValueForBlockVersion (I)I
@@ -6439,6 +6441,8 @@ CLASS none/alq net/minecraft/item/Item
 		ARG 1 item
 	METHOD a (Lnone/fn;)Z
 		ARG 0 nbtMap
+	METHOD a setHasMetadata (Z)Lnone/alq;
+		ARG 0 hasMetadata
 	METHOD b getItem (I)Lnone/alq;
 		ARG 0 index
 	METHOD b getItemId (Lnone/alq;)I
@@ -6455,6 +6459,7 @@ CLASS none/alq net/minecraft/item/Item
 		ARG 0 name
 	METHOD c registerItemBlock (Lnone/atr;)V
 		ARG 0 block
+	METHOD d setMaxDurability (I)Lnone/alq;
 	METHOD d getItem (Ljava/lang/String;)Lnone/alq;
 		ARG 0 s
 	METHOD d getItemUseTimerDuration (Lnone/amj;)I
@@ -6536,193 +6541,193 @@ CLASS none/amj net/minecraft/item/ItemStack
 	METHOD p getEnchantments ()Lnone/fv;
 	METHOD w isEnchanted ()Z
 CLASS none/amk net/minecraft/item/Items
-	FIELD A mushroomStew
-	FIELD B goldenSword
-	FIELD C goldenShovel
-	FIELD D goldenPickaxe
-	FIELD E goldenAxe
-	FIELD F string
-	FIELD G feather
-	FIELD H gunpowder
-	FIELD I woodenHoe
-	FIELD J stoneHoe
-	FIELD K ironHoe
-	FIELD L diamondHoe
-	FIELD M goldenHoe
-	FIELD N wheatSeeds
-	FIELD O wheat
-	FIELD P bread
-	FIELD Q leatherHelmet
-	FIELD R leatherChestplate
-	FIELD S leatherLeggings
-	FIELD T leatherBoots
-	FIELD U chainmailHelmet
-	FIELD V chainmailChestplate
-	FIELD W chainmailLeggings
-	FIELD X chainmailBoots
-	FIELD Y ironHelmet
-	FIELD Z ironChestplate
-	FIELD a ironShovel
-	FIELD aA saddle
-	FIELD aB ironDoor
-	FIELD aC redstone
-	FIELD aD snowball
-	FIELD aE boat
-	FIELD aF leather
-	FIELD aG molkBucket
-	FIELD aH brick
-	FIELD aI clayBall
-	FIELD aJ reeds
-	FIELD aK paper
-	FIELD aL book
-	FIELD aM slimeBall
-	FIELD aN chestMinecart
-	FIELD aO furnaceMinecart
-	FIELD aP egg
-	FIELD aQ compass
-	FIELD aR fishingRod
-	FIELD aS clock
-	FIELD aT glowstoneDust
-	FIELD aU fish
-	FIELD aV cookedFish
-	FIELD aW dye
-	FIELD aX bone
-	FIELD aY sugar
-	FIELD aZ cake
-	FIELD aa ironLeggings
-	FIELD ab ironBoots
-	FIELD ac diamondHelmet
-	FIELD ad diamondChestplate
-	FIELD ae diamondLeggings
-	FIELD af DiamondBoots
-	FIELD ag goldenHelmet
-	FIELD ah goldenChestplate
-	FIELD ai goldenLeggings
-	FIELD aj goldenBoots
-	FIELD ak flint
-	FIELD al porkchop
-	FIELD am cookedPorkchop
-	FIELD an painting
-	FIELD ao goldenApple
-	FIELD ap gign
-	FIELD aq woodenDoor
-	FIELD ar spruceDoor
-	FIELD as birchDoor
-	FIELD at jungleDoor
-	FIELD au acaciaDoor
-	FIELD av darkOakDoor
-	FIELD aw bucket
-	FIELD ax waterBocket
-	FIELD ay lavaBucket
-	FIELD az minecart
-	FIELD b ironPickaxe
-	FIELD bA glassBottle
-	FIELD bB spiderEye
-	FIELD bC fermentedSpiderEye
-	FIELD bD blazePowder
-	FIELD bE magmaCream
-	FIELD bF brewingStand
-	FIELD bG cauldron
-	FIELD bH enderEye
-	FIELD bI speckledMelon
-	FIELD bJ spawnEgg
-	FIELD bK experienceBottle
-	FIELD bL fireCharge
-	FIELD bM writableBook
-	FIELD bN writtenBook
-	FIELD bO emerald
-	FIELD bP itemFrame
-	FIELD bQ flowerPot
-	FIELD bR carrot
-	FIELD bS potato
-	FIELD bT bakedPotato
-	FIELD bU poisonousPotato
-	FIELD bV map
-	FIELD bW goldenCarrot
-	FIELD bX skull
-	FIELD bY carrotOnAStick
-	FIELD bZ netherStar
-	FIELD ba bed
-	FIELD bb repeater
-	FIELD bc cookie
-	FIELD bd illedMap
-	FIELD be shears
-	FIELD bf melon
-	FIELD bg pumpkinSeeds
-	FIELD bh melonSeeds
-	FIELD bi beef
-	FIELD bj cookedBeef
-	FIELD bk chicken
-	FIELD bl cookedChicken
-	FIELD bm mutton
-	FIELD bn cookedMutton
-	FIELD bo rabbit
-	FIELD bp cookedRabbit
-	FIELD bq rabbitStew
-	FIELD br rabbitFoot
-	FIELD bs rabbitHide
-	FIELD bt rabbitFlesh
-	FIELD bu enderPearl
-	FIELD bv blazeRod
-	FIELD bw ghastTear
-	FIELD bx goldNugget
-	FIELD by netherWart
-	FIELD bz potion
-	FIELD c ironAxe
-	FIELD cA record11
-	FIELD cB recordWait
-	FIELD cC prismarineShard
-	FIELD cD prismarineCrystals
-	FIELD cE banner
-	FIELD ca pumpkinPie
-	FIELD cb fireworks
-	FIELD cc fireworkCharge
-	FIELD cd enchantedBook
-	FIELD ce comparator
-	FIELD cf netherbrick
-	FIELD cg quartz
-	FIELD ch tntMinecart
-	FIELD ci hopperMinecart
-	FIELD cj armorStand
-	FIELD ck ironHorseArmor
-	FIELD cl goldenHorseArmor
-	FIELD cm diamondHorseArmor
-	FIELD cn lead
-	FIELD co nameTag
-	FIELD cp commandBlockMinecart
-	FIELD cq record13
-	FIELD cr recordCat
-	FIELD cs recordBlock
-	FIELD ct recordChirp
-	FIELD cu recordFar
-	FIELD cv recordMall
-	FIELD cw recordMellohi
-	FIELD cx recordStal
-	FIELD cy recordStrad
-	FIELD cz recordWard
-	FIELD d flintAndSteel
-	FIELD e apple
-	FIELD f bow
-	FIELD g arrow
-	FIELD h coal
-	FIELD i diamond
-	FIELD j iron
-	FIELD k goldIngot
-	FIELD l ironSword
-	FIELD m woodenSword
-	FIELD n woodenShovel
-	FIELD o woodenPickaxe
-	FIELD p woodenAxe
-	FIELD q stoneSword
-	FIELD r stoneShovel
-	FIELD s stonePickaxe
-	FIELD t stoneAxe
-	FIELD u diamondSword
-	FIELD v diamondShovel
-	FIELD w diamondPickaxe
-	FIELD x diamondAxe
-	FIELD y stick
-	FIELD z bowl
+	FIELD A MUSHROOM_STEW
+	FIELD B GOLDEN_SWORD
+	FIELD C GOLDEN_SHOVEL
+	FIELD D GOLDEN_PICKAXE
+	FIELD E GOLDEN_AXE
+	FIELD F STRING
+	FIELD G FEATHER
+	FIELD H GUNPOWDER
+	FIELD I WOODEN_HOE
+	FIELD J STONE_HOE
+	FIELD K IRON_HOE
+	FIELD L DIAMOND_HOE
+	FIELD M GOLDEN_HOE
+	FIELD N WHEAT_SEEDS
+	FIELD O WHEAT
+	FIELD P BREAD
+	FIELD Q LEATHER_HELMET
+	FIELD R LEATHER_CHESTPLATE
+	FIELD S LEATHER_LEGGINGS
+	FIELD T LEATHER_BOOTS
+	FIELD U CHAINMAIL_HELMET
+	FIELD V CHAINMAIL_CHESTPLATE
+	FIELD W CHAINMAIL_LEGGINGS
+	FIELD X CHAINMAIL_BOOTS
+	FIELD Y IRON_HELMET
+	FIELD Z IRON_CHESTPLATE
+	FIELD a IRON_SHOVEL
+	FIELD aA SADDLE
+	FIELD aB IRON_DOOR
+	FIELD aC REDSTONE
+	FIELD aD SNOWBALL
+	FIELD aE BOAT
+	FIELD aF LEATHER
+	FIELD aG MILK_BUCKET
+	FIELD aH BRICK
+	FIELD aI CLAY_BALL
+	FIELD aJ REEDS
+	FIELD aK PAPER
+	FIELD aL BOOK
+	FIELD aM SLIME_BALL
+	FIELD aN CHEST_MINECART
+	FIELD aO FURNACE_MINECART
+	FIELD aP EGG
+	FIELD aQ COMPASS
+	FIELD aR FISHING_ROD
+	FIELD aS CLOCK
+	FIELD aT GLOWSTONE_DUST
+	FIELD aU FISH
+	FIELD aV COOKED_FISH
+	FIELD aW DYE
+	FIELD aX BONE
+	FIELD aY SUGAR
+	FIELD aZ CAKE
+	FIELD aa IRON_LEGGINGS
+	FIELD ab IRON_BOOTS
+	FIELD ac DIAMOND_HELMET
+	FIELD ad DIAMOND_CHESTPLATE
+	FIELD ae DIAMOND_LEGGINGS
+	FIELD af DIAMOND_BOOTS
+	FIELD ag GOLDEN_HELMET
+	FIELD ah GOLDEN_CHESTPLATE
+	FIELD ai GOLDEN_LEGGINGS
+	FIELD aj GOLDEN_BOOTS
+	FIELD ak FLINT
+	FIELD al PORKCHOP
+	FIELD am COOKED_PORKCHOP
+	FIELD an PAINTING
+	FIELD ao GOLDEN_APPLE
+	FIELD ap SIGN
+	FIELD aq WOODEN_DOOR
+	FIELD ar SPRUCE_DOOR
+	FIELD as BIRCH_DOOR
+	FIELD at JUNGLE_DOOR
+	FIELD au ACACIA_DOOR
+	FIELD av DARK_OAK_DOOR
+	FIELD aw BUCKET
+	FIELD ax WATER_BUCKET
+	FIELD ay LAVA_BUCKET
+	FIELD az MINECART
+	FIELD b IRON_PICKAXE
+	FIELD bA GLASS_BOTTLE
+	FIELD bB SPIDER_EYE
+	FIELD bC FERMENTED_SPIDER_EYE
+	FIELD bD BLAZE_POWDER
+	FIELD bE MAGMA_CREAM
+	FIELD bF BREWING_STAND
+	FIELD bG CAULDRON
+	FIELD bH ENDER_EYE
+	FIELD bI SPECKLED_MELON
+	FIELD bJ SPAWN_EGG
+	FIELD bK EXPERIENCE_BOTTLE
+	FIELD bL FIRE_CHARGE
+	FIELD bM WRITABLE_BOOK
+	FIELD bN WRITTEN_BOOK
+	FIELD bO EMERALD
+	FIELD bP ITEM_FRAME
+	FIELD bQ FLOWER_POT
+	FIELD bR CARROT
+	FIELD bS POTATO
+	FIELD bT BAKED_POTATO
+	FIELD bU POISONOUS_POTATO
+	FIELD bV MAP
+	FIELD bW GOLDEN_CARROT
+	FIELD bX SKULL
+	FIELD bY CARROT_ON_A_STICK
+	FIELD bZ NETHER_STAR
+	FIELD ba BED
+	FIELD bb REPEATER
+	FIELD bc COOKIE
+	FIELD bd FILLED_MAP
+	FIELD be SHEARS
+	FIELD bf MELON
+	FIELD bg PUMPKIN_SEEDS
+	FIELD bh MELON_SEEDS
+	FIELD bi BEEF
+	FIELD bj COOKED_BEEF
+	FIELD bk CHICKEN
+	FIELD bl COOKED_CHICKEN
+	FIELD bm MUTTON
+	FIELD bn COOKED_MUTTON
+	FIELD bo RABBIT
+	FIELD bp COOKED_RABBIT
+	FIELD bq RABBIT_STEW
+	FIELD br RABBIT_FOOT
+	FIELD bs RABBIT_HIDE
+	FIELD bt ROTTEN_FLESH
+	FIELD bu ENDER_PEARL
+	FIELD bv BLAZE_ROD
+	FIELD bw GHAST_TEAR
+	FIELD bx GOLD_NUGGET
+	FIELD by NETHER_WART
+	FIELD bz POTION
+	FIELD c IRON_AXE
+	FIELD cA RECORD_11
+	FIELD cB RECORD_WAIT
+	FIELD cC PRISMARINE_SHARD
+	FIELD cD PRISMARINE_CRYSTALS
+	FIELD cE BANNER
+	FIELD ca PUMPKIN_PIE
+	FIELD cb FIREWORKS
+	FIELD cc FIREWORK_CHARGE
+	FIELD cd rENCHANTED_BOOK
+	FIELD ce COMPARATOR
+	FIELD cf NETHERBRICK
+	FIELD cg QUARTZ
+	FIELD ch TNT_MINECART
+	FIELD ci HOPPER_MINECART
+	FIELD cj ARMOR_STAND
+	FIELD ck IRON_HORSE_ARMOR
+	FIELD cl GOLDEN_HORSE_ARMOR
+	FIELD cm DIAMOND_HORSE_ARMOR
+	FIELD cn LEAD
+	FIELD co NAME_TAG
+	FIELD cp COMMAND_BLOCK_MINECART
+	FIELD cq RECORD_13
+	FIELD cr RECORD_CAT
+	FIELD cs RECORD_BLOCKS
+	FIELD ct RECORD_CHIRP
+	FIELD cu RECORD_FAR
+	FIELD cv RECORD_MALL
+	FIELD cw RECORD_MELLOHI
+	FIELD cx RECORD_STAL
+	FIELD cy RECORD_STRAD
+	FIELD cz RECORD_WARD
+	FIELD d FLINT_AND_STEEL
+	FIELD e APPLE
+	FIELD f BOW
+	FIELD g ARROW
+	FIELD h COAL
+	FIELD i DIAMOND
+	FIELD j IRON_INGOT
+	FIELD k GOLD_INGOT
+	FIELD l IRON_SWORD
+	FIELD m WOODEN_SWORD
+	FIELD n WOODEN_SHOVEL
+	FIELD o WOODEN_PICKAXE
+	FIELD p WOODEN_AXE
+	FIELD q STONE_SWORD
+	FIELD r STONE_SHOVEL
+	FIELD s STONE_PICKAXE
+	FIELD t STONE_AXE
+	FIELD u DIAMOND_SWORD
+	FIELD v DIAMOND_SHOVEL
+	FIELD w DIAMOND_PICKAXE
+	FIELD x DIAMOND_AXE
+	FIELD y STICK
+	FIELD z BOWL
 	METHOD a getItem (Ljava/lang/String;)Lnone/alq;
 CLASS none/aml net/minecraft/item/ItemLead
 	METHOD a onBlockPlace (Lnone/amj;Lnone/ahd;Lnone/aqu;Lnone/dt;Lnone/ej;FFF)Z
@@ -12438,6 +12443,7 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	FIELD aq isDemo
 	FIELD ar myNetworkManager
 	FIELD as integratedServerIsRunning
+	FIELD at debugCrashTriggerTime
 	FIELD au mcResourceManager
 	FIELD av metadataSerializer
 	FIELD aw defaultResourcePacks
@@ -14925,7 +14931,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD V yggdrasilAuthenticationService
 	FIELD W minecraftSessionService
 	FIELD Y gameProfileRepository
-	FIELD a userCacheFile
+	FIELD a USER_CACHE_FILE
 	FIELD aa thread
 	FIELD ab currentTimeMillis
 	FIELD b theProfiler
@@ -14936,7 +14942,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD g tickTimeArray
 	FIELD h timeOfLastDimensionTick
 	FIELD i queue
-	FIELD j logger
+	FIELD j LOGGER
 	FIELD k instance
 	FIELD l anvilConverterForAnvilFile
 	FIELD m usageSnooper
