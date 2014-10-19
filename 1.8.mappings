@@ -3553,9 +3553,19 @@ CLASS none/qp net/minecraft/level/LevelManager
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnone/qt;)V
 		ARG 0 minecraftServer
 		ARG 1 dimensionServer
-	METHOD a (Lnone/wv;)V
+	METHOD a markBlockRangeForRenderUpdate (IIIIII)V
+	METHOD a broadcastSound (ILnone/dt;I)V
+	METHOD a spawnParticle (IZDDDDDD[I)V
+	METHOD a playSound (Ljava/lang/String;DDDFF)V
+	METHOD a playRecord (Ljava/lang/String;Lnone/dt;)V
+	METHOD a playAusSFX (Lnone/ahd;ILnone/dt;I)V
+	METHOD a playSoundToNearExcept (Lnone/ahd;Ljava/lang/String;DDDFF)V
+	METHOD a markBlockForUpdate (Lnone/dt;)V
+	METHOD a onEntityAdded (Lnone/wv;)V
 		ARG 0 entity
-	METHOD b (Lnone/wv;)V
+	METHOD b notifyLightSet (ILnone/dt;I)V
+	METHOD b sendBlockBreakProgress (Lnone/dt;)V
+	METHOD b onEntityRemoved (Lnone/wv;)V
 		ARG 0 entity
 CLASS none/qq
 	FIELD a logger
@@ -3578,6 +3588,8 @@ CLASS none/qs
 	METHOD c loadChunk (II)Lnone/bfh;
 	METHOD d unloadQueuedChunks ()Z
 	METHOD d generate (II)Lnone/bfh;
+		ARG 0 chunkX
+		ARG 1 chunkZ
 	METHOD e canSave ()Z
 	METHOD f makeString ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
@@ -7086,6 +7098,16 @@ CLASS none/aqm net/minecraft/level/ChunkCoordIntPair
 	METHOD e getMaxX ()I
 	METHOD f getMaxZ ()I
 CLASS none/aqo net/minecraft/level/Explosion
+CLASS none/aqp net/minecraft/level/ColorizerLeaves
+	FIELD a colorBuffer
+	METHOD a getColorPine ()I
+	METHOD a getColor (DD)I
+		ARG 0 temperature
+		ARG 1 rainfall
+	METHOD a setColorBuffer ([I)V
+		ARG 0 colorBuffer
+	METHOD b getColorBirch ()I
+	METHOD c getColorBasic ()I
 CLASS none/aqq net/minecraft/level/GameRules
 	METHOD a addRule (Ljava/lang/String;Ljava/lang/String;Lnone/aqs;)V
 	METHOD b getGameRuleBooleanValue (Ljava/lang/String;)Z
@@ -7093,6 +7115,13 @@ CLASS none/aqs net/minecraft/level/GameRulesEnumValueType
 	FIELD a ANY_VALUE
 	FIELD b BOOLEAN_VALUE
 	FIELD c NUMERICAL_VALUE
+CLASS none/aqt net/minecraft/level/ColorizerGrass
+	FIELD a grassBuffer
+	METHOD a getGrassColor (DD)I
+		ARG 0 temperature
+		ARG 1 rainfall
+	METHOD a setGrassBiomeColorizer ([I)V
+		ARG 0 grassBuffer
 CLASS none/aqu net/minecraft/level/Level
 	FIELD A villageCollectionObj
 	FIELD B profiler
@@ -7540,6 +7569,48 @@ CLASS none/aqu net/minecraft/level/Level
 	METHOD z checkBlockIsPowered (Lnone/dt;)Z
 		ARG 0 rpos
 CLASS none/aqz net/minecraft/level/MinecraftException
+CLASS none/ara net/minecraft/level/ILevelAccess
+	METHOD a markBlockRangeForRenderUpdate (IIIIII)V
+		ARG 0 minX
+		ARG 1 minY
+		ARG 2 minZ
+		ARG 3 maxX
+		ARG 4 maxY
+		ARG 5 maxZ
+	METHOD a broadcastSound (ILnone/dt;I)V
+		ARG 1 blockPos
+	METHOD a spawnParticle (IZDDDDDD[I)V
+	METHOD a playSound (Ljava/lang/String;DDDFF)V
+		ARG 0 soundName
+		ARG 1 x
+		ARG 2 y
+		ARG 3 z
+		ARG 4 volume
+		ARG 5 pitch
+	METHOD a playRecord (Ljava/lang/String;Lnone/dt;)V
+		ARG 0 recordName
+		ARG 1 blockPos
+	METHOD a playAusSFX (Lnone/ahd;ILnone/dt;I)V
+		ARG 0 entPlayer
+		ARG 2 blockPos
+	METHOD a playSoundToNearExcept (Lnone/ahd;Ljava/lang/String;DDDFF)V
+		ARG 0 entPlayer
+		ARG 1 soundName
+		ARG 2 x
+		ARG 3 y
+		ARG 4 z
+		ARG 5 volume
+		ARG 6 pitch
+	METHOD a markBlockForUpdate (Lnone/dt;)V
+		ARG 0 blockPos
+	METHOD a onEntityAdded (Lnone/wv;)V
+		ARG 0 ent
+	METHOD b notifyLightSet (ILnone/dt;I)V
+		ARG 1 blockPos
+	METHOD b sendBlockBreakProgress (Lnone/dt;)V
+		ARG 0 blockPos
+	METHOD b onEntityRemoved (Lnone/wv;)V
+		ARG 0 ent
 CLASS none/arb net/minecraft/level/LevelSettings
 	FIELD a seed
 	FIELD b gameType
@@ -7670,97 +7741,163 @@ CLASS none/arl net/minecraft/level/biome/BiomeBeach
 	METHOD <init> (I)V
 		ARG 0 biomeID
 CLASS none/arm net/minecraft/level/biome/BiomeBase
-	FIELD A frozenRiver
-	FIELD B icePlains
-	FIELD C iceMountains
-	FIELD D mushroomIsland
-	FIELD E mushroomIslandShore
-	FIELD F beach
-	FIELD G desertHills
-	FIELD H forestHills
-	FIELD I taigaHills
-	FIELD J extremeHillsEdge
-	FIELD K jungle
-	FIELD L jungleHills
-	FIELD M jungleEdge
-	FIELD N deepOcean
-	FIELD O stoneBeach
-	FIELD P coldBeach
-	FIELD Q birchForest
-	FIELD R birchForestHills
-	FIELD S roofedForest
-	FIELD T coldTaiga
-	FIELD U coldTaigaHills
-	FIELD V megaTaiga
-	FIELD W megaTaigaHills
-	FIELD X extremeHillsPlus
-	FIELD Y savanna
-	FIELD Z savannaPlateau
-	FIELD aD logger
-	FIELD aE biomeArray
-	FIELD aa mesa
-	FIELD ab mesaPlateauForest
-	FIELD ac mesaPlateau
-	FIELD ad defaultBiome
+	FIELD A FROZEN_RIVER
+	FIELD B ICE_PLAINS
+	FIELD C ICE_MOUNTAINS
+	FIELD D MUSHROOM_ISLAND
+	FIELD E MUSHROOM_ISLAND_SHORE
+	FIELD F BEACH
+	FIELD G DESERT_HILLS
+	FIELD H FOREST_HILLS
+	FIELD I TAIGA_HILLS
+	FIELD J EXTREME_HILLS_EDGE
+	FIELD K JUNGLE
+	FIELD L JUNGLE_HILLS
+	FIELD M JUNGLE_EDGE
+	FIELD N DEEP_OCEAN
+	FIELD O STONE_BEACH
+	FIELD P COLD_BEACH
+	FIELD Q BIRCH_FOREST
+	FIELD R BIRCH_FOREST_HILLS
+	FIELD S ROOFED_FOREST
+	FIELD T COLD_TAIGA
+	FIELD U COLD_TAIGA_HILLS
+	FIELD V MEGA_TAIGA
+	FIELD W MEGA_TAIGA_HILLS
+	FIELD X EXTREME_HILLS_PLUS
+	FIELD Y SAVANNA
+	FIELD Z SAVANNA_PLATEAU
+	FIELD a DEFAULT_TERRAIN_DATA
+	FIELD aA treeGenerator
+	FIELD aB bigTreeGenerator
+	FIELD aC swampTreeGenerator
+	FIELD aD LOGGER
+	FIELD aE BIOME_ARRAY
+	FIELD aa MESA
+	FIELD ab MESA_PLATEAU_FOREST
+	FIELD ac MESA_PLATEAU
+	FIELD ad DEFAULT_BIOME
+	FIELD ae TEMPERATURE_NOISE_GENERATOR
+	FIELD af RAINFALL_NOISE_GENERATOR
+	FIELD ag DOUBLE_PLANT_GENERATOR
 	FIELD ah biomeName
+	FIELD ai color
 	FIELD ak topBlock
 	FIELD al fillerBlock
+	FIELD am fillerBlockMetadata
 	FIELD an height
 	FIELD ao volatility
 	FIELD ap temperature
 	FIELD aq rainfall
+	FIELD ar waterColorModifier
+	FIELD as biomeDecorator
 	FIELD at monsterSpawnlist
 	FIELD au creatureSpawnlist
 	FIELD av waterSpawnlist
 	FIELD aw ambientSpawnlist
+	FIELD ax enableSnow
+	FIELD ay enableRain
 	FIELD az biomeID
-	FIELD b riverTerrainData
-	FIELD c oceanTerrainData
-	FIELD d deepOceanTerrainData
-	FIELD e plainsTerrainData
-	FIELD g hillsTerrainData
-	FIELD h plateauTerrainData
-	FIELD i extremeHillsTerrainData
-	FIELD m swamplandTerrainData
-	FIELD n biomeSetNoMutated
-	FIELD o idToBiomeMap
-	FIELD p ocean
-	FIELD q plains
-	FIELD r desert
-	FIELD s extremeHills
-	FIELD t forest
-	FIELD u taiga
-	FIELD v swampland
-	FIELD w river
-	FIELD x hell
-	FIELD y theEnd
-	FIELD z frozenOcean
+	FIELD b RIVER_TERRAIN_DATA
+	FIELD c OCEAN_TERRAIN_DATA
+	FIELD d DEEP_OCEAN_TERRAIN_DATA
+	FIELD e PLAINS_TERRAIN_DATA
+	FIELD f TAIGA_TERRAIN_DATA
+	FIELD g HILLS_TERRAIN_DATA
+	FIELD h PLATEAU_TERRAIN_DATA
+	FIELD i EXTREME_HILLS_TERRAIN_DATA
+	FIELD j BEACH_TERRAIN_DATA
+	FIELD k STONE_BEACH_TERRAIN_DATA
+	FIELD l MUSHROOM_ISLAND_TERRAIN_DATA
+	FIELD m SWAMPLAND_TERRAIN_DATA
+	FIELD n SET_OF_UNMUTATED_BIOMES
+	FIELD o ID_TO_BIOME_MAP
+	FIELD p OCEAN
+	FIELD q PLAINS
+	FIELD r DESERT
+	FIELD s EXTREME_HILLS
+	FIELD t FOREST
+	FIELD u TAIGA
+	FIELD v SWAMPLAND
+	FIELD w RIVER
+	FIELD x NETHER
+	FIELD y THE_END
+	FIELD z FROZEN_OCEAN
+	METHOD <init> (I)V
+		ARG 0 biomeID
+	METHOD a createBiomeDecorator ()Lnone/ary;
+	METHOD a getSkyColor (F)I
+		ARG 0 temperature
 	METHOD a setTemperatureRainfall (FF)Lnone/arm;
 		ARG 0 temperature
 		ARG 1 rainfall
+	METHOD a getFillerBlockMetadata (I)Lnone/arm;
+		ARG 0 fillerBlockMetadata
+	METHOD a getBiomeFromBiomeList (ILnone/arm;)Lnone/arm;
+		ARG 0 biomeID
+		ARG 1 unmutatedBiome
+	METHOD a setColor (IZ)Lnone/arm;
+		ARG 0 color
 	METHOD a setName (Ljava/lang/String;)Lnone/arm;
-	METHOD a (Ljava/util/Random;)Lnone/bhc;
+		ARG 0 biomeName
+	METHOD a getRandomTreeGenerator (Ljava/util/Random;)Lnone/bhc;
 		ARG 0 rand
-	METHOD a (Ljava/util/Random;Lnone/dt;)Lnone/awa;
+	METHOD a getRandomFlower (Ljava/util/Random;Lnone/dt;)Lnone/awa;
 		ARG 0 rand
+		ARG 1 blockPos
 	METHOD a placeBlocksInBiome (Lnone/aqu;Ljava/util/Random;Lnone/bgk;IID)V
+		ARG 0 level
+		ARG 1 rand
+		ARG 2 chunkPrimer
 		ARG 3 levelX
 		ARG 4 levelZ
+		ARG 5 grassCutoff
+	METHOD a decorate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
+		ARG 0 level
+		ARG 1 rand
+		ARG 2 blockPos
 	METHOD a equals (Lnone/arm;)Z
+		ARG 0 biomeBase
 	METHOD a setBiomeTerrainData (Lnone/aro;)Lnone/arm;
+		ARG 0 heightData
 	METHOD a getTemp (Lnone/dt;)F
+		ARG 0 blockPos
 	METHOD a getSpawnlist (Lnone/xp;)Ljava/util/List;
-	METHOD b (Ljava/util/Random;)Lnone/bhp;
+		ARG 0 creatureType
+	METHOD b disableRain ()Lnone/arm;
+	METHOD b setColor (I)Lnone/arm;
+		ARG 0 color
+	METHOD b getRandomGrassGenerator (Ljava/util/Random;)Lnone/bhp;
 		ARG 0 rand
 	METHOD b replaceBlocks (Lnone/aqu;Ljava/util/Random;Lnone/bgk;IID)V
+		ARG 0 level
+		ARG 1 rand
+		ARG 2 chunkPrimer
 		ARG 3 levelX
 		ARG 4 levelZ
-		ARG 5 value
+		ARG 5 grassCutoff
+	METHOD b getGrassColorAt (Lnone/dt;)I
+		ARG 0 blockPos
+	METHOD c getBiomeAndEnableSnow ()Lnone/arm;
+	METHOD c setColorDirectly (I)Lnone/arm;
+	METHOD c getLeavesColorAt (Lnone/dt;)I
+		ARG 0 blockPos
+	METHOD d getEnableSnow ()Z
 	METHOD d createSubBiome (I)Lnone/arm;
 		ARG 0 biomeID
+	METHOD e canSpawnLightning ()Z
+	METHOD e getBiome (I)Lnone/arm;
+		ARG 0 biomeID
+	METHOD f isHighRainfall ()Z
+	METHOD h getRainfallInt ()I
+	METHOD i getRainfallFloat ()F
+	METHOD j isSnowyBiome ()Z
 	METHOD k createMutated ()Lnone/arm;
+	METHOD l getBiomeClass ()Ljava/lang/Class;
 	METHOD m getTempType ()Lnone/arp;
 	METHOD n getBiomeArray ()[Lnone/arm;
+CLASS none/arn net/minecraft/level/biome/BiomeGenBaseSwitchCreatureType
+	FIELD a search
 CLASS none/aro net/minecraft/level/biome/HeightData
 	FIELD a height
 	FIELD b volatility
@@ -7818,7 +7955,15 @@ CLASS none/arz net/minecraft/level/biome/LevelChunkManager
 		ARG 1 levelType
 	METHOD <init> (Lnone/aqu;)V
 		ARG 0 level
-	METHOD a (IIILjava/util/List;Ljava/util/Random;)Lnone/dt;
+	METHOD a getTemperatureAtHeight (FI)F
+		ARG 0 temperature
+		ARG 1 height
+	METHOD a checkViableBiomes (IIILjava/util/List;)Z
+		ARG 0 xPos
+		ARG 1 zPos
+		ARG 2 radius
+		ARG 3 biomeList
+	METHOD a findBiomePosition (IIILjava/util/List;Ljava/util/Random;)Lnone/dt;
 		ARG 4 rand
 	METHOD a (Lnone/dt;)Lnone/arm;
 		ARG 0 blockPos
@@ -7830,20 +7975,21 @@ CLASS none/arz net/minecraft/level/biome/LevelChunkManager
 		ARG 2 zPos
 		ARG 3 xSize
 		ARG 4 zSize
-	METHOD a ([Lnone/arm;IIII)[Lnone/arm;
+	METHOD a getBiomesForGeneration ([Lnone/arm;IIII)[Lnone/arm;
 		ARG 0 biomeArray
 		ARG 1 xPos
 		ARG 2 zPos
 		ARG 3 xSize
 		ARG 4 zSize
-	METHOD a ([Lnone/arm;IIIIZ)[Lnone/arm;
+	METHOD a getBiomeGenAt ([Lnone/arm;IIIIZ)[Lnone/arm;
 		ARG 0 biomeArray
 		ARG 1 levelX
 		ARG 2 levelZ
 		ARG 3 xSize
 		ARG 4 zSize
 		ARG 5 getBiomes
-	METHOD b ([Lnone/arm;IIII)[Lnone/arm;
+	METHOD b cleanupCache ()V
+	METHOD b loadBlockGeneratorData ([Lnone/arm;IIII)[Lnone/arm;
 		ARG 0 biomeArray
 		ARG 1 levelX
 		ARG 2 levelZ
@@ -7852,21 +7998,37 @@ CLASS none/arz net/minecraft/level/biome/LevelChunkManager
 CLASS none/asa net/minecraft/level/biome/BiomeDesert
 	METHOD <init> (I)V
 		ARG 0 biomeID
-	METHOD a (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
+	METHOD a decorate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
 		ARG 1 rand
 CLASS none/asb net/minecraft/level/biome/BiomeExtremeHills
 	METHOD <init> (IZ)V
 		ARG 0 biomeID
 		ARG 1 typeFlag
+	METHOD a getRandomTreeGenerator (Ljava/util/Random;)Lnone/bhc;
 	METHOD a placeBlocksInBiome (Lnone/aqu;Ljava/util/Random;Lnone/bgk;IID)V
+	METHOD a decorate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
 	METHOD b subBiome (Lnone/arm;)Lnone/asb;
 	METHOD d createSubBiome (I)Lnone/arm;
 CLASS none/asc net/minecraft/level/LevelChunkManagerHell
+	METHOD a checkViableBiomes (IIILjava/util/List;)Z
+	METHOD a findBiomePosition (IIILjava/util/List;Ljava/util/Random;)Lnone/dt;
+	METHOD a getBiomesForGeneration ([Lnone/arm;IIII)[Lnone/arm;
+	METHOD a getBiomeGenAt ([Lnone/arm;IIIIZ)[Lnone/arm;
+	METHOD b loadBlockGeneratorData ([Lnone/arm;IIII)[Lnone/arm;
 CLASS none/asd net/minecraft/level/biome/BiomeForest
+	CLASS ase
+		METHOD a getRandomTreeGenerator (Ljava/util/Random;)Lnone/bhc;
+	CLASS asf
+		METHOD a decorate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
 	FIELD aG typeID
 	METHOD <init> (II)V
 		ARG 0 biomeID
 		ARG 1 typeID
+	METHOD a setColor (IZ)Lnone/arm;
+	METHOD a getRandomTreeGenerator (Ljava/util/Random;)Lnone/bhc;
+	METHOD a getRandomFlower (Ljava/util/Random;Lnone/dt;)Lnone/awa;
+	METHOD a decorate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
+	METHOD b getGrassColorAt (Lnone/dt;)I
 	METHOD d createSubBiome (I)Lnone/arm;
 CLASS none/asg net/minecraft/level/biome/BiomeHell
 	METHOD <init> (I)V
@@ -7876,12 +8038,17 @@ CLASS none/ash net/minecraft/level/biome/BiomeIcy
 	METHOD <init> (IZ)V
 		ARG 0 biomeID
 		ARG 1 typeFlag
+	METHOD a getRandomTreeGenerator (Ljava/util/Random;)Lnone/bhc;
+	METHOD a decorate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
 	METHOD d createSubBiome (I)Lnone/arm;
 CLASS none/asi net/minecraft/level/biome/BiomeJungle
 	FIELD aD typeFlag
 	METHOD <init> (IZ)V
 		ARG 0 biomeID
 		ARG 1 typeFlag
+	METHOD a getRandomTreeGenerator (Ljava/util/Random;)Lnone/bhc;
+	METHOD a decorate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
+	METHOD b getRandomGrassGenerator (Ljava/util/Random;)Lnone/bhp;
 CLASS none/asj net/minecraft/level/biome/BiomeMesa
 	FIELD aF noiseField1
 	FIELD aG noiseField2
@@ -7892,7 +8059,11 @@ CLASS none/asj net/minecraft/level/biome/BiomeMesa
 		ARG 0 biomeID
 		ARG 1 isAlreadyMesa
 		ARG 2 hasForest
+	METHOD a getRandomTreeGenerator (Ljava/util/Random;)Lnone/bhc;
 	METHOD a placeBlocksInBiome (Lnone/aqu;Ljava/util/Random;Lnone/bgk;IID)V
+	METHOD a decorate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
+	METHOD b getGrassColorAt (Lnone/dt;)I
+	METHOD c getLeavesColorAt (Lnone/dt;)I
 	METHOD d createSubBiome (I)Lnone/arm;
 CLASS none/ask net/minecraft/level/biome/BiomeMushroomIsland
 	METHOD <init> (I)V
@@ -7902,8 +8073,13 @@ CLASS none/asl net/minecraft/level/biome/BiomeMutated
 	METHOD <init> (ILnone/arm;)V
 		ARG 0 biomeID
 		ARG 1 baseBiome
+	METHOD a getRandomTreeGenerator (Ljava/util/Random;)Lnone/bhc;
 	METHOD a placeBlocksInBiome (Lnone/aqu;Ljava/util/Random;Lnone/bgk;IID)V
+	METHOD a decorate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
 	METHOD a equals (Lnone/arm;)Z
+	METHOD b getGrassColorAt (Lnone/dt;)I
+	METHOD c getLeavesColorAt (Lnone/dt;)I
+	METHOD l getBiomeClass ()Ljava/lang/Class;
 	METHOD m getTempType ()Lnone/arp;
 CLASS none/asm net/minecraft/level/biome/BiomeOcean
 	METHOD <init> (I)V
@@ -7913,6 +8089,8 @@ CLASS none/asm net/minecraft/level/biome/BiomeOcean
 CLASS none/asn net/minecraft/level/biome/BiomePlains
 	METHOD <init> (I)V
 		ARG 0 biomeID
+	METHOD a getRandomFlower (Ljava/util/Random;Lnone/dt;)Lnone/awa;
+	METHOD a decorate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
 	METHOD d createSubBiome (I)Lnone/arm;
 CLASS none/asp net/minecraft/level/biome/BiomeRiver
 	METHOD <init> (I)V
@@ -7920,27 +8098,38 @@ CLASS none/asp net/minecraft/level/biome/BiomeRiver
 CLASS none/asq net/minecraft/level/biome/BiomeSavanna
 	METHOD <init> (I)V
 		ARG 0 biomeID
+	METHOD a getRandomTreeGenerator (Ljava/util/Random;)Lnone/bhc;
+	METHOD a decorate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
 	METHOD d createSubBiome (I)Lnone/arm;
 CLASS none/asr
 	METHOD a placeBlocksInBiome (Lnone/aqu;Ljava/util/Random;Lnone/bgk;IID)V
+	METHOD a decorate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
 CLASS none/ass net/minecraft/level/biome/BiomeStoneBeach
 	METHOD <init> (I)V
 		ARG 0 biomeID
 CLASS none/ast net/minecraft/level/biome/BiomeSwampland
 	METHOD <init> (I)V
 		ARG 0 biomeID
+	METHOD a getRandomTreeGenerator (Ljava/util/Random;)Lnone/bhc;
+	METHOD a getRandomFlower (Ljava/util/Random;Lnone/dt;)Lnone/awa;
 	METHOD a placeBlocksInBiome (Lnone/aqu;Ljava/util/Random;Lnone/bgk;IID)V
+	METHOD b getGrassColorAt (Lnone/dt;)I
+	METHOD c getLeavesColorAt (Lnone/dt;)I
 CLASS none/asu net/minecraft/level/biome/BiomeTaiga
 	FIELD aI typeFlag
 	METHOD <init> (II)V
 		ARG 0 biomeID
 		ARG 1 typeFlag
+	METHOD a getRandomTreeGenerator (Ljava/util/Random;)Lnone/bhc;
 	METHOD a placeBlocksInBiome (Lnone/aqu;Ljava/util/Random;Lnone/bgk;IID)V
+	METHOD a decorate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
+	METHOD b getRandomGrassGenerator (Ljava/util/Random;)Lnone/bhp;
 	METHOD d createSubBiome (I)Lnone/arm;
 		ARG 0 biomeID
 CLASS none/asv net/minecraft/level/biome/BiomeTheEnd
 	METHOD <init> (I)V
 		ARG 0 biomeID
+	METHOD a getSkyColor (F)I
 CLASS none/asw net/minecraft/level/decorator/EndDecorator
 	METHOD a decorate (Lnone/arm;)V
 CLASS none/asy net/minecraft/block/BlockAir
@@ -10903,6 +11092,8 @@ CLASS none/bfe net/minecraft/level/IChunkProvider
 		ARG 3 chunkZ
 	METHOD a (Lnone/bfh;II)V
 		ARG 0 chunk
+		ARG 1 chunkX
+		ARG 2 chunkZ
 	METHOD a provideChunk (Lnone/dt;)Lnone/bfh;
 		ARG 0 blockCoords
 	METHOD a getSpawnableAtPos (Lnone/xp;Lnone/dt;)Ljava/util/List;
@@ -10974,7 +11165,7 @@ CLASS none/bfg net/minecraft/level/chunk/EmptyChunk
 CLASS none/bfh net/minecraft/level/chunk/Chunk
 	FIELD a chunkX
 	FIELD b chunkZ
-	FIELD c logger
+	FIELD c LOGGER
 	FIELD d chunkSections
 	FIELD e biomeMap
 	FIELD f rainfallMap
@@ -11028,6 +11219,7 @@ CLASS none/bfh net/minecraft/level/chunk/Chunk
 		ARG 1 blockPos
 		ARG 2 lightValue
 	METHOD a setBlockEntity (Lnone/bcm;)V
+		ARG 0 blockEnt
 	METHOD a populateChunk (Lnone/bfe;Lnone/bfe;II)V
 		ARG 0 chunkProvider
 		ARG 1 chunkProvider2
@@ -11042,11 +11234,14 @@ CLASS none/bfh net/minecraft/level/chunk/Chunk
 		ARG 0 blockPos
 		ARG 1 chunkManager
 	METHOD a setBlockEntityAt (Lnone/dt;Lnone/bcm;)V
+		ARG 0 blockPos
+		ARG 1 blockEnt
 	METHOD a setBlockState (Lnone/dt;Lnone/bec;)Lnone/bec;
 		ARG 0 blockPos
 		ARG 1 blockState
 	METHOD a getBlockEntityAt (Lnone/dt;Lnone/bfl;)Lnone/bcm;
 		ARG 0 blockPos
+		ARG 1 createEntityType
 	METHOD a checkLightsOnSide (Lnone/ej;)V
 		ARG 0 facing
 	METHOD a addEntity (Lnone/wv;)V
@@ -11059,17 +11254,20 @@ CLASS none/bfh net/minecraft/level/chunk/Chunk
 		ARG 1 aabb
 	METHOD a needsSaving (Z)Z
 	METHOD a setBiomeMap ([B)V
+		ARG 0 biomeArray
 	METHOD a readChunkIn ([BIZ)V
 		ARG 1 chunkSectionMap
 		ARG 2 hasBiomes
 	METHOD a setHeightMap ([I)V
 		ARG 0 newHeightmap
 	METHOD a setChunkSections ([Lnone/bfm;)V
+		ARG 0 chunkSections
 	METHOD b generateSkylightMap ()V
 	METHOD b getHeightAtCoords (II)I
 		ARG 0 localX
 		ARG 1 localZ
 	METHOD b setLastSaveTime (J)V
+		ARG 0 lastSaveTime
 	METHOD b getBlockOpacityAt (Lnone/dt;)I
 		ARG 0 blockPos
 	METHOD b removeEntity (Lnone/wv;)V
@@ -11084,9 +11282,11 @@ CLASS none/bfh net/minecraft/level/chunk/Chunk
 		ARG 1 levelZ
 		ARG 2 minY
 	METHOD c setInhabitedTime (J)V
+		ARG 0 inhabitedTime
 	METHOD c getBlockMetadata (Lnone/dt;)I
 		ARG 0 blockPos
 	METHOD c setChunkLoaded (Z)V
+		ARG 0 chunkLoaded
 	METHOD d onChunkUnload ()V
 	METHOD d propagateSkylightOcclusion (II)V
 		ARG 0 localX
@@ -11098,6 +11298,7 @@ CLASS none/bfh net/minecraft/level/chunk/Chunk
 	METHOD d canSeeSky (Lnone/dt;)Z
 		ARG 0 blockPos
 	METHOD d setTerrainPopulated (Z)V
+		ARG 0 terrainPopulated
 	METHOD e setChunkModified ()V
 	METHOD e checkLightInColumn (II)Z
 		ARG 0 localX
@@ -11107,7 +11308,9 @@ CLASS none/bfh net/minecraft/level/chunk/Chunk
 		ARG 1 localY
 		ARG 2 localZ
 	METHOD e removeBlockEntityAt (Lnone/dt;)V
+		ARG 0 blockPos
 	METHOD e setLightPopulated (Z)V
+		ARG 0 lightPopulated
 	METHOD f isEmpty ()Z
 	METHOD f getBlockAtLocalCoords (III)Lnone/atr;
 		ARG 0 localX
@@ -11116,6 +11319,7 @@ CLASS none/bfh net/minecraft/level/chunk/Chunk
 	METHOD f getHeightAtCoords (Lnone/dt;)I
 		ARG 0 blockPos
 	METHOD f setModified (Z)V
+		ARG 0 isModified
 	METHOD g getBlockStoreY ()I
 	METHOD g getBlockMetadata (III)I
 		ARG 0 localX
@@ -11123,7 +11327,8 @@ CLASS none/bfh net/minecraft/level/chunk/Chunk
 		ARG 2 localZ
 	METHOD g getBlockState (Lnone/dt;)Lnone/bec;
 		ARG 0 blockPos
-	METHOD g compareHasEntities (Z)V
+	METHOD g setHasEntities (Z)V
+		ARG 0 hasEntities
 	METHOD h getCubeArray ()[Lnone/bfm;
 	METHOD h getRainfallHeight (Lnone/dt;)Lnone/dt;
 		ARG 0 blockPos
@@ -11572,22 +11777,59 @@ CLASS none/bgq net/minecraft/level/gen/ChunkProviderFlat
 	METHOD e canSave ()Z
 	METHOD f makeString ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
-CLASS none/bgr net/minecraft/level/ChunkProviderHell
-	FIELD h dim
+CLASS none/bgr net/minecraft/level/gen/ChunkProviderNether
+	FIELD A redMushroomGenerator
+	FIELD B netherBridgeGenerator
+	FIELD C netherCaveGenerator
+	FIELD a noiseGen6
+	FIELD b noiseGen7
+	FIELD c noiseData1
+	FIELD d noiseData2
+	FIELD e noiseData3
+	FIELD f noiseData4
+	FIELD g noiseData5
+	FIELD h level
+	FIELD i hasFeatures
 	FIELD j rand
+	FIELD k soulsandNoiseField
+	FIELD l gravelNoiseField
+	FIELD m netherrackOnlyNoiseField
+	FIELD n noiseField
+	FIELD o noiseGen1
+	FIELD p noiseGen2
+	FIELD q noiseGen3
+	FIELD r soulsandAndGravelNoiseGenerator
+	FIELD s netherrackOnlyNoiseGenerator
+	FIELD t FireGenerator
+	FIELD u GlowstoneLowGenerator
+	FIELD v GlowstoneHighGenerator
+	FIELD w quartzGenerator
+	FIELD x lavaGeneratorDelayed
+	FIELD y lavaGeneratorImmediate
+	FIELD z brownMushroomGenerator
 	METHOD <init> (Lnone/aqu;ZJ)V
+		ARG 0 level
+		ARG 1 hasFeatures
 		ARG 2 seed
 	METHOD a chunkExists (II)Z
 	METHOD a generateTerrain (IILnone/bgk;)V
+		ARG 0 chunkX
+		ARG 1 chunkZ
+		ARG 2 chunkPrimer
 	METHOD a getStrongholdGen (Lnone/aqu;Ljava/lang/String;Lnone/dt;)Lnone/dt;
 	METHOD a provideChunk (Lnone/dt;)Lnone/bfh;
 	METHOD a getSpawnableAtPos (Lnone/xp;Lnone/dt;)Ljava/util/List;
 	METHOD a saveChunks (ZLnone/uy;)Z
 	METHOD a generateNoiseField ([DIIIIII)[D
 	METHOD b replaceBlocks (IILnone/bgk;)V
+		ARG 0 chunkX
+		ARG 1 chunkZ
+		ARG 2 chunkPrimer
 	METHOD c saveExtraData ()V
 	METHOD d unloadQueuedChunks ()Z
 	METHOD d generate (II)Lnone/bfh;
+		ARG 0 chunkX
+		ARG 1 chunkZ
 	METHOD e canSave ()Z
 	METHOD f makeString ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
@@ -11693,7 +11935,7 @@ CLASS none/bgw net/minecraft/level/gen/ChunkProviderEnd
 	METHOD f makeString ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
 CLASS none/bhc net/minecraft/level/gen/feature/LevelGenAbstractTree
-CLASS none/bhd
+CLASS none/bhd net/minecraft/level/gen/feature/BigTrees
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
 CLASS none/bhf net/minecraft/level/gen/feature/Forest
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
@@ -11724,8 +11966,16 @@ CLASS none/bhs net/minecraft/level/gen/feature/Fires
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
 CLASS none/bht net/minecraft/level/gen/feature/GlowstoneHigh
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bhu
+CLASS none/bhu net/minecraft/level/gen/feature/LevelGenNetherLava
+	FIELD a fluidBlock
+	FIELD b updateLater
+	METHOD <init> (Lnone/atr;Z)V
+		ARG 0 fluidBlock
+		ARG 1 updateLater
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
+		ARG 0 level
+		ARG 1 rand
+		ARG 2 blockPos
 CLASS none/bhv net/minecraft/level/gen/feature/BigMushrooms
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
 CLASS none/bhw net/minecraft/level/gen/feature/IcePaths
@@ -11770,7 +12020,7 @@ CLASS none/bin
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
 CLASS none/bio
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bip
+CLASS none/bip net/minecraft/level/gen/feature/SwampTrees
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
 CLASS none/biq net/minecraft/level/gen/feature/TallGrass
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
@@ -11980,9 +12230,26 @@ CLASS none/blo net/minecraft/level/gen/structure/ComponentScatteredFeatureSwampH
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 CLASS none/blp net/minecraft/level/gen/structure/Stronghold
 CLASS none/blq net/minecraft/level/structure/StrongholdStart
+CLASS none/blr net/minecraft/level/gen/structure/StrongholdComponents
+	FIELD a totalWeight
+	FIELD b componentWeightArray
+	FIELD c structureComponentList
+	FIELD d strongholdComponentType
+	FIELD e strongholdStones
+	METHOD a registerComponents ()V
 CLASS none/blv
+	METHOD <init> (ILjava/util/Random;Lnone/bjb;Lnone/ej;)V
+		ARG 1 rand
+		ARG 2 boundingBox
+		ARG 3 facing
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
+		ARG 0 structureComponent
+		ARG 2 rand
+	METHOD a (Lnone/fn;)V
+		ARG 0 nbtTagCompound
+	METHOD b (Lnone/fn;)V
+		ARG 0 nbtTagCompound
 CLASS none/blw
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 CLASS none/blx
@@ -12005,7 +12272,7 @@ CLASS none/bmd
 CLASS none/bme
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
-CLASS none/bmg net/minecraft/level/structure/bmg
+CLASS none/bmg net/minecraft/level/structure/StrongholdComponentsStairs
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
 CLASS none/bmi
@@ -12014,20 +12281,23 @@ CLASS none/bmi
 CLASS none/bmj
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
-CLASS none/bml
+CLASS none/bmk net/minecraft/level/gen/structure/StrongholdComponentsStronghold
+	FIELD d doorPiece
+CLASS none/bml net/minecraft/level/gen/structure/StrongholdPiecesDoor
 	FIELD a OPENING
 	FIELD b WOOD_DOOR
 	FIELD c GRATES
 	FIELD d IRON_DOOR
 CLASS none/bmm net/minecraft/level/gen/GenStructureBase
 CLASS none/bmq net/minecraft/level/gen/structure/StructureIO
-	FIELD a logger
+	FIELD a LOGGER
+	METHOD a registerComponent (Ljava/lang/Class;Ljava/lang/String;)V
 CLASS none/bmr
 	METHOD a load (Lnone/fn;)V
 	METHOD b save (Lnone/fn;)V
 CLASS none/bms net/minecraft/level/gen/structure/StructureComponent
 	FIELD l boundingBox
-	FIELD m coordBaseMode
+	FIELD m facing
 	METHOD a getXWithOffset (II)I
 	METHOD a findIntersecting (Ljava/util/List;Lnone/bjb;)Lnone/bms;
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
@@ -12077,6 +12347,7 @@ CLASS none/bnp
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
 CLASS none/bnu net/minecraft/level/gen/noisegen/Perlin3d
 CLASS none/bnv net/minecraft/level/gen/noisegen/Perlin3dOctaves
+	METHOD a generateNoise ([DIIIIIIDDD)[D
 CLASS none/bnw net/minecraft/level/gen/noisegen/Simplex2dOctaves
 CLASS none/bnz net/minecraft/level/gen/noisegen/Simplex2d
 CLASS none/boa net/minecraft/level/gen/noisegen/NoiseGenAbstract
@@ -15034,7 +15305,19 @@ CLASS none/ckn
 	FIELD e CLOUDS
 	FIELD f END_SKY
 	FIELD g FORCEFIELD
+	METHOD a markBlockRangeForRenderUpdate (IIIIII)V
+	METHOD a broadcastSound (ILnone/dt;I)V
+	METHOD a spawnParticle (IZDDDDDD[I)V
+	METHOD a playSound (Ljava/lang/String;DDDFF)V
+	METHOD a playRecord (Ljava/lang/String;Lnone/dt;)V
+	METHOD a playAusSFX (Lnone/ahd;ILnone/dt;I)V
+	METHOD a playSoundToNearExcept (Lnone/ahd;Ljava/lang/String;DDDFF)V
 	METHOD a onReload (Lnone/cvk;)V
+	METHOD a markBlockForUpdate (Lnone/dt;)V
+	METHOD a onEntityAdded (Lnone/wv;)V
+	METHOD b notifyLightSet (ILnone/dt;I)V
+	METHOD b sendBlockBreakProgress (Lnone/dt;)V
+	METHOD b onEntityRemoved (Lnone/wv;)V
 CLASS none/ckt net/minecraft/client/util/QuadComparator
 	FIELD d buffer
 	METHOD compare (Ljava/lang/Integer;Ljava/lang/Integer;)I
