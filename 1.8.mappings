@@ -3580,7 +3580,7 @@ CLASS none/qq
 		ARG 0 dimensionServer
 CLASS none/qs net/minecraft/level/gen/ServerChunkCache
 	FIELD b logger
-	FIELD e worldGenerator
+	FIELD e levelGenerator
 	FIELD i level
 	METHOD <init> (Lnone/qt;Lnone/bfq;Lnone/bfe;)V
 		ARG 0 level
@@ -4582,7 +4582,7 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD a spawnDroppedItemStack (Lnone/amj;F)Lnone/adw;
 		ARG 0 itemStack
 		ARG 1 spawnOffsetY
-	METHOD a setWorld (Lnone/aqu;)V
+	METHOD a setLevel (Lnone/aqu;)V
 		ARG 0 level
 	METHOD a isInMaterial (Lnone/bof;)Z
 		ARG 0 material
@@ -12043,7 +12043,7 @@ CLASS none/bgv net/minecraft/level/gen/LevelGeneratorDefault
 	FIELD k noiseGen3
 	FIELD l noiseGen4
 	FIELD m level
-	FIELD o worldGenerator
+	FIELD o levelGenerator
 	FIELD p densityField
 	FIELD q smoothingField
 	FIELD r generatorSettings
@@ -13660,7 +13660,7 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	FIELD c playerController
 	FIELD d displayWidth
 	FIELD e displayHeight
-	FIELD f level
+	FIELD f levelClient
 	FIELD g worldRenderer
 	FIELD h player
 	FIELD i pointedEntityLiving
@@ -15057,7 +15057,7 @@ CLASS none/cem net/minecraft/client/multiplayer/PlayerControllerMP
 	FIELD i gameMode
 	METHOD a windowClick (IIIILnone/ahd;)Lnone/amj;
 	METHOD a setGameType (Lnone/arc;)V
-CLASS none/cen net/minecraft/level/ClientWorld
+CLASS none/cen net/minecraft/level/LevelClient
 	FIELD b chunkCache
 	METHOD H sendQuittingDisconnectingPacket ()V
 	METHOD a playSoundEffect (DDDLjava/lang/String;FFZ)V
@@ -15552,7 +15552,7 @@ CLASS none/ckn net/minecraft/client/renderer/LevelRenderer
 	FIELD h minecraft
 	FIELD i textureManager
 	FIELD j renderManager
-	FIELD k clientWorld
+	FIELD k levelClient
 	METHOD a markBlockRangeForRenderUpdate (IIIIII)V
 	METHOD a broadcastSound (ILnone/dt;I)V
 	METHOD a spawnParticle (IZDDDDDD[I)V
