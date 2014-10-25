@@ -4529,7 +4529,7 @@ CLASS none/wv net/minecraft/entity/Entity
 	FIELD i fire
 	FIELD l riderEntity
 	FIELD m riddenEntity
-	FIELD o world
+	FIELD o level
 	FIELD p previousLevelX
 	FIELD q previousLevelY
 	FIELD r previousLevelZ
@@ -4583,7 +4583,7 @@ CLASS none/wv net/minecraft/entity/Entity
 		ARG 0 itemStack
 		ARG 1 spawnOffsetY
 	METHOD a setWorld (Lnone/aqu;)V
-		ARG 0 world
+		ARG 0 level
 	METHOD a isInMaterial (Lnone/bof;)Z
 		ARG 0 material
 	METHOD a setBoundingBox (Lnone/brt;)V
@@ -7844,9 +7844,9 @@ CLASS none/arj net/minecraft/level/ChunkCache
 	FIELD b chunkZ
 	FIELD c cache
 	FIELD d hasExtendedLevels
-	FIELD e world
+	FIELD e level
 	METHOD <init> (Lnone/aqu;Lnone/dt;Lnone/dt;I)V
-		ARG 0 world
+		ARG 0 level
 		ARG 1 pos1
 		ARG 2 pos2
 		ARG 3 radius
@@ -8116,7 +8116,7 @@ CLASS none/arz net/minecraft/level/biome/BiomeManager
 		ARG 0 seed
 		ARG 1 levelType
 	METHOD <init> (Lnone/aqu;)V
-		ARG 0 world
+		ARG 0 level
 	METHOD a getTemperatureAtHeight (FI)F
 		ARG 0 temperature
 		ARG 1 height
@@ -10830,7 +10830,7 @@ CLASS none/bck net/minecraft/blockentity/BlockEntityBeacon
 	METHOD p_ getMaxStackSize ()I
 CLASS none/bcm net/minecraft/blockentity/BlockEntity
 	FIELD a logger
-	FIELD b world
+	FIELD b level
 	FIELD c blockCoords
 	FIELD e block
 	FIELD f idToClassRegistry
@@ -11354,7 +11354,7 @@ CLASS none/bfh net/minecraft/level/chunk/Chunk
 	FIELD f rainfallMap
 	FIELD g skylightUpdateMap
 	FIELD h chunkLoaded
-	FIELD i world
+	FIELD i level
 	FIELD j heightMap
 	FIELD k isGapLightingUpdated
 	FIELD l blockEntityMap
@@ -11369,11 +11369,11 @@ CLASS none/bfh net/minecraft/level/chunk/Chunk
 	FIELD v queuedLighting
 	FIELD w queuedBlockEntities
 	METHOD <init> (Lnone/aqu;II)V
-		ARG 0 world
+		ARG 0 level
 		ARG 1 chunkX
 		ARG 2 chunkZ
 	METHOD <init> (Lnone/aqu;Lnone/bgk;II)V
-		ARG 0 world
+		ARG 0 level
 		ARG 1 primer
 		ARG 2 chunkX
 		ARG 3 chunkZ
@@ -11886,14 +11886,14 @@ CLASS none/bgn net/minecraft/level/gen/GeneratorSettingsFactory
 	METHOD b getGeneratorSettings ()Lnone/bgl;
 CLASS none/bgo net/minecraft/level/gen/GeneratorSettingsSerializer
 CLASS none/bgp net/minecraft/level/gen/LevelGeneratorDebug
-	FIELD c world
+	FIELD c level
 	METHOD <init> (Lnone/aqu;)V
-		ARG 0 world
+		ARG 0 level
 	METHOD a chunkExists (II)Z
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD a getStrongholdGen (Lnone/aqu;Ljava/lang/String;Lnone/dt;)Lnone/dt;
-		ARG 0 world
+		ARG 0 level
 		ARG 2 blockPos
 	METHOD a (Lnone/bfe;II)V
 		ARG 0 chunkProvider
@@ -12091,11 +12091,11 @@ CLASS none/bgw net/minecraft/level/gen/LevelGeneratorEnd
 	FIELD i noiseGen1
 	FIELD j noiseGen2
 	FIELD k noiseGen3
-	FIELD l world
+	FIELD l level
 	FIELD m densities
 	FIELD n biomeArray
 	METHOD <init> (Lnone/aqu;J)V
-		ARG 0 world
+		ARG 0 level
 		ARG 1 seed
 	METHOD a chunkExists (II)Z
 		ARG 0 chunkX
@@ -12285,7 +12285,7 @@ CLASS none/biv net/minecraft/level/gen/FlatGeneratorInfo
 	METHOD c getLayers ()Ljava/util/List;
 	METHOD d calculateMinimumYsFromHeights ()V
 	METHOD e getDefaultFlatGenerator ()Lnone/biv;
-CLASS none/biw net/minecraft/world/gen/FlatLayerInfo
+CLASS none/biw net/minecraft/level/gen/FlatLayerInfo
 	FIELD b layerBlock
 	FIELD c layerHeight
 	FIELD d minimumLayerY
