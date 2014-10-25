@@ -7277,12 +7277,12 @@ CLASS none/aqu net/minecraft/level/Level
 	FIELD u levelAccesses
 	FIELD v chunkProvider
 	FIELD w saveHandler
-	FIELD x level
+	FIELD x world
 	FIELD y findingSpawnPoint
 	FIELD z mapStorage
 	METHOD <init> (Lnone/bqy;Lnone/bqo;Lnone/bgd;Lnone/uw;Z)V
 		ARG 0 saveHandler
-		ARG 1 levelInfo
+		ARG 1 world
 		ARG 2 dimension
 		ARG 3 profiler
 		ARG 4 isClient
@@ -7738,7 +7738,7 @@ CLASS none/ara net/minecraft/level/ILevelAccess
 		ARG 0 blockPos
 	METHOD b onEntityRemoved (Lnone/wv;)V
 		ARG 0 ent
-CLASS none/arb net/minecraft/level/LevelSettings
+CLASS none/arb net/minecraft/level/WorldSettings
 	FIELD a seed
 	FIELD b gameType
 	FIELD c mapFeatures
@@ -7795,7 +7795,7 @@ CLASS none/ard net/minecraft/level/IBlockAccess
 	METHOD s getBlockEntityAt (Lnone/dt;)Lnone/bcm;
 		ARG 0 blockPos
 CLASS none/are net/minecraft/level/Generator
-	FIELD a LEVEL_TYPES
+	FIELD a WORLD_TYPES
 	FIELD b DEFAULT_LEVEL_TYPE
 	FIELD c FLAT
 	FIELD d LARGE_BIOMES
@@ -12854,11 +12854,13 @@ CLASS none/bqj net/minecraft/level/storage/AnvilSaveConverter
 	METHOD a getSaveLoader (Ljava/lang/String;Z)Lnone/bqy;
 	METHOD b getSaveList ()Ljava/util/List;
 	METHOD d flushCache ()V
-CLASS none/bql net/minecraft/level/LevelMulti
-	FIELD b mainLevelInstance
+CLASS none/bql net/minecraft/level/WorldMulti
+	FIELD b mainWorldInstance
+	METHOD <init> (Lnone/bqo;)V
+		ARG 0 mainWorldInstance
 	METHOD a getNbtTagCompound ()Lnone/fn;
 	METHOD a setSpawnX (I)V
-	METHOD a setLevelName (Ljava/lang/String;)V
+	METHOD a setName (Ljava/lang/String;)V
 	METHOD a setGenerator (Lnone/are;)V
 	METHOD a setSpawnPoint (Lnone/dt;)V
 	METHOD a cloneNbtTagCompound (Lnone/fn;)Lnone/fn;
@@ -12882,7 +12884,7 @@ CLASS none/bql net/minecraft/level/LevelMulti
 	METHOD g getDayTime ()J
 	METHOD g setRainTime (I)V
 	METHOD h getSizeOnDisk ()J
-	METHOD k getLevelName ()Ljava/lang/String;
+	METHOD k getName ()Ljava/lang/String;
 	METHOD l getVersion ()I
 	METHOD m getLastPlayed ()J
 	METHOD n isThundering ()Z
@@ -12925,7 +12927,7 @@ CLASS none/bqm net/minecraft/level/storage/SaveHandler
 	METHOD b readPlayerData (Lnone/ahd;)Lnone/fn;
 		ARG 0 entityPlayer
 	METHOD c checkSessionLock ()V
-	METHOD d loadLevelInfo ()Lnone/bqo;
+	METHOD d getWorld ()Lnone/bqo;
 	METHOD e getPlayerSaveHandler ()Lnone/brl;
 	METHOD f getAvailablePlayerData ()[Ljava/lang/String;
 	METHOD g getLevelDirectoryName ()Ljava/lang/String;
@@ -12936,7 +12938,7 @@ CLASS none/bqn net/minecraft/level/storage/OldSaveFormat
 	METHOD <init> (Ljava/io/File;)V
 		ARG 0 saveFile
 	METHOD a getSaveFormatType ()Ljava/lang/String;
-	METHOD a renameLevel (Ljava/lang/String;Ljava/lang/String;)V
+	METHOD a renameWorld (Ljava/lang/String;Ljava/lang/String;)V
 		ARG 0 directory
 		ARG 1 newName
 	METHOD a convertMapFormat (Ljava/lang/String;Lnone/uy;)Z
@@ -12947,14 +12949,14 @@ CLASS none/bqn net/minecraft/level/storage/OldSaveFormat
 	METHOD a deleteFiles ([Ljava/io/File;)Z
 		ARG 0 aFiles
 	METHOD b getSaveList ()Ljava/util/List;
-	METHOD c getLevelData (Ljava/lang/String;)Lnone/bqo;
+	METHOD c getWorld (Ljava/lang/String;)Lnone/bqo;
 		ARG 0 directory
 	METHOD d flushCache ()V
 	METHOD d createNewSaveFile (Ljava/lang/String;)Z
 		ARG 0 directory
 	METHOD e deleteLevelDirectory (Ljava/lang/String;)Z
 		ARG 0 directory
-CLASS none/bqo net/minecraft/level/LevelInfo
+CLASS none/bqo net/minecraft/level/World
 	CLASS bqp
 		METHOD call ()Ljava/lang/String;
 	FIELD A difficultyLocked
@@ -12981,7 +12983,7 @@ CLASS none/bqo net/minecraft/level/LevelInfo
 	FIELD k sizeOnDisk
 	FIELD l player
 	FIELD m dimension
-	FIELD n levelName
+	FIELD n name
 	FIELD o storageVersion
 	FIELD p clearWeatherTime
 	FIELD q raining
@@ -13017,8 +13019,8 @@ CLASS none/bqo net/minecraft/level/LevelInfo
 		ARG 0 borderSize
 	METHOD a setSpawnX (I)V
 		ARG 0 spawnX
-	METHOD a setLevelName (Ljava/lang/String;)V
-		ARG 0 levelName
+	METHOD a setName (Ljava/lang/String;)V
+		ARG 0 worldName
 	METHOD a applyLevelSettings (Lnone/arb;)V
 		ARG 0 levelSettings
 	METHOD a setGameType (Lnone/arc;)V
@@ -13087,7 +13089,7 @@ CLASS none/bqo net/minecraft/level/LevelInfo
 		ARG 0 clearWeatherTime
 	METHOD j setBorderWarningBlocks (I)V
 		ARG 0 borderWarningBlocks
-	METHOD k getLevelName ()Ljava/lang/String;
+	METHOD k getName ()Ljava/lang/String;
 	METHOD k setBorderWarningTime (I)V
 		ARG 0 borderWarningTime
 	METHOD l getVersion ()I
@@ -13113,16 +13115,16 @@ CLASS none/bqy net/minecraft/level/ISaveHandler
 	METHOD a saveLevelInfoWithPlayer (Lnone/bqo;Lnone/fn;)V
 	METHOD b getSaveFile ()Ljava/io/File;
 	METHOD c checkSessionLock ()V
-	METHOD d loadLevelInfo ()Lnone/bqo;
+	METHOD d getWorld ()Lnone/bqo;
 	METHOD e getPlayerSaveHandler ()Lnone/brl;
 	METHOD g getLevelDirectoryName ()Ljava/lang/String;
 CLASS none/bra net/minecraft/level/ISaveFormat
 	METHOD a getSaveFormatType ()Ljava/lang/String;
-	METHOD a renameLevel (Ljava/lang/String;Ljava/lang/String;)V
+	METHOD a renameWorld (Ljava/lang/String;Ljava/lang/String;)V
 	METHOD a convertMapFormat (Ljava/lang/String;Lnone/uy;)Z
 	METHOD a getSaveLoader (Ljava/lang/String;Z)Lnone/bqy;
 	METHOD b getSaveList ()Ljava/util/List;
-	METHOD c getLevelData (Ljava/lang/String;)Lnone/bqo;
+	METHOD c getWorld (Ljava/lang/String;)Lnone/bqo;
 	METHOD d flushCache ()V
 	METHOD d createNewSaveFile (Ljava/lang/String;)Z
 	METHOD e deleteLevelDirectory (Ljava/lang/String;)Z
@@ -13162,7 +13164,7 @@ CLASS none/brk
 	METHOD a saveLevelInfoWithPlayer (Lnone/bqo;Lnone/fn;)V
 	METHOD b getSaveFile ()Ljava/io/File;
 	METHOD c checkSessionLock ()V
-	METHOD d loadLevelInfo ()Lnone/bqo;
+	METHOD d getWorld ()Lnone/bqo;
 	METHOD e getPlayerSaveHandler ()Lnone/brl;
 	METHOD g getLevelDirectoryName ()Ljava/lang/String;
 CLASS none/brl net/minecraft/level/storage/IPlayerFileData
@@ -13704,6 +13706,7 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	METHOD Y getMinecraftSessionService ()Lcom/mojang/authlib/minecraft/MinecraftSessionService;
 	METHOD a run ()V
 	METHOD a runTask (Ljava/lang/Runnable;)Lcom/google/common/util/concurrent/ListenableFuture;
+	METHOD a createNewWorld (Ljava/lang/String;Ljava/lang/String;Lnone/arb;)V
 	METHOD a setCrashReporter (Lnone/b;)V
 	METHOD a displayGuiScreen (Lnone/bxf;)V
 	METHOD a setServerData (Lnone/cew;)V
@@ -15942,7 +15945,7 @@ CLASS none/cyk net/minecraft/server/IntegratedServer
 	FIELD j logger
 	FIELD k minecraft
 	FIELD l levelSettings
-	METHOD a loadLevel (Ljava/lang/String;Ljava/lang/String;JLnone/are;Ljava/lang/String;)V
+	METHOD a loadWorld (Ljava/lang/String;Ljava/lang/String;JLnone/are;Ljava/lang/String;)V
 	METHOD a setGameType (Lnone/arc;)V
 	METHOD a shareToLAN (Lnone/arc;Z)Ljava/lang/String;
 	METHOD a finalTick (Lnone/b;)V
@@ -16159,7 +16162,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD H serverKeyPair
 	FIELD I serverOwner
 	FIELD J folderName
-	FIELD K levelName
+	FIELD K worldName
 	FIELD L isDemo
 	FIELD M enableBonusChest
 	FIELD N levelIsBeingDeleted
@@ -16176,7 +16179,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD aa thread
 	FIELD ab currentTimeMillis
 	FIELD b theProfiler
-	FIELD c levelServers
+	FIELD c levels
 	FIELD d serverproxy
 	FIELD e currentTask
 	FIELD f percentDone
@@ -16211,7 +16214,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD R getServerOwner ()Ljava/lang/String;
 	METHOD S isSinglePlayer ()Z
 	METHOD T getFolderName ()Ljava/lang/String;
-	METHOD U getLevelName ()Ljava/lang/String;
+	METHOD U getWorldName ()Ljava/lang/String;
 	METHOD V allowSpawnMonsters ()Z
 	METHOD W isDemo ()Z
 	METHOD X getActiveAnvilConverter ()Lnone/bra;
@@ -16220,8 +16223,8 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD a canUseCommand (ILjava/lang/String;)Z
 	METHOD a runTask (Ljava/lang/Runnable;)Lcom/google/common/util/concurrent/ListenableFuture;
 		ARG 0 task
-	METHOD a convertMapIfNeeded (Ljava/lang/String;)V
-	METHOD a loadLevel (Ljava/lang/String;Ljava/lang/String;JLnone/are;Ljava/lang/String;)V
+	METHOD a convertWorldIfNeeded (Ljava/lang/String;)V
+	METHOD a loadWorld (Ljava/lang/String;Ljava/lang/String;JLnone/are;Ljava/lang/String;)V
 	METHOD a setKeyPair (Ljava/security/KeyPair;)V
 		ARG 0 keyPair
 	METHOD a getEntityFromUuid (Ljava/util/UUID;)Lnone/wv;
@@ -16292,7 +16295,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD k initialLevelChunkLoad ()V
 	METHOD k setFolderName (Ljava/lang/String;)V
 	METHOD l canStructuresSpawn ()Z
-	METHOD l setLevelName (Ljava/lang/String;)V
+	METHOD l setWorldName (Ljava/lang/String;)V
 	METHOD m getGameType ()Lnone/arc;
 	METHOD m setMOTD (Ljava/lang/String;)V
 	METHOD n getDifficulty ()Lnone/vt;
