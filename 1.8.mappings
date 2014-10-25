@@ -3514,7 +3514,7 @@ CLASS none/pk net/minecraft/scoreboard/ServerScoreboardManager
 		ARG 0 objective
 CLASS none/pm net/minecraft/server/gui/IUpdatePlayerListBox
 	METHOD c update ()V
-CLASS none/qj net/minecraft/level/ServerWorldDemo
+CLASS none/qj net/minecraft/level/LevelServerDemo
 CLASS none/qk
 	METHOD <init> (Lnone/aqu;)V
 		ARG 0 level
@@ -3522,7 +3522,7 @@ CLASS none/qk
 		ARG 1 dimension
 	METHOD a (Lnone/ahd;Lnone/aqu;Lnone/amj;Lnone/dt;Lnone/ej;FFF)Z
 		ARG 1 dimension
-CLASS none/ql net/minecraft/level/ServerWorldMulti
+CLASS none/ql net/minecraft/level/LevelServerMulti
 	CLASS qm
 		METHOD a onSizeChange (Lnone/bfb;D)V
 		METHOD a onCenterChange (Lnone/bfb;DD)V
@@ -3553,12 +3553,12 @@ CLASS none/qn net/minecraft/entity/EntityTracker
 		ARG 0 entity
 	METHOD b (Lnone/wv;Lnone/id;)V
 		ARG 0 entity
-CLASS none/qp net/minecraft/level/WorldManager
+CLASS none/qp net/minecraft/level/LevelManager
 	FIELD a minecraftServer
-	FIELD b serverWorld
+	FIELD b levelServer
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnone/qt;)V
 		ARG 0 minecraftServer
-		ARG 1 serverLevel
+		ARG 1 levelServer
 	METHOD a markBlockRangeForRenderUpdate (IIIIII)V
 	METHOD a broadcastSound (ILnone/dt;I)V
 	METHOD a spawnParticle (IZDDDDDD[I)V
@@ -3599,7 +3599,7 @@ CLASS none/qs net/minecraft/level/gen/ServerChunkCache
 	METHOD e canSave ()Z
 	METHOD f ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
-CLASS none/qt net/minecraft/level/ServerWorld
+CLASS none/qt net/minecraft/level/LevelServer
 	FIELD I minecraftServer
 	FIELD J entityTracker
 	FIELD L lastSyncedTickNextTick
@@ -7241,7 +7241,7 @@ CLASS none/aqt net/minecraft/level/ColorizerGrass
 		ARG 1 rainfall
 	METHOD a setGrassBiomeColorizer ([I)V
 		ARG 0 grassBuffer
-CLASS none/aqu net/minecraft/level/World
+CLASS none/aqu net/minecraft/level/Level
 	FIELD A villageCollectionObj
 	FIELD B profiler
 	FIELD C scoreboardManager
@@ -7274,13 +7274,19 @@ CLASS none/aqu net/minecraft/level/World
 	FIELD q prevThunderingStrength
 	FIELD r thunderingStrength
 	FIELD s rand
-	FIELD t currentDimension
-	FIELD u worldAccesses
+	FIELD t dimension
+	FIELD u levelAccesses
 	FIELD v chunkProvider
 	FIELD w saveHandler
 	FIELD x level
 	FIELD y findingSpawnPoint
 	FIELD z mapStorage
+	METHOD <init> (Lnone/bqy;Lnone/bqo;Lnone/bgd;Lnone/uw;Z)V
+		ARG 0 saveHandler
+		ARG 1 levelInfo
+		ARG 2 dimension
+		ARG 3 profiler
+		ARG 4 isClient
 	METHOD A getChunkProviderName ()Ljava/lang/String;
 	METHOD A getPowerSuppliedToBlockAt (Lnone/dt;)I
 		ARG 0 blockPos
@@ -7339,6 +7345,7 @@ CLASS none/aqu net/minecraft/level/World
 		ARG 3 maxLevelX
 		ARG 4 maxLevelY
 		ARG 5 maxLevelZ
+		ARG 6 ignoreEmptyChunk
 	METHOD a (IILnone/bfh;)V
 		ARG 2 chunk
 	METHOD a checkChunkExists (IIZ)Z
@@ -7373,6 +7380,7 @@ CLASS none/aqu net/minecraft/level/World
 		ARG 2 facing
 	METHOD a addLevelAccess (Lnone/ara;)V
 	METHOD a setLevelInitialized (Lnone/arb;)V
+		ARG 0 levelSettings
 	METHOD a checkBlockIsValidAttachmentSurface (Lnone/ard;Lnone/dt;)Z
 		ARG 1 blockPos
 	METHOD a getLightFromNeighbors (Lnone/arf;Lnone/dt;)I
@@ -7475,6 +7483,7 @@ CLASS none/aqu net/minecraft/level/World
 		ARG 1 facing
 	METHOD a isBlockLoaded (Lnone/dt;Z)Z
 		ARG 0 blockPos
+		ARG 1 ignoreEmptyChunk
 	METHOD a playEffect (Lnone/ew;DDDDDD[I)V
 		ARG 0 particleType
 	METHOD a (Lnone/wv;)V
@@ -7633,7 +7642,7 @@ CLASS none/aqu net/minecraft/level/World
 	METHOD h tickBlocks ()V
 	METHOD h getThunderStrength (F)F
 		ARG 0 weight
-	METHOD h (Lnone/dt;)V
+	METHOD h markBlockForUpdate (Lnone/dt;)V
 		ARG 0 blockPos
 	METHOD h addEntityAndNearbyChunks (Lnone/wv;)V
 		ARG 0 entity
@@ -7688,7 +7697,7 @@ CLASS none/aqu net/minecraft/level/World
 	METHOD z checkBlockIsPowered (Lnone/dt;)Z
 		ARG 0 rpos
 CLASS none/aqz net/minecraft/level/MinecraftException
-CLASS none/ara net/minecraft/level/IWorldAccess
+CLASS none/ara net/minecraft/level/ILevelAccess
 	METHOD a markBlockRangeForRenderUpdate (IIIIII)V
 		ARG 0 minX
 		ARG 1 minY
@@ -11634,12 +11643,12 @@ CLASS none/bfy
 	METHOD b saveExtraData ()V
 	METHOD b saveExtraChunkData (Lnone/aqu;Lnone/bfh;)V
 CLASS none/bgd net/minecraft/level/Dimension
-	FIELD b world
+	FIELD b level
 	FIELD c biomeManager
-	FIELD d isHellWorld
+	FIELD d isHellDimension
 	FIELD e hasNoSky
 	FIELD f lightBrightnessTable
-	FIELD g dimensionId
+	FIELD g dimensionID
 	FIELD h generator
 	FIELD i generatorOptions
 	METHOD a generateLightBrightnessTable ()V
@@ -11649,15 +11658,15 @@ CLASS none/bgd net/minecraft/level/Dimension
 	METHOD a calculateCelestialAngle (JF)F
 		ARG 0 elapsedTime
 		ARG 1 offsetTime
-	METHOD a setWorld (Lnone/aqu;)V
+	METHOD a setLevel (Lnone/aqu;)V
 	METHOD b registerBiomeManager ()V
 	METHOD b getFogColor (FF)Lnone/brw;
 	METHOD b doesXZShowFog (II)Z
-	METHOD c getWorldGenerator ()Lnone/bfe;
+	METHOD c getLevelGenerator ()Lnone/bfe;
 	METHOD d isOverworld ()Z
 	METHOD e canRespawnHere ()Z
 	METHOD k getName ()Ljava/lang/String;
-	METHOD l getDimensionSuffix ()Ljava/lang/String;
+	METHOD l getLevelSuffix ()Ljava/lang/String;
 	METHOD m getBiomeManager ()Lnone/arz;
 	METHOD o hasSky ()Z
 	METHOD q getId ()I
@@ -11672,26 +11681,26 @@ CLASS none/bge net/minecraft/level/DimensionNether
 	METHOD b registerBiomeManager ()V
 	METHOD b getFogColor (FF)Lnone/brw;
 	METHOD b doesXZShowFog (II)Z
-	METHOD c getWorldGenerator ()Lnone/bfe;
+	METHOD c getLevelGenerator ()Lnone/bfe;
 	METHOD d isOverworld ()Z
 	METHOD e canRespawnHere ()Z
 	METHOD k getName ()Ljava/lang/String;
-	METHOD l getDimensionSuffix ()Ljava/lang/String;
+	METHOD l getLevelSuffix ()Ljava/lang/String;
 	METHOD r getLevelBorder ()Lnone/bfb;
 CLASS none/bgg net/minecraft/level/DimensionOverworld
 	METHOD k getName ()Ljava/lang/String;
-	METHOD l getDimensionSuffix ()Ljava/lang/String;
+	METHOD l getLevelSuffix ()Ljava/lang/String;
 CLASS none/bgh net/minecraft/level/DimensionEnd
 	METHOD a canCoordinateBeSpawn (II)Z
 	METHOD a calculateCelestialAngle (JF)F
 	METHOD b registerBiomeManager ()V
 	METHOD b getFogColor (FF)Lnone/brw;
 	METHOD b doesXZShowFog (II)Z
-	METHOD c getWorldGenerator ()Lnone/bfe;
+	METHOD c getLevelGenerator ()Lnone/bfe;
 	METHOD d isOverworld ()Z
 	METHOD e canRespawnHere ()Z
 	METHOD k getName ()Ljava/lang/String;
-	METHOD l getDimensionSuffix ()Ljava/lang/String;
+	METHOD l getLevelSuffix ()Ljava/lang/String;
 CLASS none/bgj net/minecraft/level/gen/structure/RavineGenerator
 	FIELD d widthArray
 CLASS none/bgk net/minecraft/level/chunk/ChunkPrimer
@@ -11876,7 +11885,7 @@ CLASS none/bgn net/minecraft/level/gen/GeneratorSettingsFactory
 		ARG 0 generationOptions
 	METHOD b getGeneratorSettings ()Lnone/bgl;
 CLASS none/bgo net/minecraft/level/gen/GeneratorSettingsSerializer
-CLASS none/bgp net/minecraft/level/gen/WorldGeneratorDebug
+CLASS none/bgp net/minecraft/level/gen/LevelGeneratorDebug
 	FIELD c world
 	METHOD <init> (Lnone/aqu;)V
 		ARG 0 world
@@ -11913,7 +11922,7 @@ CLASS none/bgp net/minecraft/level/gen/WorldGeneratorDebug
 	METHOD e canSave ()Z
 	METHOD f ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
-CLASS none/bgq net/minecraft/level/gen/WorldGeneratorFlat
+CLASS none/bgq net/minecraft/level/gen/LevelGeneratorFlat
 	FIELD a level
 	FIELD b and
 	FIELD c blockStateArray
@@ -11958,7 +11967,7 @@ CLASS none/bgq net/minecraft/level/gen/WorldGeneratorFlat
 	METHOD e canSave ()Z
 	METHOD f ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
-CLASS none/bgr net/minecraft/level/gen/WorldGeneratorNether
+CLASS none/bgr net/minecraft/level/gen/LevelGeneratorNether
 	FIELD A redMushroomGenerator
 	FIELD B netherBridgeGenerator
 	FIELD C netherCaveGenerator
@@ -11998,6 +12007,7 @@ CLASS none/bgr net/minecraft/level/gen/WorldGeneratorNether
 		ARG 1 chunkZ
 		ARG 2 chunkPrimer
 	METHOD a getStrongholdGen (Lnone/aqu;Ljava/lang/String;Lnone/dt;)Lnone/dt;
+	METHOD a (Lnone/bfe;II)V
 	METHOD a provideChunk (Lnone/dt;)Lnone/bfh;
 	METHOD a getSpawnableAtPos (Lnone/xp;Lnone/dt;)Ljava/util/List;
 	METHOD a saveChunks (ZLnone/uy;)Z
@@ -12021,7 +12031,7 @@ CLASS none/bgt net/minecraft/level/gen/structure/StructureGenerator
 	FIELD c level
 	METHOD a generateStructureInChunk (Lnone/bfe;Lnone/aqu;IILnone/bgk;)V
 CLASS none/bgu net/minecraft/level/gen/structure/CaveGeneratorHell
-CLASS none/bgv net/minecraft/level/gen/WorldGeneratorDefault
+CLASS none/bgv net/minecraft/level/gen/LevelGeneratorDefault
 	FIELD A oceanMonumentGenerator
 	FIELD B biomesForGeneration
 	FIELD a noiseGen5
@@ -12069,7 +12079,7 @@ CLASS none/bgv net/minecraft/level/gen/WorldGeneratorDefault
 	METHOD e canSave ()Z
 	METHOD f ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
-CLASS none/bgw net/minecraft/level/gen/WorldGeneratorEnd
+CLASS none/bgw net/minecraft/level/gen/LevelGeneratorEnd
 	FIELD a noiseGen4
 	FIELD b noiseGen5
 	FIELD c noiseData1
@@ -12945,7 +12955,7 @@ CLASS none/bqn net/minecraft/level/storage/OldSaveFormat
 		ARG 0 directory
 	METHOD e deleteLevelDirectory (Ljava/lang/String;)Z
 		ARG 0 directory
-CLASS none/bqo net/minecraft/level/Level
+CLASS none/bqo net/minecraft/level/LevelInfo
 	CLASS bqp
 		METHOD call ()Ljava/lang/String;
 	FIELD A difficultyLocked
@@ -15532,7 +15542,7 @@ CLASS none/cki
 	FIELD a MAP_BACKGROUND
 	FIELD b UNDERWATER
 	FIELD c minecraft
-CLASS none/ckn net/minecraft/level/WorldRenderer
+CLASS none/ckn net/minecraft/client/renderer/LevelRenderer
 	FIELD b LOGGER
 	FIELD c MOON_PHASES
 	FIELD d SUN
