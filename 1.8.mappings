@@ -3613,6 +3613,7 @@ CLASS none/qt net/minecraft/level/LevelServer
 	METHOD a scheduleBlockTick (Lnone/dt;Lnone/atr;I)V
 	METHOD a scheduleBlockTick (Lnone/dt;Lnone/atr;II)V
 		ARG 2 delayTicks
+	METHOD a onEntityAdded (Lnone/wv;)V
 	METHOD a createExplosion (Lnone/wv;DDDFZZ)Lnone/aqo;
 	METHOD a tickPending (Z)Z
 	METHOD a saveAllChunks (ZLnone/uy;)V
@@ -3620,6 +3621,7 @@ CLASS none/qt net/minecraft/level/LevelServer
 	METHOD aj setDebugLevelSettings ()V
 	METHOD b initialize ()Lnone/aqu;
 	METHOD b initializeSpawn (Lnone/arb;)V
+	METHOD b onEntityRemoved (Lnone/wv;)V
 	METHOD c tick ()V
 	METHOD c sendEvent (Lnone/dt;Lnone/atr;II)V
 	METHOD c addEntity (Lnone/wv;)Z
@@ -7353,6 +7355,7 @@ CLASS none/aqu net/minecraft/level/Level
 		ARG 2 ignoreEmptyChunk
 	METHOD a (ILnone/dt;I)V
 		ARG 1 blockPos
+	METHOD a spawnParticle (IZDDDDDD[I)V
 	METHOD a (J)V
 		ARG 0 time
 	METHOD a getEntities (Ljava/lang/Class;Lcom/google/common/base/Predicate;)Ljava/util/List;
@@ -7365,6 +7368,8 @@ CLASS none/aqu net/minecraft/level/Level
 		ARG 2 ent
 	METHOD a (Ljava/lang/String;Lnone/dt;)Lnone/dt;
 		ARG 1 rpos
+	METHOD a addBlockEntities (Ljava/util/Collection;)V
+		ARG 0 blockEntities
 	METHOD a (Lnone/ahd;ILnone/dt;I)V
 		ARG 0 entPlayer
 		ARG 2 blockPos
@@ -7400,7 +7405,7 @@ CLASS none/aqu net/minecraft/level/Level
 		ARG 4 ent
 		ARG 5 itemStack
 	METHOD a addLevelInfoToCrashReport (Lnone/b;)Lnone/j;
-	METHOD a (Lnone/bcm;)Z
+	METHOD a addBlockEntity (Lnone/bcm;)Z
 		ARG 0 blockEnt
 	METHOD a isInsideBorder (Lnone/bfb;Lnone/wv;)Z
 	METHOD a (Lnone/bfh;Z)Ljava/util/List;
@@ -7442,7 +7447,7 @@ CLASS none/aqu net/minecraft/level/Level
 		ARG 0 blockPos
 		ARG 1 range
 		ARG 2 flag
-	METHOD a (Lnone/dt;Ljava/lang/String;)V
+	METHOD a playRecord (Lnone/dt;Ljava/lang/String;)V
 		ARG 0 blockPos
 	METHOD a (Lnone/dt;Lnone/arf;)I
 		ARG 0 blockPos
@@ -7485,7 +7490,8 @@ CLASS none/aqu net/minecraft/level/Level
 		ARG 1 ignoreEmptyChunk
 	METHOD a playEffect (Lnone/ew;DDDDDD[I)V
 		ARG 0 particleType
-	METHOD a (Lnone/wv;)V
+	METHOD a spawnParticle (Lnone/ew;ZDDDDDD[I)V
+	METHOD a onEntityAdded (Lnone/wv;)V
 		ARG 0 ent
 	METHOD a (Lnone/wv;B)V
 		ARG 0 ent
@@ -7520,14 +7526,16 @@ CLASS none/aqu net/minecraft/level/Level
 		ARG 0 weight
 	METHOD b setSkylightReduction (I)V
 		ARG 0 skylightReduction
-	METHOD b (II)I
+	METHOD b getChunkMinimumHeight (II)I
 		ARG 0 levelX
 		ARG 1 levelZ
+	METHOD b markBlockRangeForRenderUpdate (IIIIII)V
 	METHOD b (J)V
 		ARG 0 dayTime
 	METHOD b getPlayers (Ljava/lang/Class;Lcom/google/common/base/Predicate;)Ljava/util/List;
 	METHOD b getPlayerEntityByUUID (Ljava/util/UUID;)Lnone/ahd;
 		ARG 0 uuid
+	METHOD b removeLevelAccess (Lnone/ara;)V
 	METHOD b getLightAt (Lnone/arf;Lnone/dt;)I
 		ARG 0 ceiling
 		ARG 1 blockPos
@@ -7546,7 +7554,7 @@ CLASS none/aqu net/minecraft/level/Level
 	METHOD b getCombinedLight (Lnone/dt;I)I
 		ARG 0 blockPos
 		ARG 1 lightValue
-	METHOD b (Lnone/dt;Lnone/atr;)V
+	METHOD b updateNonDebugNeighborBlocks (Lnone/dt;Lnone/atr;)V
 		ARG 0 blockPos
 		ARG 1 block
 	METHOD b (Lnone/dt;Lnone/atr;II)V
@@ -7555,7 +7563,7 @@ CLASS none/aqu net/minecraft/level/Level
 	METHOD b (Lnone/dt;Lnone/bcm;)V
 		ARG 0 blockPos
 		ARG 1 blockEnt
-	METHOD b (Lnone/dt;Lnone/dt;)V
+	METHOD b markBlockRangeForRenderUpdate (Lnone/dt;Lnone/dt;)V
 		ARG 0 blockPos
 		ARG 1 pos2
 	METHOD b isSidePowered (Lnone/dt;Lnone/ej;)Z
@@ -7564,7 +7572,7 @@ CLASS none/aqu net/minecraft/level/Level
 	METHOD b (Lnone/dt;Z)Z
 		ARG 0 blockPos
 		ARG 1 dropItems
-	METHOD b (Lnone/wv;)V
+	METHOD b onEntityRemoved (Lnone/wv;)V
 		ARG 0 ent
 	METHOD b (Lnone/wv;Lnone/brt;)Ljava/util/List;
 		ARG 0 ent
@@ -7593,7 +7601,7 @@ CLASS none/aqu net/minecraft/level/Level
 	METHOD c getPowerReceivedFromLocationFacing (Lnone/dt;Lnone/ej;)I
 		ARG 0 blockPos
 		ARG 1 facing
-	METHOD c (Lnone/dt;Z)I
+	METHOD c getNeighborLight (Lnone/dt;Z)I
 		ARG 0 blockPos
 	METHOD c addEntity (Lnone/wv;)Z
 		ARG 0 ent
@@ -7657,15 +7665,15 @@ CLASS none/aqu net/minecraft/level/Level
 	METHOD k createChunkCache ()Lnone/bfe;
 	METHOD k setRainStrength (F)V
 		ARG 0 strength
-	METHOD k (Lnone/dt;)I
+	METHOD k getLight (Lnone/dt;)I
 		ARG 0 blockPos
-	METHOD l (Lnone/dt;)I
+	METHOD l getNeighborLight (Lnone/dt;)I
 		ARG 0 blockPos
-	METHOD m (Lnone/dt;)Lnone/dt;
+	METHOD m getSurfacePosition (Lnone/dt;)Lnone/dt;
 		ARG 0 blockPos
-	METHOD n (Lnone/dt;)V
+	METHOD n sendBlockBreakProgress (Lnone/dt;)V
 		ARG 0 blockPos
-	METHOD o (Lnone/dt;)F
+	METHOD o getLightBrightness (Lnone/dt;)F
 		ARG 0 blockPos
 	METHOD p updateWeather ()V
 	METHOD p getBlockStateAt (Lnone/dt;)Lnone/bec;
@@ -7684,6 +7692,7 @@ CLASS none/aqu net/minecraft/level/Level
 	METHOD v getBiomeManager ()Lnone/arz;
 	METHOD v canBlockFreezeCheck (Lnone/dt;)Z
 		ARG 0 blockPos
+	METHOD w isDaytime ()Z
 	METHOD w canBlockFreezeWithoutCheck (Lnone/dt;)Z
 		ARG 0 blockPos
 	METHOD x getMoonPhase ()I
@@ -8072,9 +8081,22 @@ CLASS none/arr net/minecraft/level/biome/BiomeCache
 		ARG 0 xPos
 		ARG 1 zPos
 CLASS none/ary net/minecraft/level/biome/Decorator
-	FIELD a dim
+	FIELD A treesPerChunk
+	FIELD B dandelionsPerChunk
+	FIELD C randomGrassPerChunk
+	FIELD D deadBushesPerChunk
+	FIELD E brownMushroomsPerChunk
+	FIELD F reedsPerChunk
+	FIELD G cactiPerChunk
+	FIELD H gravelBeachesPerChunk
+	FIELD I sandBeachesPerChunk
+	FIELD J clayPerChunk
+	FIELD K hugeMushroomsPerChunk
+	FIELD L generateLakes
+	FIELD a level
 	FIELD b rand
-	FIELD c blockCoords
+	FIELD c blockPos
+	FIELD d generatorSettings
 	FIELD e clayGenerator
 	FIELD f sandBeachGenerator
 	FIELD g gravelBeachGenerator
@@ -8096,6 +8118,7 @@ CLASS none/ary net/minecraft/level/biome/Decorator
 	FIELD w reedGenerator
 	FIELD x cactusGenerator
 	FIELD y lilyPadGenerator
+	FIELD z lilypadsPerChunk
 	METHOD a generateWithin (ILnone/bhp;II)V
 		ARG 0 tries
 		ARG 2 minHeight
@@ -11308,7 +11331,7 @@ CLASS none/bff net/minecraft/level/chunk/NibbleArray
 	METHOD a setValueAtCoords (IIII)V
 		ARG 0 localX
 		ARG 1 localY
-		ARG 2 locelZ
+		ARG 2 localZ
 		ARG 3 value
 	METHOD b checkIfEven (I)Z
 		ARG 0 raddress
@@ -11596,6 +11619,10 @@ CLASS none/bfn net/minecraft/level/chunk/storage/NibbleArrayReader
 	FIELD a aByte
 	FIELD b offset1
 	FIELD c offset2
+	METHOD a (III)I
+		ARG 0 localX
+		ARG 1 localY
+		ARG 2 localZ
 CLASS none/bfq net/minecraft/level/chunk/storage/IChunkLoader
 	METHOD a tickChunk ()V
 	METHOD a loadChunk (Lnone/aqu;II)Lnone/bfh;
@@ -11609,7 +11636,7 @@ CLASS none/bfq net/minecraft/level/chunk/storage/IChunkLoader
 	METHOD b saveExtraChunkData (Lnone/aqu;Lnone/bfh;)V
 		ARG 0 level
 		ARG 1 chunk
-CLASS none/bft net/minecraft/level/storage/ChunkLoader
+CLASS none/bft net/minecraft/level/chunk/storage/ChunkLoader
 	METHOD a writeChunkToNBT (Lnone/bfu;Lnone/fn;Lnone/arz;)V
 	METHOD a readChunkFromNBT (Lnone/fn;)Lnone/bfu;
 CLASS none/bfu net/minecraft/level/chunk/storage/AnvilConverterData
@@ -11622,11 +11649,53 @@ CLASS none/bfu net/minecraft/level/chunk/storage/AnvilConverterData
 	FIELD g blocks
 	FIELD h entityList
 	FIELD i blockEntityList
-	FIELD j tileTickList
+	FIELD j blockTickList
 	FIELD k chunkXPos
 	FIELD l chunkZPos
-CLASS none/bfv
-	FIELD b fileTarget
+CLASS none/bfv net/minecraft/level/chunk/storage/RegionFile
+	FIELD a EMPTY_SECTORS
+	FIELD b fileName
+	FIELD c dataFile
+	FIELD d offsets
+	FIELD e chunkTimestamps
+	FIELD f freeSectorList
+	FIELD g sizeDelta
+	FIELD h lastModified
+	METHOD <init> (Ljava/io/File;)V
+		ARG 0 fileName
+	METHOD a getChunkDataInputStream (II)Ljava/io/DataInputStream;
+		ARG 0 chunkX
+		ARG 1 chunkZ
+	METHOD a writeOffsets (III)V
+		ARG 0 chunkX
+		ARG 1 chunkZ
+		ARG 2 offset
+	METHOD a write (II[BI)V
+		ARG 0 chunkX
+		ARG 1 chunkZ
+		ARG 2 data
+		ARG 3 length
+	METHOD a write (I[BI)V
+		ARG 0 sectorNum
+		ARG 1 data
+		ARG 2 length
+	METHOD b getChunkDataOutputStream (II)Ljava/io/DataOutputStream;
+		ARG 0 chunkX
+		ARG 1 chunkZ
+	METHOD b writeTimestamp (III)V
+		ARG 0 chunkX
+		ARG 1 chunkZ
+		ARG 2 timestamp
+	METHOD c close ()V
+	METHOD c checkChunkSaved (II)Z
+		ARG 0 chunkX
+		ARG 1 chunkZ
+	METHOD d outOfBounds (II)Z
+		ARG 0 chunkX
+		ARG 1 chunkZ
+	METHOD e getOffset (II)I
+		ARG 0 chunkX
+		ARG 1 chunkZ
 CLASS none/bfx net/minecraft/level/chunk/storage/RegionFileCache
 	METHOD a clearFileWriter ()V
 	METHOD a writeChunkToFile (Ljava/io/File;II)Lnone/bfv;
@@ -15066,6 +15135,8 @@ CLASS none/cen net/minecraft/level/LevelClient
 	METHOD a getEntity (I)Lnone/wv;
 	METHOD a addLevelInfoToCrashReport (Lnone/b;)Lnone/j;
 	METHOD a playSoundEffect (Lnone/dt;Ljava/lang/String;FFZ)V
+	METHOD a onEntityAdded (Lnone/wv;)V
+	METHOD b onEntityRemoved (Lnone/wv;)V
 	METHOD c tick ()V
 	METHOD d spawn (Lnone/wv;)Z
 	METHOD e removeEntity (Lnone/wv;)V
