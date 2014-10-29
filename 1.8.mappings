@@ -2276,7 +2276,7 @@ CLASS none/hr net/minecraft/chat/HoverEvent
 	METHOD <init> (Lnone/hs;Lnone/ho;)V
 		ARG 0 enumHoverAction
 	METHOD a getHoverAction ()Lnone/hs;
-CLASS none/hs net/minecraft/chat/HoverActionTypes
+CLASS none/hs net/minecraft/chat/EnumHoverAction
 	FIELD a ShowText
 	FIELD b ShowAchievement
 	FIELD c ShowItem
@@ -3533,6 +3533,7 @@ CLASS none/ql net/minecraft/level/LevelServerMulti
 		METHOD c onDamageBufferChange (Lnone/bfb;D)V
 	FIELD a mainLevel
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnone/bqy;ILnone/qt;Lnone/uw;)V
+	METHOD a saveWorldData ()V
 	METHOD b initialize ()Lnone/aqu;
 CLASS none/qn net/minecraft/entity/EntityTracker
 	FIELD a logger
@@ -3588,7 +3589,7 @@ CLASS none/qs net/minecraft/level/gen/ServerChunkCache
 		ARG 0 dimension
 	METHOD a provideChunk (Lnone/dt;)Lnone/bfh;
 	METHOD a getSpawnableAtPos (Lnone/xp;Lnone/dt;)Ljava/util/List;
-	METHOD a saveChunks (ZLnone/uy;)Z
+	METHOD a saveAllChunks (ZLnone/uy;)Z
 	METHOD c saveExtraData ()V
 	METHOD c loadChunk (II)Lnone/bfh;
 	METHOD d unloadQueuedChunks ()Z
@@ -3606,6 +3607,7 @@ CLASS none/qt net/minecraft/level/LevelServer
 	FIELD V tickNow
 	FIELD a logger
 	FIELD b chunkCache
+	METHOD a saveWorldData ()V
 	METHOD a runTask (Ljava/lang/Runnable;)Lcom/google/common/util/concurrent/ListenableFuture;
 	METHOD a setLevelInitialized (Lnone/arb;)V
 		ARG 0 levelSettings
@@ -3616,7 +3618,7 @@ CLASS none/qt net/minecraft/level/LevelServer
 	METHOD a onEntityAdded (Lnone/wv;)V
 	METHOD a createExplosion (Lnone/wv;DDDFZZ)Lnone/aqo;
 	METHOD a tickPending (Z)Z
-	METHOD a saveAllChunks (ZLnone/uy;)V
+	METHOD a saveWorld (ZLnone/uy;)V
 	METHOD aH isInMainThread ()Z
 	METHOD aj setDebugLevelSettings ()V
 	METHOD b initialize ()Lnone/aqu;
@@ -3803,6 +3805,7 @@ CLASS none/sn net/minecraft/server/ServerConfigurationManager
 	METHOD p getCurrentPlayerCount ()I
 	METHOD q getMaxPlayers ()I
 	METHOD r getAvailablePlayerDat ()[Ljava/lang/String;
+	METHOD u getPlayerNbt ()Lnone/fn;
 	METHOD v removeAllPlayers ()V
 CLASS none/tk net/minecraft/stats/Achievement
 	FIELD a column
@@ -4147,6 +4150,7 @@ CLASS none/ux net/minecraft/profiler/ProfilerEntry
 	METHOD compareTo (Lnone/ux;)I
 		ARG 0 profilerEntry
 CLASS none/uy net/minecraft/util/IProgressBar
+	METHOD c setProgressBarMessage (Ljava/lang/String;)V
 CLASS none/va net/minecraft/block/IEnumBlockPropertyValue
 	METHOD l getName ()Ljava/lang/String;
 CLASS none/vb net/minecraft/util/StringUtil
@@ -4522,6 +4526,7 @@ CLASS none/wv net/minecraft/entity/Entity
 	FIELD ak insidePortal
 	FIELD al portalTimer
 	FIELD am dimensionId
+	FIELD an compassDirection
 	FIELD ao uuid
 	FIELD ar invulnerable
 	FIELD c id
@@ -4598,6 +4603,7 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD aA getOxygen ()I
 	METHOD aB onInsideWeb ()V
 	METHOD aD getHeadPitch ()F
+	METHOD aG getCompassDirection ()I
 	METHOD aJ getUuid ()Ljava/util/UUID;
 	METHOD aL getCustomName ()Ljava/lang/String;
 	METHOD aM isCustomNameVisible ()Z
@@ -5091,7 +5097,9 @@ CLASS none/aah net/minecraft/entity/ai/GoalTradePlayer
 CLASS none/aai net/minecraft/entity/ai/GoalExchangeProduce
 CLASS none/aak net/minecraft/entity/ai/GoalDefendVillage
 CLASS none/aaq net/minecraft/entity/ai/GoalFollowEntity
-CLASS none/abl
+CLASS none/abl net/minecraft/level/storage/VillagesData
+	FIELD b level
+	METHOD a getNameForDimension (Lnone/bgd;)Ljava/lang/String;
 	METHOD a load (Lnone/fn;)V
 	METHOD b save (Lnone/fn;)V
 CLASS none/abn net/minecraft/entity/EntityFlyingCreature
@@ -5190,7 +5198,9 @@ CLASS none/aca net/minecraft/entity/passive/EntityPig
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
+	METHOD cj isSaddled ()Z
 	METHOD e onHitGround (FF)V
+	METHOD l setSaddled (Z)V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/acb net/minecraft/entity/passive/EntityRabbit
 	METHOD Y checkDoSprintEffect ()V
@@ -5371,29 +5381,38 @@ CLASS none/adj net/minecraft/entity/EntityHanging
 	METHOD b updatePosition (DDD)V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD d applyMotion (DDD)V
+	METHOD l getMinX ()I
+	METHOD m getMinY ()I
 	METHOD s_ onUpdate ()V
 CLASS none/adk net/minecraft/entity/item/EntityItemFrame
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD e attemptMountByPlayer (Lnone/ahd;)Z
+	METHOD l getMinX ()I
+	METHOD m getMinY ()I
 CLASS none/adl net/minecraft/entity/EntityLeashKnot
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD aR getEyeHeight ()F
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD e attemptMountByPlayer (Lnone/ahd;)Z
+	METHOD l getMinX ()I
+	METHOD m getMinY ()I
 CLASS none/adm net/minecraft/entity/item/EntityPainting
+	FIELD c paintingArt
 	METHOD a updateKinetics (DDDFFIZ)V
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD b setLocationAndAngles (DDDFF)V
 	METHOD b writeToNBT (Lnone/fn;)V
+	METHOD l getMinX ()I
+	METHOD m getMinY ()I
 CLASS none/adn net/minecraft/entity/item/EntityPaintingEnumArt
 	FIELD A uselessValue
 	FIELD B name
 	FIELD C xMin
-	FIELD D zMin
+	FIELD D yMin
 	FIELD E xMax
-	FIELD F zMax
+	FIELD F yMax
 	FIELD G paintingType
 	FIELD a KEBAB
 	FIELD b AZTEC
@@ -5426,9 +5445,9 @@ CLASS none/adn net/minecraft/entity/item/EntityPaintingEnumArt
 		ARG 1 id
 		ARG 2 name
 		ARG 3 xMin
-		ARG 4 zMin
+		ARG 4 yMin
 		ARG 5 xMax
-		ARG 6 zMax
+		ARG 6 yMax
 CLASS none/ado net/minecraft/entity/projectile/EntityFishingHook
 	FIELD aA lastSyncedZ
 	FIELD aB lastSyncedYaw
@@ -7243,7 +7262,7 @@ CLASS none/aqt net/minecraft/level/ColorizerGrass
 	METHOD a setGrassBiomeColorizer ([I)V
 		ARG 0 grassBuffer
 CLASS none/aqu net/minecraft/level/Level
-	FIELD A villageCollectionObj
+	FIELD A villagesData
 	FIELD B profiler
 	FIELD C scoreboardManager
 	FIELD D isClient
@@ -7277,11 +7296,11 @@ CLASS none/aqu net/minecraft/level/Level
 	FIELD s rand
 	FIELD t dimension
 	FIELD u levelAccesses
-	FIELD v chunkProvider
+	FIELD v chunkCache
 	FIELD w saveHandler
 	FIELD x world
 	FIELD y findingSpawnPoint
-	FIELD z mapStorage
+	FIELD z worldStorage
 	METHOD <init> (Lnone/bqy;Lnone/bqo;Lnone/bgd;Lnone/uw;Z)V
 		ARG 0 saveHandler
 		ARG 1 world
@@ -11304,7 +11323,7 @@ CLASS none/bfe net/minecraft/level/IChunkProvider
 	METHOD a getSpawnableAtPos (Lnone/xp;Lnone/dt;)Ljava/util/List;
 		ARG 0 creatureType
 		ARG 1 blockPos
-	METHOD a saveChunks (ZLnone/uy;)Z
+	METHOD a saveAllChunks (ZLnone/uy;)Z
 		ARG 1 progressBar
 	METHOD c saveExtraData ()V
 	METHOD d unloadQueuedChunks ()Z
@@ -11636,7 +11655,7 @@ CLASS none/bfq net/minecraft/level/chunk/storage/IChunkLoader
 	METHOD b saveExtraChunkData (Lnone/aqu;Lnone/bfh;)V
 		ARG 0 level
 		ARG 1 chunk
-CLASS none/bft net/minecraft/level/chunk/storage/ChunkLoader
+CLASS none/bft net/minecraft/level/chunk/storage/ChunkInfo
 	METHOD a writeChunkToNBT (Lnone/bfu;Lnone/fn;Lnone/arz;)V
 	METHOD a readChunkFromNBT (Lnone/fn;)Lnone/bfu;
 CLASS none/bfu net/minecraft/level/chunk/storage/AnvilConverterData
@@ -11703,10 +11722,18 @@ CLASS none/bfx net/minecraft/level/chunk/storage/RegionFileCache
 		ARG 2 chunkZ
 	METHOD c readRegionFile (Ljava/io/File;II)Ljava/io/DataInputStream;
 	METHOD d writeRegionFile (Ljava/io/File;II)Ljava/io/DataOutputStream;
-CLASS none/bfy
+CLASS none/bfy net/minecraft/level/chunk/storage/ChunkLoader
 	FIELD a logger
+	FIELD e regionFile
 	METHOD a tickChunk ()V
 	METHOD a loadChunk (Lnone/aqu;II)Lnone/bfh;
+		ARG 0 level
+		ARG 1 chunkX
+		ARG 2 chunkZ
+	METHOD a checkChunkLoadingErrors (Lnone/aqu;IILnone/fn;)Lnone/bfh;
+		ARG 0 level
+		ARG 1 chunkX
+		ARG 2 chunkZ
 	METHOD a saveChunk (Lnone/aqu;Lnone/bfh;)V
 	METHOD b saveExtraData ()V
 	METHOD b saveExtraChunkData (Lnone/aqu;Lnone/bfh;)V
@@ -11734,7 +11761,7 @@ CLASS none/bgd net/minecraft/level/Dimension
 	METHOD d isOverworld ()Z
 	METHOD e canRespawnHere ()Z
 	METHOD k getName ()Ljava/lang/String;
-	METHOD l getLevelSuffix ()Ljava/lang/String;
+	METHOD l getDimensionNameSuffix ()Ljava/lang/String;
 	METHOD m getBiomeManager ()Lnone/arz;
 	METHOD o hasSky ()Z
 	METHOD q getId ()I
@@ -11753,11 +11780,11 @@ CLASS none/bge net/minecraft/level/DimensionNether
 	METHOD d isOverworld ()Z
 	METHOD e canRespawnHere ()Z
 	METHOD k getName ()Ljava/lang/String;
-	METHOD l getLevelSuffix ()Ljava/lang/String;
+	METHOD l getDimensionNameSuffix ()Ljava/lang/String;
 	METHOD r getLevelBorder ()Lnone/bfb;
 CLASS none/bgg net/minecraft/level/DimensionOverworld
 	METHOD k getName ()Ljava/lang/String;
-	METHOD l getLevelSuffix ()Ljava/lang/String;
+	METHOD l getDimensionNameSuffix ()Ljava/lang/String;
 CLASS none/bgh net/minecraft/level/DimensionEnd
 	METHOD a canCoordinateBeSpawn (II)Z
 	METHOD a calculateCelestialAngle (JF)F
@@ -11768,7 +11795,7 @@ CLASS none/bgh net/minecraft/level/DimensionEnd
 	METHOD d isOverworld ()Z
 	METHOD e canRespawnHere ()Z
 	METHOD k getName ()Ljava/lang/String;
-	METHOD l getLevelSuffix ()Ljava/lang/String;
+	METHOD l getDimensionNameSuffix ()Ljava/lang/String;
 CLASS none/bgj net/minecraft/level/gen/structure/RavineGenerator
 	FIELD d widthArray
 CLASS none/bgk net/minecraft/level/chunk/ChunkPrimer
@@ -11977,7 +12004,7 @@ CLASS none/bgp net/minecraft/level/gen/LevelGeneratorDebug
 	METHOD a getSpawnableAtPos (Lnone/xp;Lnone/dt;)Ljava/util/List;
 		ARG 0 creatureType
 		ARG 1 blockPos
-	METHOD a saveChunks (ZLnone/uy;)Z
+	METHOD a saveAllChunks (ZLnone/uy;)Z
 		ARG 1 progressBar
 	METHOD b locateBlockStates (II)Lnone/bec;
 		ARG 0 levelX
@@ -12025,7 +12052,7 @@ CLASS none/bgq net/minecraft/level/gen/LevelGeneratorFlat
 	METHOD a getSpawnableAtPos (Lnone/xp;Lnone/dt;)Ljava/util/List;
 		ARG 0 creatureType
 		ARG 1 blockPos
-	METHOD a saveChunks (ZLnone/uy;)Z
+	METHOD a saveAllChunks (ZLnone/uy;)Z
 		ARG 1 progressBar
 	METHOD c saveExtraData ()V
 	METHOD d unloadQueuedChunks ()Z
@@ -12078,7 +12105,7 @@ CLASS none/bgr net/minecraft/level/gen/LevelGeneratorNether
 	METHOD a (Lnone/bfe;II)V
 	METHOD a provideChunk (Lnone/dt;)Lnone/bfh;
 	METHOD a getSpawnableAtPos (Lnone/xp;Lnone/dt;)Ljava/util/List;
-	METHOD a saveChunks (ZLnone/uy;)Z
+	METHOD a saveAllChunks (ZLnone/uy;)Z
 	METHOD a generateNoiseField ([DIIIIII)[D
 	METHOD b replaceBlocks (IILnone/bgk;)V
 		ARG 0 chunkX
@@ -12140,7 +12167,7 @@ CLASS none/bgv net/minecraft/level/gen/LevelGeneratorDefault
 		ARG 3 chunkZ
 	METHOD a provideChunk (Lnone/dt;)Lnone/bfh;
 	METHOD a getSpawnableAtPos (Lnone/xp;Lnone/dt;)Ljava/util/List;
-	METHOD a saveChunks (ZLnone/uy;)Z
+	METHOD a saveAllChunks (ZLnone/uy;)Z
 	METHOD c saveExtraData ()V
 	METHOD d unloadQueuedChunks ()Z
 	METHOD d generate (II)Lnone/bfh;
@@ -12191,7 +12218,7 @@ CLASS none/bgw net/minecraft/level/gen/LevelGeneratorEnd
 	METHOD a getSpawnableAtPos (Lnone/xp;Lnone/dt;)Ljava/util/List;
 		ARG 0 creatureType
 		ARG 1 blockPos
-	METHOD a saveChunks (ZLnone/uy;)Z
+	METHOD a saveAllChunks (ZLnone/uy;)Z
 		ARG 1 progressBar
 	METHOD a initializeNoiseFields ([DIIIIII)[D
 		ARG 0 noiseField
@@ -12590,7 +12617,7 @@ CLASS none/bmm net/minecraft/level/gen/structure/StructureFeatureGenerator
 CLASS none/bmq net/minecraft/level/gen/structure/StructureIO
 	FIELD a LOGGER
 	METHOD a registerComponent (Ljava/lang/Class;Ljava/lang/String;)V
-CLASS none/bmr
+CLASS none/bmr net/minecraft/level/storage/FeaturesData
 	METHOD a load (Lnone/fn;)V
 	METHOD b save (Lnone/fn;)V
 CLASS none/bms net/minecraft/level/gen/structure/StructureComponent
@@ -12891,7 +12918,7 @@ CLASS none/bpp net/minecraft/level/gen/layer/GenLayerZoom
 		ARG 0 seed
 		ARG 1 source
 		ARG 2 zoomLevel
-CLASS none/bqc net/minecraft/level/LevelSavedData
+CLASS none/bqc net/minecraft/level/LevelData
 	FIELD a name
 	FIELD b requiresSave
 	METHOD <init> (Ljava/lang/String;)V
@@ -12910,18 +12937,29 @@ CLASS none/bqd net/minecraft/util/Vec4b
 	METHOD c getThird ()B
 	METHOD d getFourth ()B
 CLASS none/bqe net/minecraft/level/storage/MapData
+	FIELD b xCenter
+	FIELD c zCenter
+	FIELD d dimensionID
+	FIELD e scale
+	FIELD f colors
+	METHOD a setCenterForScale (DDI)V
+		ARG 0 oldCenterX
+		ARG 1 oldCenterZ
+		ARG 2 scale
 	METHOD a load (Lnone/fn;)V
 	METHOD b save (Lnone/fn;)V
-CLASS none/bqi
+CLASS none/bqi net/minecraft/level/storage/SaveHandlerAnvil
 	METHOD a flush ()V
 	METHOD a getChunkLoader (Lnone/bgd;)Lnone/bfq;
-	METHOD a saveLevelInfoWithPlayer (Lnone/bqo;Lnone/fn;)V
-CLASS none/bqj net/minecraft/level/storage/AnvilSaveConverter
+	METHOD a saveWorldInfoWithPlayer (Lnone/bqo;Lnone/fn;)V
+		ARG 0 world
+CLASS none/bqj net/minecraft/level/storage/SaveLoaderAnvil
 	FIELD b LOGGER
-	METHOD a getSaveFormatType ()Ljava/lang/String;
+	METHOD a getSaveFormatName ()Ljava/lang/String;
 	METHOD a convertMapFormat (Ljava/lang/String;Lnone/uy;)Z
-	METHOD a getSaveLoader (Ljava/lang/String;Z)Lnone/bqy;
+	METHOD a getSaveHandler (Ljava/lang/String;Z)Lnone/bqy;
 	METHOD b getSaveList ()Ljava/util/List;
+	METHOD c getCurrentVersion ()I
 	METHOD d flushCache ()V
 CLASS none/bql net/minecraft/level/WorldMulti
 	FIELD b mainWorldInstance
@@ -12969,7 +13007,7 @@ CLASS none/bql net/minecraft/level/WorldMulti
 	METHOD x getGameRules ()Lnone/aqq;
 	METHOD y getDifficulty ()Lnone/vt;
 	METHOD z isDifficultyLocked ()Z
-CLASS none/bqm net/minecraft/level/storage/SaveHandler
+CLASS none/bqm net/minecraft/level/storage/SaveHandlerOld
 	FIELD a LOGGER
 	FIELD b saveFile
 	FIELD c playerDataFile
@@ -12986,10 +13024,10 @@ CLASS none/bqm net/minecraft/level/storage/SaveHandler
 	METHOD a savePlayerData (Lnone/ahd;)V
 		ARG 0 entityPlayer
 	METHOD a getChunkLoader (Lnone/bgd;)Lnone/bfq;
-		ARG 0 levelProvider
-	METHOD a saveLevelInfo (Lnone/bqo;)V
+		ARG 0 dimension
+	METHOD a saveWorldInfo (Lnone/bqo;)V
 		ARG 0 levelInfo
-	METHOD a saveLevelInfoWithPlayer (Lnone/bqo;Lnone/fn;)V
+	METHOD a saveWorldInfoWithPlayer (Lnone/bqo;Lnone/fn;)V
 		ARG 0 levelInfo
 		ARG 1 nbtTagCompound
 	METHOD b getSaveFile ()Ljava/io/File;
@@ -13001,18 +13039,18 @@ CLASS none/bqm net/minecraft/level/storage/SaveHandler
 	METHOD f getAvailablePlayerData ()[Ljava/lang/String;
 	METHOD g getLevelDirectoryName ()Ljava/lang/String;
 	METHOD h createSessionLock ()V
-CLASS none/bqn net/minecraft/level/storage/OldSaveFormat
+CLASS none/bqn net/minecraft/level/storage/SaveLoaderOld
 	FIELD a saveFile
 	FIELD b LOGGER
 	METHOD <init> (Ljava/io/File;)V
 		ARG 0 saveFile
-	METHOD a getSaveFormatType ()Ljava/lang/String;
+	METHOD a getSaveFormatName ()Ljava/lang/String;
 	METHOD a renameWorld (Ljava/lang/String;Ljava/lang/String;)V
 		ARG 0 directory
 		ARG 1 newName
 	METHOD a convertMapFormat (Ljava/lang/String;Lnone/uy;)Z
 		ARG 1 progressBar
-	METHOD a getSaveLoader (Ljava/lang/String;Z)Lnone/bqy;
+	METHOD a getSaveHandler (Ljava/lang/String;Z)Lnone/bqy;
 		ARG 0 saveDirectory
 		ARG 1 savePlayers
 	METHOD a deleteFiles ([Ljava/io/File;)Z
@@ -13180,18 +13218,18 @@ CLASS none/bqy net/minecraft/level/ISaveHandler
 	METHOD a flush ()V
 	METHOD a getFileFromName (Ljava/lang/String;)Ljava/io/File;
 	METHOD a getChunkLoader (Lnone/bgd;)Lnone/bfq;
-	METHOD a saveLevelInfo (Lnone/bqo;)V
-	METHOD a saveLevelInfoWithPlayer (Lnone/bqo;Lnone/fn;)V
+	METHOD a saveWorldInfo (Lnone/bqo;)V
+	METHOD a saveWorldInfoWithPlayer (Lnone/bqo;Lnone/fn;)V
 	METHOD b getSaveFile ()Ljava/io/File;
 	METHOD c checkSessionLock ()V
 	METHOD d getWorld ()Lnone/bqo;
 	METHOD e getPlayerSaveHandler ()Lnone/brl;
 	METHOD g getLevelDirectoryName ()Ljava/lang/String;
-CLASS none/bra net/minecraft/level/ISaveFormat
-	METHOD a getSaveFormatType ()Ljava/lang/String;
+CLASS none/bra net/minecraft/level/ISaveLoader
+	METHOD a getSaveFormatName ()Ljava/lang/String;
 	METHOD a renameWorld (Ljava/lang/String;Ljava/lang/String;)V
 	METHOD a convertMapFormat (Ljava/lang/String;Lnone/uy;)Z
-	METHOD a getSaveLoader (Ljava/lang/String;Z)Lnone/bqy;
+	METHOD a getSaveHandler (Ljava/lang/String;Z)Lnone/bqy;
 	METHOD b getSaveList ()Ljava/util/List;
 	METHOD c getWorld (Ljava/lang/String;)Lnone/bqo;
 	METHOD d flushCache ()V
@@ -13225,12 +13263,12 @@ CLASS none/brb net/minecraft/level/storage/SaveFormatComparer
 	METHOD f getGameType ()Lnone/arc;
 	METHOD g getIsHardcore ()Z
 	METHOD h getCommandsEnabled ()Z
-CLASS none/brk
+CLASS none/brk net/minecraft/level/storage/SaveHandlerClientDummy
 	METHOD a flush ()V
 	METHOD a getFileFromName (Ljava/lang/String;)Ljava/io/File;
 	METHOD a getChunkLoader (Lnone/bgd;)Lnone/bfq;
-	METHOD a saveLevelInfo (Lnone/bqo;)V
-	METHOD a saveLevelInfoWithPlayer (Lnone/bqo;Lnone/fn;)V
+	METHOD a saveWorldInfo (Lnone/bqo;)V
+	METHOD a saveWorldInfoWithPlayer (Lnone/bqo;Lnone/fn;)V
 	METHOD b getSaveFile ()Ljava/io/File;
 	METHOD c checkSessionLock ()V
 	METHOD d getWorld ()Lnone/bqo;
@@ -13242,6 +13280,25 @@ CLASS none/brl net/minecraft/level/storage/IPlayerFileData
 	METHOD b readPlayerData (Lnone/ahd;)Lnone/fn;
 		ARG 0 entPlayer
 	METHOD f getAvailablePlayerData ()[Ljava/lang/String;
+CLASS none/brm net/minecraft/level/storage/WorldStorageClient
+	METHOD a saveAllWorldData ()V
+	METHOD a instantiateLevelData (Ljava/lang/Class;Ljava/lang/String;)Lnone/bqc;
+	METHOD a addLevelData (Ljava/lang/String;Lnone/bqc;)V
+CLASS none/brn net/minecraft/level/storage/WorldStorage
+	FIELD a levelDataObjects
+	FIELD b saveHandler
+	FIELD c levelDataSaveList
+	METHOD <init> (Lnone/bqy;)V
+		ARG 0 saveHandler
+	METHOD a saveAllWorldData ()V
+	METHOD a instantiateLevelData (Ljava/lang/Class;Ljava/lang/String;)Lnone/bqc;
+		ARG 0 levelDataClass
+		ARG 1 levelDataName
+	METHOD a addLevelData (Ljava/lang/String;Lnone/bqc;)V
+		ARG 0 levelDataName
+		ARG 1 levelData
+	METHOD a saveLevelData (Lnone/bqc;)V
+		ARG 0 levelData
 CLASS none/brt net/minecraft/util/AxisAlignedBB
 	FIELD a minX
 	FIELD b minY
@@ -13693,9 +13750,12 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	FIELD T crashReporter
 	FIELD U timer
 	FIELD V usageSnooper
-	FIELD X fontRenderer2
+	FIELD W entityRenderer
+	FIELD X itemRenderer
+	FIELD Y playerRenderer
 	FIELD Z renderViewEntity
 	FIELD a isRunningOnMac
+	FIELD aE musicTicker
 	FIELD aG mcSessionService
 	FIELD aI scheduledExecutables
 	FIELD aK thread
@@ -13739,7 +13799,7 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	FIELD l standardGalacticFontRenderer
 	FIELD m currentScreen
 	FIELD n loadingScreen
-	FIELD o entityRenderer
+	FIELD o gameRenderer
 	FIELD p guiAchievement
 	FIELD q ingameGUI
 	FIELD r skipRenderLevel
@@ -13775,7 +13835,8 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	METHOD Y getMinecraftSessionService ()Lcom/mojang/authlib/minecraft/MinecraftSessionService;
 	METHOD a run ()V
 	METHOD a runTask (Ljava/lang/Runnable;)Lcom/google/common/util/concurrent/ListenableFuture;
-	METHOD a createNewWorld (Ljava/lang/String;Ljava/lang/String;Lnone/arb;)V
+	METHOD a loadWorld (Ljava/lang/String;Ljava/lang/String;Lnone/arb;)V
+		ARG 0 worldName
 	METHOD a setCrashReporter (Lnone/b;)V
 	METHOD a displayGuiScreen (Lnone/bxf;)V
 	METHOD a setServerData (Lnone/cew;)V
@@ -13784,7 +13845,9 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	METHOD aH isInMainThread ()Z
 	METHOD aa getViewEntity ()Lnone/wv;
 	METHOD ac isSnooperEnabled ()Z
-	METHOD af getFontRenderer ()Lnone/cqh;
+	METHOD ae getRenderManager ()Lnone/cpt;
+	METHOD af getItemRenderer ()Lnone/cqh;
+	METHOD ag getPlayerRenderer ()Lnone/cki;
 	METHOD ah getDebugFPS ()I
 	METHOD aj startGame ()V
 	METHOD ak registerMetadataSectionTypes ()V
@@ -13802,7 +13865,9 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	METHOD c displayCrashReport (Lnone/b;)V
 	METHOD d isCurrentLocaleUnicode ()Z
 	METHOD e refreshResources ()V
+	METHOD f getSaveLoader ()Lnone/bra;
 	METHOD g shutdownMinecraftApplet ()V
+	METHOD j getMaxFps ()I
 	METHOD l freeMemory ()V
 	METHOD q toggleFullscreen ()V
 	METHOD r tick ()V
@@ -13968,6 +14033,8 @@ CLASS none/btr net/minecraft/options/EnumOptions
 	METHOD d getEnumString ()Ljava/lang/String;
 	METHOD f getEnumFloat3 ()F
 CLASS none/bts net/minecraft/client/LoadingScreenRenderer
+	FIELD a progressBarMessage
+	METHOD c setProgressBarMessage (Ljava/lang/String;)V
 CLASS none/btt net/minecraft/util/ScreenShotHelper
 	FIELD a logger
 CLASS none/btu net/minecraft/util/MinecraftError
@@ -14111,20 +14178,42 @@ CLASS none/but net/minecraft/client/gui/button/EnumLockButtonState
 	FIELD e UNLOCKED_HOVER
 	FIELD f UNLOCKED_DISABLED
 CLASS none/buu
-	METHOD a drawSlot (IIIIII)V
+	METHOD a drawBackground ()V
+	METHOD a isListItemSelected (I)Z
+	METHOD a drawListItem (IIIIII)V
+	METHOD a selectItem (IZII)V
 CLASS none/buv net/minecraft/client/gui/IGuiSlot
 CLASS none/buw net/minecraft/client/gui/button/GuiSmallButton
 	METHOD c returnEnumOptions ()Lnone/btr;
+CLASS none/bux
+	METHOD b getListItemCount ()I
+	METHOD d getScrollbarHorizontalPosition ()I
 CLASS none/buy
 	FIELD a mc
+CLASS none/buz
+	METHOD b getListItemCount ()I
+	METHOD d getScrollbarHorizontalPosition ()I
 CLASS none/bvh net/minecraft/client/gui/GuiScoreboard
 	FIELD f mc
 	METHOD a setFooter (Lnone/ho;)V
 	METHOD b setHeader (Lnone/ho;)V
-CLASS none/bvk
-	FIELD a mc
-	METHOD a drawSlot (IIIIII)V
+CLASS none/bvk net/minecraft/client/gui/GuiScrolledSelectionList
+	FIELD a minecraft
+	FIELD b guiWidth
+	FIELD c guiHeight
+	FIELD h listItemHeight
+	METHOD <init> (Lnone/bsu;IIIII)V
+		ARG 1 guiWidth
+		ARG 2 guiHeight
+		ARG 5 listItemHeight
+	METHOD a drawBackground ()V
+	METHOD a isListItemSelected (I)Z
+	METHOD a drawListItem (IIIIII)V
+	METHOD a selectItem (IZII)V
 	METHOD a actionPerformed (Lnone/bug;)V
+	METHOD b getListItemCount ()I
+	METHOD d getScrollbarHorizontalPosition ()I
+	METHOD k getScrolledHeight ()I
 CLASS none/bvl net/minecraft/client/gui/button/bvl
 	METHOD a mouseReleased (II)V
 	METHOD a getHoverState (Z)I
@@ -14142,7 +14231,16 @@ CLASS none/bvr net/minecraft/client/gui/button/bvr
 	METHOD b mouseDragged (Lnone/bsu;II)V
 	METHOD c mousePressed (Lnone/bsu;II)Z
 CLASS none/bvs
-	METHOD a drawSlot (IIIIII)V
+	FIELD u selectionList
+	METHOD a drawBackground ()V
+	METHOD a isListItemSelected (I)Z
+	METHOD a drawListItem (IIIIII)V
+	METHOD a drawSelectedListItem (IIILnet/minecraft/realms/Tezzelator;)V
+	METHOD a selectItem (IZII)V
+	METHOD b getListItemCount ()I
+	METHOD d getScrollbarHorizontalPosition ()I
+	METHOD e getGuiWidth ()I
+	METHOD k getScrolledHeight ()I
 CLASS none/bvt net/minecraft/client/gui/GuiRealms
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
@@ -14163,9 +14261,23 @@ CLASS none/bvt net/minecraft/client/gui/GuiRealms
 	METHOD l handleKeyboardInput ()V
 	METHOD m onGuiClosed ()V
 CLASS none/bvu
-	METHOD a drawSlot (IIIIII)V
+	METHOD a drawBackground ()V
+	METHOD a isListItemSelected (I)Z
+	METHOD a drawListItem (IIIIII)V
+	METHOD a selectItem (IZII)V
+	METHOD b getListItemCount ()I
+	METHOD d getScrollbarHorizontalPosition ()I
+	METHOD k getScrolledHeight ()I
 CLASS none/bvv
-	METHOD a drawSlot (IIIIII)V
+	FIELD u selectionList
+	METHOD a drawBackground ()V
+	METHOD a isListItemSelected (I)Z
+	METHOD a drawListItem (IIIIII)V
+	METHOD a selectItem (IZII)V
+	METHOD b getListItemCount ()I
+	METHOD d getScrollbarHorizontalPosition ()I
+	METHOD e getGuiWidth ()I
+	METHOD k getScrolledHeight ()I
 CLASS none/bvw net/minecraft/client/gui/GuiChatOptions
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
@@ -14202,8 +14314,21 @@ CLASS none/bwb net/minecraft/client/gui/GuiConnecting
 	METHOD b initGui ()V
 	METHOD e updateScreen ()V
 CLASS none/bwd net/minecraft/client/gui/GuiCreateFlatWorld
-	CLASS bwe GuiCreateFlatWorldListSlot
-		METHOD a drawSlot (IIIIII)V
+	CLASS bwe GuiCreateFlatWorldSelectionList
+		METHOD a drawBackground ()V
+		METHOD a isListItemSelected (I)Z
+		METHOD a drawListItem (IIIIII)V
+		METHOD a selectItem (IZII)V
+		METHOD b getListItemCount ()I
+		METHOD d getScrollbarHorizontalPosition ()I
+	FIELD a guiNewWorld
+	FIELD g titleString
+	FIELD h tileString
+	FIELD i heightString
+	FIELD r selectionList
+	FIELD s addLayerButton
+	FIELD t editLayerButton
+	FIELD u removeLayerButton
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
@@ -14218,7 +14343,16 @@ CLASS none/bwf net/minecraft/client/gui/GuiNewWorld
 	METHOD m onGuiClosed ()V
 CLASS none/bwg net/minecraft/client/gui/GuiCustomWorldPresets
 	CLASS bwi
-		METHOD a drawSlot (IIIIII)V
+		METHOD a drawBackground ()V
+		METHOD a isListItemSelected (I)Z
+		METHOD a drawListItem (IIIIII)V
+		METHOD a selectItem (IZII)V
+		METHOD b getListItemCount ()I
+	FIELD a titleString
+	FIELD h selectPresetButton
+	FIELD r guiWorldSettings
+	FIELD s shareString
+	FIELD t listString
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a mouseClicked (III)V
@@ -14285,6 +14419,13 @@ CLASS none/bwr net/minecraft/client/gui/GuiSleepMP
 	METHOD b initGui ()V
 	METHOD f wakeEntity ()V
 CLASS none/bws net/minecraft/client/gui/GuiLanguage
+	CLASS bwt
+		METHOD a drawBackground ()V
+		METHOD a isListItemSelected (I)Z
+		METHOD a drawListItem (IIIIII)V
+		METHOD a selectItem (IZII)V
+		METHOD b getListItemCount ()I
+		METHOD k getScrolledHeight ()I
 	FIELD a parentGui
 	FIELD f languageList
 	FIELD g theGameSettings
@@ -14315,7 +14456,12 @@ CLASS none/bwy net/minecraft/client/gui/GuiIngameMenu
 	METHOD e updateScreen ()V
 CLASS none/bwz net/minecraft/client/gui/GuiWorldPresets
 	CLASS bxb
-		METHOD a drawSlot (IIIIII)V
+		METHOD a drawBackground ()V
+		METHOD a isListItemSelected (I)Z
+		METHOD a drawListItem (IIIIII)V
+		METHOD a selectItem (IZII)V
+		METHOD b getListItemCount ()I
+	FIELD s selectPresetButton
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a mouseClicked (III)V
@@ -14326,6 +14472,7 @@ CLASS none/bwz net/minecraft/client/gui/GuiWorldPresets
 	METHOD m onGuiClosed ()V
 CLASS none/bxc net/minecraft/client/gui/GuiResourcePackProgress
 	METHOD a drawScreen (IIF)V
+	METHOD c setProgressBarMessage (Ljava/lang/String;)V
 CLASS none/bxd net/minecraft/client/gui/GuiDownloadingTerrain
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
@@ -14375,11 +14522,26 @@ CLASS none/bxf net/minecraft/client/gui/GuiScreen
 	METHOD r isShiftKeyDown ()Z
 CLASS none/bxg net/minecraft/client/gui/GuiSelectWorld
 	CLASS bxh
-		METHOD a drawSlot (IIIIII)V
+		METHOD a drawBackground ()V
+		METHOD a isListItemSelected (I)Z
+			ARG 0 saveNumber
+		METHOD a drawListItem (IIIIII)V
+		METHOD a selectItem (IZII)V
+		METHOD b getListItemCount ()I
+		METHOD k getScrolledHeight ()I
+	FIELD A renameButton
+	FIELD B recreateButton
+	FIELD f titleString
+	FIELD r selectedSaveNumber
+	FIELD s saveList
+	FIELD w gameModeStrings
+	FIELD y deleteButton
+	FIELD z selectButton
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD a onChoice (ZI)V
 	METHOD b initGui ()V
+	METHOD f readSaveList ()V
 	METHOD k handleMouseInput ()V
 CLASS none/bxi net/minecraft/client/gui/GuiLanServer
 	METHOD a drawScreen (IIF)V
@@ -14389,7 +14551,12 @@ CLASS none/bxj net/minecraft/client/gui/GuiSkinCustomization
 CLASS none/bxk empty/_1
 CLASS none/bxm net/minecraft/client/gui/GuiSnooper
 	CLASS bxn
-		METHOD a drawSlot (IIIIII)V
+		METHOD a drawBackground ()V
+		METHOD a isListItemSelected (I)Z
+		METHOD a drawListItem (IIIIII)V
+		METHOD a selectItem (IZII)V
+		METHOD b getListItemCount ()I
+		METHOD d getScrollbarHorizontalPosition ()I
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
@@ -14449,6 +14616,29 @@ CLASS none/bxu net/minecraft/client/gui/GuiAchievements
 	METHOD d doesGuiPauseGame ()Z
 	METHOD e updateScreen ()V
 CLASS none/bxv net/minecraft/client/gui/GuiStats
+	CLASS bxw
+		METHOD a drawListItem (IIIIII)V
+	CLASS bxy
+		METHOD a drawBackground ()V
+		METHOD a isListItemSelected (I)Z
+		METHOD a drawListItem (IIIIII)V
+		METHOD a selectItem (IZII)V
+		METHOD b getListItemCount ()I
+		METHOD k getScrolledHeight ()I
+	CLASS bxz
+		METHOD a drawListItem (IIIIII)V
+	CLASS byb
+		METHOD a drawBackground ()V
+		METHOD a isListItemSelected (I)Z
+		METHOD a drawListItem (IIIIII)V
+		METHOD a selectItem (IZII)V
+		METHOD b getListItemCount ()I
+		METHOD k getScrolledHeight ()I
+	CLASS byc
+		METHOD a drawBackground ()V
+		METHOD a isListItemSelected (I)Z
+		METHOD a selectItem (IZII)V
+		METHOD b getListItemCount ()I
 	FIELD a parent
 	METHOD <init> (Lnone/bxf;Lnone/tz;)V
 		ARG 0 parent
@@ -14464,6 +14654,8 @@ CLASS none/byd net/minecraft/client/gui/ILoadableGui
 	METHOD a onLoaded ()V
 CLASS none/byf
 	FIELD v mc
+	METHOD b getListItemCount ()I
+	METHOD d getScrollbarHorizontalPosition ()I
 CLASS none/byj net/minecraft/client/gui/GuiControls
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
@@ -14646,6 +14838,10 @@ CLASS none/bzp net/minecraft/client/gui/GuiMultiplayer
 	METHOD m onGuiClosed ()V
 CLASS none/bzq net/minecraft/client/gui/GuiSlotServer
 	FIELD a mc
+CLASS none/bzu
+	METHOD a isListItemSelected (I)Z
+	METHOD b getListItemCount ()I
+	METHOD d getScrollbarHorizontalPosition ()I
 CLASS none/bzx net/minecraft/client/gui/GuiSelectResourcePack
 	METHOD a drawScreen (IIF)V
 	METHOD a mouseClicked (III)V
@@ -14653,7 +14849,17 @@ CLASS none/bzx net/minecraft/client/gui/GuiSelectResourcePack
 	METHOD b initGui ()V
 	METHOD b mouseMovedOrUp (III)V
 	METHOD k handleMouseInput ()V
+CLASS none/cad
+	METHOD b getListItemCount ()I
+	METHOD d getScrollbarHorizontalPosition ()I
 CLASS none/cah net/minecraft/client/gui/GuiTwitchIngest
+	CLASS cai
+		METHOD a drawBackground ()V
+		METHOD a isListItemSelected (I)Z
+		METHOD a drawListItem (IIIIII)V
+		METHOD a selectItem (IZII)V
+		METHOD b getListItemCount ()I
+		METHOD d getScrollbarHorizontalPosition ()I
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
@@ -15117,7 +15323,7 @@ CLASS none/cel net/minecraft/level/gen/ClientChunkCache
 	METHOD a getStrongholdGen (Lnone/aqu;Ljava/lang/String;Lnone/dt;)Lnone/dt;
 	METHOD a provideChunk (Lnone/dt;)Lnone/bfh;
 	METHOD a getSpawnableAtPos (Lnone/xp;Lnone/dt;)Ljava/util/List;
-	METHOD a saveChunks (ZLnone/uy;)Z
+	METHOD a saveAllChunks (ZLnone/uy;)Z
 	METHOD c saveExtraData ()V
 	METHOD d unloadQueuedChunks ()Z
 	METHOD d generate (II)Lnone/bfh;
@@ -15592,7 +15798,7 @@ CLASS none/cjh net/minecraft/client/renderers/BlockVertex
 	FIELD a xFaceId
 	FIELD b yFaceId
 	FIELD c zFaceId
-CLASS none/cji net/minecraft/entity/EntityRenderer
+CLASS none/cji net/minecraft/client/renderers/Renderer
 	FIELD ab SHADERS
 	FIELD e LOGGER
 	FIELD f RAIN_TEXTURE
@@ -15611,11 +15817,14 @@ CLASS none/cjm net/minecraft/client/OpenGL
 	METHOD b glTranslatef (FFF)V
 	METHOD b glRotatef (FFFF)V
 	METHOD c glColor4f (FFFF)V
-CLASS none/cki
+CLASS none/cki net/minecraft/client/renderers/PlayerRenderer
 	FIELD a MAP_BACKGROUND
 	FIELD b UNDERWATER
 	FIELD c minecraft
-CLASS none/ckn net/minecraft/client/renderer/LevelRenderer
+	FIELD d heldItemStack
+	FIELD g entityRenderer
+	FIELD h itemRenderer
+CLASS none/ckn net/minecraft/client/renderers/LevelRenderer
 	FIELD b LOGGER
 	FIELD c MOON_PHASES
 	FIELD d SUN
@@ -15654,6 +15863,8 @@ CLASS none/ckx net/minecraft/client/renderers/Tessellator
 CLASS none/ckz
 	METHOD a draw (Lnone/civ;I)I
 CLASS none/cll
+	FIELD b gameSettings
+	METHOD a tryTesselateBlock (Lnone/bec;Lnone/dt;Lnone/ard;Lnone/civ;)Z
 	METHOD a onReload (Lnone/cvk;)V
 CLASS none/clp
 	FIELD a DOWN
@@ -15702,6 +15913,7 @@ CLASS none/cnv net/minecraft/client/renderers/BlockEntitySignRenderer
 	METHOD a renderBlockEntitySignAt (Lnone/bdj;DDDFI)V
 CLASS none/cpe net/minecraft/client/renderers/RenderArmorStand
 	METHOD a rotateCorpse (Lnone/xm;FFF)V
+	METHOD b getModel ()Lnone/ccq;
 CLASS none/cpg net/minecraft/client/renderers/RenderArrow
 CLASS none/cph net/minecraft/client/renderers/RenderBat
 	FIELD a batTextures
@@ -15725,16 +15937,19 @@ CLASS none/cpq net/minecraft/client/renderers/RenderEnderdragon
 CLASS none/cpr net/minecraft/client/renderers/RenderEnderman
 	FIELD a ENDERMAN_PNG
 CLASS none/cps net/minecraft/client/renderers/RenderEndermite
-CLASS none/cpt net/minecraft/client/renderers/RenderManager
+CLASS none/cpt net/minecraft/client/renderers/EntityRenderer
 	FIELD a renderEngine
+	FIELD b level
+	FIELD g gameSettings
 	FIELD k entityRenderMap
+	FIELD n fontRenderer
 	METHOD a getEntityRenderObject (Lnone/wv;)Lnone/cpu;
 	METHOD a renderEntityWithPosYaw (Lnone/wv;DDDFFZ)Z
 CLASS none/cpu net/minecraft/client/renderers/Render
 CLASS none/cpv net/minecraft/client/renderers/RenderXBOrb
 CLASS none/cpw net/minecraft/client/renderers/RenderFallingBlock
 CLASS none/cpx net/minecraft/client/renderers/RenderFireball
-CLASS none/cpy
+CLASS none/cpy net/minecraft/client/renderers/RenderFishingHook
 	FIELD a PARTICLES_PNG
 CLASS none/cpz net/minecraft/client/renderers/RenderGhast
 	FIELD a GHAST_PNG
@@ -15760,7 +15975,9 @@ CLASS none/cqt net/minecraft/client/renderers/RenderLeashKnot
 	FIELD a LEAD_KNOT_PNG
 CLASS none/cqu net/minecraft/client/renderers/RenderLightningBolt
 CLASS none/cqv
+	FIELD f model
 	METHOD a rotateCorpse (Lnone/xm;FFF)V
+	METHOD b getModel ()Lnone/ccq;
 CLASS none/cqx net/minecraft/client/renderers/RenderMinecartBase
 	FIELD e MINECART_PNG
 CLASS none/cqy net/minecraft/client/renderers/RenderMinecartSpawner
@@ -15779,6 +15996,7 @@ CLASS none/crj net/minecraft/client/renderers/RenderSkeleton
 CLASS none/crl net/minecraft/client/renderers/RenderSlime
 CLASS none/crm net/minecraft/client/renderers/RenderSnowman
 	FIELD a SNOWMAN_PNG
+	METHOD b getModel ()Lnone/ccq;
 CLASS none/crn net/minecraft/client/renderers/RenderSpider
 	FIELD a SPIDER_PNG
 CLASS none/cro net/minecraft/client/renderers/RenderSquid
@@ -15790,6 +16008,7 @@ CLASS none/crs net/minecraft/client/renderers/RenderPrimedTNT
 CLASS none/crt net/minecraft/client/renderers/RenderIronGolem
 	METHOD a rotateCorpse (Lnone/xm;FFF)V
 CLASS none/cru net/minecraft/client/renderers/RenderVillager
+	METHOD b getModel ()Lnone/ccq;
 CLASS none/crv net/minecraft/client/renderers/RenderWitch
 	FIELD a WITCH_PNG
 CLASS none/crw net/minecraft/client/renderers/RenderWither
@@ -15799,12 +16018,85 @@ CLASS none/crz net/minecraft/client/renderers/RenderZombie
 	FIELD j ZOMBIE_PNG
 	FIELD k ZOMBIE_VILLAGER_PNG
 	METHOD a rotateCorpse (Lnone/xm;FFF)V
-CLASS none/csr
+CLASS none/csb
+	METHOD a render (Lnone/xm;FFFFFFF)V
+CLASS none/csd
+	METHOD a render (Lnone/xm;FFFFFFF)V
+CLASS none/cse
+	METHOD a render (Lnone/xm;FFFFFFF)V
+CLASS none/csf
+	FIELD a renderEnderman
+	METHOD a render (Lnone/xm;FFFFFFF)V
+CLASS none/csg net/minecraft/client/renderers/RenderCreeperArmor
+	FIELD a CREEPER_ARMOR_PNG
+	FIELD b renderCreeper
+	FIELD c modelCreeper
+	METHOD a render (Lnone/aep;FFFFFFF)V
+	METHOD a render (Lnone/xm;FFFFFFF)V
+CLASS none/csh
+	METHOD a render (Lnone/xm;FFFFFFF)V
+CLASS none/csi
+	METHOD a render (Lnone/xm;FFFFFFF)V
+CLASS none/csj
+	METHOD a render (Lnone/xm;FFFFFFF)V
+CLASS none/csk net/minecraft/client/renderers/RenderDragonEyes
+	FIELD a DRAGON_EYES_PNG
+	FIELD b renderEnderdragon
+	METHOD a render (Lnone/adb;FFFFFFF)V
+	METHOD a render (Lnone/xm;FFFFFFF)V
+CLASS none/csl net/minecraft/client/renderers/RenderEndermanEyes
+	FIELD a ENDERMAN_EYES_PNG
+	FIELD b renderEnderman
+	METHOD a render (Lnone/aer;FFFFFFF)V
+	METHOD a render (Lnone/xm;FFFFFFF)V
+CLASS none/csn
+	METHOD a render (Lnone/xm;FFFFFFF)V
+CLASS none/cso
+	METHOD a render (Lnone/xm;FFFFFFF)V
+CLASS none/csp net/minecraft/client/renderers/RenderPigSaddle
+	FIELD a PIG_SADDLE_PNG
+	FIELD b renderPig
+	FIELD c modelPig
+	METHOD a render (Lnone/aca;FFFFFFF)V
+	METHOD a render (Lnone/xm;FFFFFFF)V
+CLASS none/csq net/minecraft/client/renderers/IRenderLivingEntityProp
+	METHOD a render (Lnone/xm;FFFFFFF)V
+CLASS none/csr net/minecraft/client/renderers/RenderSheepFur
 	FIELD a SHEEP_FUR_PNG
+	FIELD b renderSheep
+	FIELD c modelSheep
+	METHOD a render (Lnone/acl;FFFFFFF)V
+	METHOD a render (Lnone/xm;FFFFFFF)V
+CLASS none/css
+	METHOD a render (Lnone/xm;FFFFFFF)V
+CLASS none/cst
+	METHOD a render (Lnone/xm;FFFFFFF)V
 CLASS none/csu net/minecraft/client/renderers/RenderSpiderEyes
+	FIELD a SPIDER_EYES_PNG
+	FIELD b renderSpider
+	METHOD a render (Lnone/age;FFFFFFF)V
+	METHOD a render (Lnone/xm;FFFFFFF)V
+CLASS none/csw
+	METHOD a render (Lnone/acq;FFFFFFF)V
+	METHOD a render (Lnone/xm;FFFFFFF)V
+CLASS none/csx
+	FIELD a renderWitch
+	METHOD a render (Lnone/agi;FFFFFFF)V
+	METHOD a render (Lnone/xm;FFFFFFF)V
+CLASS none/csy net/minecraft/client/renderers/RenderWitherArmor
+	FIELD a WITHER_ARMOR_PNG
+	FIELD b renderWither
+	FIELD c modelWither
+	METHOD a render (Lnone/adf;FFFFFFF)V
+	METHOD a render (Lnone/xm;FFFFFFF)V
 CLASS none/csz net/minecraft/client/renderers/RenderWolfCollar
+	FIELD a WOLF_COLLAR_PNG
+	FIELD b renderWolf
+	METHOD a render (Lnone/acu;FFFFFFF)V
+	METHOD a render (Lnone/xm;FFFFFFF)V
 CLASS none/ctc
 	METHOD a rotateCorpse (Lnone/xm;FFF)V
+	METHOD b getModel ()Lnone/ccq;
 CLASS none/ctx
 	FIELD b width
 	FIELD c height
@@ -16012,6 +16304,9 @@ CLASS none/cxz net/minecraft/sound/EnumSoundType
 CLASS none/cyc
 	FIELD a FILE
 	FIELD b SOUND_EVENT
+CLASS none/cyj
+	FIELD h playerNbt
+	METHOD u getPlayerNbt ()Lnone/fn;
 CLASS none/cyk net/minecraft/server/IntegratedServer
 	FIELD j logger
 	FIELD k minecraft
@@ -16224,6 +16519,8 @@ CLASS none/cee$ceh
 	CLASS cei
 		METHOD a onChoice (ZI)V
 CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
+	CLASS pd
+		METHOD c setProgressBarMessage (Ljava/lang/String;)V
 	FIELD A canSpawnAnimals
 	FIELD B canSpawnNPCs
 	FIELD C pvpEnabled
@@ -16290,7 +16587,8 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD W isDemo ()Z
 	METHOD X getActiveAnvilConverter ()Lnone/bra;
 	METHOD Z deleteLevelAndStopServer ()V
-	METHOD a levelServerForDimension (I)Lnone/qt;
+	METHOD a getLevelServerForDimension (I)Lnone/qt;
+		ARG 0 dimensionID
 	METHOD a canUseCommand (ILjava/lang/String;)Z
 	METHOD a runTask (Ljava/lang/Runnable;)Lcom/google/common/util/concurrent/ListenableFuture;
 		ARG 0 task
