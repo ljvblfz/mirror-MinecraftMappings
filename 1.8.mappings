@@ -4503,7 +4503,7 @@ CLASS none/ws net/minecraft/entity/EntityAgeable
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws;
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD i_ isBaby ()Z
-	METHOD n assGoals ()V
+	METHOD n attackGoals ()V
 CLASS none/wv net/minecraft/entity/Entity
 	FIELD A previousYaw
 	FIELD B previousPitch
@@ -4780,6 +4780,7 @@ CLASS none/xm net/minecraft/entity/EntityLiving
 	METHOD a mount (Lnone/wv;)V
 	METHOD a getAttribute (Lnone/xy;)Lnone/xz;
 	METHOD aD getHeadPitch ()F
+	METHOD aW setAttributes ()V
 	METHOD aX breathesUnderwater ()Z
 	METHOD ac markForKnockback ()V
 	METHOD ai isEntityAlive ()Z
@@ -4828,6 +4829,7 @@ CLASS none/xn net/minecraft/entity/EntityMob
 	METHOD a doInteractionWith (Lnone/ahd;)Z
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
+	METHOD aW setAttributes ()V
 	METHOD at getArmorEquipment ()[Lnone/amj;
 	METHOD b getDroppedXp (Lnone/ahd;)I
 	METHOD b writeToNBT (Lnone/fn;)V
@@ -4835,7 +4837,7 @@ CLASS none/xn net/minecraft/entity/EntityMob
 	METHOD c setArmorInSlot (ILnone/amj;)V
 	METHOD d replaceItem (ILnone/amj;)Z
 	METHOD e attemptMountByPlayer (Lnone/ahd;)Z
-	METHOD n assGoals ()V
+	METHOD n attackGoals ()V
 	METHOD p getEquipmentInSlot (I)Lnone/amj;
 	METHOD s_ onUpdate ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
@@ -5051,53 +5053,155 @@ CLASS none/yg net/minecraft/entity/attribute/Attribute
 		ARG 0 displayName
 	METHOD g getDisplayName ()Ljava/lang/String;
 CLASS none/yp net/minecraft/entity/ai/GoalAvoidEntity
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/yr net/minecraft/entity/ai/GoalBeg
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/ys net/minecraft/entity/ai/GoalBreakDoor
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/yt net/minecraft/entity/ai/GoalMate
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/yu net/minecraft/entity/ai/GoalPlayerControl
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/yv net/minecraft/entity/ai/GoalDoorInteract
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/yw net/minecraft/entity/ai/GoalEatGrass
+	FIELD b predicate
+	FIELD c executor
+	FIELD d level
+	METHOD <init> (Lnone/xn;)V
+		ARG 0 executor
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/yx net/minecraft/entity/ai/GoalFleeSun
+	METHOD a ()Z
 CLASS none/yy net/minecraft/entity/ai/GoalSwimming
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/yz net/minecraft/entity/ai/GoalFollowOwner
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/za net/minecraft/entity/ai/GoalFollowParent
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/zb net/minecraft/entity/ai/Goal
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/zc net/minecraft/entity/ai/EntityGoals
 	METHOD a add (ILnone/zb;)V
+	METHOD a add (Lnone/zb;)V
 CLASS none/ze net/minecraft/entity/ai/GoalPlantCrops
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/zg net/minecraft/entity/ai/GoalLeapAtTarget
+	METHOD a ()Z
 CLASS none/zh net/minecraft/entity/ai/GoalWatchEntity
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/zi net/minecraft/entity/ai/GoalWatchTradingPlayer
+	METHOD a ()Z
 CLASS none/zj net/minecraft/entity/ai/GoalVillagerReproduce
-CLASS none/zk net/minecraft/entity/ai/GoalMeleeAttack
+	METHOD a ()Z
+	METHOD e opUpdate ()V
+CLASS none/zk net/minecraft/entity/ai/GoalTargetEntity
+	FIELD g targetEntity
+	METHOD <init> (Lnone/xu;Ljava/lang/Class;DZ)V
+		ARG 0 goalExecutor
+		ARG 1 targetEntity
+	METHOD a ()Z
 	METHOD a (Lnone/xm;)D
 		ARG 0 entity
+	METHOD e opUpdate ()V
 CLASS none/zl net/minecraft/entity/ai/GoalMoveIndoors
+	METHOD a ()Z
 CLASS none/zm net/minecraft/entity/ai/GoalMoveThroughVillage
+	METHOD a ()Z
 CLASS none/zn net/minecraft/entity/ai/GoalMoveToBlock
+	METHOD a ()Z
+	METHOD e opUpdate ()V
+CLASS none/zo
+	METHOD a ()Z
 CLASS none/zp net/minecraft/entity/ai/GoalMoveToTarget
+	METHOD a ()Z
 CLASS none/zq net/minecraft/entity/ai/GoalOcelotAttack
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/zr net/minecraft/entity/ai/GoalOcelotSit
+	METHOD a ()Z
 	METHOD a (Lnone/aqu;Lnone/dt;)Z
 		ARG 0 level
 		ARG 1 blockPos
+	METHOD e opUpdate ()V
 CLASS none/zs net/minecraft/entity/ai/GoalWatchVillager
+	FIELD a executor
+	METHOD <init> (Lnone/acq;)V
+		ARG 0 golem
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/zt net/minecraft/entity/ai/GoalOpenDoor
+	METHOD e opUpdate ()V
 CLASS none/zu net/minecraft/entity/ai/GoalPanic
+	METHOD a ()Z
 CLASS none/zv net/minecraft/entity/ai/GoalVillagerPlay
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/zx net/minecraft/entity/ai/GoalIdleLook
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/zy net/minecraft/entity/ai/GoalWander
+	METHOD a ()Z
 CLASS none/zz net/minecraft/entity/ai/GoalArrowAttack
+	FIELD b rangedAttackMob
+	METHOD <init> (Lnone/afr;DIF)V
+		ARG 0 rangedAttackMob
+	METHOD <init> (Lnone/afr;DIIF)V
+		ARG 0 rangedAttackMob
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/aaa net/minecraft/entity/ai/GoalRestrictOpenDoor
-CLASS none/aab net/minecraft/entity/ai/GoalCheckSun
+	METHOD a ()Z
+	METHOD e opUpdate ()V
+CLASS none/aab net/minecraft/entity/ai/GoalAvoidSun
+	METHOD a ()Z
+CLASS none/aac
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/aad net/minecraft/entity/ai/GoalSit
+	METHOD a ()Z
 CLASS none/aae net/minecraft/entity/ai/GoalCreeperSwell
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/aaf net/minecraft/entity/ai/GoalFollowGolem
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/aag net/minecraft/entity/ai/GoalTempt
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/aah net/minecraft/entity/ai/GoalTradePlayer
+	METHOD a ()Z
 CLASS none/aai net/minecraft/entity/ai/GoalExchangeProduce
+	METHOD e opUpdate ()V
 CLASS none/aak net/minecraft/entity/ai/GoalDefendVillage
+	METHOD a ()Z
+CLASS none/aal
+	METHOD a ()Z
+CLASS none/aam
+	METHOD a ()Z
+CLASS none/aao
+	METHOD a ()Z
 CLASS none/aaq net/minecraft/entity/ai/GoalFollowEntity
+	METHOD a ()Z
+CLASS none/aat
+	METHOD a ()Z
+CLASS none/aau
+	METHOD a ()Z
+CLASS none/aav
+	METHOD a ()Z
 CLASS none/abl net/minecraft/level/storage/VillagesData
 	FIELD b level
 	METHOD a getNameForDimension (Lnone/bgd;)Ljava/lang/String;
@@ -5113,6 +5217,7 @@ CLASS none/abo net/minecraft/entity/passive/EntityBat
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
 	METHOD aR getEyeHeight ()F
+	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
@@ -5134,6 +5239,7 @@ CLASS none/abr net/minecraft/entity/passive/EntityChicken
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws;
 	METHOD aR getEyeHeight ()F
+	METHOD aW setAttributes ()V
 	METHOD b getDroppedXp (Lnone/ahd;)I
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
@@ -5145,6 +5251,7 @@ CLASS none/abs net/minecraft/entity/passive/EntityCow
 	METHOD a doInteractionWith (Lnone/ahd;)Z
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws;
 	METHOD aR getEyeHeight ()F
+	METHOD aW setAttributes ()V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD z getIdleSound ()Ljava/lang/String;
@@ -5159,6 +5266,7 @@ CLASS none/abt net/minecraft/entity/passive/EntityHorse
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws;
 	METHOD aR getEyeHeight ()F
+	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
@@ -5184,6 +5292,7 @@ CLASS none/aby net/minecraft/entity/passive/EntityOcelot
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws;
+	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
@@ -5196,6 +5305,7 @@ CLASS none/aca net/minecraft/entity/passive/EntityPig
 	METHOD a doInteractionWith (Lnone/ahd;)Z
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws;
+	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
@@ -5210,10 +5320,18 @@ CLASS none/acb net/minecraft/entity/passive/EntityRabbit
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws;
+	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD z getIdleSound ()Ljava/lang/String;
+CLASS none/acf
+	METHOD e opUpdate ()V
+CLASS none/acj
+	METHOD e opUpdate ()V
+CLASS none/ack
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/acl net/minecraft/entity/passive/EntitySheep
 	FIELD bk craftingInventory
 	FIELD bm woolColors
@@ -5224,6 +5342,7 @@ CLASS none/acl net/minecraft/entity/passive/EntitySheep
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws;
 	METHOD aR getEyeHeight ()F
+	METHOD aW setAttributes ()V
 	METHOD b setDyeColor (Lnone/akv;)V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
@@ -5234,18 +5353,24 @@ CLASS none/acn net/minecraft/entity/monster/EntitySnowMan
 	METHOD A getDroppedItem ()Lnone/alq;
 	METHOD a shoot (Lnone/xm;F)V
 	METHOD aR getEyeHeight ()F
+	METHOD aW setAttributes ()V
 CLASS none/aco net/minecraft/entity/passive/EntitySquid
 	METHOD A getDroppedItem ()Lnone/alq;
 	METHOD V isInWater ()Z
 	METHOD a handleEntityStatusPacket (B)V
 	METHOD aR getEyeHeight ()F
+	METHOD aW setAttributes ()V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD z getIdleSound ()Ljava/lang/String;
+CLASS none/acp
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/acq net/minecraft/entity/monster/EntityIronGolem
 	METHOD a handleEntityStatusPacket (B)V
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a handleDeathFrom (Lnone/wh;)V
+	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
@@ -5264,6 +5389,7 @@ CLASS none/acu net/minecraft/entity/passive/EntityWolf
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws;
 	METHOD aR getEyeHeight ()F
+	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
@@ -5289,8 +5415,9 @@ CLASS none/ada net/minecraft/entity/item/EntityEnderCrystal
 CLASS none/adb net/minecraft/entity/boss/EntityDragon
 	METHOD G onKillCommand ()V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD aW setAttributes ()V
 	METHOD bn getHurtSound ()Ljava/lang/String;
-	METHOD n assGoals ()V
+	METHOD n attackGoals ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/adf net/minecraft/entity/boss/EntityWither
 	METHOD a readFromNBT (Lnone/fn;)V
@@ -5298,11 +5425,12 @@ CLASS none/adf net/minecraft/entity/boss/EntityWither
 	METHOD a mount (Lnone/wv;)V
 	METHOD a shoot (Lnone/xm;F)V
 	METHOD aB onInsideWeb ()V
+	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD e onHitGround (FF)V
-	METHOD n assGoals ()V
+	METHOD n attackGoals ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/adi net/minecraft/entity/item/EntityArmorStand
 	FIELD a DEFAULT_HEAD_ROTATIONS
@@ -5695,21 +5823,29 @@ CLASS none/aek net/minecraft/entity/item/EntityTNTPrimed
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD s_ onUpdate ()V
 CLASS none/aem net/minecraft/entity/monster/EntityBlaze
+	METHOD <init> (Lnone/aqu;)V
+		ARG 0 level
 	METHOD A getDroppedItem ()Lnone/alq;
+	METHOD aW setAttributes ()V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD c getBrightness (F)F
 	METHOD e onHitGround (FF)V
 	METHOD z getIdleSound ()Ljava/lang/String;
+CLASS none/aen
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/aeo net/minecraft/entity/monster/EntityCaveSpider
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD aR getEyeHeight ()F
+	METHOD aW setAttributes ()V
 CLASS none/aep net/minecraft/entity/monster/EntityCreeper
 	METHOD A getDroppedItem ()Lnone/alq;
 	METHOD a applyLightningDamage (Lnone/ads;)V
 	METHOD a doInteractionWith (Lnone/ahd;)Z
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a handleDeathFrom (Lnone/wh;)V
+	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
@@ -5721,17 +5857,28 @@ CLASS none/aer net/minecraft/entity/monster/EntityEnderman
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
 	METHOD aR getEyeHeight ()F
+	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD k tryTeleport (DDD)Z
 	METHOD z getIdleSound ()Ljava/lang/String;
+CLASS none/aet
+	METHOD a ()Z
+	METHOD e opUpdate ()V
+CLASS none/aeu
+	METHOD a ()Z
+	METHOD e opUpdate ()V
+CLASS none/aev
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/aew net/minecraft/entity/EntityEndermite
 	METHOD <init> (Lnone/aqu;)V
 		ARG 0 level
 	METHOD A getDroppedItem ()Lnone/alq;
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD aR getEyeHeight ()F
+	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
@@ -5742,32 +5889,48 @@ CLASS none/afa net/minecraft/entity/monster/EntityGhast
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
 	METHOD aR getEyeHeight ()F
+	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD s_ onUpdate ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
+CLASS none/afb
+	METHOD a ()Z
+	METHOD e opUpdate ()V
+CLASS none/afd
+	METHOD a ()Z
+	METHOD e opUpdate ()V
+CLASS none/afe
+	METHOD a ()Z
 CLASS none/aff net/minecraft/entity/monster/EntityGiantZombie
 	METHOD <init> (Lnone/aqu;)V
 		ARG 0 level
 	METHOD aR getEyeHeight ()F
+	METHOD aW setAttributes ()V
 CLASS none/afg net/minecraft/entity/monster/EntityGuardian
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
 	METHOD aR getEyeHeight ()F
+	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD cl isElder ()Z
 	METHOD z getIdleSound ()Ljava/lang/String;
+CLASS none/afi
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/afl net/minecraft/entity/monster/EntityMagmaCube
 	METHOD A getDroppedItem ()Lnone/alq;
+	METHOD aW setAttributes ()V
 	METHOD c getBrightness (F)F
 	METHOD cd createChildSlime ()Lnone/afy;
 	METHOD e onHitGround (FF)V
 CLASS none/afm net/minecraft/entity/monster/EntityMonster
 	METHOD P getSwimSound ()Ljava/lang/String;
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD aW setAttributes ()V
 	METHOD aa getSplashSound ()Ljava/lang/String;
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
@@ -5778,12 +5941,15 @@ CLASS none/afo net/minecraft/entity/monster/EntityPigZombie
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
 	METHOD a mount (Lnone/wv;)V
+	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
-	METHOD n assGoals ()V
+	METHOD n attackGoals ()V
 	METHOD s_ onUpdate ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
+CLASS none/afp
+	METHOD a ()Z
 CLASS none/afr net/minecraft/entity/IRangedAttackMob
 	METHOD a shoot (Lnone/xm;F)V
 CLASS none/afs net/minecraft/entity/attribute/GenericAttributes
@@ -5798,22 +5964,36 @@ CLASS none/aft net/minecraft/entity/monster/EntitySilverfish
 	METHOD A getDroppedItem ()Lnone/alq;
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
 	METHOD aR getEyeHeight ()F
+	METHOD aW setAttributes ()V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD s_ onUpdate ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
+CLASS none/afu
+	METHOD a ()Z
+CLASS none/afv
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/afw net/minecraft/entity/monster/EntitySkeleton
+	CLASS afx
+		METHOD apply (Lnone/wv;)Z
+			ARG 0 entity
+	FIELD b arrowAttackGoal
+	FIELD c targetGoal
+	METHOD <init> (Lnone/aqu;)V
+		ARG 0 level
 	METHOD A getDroppedItem ()Lnone/alq;
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD a handleDeathFrom (Lnone/wh;)V
 	METHOD a shoot (Lnone/xm;F)V
 	METHOD aR getEyeHeight ()F
+	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD c setArmorInSlot (ILnone/amj;)V
-	METHOD n assGoals ()V
+	METHOD n attackGoals ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/afy net/minecraft/entity/monster/EntitySlime
 	FIELD b squishFactor
@@ -5831,19 +6011,37 @@ CLASS none/afy net/minecraft/entity/monster/EntitySlime
 	METHOD d onCollide (Lnone/ahd;)V
 	METHOD i applyCollisionWithEntity (Lnone/wv;)V
 	METHOD s_ onUpdate ()V
+CLASS none/afz
+	METHOD a ()Z
+	METHOD e opUpdate ()V
+CLASS none/aga
+	METHOD <init> (Lnone/afy;)V
+		ARG 0 slime
+	METHOD a ()Z
+	METHOD e opUpdate ()V
+CLASS none/agb
+	METHOD a ()Z
+	METHOD e opUpdate ()V
+CLASS none/agd
+	METHOD a ()Z
+	METHOD e opUpdate ()V
 CLASS none/age net/minecraft/entity/monster/EntitySpider
 	METHOD A getDroppedItem ()Lnone/alq;
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD aB onInsideWeb ()V
 	METHOD aR getEyeHeight ()F
+	METHOD aW setAttributes ()V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD s_ onUpdate ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
+CLASS none/agh
+	METHOD a ()Z
 CLASS none/agi net/minecraft/entity/monster/EntityWitch
 	METHOD a handleEntityStatusPacket (B)V
 	METHOD a shoot (Lnone/xm;F)V
 	METHOD aR getEyeHeight ()F
+	METHOD aW setAttributes ()V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD z getIdleSound ()Ljava/lang/String;
@@ -5860,6 +6058,7 @@ CLASS none/agj net/minecraft/entity/monster/EntityZombie
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
 	METHOD a setCanBreakDoors (Z)V
 	METHOD aR getEyeHeight ()F
+	METHOD aW setAttributes ()V
 	METHOD b getDroppedXp (Lnone/ahd;)I
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
@@ -5870,7 +6069,7 @@ CLASS none/agj net/minecraft/entity/monster/EntityZombie
 	METHOD i_ isBaby ()Z
 	METHOD l setBaby (Z)V
 	METHOD m setVillager (Z)V
-	METHOD n assGoals ()V
+	METHOD n attackGoals ()V
 	METHOD s_ onUpdate ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/agn
@@ -5891,6 +6090,7 @@ CLASS none/agp net/minecraft/entity/passive/EntityVillager
 	METHOD a handleDeathFrom (Lnone/wh;)V
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws;
 	METHOD aR getEyeHeight ()F
+	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD b_ getRecipes (Lnone/ahd;)Lnone/aqd;
 	METHOD bn getHurtSound ()Ljava/lang/String;
@@ -5898,7 +6098,7 @@ CLASS none/agp net/minecraft/entity/passive/EntityVillager
 	METHOD cj getProfession ()I
 	METHOD d replaceItem (ILnone/amj;)Z
 	METHOD e_ getNameComponent ()Lnone/ho;
-	METHOD n assGoals ()V
+	METHOD n attackGoals ()V
 	METHOD r setProfession (I)V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/aha net/minecraft/entity/player/PlayerCapabilities
@@ -6014,6 +6214,7 @@ CLASS none/ahd net/minecraft/entity/player/EntityPlayer
 	METHOD a dropItemFromSelectedHotbarSlot (Z)Lnone/adw;
 	METHOD aB onInsideWeb ()V
 	METHOD aR getEyeHeight ()F
+	METHOD aW setAttributes ()V
 	METHOD aa getSplashSound ()Ljava/lang/String;
 	METHOD ar getPortalCooldownTicks ()I
 	METHOD at getArmorEquipment ()[Lnone/amj;
@@ -10920,6 +11121,7 @@ CLASS none/bcm net/minecraft/blockentity/BlockEntity
 	FIELD g classToIdRegistry
 	METHOD a register (Ljava/lang/Class;Ljava/lang/String;)V
 	METHOD a setLevel (Lnone/aqu;)V
+		ARG 0 level
 	METHOD a setPosition (Lnone/dt;)V
 	METHOD a load (Lnone/fn;)V
 	METHOD b save (Lnone/fn;)V
@@ -16728,7 +16930,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD z updateTimeLightAndEntities ()V
 CLASS net/minecraft/server/MinecraftServer$pd net/minecraft/level/ConvertingProcessUpdate
 CLASS net/minecraft/client/ClientBrandRetriever net/minecraft/client/ClientBrandRetriever
-	METHOD getClientModName ()Ljava/lang/String;
+	METHOD getClientModName getClientModName ()Ljava/lang/String;
 CLASS net/minecraft/realms/RealmsServerStatusPinger
 	CLASS daw
 		METHOD a handlePingResponse (Lnone/nn;)V
