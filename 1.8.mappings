@@ -8654,27 +8654,34 @@ CLASS none/arz net/minecraft/level/biome/BiomeManager
 	FIELD c biomeIndexLayer
 	FIELD d biomeCache
 	FIELD e spawnBiomes
+	FIELD f generatorOptions
 	METHOD <init> (JLnone/are;Ljava/lang/String;)V
 		ARG 0 seed
 		ARG 1 levelType
+		ARG 2 generatorOptions
 	METHOD <init> (Lnone/aqu;)V
 		ARG 0 level
+	METHOD a getSpawnableBiomes ()Ljava/util/List;
 	METHOD a getTemperatureAtHeight (FI)F
 		ARG 0 temperature
 		ARG 1 height
 	METHOD a checkViableBiomes (IIILjava/util/List;)Z
 		ARG 0 xPos
 		ARG 1 zPos
-		ARG 2 radius
+		ARG 2 size
 		ARG 3 biomeList
-	METHOD a findBiomePosition (IIILjava/util/List;Ljava/util/Random;)Lnone/dt;
+	METHOD a getRandomPositionInBiome (IIILjava/util/List;Ljava/util/Random;)Lnone/dt;
+		ARG 0 xPos
+		ARG 1 zPos
+		ARG 2 size
+		ARG 3 biomeList
 		ARG 4 rand
-	METHOD a (Lnone/dt;)Lnone/arm;
+	METHOD a getBiomeForPosition (Lnone/dt;)Lnone/arm;
 		ARG 0 blockPos
 	METHOD a (Lnone/dt;Lnone/arm;)Lnone/arm;
 		ARG 0 blockPos
 		ARG 1 defaultBiome
-	METHOD a ([FIIII)[F
+	METHOD a getRainfallMap ([FIIII)[F
 		ARG 1 xPos
 		ARG 2 zPos
 		ARG 3 xSize
@@ -8713,15 +8720,45 @@ CLASS none/asb net/minecraft/level/biome/BiomeExtremeHills
 	METHOD a decorate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
 	METHOD b subBiome (Lnone/arm;)Lnone/asb;
 	METHOD d createSubBiome (I)Lnone/arm;
-CLASS none/asc net/minecraft/level/BiomeManagerSingle
+CLASS none/asc net/minecraft/level/biome/BiomeManagerSingle
 	FIELD b biome
+	FIELD c rainfall
 	METHOD <init> (Lnone/arm;F)V
 		ARG 0 biome
+		ARG 1 rainfall
 	METHOD a checkViableBiomes (IIILjava/util/List;)Z
-	METHOD a findBiomePosition (IIILjava/util/List;Ljava/util/Random;)Lnone/dt;
+		ARG 0 xPos
+		ARG 1 zPos
+		ARG 2 size
+		ARG 3 biomeList
+	METHOD a getRandomPositionInBiome (IIILjava/util/List;Ljava/util/Random;)Lnone/dt;
+		ARG 0 xPos
+		ARG 1 zPos
+		ARG 2 size
+		ARG 3 biomeList
+		ARG 4 rand
+	METHOD a getBiomeForPosition (Lnone/dt;)Lnone/arm;
+		ARG 0 blockPos
+	METHOD a getRainfallMap ([FIIII)[F
+		ARG 1 xPos
+		ARG 2 zPos
+		ARG 3 xSize
+		ARG 4 zSize
 	METHOD a getBiomesForGeneration ([Lnone/arm;IIII)[Lnone/arm;
+		ARG 1 xPos
+		ARG 2 zPos
+		ARG 3 xSize
+		ARG 4 zSize
 	METHOD a getBiomeGenAt ([Lnone/arm;IIIIZ)[Lnone/arm;
+		ARG 1 xPos
+		ARG 2 zPos
+		ARG 3 xSize
+		ARG 4 zSize
 	METHOD b loadBlockGeneratorData ([Lnone/arm;IIII)[Lnone/arm;
+		ARG 1 xPos
+		ARG 2 zPos
+		ARG 3 xSize
+		ARG 4 zSize
 CLASS none/asd net/minecraft/level/biome/BiomeForest
 	CLASS ase
 		METHOD a getRandomTreeGenerator (Ljava/util/Random;)Lnone/bhc;
