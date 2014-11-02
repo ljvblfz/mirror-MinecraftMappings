@@ -4653,6 +4653,7 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD aq doEnterPortal ()V
 	METHOD ar getPortalCooldownTicks ()I
 	METHOD at getArmorEquipment ()[Lnone/amj;
+	METHOD au isOnFire ()Z
 	METHOD av isRiding ()Z
 	METHOD aw isSneaking ()Z
 	METHOD ax isSprinting ()Z
@@ -4672,7 +4673,7 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD c getBrightness (F)F
 	METHOD c changeDimension (I)V
 		ARG 0 dimensionId
-	METHOD c setArmorInSlot (ILnone/amj;)V
+	METHOD c setItemStackInSlot (ILnone/amj;)V
 		ARG 1 itemStack
 	METHOD c distanceFromCenterSquared (Lnone/dt;)D
 	METHOD d getVec3 ()Lnone/brw;
@@ -4830,6 +4831,7 @@ CLASS none/xm net/minecraft/entity/EntityLiving
 	METHOD b setDamager (Lnone/xm;)V
 		ARG 0 damagerEntity
 	METHOD b spawnLoot (ZI)V
+	METHOD bA getMovementSpeed ()F
 	METHOD bI isInBed ()Z
 	METHOD bM getAbsorptionHealth ()F
 	METHOD bN getTeam ()Lnone/bsf;
@@ -4842,11 +4844,12 @@ CLASS none/xm net/minecraft/entity/EntityLiving
 	METHOD bm getHealth ()F
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
+	METHOD bp spawnSpecialLoot ()V
 	METHOD br getDeathReporter ()Lnone/wg;
 	METHOD bt getMaxHealth ()F
 	METHOD bv swingItem ()V
 	METHOD bz getCurrentlyHoldingItemStack ()Lnone/amj;
-	METHOD c setArmorInSlot (ILnone/amj;)V
+	METHOD c setItemStackInSlot (ILnone/amj;)V
 	METHOD d damageEntity (Lnone/wh;F)V
 		ARG 0 source
 		ARG 1 damage
@@ -4868,6 +4871,7 @@ CLASS none/xn net/minecraft/entity/EntityMob
 	FIELD bg goals2
 	FIELD bh dropChances
 	FIELD bj inventory
+	FIELD bk canPickUpLoot
 	FIELD bl persistenceRequired
 	FIELD bm leashed
 	FIELD bn leashedEntity
@@ -4877,6 +4881,7 @@ CLASS none/xn net/minecraft/entity/EntityMob
 	METHOD C canDespawn ()Z
 	METHOD K onTick ()V
 	METHOD a handleEntityStatusPacket (B)V
+	METHOD a setDropChance (IF)V
 	METHOD a doInteractionWith (Lnone/ahd;)Z
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
@@ -4885,9 +4890,11 @@ CLASS none/xn net/minecraft/entity/EntityMob
 	METHOD b getDroppedXp (Lnone/ahd;)I
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD b spawnLoot (ZI)V
+	METHOD bW setPersistenceRequired ()V
 	METHOD bX getCanPickUpLoot ()Z
+	METHOD bY isPersistenceRequired ()Z
 	METHOD bz getCurrentlyHoldingItemStack ()Lnone/amj;
-	METHOD c setArmorInSlot (ILnone/amj;)V
+	METHOD c setItemStackInSlot (ILnone/amj;)V
 	METHOD cd getNoAI ()Z
 	METHOD d replaceItem (ILnone/amj;)Z
 	METHOD e onUseByPlayer (Lnone/ahd;)Z
@@ -5290,6 +5297,7 @@ CLASS none/abo net/minecraft/entity/passive/EntityBat
 	METHOD aW setAttributes ()V
 	METHOD ae canBePushed ()Z
 	METHOD b writeToNBT (Lnone/fn;)V
+	METHOD bA getMovementSpeed ()F
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD e onHitGround (FF)V
@@ -5307,7 +5315,7 @@ CLASS none/abq net/minecraft/entity/passive/EntityAnimal
 	METHOD b writeToNBT (Lnone/fn;)V
 CLASS none/abr net/minecraft/entity/passive/EntityChicken
 	FIELD bq eggLayTime
-	FIELD br isChickenJockey
+	FIELD br chickenJockey
 	METHOD A getDroppedItem ()Lnone/alq;
 	METHOD C canDespawn ()Z
 	METHOD a readFromNBT (Lnone/fn;)V
@@ -5319,7 +5327,9 @@ CLASS none/abr net/minecraft/entity/passive/EntityChicken
 	METHOD b spawnLoot (ZI)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
+	METHOD cj isChickenJockey ()Z
 	METHOD e onHitGround (FF)V
+	METHOD l setChickenJockey (Z)V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/abs net/minecraft/entity/passive/EntityCow
 	METHOD A getDroppedItem ()Lnone/alq;
@@ -5328,6 +5338,7 @@ CLASS none/abs net/minecraft/entity/passive/EntityCow
 	METHOD aR getEyeHeight ()F
 	METHOD aW setAttributes ()V
 	METHOD b spawnLoot (ZI)V
+	METHOD bA getMovementSpeed ()F
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD z getIdleSound ()Ljava/lang/String;
@@ -5347,6 +5358,7 @@ CLASS none/abt net/minecraft/entity/passive/EntityHorse
 	METHOD b setOwner (Ljava/lang/String;)V
 		ARG 0 ownerName
 	METHOD b writeToNBT (Lnone/fn;)V
+	METHOD bA getMovementSpeed ()F
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD cA getTemper ()I
@@ -5393,6 +5405,7 @@ CLASS none/aby net/minecraft/entity/passive/EntityOcelot
 	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD b spawnLoot (ZI)V
+	METHOD bA getMovementSpeed ()F
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD cr getCatType ()I
@@ -5429,6 +5442,7 @@ CLASS none/acb net/minecraft/entity/passive/EntityRabbit
 	METHOD b spawnLoot (ZI)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
+	METHOD bp spawnSpecialLoot ()V
 	METHOD cl getRabbitType ()I
 	METHOD r setRabbitType (I)V
 	METHOD z getIdleSound ()Ljava/lang/String;
@@ -5472,6 +5486,7 @@ CLASS none/aco net/minecraft/entity/passive/EntitySquid
 	METHOD aR getEyeHeight ()F
 	METHOD aW setAttributes ()V
 	METHOD b spawnLoot (ZI)V
+	METHOD bA getMovementSpeed ()F
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD z getIdleSound ()Ljava/lang/String;
@@ -5507,6 +5522,7 @@ CLASS none/acu net/minecraft/entity/passive/EntityWolf
 	METHOD aR getEyeHeight ()F
 	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
+	METHOD bA getMovementSpeed ()F
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD ct isAngry ()Z
@@ -5538,6 +5554,7 @@ CLASS none/adb net/minecraft/entity/boss/EntityDragon
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
 	METHOD aW setAttributes ()V
 	METHOD ad canBeHit ()Z
+	METHOD bA getMovementSpeed ()F
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD n attackGoals ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
@@ -5596,7 +5613,7 @@ CLASS none/adi net/minecraft/entity/item/EntityArmorStand
 	METHOD b writeToNBT (Lnone/fn;)V
 		ARG 0 nbtTagCompound
 	METHOD bz getCurrentlyHoldingItemStack ()Lnone/amj;
-	METHOD c setArmorInSlot (ILnone/amj;)V
+	METHOD c setItemStackInSlot (ILnone/amj;)V
 	METHOD c setLeftArmRotations (Lnone/fa;)V
 		ARG 0 leftArmRotations
 	METHOD d replaceItem (ILnone/amj;)Z
@@ -6003,6 +6020,7 @@ CLASS none/aem net/minecraft/entity/monster/EntityBlaze
 		ARG 0 level
 	METHOD A getDroppedItem ()Lnone/alq;
 	METHOD aW setAttributes ()V
+	METHOD au isOnFire ()Z
 	METHOD b spawnLoot (ZI)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
@@ -6081,6 +6099,7 @@ CLASS none/afa net/minecraft/entity/monster/EntityGhast
 	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD b spawnLoot (ZI)V
+	METHOD bA getMovementSpeed ()F
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD s_ onUpdate ()V
@@ -6108,6 +6127,7 @@ CLASS none/afg net/minecraft/entity/monster/EntityGuardian
 	METHOD b spawnLoot (ZI)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
+	METHOD bp spawnSpecialLoot ()V
 	METHOD cl isElder ()Z
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/afi
@@ -6116,6 +6136,7 @@ CLASS none/afi
 CLASS none/afl net/minecraft/entity/monster/EntityMagmaCube
 	METHOD A getDroppedItem ()Lnone/alq;
 	METHOD aW setAttributes ()V
+	METHOD au isOnFire ()Z
 	METHOD b spawnLoot (ZI)V
 	METHOD c getBrightness (F)F
 	METHOD cd createChildSlime ()Lnone/afy;
@@ -6143,6 +6164,7 @@ CLASS none/afo net/minecraft/entity/monster/EntityPigZombie
 	METHOD b spawnLoot (ZI)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
+	METHOD bp spawnSpecialLoot ()V
 	METHOD n attackGoals ()V
 	METHOD s_ onUpdate ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
@@ -6192,7 +6214,8 @@ CLASS none/afw net/minecraft/entity/monster/EntitySkeleton
 	METHOD b spawnLoot (ZI)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
-	METHOD c setArmorInSlot (ILnone/amj;)V
+	METHOD bp spawnSpecialLoot ()V
+	METHOD c setItemStackInSlot (ILnone/amj;)V
 	METHOD ck getSkeletonType ()I
 	METHOD n attackGoals ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
@@ -6207,6 +6230,7 @@ CLASS none/afy net/minecraft/entity/monster/EntitySlime
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD aR getEyeHeight ()F
 	METHOD b writeToNBT (Lnone/fn;)V
+	METHOD bA getMovementSpeed ()F
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD cd createChildSlime ()Lnone/afy;
@@ -6268,6 +6292,7 @@ CLASS none/agj net/minecraft/entity/monster/EntityZombie
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
+	METHOD bp spawnSpecialLoot ()V
 	METHOD cl getCanBreakDoors ()Z
 	METHOD cm isVillager ()Z
 	METHOD cn isConverting ()Z
@@ -6447,7 +6472,7 @@ CLASS none/ahd net/minecraft/entity/player/EntityPlayer
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD bz getCurrentlyHoldingItemStack ()Lnone/amj;
-	METHOD c setArmorInSlot (ILnone/amj;)V
+	METHOD c setItemStackInSlot (ILnone/amj;)V
 		ARG 0 slotIndex
 	METHOD ca respawnPlayer ()V
 	METHOD cc getProfile ()Lcom/mojang/authlib/GameProfile;
@@ -6587,6 +6612,7 @@ CLASS none/ahw net/minecraft/entity/projectile/EntityWitherSkull
 	METHOD a onHit (Lnone/bru;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
 	METHOD ad canBeHit ()Z
+	METHOD au isOnFire ()Z
 CLASS none/ahz net/minecraft/entity/player/FoodStats
 	FIELD a foodLevel
 	FIELD b saturationLevel
@@ -7638,7 +7664,7 @@ CLASS none/aqf net/minecraft/command/server/CommandBlockSender
 	METHOD e_ getNameComponent ()Lnone/ho;
 	METHOD m isCommandOutputEnabled ()Z
 	METHOD t_ shouldReceiveCommandFeedback ()Z
-CLASS none/aqi net/minecraft/entity/spawn/SpawnLogic
+CLASS none/aqi net/minecraft/entity/SpawnLogic
 	CLASS aqj SpawnPotential
 		FIELD c properties
 		FIELD d type
@@ -9625,6 +9651,7 @@ CLASS none/auc net/minecraft/block/BlockGrowable
 	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c isOpaque ()Z
 	METHOD c canPlace (Lnone/aqu;Lnone/dt;)Z
+	METHOD c isPlaceableOnBlock (Lnone/atr;)Z
 	METHOD d hasFullCubeHitbox ()Z
 	METHOD k getBlockTextureType ()Lnone/aql;
 CLASS none/aud net/minecraft/block/BlockButton
@@ -9808,6 +9835,7 @@ CLASS none/auu net/minecraft/block/BlockCrops
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD c isPlaceableOnBlock (Lnone/atr;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/auv net/minecraft/block/BlockDaylightDetector
@@ -9829,6 +9857,7 @@ CLASS none/auv net/minecraft/block/BlockDaylightDetector
 CLASS none/auw net/minecraft/block/BlockDeadBush
 	METHOD a onMined (Lnone/aqu;Lnone/ahd;Lnone/dt;Lnone/bec;Lnone/bcm;)V
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
+	METHOD c isPlaceableOnBlock (Lnone/atr;)Z
 	METHOD f isBlockOverwrittenOnBlockPlacement (Lnone/aqu;Lnone/dt;)Z
 CLASS none/auy net/minecraft/block/BlockDetectorRail
 	FIELD M powered
@@ -10473,6 +10502,7 @@ CLASS none/axu net/minecraft/block/EnumSilverfishVariant
 CLASS none/ayb net/minecraft/block/BlockMushroom
 	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
 	METHOD c canPlace (Lnone/aqu;Lnone/dt;)Z
+	METHOD c isPlaceableOnBlock (Lnone/atr;)Z
 CLASS none/ayc net/minecraft/block/BlockMycelium
 	FIELD a snowy
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
@@ -10491,6 +10521,7 @@ CLASS none/aye net/minecraft/block/BlockNetherWart
 	METHOD a getDroppedItem (Lnone/bec;Ljava/util/Random;I)Lnone/alq;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD c isPlaceableOnBlock (Lnone/atr;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/ayf net/minecraft/block/BlockNetherBrick
@@ -10991,6 +11022,7 @@ CLASS none/bay net/minecraft/block/BlockPlantStem
 	METHOD a updateState (Lnone/bec;Lnone/ard;Lnone/dt;)Lnone/bec;
 	METHOD b getItem (Lnone/aqu;Lnone/dt;)Lnone/alq;
 	METHOD b onTick (Lnone/aqu;Lnone/dt;Lnone/bec;Ljava/util/Random;)V
+	METHOD c isPlaceableOnBlock (Lnone/atr;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD e initPropertyManager ()Lnone/bed;
 	METHOD h updateTargetingHitbox ()V
@@ -11274,6 +11306,7 @@ CLASS none/bcb net/minecraft/block/BlockLilyPad
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
 	METHOD a checkCollision (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/brt;Ljava/util/List;Lnone/wv;)V
 	METHOD a getColor (Lnone/ard;Lnone/dt;I)I
+	METHOD c isPlaceableOnBlock (Lnone/atr;)Z
 	METHOD c getMetadataForBlockState (Lnone/bec;)I
 	METHOD h getColor (Lnone/bec;)I
 CLASS none/bcc net/minecraft/block/BlockWeb
@@ -14356,11 +14389,13 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	METHOD an startDisplay ()V
 	METHOD ao setResourcePackIcon ()V
 	METHOD ap isClient64bit ()Z
+	METHOD aq createTimerHackThread ()V
 	METHOD ar updateDisplayMode ()V
 	METHOD as runGameLoop ()V
 	METHOD at onLeftClick ()V
 	METHOD au onRightClick ()V
 	METHOD aw onPickBlockClick ()V
+	METHOD b setDebugOverlayView (I)V
 	METHOD b checkGLError (Ljava/lang/String;)V
 	METHOD b addGraphicsAndLevelToCrashReport (Lnone/b;)Lnone/b;
 	METHOD b addServerTypeToSnooper (Lnone/wb;)V
@@ -14445,6 +14480,10 @@ CLASS none/bto net/minecraft/client/settings/GameSettings
 	FIELD as keyBindHotbar
 	FIELD au minecraft
 	FIELD av difficulty
+	FIELD aw showHeadsUpDisplay
+	FIELD ax cameraPerspective
+	FIELD ay showDebugOverlay
+	FIELD az showProfilerGraph
 	FIELD b invertMouse
 	FIELD c renderDistance
 	FIELD d bobView
@@ -15069,6 +15108,7 @@ CLASS none/bxo net/minecraft/client/gui/GuiSoundOptions
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
 CLASS none/bxq net/minecraft/client/gui/GuiMainMenu
+	FIELD r titleMessage
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a mouseClicked (III)V
@@ -15402,11 +15442,13 @@ CLASS none/cbf net/minecraft/main/MinecraftInitializer
 	FIELD b mcGameInfo
 	FIELD c mcAssets
 	FIELD d mcVersion
+	FIELD e mcServerArgs
 	METHOD <init> (Lnone/cbk;Lnone/cbg;Lnone/cbh;Lnone/cbi;Lnone/cbj;)V
 		ARG 0 mcProxy
 		ARG 1 mcGameInfo
 		ARG 2 mcAssets
 		ARG 3 mcVersion
+		ARG 4 mcServerArgs
 CLASS none/cbg net/minecraft/main/MinecraftGameInfo
 	FIELD a displayWidth
 	FIELD b displayHeight
@@ -15433,6 +15475,9 @@ CLASS none/cbi net/minecraft/main/MinecraftVersion
 	METHOD <init> (ZLjava/lang/String;)V
 		ARG 0 isDemo
 		ARG 1 launchedVersion
+CLASS none/cbj net/minecraft/main/MinecraftServerArgs
+	FIELD a serverName
+	FIELD b port
 CLASS none/cbk net/minecraft/main/MinecraftProxy
 	FIELD a myILogAgent
 	FIELD b propertyMap
@@ -15440,6 +15485,7 @@ CLASS none/cbk net/minecraft/main/MinecraftProxy
 	METHOD <init> (Lnone/btw;Lcom/mojang/authlib/properties/PropertyMap;Ljava/net/Proxy;)V
 		ARG 0 myILogAgent
 		ARG 1 propertyMap
+CLASS none/cbm net/minecraft/main/ThreadClientShutdown
 CLASS none/cbu net/minecraft/client/models/ModelArmorStandArmor
 	METHOD a setRotationAngles (FFFFFFLnone/wv;)V
 CLASS none/cbv net/minecraft/client/renderers/models/ModelArmorStand
@@ -16134,7 +16180,7 @@ CLASS none/cip net/minecraft/entity/EntityOtherPlayerMP
 	METHOD a sendChat (Lnone/ho;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
 	METHOD c getPosition ()Lnone/dt;
-	METHOD c setArmorInSlot (ILnone/amj;)V
+	METHOD c setItemStackInSlot (ILnone/amj;)V
 	METHOD s_ onUpdate ()V
 CLASS none/ciq
 	METHOD a getInterfaceContainer (Lnone/ahb;Lnone/ahd;)Lnone/aib;
@@ -16312,15 +16358,116 @@ CLASS none/cji net/minecraft/client/renderers/GameRenderer
 	METHOD a setViewEntity (Lnone/wv;)V
 	METHOD j setupOverlayRendering ()V
 CLASS none/cjm net/minecraft/client/OpenGL
+	FIELD a alphaTestFunc
+	FIELD e pixelArithmetic
+	FIELD f depthBuffer
+	FIELD o selectedTexture
+	FIELD p textures
+	FIELD q shadeMode
+	FIELD t color
+	FIELD u viewport
+	METHOD D glLoadIdentity ()V
 	METHOD E glPushMatrix ()V
 	METHOD F glPopMatrix ()V
+	METHOD a glScaled (DDD)V
+	METHOD a glOrtho (DDDDDD)V
 	METHOD a glScalef (FFF)V
-	METHOD a glBlendFunc (IIII)V
+	METHOD a glAlphaFunc (IF)V
+		ARG 0 func
+		ARG 1 ref
+	METHOD a glColorMaterial (II)V
+		ARG 0 face
+		ARG 1 mode
+	METHOD a glBlendFuncSeparate (IIII)V
+		ARG 0 srcRGB
+		ARG 1 dstRGB
+		ARG 2 srcAlpha
+		ARG 3 dstAlpha
+	METHOD a glGetFloat (ILjava/nio/FloatBuffer;)V
+	METHOD a glMultMatrix (Ljava/nio/FloatBuffer;)V
 	METHOD a glDepthMask (Z)V
+		ARG 0 flag
 	METHOD a drawGradientRect (ZZZZ)V
+	METHOD b glPopAttrib ()V
+	METHOD b glTranslated (DDD)V
 	METHOD b glTranslatef (FFF)V
 	METHOD b glRotatef (FFFF)V
-	METHOD c glColor4f (FFFF)V
+	METHOD b glBlendFunc (II)V
+	METHOD b setViewport (IIII)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 width
+		ARG 3 height
+	METHOD c disableAlphaTest ()V
+	METHOD c setColor (FFF)V
+		ARG 0 red
+		ARG 1 green
+		ARG 2 blue
+	METHOD c setColorAndAlpha (FFFF)V
+		ARG 0 red
+		ARG 1 green
+		ARG 2 blue
+		ARG 3 alpha
+	METHOD c glDepthFunc (I)V
+		ARG 0 func
+	METHOD d enableAlphaTest ()V
+	METHOD g enableColorMaterial ()V
+	METHOD h disableColorMaterial ()V
+	METHOD h glDeleteTextures (I)V
+		ARG 0 n
+	METHOD i disableDepthTest ()V
+	METHOD i glBindTexture (I)V
+		ARG 0 textureName
+	METHOD j enableDepthTest ()V
+	METHOD j glShadeModel (I)V
+		ARG 0 mode
+	METHOD k disableBlend ()V
+	METHOD l enableBlend ()V
+	METHOD m glClear (I)V
+		ARG 0 depth
+	METHOD n glMatrixMode (I)V
+	METHOD y glGenTextures ()I
+CLASS none/cjo net/minecraft/client/OpenGLAlphaTestFunc
+	FIELD a alphaTestCapability
+	FIELD b func
+	FIELD c ref
+CLASS none/cjp net/minecraft/client/OpenGLPixelArithmetic
+	FIELD a blendCapability
+	FIELD b srcRGB
+	FIELD c dstRGB
+	FIELD d srcAlpha
+	FIELD e dstAlpha
+CLASS none/cjq net/minecraft/client/OpenGLCapability
+	FIELD a glCapability
+	FIELD b enabled
+	METHOD a disable ()V
+	METHOD a setEnabled (Z)V
+	METHOD b enable ()V
+CLASS none/cjs net/minecraft/client/OpenGLColor
+	FIELD a red
+	FIELD b green
+	FIELD c blue
+	FIELD d alpha
+	METHOD <init> (FFFF)V
+		ARG 0 red
+		ARG 1 green
+		ARG 2 blue
+		ARG 3 alpha
+CLASS none/cjv
+	FIELD a colorMaterialCapability
+	FIELD b face
+	FIELD c mode
+CLASS none/cjx net/minecraft/client/OpenGLDepthBuffer
+	FIELD a depthTestCapability
+	FIELD b depthBufferWritingEnabled
+	FIELD c func
+CLASS none/ckf net/minecraft/client/OpenGLTexture
+	FIELD b textureName
+CLASS none/ckg net/minecraft/client/OpenGLViewport
+	FIELD a x
+	FIELD b y
+	FIELD c width
+	FIELD d height
 CLASS none/cki net/minecraft/client/renderers/PlayerRenderer
 	FIELD a MAP_BACKGROUND
 	FIELD b UNDERWATER
@@ -16496,6 +16643,7 @@ CLASS none/cre net/minecraft/client/renderers/RenderPigZombie
 	FIELD j ZOMBIE_PIGMAN_PNG
 CLASS none/crg net/minecraft/client/renderers/RenderRabbit
 CLASS none/crh net/minecraft/client/renderers/RenderSheep
+	FIELD a SHEEP_PNG
 CLASS none/cri net/minecraft/client/renderers/RenderSilverfish
 	FIELD a SILVERFISH_PNG
 CLASS none/crj net/minecraft/client/renderers/RenderSkeleton
@@ -16994,9 +17142,60 @@ CLASS none/dat tv/twitch/dat
 CLASS none/dax net/minecraft/client/renderers/OpenGlHelper
 	FIELD O vboAvailable
 	FIELD S shadersAvailable
+	FIELD X featureLogString
 	FIELD q lightmapTexUnit
 	METHOD a initializeTextures ()V
+	METHOD a glDeleteShader (I)V
 	METHOD a setLightmapTextureCoords (IFF)V
+	METHOD a glGetProgrami (II)I
+	METHOD a glRenderbufferStorage (IIII)V
+	METHOD a glFramebufferTexture2D (IIIII)V
+	METHOD a glGetUniformLocation (ILjava/lang/CharSequence;)I
+	METHOD a glShaderSource (ILjava/nio/ByteBuffer;)V
+	METHOD a glBufferData (ILjava/nio/ByteBuffer;I)V
+	METHOD a glUniform1 (ILjava/nio/FloatBuffer;)V
+	METHOD a glUniform1 (ILjava/nio/IntBuffer;)V
+	METHOD a glUniformMatrix2 (IZLjava/nio/FloatBuffer;)V
+	METHOD b glCreateShader (I)I
+	METHOD b glAttachShader (II)V
+	METHOD b glFramebufferRenderbuffer (IIII)V
+	METHOD b glGetAttribLocation (ILjava/lang/CharSequence;)I
+	METHOD b glUniform2 (ILjava/nio/FloatBuffer;)V
+	METHOD b glUniform2 (ILjava/nio/IntBuffer;)V
+	METHOD b glUniformMatrix3 (IZLjava/nio/FloatBuffer;)V
+	METHOD c glCompileShader (I)V
+	METHOD c glGetShaderi (II)I
+	METHOD c glBlendFunc (IIII)V
+		ARG 0 srcRGB
+		ARG 1 dstRGB
+		ARG 2 srcAlpha
+		ARG 3 dstAlpha
+	METHOD c glUniform3 (ILjava/nio/FloatBuffer;)V
+	METHOD c glUniform3 (ILjava/nio/IntBuffer;)V
+	METHOD c glUniformMatrix4 (IZLjava/nio/FloatBuffer;)V
+	METHOD d glCreateProgram ()I
+	METHOD d glUseProgram (I)V
+	METHOD d glGetShaderInfoLog (II)Ljava/lang/String;
+	METHOD d glUniform4 (ILjava/nio/FloatBuffer;)V
+	METHOD d glUniform4 (ILjava/nio/IntBuffer;)V
+	METHOD e glGenBuffers ()I
+	METHOD e glDeleteProgram (I)V
+	METHOD e glGetProgramInfoLog (II)Ljava/lang/String;
+	METHOD f glLinkProgram (I)V
+	METHOD f glUniform1i (II)V
+	METHOD g glGenFramebuffers ()I
+	METHOD g glDeleteBuffers (I)V
+	METHOD g glBindBuffer (II)V
+	METHOD h glGenRenderbuffers ()I
+	METHOD h glDeleteRenderbuffers (I)V
+	METHOD h glBindFramebuffer (II)V
+	METHOD i glDeleteFramebuffers (I)V
+	METHOD i glBindRenderbuffer (II)V
+	METHOD j glCheckFramebufferStatus (I)I
+	METHOD k glActiveTexture (I)V
+		ARG 0 texture
+	METHOD l glClientActiveTexture (I)V
+		ARG 0 texture
 CLASS none/bws$bwt net/minecraft/client/gui/GuiSlotLanguage
 	METHOD a drawSlot (IIIIII)V
 CLASS none/bxj$bxl net/minecraft/client/gui/button/bxl
