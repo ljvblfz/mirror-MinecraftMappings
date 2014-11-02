@@ -1220,7 +1220,7 @@ CLASS none/dy
 CLASS none/dz net/minecraft/dispenser/IBlockSource
 CLASS none/ea net/minecraft/block/BlockSourceImpl
 CLASS none/eb net/minecraft/util/Cartesian
-CLASS none/ec empty/_5
+CLASS none/ec empty/ec
 CLASS none/eg net/minecraft/dispenser/DispenseBehaviorDefault
 CLASS none/eh net/minecraft/util/RegistryNamedspaced
 	FIELD d defaultKey
@@ -7517,6 +7517,7 @@ CLASS none/anq net/minecraft/item/ItemWritableBook
 	METHOD a onRightClick (Lnone/amj;Lnone/aqu;Lnone/ahd;)Lnone/amj;
 CLASS none/anr net/minecraft/item/ItemWrittenBook
 	METHOD a onRightClick (Lnone/amj;Lnone/aqu;Lnone/ahd;)Lnone/amj;
+CLASS none/aod empty/aod
 CLASS none/aop
 	METHOD a addRecipe (Lnone/amj;[Ljava/lang/Object;)Lnone/aos;
 		ARG 0 craftingResult
@@ -7601,6 +7602,7 @@ CLASS none/aph net/minecraft/enchantment/EnchantmentHelper
 	METHOD h getCurrentItemLureLevel (Lnone/xm;)I
 	METHOD i getCurrentItemLootingLevel (Lnone/xm;)I
 	METHOD j hasAquaAffinityArmor (Lnone/xm;)Z
+CLASS none/api empty/api
 CLASS none/apo net/minecraft/enchantment/EnchantmentInstance
 	FIELD b enchantment
 	FIELD c level
@@ -12465,6 +12467,7 @@ CLASS none/bgl net/minecraft/level/gen/GeneratorSettings
 	FIELD z useRavines
 	METHOD <init> (Lnone/bgn;)V
 		ARG 0 settingsFactory
+CLASS none/bgm empty/bgm
 CLASS none/bgn net/minecraft/level/gen/GeneratorSettingsFactory
 	FIELD A useRavines
 	FIELD B useWaterLakes
@@ -14676,6 +14679,7 @@ CLASS none/bub net/minecraft/client/gui/Gui
 	METHOD c drawString (Lnone/bty;Ljava/lang/String;III)V
 CLASS none/buc
 	FIELD a MAP_ICONS_PNG
+CLASS none/bud empty/bud
 CLASS none/buf net/minecraft/client/gui/ScaledResolution
 	METHOD a getScaledWidth ()I
 	METHOD b getScaledHeight ()I
@@ -14776,6 +14780,7 @@ CLASS none/bvh net/minecraft/client/gui/GuiScoreboard
 	FIELD f mc
 	METHOD a setFooter (Lnone/ho;)V
 	METHOD b setHeader (Lnone/ho;)V
+CLASS none/bvi empty/bvi
 CLASS none/bvk net/minecraft/client/gui/GuiScrolledSelectionList
 	FIELD a minecraft
 	FIELD b guiWidth
@@ -15127,7 +15132,7 @@ CLASS none/bxi net/minecraft/client/gui/GuiLanServer
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
 CLASS none/bxj net/minecraft/client/gui/GuiSkinCustomization
-CLASS none/bxk empty/_1
+CLASS none/bxk empty/bxk
 CLASS none/bxm net/minecraft/client/gui/GuiSnooper
 	CLASS bxn
 		METHOD a drawBackground ()V
@@ -16105,6 +16110,7 @@ CLASS none/chi net/minecraft/level/entity/particle/ParticleRedstoneBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/chj
 	METHOD s_ onUpdate ()V
+CLASS none/chk empty/chk
 CLASS none/chl net/minecraft/level/entity/particle/ParticleSmokeNormalBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/chm
@@ -16373,7 +16379,7 @@ CLASS none/cje net/minecraft/client/renderers/EnumBlockVertices
 	FIELD f EAST
 	METHOD a getBlockVertex (I)Lnone/cjh;
 	METHOD a getBlockVerticesFromBlockFace (Lnone/ej;)Lnone/cje;
-CLASS none/cjf empty/_2
+CLASS none/cjf empty/cjf
 CLASS none/cjg net/minecraft/block/BlockFacingId
 	FIELD a SOUTH
 	FIELD b UP
@@ -16574,15 +16580,18 @@ CLASS none/cls
 	FIELD j FLIP_SOUTH
 	FIELD k FLIP_WEST
 	FIELD l FLIP_EAST
-CLASS none/cmd empty/_3
+CLASS none/cmd empty/cmd
+CLASS none/cmg empty/cmg
 CLASS none/cmz net/minecraft/entity/player/EnumCameraType
 	FIELD a NONE
 	FIELD b THIRD_PERSON
 	FIELD c FIRST_PERSON
 	FIELD d HEAD
 	FIELD e GUI
+CLASS none/cng empty/cng
 CLASS none/cnk net/minecraft/client/renderers/BlockEntityBannerRenderer
 	FIELD d BANNER_BASE
+CLASS none/cnl empty/cnl
 CLASS none/cno net/minecraft/client/renderers/BlockEntityRenderer
 	FIELD a instance
 	METHOD a renderBlockEntityAt (Lnone/bcm;DDDF)V
@@ -16828,6 +16837,7 @@ CLASS none/cug net/minecraft/client/renderers/texture/TextureManager
 	METHOD e tick ()V
 CLASS none/cuk net/minecraft/client/renderers/texture/ITickable
 	METHOD e tick ()V
+CLASS none/cul empty/cul
 CLASS none/cus net/minecraft/client/renderers/vertex/VertexFormat
 	FIELD a logger
 	FIELD b elements
@@ -16953,6 +16963,7 @@ CLASS none/cwe net/minecraft/client/resources/LanguageManager
 	METHOD b isCurrentLanguageBidirectional ()Z
 	METHOD c getCurrentLanguage ()Lnone/cwd;
 CLASS none/cwh net/minecraft/client/resources/data/MetadataSectionSerializer
+CLASS none/cwi empty/cwi
 CLASS none/cwj net/minecraft/client/resources/data/IMetadataSectionSerializer
 CLASS none/cwk net/minecraft/client/resources/data/MetadataSerializer
 	FIELD a registry
@@ -16961,7 +16972,7 @@ CLASS none/cwk net/minecraft/client/resources/data/MetadataSerializer
 	METHOD a (Ljava/lang/String;Lcom/google/gson/JsonObject;)Lnone/cwi;
 		ARG 0 metadataSectionName
 	METHOD a registerMetadataSectionType (Lnone/cwj;Ljava/lang/Class;)V
-CLASS none/cwl empty/_4
+CLASS none/cwl empty/cwl
 CLASS none/cwo net/minecraft/client/resources/data/AnimationMetadataSection
 CLASS none/cwp net/minecraft/client/resources/data/AnimationMetadataSectionSerializer
 CLASS none/cwr net/minecraft/client/resources/data/FontMetadataSection
@@ -17022,7 +17033,7 @@ CLASS none/cyk net/minecraft/server/IntegratedServer
 	METHOD u initiateShutdown ()V
 	METHOD w getDataDirectory ()Ljava/io/File;
 	METHOD y onTick ()V
-CLASS none/cyo empty/_6
+CLASS none/cyo empty/cyo
 CLASS none/cyp
 	FIELD a atomicInteger
 	FIELD b logger
