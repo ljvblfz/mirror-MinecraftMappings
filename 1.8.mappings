@@ -13190,8 +13190,20 @@ CLASS none/bjg net/minecraft/level/gen/structure/ComponentMineshaftCorridor
 	FIELD b hasSpiders
 	FIELD c spawnerPlaced
 	FIELD d sectionCount
+	METHOD <init> (ILjava/util/Random;Lnone/bjb;Lnone/ej;)V
+		ARG 1 rand
+	METHOD a (Ljava/util/List;Ljava/util/Random;IIILnone/ej;)Lnone/bjb;
+		ARG 1 rand
+		ARG 5 facing
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
+		ARG 0 level
+		ARG 1 rand
+	METHOD a (Lnone/aqu;Lnone/bjb;Ljava/util/Random;IIILjava/util/List;I)Z
+		ARG 0 level
+		ARG 2 rand
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
+		ARG 0 component
+		ARG 2 rand
 CLASS none/bjh
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
@@ -13203,7 +13215,12 @@ CLASS none/bjj
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
 CLASS none/bjk net/minecraft/level/gen/structure/MineshaftStart
 CLASS none/bjl net/minecraft/level/gen/structure/NetherFortressGenerator
-CLASS none/bjm net/minecraft/level/structure/NetherBridgeStart
+CLASS none/bjm net/minecraft/level/gen/structure/NetherBridgeStart
+	METHOD <init> (Lnone/aqu;Ljava/util/Random;II)V
+		ARG 0 level
+		ARG 1 rand
+		ARG 2 chunkX
+		ARG 3 chunkZ
 CLASS none/bjn net/minecraft/level/gen/structure/ComponentNetherFortress
 CLASS none/bjp net/minecraft/level/gen/structure/ComponentNetherBridgeCrossing3
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
@@ -13293,7 +13310,12 @@ CLASS none/blo net/minecraft/level/gen/structure/ComponentScatteredFeatureSwampH
 	FIELD e hasWitch
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 CLASS none/blp net/minecraft/level/gen/structure/StrongholdGenerator
-CLASS none/blq net/minecraft/level/structure/StrongholdStart
+CLASS none/blq net/minecraft/level/gen/structure/StrongholdStart
+	METHOD <init> (Lnone/aqu;Ljava/util/Random;II)V
+		ARG 0 level
+		ARG 1 rand
+		ARG 2 chunkX
+		ARG 3 chunkZ
 CLASS none/blr net/minecraft/level/gen/structure/StrongholdComponents
 	FIELD a totalWeight
 	FIELD b componentWeightArray
@@ -13336,7 +13358,9 @@ CLASS none/bmd
 CLASS none/bme
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
-CLASS none/bmg net/minecraft/level/structure/StrongholdComponentsStairs
+CLASS none/bmg net/minecraft/level/gen/structure/StrongholdComponentsStairs
+	METHOD <init> (ILjava/util/Random;II)V
+		ARG 1 rand
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
 CLASS none/bmi
@@ -13373,8 +13397,41 @@ CLASS none/bms net/minecraft/level/gen/structure/StructureComponent
 	METHOD b getZWithOffset (II)I
 	METHOD b fillCurrentPositionBlocksDownwards (Lnone/aqu;Lnone/bec;IIILnone/bjb;)V
 	METHOD d getYWithOffset (I)I
+CLASS none/bmv net/minecraft/world/gen/structure/StructureStart
+	FIELD a components
+	FIELD b boundingBox
+	FIELD c chunkX
+	FIELD d chunkZ
+	METHOD <init> (II)V
+		ARG 0 chunkX
+		ARG 1 chunkZ
+	METHOD a getBoundingBox ()Lnone/bjb;
+	METHOD a write (II)Lnone/fn;
+		ARG 0 chunkX
+		ARG 1 chunkZ
+	METHOD a markAvailableHeight (Lnone/aqu;Ljava/util/Random;I)V
+		ARG 0 level
+		ARG 1 rand
+		ARG 2 offsetDown
+	METHOD a (Lnone/aqu;Ljava/util/Random;II)V
+		ARG 0 level
+		ARG 1 rand
+	METHOD a (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)V
+		ARG 0 level
+		ARG 1 rand
+		ARG 2 boundingBox
+	METHOD a read (Lnone/aqu;Lnone/fn;)V
+		ARG 0 level
+	METHOD b getComponents ()Ljava/util/LinkedList;
+	METHOD e getChunkX ()I
+	METHOD f getChunkZ ()I
 CLASS none/bmw net/minecraft/level/gen/structure/VillageGenerator
-CLASS none/bmx net/minecraft/level/structure/StructureVillage
+CLASS none/bmx net/minecraft/level/gen/structure/StructureVillage
+	METHOD <init> (Lnone/aqu;Ljava/util/Random;III)V
+		ARG 0 level
+		ARG 1 rand
+		ARG 2 chunkX
+		ARG 3 chunkZ
 CLASS none/bna
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 CLASS none/bnb net/minecraft/level/gen/structure/ComponentVillageField
