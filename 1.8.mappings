@@ -7772,6 +7772,7 @@ CLASS none/aqi net/minecraft/entity/SpawnLogic
 	METHOD b getBlockPos ()Lnone/dt;
 	METHOD c onUpdate ()V
 	METHOD f getEntityID ()Ljava/lang/String;
+	METHOD g arePlayersWithinRequiredRange ()Z
 CLASS none/aql net/minecraft/client/renderers/EnumBlockRenderMode
 	FIELD a SOLID
 	FIELD b CUTOUT_MIPPED
@@ -14536,11 +14537,11 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	FIELD I logger
 	FIELD J locationMojangPng
 	FIELD K macDisplayModes
-	FIELD L fileResourcepacks
+	FIELD L resourcepacksDir
 	FIELD M propertyMap
 	FIELD N currentServerData
 	FIELD O renderEngine
-	FIELD P theMinecraft
+	FIELD P instance
 	FIELD Q fullscreen
 	FIELD S hasCrashed
 	FIELD T crashReporter
@@ -14556,13 +14557,13 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	FIELD aI scheduledExecutables
 	FIELD aK thread
 	FIELD aN debugProfilerName
-	FIELD aa mcLogAgent
+	FIELD aa logAgent
 	FIELD ab isGamePaused
 	FIELD ac leftClickCounter
 	FIELD ad tempDisplayWidth
 	FIELD ae tempDisplayHeight
 	FIELD af theIntegratedServer
-	FIELD ag fileAssets
+	FIELD ag assetsDir
 	FIELD ah launchedVersion
 	FIELD ai proxy
 	FIELD aj saveLoader
@@ -14573,15 +14574,15 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	FIELD ao joinPlayerCounter
 	FIELD ap is64bit
 	FIELD aq isDemo
-	FIELD ar myNetworkManager
+	FIELD ar networkManager
 	FIELD as integratedServerIsRunning
 	FIELD at debugCrashTriggerTime
-	FIELD au mcResourceManager
+	FIELD au resourceManager
 	FIELD av metadataSerializer
 	FIELD aw defaultResourcePacks
-	FIELD ax mcDefaultResourcePack
-	FIELD ay mcResourcePackRepository
-	FIELD az mcLanguageManager
+	FIELD ax defaultResourcePack
+	FIELD ay resourcePackRepository
+	FIELD az languageManager
 	FIELD b memoryReserve
 	FIELD c playerController
 	FIELD d displayWidth
@@ -14602,10 +14603,10 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	FIELD s objectMouseOver
 	FIELD t gameSettings
 	FIELD u soundManager
-	FIELD v mcDataDir
+	FIELD v dataDir
 	FIELD w isTakingScreenshot
 	FIELD x systemTime
-	FIELD y mcProfiler
+	FIELD y profiler
 	FIELD z running
 	METHOD <init> (Lnone/cbf;)V
 		ARG 0 mcInitializer
@@ -14844,9 +14845,24 @@ CLASS none/btt net/minecraft/util/ScreenShotHelper
 	FIELD a logger
 CLASS none/btu net/minecraft/util/MinecraftError
 CLASS none/btv net/minecraft/util/Timer
-CLASS none/btw net/minecraft/util/Session
+	FIELD a hertz
+	FIELD b catchupTicks
+	FIELD c interpolation
+	FIELD e null
+	FIELD f lastSecondTime
+	FIELD g lastSystemTime
+	FIELD h lastMillisecondTime
+	FIELD i millisecondsThisSecond
+	FIELD j updatesPerSecond
+	METHOD <init> (F)V
+		ARG 0 hertz
+	METHOD a update ()V
+CLASS none/btw net/minecraft/client/main/MinecraftSession
+	FIELD a username
+	FIELD d accountType
 	METHOD a getSessionID ()Ljava/lang/String;
 	METHOD c getUsername ()Ljava/lang/String;
+	METHOD f getAccountType ()Lnone/btx;
 CLASS none/btx net/minecraft/util/AccountType
 	FIELD a MINECRAFT
 	FIELD b MOJANG
@@ -15703,10 +15719,10 @@ CLASS none/can net/minecraft/client/gui/GuiTwitchUsers
 	METHOD b initGui ()V
 CLASS none/caw net/minecraft/chat/caw
 CLASS none/cbf net/minecraft/main/MinecraftInitializer
-	FIELD a mcProxy
-	FIELD b mcGameInfo
-	FIELD c mcAssets
-	FIELD d mcVersion
+	FIELD a proxy
+	FIELD b gameInfo
+	FIELD c assets
+	FIELD d version
 	FIELD e mcServerArgs
 	METHOD <init> (Lnone/cbk;Lnone/cbg;Lnone/cbh;Lnone/cbi;Lnone/cbj;)V
 		ARG 0 mcProxy
@@ -15725,14 +15741,14 @@ CLASS none/cbg net/minecraft/main/MinecraftGameInfo
 		ARG 2 fullscreen
 		ARG 3 isDemo
 CLASS none/cbh net/minecraft/main/MinecraftAssets
-	FIELD a mcDataFile
-	FIELD b fileAssets
-	FIELD c fileResourcepacks
+	FIELD a dataDir
+	FIELD b resourcepacksDir
+	FIELD c assetsDir
 	FIELD d launchedVersion
 	METHOD <init> (Ljava/io/File;Ljava/io/File;Ljava/io/File;Ljava/lang/String;)V
 		ARG 0 mcDataFile
-		ARG 1 fileAssets
-		ARG 2 fileResourcepacks
+		ARG 1 fileResourcepacks
+		ARG 2 fileAssets
 		ARG 3 launchedVersion
 CLASS none/cbi net/minecraft/main/MinecraftVersion
 	FIELD a isDemo
@@ -15744,11 +15760,11 @@ CLASS none/cbj net/minecraft/main/MinecraftServerArgs
 	FIELD a serverName
 	FIELD b port
 CLASS none/cbk net/minecraft/main/MinecraftProxy
-	FIELD a myILogAgent
+	FIELD a session
 	FIELD b propertyMap
 	FIELD c proxy
 	METHOD <init> (Lnone/btw;Lcom/mojang/authlib/properties/PropertyMap;Ljava/net/Proxy;)V
-		ARG 0 myILogAgent
+		ARG 0 session
 		ARG 1 propertyMap
 CLASS none/cbm net/minecraft/main/ThreadClientShutdown
 CLASS none/cbu net/minecraft/client/models/ModelArmorStandArmor
