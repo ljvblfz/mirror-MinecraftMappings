@@ -3464,6 +3464,7 @@ CLASS none/os net/minecraft/dispenser/DispenseBehaviorSpawnEgg
 CLASS none/ot net/minecraft/dispenser/DispenseBehaviorFireworks
 CLASS none/ou net/minecraft/dispenser/DispenseBehaviorFireCharge
 CLASS none/ov net/minecraft/dispenser/DispenseBehaviorBoat
+CLASS none/ow net/minecraft/util/JsonException
 CLASS none/pc net/minecraft/util/StackInfoPrintStream
 	FIELD a logger
 	FIELD b prefix
@@ -3980,6 +3981,7 @@ CLASS none/uc net/minecraft/entity/EntitySet
 	FIELD b entitySet
 	METHOD a (Ljava/lang/Class;Z)Ljava/lang/Class;
 		ARG 1 flag
+CLASS none/uh net/minecraft/util/JsonUtils
 CLASS none/ul net/minecraft/util/CaseInsensitiveHashMap
 	FIELD a wrapped
 	METHOD clear ()V
@@ -16794,6 +16796,47 @@ CLASS none/ckt net/minecraft/client/util/QuadComparator
 	METHOD compare (Ljava/lang/Integer;Ljava/lang/Integer;)I
 		ARG 0 id1
 		ARG 1 id2
+CLASS none/ckw net/minecraft/client/shader/FrameBuffer
+	FIELD a textureWidth
+	FIELD b textureHeight
+	FIELD c width
+	FIELD d height
+	FIELD e useDepth
+	FIELD f object
+	FIELD g texture
+	FIELD h depthBuffer
+	FIELD i color
+	FIELD j filter
+	METHOD <init> (IIZ)V
+		ARG 0 width
+		ARG 1 height
+		ARG 2 useDepth
+	METHOD a deleteFrameBuffer ()V
+	METHOD a setColor (FFFF)V
+		ARG 0 red
+		ARG 1 green
+		ARG 2 blue
+		ARG 3 alpha
+	METHOD a setFilter (I)V
+		ARG 0 filter
+	METHOD a createBindFrameBuffer (II)V
+		ARG 0 width
+		ARG 1 height
+	METHOD a frameBufferRender (IIZ)V
+		ARG 0 width
+		ARG 1 height
+	METHOD a bindFrameBuffer (Z)V
+	METHOD b checkFrameBufferComplete ()V
+	METHOD b createFrameBuffer (II)V
+		ARG 0 width
+		ARG 1 height
+	METHOD c bindTexture ()V
+	METHOD c frameBufferRender (II)V
+		ARG 0 width
+		ARG 1 height
+	METHOD d unbindTexture ()V
+	METHOD e unbindFrameBuffer ()V
+	METHOD f frameBufferClear ()V
 CLASS none/ckx net/minecraft/client/renderers/Tessellator
 	FIELD a levelRenderer
 	FIELD b vboUploader
@@ -17098,6 +17141,182 @@ CLASS none/csz net/minecraft/client/renderers/RenderWolfCollar
 CLASS none/ctc
 	METHOD a rotateCorpse (Lnone/xm;FFF)V
 	METHOD b getModel ()Lnone/ccq;
+CLASS none/ctd net/minecraft/util/JsonBlendingMode
+	FIELD a BLENDINGMODE
+CLASS none/cte net/minecraft/client/shader/ShaderDefault
+	METHOD a set (F)V
+	METHOD a set (FF)V
+	METHOD a set (FFF)V
+	METHOD a set (FFFF)V
+	METHOD a set (FFFFFFFFFFFFFFFF)V
+	METHOD a set (IIII)V
+	METHOD a set (Ljavax/vecmath/Matrix4f;)V
+	METHOD a set ([F)V
+CLASS none/ctf net/minecraft/client/shader/ShaderManager
+	FIELD a LOGGER
+	FIELD b DEFAULT_SHADER
+	FIELD c SHADER_MANAGER
+	FIELD d CURRENT_PROGRAM
+	FIELD f shaderSamplers
+	FIELD g samplerNames
+	FIELD h samplerLocations
+	FIELD i shaderUniforms
+	FIELD j uniformLocations
+	FIELD k mappedShaderUniforms
+	FIELD l program
+	FIELD m programFileName
+	FIELD n useFaceCulling
+	FIELD o isDirty
+	FIELD p blendingMode
+	FIELD q attribLocations
+	FIELD r attributes
+	FIELD s vertexShaderLoader
+	FIELD t fragmentShaderLoader
+	METHOD <init> (Lnone/cvk;Ljava/lang/String;)V
+		ARG 0 manager
+		ARG 1 fileName
+	METHOD a deleteShader ()V
+	METHOD a parseSampler (Lcom/google/gson/JsonElement;)V
+		ARG 0 element
+	METHOD a getShaderUniform (Ljava/lang/String;)Lnone/ctl;
+	METHOD a addSamplerTexture (Ljava/lang/String;Ljava/lang/Object;)V
+	METHOD b endShader ()V
+	METHOD b parseUniform (Lcom/google/gson/JsonElement;)V
+		ARG 0 element
+	METHOD b getShaderUniformElseDefault (Ljava/lang/String;)Lnone/ctl;
+	METHOD d markDirty ()V
+	METHOD e getVertexShaderLoader ()Lnone/cti;
+	METHOD f getFragmentShaderLoader ()Lnone/cti;
+	METHOD h getProgram ()I
+CLASS none/ctg net/minecraft/client/shader/ShaderGroup
+	FIELD a mainFrameBuffer
+	FIELD b resourceManager
+	FIELD c groupName
+	FIELD d shaderList
+	FIELD e frameBufferMap
+	FIELD f frameBufferList
+	FIELD g projectionMatrix
+	FIELD h width
+	FIELD i height
+	METHOD <init> (Lnone/cug;Lnone/cvk;Lnone/ckw;Lnone/oa;)V
+		ARG 0 textureManager
+		ARG 1 resourceManager
+		ARG 2 mainFrameBuffer
+		ARG 3 resourceLocation
+	METHOD a deleteShaderGroup ()V
+	METHOD a loadShaderGroup (F)V
+	METHOD a createBindFrameBuffers (II)V
+	METHOD a initTarget (Lcom/google/gson/JsonElement;)V
+	METHOD a getRawFrameBuffer (Ljava/lang/String;)Lnone/ckw;
+	METHOD a addFrameBuffer (Ljava/lang/String;II)V
+	METHOD a addShader (Ljava/lang/String;Lnone/ckw;Lnone/ckw;)Lnone/cth;
+	METHOD a parsePass (Lnone/cug;Lcom/google/gson/JsonElement;)V
+	METHOD a parseGroup (Lnone/cug;Lnone/oa;)V
+	METHOD b getShaderGroupName ()Ljava/lang/String;
+	METHOD b initUniform (Lcom/google/gson/JsonElement;)V
+	METHOD b getFrameBuffer (Ljava/lang/String;)Lnone/ckw;
+CLASS none/cth net/minecraft/client/shader/Shader
+	FIELD a frameBufferIn
+	FIELD b frameBufferOut
+	FIELD c manager
+	FIELD d auxFrameBuffers
+	FIELD e auxNames
+	FIELD f auxWidths
+	FIELD g auxHeights
+	FIELD h projectionMatrix
+	METHOD <init> (Lnone/cvk;Ljava/lang/String;Lnone/ckw;Lnone/ckw;)V
+		ARG 0 manager
+		ARG 1 fileName
+		ARG 2 frameBufferIn
+		ARG 3 frameBufferOut
+	METHOD a loadShader (F)V
+	METHOD a addAuxFrameBuffer (Ljava/lang/String;Ljava/lang/Object;II)V
+		ARG 0 name
+		ARG 1 frameBuffer
+		ARG 2 width
+		ARG 3 height
+	METHOD a setProjectionMatrix (Ljavax/vecmath/Matrix4f;)V
+		ARG 0 projectionMatrix
+	METHOD b deleteShader ()V
+	METHOD c getShaderManager ()Lnone/ctf;
+	METHOD d preLoadShader ()V
+CLASS none/cti net/minecraft/client/shader/ShaderLoader
+	FIELD a shaderType
+	FIELD b fileName
+	FIELD c shaderID
+	FIELD d attachedCount
+	METHOD <init> (Lnone/ctj;ILjava/lang/String;)V
+		ARG 0 shaderType
+		ARG 1 shaderID
+		ARG 2 fileName
+	METHOD a getShaderFileName ()Ljava/lang/String;
+	METHOD a toByteArray (Ljava/io/BufferedInputStream;)[B
+	METHOD a attachShader (Lnone/ctf;)V
+		ARG 0 manager
+	METHOD a loadShader (Lnone/cvk;Lnone/ctj;Ljava/lang/String;)Lnone/cti;
+		ARG 1 shaderType
+		ARG 2 fileName
+	METHOD b detachShader (Lnone/ctf;)V
+		ARG 0 manager
+CLASS none/ctj net/minecraft/client/shader/ShaderLoaderShaderType
+	FIELD a VERT
+	FIELD b FRAG
+	FIELD c name
+	FIELD d extension
+	FIELD e mode
+	FIELD f loadedShaders
+	METHOD <init> (Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;I)V
+		ARG 2 name
+		ARG 3 extension
+		ARG 4 mode
+	METHOD a getName ()Ljava/lang/String;
+	METHOD b getExtension ()Ljava/lang/String;
+	METHOD c getMode ()I
+	METHOD d getLoadedShaders ()Ljava/util/Map;
+CLASS none/ctk net/minecraft/client/shader/ShaderProgram
+	FIELD a LOGGER
+	FIELD b PROGRAM
+	METHOD a setNewProgram ()V
+	METHOD a deleteProgram (Lnone/ctf;)V
+		ARG 0 manager
+	METHOD b getProgram ()Lnone/ctk;
+	METHOD b linkProgram (Lnone/ctf;)V
+		ARG 0 manager
+	METHOD c createProgram ()I
+CLASS none/ctl net/minecraft/client/shader/ShaderUniform
+	FIELD a LOGGER
+	FIELD b location
+	FIELD c count
+	FIELD d type
+	FIELD e intBuffer
+	FIELD f floatBuffer
+	FIELD g name
+	FIELD h isDirty
+	FIELD i manager
+	METHOD <init> (Ljava/lang/String;IILnone/ctf;)V
+		ARG 0 name
+		ARG 1 type
+		ARG 2 count
+		ARG 3 manager
+	METHOD a getShaderName ()Ljava/lang/String;
+	METHOD a set (F)V
+	METHOD a set (FF)V
+	METHOD a set (FFF)V
+	METHOD a set (FFFF)V
+	METHOD a set (FFFFFFFFFFFFFFFF)V
+	METHOD a set (IIII)V
+	METHOD a parseType (Ljava/lang/String;)I
+		ARG 0 type
+	METHOD a set (Ljavax/vecmath/Matrix4f;)V
+		ARG 0 matrix
+	METHOD a set ([F)V
+	METHOD b upload ()V
+	METHOD b setUniformLocation (I)V
+		ARG 0 location
+	METHOD h markDirty ()V
+	METHOD i uploadInt ()V
+	METHOD j uploadFloat ()V
+	METHOD k uploadFloatMatrix ()V
 CLASS none/ctw net/minecraft/client/renderers/texture/TextureAtlas
 CLASS none/ctx
 	FIELD b width
@@ -17149,6 +17368,9 @@ CLASS none/cug net/minecraft/client/renderers/texture/TextureManager
 	METHOD a loadTexture (Lnone/oa;Lnone/cui;)Z
 	METHOD e tick ()V
 CLASS none/cui net/minecraft/client/renderers/texture/ITexture
+CLASS none/cuj net/minecraft/renderers/texture/TextureUtil
+	FIELD c LOGGER
+	FIELD d INTBUFFER
 CLASS none/cuk net/minecraft/client/renderers/texture/ITickable
 	METHOD e tick ()V
 CLASS none/cul empty/cul
@@ -17414,7 +17636,9 @@ CLASS none/czh net/minecraft/client/sound/czh
 	FIELD g resourceManager
 	METHOD a onReload (Lnone/cvk;)V
 	METHOD c update ()V
-CLASS none/czl
+CLASS none/czl net/minecraft/client/audio/SoundRegistry
+	FIELD a registry
+	METHOD a clearRegistry ()V
 	METHOD b initializeMap ()Ljava/util/Map;
 CLASS none/czm net/minecraft/client/audio/ISoundEventAccessor
 CLASS none/czn net/minecraft/client/audio/SoundEventAccessor
