@@ -7601,6 +7601,11 @@ CLASS none/anr net/minecraft/item/ItemWrittenBook
 CLASS none/ans net/minecraft/potion/PotionBrewer
 	FIELD r POTION_PREFIXES
 CLASS none/aod empty/aod
+CLASS none/aok net/minecraft/item/crafting/FurnaceRecipes
+	FIELD a recipes
+	METHOD a addRecipe (Lnone/alq;Lnone/amj;F)V
+	METHOD a addRecipe (Lnone/amj;Lnone/amj;F)V
+	METHOD a addRecipe (Lnone/atr;Lnone/amj;F)V
 CLASS none/aop
 	METHOD a addRecipe (Lnone/amj;[Ljava/lang/Object;)Lnone/aos;
 		ARG 0 craftingResult
@@ -17328,6 +17333,7 @@ CLASS none/cxl
 CLASS none/cxq
 	FIELD b null
 	METHOD compareTo (Lnone/cxq;)I
+CLASS none/cxt net/minecraft/client/audio/PositionedSound
 CLASS none/cxz net/minecraft/sound/EnumSoundType
 	FIELD a MASTER
 	FIELD b MUSIC
@@ -17341,6 +17347,7 @@ CLASS none/cxz net/minecraft/sound/EnumSoundType
 CLASS none/cyc
 	FIELD a FILE
 	FIELD b SOUND_EVENT
+CLASS none/cye net/minecraft/client/audio/ISound
 CLASS none/cyj
 	FIELD h playerNbt
 	METHOD u getPlayerNbt ()Lnone/fn;
@@ -17369,7 +17376,7 @@ CLASS none/cyk net/minecraft/server/IntegratedServer
 	METHOD w getDataDirectory ()Ljava/io/File;
 	METHOD y onTick ()V
 CLASS none/cyo empty/cyo
-CLASS none/cyp
+CLASS none/cyp net/minecraft/client/network/LanServerDetector
 	FIELD a atomicInteger
 	FIELD b logger
 CLASS none/cyq
@@ -17389,6 +17396,7 @@ CLASS none/cyy net/minecraft/sound/EnumMusicType
 	FIELD e NETHER
 	FIELD f END_BOSS
 	FIELD g END
+CLASS none/cyz net/minecraft/client/audio/SoundPoolEntry
 CLASS none/cza net/minecraft/client/sound/SoundSystem
 	FIELD a marker
 	FIELD b logger
@@ -17408,9 +17416,17 @@ CLASS none/czh net/minecraft/client/sound/czh
 	METHOD c update ()V
 CLASS none/czl
 	METHOD b initializeMap ()Ljava/util/Map;
+CLASS none/czm net/minecraft/client/audio/ISoundEventAccessor
+CLASS none/czn net/minecraft/client/audio/SoundEventAccessor
+	FIELD a poolEntry
+	METHOD g clone ()Lnone/cyz;
 CLASS none/czp net/minecraft/client/stream/AchievementMetadata
 	METHOD <init> (Lnone/tk;)V
 		ARG 0 achievement
+CLASS none/czq net/minecraft/client/stream/MetadataCombat
+	METHOD <init> (Lnone/xm;Lnone/xm;)V
+		ARG 0 entityLiving
+		ARG 1 entityLiving2
 CLASS none/czr net/minecraft/client/stream/PlayerDeathMetadata
 CLASS none/czs net/minecraft/client/stream/Metadata
 	FIELD a encodedPayload
