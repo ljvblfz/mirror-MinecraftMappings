@@ -17148,9 +17148,9 @@ CLASS none/cte net/minecraft/client/shader/ShaderDefault
 	METHOD a set (FF)V
 	METHOD a set (FFF)V
 	METHOD a set (FFFF)V
-	METHOD a set (FFFFFFFFFFFFFFFF)V
+	METHOD a setMatrix (FFFFFFFFFFFFFFFF)V
 	METHOD a set (IIII)V
-	METHOD a set (Ljavax/vecmath/Matrix4f;)V
+	METHOD a setMatrix (Ljavax/vecmath/Matrix4f;)V
 	METHOD a set ([F)V
 CLASS none/ctf net/minecraft/client/shader/ShaderManager
 	FIELD a LOGGER
@@ -17303,11 +17303,27 @@ CLASS none/ctl net/minecraft/client/shader/ShaderUniform
 	METHOD a set (FF)V
 	METHOD a set (FFF)V
 	METHOD a set (FFFF)V
-	METHOD a set (FFFFFFFFFFFFFFFF)V
+	METHOD a setMatrix (FFFFFFFFFFFFFFFF)V
+		ARG 0 m00
+		ARG 1 m01
+		ARG 2 m02
+		ARG 3 m03
+		ARG 4 m10
+		ARG 5 m11
+		ARG 6 m12
+		ARG 7 m13
+		ARG 8 m20
+		ARG 9 m21
+		ARG 10 m22
+		ARG 11 m23
+		ARG 12 m30
+		ARG 13 m31
+		ARG 14 m32
+		ARG 15 m33
 	METHOD a set (IIII)V
 	METHOD a parseType (Ljava/lang/String;)I
 		ARG 0 type
-	METHOD a set (Ljavax/vecmath/Matrix4f;)V
+	METHOD a setMatrix (Ljavax/vecmath/Matrix4f;)V
 		ARG 0 matrix
 	METHOD a set ([F)V
 	METHOD b upload ()V
