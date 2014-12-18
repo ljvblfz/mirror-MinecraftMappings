@@ -16612,6 +16612,8 @@ CLASS none/ciw net/minecraft/client/renderers/LevelRendererSwitchEnumUsage
 	FIELD a VALUES
 CLASS none/ciy net/minecraft/client/renderers/LevelVertexBufferUploader
 	METHOD a draw (Lnone/civ;I)I
+CLASS none/ciz
+	FIELD a VALUES
 CLASS none/cja
 	FIELD f AIR
 	METHOD b getCombinedLight (Lnone/dt;I)I
@@ -16648,20 +16650,34 @@ CLASS none/cji net/minecraft/client/renderers/GameRenderer
 	METHOD a setViewEntity (Lnone/wv;)V
 	METHOD j setupOverlayRendering ()V
 CLASS none/cjm net/minecraft/client/OpenGL
-	FIELD a alphaTestFunc
+	FIELD a alphaTest
+	FIELD d colorMaterial
 	FIELD e pixelArithmetic
 	FIELD f depthBuffer
+	FIELD g fog
+	FIELD h polygonCulling
+	FIELD i polygonOffset
+	FIELD j logicOp
 	FIELD o selectedTexture
 	FIELD p textures
-	FIELD q shadeMode
+	FIELD q shadeModel
+	FIELD s colorMask
 	FIELD t color
 	FIELD u viewport
 	METHOD D glLoadIdentity ()V
 	METHOD E glPushMatrix ()V
 	METHOD F glPopMatrix ()V
+	METHOD a glClearDepth (D)V
+		ARG 0 depth
 	METHOD a glScaled (DDD)V
 	METHOD a glOrtho (DDDDDD)V
+	METHOD a setFogDensity (F)V
+		ARG 0 density
+	METHOD a glPolygonOffset (FF)V
+		ARG 0 factor
+		ARG 1 units
 	METHOD a glScalef (FFF)V
+	METHOD a glClearColor (FFFF)V
 	METHOD a glAlphaFunc (IF)V
 		ARG 0 func
 		ARG 1 ref
@@ -16677,9 +16693,15 @@ CLASS none/cjm net/minecraft/client/OpenGL
 	METHOD a glMultMatrix (Ljava/nio/FloatBuffer;)V
 	METHOD a glDepthMask (Z)V
 		ARG 0 flag
-	METHOD a drawGradientRect (ZZZZ)V
+	METHOD a glColorMask (ZZZZ)V
+		ARG 0 red
+		ARG 1 green
+		ARG 2 blue
+		ARG 3 alpha
 	METHOD b glPopAttrib ()V
 	METHOD b glTranslated (DDD)V
+	METHOD b setFogStart (F)V
+		ARG 0 start
 	METHOD b glTranslatef (FFF)V
 	METHOD b glRotatef (FFFF)V
 	METHOD b glBlendFunc (II)V
@@ -16689,6 +16711,8 @@ CLASS none/cjm net/minecraft/client/OpenGL
 		ARG 2 width
 		ARG 3 height
 	METHOD c disableAlphaTest ()V
+	METHOD c setFogEnd (F)V
+		ARG 0 end
 	METHOD c setColor (FFF)V
 		ARG 0 red
 		ARG 1 green
@@ -16701,6 +16725,12 @@ CLASS none/cjm net/minecraft/client/OpenGL
 	METHOD c glDepthFunc (I)V
 		ARG 0 func
 	METHOD d enableAlphaTest ()V
+	METHOD d setFogMode (I)V
+		ARG 0 mode
+	METHOD e glCullFace (I)V
+		ARG 0 mode
+	METHOD f glLogicOp (I)V
+		ARG 0 opcode
 	METHOD g enableColorMaterial ()V
 	METHOD h disableColorMaterial ()V
 	METHOD h glDeleteTextures (I)V
@@ -16713,12 +16743,21 @@ CLASS none/cjm net/minecraft/client/OpenGL
 		ARG 0 mode
 	METHOD k disableBlend ()V
 	METHOD l enableBlend ()V
+	METHOD m enableFog ()V
 	METHOD m glClear (I)V
 		ARG 0 depth
+	METHOD n disableFog ()V
 	METHOD n glMatrixMode (I)V
+	METHOD o enablePolygonCulling ()V
+	METHOD o glCallList (I)V
+	METHOD p disablePolygonCulling ()V
+	METHOD q enablePolygonOffsetFill ()V
+	METHOD r disablePolygonOffsetFill ()V
+	METHOD u enableLogicOp ()V
+	METHOD v disableLogicOp ()V
 	METHOD y glGenTextures ()I
-CLASS none/cjo net/minecraft/client/OpenGLAlphaTestFunc
-	FIELD a alphaTestCapability
+CLASS none/cjo net/minecraft/client/OpenGLAlphaTest
+	FIELD a capability
 	FIELD b func
 	FIELD c ref
 CLASS none/cjp net/minecraft/client/OpenGLPixelArithmetic
@@ -16733,6 +16772,9 @@ CLASS none/cjq net/minecraft/client/OpenGLCapability
 	METHOD a disable ()V
 	METHOD a setEnabled (Z)V
 	METHOD b enable ()V
+CLASS none/cjr
+	FIELD a depth
+	FIELD b color
 CLASS none/cjs net/minecraft/client/OpenGLColor
 	FIELD a red
 	FIELD b green
@@ -16743,14 +16785,36 @@ CLASS none/cjs net/minecraft/client/OpenGLColor
 		ARG 1 green
 		ARG 2 blue
 		ARG 3 alpha
-CLASS none/cjv
-	FIELD a colorMaterialCapability
+CLASS none/cjt net/minecraft/client/OpenGLLogicOp
+	FIELD a capability
+	FIELD b opcode
+CLASS none/cju net/minecraft/client/OpenGLColorMask
+	FIELD a red
+	FIELD b green
+	FIELD c blue
+	FIELD d alpha
+CLASS none/cjv net/minecraft/client/OpenGLColorMaterial
+	FIELD a capability
 	FIELD b face
 	FIELD c mode
+CLASS none/cjw net/minecraft/client/OpenGLPolygonCulling
+	FIELD a capability
+	FIELD b cullFace
 CLASS none/cjx net/minecraft/client/OpenGLDepthBuffer
 	FIELD a depthTestCapability
 	FIELD b depthBufferWritingEnabled
 	FIELD c func
+CLASS none/cjy net/minecraft/client/OpenGLFog
+	FIELD a capability
+	FIELD b mode
+	FIELD c density
+	FIELD d start
+	FIELD e end
+CLASS none/cjz net/minecraft/client/OpenGLPolygonOffset
+	FIELD a fillCapability
+	FIELD b lineCapability
+	FIELD c factor
+	FIELD d units
 CLASS none/ckf net/minecraft/client/OpenGLTexture
 	FIELD b textureName
 CLASS none/ckg net/minecraft/client/OpenGLViewport
@@ -17782,11 +17846,55 @@ CLASS none/daq tv/twitch/TwitchAuthenticator
 		ARG 0 minecraft
 CLASS none/dat tv/twitch/dat
 CLASS none/dax net/minecraft/client/renderers/OpenGlHelper
+	FIELD A GL_SOURCE2_RGB
+	FIELD B GL_OPERAND0_RGB
+	FIELD C GL_OPERAND1_RGB
+	FIELD D GL_OPERAND2_RGB
+	FIELD E GL_COMBINE_ALPHA
+	FIELD F GL_SOURCE0_ALPHA
+	FIELD G GL_SOURCE1_ALPHA
+	FIELD H GL_SOURCE2_ALPHA
+	FIELD I GL_OPERAND0_ALPHA
+	FIELD J GL_OPERAND1_ALPHA
+	FIELD K GL_OPERAND2_ALPHA
+	FIELD L null
 	FIELD M openGL21Capability
 	FIELD O vboAvailable
+	FIELD P GL_ARRAY_BUFFER
+	FIELD Q GL_STATIC_DRAW
+	FIELD R framebufferSupportReason
 	FIELD S shadersAvailable
+	FIELD T useShaders
+	FIELD U supportedARB_multitexture
+	FIELD V supportedARB_texture_env_combine
 	FIELD X featureLogString
-	FIELD q lightmapTexUnit
+	FIELD Y supportedARB_vertex_buffer_object
+	FIELD a isNvidiaGpu
+	FIELD b GL_READ_FRAMEBUFFER
+	FIELD c GL_DRAW_FRAMEBUFFER
+	FIELD d GL_COLOR_ATTACHMENT0
+	FIELD e GL_DEPTH_ATTACHMENT
+	FIELD f GL_FRAMEBUFFER_COMPLETE
+	FIELD g GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT
+	FIELD h GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT
+	FIELD i GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER
+	FIELD j GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER
+	FIELD k useFramebufferObjects
+	FIELD l GL_LINK_STATUS
+	FIELD m GL_COMPILE_STATUS
+	FIELD n GL_VERTEX_SHADER
+	FIELD o GL_FRAGMENT_SHADER
+	FIELD p GL_TEXTURE0
+	FIELD q GL_TEXTURE1
+	FIELD r GL_TEXTURE2
+	FIELD s GL_COMBINE
+	FIELD t GL_INTERPOLATE
+	FIELD u GL_PRIMARY_COLOR
+	FIELD v GL_CONSTANT
+	FIELD w GL_PREVIOUS
+	FIELD x GL_COMBINE_RGB
+	FIELD y GL_SOURCE0_RGB
+	FIELD z GL_SOURCE1_RGB
 	METHOD a initializeTextures ()V
 	METHOD a glDeleteShader (I)V
 	METHOD a setLightmapTextureCoords (IFF)V
@@ -17806,6 +17914,7 @@ CLASS none/dax net/minecraft/client/renderers/OpenGlHelper
 	METHOD b glUniform2 (ILjava/nio/FloatBuffer;)V
 	METHOD b glUniform2 (ILjava/nio/IntBuffer;)V
 	METHOD b glUniformMatrix3 (IZLjava/nio/FloatBuffer;)V
+	METHOD c getFeatureLogString ()Ljava/lang/String;
 	METHOD c glCompileShader (I)V
 	METHOD c glGetShaderi (II)I
 	METHOD c glBlendFunc (IIII)V
@@ -17833,6 +17942,7 @@ CLASS none/dax net/minecraft/client/renderers/OpenGlHelper
 	METHOD h glGenRenderbuffers ()I
 	METHOD h glDeleteRenderbuffers (I)V
 	METHOD h glBindFramebuffer (II)V
+	METHOD i areFramebufferObjectsEnabled ()Z
 	METHOD i glDeleteFramebuffers (I)V
 	METHOD i glBindRenderbuffer (II)V
 	METHOD j glCheckFramebufferStatus (I)I
