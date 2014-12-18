@@ -14541,13 +14541,14 @@ CLASS none/bst net/minecraft/client/GLAllocation
 CLASS none/bsu net/minecraft/main/Minecraft
 	CLASS btc
 		METHOD a onChoice (ZI)V
+	FIELD F lastSecondTime
 	FIELD I logger
 	FIELD J locationMojangPng
 	FIELD K macDisplayModes
 	FIELD L resourcepacksDir
 	FIELD M propertyMap
 	FIELD N currentServerData
-	FIELD O renderEngine
+	FIELD O textureManager
 	FIELD P instance
 	FIELD Q fullscreen
 	FIELD S hasCrashed
@@ -14559,6 +14560,9 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	FIELD Y playerRenderer
 	FIELD Z renderViewEntity
 	FIELD a isRunningOnMac
+	FIELD aA twitchAuthenticator
+	FIELD aB displayBuffer
+	FIELD aD soundManager
 	FIELD aE musicTicker
 	FIELD aG mcSessionService
 	FIELD aI scheduledExecutables
@@ -14609,7 +14613,7 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	FIELD r skipRenderLevel
 	FIELD s objectMouseOver
 	FIELD t gameSettings
-	FIELD u soundManager
+	FIELD u mouseHelper
 	FIELD v dataDir
 	FIELD w isTakingScreenshot
 	FIELD x systemTime
@@ -14676,8 +14680,12 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	METHOD e refreshResources ()V
 	METHOD f getSaveLoader ()Lnone/bra;
 	METHOD g shutdownMinecraftApplet ()V
+	METHOD h updateDisplay ()V
 	METHOD j getMaxFps ()I
 	METHOD l freeMemory ()V
+	METHOD m stop ()V
+	METHOD n startTakingScreenshot ()V
+	METHOD o stopTakingScreenshot ()V
 	METHOD q toggleFullscreen ()V
 	METHOD r tick ()V
 	METHOD t getNetHandler ()Lnone/cee;
@@ -15208,6 +15216,7 @@ CLASS none/bwl net/minecraft/client/gui/GuiDeath
 	METHOD d doesGuiPauseGame ()Z
 	METHOD e updateScreen ()V
 CLASS none/bwm net/minecraft/client/gui/GuiDemoHelp
+	FIELD f DEMO_BACKGROUND_PNG
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
@@ -15439,6 +15448,7 @@ CLASS none/bxt net/minecraft/client/gui/GuiAchievement
 		ARG 0 achievement
 	METHOD c setupRendering ()V
 CLASS none/bxu net/minecraft/client/gui/GuiAchievements
+	FIELD C ACHIEVEMENT_BACKGROUND_PNG
 	METHOD a onLoaded ()V
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
@@ -16651,22 +16661,33 @@ CLASS none/cji net/minecraft/client/renderers/GameRenderer
 	METHOD j setupOverlayRendering ()V
 CLASS none/cjm net/minecraft/client/OpenGL
 	FIELD a alphaTest
+	FIELD b lightingCapability
+	FIELD c lights
 	FIELD d colorMaterial
 	FIELD e pixelArithmetic
-	FIELD f depthBuffer
+	FIELD f depthTest
 	FIELD g fog
 	FIELD h polygonCulling
 	FIELD i polygonOffset
 	FIELD j logicOp
+	FIELD k texGen
+	FIELD l depthBuffer
+	FIELD m stencilBuffer
+	FIELD n normalizeCapability
 	FIELD o selectedTexture
 	FIELD p textures
 	FIELD q shadeModel
+	FIELD r rescaleNormalCapability
 	FIELD s colorMask
 	FIELD t color
 	FIELD u viewport
+	METHOD A disableNormalize ()V
+	METHOD B enableRescaleNormal ()V
+	METHOD C disableRescaleNormal ()V
 	METHOD D glLoadIdentity ()V
 	METHOD E glPushMatrix ()V
 	METHOD F glPopMatrix ()V
+	METHOD a pushAttributeStack ()V
 	METHOD a glClearDepth (D)V
 		ARG 0 depth
 	METHOD a glScaled (DDD)V
@@ -16678,6 +16699,12 @@ CLASS none/cjm net/minecraft/client/OpenGL
 		ARG 1 units
 	METHOD a glScalef (FFF)V
 	METHOD a glClearColor (FFFF)V
+		ARG 0 red
+		ARG 1 green
+		ARG 2 blue
+		ARG 3 alpha
+	METHOD a enableLight (I)V
+		ARG 0 lightNumber
 	METHOD a glAlphaFunc (IF)V
 		ARG 0 func
 		ARG 1 ref
@@ -16691,6 +16718,10 @@ CLASS none/cjm net/minecraft/client/OpenGL
 		ARG 3 dstAlpha
 	METHOD a glGetFloat (ILjava/nio/FloatBuffer;)V
 	METHOD a glMultMatrix (Ljava/nio/FloatBuffer;)V
+	METHOD a enableTexGenCoord (Lnone/ckc;)V
+	METHOD a setTexGenFunc (Lnone/ckc;I)V
+		ARG 1 texGenFunc
+	METHOD a glTexGen (Lnone/ckc;ILjava/nio/FloatBuffer;)V
 	METHOD a glDepthMask (Z)V
 		ARG 0 flag
 	METHOD a glColorMask (ZZZZ)V
@@ -16704,12 +16735,15 @@ CLASS none/cjm net/minecraft/client/OpenGL
 		ARG 0 start
 	METHOD b glTranslatef (FFF)V
 	METHOD b glRotatef (FFFF)V
+	METHOD b disableLight (I)V
+		ARG 0 lightNumber
 	METHOD b glBlendFunc (II)V
 	METHOD b setViewport (IIII)V
 		ARG 0 x
 		ARG 1 y
 		ARG 2 width
 		ARG 3 height
+	METHOD b disableTexGenCoord (Lnone/ckc;)V
 	METHOD c disableAlphaTest ()V
 	METHOD c setFogEnd (F)V
 		ARG 0 end
@@ -16717,21 +16751,26 @@ CLASS none/cjm net/minecraft/client/OpenGL
 		ARG 0 red
 		ARG 1 green
 		ARG 2 blue
-	METHOD c setColorAndAlpha (FFFF)V
+	METHOD c glColor4f (FFFF)V
 		ARG 0 red
 		ARG 1 green
 		ARG 2 blue
 		ARG 3 alpha
 	METHOD c glDepthFunc (I)V
 		ARG 0 func
+	METHOD c getTexCoord (Lnone/ckc;)Lnone/ckd;
+		ARG 0 texCoord
 	METHOD d enableAlphaTest ()V
 	METHOD d setFogMode (I)V
 		ARG 0 mode
+	METHOD e enableLighting ()V
 	METHOD e glCullFace (I)V
 		ARG 0 mode
+	METHOD f disableLightinh ()V
 	METHOD f glLogicOp (I)V
 		ARG 0 opcode
 	METHOD g enableColorMaterial ()V
+	METHOD g glActiveTexture (I)V
 	METHOD h disableColorMaterial ()V
 	METHOD h glDeleteTextures (I)V
 		ARG 0 n
@@ -16755,7 +16794,12 @@ CLASS none/cjm net/minecraft/client/OpenGL
 	METHOD r disablePolygonOffsetFill ()V
 	METHOD u enableLogicOp ()V
 	METHOD v disableLogicOp ()V
+	METHOD w enableActiveTexture ()V
+	METHOD x disableActiveTexture ()V
 	METHOD y glGenTextures ()I
+	METHOD z enableNormalize ()V
+CLASS none/cjn
+	FIELD a VALUES
 CLASS none/cjo net/minecraft/client/OpenGLAlphaTest
 	FIELD a capability
 	FIELD b func
@@ -16772,7 +16816,7 @@ CLASS none/cjq net/minecraft/client/OpenGLCapability
 	METHOD a disable ()V
 	METHOD a setEnabled (Z)V
 	METHOD b enable ()V
-CLASS none/cjr
+CLASS none/cjr net/minecraft/client/OpenGLDepthBuffer
 	FIELD a depth
 	FIELD b color
 CLASS none/cjs net/minecraft/client/OpenGLColor
@@ -16800,8 +16844,8 @@ CLASS none/cjv net/minecraft/client/OpenGLColorMaterial
 CLASS none/cjw net/minecraft/client/OpenGLPolygonCulling
 	FIELD a capability
 	FIELD b cullFace
-CLASS none/cjx net/minecraft/client/OpenGLDepthBuffer
-	FIELD a depthTestCapability
+CLASS none/cjx net/minecraft/client/OpenGLDepthTest
+	FIELD a capability
 	FIELD b depthBufferWritingEnabled
 	FIELD c func
 CLASS none/cjy net/minecraft/client/OpenGLFog
@@ -16815,7 +16859,33 @@ CLASS none/cjz net/minecraft/client/OpenGLPolygonOffset
 	FIELD b lineCapability
 	FIELD c factor
 	FIELD d units
-CLASS none/ckf net/minecraft/client/OpenGLTexture
+CLASS none/cka net/minecraft/client/OpenGLStencilTestFunc
+	FIELD a func
+	FIELD b ref
+	FIELD c mask
+CLASS none/ckb net/minecraft/client/OpenGLStencilBuffer
+	FIELD c sfail
+	FIELD d dpfail
+	FIELD e dppass
+CLASS none/ckc net/minecraft/client/EnumTexCoord
+	FIELD a S
+	FIELD b T
+	FIELD c R
+	FIELD d Q
+CLASS none/ckd net/minecraft/client/OpenGLTexCoord
+	FIELD a capability
+	FIELD b coord
+	FIELD c func
+	METHOD <init> (II)V
+		ARG 0 coord
+		ARG 1 pname
+CLASS none/cke net/minecraft/client/OpenGLTexGen
+	FIELD a S
+	FIELD b T
+	FIELD c R
+	FIELD d Q
+CLASS none/ckf net/minecraft/client/OpenGLTexture2D
+	FIELD a capability
 	FIELD b textureName
 CLASS none/ckg net/minecraft/client/OpenGLViewport
 	FIELD a x
@@ -17702,6 +17772,7 @@ CLASS none/cyz net/minecraft/client/audio/SoundPoolEntry
 CLASS none/cza net/minecraft/client/sound/SoundSystem
 	FIELD a marker
 	FIELD b logger
+	METHOD d update ()V
 CLASS none/czg
 	FIELD b random
 	FIELD c resourceLocation
@@ -17710,8 +17781,10 @@ CLASS none/czg
 		ARG 0 resourceLocation
 	METHOD c getResourceLocation ()Lnone/oa;
 	METHOD d getSoundType ()Lnone/cxz;
-CLASS none/czh net/minecraft/client/sound/czh
+CLASS none/czh net/minecraft/client/sound/SoundManager
+	FIELD a MISSING_SOUND
 	FIELD b logger
+	FIELD e soundRegistry
 	FIELD f soundSystem
 	FIELD g resourceManager
 	METHOD a onReload (Lnone/cvk;)V
