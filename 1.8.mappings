@@ -1279,7 +1279,7 @@ CLASS none/ek net/minecraft/util/SwitchDirection
 	FIELD a pillarAxes
 	FIELD b facings
 	FIELD c orientations
-CLASS none/el net/minecraft/block/EnumPillarAxis
+CLASS none/el net/minecraft/util/RotationAxis
 	FIELD a X
 	FIELD b Y
 	FIELD c Z
@@ -1292,13 +1292,13 @@ CLASS none/el net/minecraft/block/EnumPillarAxis
 	METHOD c isHorizontal ()Z
 	METHOD d getOrientation ()Lnone/en;
 	METHOD l getName ()Ljava/lang/String;
-CLASS none/em net/minecraft/util/EnumFacingEnumAxisDirection
+CLASS none/em net/minecraft/util/CoordinateDirection
 	FIELD a POSITIVE
 	FIELD b NEGATIVE
 	FIELD c index
 	FIELD d name
 	METHOD <init> (Ljava/lang/String;IILjava/lang/String;)V
-		ARG 1 axisID
+		ARG 1 coordinateID
 		ARG 2 index
 		ARG 3 name
 	METHOD a getIndex ()I
@@ -14984,7 +14984,7 @@ CLASS none/buf net/minecraft/client/gui/ScaledResolution
 	METHOD a getScaledWidth ()I
 	METHOD b getScaledHeight ()I
 CLASS none/bug net/minecraft/client/gui/GuiButton
-	FIELD a buttonTextures
+	FIELD a WIDGETS_PNG
 	FIELD f width
 	FIELD g height
 	FIELD h xPosition
@@ -15468,6 +15468,8 @@ CLASS none/bxr net/minecraft/client/gui/GuiVideoSettings
 	METHOD b mouseMovedOrUp (III)V
 	METHOD k handleMouseInput ()V
 CLASS none/bxs net/minecraft/client/gui/GuiCredits
+	FIELD f MINECRAFT_PNG
+	FIELD g VIGNETTE_PNG
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD b initGui ()V
@@ -15725,6 +15727,9 @@ CLASS none/bzp net/minecraft/client/gui/GuiMultiplayer
 	METHOD m onGuiClosed ()V
 CLASS none/bzq net/minecraft/client/gui/GuiSlotServer
 	FIELD a mc
+CLASS none/bzs
+	FIELD c UNKNOWN_SERVER_PNG
+	FIELD d SERVER_SELECTION_PNG
 CLASS none/bzu
 	METHOD a isListItemSelected (I)Z
 	METHOD b getListItemCount ()I
@@ -15946,7 +15951,7 @@ CLASS none/ccl net/minecraft/client/renderers/models/ModelBiped
 	METHOD a setModelAttributes (Lnone/ccq;)V
 	METHOD a render (Lnone/wv;FFFFFF)V
 CLASS none/ccm net/minecraft/client/renderers/models/ModelLargeChest
-CLASS none/ccn net/minecraft/client/renderers/ModelMagmaCube
+CLASS none/ccn net/minecraft/client/renderers/models/ModelMagmaCube
 	METHOD a render (Lnone/wv;FFFFFF)V
 	METHOD a setLivingAnimations (Lnone/xm;FFF)V
 CLASS none/cco net/minecraft/client/renderers/models/ModelLeashKnot
@@ -15954,7 +15959,7 @@ CLASS none/cco net/minecraft/client/renderers/models/ModelLeashKnot
 	METHOD a render (Lnone/wv;FFFFFF)V
 CLASS none/ccp net/minecraft/client/renderers/models/ModelMinecart
 	METHOD a render (Lnone/wv;FFFFFF)V
-CLASS none/ccq net/minecraft/client/renderers/ModelBase
+CLASS none/ccq net/minecraft/client/renderers/models/ModelBase
 	FIELD a modelTextureMap
 	FIELD p swingProgress
 	FIELD q isRiding
@@ -15997,7 +16002,7 @@ CLASS none/ccx net/minecraft/client/renderers/models/ModelSheep
 CLASS none/ccy net/minecraft/client/renderers/models/ModelSheep2
 	METHOD a setRotationAngles (FFFFFFLnone/wv;)V
 	METHOD a setLivingAnimations (Lnone/xm;FFF)V
-CLASS none/ccz net/minecraft/client/renderers/ModelSign
+CLASS none/ccz net/minecraft/client/renderers/models/ModelSign
 	FIELD b signStick
 	METHOD a renderSign ()V
 CLASS none/cda net/minecraft/client/renderers/models/ModelSilverfish
@@ -16111,7 +16116,7 @@ CLASS none/cdy net/minecraft/client/renderers/ModelRenderer
 		ARG 1 textureHeight
 	METHOD c postRender (F)V
 	METHOD d compileDisplayList (F)V
-CLASS none/cdz net/minecraft/client/renderers/texture/TextureOffset
+CLASS none/cdz net/minecraft/client/texture/TextureOffset
 	FIELD a textureOffsetX
 	FIELD b textureOffsetY
 CLASS none/cec net/minecraft/network/login/NetHandlerLoginClient
@@ -16372,6 +16377,7 @@ CLASS none/cgc net/minecraft/level/entity/particle/ParticleFlame
 CLASS none/cgd net/minecraft/level/entity/particle/ParticleFlameBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cge net/minecraft/level/entity/particle/ParticleFootstep
+	FIELD a FOOTPRINT_PNG
 	METHOD a getParticleType ()I
 	METHOD s_ onUpdate ()V
 CLASS none/cgf net/minecraft/level/entity/particle/ParticleFootstepBuilder
@@ -16383,6 +16389,8 @@ CLASS none/cgh net/minecraft/level/entity/particle/ParticleVillagerAngryBuilder
 CLASS none/cgi net/minecraft/level/entity/particle/ParticleHeartBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cgj net/minecraft/level/entity/particle/ParticleExplosionLarge
+	FIELD a EXPLOSION_PNG
+	FIELD aA null
 	METHOD a getParticleType ()I
 	METHOD s_ onUpdate ()V
 CLASS none/cgk net/minecraft/level/entity/particle/ParticleExplosionLargeBuilder
@@ -17118,6 +17126,12 @@ CLASS none/cls
 	FIELD j FLIP_SOUTH
 	FIELD k FLIP_WEST
 	FIELD l FLIP_EAST
+CLASS none/cmc
+	FIELD a GSON_BUILDER
+	FIELD b name
+	FIELD e resourceLocation
+	FIELD f LOGGER
+	METHOD e getResourceLocation ()Lnone/oa;
 CLASS none/cmd empty/cmd
 CLASS none/cmg empty/cmg
 CLASS none/cmz net/minecraft/entity/player/EnumCameraType
@@ -17324,6 +17338,7 @@ CLASS none/crz net/minecraft/client/renderers/RenderZombie
 	FIELD k ZOMBIE_VILLAGER_PNG
 	METHOD a rotateCorpse (Lnone/xm;FFF)V
 CLASS none/csb
+	FIELD b ENCHANTED_ITEM_GLINT_PNG
 	METHOD a render (Lnone/xm;FFFFFFF)V
 CLASS none/csd
 	METHOD a render (Lnone/xm;FFFFFFF)V
@@ -17594,7 +17609,39 @@ CLASS none/ctl net/minecraft/client/shader/ShaderUniform
 	METHOD i uploadInt ()V
 	METHOD j uploadFloat ()V
 	METHOD k uploadFloatMatrix ()V
-CLASS none/ctw net/minecraft/client/renderers/texture/TextureAtlas
+CLASS none/cto net/minecraft/client/texture/TextureBase
+	FIELD a textureId
+	FIELD b useLinear
+	FIELD c useMipmap
+	FIELD d previousUseLinear
+	FIELD e previousUseMipmap
+	METHOD a setUseLinearAndMipmap (ZZ)V
+	METHOD b getId ()I
+	METHOD c delete ()V
+CLASS none/ctp net/minecraft/client/texture/TextureImage
+	METHOD a load (Lnone/cvk;)V
+CLASS none/ctq net/minecraft/client/texture/TextureDownloadable
+	FIELD g logger
+	FIELD h downloaderNumber
+	FIELD i cachedFile
+	FIELD j url
+	FIELD m textureDownloaderThread
+	METHOD a load (Lnone/cvk;)V
+	METHOD b getId ()I
+	METHOD d download ()V
+CLASS none/cts
+	METHOD a (Lnone/cua;)V
+		ARG 0 textureBlock
+CLASS none/ctt net/minecraft/client/texture/TextureBanner
+	FIELD f logger
+	METHOD a load (Lnone/cvk;)V
+CLASS none/ctu
+	FIELD g LOGGER
+	METHOD a load (Lnone/cvk;)V
+CLASS none/ctv net/minecraft/client/texture/TextureExternal
+	FIELD f location
+	METHOD a load (Lnone/cvk;)V
+CLASS none/ctw net/minecraft/client/texture/TextureAtlas
 CLASS none/ctx
 	FIELD b width
 	FIELD c height
@@ -17608,16 +17655,19 @@ CLASS none/cty
 	FIELD e subSlots
 	FIELD f texture
 	METHOD toString ()Ljava/lang/String;
-CLASS none/cua
+CLASS none/cua net/minecraft/client/texture/TextureBlock
 	FIELD f MISSINGNO
 	FIELD g BLOCKS_PNG
 	FIELD h logger
 	FIELD l atlasPath
 	FIELD n mipLevel
 	FIELD o sprite
+	METHOD a setMipLevel (I)V
 	METHOD a getSprite (Ljava/lang/String;)Lnone/cue;
+	METHOD a load (Lnone/cvk;)V
 	METHOD a getSpriteByResourceLocation (Lnone/oa;)Lnone/cue;
-CLASS none/cue net/minecraft/client/renderers/texture/TextureAtlasSprite
+	METHOD f getSprite ()Lnone/cue;
+CLASS none/cue net/minecraft/client/texture/TextureAtlasSprite
 	FIELD a frames
 	FIELD c isRotated
 	FIELD d x
@@ -17638,20 +17688,26 @@ CLASS none/cue net/minecraft/client/renderers/texture/TextureAtlasSprite
 	METHOD d getHeight ()I
 	METHOD i getName ()Ljava/lang/String;
 	METHOD k getFrameCount ()I
-CLASS none/cug net/minecraft/client/renderers/texture/TextureManager
+CLASS none/cug net/minecraft/client/texture/TextureManager
 	FIELD a logger
 	FIELD e resourceManager
 	METHOD a onReload (Lnone/cvk;)V
 	METHOD a bindTexture (Lnone/oa;)V
 	METHOD a loadTexture (Lnone/oa;Lnone/cui;)Z
 	METHOD e tick ()V
-CLASS none/cui net/minecraft/client/renderers/texture/ITexture
-CLASS none/cuj net/minecraft/client/renderers/texture/TextureUtil
+CLASS none/cui net/minecraft/client/texture/ITexture
+	METHOD a load (Lnone/cvk;)V
+		ARG 0 resourceManager
+	METHOD b getId ()I
+CLASS none/cuj net/minecraft/client/texture/TextureUtil
 	FIELD c LOGGER
 	FIELD d INTBUFFER
-CLASS none/cuk net/minecraft/client/renderers/texture/ITickable
+	METHOD a genTexture ()I
+	METHOD a deleteTexture (I)V
+		ARG 0 textureId
+CLASS none/cuk net/minecraft/client/texture/ITickable
 	METHOD e tick ()V
-CLASS none/cul empty/cul
+CLASS none/cul net/minecraft/client/texture/ITickableTexture
 CLASS none/cuq net/minecraft/client/renderers/vertex/VertexFormats
 	FIELD a VBO_FORMAT_1
 	FIELD b VBO_FORMAT_2
@@ -17746,13 +17802,17 @@ CLASS none/cuw net/minecraft/client/renderers/vertex/VertexFormatElementEnumUsag
 		ARG 1 id
 	METHOD a getName ()Ljava/lang/String;
 CLASS none/cva net/minecraft/client/renderers/RenderPlayer
+	FIELD a STEVE_PNG
+	FIELD b ALEX_PNG
 CLASS none/cvb net/minecraft/client/resources/DefaultResourcePack
 	METHOD c setIcon (Lnone/oa;)Ljava/io/InputStream;
 CLASS none/cvc
 	FIELD b logger
 CLASS none/cvg net/minecraft/client/resources/FoliageColorReloadListener
+	FIELD a FOLIAGE_PNG
 	METHOD a onReload (Lnone/cvk;)V
 CLASS none/cvh net/minecraft/client/resources/GrassColorReloadListener
+	FIELD a GRASS_PNG
 	METHOD a onReload (Lnone/cvk;)V
 CLASS none/cvi net/minecraft/client/resources/IReloadableResourceManager
 	METHOD a registerReloadListener (Lnone/cvl;)V
@@ -17817,7 +17877,7 @@ CLASS none/cwx net/minecraft/client/resources/data/PackMetadataSection
 CLASS none/cwy net/minecraft/client/resources/data/PackMetadataSectionSerializer
 CLASS none/cxb net/minecraft/client/resources/data/TextureMetadataSection
 CLASS none/cxc net/minecraft/client/resources/data/TextureMetadataSectionSerializer
-CLASS none/cxf net/minecraft/client/renderers/models/BlockModelRotation
+CLASS none/cxf net/minecraft/util/BlockModelRotation
 	FIELD a X0_Y0
 	FIELD b X0_Y90
 	FIELD c X0_Y180
@@ -17837,6 +17897,10 @@ CLASS none/cxf net/minecraft/client/renderers/models/BlockModelRotation
 CLASS none/cxh
 	FIELD c logger
 	FIELD f resourceManager
+	FIELD o GENERATION_MARKER
+	FIELD p COMPASS_GENERATION_MARKER
+	FIELD q CLASS_GENERATION_MARKER
+	FIELD r BLOCK_ENTITY_MARKER
 CLASS none/cxk
 	METHOD a onReload (Lnone/cvk;)V
 CLASS none/cxl
