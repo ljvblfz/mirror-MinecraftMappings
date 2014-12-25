@@ -1200,6 +1200,7 @@ CLASS none/dt net/minecraft/util/BlockPos
 		ARG 0 blocks
 	METHOD d (Lnone/fd;)Lnone/dt;
 		ARG 0 vec
+	METHOD d crossProduct (Lnone/fd;)Lnone/fd;
 	METHOD e west ()Lnone/dt;
 	METHOD e south (I)Lnone/dt;
 		ARG 0 blocks
@@ -1217,6 +1218,7 @@ CLASS none/dy
 		ARG 0 x
 		ARG 1 y
 		ARG 2 z
+	METHOD d crossProduct (Lnone/fd;)Lnone/fd;
 	METHOD n getX ()I
 	METHOD o getY ()I
 	METHOD p getZ ()I
@@ -1283,7 +1285,7 @@ CLASS none/el net/minecraft/util/RotationAxis
 	FIELD a X
 	FIELD b Y
 	FIELD c Z
-	FIELD d lookupMap
+	FIELD d LOOKUP
 	FIELD e name
 	FIELD f orientation
 	METHOD a getKey ()Ljava/lang/String;
@@ -1457,7 +1459,7 @@ CLASS none/fd net/minecraft/util/Vec3i
 	FIELD a x
 	FIELD b y
 	FIELD c z
-	FIELD e zeroed
+	FIELD e ZEROED
 	METHOD <init> (DDD)V
 		ARG 0 levelX
 		ARG 1 levelY
@@ -1476,7 +1478,7 @@ CLASS none/fd net/minecraft/util/Vec3i
 		ARG 0 x
 		ARG 1 y
 		ARG 2 z
-	METHOD d (Lnone/fd;)Lnone/fd;
+	METHOD d crossProduct (Lnone/fd;)Lnone/fd;
 		ARG 0 vec
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 0 o
@@ -2255,13 +2257,13 @@ CLASS none/hj net/minecraft/chat/BaseComponent
 	METHOD d getFormattedText ()Ljava/lang/String;
 CLASS none/hm net/minecraft/chat/ClickEvent
 CLASS none/hn net/minecraft/client/gui/EnumClickActionTypes
-	FIELD a OpenUrl
-	FIELD b OpenFile
-	FIELD c RunCommand
-	FIELD d TwitchUserInfo
-	FIELD e SuggestCommand
-	FIELD f ChangePage
-	FIELD g nameMap
+	FIELD a OPEN_URL
+	FIELD b OPEN_FILE
+	FIELD c RUN_COMMAND
+	FIELD d TWITCH_USER_INFO
+	FIELD e SUGGEST_COMMAND
+	FIELD f CHANGE_PAGE
+	FIELD g NAME_MAP
 	FIELD h allowInChat
 	FIELD i name
 	METHOD <init> (Ljava/lang/String;ILjava/lang/String;Z)V
@@ -2293,11 +2295,11 @@ CLASS none/hr net/minecraft/chat/HoverEvent
 		ARG 0 enumHoverAction
 	METHOD a getHoverAction ()Lnone/hs;
 CLASS none/hs net/minecraft/chat/EnumHoverAction
-	FIELD a ShowText
-	FIELD b ShowAchievement
-	FIELD c ShowItem
-	FIELD d ShowEntity
-	FIELD e nameMap
+	FIELD a SHOW_TEXT
+	FIELD b SHOW_ACHIEVEMENT
+	FIELD c SHOW_ITEM
+	FIELD d SHOW_ENTITY
+	FIELD e NAME_MAP
 	FIELD f allowInChat
 	FIELD g name
 	FIELD h enumHoverEventActions
@@ -3431,9 +3433,9 @@ CLASS none/oa net/minecraft/client/resources/ResourceLocation
 	METHOD toString getFullName ()Ljava/lang/String;
 CLASS none/oc net/minecraft/dispenser/DispenseBehaviorShootable
 CLASS none/od net/minecraft/bootstrap/Bootstrap
-	FIELD a printStream
+	FIELD a PRINT_STREAM
 	FIELD b initialized
-	FIELD c logger
+	FIELD c LOGGER
 	METHOD a isInitialized ()Z
 	METHOD a println (Ljava/lang/String;)V
 		ARG 0 x
@@ -3470,7 +3472,7 @@ CLASS none/ou net/minecraft/dispenser/DispenseBehaviorFireCharge
 CLASS none/ov net/minecraft/dispenser/DispenseBehaviorBoat
 CLASS none/ow net/minecraft/util/JsonException
 CLASS none/pc net/minecraft/util/StackInfoPrintStream
-	FIELD a logger
+	FIELD a LOGGER
 	FIELD b prefix
 	METHOD <init> (Ljava/lang/String;Ljava/io/OutputStream;)V
 		ARG 0 prefix
@@ -3592,7 +3594,7 @@ CLASS none/qp net/minecraft/level/LevelManager
 	METHOD b onEntityRemoved (Lnone/wv;)V
 		ARG 0 entity
 CLASS none/qq
-	FIELD a logger
+	FIELD a LOGGER
 	FIELD b dimensionServer
 	METHOD <init> (Lnone/qt;)V
 		ARG 0 dimensionServer
@@ -3623,7 +3625,7 @@ CLASS none/qt net/minecraft/level/LevelServer
 	FIELD L lastSyncedTickNextTick
 	FIELD M tickNextTick
 	FIELD V tickNow
-	FIELD a logger
+	FIELD a LOGGER
 	FIELD b chunkCache
 	METHOD a saveWorldData ()V
 	METHOD a runTask (Ljava/lang/Runnable;)Lcom/google/common/util/concurrent/ListenableFuture;
@@ -3719,10 +3721,10 @@ CLASS none/qx
 		ARG 0 gameType
 CLASS none/qy
 	FIELD a entity1
-	FIELD p logger
+	FIELD p LOGGER
 	FIELD w entity2
 CLASS none/ra
-	FIELD a logger
+	FIELD a LOGGER
 	METHOD a (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;)V
 		ARG 0 channelHandlerContext
 	METHOD channelRead (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Object;)V
@@ -3803,6 +3805,7 @@ CLASS none/sf
 	FIELD b BANNED_PLAYERS_FILE
 	FIELD c OPS_FILE
 	FIELD d WHITE_LIST_FILE
+	FIELD e LOGGER
 	METHOD a lookupUserWhitelistEntry (Ljava/lang/String;)Ljava/lang/String;
 CLASS none/sn net/minecraft/server/ServerConfigurationManager
 	CLASS so
@@ -3901,6 +3904,8 @@ CLASS none/tn net/minecraft/stats/tn
 CLASS none/to net/minecraft/stats/StatItem
 	FIELD a item
 	METHOD a getItem ()Lnone/alq;
+CLASS none/tp
+	FIELD b LOGGER
 CLASS none/tq net/minecraft/stats/Stat
 	FIELD b formatter
 	FIELD c criteria
@@ -3985,7 +3990,11 @@ CLASS none/uc net/minecraft/entity/EntitySet
 	FIELD b entitySet
 	METHOD a (Ljava/lang/Class;Z)Ljava/lang/Class;
 		ARG 1 flag
+CLASS none/ug
+	FIELD a LOGGER
 CLASS none/uh net/minecraft/util/JsonUtils
+CLASS none/ui
+	FIELD c LOGGER
 CLASS none/ul net/minecraft/util/CaseInsensitiveHashMap
 	FIELD a wrapped
 	METHOD clear ()V
@@ -4175,6 +4184,8 @@ CLASS none/ux net/minecraft/profiler/ProfilerEntry
 	METHOD compareTo (Lnone/ux;)I
 		ARG 0 profilerEntry
 CLASS none/uy net/minecraft/util/IProgressBar
+	METHOD a setProgressBarPercentage (I)V
+	METHOD b (Ljava/lang/String;)V
 	METHOD c setProgressBarMessage (Ljava/lang/String;)V
 CLASS none/va net/minecraft/block/IBlockPropertyValue
 	METHOD l getName ()Ljava/lang/String;
@@ -4215,6 +4226,8 @@ CLASS none/vq net/minecraft/container/inventory/IInventory
 	METHOD n_ getSize ()I
 	METHOD o_ onChanged ()V
 	METHOD p_ getMaxStackSize ()I
+CLASS none/vs
+	FIELD a RANDOM
 CLASS none/vt net/minecraft/level/EnumDifficulty
 	FIELD a PEACEFUL
 	FIELD b EASY
@@ -5305,8 +5318,10 @@ CLASS none/aak net/minecraft/entity/ai/GoalDefendVillage
 CLASS none/aal
 	METHOD a ()Z
 CLASS none/aam
+	FIELD a LOGGER
 	METHOD a ()Z
 CLASS none/aao
+	FIELD a LOGGER
 	METHOD a ()Z
 CLASS none/aaq net/minecraft/entity/ai/GoalFollowEntity
 	METHOD a ()Z
@@ -7612,9 +7627,13 @@ CLASS none/aok net/minecraft/item/crafting/FurnaceRecipes
 	METHOD a addRecipe (Lnone/alq;Lnone/amj;F)V
 	METHOD a addRecipe (Lnone/amj;Lnone/amj;F)V
 	METHOD a addRecipe (Lnone/atr;Lnone/amj;F)V
-CLASS none/aop
+CLASS none/aop net/minecraft/item/crafting/CraftingRecipes
+	FIELD a INSTANCE
+	FIELD b recipes
+	METHOD a getInstance ()Lnone/aop;
 	METHOD a addRecipe (Lnone/amj;[Ljava/lang/Object;)Lnone/aos;
 		ARG 0 craftingResult
+	METHOD b getRecipeList ()Ljava/util/List;
 	METHOD b addShapelessRecipe (Lnone/amj;[Ljava/lang/Object;)V
 CLASS none/aoy net/minecraft/enchantment/EnchantmentPower
 	METHOD b getMaxLevel ()I
@@ -9010,8 +9029,8 @@ CLASS none/asy net/minecraft/block/BlockAir
 	METHOD b getRenderType ()I
 	METHOD c isOpaque ()Z
 CLASS none/asz net/minecraft/block/BlockAnvil
-	FIELD a facing
-	FIELD b damage
+	FIELD a FACING
+	FIELD b DAMAGE
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a addCreativeStackTo (Lnone/alq;Lnone/akf;Ljava/util/List;)V
 	METHOD a onRightClicked (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;Lnone/ej;FFF)Z
@@ -9030,8 +9049,8 @@ CLASS none/ata net/minecraft/container/InferfaceContainerAnvil
 	METHOD a getInterfaceContainer (Lnone/ahb;Lnone/ahd;)Lnone/aib;
 	METHOD k getBlockID ()Ljava/lang/String;
 CLASS none/atb net/minecraft/block/BlockBannerBase
-	FIELD a facing
-	FIELD b rotation
+	FIELD a FACING
+	FIELD b ROTATION
 	METHOD a getBlockEntity (Lnone/aqu;I)Lnone/bcm;
 	METHOD a onMined (Lnone/aqu;Lnone/ahd;Lnone/dt;Lnone/bec;Lnone/bcm;)V
 	METHOD a getBoundingBoxAt (Lnone/aqu;Lnone/dt;)Lnone/brt;
@@ -9137,8 +9156,8 @@ CLASS none/atm net/minecraft/block/BlockBeacon
 	METHOD d hasFullCubeHitbox ()Z
 	METHOD k getBlockRenderMode ()Lnone/aql;
 CLASS none/atp net/minecraft/block/BlockBed
-	FIELD a part
-	FIELD b occupied
+	FIELD a PART
+	FIELD b OCCUPIED
 	METHOD a getBlockStateForMetadata (I)Lnone/bec;
 	METHOD a dropItems (Lnone/aqu;Lnone/dt;Lnone/bec;FI)V
 	METHOD a onBlockHarvested (Lnone/aqu;Lnone/dt;Lnone/bec;Lnone/ahd;)V
@@ -9175,7 +9194,7 @@ CLASS none/atr net/minecraft/block/Block
 	FIELD N name
 	FIELD a AIR
 	FIELD b creativeTab
-	FIELD c blockRegistry
+	FIELD c BLOCK_REGISTRY
 	FIELD d intObjectMap
 	FIELD e SOUND_DUST
 	FIELD f SOUND_WOOD
@@ -11634,7 +11653,7 @@ CLASS none/bck net/minecraft/blockentity/BlockEntityBeacon
 	METHOD n_ getSize ()I
 	METHOD p_ getMaxStackSize ()I
 CLASS none/bcm net/minecraft/blockentity/BlockEntity
-	FIELD a logger
+	FIELD a LOGGER
 	FIELD b level
 	FIELD c blockCoords
 	FIELD e block
@@ -11897,7 +11916,7 @@ CLASS none/bdx net/minecraft/block/BlockPistonMoving
 	METHOD d onDestroyed (Lnone/aqu;Lnone/dt;Lnone/bec;)V
 	METHOD e initPropertyManager ()Lnone/bed;
 CLASS none/bea net/minecraft/block/BlockStateBase
-	FIELD a joiner
+	FIELD a JOINER
 	METHOD a cycleProperty (Lnone/bex;)Lnone/bec;
 CLASS none/bec net/minecraft/block/IBlockState
 	METHOD a getPropertiesKeySet ()Ljava/util/Collection;
@@ -11937,6 +11956,8 @@ CLASS none/bei
 	FIELD d blockEntity
 CLASS none/bel
 	FIELD a dim
+CLASS none/ben
+	FIELD a JOINER
 CLASS none/bep net/minecraft/level/gen/feature/OreGenerationValidInBlockPredicate
 	METHOD a create (Lnone/atr;)Lnone/bep;
 CLASS none/bes net/minecraft/block/BlockProperty
@@ -13728,6 +13749,7 @@ CLASS none/bpa net/minecraft/level/gen/layer/GenLayerBase
 CLASS none/bpd
 	METHOD a getInts (IIII)[I
 CLASS none/bpe
+	FIELD c LOGGER
 	METHOD a getInts (IIII)[I
 CLASS none/bpf
 	METHOD a getInts (IIII)[I
@@ -14544,8 +14566,8 @@ CLASS none/bsq net/minecraft/chat/ChatLine
 	METHOD b getUpdateCounter ()I
 	METHOD c getChatLineId ()I
 CLASS none/bsr net/minecraft/client/KeyBinding
-	FIELD a bindings
-	FIELD c categories
+	FIELD a BINDINGS
+	FIELD c CATEGORIES
 	FIELD d keyName
 	FIELD e defaultKey
 	FIELD f category
@@ -14901,9 +14923,17 @@ CLASS none/btr net/minecraft/options/Options
 	METHOD f roundToStep (F)F
 CLASS none/bts net/minecraft/client/LoadingScreenRenderer
 	FIELD a progressBarMessage
+	FIELD b minecraft
+	FIELD c progressActionName
+	METHOD <init> (Lnone/bsu;)V
+		ARG 0 minecraft
+	METHOD a setProgressBarPercentage (I)V
+	METHOD b (Ljava/lang/String;)V
+		ARG 0 action
 	METHOD c setProgressBarMessage (Ljava/lang/String;)V
 CLASS none/btt net/minecraft/util/ScreenShotHelper
-	FIELD a logger
+	FIELD a LOGGER
+	FIELD b DATE_FORMAT
 CLASS none/btu net/minecraft/util/MinecraftError
 CLASS none/btv net/minecraft/util/Timer
 	FIELD a hertz
@@ -14935,6 +14965,8 @@ CLASS none/btx net/minecraft/util/AccountType
 		ARG 0 id
 	METHOD values ()[Lnone/btx;
 CLASS none/bty net/minecraft/client/renderers/FontRenderer
+	FIELD c UNICODE_PAGE_PNG_CACHE
+	METHOD a getUnicodePage (I)Lnone/oa;
 	METHOD a getStringWidth (Ljava/lang/String;)I
 	METHOD a drawStringWithShadow (Ljava/lang/String;FFI)I
 	METHOD a drawString (Ljava/lang/String;III)I
@@ -14943,11 +14975,11 @@ CLASS none/bty net/minecraft/client/renderers/FontRenderer
 	METHOD b setBidiFlag (Z)V
 CLASS none/btz net/minecraft/client/gui/GuiIngame
 	FIELD a prevVignetteBrightness
-	FIELD f vignetteTexture
-	FIELD g widgetsTextures
-	FIELD h pumpkinBlurTexture
+	FIELD f VIGNETTE_TEXTURE
+	FIELD g WIDGETS_TEXTURES
+	FIELD h PUMPKIN_BLUR_TEXTURE
 	FIELD i random
-	FIELD j mc
+	FIELD j minecraft
 	FIELD n updateCounter
 	FIELD s highlightingItemStack
 	FIELD u persistantChatGui2
@@ -15001,10 +15033,12 @@ CLASS none/bug net/minecraft/client/gui/GuiButton
 	METHOD b mouseDragged (Lnone/bsu;II)V
 	METHOD c mousePressed (Lnone/bsu;II)Z
 CLASS none/buh net/minecraft/client/gui/GuiNewChat
-	FIELD a logger
-	FIELD f mc
+	FIELD a LOGGER
+	FIELD f minecraft
 	FIELD g sentMessages
 	FIELD h chatLines
+	METHOD <init> (Lnone/bsu;)V
+		ARG 0 minecraft
 	METHOD a clearChatMessages ()V
 	METHOD a drawChat (I)V
 	METHOD a addToSentMessages (Ljava/lang/String;)V
@@ -15356,7 +15390,10 @@ CLASS none/bwz net/minecraft/client/gui/GuiWorldPresets
 	METHOD k handleMouseInput ()V
 	METHOD m onGuiClosed ()V
 CLASS none/bxc net/minecraft/client/gui/GuiResourcePackProgress
+	FIELD a progressAction
+	METHOD a setProgressBarPercentage (I)V
 	METHOD a drawScreen (IIF)V
+	METHOD b (Ljava/lang/String;)V
 	METHOD c setProgressBarMessage (Ljava/lang/String;)V
 CLASS none/bxd net/minecraft/client/gui/GuiDownloadingTerrain
 	METHOD a keyTyped (CI)V
@@ -15373,10 +15410,10 @@ CLASS none/bxe net/minecraft/client/gui/GuiRenameWorld
 	METHOD e updateScreen ()V
 	METHOD m onGuiClosed ()V
 CLASS none/bxf net/minecraft/client/gui/GuiScreen
-	FIELD a logger
-	FIELD g splitter
+	FIELD a LOGGER
+	FIELD g SPLITTER
 	FIELD i eventButton
-	FIELD j mc
+	FIELD j minecraft
 	FIELD k fontRenderer
 	FIELD l width
 	FIELD m height
@@ -15476,7 +15513,7 @@ CLASS none/bxs net/minecraft/client/gui/GuiCredits
 	METHOD d doesGuiPauseGame ()Z
 	METHOD e updateScreen ()V
 CLASS none/bxt net/minecraft/client/gui/GuiAchievement
-	FIELD a namespace
+	FIELD a NAMESPACE
 	FIELD f minecraft
 	FIELD g screenWidth
 	FIELD h screenHeight
@@ -15601,8 +15638,8 @@ CLASS none/byn net/minecraft/client/gui/GuiBeacon
 CLASS none/byr net/minecraft/client/gui/button/byr
 	METHOD a drawButton (Lnone/bsu;II)V
 CLASS none/bys net/minecraft/client/gui/GuiBook
-	FIELD a logger
-	FIELD f bookTextures
+	FIELD a LOGGER
+	FIELD f BOOK_TEXTURES
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a mouseClicked (III)V
@@ -15616,7 +15653,7 @@ CLASS none/byu net/minecraft/client/gui/GuiBrewingStand
 	METHOD a drawGuiContainerBackgroundLayer (FII)V
 	METHOD b drawGuiContainerForegroundLayer (II)V
 CLASS none/byv net/minecraft/client/gui/GuiCommandBlock
-	FIELD a logger
+	FIELD a LOGGER
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a mouseClicked (III)V
@@ -15625,7 +15662,7 @@ CLASS none/byv net/minecraft/client/gui/GuiCommandBlock
 	METHOD e updateScreen ()V
 	METHOD m onGuiClosed ()V
 CLASS none/byw net/minecraft/client/gui/GuiCrafting
-	FIELD u craftingTableGuiTextures
+	FIELD u CRAFTING_TABLE_GUI_TEXTURES
 	METHOD a drawGuiContainerBackgroundLayer (FII)V
 	METHOD b drawGuiContainerForegroundLayer (II)V
 CLASS none/byx net/minecraft/client/gui/GuiCraftingTable
@@ -15687,8 +15724,8 @@ CLASS none/bzj
 	METHOD e updateScreen ()V
 CLASS none/bzk net/minecraft/client/gui/GuiMerchant
 	FIELD A chatMessageComponent
-	FIELD u logger
-	FIELD v merchantTextures
+	FIELD u LOGGER
+	FIELD v MERCHANT_TEXTURES
 	FIELD w theIMerchant
 	FIELD x nextRecipeButtonIndex
 	FIELD y previousRecipeButtonIndex
@@ -15714,7 +15751,7 @@ CLASS none/bzm net/minecraft/client/gui/GuiEditSign
 	METHOD e updateScreen ()V
 	METHOD m onGuiClosed ()V
 CLASS none/bzp net/minecraft/client/gui/GuiMultiplayer
-	FIELD a logger
+	FIELD a LOGGER
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a mouseClicked (III)V
@@ -16451,6 +16488,7 @@ CLASS none/cgx net/minecraft/client/renderers/EffectRenderer
 	CLASS cgz
 		METHOD call ()Ljava/lang/String;
 	FIELD a level
+	FIELD b PARTICLES_PNG
 	FIELD f random
 	FIELD g particleMap
 	METHOD a (ILnone/chc;)V
@@ -16760,9 +16798,10 @@ CLASS none/cjh net/minecraft/client/renderers/BlockVertex
 	FIELD c zFaceId
 CLASS none/cji net/minecraft/client/renderers/GameRenderer
 	FIELD ab SHADERS
+	FIELD d SHADER_COUNT
 	FIELD e LOGGER
-	FIELD f RAIN_TEXTURE
-	FIELD g SNOW_TEXTURE
+	FIELD f RAIN_PNG
+	FIELD g SNOW_PNG
 	FIELD h minecraft
 	METHOD a onReload (Lnone/cvk;)V
 	METHOD a setViewEntity (Lnone/wv;)V
@@ -17004,8 +17043,8 @@ CLASS none/ckg net/minecraft/client/OpenGLViewport
 	FIELD c width
 	FIELD d height
 CLASS none/cki net/minecraft/client/renderers/PlayerRenderer
-	FIELD a MAP_BACKGROUND
-	FIELD b UNDERWATER
+	FIELD a MAP_BACKGROUND_PNG
+	FIELD b UNDERWATER_PNG
 	FIELD c minecraft
 	FIELD d heldItemStack
 	FIELD g entityRenderer
@@ -17142,7 +17181,7 @@ CLASS none/cmz net/minecraft/entity/player/EnumCameraType
 	FIELD e GUI
 CLASS none/cng empty/cng
 CLASS none/cnk net/minecraft/client/renderers/BlockEntityBannerRenderer
-	FIELD d BANNER_BASE
+	FIELD d BANNER_BASE_PNG
 	FIELD e modelBanner
 	METHOD a render (Lnone/bci;DDDFI)V
 	METHOD a render (Lnone/bcm;DDDFI)V
@@ -17166,7 +17205,7 @@ CLASS none/cno net/minecraft/client/renderers/BlockEntityRenderer
 	METHOD a render (Lnone/bcm;DDDFI)V
 	METHOD b getDetailsRendererForBlockEntity (Lnone/bcm;)Lnone/cnp;
 CLASS none/cnp net/minecraft/client/renderers/BlockEntityDetailsRenderer
-	FIELD a DESTROY_STAGES
+	FIELD a DESTROY_STAGE_PNGS
 	FIELD b blockEntityRenderer
 	METHOD a getLevel ()Lnone/aqu;
 	METHOD a render (Lnone/bcm;DDDFI)V
@@ -17228,11 +17267,13 @@ CLASS none/cop net/minecraft/client/renderers/BlockRenderer
 	METHOD b getVBO (I)Lnone/cur;
 	METHOD j getBlockPos ()Lnone/dt;
 CLASS none/cpe net/minecraft/client/renderers/RenderArmorStand
+	FIELD a ARMOR_STAND_PNG
 	METHOD a rotateCorpse (Lnone/xm;FFF)V
 	METHOD b getModel ()Lnone/ccq;
 CLASS none/cpg net/minecraft/client/renderers/RenderArrow
+	FIELD a ARROW_PNG
 CLASS none/cph net/minecraft/client/renderers/RenderBat
-	FIELD a batTextures
+	FIELD a BAT_PNG
 	METHOD a getBatTextures (Lnone/abo;)Lnone/oa;
 	METHOD a rotateCorpse (Lnone/xm;FFF)V
 CLASS none/cpi net/minecraft/client/renderers/RenderBlaze
@@ -17240,11 +17281,14 @@ CLASS none/cpi net/minecraft/client/renderers/RenderBlaze
 CLASS none/cpj net/minecraft/client/renderers/RenderBoat
 	FIELD e BOAT_PNG
 CLASS none/cpk net/minecraft/client/renderers/RenderCaveSpider
+	FIELD a CAVE_SPIDER_PNG
 CLASS none/cpl net/minecraft/client/renderers/RenderChicken
+	FIELD a CHICKEN_PNG
 CLASS none/cpm net/minecraft/client/renderers/RenderCow
-	FIELD a cowTextures
+	FIELD a COW_PNG
 	METHOD a getCowTextures (Lnone/abs;)Lnone/oa;
 CLASS none/cpn net/minecraft/client/renderers/RenderCreeper
+	FIELD a CREEPER_PNG
 CLASS none/cpo net/minecraft/client/renderers/RenderEntity
 CLASS none/cpp net/minecraft/client/renderers/RenderEnderCrystal
 	FIELD a ENDERCRYSTAL_PNG
@@ -17262,6 +17306,7 @@ CLASS none/cpt net/minecraft/client/renderers/EntityRenderer
 	METHOD a getEntityRenderObject (Lnone/wv;)Lnone/cpu;
 	METHOD a renderEntityWithPosYaw (Lnone/wv;DDDFFZ)Z
 CLASS none/cpu net/minecraft/client/renderers/Render
+	FIELD a SHADOW_PNG
 CLASS none/cpv net/minecraft/client/renderers/RenderXBOrb
 CLASS none/cpw net/minecraft/client/renderers/RenderFallingBlock
 CLASS none/cpx net/minecraft/client/renderers/RenderFireball
@@ -17293,6 +17338,7 @@ CLASS none/cqt net/minecraft/client/renderers/RenderLeashKnot
 	FIELD a LEAD_KNOT_PNG
 CLASS none/cqu net/minecraft/client/renderers/RenderLightningBolt
 CLASS none/cqv
+	FIELD a LOGGER
 	FIELD f model
 	METHOD a rotateCorpse (Lnone/xm;FFF)V
 	METHOD b getModel ()Lnone/ccq;
@@ -17801,13 +17847,17 @@ CLASS none/cuw net/minecraft/client/renderers/vertex/VertexFormatElementEnumUsag
 		ARG 0 rname
 		ARG 1 id
 	METHOD a getName ()Ljava/lang/String;
+CLASS none/cuy
+	FIELD b LOGGER
+CLASS none/cuz
+	FIELD a LOGGER
 CLASS none/cva net/minecraft/client/renderers/RenderPlayer
 	FIELD a STEVE_PNG
 	FIELD b ALEX_PNG
 CLASS none/cvb net/minecraft/client/resources/DefaultResourcePack
 	METHOD c setIcon (Lnone/oa;)Ljava/io/InputStream;
 CLASS none/cvc
-	FIELD b logger
+	FIELD b LOGGER
 CLASS none/cvg net/minecraft/client/resources/FoliageColorReloadListener
 	FIELD a FOLIAGE_PNG
 	METHOD a onReload (Lnone/cvk;)V
@@ -17954,8 +18004,8 @@ CLASS none/cyk net/minecraft/server/IntegratedServer
 	METHOD y onTick ()V
 CLASS none/cyo empty/cyo
 CLASS none/cyp net/minecraft/client/network/LanServerDetector
-	FIELD a atomicInteger
-	FIELD b logger
+	FIELD a DETECTOR_THREAD_ID
+	FIELD b LOGGER
 CLASS none/cyq
 	FIELD c updateTime
 	METHOD c updateTime ()V
@@ -18033,7 +18083,7 @@ CLASS none/czu tv/twitch/TwitchBroadcaster
 		METHOD requestAuthTokenCallback (Ltv/twitch/ErrorCode;Ltv/twitch/AuthToken;)V
 		METHOD runCommercialCallback (Ltv/twitch/ErrorCode;)V
 	FIELD A serverConnector
-	FIELD D logger
+	FIELD D LOGGER
 	FIELD G errorCode
 	FIELD g audioEnabled
 	FIELD h core
@@ -18080,6 +18130,7 @@ CLASS none/czy tv/twitch/EnumTwitchStatus
 	FIELD n INGEST_TESTING
 CLASS none/czz tv/twitch/czz
 CLASS none/daa tv/twitch/ChatController
+	FIELD q LOGGER
 CLASS none/dac net/minecraft/chat/dac
 CLASS none/dad net/minecraft/client/stream/ChatControllerEnumChannelState
 	FIELD a Created
@@ -18115,7 +18166,7 @@ CLASS none/dap tv/twitch/EnumTwitchError
 	FIELD a ERROR
 	FIELD b INVALID_TOKEN
 CLASS none/daq tv/twitch/TwitchAuthenticator
-	FIELD b logger
+	FIELD b LOGGER
 	FIELD c broadcaster
 	FIELD d chatController
 	FIELD f minecraft
@@ -18257,6 +18308,9 @@ CLASS none/cee$ceh
 		METHOD a onChoice (ZI)V
 CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	CLASS pd
+		METHOD a setProgressBarPercentage (I)V
+			ARG 0 percentage
+		METHOD b (Ljava/lang/String;)V
 		METHOD c setProgressBarMessage (Ljava/lang/String;)V
 	FIELD A canSpawnAnimals
 	FIELD B canSpawnNPCs
