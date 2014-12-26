@@ -72,7 +72,7 @@ CLASS none/b net/minecraft/crash/CrashReport
 		METHOD call ()Ljava/lang/String;
 	CLASS i
 		METHOD call ()Ljava/lang/String;
-	FIELD a logger
+	FIELD a LOGGER
 	FIELD b message
 	FIELD c cause
 	FIELD d crashLogInfo
@@ -145,7 +145,7 @@ CLASS none/u net/minecraft/crash/CrashReportException
 		ARG 0 crashLogger
 	METHOD a getCrashLogger ()Lnone/b;
 CLASS none/v net/minecraft/chat/AllowedCharacters
-	FIELD a allowedCharacters
+	FIELD a ALLOWED_CHARACTERS
 	METHOD a isAllowed (C)Z
 		ARG 0 c
 	METHOD a filter (Ljava/lang/String;)Ljava/lang/String;
@@ -153,11 +153,11 @@ CLASS none/v net/minecraft/chat/AllowedCharacters
 CLASS none/w net/minecraft/util/Util
 	METHOD a getOSName ()Lnone/x;
 CLASS none/x net/minecraft/util/OSType
-	FIELD a Linux
-	FIELD b Solaris
-	FIELD c Windows
+	FIELD a LINUX
+	FIELD b SOLARIS
+	FIELD c WINDOWS
 	FIELD d OSX
-	FIELD e Unknown
+	FIELD e UNKNOWN
 	FIELD f OSTypes
 CLASS none/y net/minecraft/command/IOpMessageSender
 	METHOD a sendOpMessage (Lnone/ae;Lnone/ac;ILjava/lang/String;[Ljava/lang/Object;)V
@@ -315,7 +315,7 @@ CLASS none/aa net/minecraft/command/CoordinateChange
 	METHOD b getChange ()D
 	METHOD c isRelative ()Z
 CLASS none/ab net/minecraft/command/BaseCommandManager
-	FIELD a logger
+	FIELD a LOGGER
 	FIELD b commands
 	FIELD c commandList
 	METHOD a getCommands ()Ljava/util/Map;
@@ -546,7 +546,7 @@ CLASS none/au net/minecraft/command/CommandAchievement
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 sender
 CLASS none/aw net/minecraft/command/CommandBanIp
-	FIELD a IPRegexPatern
+	FIELD a IP_PATTERN
 	METHOD a getPermissionLevel ()I
 	METHOD a canUseCommand (Lnone/ae;)Z
 		ARG 0 sender
@@ -619,7 +619,7 @@ CLASS none/bd net/minecraft/command/CommandDeOp
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/be net/minecraft/command/CommandDebug
-	FIELD a logger
+	FIELD a LOGGER
 	METHOD a getPermissionLevel ()I
 	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -1083,7 +1083,7 @@ CLASS none/da net/minecraft/command/CommandTime
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/db net/minecraft/command/CommandTitle
-	FIELD a logger
+	FIELD a LOGGER
 	METHOD a getPermissionLevel ()I
 	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -1370,7 +1370,7 @@ CLASS none/ew net/minecraft/util/EnumParticleType
 	FIELD Q particleName
 	FIELD R particleID
 	FIELD S null
-	FIELD U particleNameMap
+	FIELD U PARTICLE_NAME_MAP
 	FIELD a EXPLOSION_NORMAL
 	FIELD b EXPLOSION_LARGE
 	FIELD c EXPLOSION_HUGE
@@ -1443,7 +1443,7 @@ CLASS none/fa net/minecraft/util/Rotations
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 0 o
 CLASS none/fb net/minecraft/util/RegistrySimple
-	FIELD a logger
+	FIELD a LOGGER
 	FIELD c registryMap
 	METHOD a getRegistryItem (Ljava/lang/Object;)Ljava/lang/Object;
 		ARG 0 registryItemKey
@@ -1503,8 +1503,8 @@ CLASS none/fi net/minecraft/util/Translator
 	METHOD c isKeyTranslated (Ljava/lang/String;)Z
 		ARG 0 key
 CLASS none/fj net/minecraft/util/StringTranslate
-	FIELD a numericVariablePattern
-	FIELD b equalSignSplitter
+	FIELD a NUMERIC_VARIABLE_PATTERN
+	FIELD b EQUAL_SIGN_SPLITTER
 	FIELD c instance
 	FIELD d languageList
 	FIELD e lastUpdateTimeInMilliseconds
@@ -1552,7 +1552,7 @@ CLASS none/fm net/minecraft/nbt/NbtByte
 	METHOD hashCode ()I
 	METHOD toString ()Ljava/lang/String;
 CLASS none/fn net/minecraft/nbt/NbtTagCompound
-	FIELD b logger
+	FIELD b LOGGER
 	FIELD c dataMap
 	METHOD a getNbtTypeId ()B
 	METHOD a (BLjava/lang/String;Ljava/io/DataInput;ILnone/fx;)Lnone/gd;
@@ -1728,7 +1728,7 @@ CLASS none/fu net/minecraft/nbt/NbtInt
 	METHOD hashCode ()I
 	METHOD toString ()Ljava/lang/String;
 CLASS none/fv net/minecraft/nbt/NbtList
-	FIELD b logger
+	FIELD b LOGGER
 	FIELD c nbtList
 	FIELD d listOfNbtTypeId
 	METHOD a getNbtTypeId ()B
@@ -1781,7 +1781,7 @@ CLASS none/fw net/minecraft/nbt/NbtLong
 	METHOD hashCode ()I
 	METHOD toString ()Ljava/lang/String;
 CLASS none/fx net/minecraft/nbt/NbtSizeUtil
-	FIELD a nbtSizeUtilDefault
+	FIELD a NBT_SIZE_UTIL_DEFAULT
 	FIELD b maxSize
 	FIELD c currentSize
 	METHOD <init> (J)V
@@ -1863,7 +1863,7 @@ CLASS none/gc net/minecraft/nbt/NbtStrings
 	METHOD hashCode ()I
 	METHOD toString ()Ljava/lang/String;
 CLASS none/gd net/minecraft/nbt/Nbt
-	FIELD a NBTTypes
+	FIELD a NBT_TYPES
 	METHOD a getNbtTypeId ()B
 	METHOD a createNbt (B)Lnone/gd;
 		ARG 0 NbtTypeId
@@ -1888,8 +1888,8 @@ CLASS none/ge net/minecraft/nbt/NbtNumeric
 	METHOD h getAsFloat ()F
 CLASS none/gf net/minecraft/nbt/NBTException
 CLASS none/gg net/minecraft/nbt/JsonToNBT
-	FIELD a logger
-	FIELD b pattern
+	FIELD a LOGGER
+	FIELD b PATTERN
 	METHOD a toNbt (Ljava/lang/String;)Lnone/fn;
 		ARG 0 jsonString
 CLASS none/gm net/minecraft/network/NettyEncryptionTranslator
@@ -1945,12 +1945,12 @@ CLASS none/gr net/minecraft/network/NetworkManager
 	CLASS gw
 		METHOD initChannel (Lio/netty/channel/Channel;)V
 			ARG 0 channel
-	FIELD a markerNetwork
-	FIELD b markerNetworkPackets
-	FIELD c attributeKey
-	FIELD d clientEventLoopFactory
-	FIELD e localClientEventLoopFactory
-	FIELD f logger
+	FIELD a MARKER_NETWORK
+	FIELD b MARKER_NETWORK_PACKETS
+	FIELD c ATTRIBUTE_KEY
+	FIELD d CLIENT_EVENT_LOOP_FACTORY
+	FIELD e LOCAL_CLIENT_EVENT_LOOP_FACTORY
+	FIELD f LOGGER
 	FIELD g packetDirection
 	FIELD h queue
 	FIELD i channel
@@ -2215,15 +2215,15 @@ CLASS none/hd net/minecraft/network/PacketBuffer
 	METHOD writerIndex ()I
 	METHOD writerIndex (I)Lio/netty/buffer/ByteBuf;
 CLASS none/he net/minecraft/util/MessageDeserializer
-	FIELD a logger
-	FIELD b markerPacketReceived
+	FIELD a LOGGER
+	FIELD b MARKER_PACKET_RECEIVED
 	FIELD c direction
 	METHOD decode (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Ljava/util/List;)V
 		ARG 0 channelHandlerContext
 		ARG 1 byteBuf
 CLASS none/hf net/minecraft/util/MessageSerializer
-	FIELD a logger
-	FIELD b markerPacketSent
+	FIELD a LOGGER
+	FIELD b MARKER_PACKET_SENT
 	FIELD c direction
 	METHOD encode (Lio/netty/channel/ChannelHandlerContext;Lnone/id;Lio/netty/buffer/ByteBuf;)V
 		ARG 0 channelHandlerContext
@@ -2411,7 +2411,7 @@ CLASS none/hy net/minecraft/chat/TextComponent
 	METHOD g getText ()Ljava/lang/String;
 CLASS none/hz net/minecraft/chat/TranslatableComponent
 	FIELD b list
-	FIELD c pattern
+	FIELD c PATTERN
 	FIELD d key
 	FIELD e args
 	FIELD f lock
@@ -2449,8 +2449,8 @@ CLASS none/ij net/minecraft/network/play/data/EnumPositionComponent
 	FIELD a X
 	FIELD b Y
 	FIELD c Z
-	FIELD d YRotation
-	FIELD e XRotation
+	FIELD d Y_ROT
+	FIELD e X_ROT
 	FIELD f bit
 	METHOD <init> (Ljava/lang/String;II)V
 		ARG 0 name
@@ -2640,9 +2640,17 @@ CLASS none/io net/minecraft/network/play/packet/clientbound/PacketSpawnMob
 	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/ip net/minecraft/network/play/packet/clientbound/PacketSpawnPainting
+	FIELD a entityId
+	FIELD b location
+	FIELD c facing
+	FIELD d name
+	METHOD a getId ()I
 	METHOD a read (Lnone/hd;)V
 	METHOD a handle (Lnone/hg;)V
+	METHOD b getLocation ()Lnone/dt;
 	METHOD b write (Lnone/hd;)V
+	METHOD c getFacing ()Lnone/ej;
+	METHOD d getName ()Ljava/lang/String;
 CLASS none/iq net/minecraft/network/play/packet/clientbound/PacketSpawnPlayer
 	METHOD a read (Lnone/hd;)V
 	METHOD a handle (Lnone/hg;)V
@@ -3241,10 +3249,10 @@ CLASS none/mq net/minecraft/network/play/packet/serverbound/PacketResourcePackSt
 	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/mr net/minecraft/network/play/data/EnumResourcePackStatus
-	FIELD a SuccessfullyLoaded
-	FIELD b Declined
-	FIELD c FailedDownload
-	FIELD d Accepted
+	FIELD a SUCCESSFULLY_LOADED
+	FIELD b DECLINED
+	FIELD c FAILED_DOWNLOAD
+	FIELD d ACCEPTED
 CLASS none/ms net/minecraft/network/play/packet/serverbound/PacketHeldItemChange
 	METHOD a read (Lnone/hd;)V
 	METHOD a handle (Lnone/hg;)V
@@ -3556,7 +3564,7 @@ CLASS none/ql net/minecraft/level/LevelServerMulti
 	METHOD a saveWorldData ()V
 	METHOD b initialize ()Lnone/aqu;
 CLASS none/qn net/minecraft/entity/EntityTracker
-	FIELD a logger
+	FIELD a LOGGER
 	FIELD b dimensionServer
 	METHOD <init> (Lnone/qt;)V
 		ARG 0 dimensionServer
@@ -3599,7 +3607,7 @@ CLASS none/qq
 	METHOD <init> (Lnone/qt;)V
 		ARG 0 dimensionServer
 CLASS none/qs net/minecraft/level/gen/ServerChunkCache
-	FIELD b logger
+	FIELD b LOGGER
 	FIELD e levelGenerator
 	FIELD i level
 	METHOD <init> (Lnone/qt;Lnone/bfq;Lnone/bfe;)V
@@ -3659,7 +3667,7 @@ CLASS none/qt net/minecraft/level/LevelServer
 CLASS none/qw net/minecraft/entity/player/EntityPlayerMP
 	FIELD a netServerHandler
 	FIELD b minecraftServer
-	FIELD bF logger
+	FIELD bF LOGGER
 	FIELD bS entity
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnone/qt;Lcom/mojang/authlib/GameProfile;Lnone/qx;)V
 		ARG 0 minecraftServer
@@ -3738,9 +3746,9 @@ CLASS none/rb net/minecraft/network/handshake/NetHandlerHandshakeLocal
 	METHOD a handleHandshake (Lnone/mz;)V
 		ARG 0 packet
 CLASS none/rc net/minecraft/network/NetworkSystem
-	FIELD a serverEventLoopFactory
-	FIELD b localServerEventLoopFactory
-	FIELD d logger
+	FIELD a SERVER_EVENT_LOOP_FACTORY
+	FIELD b LOCAL_SERVER_EVENT_LOOP_FACTORY
+	FIELD d LOGGER
 	FIELD e minecraftServer
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;)V
 		ARG 0 minecraftServer
@@ -3756,7 +3764,7 @@ CLASS none/re net/minecraft/network/LocalServerEventLoopFactory
 CLASS none/rj net/minecraft/network/play/NetHandlerPlayServer
 	FIELD a manager
 	FIELD b player
-	FIELD c logger
+	FIELD c LOGGER
 	FIELD d server
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnone/gr;Lnone/qw;)V
 		ARG 0 minecraftServer
@@ -3951,10 +3959,10 @@ CLASS none/ty net/minecraft/stats/Stats
 	FIELD E treasureFished
 	FIELD F talkedToVillager
 	FIELD G tradedWithVillager
-	FIELD H mineBlock
-	FIELD I craftItem
-	FIELD J useItem
-	FIELD K breakItem
+	FIELD H MINE_BLOCK
+	FIELD I CRAFT_ITEM
+	FIELD J USE_ITEM
+	FIELD K BREAK_ITEM
 	FIELD a statMap
 	FIELD f leaveGame
 	FIELD g playOneMinute
@@ -4233,7 +4241,7 @@ CLASS none/vt net/minecraft/level/EnumDifficulty
 	FIELD b EASY
 	FIELD c NORMAL
 	FIELD d HARD
-	FIELD e values
+	FIELD e VALUES
 	FIELD f id
 	FIELD g name
 	METHOD <init> (Ljava/lang/String;IILjava/lang/String;)V
@@ -4517,7 +4525,7 @@ CLASS none/wp net/minecraft/potion/Potion
 	METHOD k getLiquidColor ()I
 	METHOD l getAttributeModifiers ()Ljava/util/Map;
 CLASS none/wq net/minecraft/potion/PotionEffect
-	FIELD a logger
+	FIELD a LOGGER
 	FIELD b potionId
 	FIELD c duration
 	FIELD d strength
@@ -4593,7 +4601,7 @@ CLASS none/wv net/minecraft/entity/Entity
 	FIELD V random
 	FIELD W tickCounter
 	FIELD Y inWater
-	FIELD a zeroedBoundingBox
+	FIELD a ZEROED_BOUNDING_BOX
 	FIELD ab underwater
 	FIELD ac dataWatcher
 	FIELD ae chunkX
@@ -4767,13 +4775,13 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD t_ shouldReceiveCommandFeedback ()Z
 	METHOD toString ()Ljava/lang/String;
 CLASS none/xb net/minecraft/entity/EntityRegistry
-	FIELD a colorMap
-	FIELD b logger
-	FIELD c nameToClass
-	FIELD d classToName
-	FIELD e idToClass
-	FIELD f classToId
-	FIELD g nameToId
+	FIELD a COLOR_MAP
+	FIELD b LOGGER
+	FIELD c NAME_TO_CLASS
+	FIELD d CLASS_TO_NAME
+	FIELD e ID_TO_CLASS
+	FIELD f CLASS_TO_ID
+	FIELD g NAME_TO_ID
 	METHOD a getClass (I)Ljava/lang/Class;
 		ARG 0 id
 	METHOD a registerEntity (Ljava/lang/Class;Ljava/lang/String;I)V
@@ -4990,7 +4998,7 @@ CLASS none/xu net/minecraft/entity/EntityCreature
 CLASS none/xv net/minecraft/entity/DataWatcher
 	FIELD a entity
 	FIELD b empty
-	FIELD c typeMap
+	FIELD c TYPE_MAP
 	FIELD d dataMap
 	FIELD f lock
 	METHOD <init> (Lnone/wv;)V
@@ -5195,7 +5203,7 @@ CLASS none/yv net/minecraft/entity/ai/GoalDoorInteract
 	METHOD a ()Z
 	METHOD e opUpdate ()V
 CLASS none/yw net/minecraft/entity/ai/GoalEatGrass
-	FIELD b predicate
+	FIELD b PREDICATE
 	FIELD c executor
 	FIELD d level
 	METHOD <init> (Lnone/xn;)V
@@ -5498,6 +5506,12 @@ CLASS none/acb net/minecraft/entity/passive/EntityRabbit
 	METHOD cl getRabbitType ()I
 	METHOD r setRabbitType (I)V
 	METHOD z getIdleSound ()Ljava/lang/String;
+CLASS none/ace
+	FIELD a NONE
+	FIELD b HOP
+	FIELD c STEP
+	FIELD d SPRINT
+	FIELD e ATTACK
 CLASS none/acf
 	METHOD e opUpdate ()V
 CLASS none/acj
@@ -5507,7 +5521,7 @@ CLASS none/ack
 	METHOD e opUpdate ()V
 CLASS none/acl net/minecraft/entity/passive/EntitySheep
 	FIELD bk craftingInventory
-	FIELD bm woolColors
+	FIELD bm WOOL_COLORS
 	METHOD A getDroppedItem ()Lnone/alq;
 	METHOD a handleEntityStatusPacket (B)V
 	METHOD a doInteractionWith (Lnone/ahd;)Z
@@ -5742,7 +5756,7 @@ CLASS none/adm net/minecraft/entity/item/EntityPainting
 	METHOD l getMinX ()I
 	METHOD m getMinY ()I
 CLASS none/adn net/minecraft/entity/item/EntityPaintingEnumArt
-	FIELD A uselessValue
+	FIELD A MAX_NAME_LENGTH
 	FIELD B name
 	FIELD C xMin
 	FIELD D yMin
@@ -5855,7 +5869,7 @@ CLASS none/adv net/minecraft/entity/item/EntityFallingBlock
 	METHOD l getBlockState ()Lnone/bec;
 	METHOD s_ onUpdate ()V
 CLASS none/adw net/minecraft/entity/item/EntityItem
-	FIELD b logger
+	FIELD b LOGGER
 	FIELD c age
 	FIELD d pickupDelay
 	FIELD e health
@@ -5906,7 +5920,7 @@ CLASS none/adx net/minecraft/entity/item/EntityMinecart
 	FIELD aq velocityY
 	FIELD ar velocityZ
 	FIELD b customName
-	FIELD c railConnections
+	FIELD c RAIL_CONNECTIONS
 	FIELD d networkLagTicks
 	FIELD e lastSyncedX
 	FIELD f lastSyncedY
@@ -6232,7 +6246,7 @@ CLASS none/afs net/minecraft/entity/attribute/GenericAttributes
 	FIELD c KNOCKBACK_RESISTANCE
 	FIELD d MOVEMENT_SPEED
 	FIELD e ATTACK_DAMAGE
-	FIELD f logger
+	FIELD f LOGGER
 	METHOD a toNbtTagCompound (Lnone/ya;)Lnone/fn;
 CLASS none/aft net/minecraft/entity/monster/EntitySilverfish
 	METHOD A getDroppedItem ()Lnone/alq;
@@ -6579,6 +6593,20 @@ CLASS none/ahg net/minecraft/options/ChatVisibility
 	FIELD a FULL
 	FIELD b SYSTEM
 	FIELD c HIDDEN
+CLASS none/ahh
+	FIELD a CAPE
+	FIELD b JACKET
+	FIELD c LEFT_SLEEVE
+	FIELD d RIGHT_SLEEVE
+	FIELD e LEFT_PANTS_LEG
+	FIELD f RIGHT_PANTS_LEG
+	FIELD g HAT
+	FIELD h id
+	FIELD j name
+	FIELD k null
+	METHOD <init> (Ljava/lang/String;IILjava/lang/String;)V
+		ARG 2 id
+		ARG 3 name
 CLASS none/ahj net/minecraft/entity/projectile/EntityArrow
 	FIELD a pickupBehavior
 	FIELD ap life
@@ -6920,19 +6948,19 @@ CLASS none/akd net/minecraft/item/ItemCoal
 		ARG 0 itemStack
 CLASS none/ake net/minecraft/item/ItemMap
 CLASS none/akf net/minecraft/creativetab/CreativeTab
-	FIELD a creativeGroupsArray
-	FIELD b buildingBlocks
-	FIELD c decorations
-	FIELD d redstone
-	FIELD e transportation
-	FIELD f misc
-	FIELD g search
-	FIELD h food
-	FIELD i tools
-	FIELD j combat
-	FIELD k brewing
-	FIELD l materials
-	FIELD m inventory
+	FIELD a CREATIVE_GROUPS_ARRAY
+	FIELD b BUILDING_BLOCKS
+	FIELD c DECORATIONS
+	FIELD d REDSTONE
+	FIELD e TRANSPORTATION
+	FIELD f MISC
+	FIELD g SEARCH
+	FIELD h FOOD
+	FIELD i TOOLS
+	FIELD j COMBAT
+	FIELD k BREWING
+	FIELD l MATERIALS
+	FIELD m INVENTORY
 	FIELD n index
 	FIELD o id
 	FIELD p imageName
@@ -7074,7 +7102,7 @@ CLASS none/ali net/minecraft/item/EnumFishType
 	FIELD b SALMON
 	FIELD c CLOWNFISH
 	FIELD d PUFFERFISH
-	FIELD e idMap
+	FIELD e ID_MAP
 	FIELD f id
 	FIELD g saveName
 	METHOD <init> (Ljava/lang/String;IILjava/lang/String;IF)V
@@ -7106,10 +7134,10 @@ CLASS none/alo net/minecraft/item/ItemHoe
 	METHOD a onBlockPlace (Lnone/amj;Lnone/ahd;Lnone/aqu;Lnone/dt;Lnone/ej;FFF)Z
 CLASS none/alp net/minecraft/item/ItemHoeSwitchDirtType
 CLASS none/alq net/minecraft/item/Item
-	FIELD a itemBlocks
+	FIELD a ITEM_BLOCKS
 	FIELD b creativeTab
 	FIELD c maxDurability
-	FIELD e registryComplex
+	FIELD e REGISTRY_COMPLEX
 	FIELD f uuid
 	FIELD g random
 	FIELD h maxStackSize
@@ -7218,6 +7246,7 @@ CLASS none/alq net/minecraft/item/Item
 	METHOD l getMaxDurability ()I
 	METHOD l (Lnone/amj;)Z
 		ARG 0 itemStack
+	METHOD m isBreakable ()Z
 	METHOD t registerItems ()V
 CLASS none/alr net/minecraft/block/FunctionGetStoneVariantLocalizableName
 CLASS none/als net/minecraft/block/FunctionGetYellowFlowerVariantLocalizableName
@@ -7237,11 +7266,11 @@ CLASS none/amf net/minecraft/block/FunctionGetLog2VariantLocalizableName
 CLASS none/amg net/minecraft/block/FunctionGetSpongeVariantLocalizableName
 CLASS none/amh net/minecraft/block/FunctionGetSandstoneVariantLocalizableName
 CLASS none/ami net/minecraft/item/ItemMaterialTypes
-	FIELD a Wood
-	FIELD b Stone
-	FIELD c Iron
-	FIELD d Emerald
-	FIELD e Gold
+	FIELD a WOOD
+	FIELD b STONE
+	FIELD c IRON
+	FIELD d EMERALD
+	FIELD e GOLD
 	METHOD c getBonusMiningSpeed ()F
 	METHOD d getTier ()I
 CLASS none/amj net/minecraft/item/ItemStack
@@ -7437,7 +7466,7 @@ CLASS none/amk net/minecraft/item/Items
 	FIELD ca PUMPKIN_PIE
 	FIELD cb FIREWORKS
 	FIELD cc FIREWORK_CHARGE
-	FIELD cd rENCHANTED_BOOK
+	FIELD cd ENCHANTED_BOOK
 	FIELD ce COMPARATOR
 	FIELD cf NETHERBRICK
 	FIELD cg QUARTZ
@@ -7557,7 +7586,7 @@ CLASS none/ane net/minecraft/item/ItemShovel
 CLASS none/anf net/minecraft/item/ItemSign
 	METHOD a onBlockPlace (Lnone/amj;Lnone/ahd;Lnone/aqu;Lnone/dt;Lnone/ej;FFF)Z
 CLASS none/anh net/minecraft/item/ItemSkull
-	FIELD a skullType
+	FIELD a SKULL_TYPES
 	METHOD a getDataValueForBlockVersion (I)I
 	METHOD a addCreativeStackTo (Lnone/alq;Lnone/akf;Ljava/util/List;)V
 	METHOD a onBlockPlace (Lnone/amj;Lnone/ahd;Lnone/aqu;Lnone/dt;Lnone/ej;FFF)Z
@@ -7623,7 +7652,7 @@ CLASS none/ans net/minecraft/potion/PotionBrewer
 	FIELD r POTION_PREFIXES
 CLASS none/aod empty/aod
 CLASS none/aok net/minecraft/item/crafting/FurnaceRecipes
-	FIELD a recipes
+	FIELD a RECIPES
 	METHOD a addRecipe (Lnone/alq;Lnone/amj;F)V
 	METHOD a addRecipe (Lnone/amj;Lnone/amj;F)V
 	METHOD a addRecipe (Lnone/atr;Lnone/amj;F)V
@@ -7651,52 +7680,52 @@ CLASS none/apd net/minecraft/enchantment/EnchantmentUnbreaking
 CLASS none/ape net/minecraft/enchantment/EnchantmentEfficiency
 	METHOD b getMaxLevel ()I
 CLASS none/apf net/minecraft/enchantment/Enchantment
-	FIELD A Lure
+	FIELD A LURE
 	FIELD B id
 	FIELD C type
-	FIELD E EnchantmentMap
-	FIELD a EnchantmentArray
-	FIELD b enchantments
-	FIELD c Protection
-	FIELD d FireProtection
-	FIELD e FeatherFalling
-	FIELD f BlastProtection
-	FIELD g ProjectileProtection
-	FIELD h WaterBreathing
-	FIELD i AquaAffinity
-	FIELD j Thorns
-	FIELD k DepthStrider
-	FIELD l Sharpness
-	FIELD m Smite
-	FIELD n BaneOfArthropods
-	FIELD o Knockback
-	FIELD p FireAspect
-	FIELD q Looting
-	FIELD r Efficiency
-	FIELD s SilkTouch
-	FIELD t Unbreaking
-	FIELD u Fortune
-	FIELD v Power
-	FIELD w Punch
-	FIELD x Flame
-	FIELD y Infinity
-	FIELD z LuckOfTheSea
+	FIELD E ENCHANTMENT_MAP
+	FIELD a ENCHANTMENT_ARRAY
+	FIELD b ENCHANTMENTS
+	FIELD c PROTECTION
+	FIELD d FIRE_PROTECTION
+	FIELD e FEATHER_FALLING
+	FIELD f BLAST_PROTECTION
+	FIELD g PROJECTILE_PROTECTION
+	FIELD h WATER_BREATHING
+	FIELD i AQUA_AFFINITY
+	FIELD j THORNS
+	FIELD k DEPTH_STRIDER
+	FIELD l SHARPNESS
+	FIELD m SMITE
+	FIELD n BANE_OF_ARTHROPODS
+	FIELD o KNOCKBACK
+	FIELD p FIRE_ASPECT
+	FIELD q LOOTING
+	FIELD r EFFICIENCY
+	FIELD s SILK_TOUCH
+	FIELD t UNBREAKING
+	FIELD u FORTUNE
+	FIELD v POWER
+	FIELD w PUNCH
+	FIELD x FLAME
+	FIELD y INFINITY
+	FIELD z LUCK_OF_THE_SEA
 	METHOD a getUnlocalizedName ()Ljava/lang/String;
 	METHOD b getMaxLevel ()I
 	METHOD c getEnchantFromID (I)Lnone/apf;
 	METHOD d getEnchantmentWeight ()I
 CLASS none/apg net/minecraft/enchantment/EnumEnchantmentType
-	FIELD a All
-	FIELD b Armor
-	FIELD c ArmorFeet
-	FIELD d ArmorLegs
-	FIELD e ArmorTorso
-	FIELD f ArmorHead
-	FIELD g Weapon
-	FIELD h Digger
-	FIELD i FishingRod
-	FIELD j Breakable
-	FIELD k Bow
+	FIELD a ALL
+	FIELD b ARMOR
+	FIELD c ARMOR_FEET
+	FIELD d ARMOR_LEGS
+	FIELD e ARMOR_TORSO
+	FIELD f ARMOR_HEAD
+	FIELD g WEAPON
+	FIELD h DIGGER
+	FIELD i FISHING_ROD
+	FIELD j BREAKABLE
+	FIELD k BOW
 	FIELD l EnchantTypesArray
 	METHOD a canItemBeEnchanted (Lnone/alq;)Z
 		ARG 0 item
@@ -8716,10 +8745,10 @@ CLASS none/aro net/minecraft/level/biome/HeightData
 	FIELD a height
 	FIELD b volatility
 CLASS none/arp net/minecraft/level/biome/TempCategory
-	FIELD a ocean
-	FIELD b cold
-	FIELD c medium
-	FIELD d m
+	FIELD a OCEAN
+	FIELD b COLD
+	FIELD c MEDIUM
+	FIELD d WARM
 CLASS none/arq net/minecraft/level/biome/SpawnList
 CLASS none/arr net/minecraft/level/biome/BiomeCache
 	CLASS ars BiomeCacheBlock
@@ -9005,7 +9034,11 @@ CLASS none/ast net/minecraft/level/biome/BiomeSwampland
 	METHOD b getGrassColorAt (Lnone/dt;)I
 	METHOD c getLeavesColorAt (Lnone/dt;)I
 CLASS none/asu net/minecraft/level/biome/BiomeTaiga
-	FIELD aH boulderGenerator
+	FIELD aD null
+	FIELD aE null
+	FIELD aF null
+	FIELD aG null
+	FIELD aH BOULDER_GENERATOR
 	FIELD aI typeFlag
 	METHOD <init> (II)V
 		ARG 0 biomeID
@@ -9195,7 +9228,7 @@ CLASS none/atr net/minecraft/block/Block
 	FIELD a AIR
 	FIELD b creativeTab
 	FIELD c BLOCK_REGISTRY
-	FIELD d intObjectMap
+	FIELD d INT_OBJECT_MAP
 	FIELD e SOUND_DUST
 	FIELD f SOUND_WOOD
 	FIELD g SOUND_GRAVEL
@@ -10835,7 +10868,7 @@ CLASS none/ayx net/minecraft/block/EnumWoodType
 	FIELD d JUNGLE
 	FIELD e ACACIA
 	FIELD f DARK_OAK
-	FIELD g values
+	FIELD g VALUES
 	FIELD h id
 	FIELD i name
 	FIELD j localizableName
@@ -11280,7 +11313,7 @@ CLASS none/bbb net/minecraft/block/EnumStoneVariant
 	FIELD e DIORITE_SMOOTH
 	FIELD f ANDESITE
 	FIELD g ANDESITE_SMOOTH
-	FIELD h values
+	FIELD h VALUES
 	FIELD i id
 	FIELD j name
 	FIELD k localizableName
@@ -12532,7 +12565,7 @@ CLASS none/bfx net/minecraft/level/chunk/storage/RegionFileCache
 	METHOD c readRegionFile (Ljava/io/File;II)Ljava/io/DataInputStream;
 	METHOD d writeRegionFile (Ljava/io/File;II)Ljava/io/DataOutputStream;
 CLASS none/bfy net/minecraft/level/chunk/storage/ChunkLoader
-	FIELD a logger
+	FIELD a LOGGER
 	FIELD e regionFile
 	METHOD a tickChunk ()V
 	METHOD a loadChunk (Lnone/aqu;II)Lnone/bfh;
@@ -13389,10 +13422,10 @@ CLASS none/blq net/minecraft/level/gen/structure/StrongholdStart
 		ARG 3 chunkZ
 CLASS none/blr net/minecraft/level/gen/structure/StrongholdComponents
 	FIELD a totalWeight
-	FIELD b componentWeightArray
+	FIELD b COMPONENT_WEIGHT_ARRAY
 	FIELD c structureComponentList
 	FIELD d strongholdComponentType
-	FIELD e strongholdStones
+	FIELD e STRONGHOLD_STONES
 	METHOD a registerComponents ()V
 CLASS none/blv
 	METHOD <init> (ILjava/util/Random;Lnone/bjb;Lnone/ej;)V
@@ -13641,7 +13674,7 @@ CLASS none/boh net/minecraft/block/Color
 	FIELD K DARK_RED
 	FIELD L color
 	FIELD M mapColorID
-	FIELD a registryArray
+	FIELD a REGISTRY_ARRAY
 	FIELD b AIR
 	FIELD c GRASS
 	FIELD d SAND
@@ -14441,7 +14474,7 @@ CLASS none/bsd net/minecraft/scoreboard/ScoreboardManager
 	METHOD k removeObjective (Lnone/bry;)V
 		ARG 0 objective
 CLASS none/bse net/minecraft/level/storage/ScoreboardData
-	FIELD b logger
+	FIELD b LOGGER
 	FIELD c manager
 	FIELD d nbt
 	METHOD <init> (Ljava/lang/String;)V
@@ -14523,7 +14556,7 @@ CLASS none/bsj net/minecraft/scoreboard/criteria/HealthCriteria
 	METHOD b isReadOnly ()Z
 	METHOD c getScoreType ()Lnone/bsl;
 CLASS none/bsk net/minecraft/scoreboard/criteria/IObjectiveCriteria
-	FIELD a criteria
+	FIELD a CRITERIA
 	FIELD b DUMMY
 	FIELD c TRIGGER
 	FIELD d DEATH_COUNT
@@ -14606,9 +14639,9 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	CLASS btc
 		METHOD a onChoice (ZI)V
 	FIELD F lastSecondTime
-	FIELD I logger
-	FIELD J locationMojangPng
-	FIELD K macDisplayModes
+	FIELD I LOGGER
+	FIELD J MOJANG_PNG
+	FIELD K MAC_DISPLAY_MODES
 	FIELD L resourcepacksDir
 	FIELD M propertyMap
 	FIELD N currentServerData
@@ -14623,7 +14656,7 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	FIELD X itemRenderer
 	FIELD Y playerRenderer
 	FIELD Z renderViewEntity
-	FIELD a isRunningOnMac
+	FIELD a IS_RUNNING_ON_MAC
 	FIELD aA twitchAuthenticator
 	FIELD aB displayBuffer
 	FIELD aD soundManager
@@ -15356,7 +15389,7 @@ CLASS none/bws net/minecraft/client/gui/GuiLanguage
 	METHOD k handleMouseInput ()V
 CLASS none/bwv net/minecraft/client/gui/GuiOptions
 	FIELD a screenTitle
-	FIELD f relevantOptions
+	FIELD f RELEVANT_OPTIONS
 	FIELD g parentScreen
 	FIELD h options
 	METHOD a drawScreen (IIF)V
@@ -16157,8 +16190,8 @@ CLASS none/cdz net/minecraft/client/texture/TextureOffset
 	FIELD a textureOffsetX
 	FIELD b textureOffsetY
 CLASS none/cec net/minecraft/network/login/NetHandlerLoginClient
-	FIELD a logger
-	FIELD b mc
+	FIELD a rLOGGER
+	FIELD b minecraft
 	METHOD a handleLoginSuccess (Lnone/nd;)V
 	METHOD a handleEncryptionRequest (Lnone/ne;)V
 	METHOD a handleEncryptionRequest (Lnone/nf;)V
@@ -16176,7 +16209,7 @@ CLASS none/cee net/minecraft/network/play/NetHandlerPlayClient
 			ARG 0 o
 	CLASS ceh
 		METHOD run ()V
-	FIELD b logger
+	FIELD b LOGGER
 	FIELD c manager
 	FIELD d profile
 	FIELD f minecraft
@@ -17133,7 +17166,7 @@ CLASS none/ckw net/minecraft/client/shader/FrameBuffer
 CLASS none/ckx net/minecraft/client/renderers/Tessellator
 	FIELD a levelRenderer
 	FIELD b vboUploader
-	FIELD c instance
+	FIELD c INSTANCE
 	METHOD a getInstance ()Lnone/ckx;
 	METHOD b draw ()I
 	METHOD c getBufferBuilder ()Lnone/civ;
@@ -17293,10 +17326,14 @@ CLASS none/cpo net/minecraft/client/renderers/RenderEntity
 CLASS none/cpp net/minecraft/client/renderers/RenderEnderCrystal
 	FIELD a ENDERCRYSTAL_PNG
 CLASS none/cpq net/minecraft/client/renderers/RenderEnderdragon
+	FIELD e ENDERCRYSTAL_BEAM_PNG
+	FIELD j DRAGON_EXPLODING_PNG
+	FIELD k DRAGON_PNG
 	METHOD a rotateCorpse (Lnone/xm;FFF)V
 CLASS none/cpr net/minecraft/client/renderers/RenderEnderman
 	FIELD a ENDERMAN_PNG
 CLASS none/cps net/minecraft/client/renderers/RenderEndermite
+	FIELD a ENDERMITE_PNG
 CLASS none/cpt net/minecraft/client/renderers/EntityRenderer
 	FIELD a renderEngine
 	FIELD b level
@@ -17308,6 +17345,7 @@ CLASS none/cpt net/minecraft/client/renderers/EntityRenderer
 CLASS none/cpu net/minecraft/client/renderers/Render
 	FIELD a SHADOW_PNG
 CLASS none/cpv net/minecraft/client/renderers/RenderXBOrb
+	FIELD a EXPERIENCE_ORB_PNG
 CLASS none/cpw net/minecraft/client/renderers/RenderFallingBlock
 CLASS none/cpx net/minecraft/client/renderers/RenderFireball
 CLASS none/cpy net/minecraft/client/renderers/RenderFishingHook
@@ -17316,12 +17354,23 @@ CLASS none/cpz net/minecraft/client/renderers/RenderGhast
 	FIELD a GHAST_PNG
 	FIELD e GHAST_SHOOTING_PNG
 CLASS none/cqa net/minecraft/client/renderers/RenderGiant
+	FIELD a ZOMBIE_PNG
 CLASS none/cqc net/minecraft/client/renderers/RenderGuardian
+	FIELD e GUARDIAN_PNG
+	FIELD j GUARDIAN_ELDER_PNG
+	FIELD k GUARDIAN_BEAM_PNG
 CLASS none/cqd net/minecraft/client/renderers/RenderHorse
+	FIELD e HORSE_WHITE_PNG
+	FIELD j MULE_PNG
+	FIELD k DONKEY_PNG
+	FIELD l HORSE_ZOMBIE_PNG
+	FIELD m HORSE_SKELETON_PNG
+	METHOD a (Lnone/abt;)Lnone/oa;
 CLASS none/cqe
 	FIELD j STEVE_PNG
 CLASS none/cqf net/minecraft/client/renderers/RenderItem
 CLASS none/cqg net/minecraft/client/renderers/RenderItemFrame
+	FIELD a MAP_BACKGROUND_PNG
 CLASS none/cqh net/minecraft/item/ItemRenderer
 	FIELD a zLevel
 	FIELD k ENCHANTED_ITEM_GLINT_PNG
@@ -17331,7 +17380,7 @@ CLASS none/cqh net/minecraft/item/ItemRenderer
 	METHOD a onReload (Lnone/cvk;)V
 	METHOD b renderItemAndEffectIntoGUI (Lnone/amj;II)V
 CLASS none/cqs net/minecraft/client/renderers/RenderMagmaCube
-	FIELD a magmaCubeTextures
+	FIELD a MAGMACUBE_PNG
 	METHOD a getMagmaCubeTextures (Lnone/afl;)Lnone/oa;
 	METHOD a scaleMagmaCube (Lnone/afl;F)V
 CLASS none/cqt net/minecraft/client/renderers/RenderLeashKnot
@@ -17347,38 +17396,71 @@ CLASS none/cqx net/minecraft/client/renderers/RenderMinecartBase
 CLASS none/cqy net/minecraft/client/renderers/RenderMinecartSpawner
 CLASS none/cqz net/minecraft/client/renderers/RenderLiving
 CLASS none/cra net/minecraft/client/renderers/RenderMooshroom
+	FIELD a MOOSHROOM_PNG
 CLASS none/crb net/minecraft/client/renderers/RenderOcelot
+	FIELD a CAT_BLACK_PNG
+	FIELD e CAT_OCELOT_PNG
+	FIELD j CAT_RED_PNG
+	FIELD k CAT_SIAMESE_PNG
 CLASS none/crc net/minecraft/client/renderers/RenderPainting
+	FIELD a PAINTINGS_PNG
 CLASS none/crd net/minecraft/client/renderers/RenderPig
+	FIELD a PIG_PNG
 CLASS none/cre net/minecraft/client/renderers/RenderPigZombie
 	FIELD j ZOMBIE_PIGMAN_PNG
 CLASS none/crg net/minecraft/client/renderers/RenderRabbit
+	FIELD a RABBIT_BROWN_PNG
+	FIELD e RABBIT_WHITE_PNG
+	FIELD j RABBIT_BLACK_PNG
+	FIELD k RABBIT_GOLD_PNG
+	FIELD l RABBIT_SALT_PNG
+	FIELD m RABBIT_WHITE_SPLOTCHED_PNG
+	FIELD n RABBIT_TOAST_PNG
+	FIELD o RABBIT_CAERBANNOG_PNG
 CLASS none/crh net/minecraft/client/renderers/RenderSheep
 	FIELD a SHEEP_PNG
 CLASS none/cri net/minecraft/client/renderers/RenderSilverfish
 	FIELD a SILVERFISH_PNG
 CLASS none/crj net/minecraft/client/renderers/RenderSkeleton
+	FIELD j SKELETON_PNG
+	FIELD k WITHER_SKELETON_PNG
 CLASS none/crl net/minecraft/client/renderers/RenderSlime
+	FIELD a SLIME_PNG
 CLASS none/crm net/minecraft/client/renderers/RenderSnowman
 	FIELD a SNOWMAN_PNG
 	METHOD b getModel ()Lnone/ccq;
 CLASS none/crn net/minecraft/client/renderers/RenderSpider
 	FIELD a SPIDER_PNG
 CLASS none/cro net/minecraft/client/renderers/RenderSquid
+	FIELD a SQUID_PNG
 	METHOD a rotateCorpse (Lnone/xm;FFF)V
 CLASS none/crp net/minecraft/client/renderers/RenderSnowball
 CLASS none/crq net/minecraft/client/renderers/RenderPotion
 CLASS none/crr net/minecraft/client/renderers/RenderMinecartTNT
 CLASS none/crs net/minecraft/client/renderers/RenderPrimedTNT
 CLASS none/crt net/minecraft/client/renderers/RenderIronGolem
+	FIELD a IRON_GOLEM_PNG
 	METHOD a rotateCorpse (Lnone/xm;FFF)V
 CLASS none/cru net/minecraft/client/renderers/RenderVillager
+	FIELD a VILLAGER_PNG
+	FIELD e FARMER_PNG
+	FIELD j LIBRARIAN_PNG
+	FIELD k PRIEST_PNG
+	FIELD l SMITH_PNG
+	FIELD m BUTCHER_PNG
 	METHOD b getModel ()Lnone/ccq;
 CLASS none/crv net/minecraft/client/renderers/RenderWitch
 	FIELD a WITCH_PNG
 CLASS none/crw net/minecraft/client/renderers/RenderWither
+	FIELD a WITHER_INVULNERABLE_PNG
+	FIELD e WITHER_PNG
 CLASS none/crx net/minecraft/client/renderers/RenderWitherSkull
+	FIELD a WITHER_INVULNERABLE_PNG
+	FIELD e WITHER_PNG
 CLASS none/cry net/minecraft/client/renderers/RenderWolf
+	FIELD a WOLF_PNG
+	FIELD e WOLF_TAME_PNG
+	FIELD j WOLF_ANGRY_PNG
 CLASS none/crz net/minecraft/client/renderers/RenderZombie
 	FIELD j ZOMBIE_PNG
 	FIELD k ZOMBIE_VILLAGER_PNG
@@ -17667,8 +17749,8 @@ CLASS none/cto net/minecraft/client/texture/TextureBase
 CLASS none/ctp net/minecraft/client/texture/TextureImage
 	METHOD a load (Lnone/cvk;)V
 CLASS none/ctq net/minecraft/client/texture/TextureDownloadable
-	FIELD g logger
-	FIELD h downloaderNumber
+	FIELD g LOGGER
+	FIELD h DOWNLOADER_NUMBER
 	FIELD i cachedFile
 	FIELD j url
 	FIELD m textureDownloaderThread
@@ -17679,7 +17761,7 @@ CLASS none/cts
 	METHOD a (Lnone/cua;)V
 		ARG 0 textureBlock
 CLASS none/ctt net/minecraft/client/texture/TextureBanner
-	FIELD f logger
+	FIELD f LOGGER
 	METHOD a load (Lnone/cvk;)V
 CLASS none/ctu
 	FIELD g LOGGER
@@ -17704,7 +17786,7 @@ CLASS none/cty
 CLASS none/cua net/minecraft/client/texture/TextureBlock
 	FIELD f MISSINGNO
 	FIELD g BLOCKS_PNG
-	FIELD h logger
+	FIELD h LOGGER
 	FIELD l atlasPath
 	FIELD n mipLevel
 	FIELD o sprite
@@ -17735,7 +17817,7 @@ CLASS none/cue net/minecraft/client/texture/TextureAtlasSprite
 	METHOD i getName ()Ljava/lang/String;
 	METHOD k getFrameCount ()I
 CLASS none/cug net/minecraft/client/texture/TextureManager
-	FIELD a logger
+	FIELD a LOGGER
 	FIELD e resourceManager
 	METHOD a onReload (Lnone/cvk;)V
 	METHOD a bindTexture (Lnone/oa;)V
@@ -17768,7 +17850,7 @@ CLASS none/cur net/minecraft/client/renderers/vertex/VBO
 	METHOD b unbindBuffer ()V
 	METHOD c deleteBuffer ()V
 CLASS none/cus net/minecraft/client/renderers/vertex/VertexFormat
-	FIELD a logger
+	FIELD a LOGGER
 	FIELD b elements
 	FIELD c offsets
 	FIELD d nextOffset
@@ -17794,7 +17876,7 @@ CLASS none/cus net/minecraft/client/renderers/vertex/VertexFormat
 CLASS none/cut net/minecraft/client/renderers/vertex/VertexFormatSwitchEnumUsage
 	FIELD a VALUES
 CLASS none/cuu net/minecraft/client/renderers/vertex/VertexFormatElement
-	FIELD a logger
+	FIELD a LOGGER
 	FIELD b type
 	FIELD c usage
 	FIELD d index
@@ -17945,7 +18027,8 @@ CLASS none/cxf net/minecraft/util/BlockModelRotation
 	FIELD o X270_Y180
 	FIELD p X270_Y270
 CLASS none/cxh
-	FIELD c logger
+	FIELD c LOGGER
+	FIELD e JOINER
 	FIELD f resourceManager
 	FIELD o GENERATION_MARKER
 	FIELD p COMPASS_GENERATION_MARKER
@@ -17979,7 +18062,7 @@ CLASS none/cyj
 	FIELD h playerNbt
 	METHOD u getPlayerNbt ()Lnone/fn;
 CLASS none/cyk net/minecraft/server/IntegratedServer
-	FIELD j logger
+	FIELD j LOGGER
 	FIELD k minecraft
 	FIELD l levelSettings
 	METHOD a loadWorld (Ljava/lang/String;Ljava/lang/String;JLnone/are;Ljava/lang/String;)V
@@ -18025,8 +18108,8 @@ CLASS none/cyy net/minecraft/sound/EnumMusicType
 	FIELD g END
 CLASS none/cyz net/minecraft/client/audio/SoundPoolEntry
 CLASS none/cza net/minecraft/client/sound/SoundSystem
-	FIELD a marker
-	FIELD b logger
+	FIELD a MARKER
+	FIELD b LOGGER
 	METHOD d update ()V
 CLASS none/czg
 	FIELD b random
@@ -18038,7 +18121,8 @@ CLASS none/czg
 	METHOD d getSoundType ()Lnone/cxz;
 CLASS none/czh net/minecraft/client/sound/SoundManager
 	FIELD a MISSING_SOUND
-	FIELD b logger
+	FIELD b LOGGER
+	FIELD c GSON
 	FIELD e soundRegistry
 	FIELD f soundSystem
 	FIELD g resourceManager
@@ -18061,7 +18145,7 @@ CLASS none/czq net/minecraft/client/stream/MetadataCombat
 		ARG 1 entityLiving2
 CLASS none/czr net/minecraft/client/stream/PlayerDeathMetadata
 CLASS none/czs net/minecraft/client/stream/Metadata
-	FIELD a encodedPayload
+	FIELD a GSON
 	FIELD b name
 	FIELD c description
 	FIELD d payload
@@ -18133,11 +18217,11 @@ CLASS none/daa tv/twitch/ChatController
 	FIELD q LOGGER
 CLASS none/dac net/minecraft/chat/dac
 CLASS none/dad net/minecraft/client/stream/ChatControllerEnumChannelState
-	FIELD a Created
-	FIELD b Connecting
-	FIELD c Connected
-	FIELD d Disconnecting
-	FIELD e Disconnected
+	FIELD a CREATED
+	FIELD b CONNECTING
+	FIELD c CONNECTED
+	FIELD d DISCONNECTING
+	FIELD e DISCONNECTED
 CLASS none/daf net/minecraft/client/stream/ChatControllerEnumChatState
 	FIELD a UNINITIALIZED
 	FIELD b INITIALIZING
