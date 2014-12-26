@@ -1,4 +1,4 @@
-CLASS none/a net/minecraft/util/EnumChatStyle
+CLASS none/a net/minecraft/util/ChatStyle
 	FIELD A format
 	FIELD B stringValue
 	FIELD C intValue
@@ -3543,7 +3543,7 @@ CLASS none/pk net/minecraft/scoreboard/ServerScoreboardManager
 CLASS none/pm net/minecraft/server/gui/IUpdatePlayerListBox
 	METHOD c update ()V
 CLASS none/qj net/minecraft/level/LevelServerDemo
-CLASS none/qk
+CLASS none/qk net/minecraft/demo/GameSessionDemo
 	METHOD <init> (Lnone/aqu;)V
 		ARG 0 level
 	METHOD a (Lnone/ahd;Lnone/aqu;Lnone/amj;)Z
@@ -3666,9 +3666,11 @@ CLASS none/qt net/minecraft/level/LevelServer
 	METHOD s getEntityTracker ()Lnone/qn;
 CLASS none/qw net/minecraft/entity/player/EntityPlayerMP
 	FIELD a netServerHandler
-	FIELD b minecraftServer
+	FIELD b server
 	FIELD bF LOGGER
+	FIELD bG locale
 	FIELD bS entity
+	FIELD c session
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnone/qt;Lcom/mojang/authlib/GameProfile;Lnone/qx;)V
 		ARG 0 minecraftServer
 		ARG 1 dimensionServer
@@ -3706,12 +3708,14 @@ CLASS none/qw net/minecraft/entity/player/EntityPlayerMP
 		ARG 0 entity
 	METHOD f (Lnone/wv;)V
 		ARG 0 entity
+	METHOD g_ enterCombat ()V
+	METHOD j endCombat ()V
 	METHOD n closeScreen ()V
 	METHOD s doSwallowAction ()V
 	METHOD s_ onUpdate ()V
 	METHOD t sendPlayerAbilities ()V
 	METHOD v isSpectating ()Z
-CLASS none/qx
+CLASS none/qx net/minecraft/network/GameSession
 	FIELD a level
 	FIELD b player
 	FIELD c gameType
@@ -3723,10 +3727,13 @@ CLASS none/qx
 		ARG 1 dimension
 	METHOD a setPlayerGameType (Lnone/arc;)V
 		ARG 0 gameType
-	METHOD a (Lnone/qt;)V
+	METHOD a setLevel (Lnone/qt;)V
 		ARG 0 level
-	METHOD b (Lnone/arc;)V
+	METHOD b getGameType ()Lnone/arc;
+	METHOD b setGameType (Lnone/arc;)V
 		ARG 0 gameType
+	METHOD c isSurvival ()Z
+	METHOD d isCreative ()Z
 CLASS none/qy
 	FIELD a entity1
 	FIELD p LOGGER
@@ -3794,6 +3801,7 @@ CLASS none/rj net/minecraft/network/play/NetHandlerPlayServer
 	METHOD a handleSpectate (Lnone/mw;)V
 	METHOD a handleBlockPlace (Lnone/mx;)V
 	METHOD c update ()V
+	METHOD c kick (Ljava/lang/String;)V
 CLASS none/ro net/minecraft/network/handshake/NetHandlerHandshakeRemote
 	METHOD a handleHandshake (Lnone/mz;)V
 CLASS none/rq net/minecraft/network/login/NetHandlerLoginServer
@@ -3808,6 +3816,9 @@ CLASS none/ru net/minecraft/network/status/NetHandlerStatusServer
 		ARG 1 manager
 	METHOD a handlePingRequest (Lnone/nw;)V
 	METHOD a handleStatusRequest (Lnone/nx;)V
+CLASS none/rx
+	METHOD d getReason ()Ljava/lang/String;
+CLASS none/sd net/minecraft/network/ListBannedIPs
 CLASS none/sf
 	FIELD a BANNED_IPS_FILE
 	FIELD b BANNED_PLAYERS_FILE
@@ -3824,14 +3835,32 @@ CLASS none/sn net/minecraft/server/ServerConfigurationManager
 		METHOD b onDamageAmountChange (Lnone/bfb;D)V
 		METHOD b onWarningDistanceChange (Lnone/bfb;I)V
 		METHOD c onDamageBufferChange (Lnone/bfb;D)V
+	FIELD a BANNED_PLAYERS_JSON
+	FIELD b BANNED_IPS_JSON
+	FIELD c OPS_JSON
+	FIELD d WHITELIST_JSON
 	FIELD e players
+	FIELD g maxPlayers
+	FIELD h LOGGER
+	FIELD i DATE_FORMAT
+	FIELD j server
+	FIELD k bannedPlayers
+	FIELD l bannedIPs
+	FIELD m ops
+	FIELD n whitelist
+	FIELD s gameMode
 	METHOD a getPlayer (Ljava/lang/String;)Lnone/qw;
+	METHOD a getRejectionMessage (Ljava/net/SocketAddress;Lcom/mojang/authlib/GameProfile;)Ljava/lang/String;
 	METHOD a getPlayerFromUuid (Ljava/util/UUID;)Lnone/qw;
+	METHOD a setGameMode (Lnone/arc;)V
+		ARG 0 gameMode
 	METHOD a broadcastMessage (Lnone/ho;)V
 	METHOD a sendPacketToAll (Lnone/id;)V
 	METHOD a setPacketToAllPlayersInDimension (Lnone/id;I)V
 	METHOD a setPlayerManager ([Lnone/qt;)V
+	METHOD c getServer ()Lnet/minecraft/server/MinecraftServer;
 	METHOD e sendPlayerInfoToAllPlayers ()V
+	METHOD e removePlayer (Lnone/qw;)V
 	METHOD g getAllUsernames ()[Ljava/lang/String;
 	METHOD g isOp (Lcom/mojang/authlib/GameProfile;)Z
 		ARG 0 profile
@@ -3841,7 +3870,13 @@ CLASS none/sn net/minecraft/server/ServerConfigurationManager
 	METHOD q getMaxPlayers ()I
 	METHOD r getAvailablePlayerDat ()[Ljava/lang/String;
 	METHOD u getPlayerNbt ()Lnone/fn;
-	METHOD v removeAllPlayers ()V
+	METHOD v kickAllPlayers ()V
+CLASS none/sp net/minecraft/network/ListOps
+CLASS none/ss
+	METHOD b getElement (Ljava/lang/Object;)Lnone/sr;
+CLASS none/sv net/minecraft/network/ListBannedPlayers
+CLASS none/sw net/minecraft/network/BanRecord
+CLASS none/sx net/minecraft/network/ListWhitelist
 CLASS none/tk net/minecraft/stats/Achievement
 	FIELD a column
 	FIELD b row
@@ -4912,8 +4947,10 @@ CLASS none/xm net/minecraft/entity/EntityLiving
 	METHOD e onHitGround (FF)V
 	METHOD f setHeadPitch (F)V
 	METHOD g heal (F)V
+	METHOD g_ enterCombat ()V
 	METHOD h setHealth (F)V
 	METHOD i_ isBaby ()Z
+	METHOD j endCombat ()V
 	METHOD j getModifiedOxygenAfterConsumption (I)I
 	METHOD k hasEffect (I)Z
 	METHOD l setAbsorptionHealth (F)V
@@ -6735,6 +6772,7 @@ CLASS none/ahz net/minecraft/entity/player/FoodStats
 CLASS none/aib net/minecraft/container/Container
 	FIELD c inventorySlots
 	FIELD d windowId
+	METHOD a addListener (Lnone/ail;)V
 	METHOD a addSlot (Lnone/ajk;)Lnone/ajk;
 	METHOD a setItems ([Lnone/amj;)V
 	METHOD b setProperty (II)V
@@ -6748,19 +6786,23 @@ CLASS none/aid net/minecraft/container/ContainerRepair
 		METHOD a isItemValid (Lnone/amj;)Z
 	FIELD g repairResultInventory
 	FIELD h repairInventory
+	METHOD a addListener (Lnone/ail;)V
 	METHOD b setProperty (II)V
 	METHOD b onContainerClosed (Lnone/ahd;)V
 CLASS none/aig net/minecraft/container/ContainerBeacon
 	CLASS aih
 		METHOD a isItemValid (Lnone/amj;)Z
+	METHOD a addListener (Lnone/ail;)V
 	METHOD b setProperty (II)V
 CLASS none/aii net/minecraft/container/ContainerBrewingStand
 	CLASS aij
 		METHOD a isItemValid (Lnone/amj;)Z
 	FIELD f ingredientSlot
+	METHOD a addListener (Lnone/ail;)V
 	METHOD b setProperty (II)V
 CLASS none/aik net/minecraft/container/slot/SlotBrewingStandBottle
 	METHOD a isItemValid (Lnone/amj;)Z
+CLASS none/ail net/minecraft/container/IContainerListener
 CLASS none/aim net/minecraft/container/ContainerChest
 	METHOD b onContainerClosed (Lnone/ahd;)V
 CLASS none/ain net/minecraft/container/inventory/CraftingInventory
@@ -6799,11 +6841,13 @@ CLASS none/aiq net/minecraft/container/ContainerEnchanting
 	CLASS ait
 		METHOD a isItemValid (Lnone/amj;)Z
 	FIELD a enchantInventory
+	METHOD a addListener (Lnone/ail;)V
 	METHOD b setProperty (II)V
 	METHOD b onContainerClosed (Lnone/ahd;)V
 CLASS none/aiu net/minecraft/container/slot/SlotFurnaceFuel
 	METHOD a isItemValid (Lnone/amj;)Z
 CLASS none/aiv net/minecraft/container/ContainerFurnace
+	METHOD a addListener (Lnone/ail;)V
 	METHOD b setProperty (II)V
 CLASS none/aiw net/minecraft/container/slot/SlotFurnaceResult
 	FIELD a player
@@ -6840,6 +6884,7 @@ CLASS none/aje
 	METHOD o_ onChanged ()V
 	METHOD p_ getMaxStackSize ()I
 CLASS none/ajf net/minecraft/container/ContainerMerchant
+	METHOD a addListener (Lnone/ail;)V
 	METHOD b setProperty (II)V
 	METHOD b onContainerClosed (Lnone/ahd;)V
 	METHOD d setCurrentRecipeIndex (I)V
@@ -8464,7 +8509,7 @@ CLASS none/arb net/minecraft/level/WorldSettings
 	METHOD h getGenerator ()Lnone/are;
 	METHOD i areCommandsAllowed ()Z
 	METHOD j getGeneratorOptions ()Ljava/lang/String;
-CLASS none/arc net/minecraft/level/EnumGameMode
+CLASS none/arc net/minecraft/level/GameMode
 	FIELD a NOT_SET
 	FIELD b SURVIVAL
 	FIELD c CREATIVE
@@ -9034,10 +9079,6 @@ CLASS none/ast net/minecraft/level/biome/BiomeSwampland
 	METHOD b getGrassColorAt (Lnone/dt;)I
 	METHOD c getLeavesColorAt (Lnone/dt;)I
 CLASS none/asu net/minecraft/level/biome/BiomeTaiga
-	FIELD aD null
-	FIELD aE null
-	FIELD aF null
-	FIELD aG null
 	FIELD aH BOULDER_GENERATOR
 	FIELD aI typeFlag
 	METHOD <init> (II)V
@@ -15655,6 +15696,8 @@ CLASS none/byl net/minecraft/client/gui/GuiContainer
 	METHOD e updateScreen ()V
 	METHOD m onGuiClosed ()V
 CLASS none/bym net/minecraft/client/gui/GuiAnvil
+	FIELD u ANVIL_PNG
+	FIELD w renameTextField
 	METHOD a keyTyped (CI)V
 	METHOD a drawGuiContainerBackgroundLayer (FII)V
 	METHOD a drawScreen (IIF)V
@@ -18060,6 +18103,8 @@ CLASS none/cyc
 CLASS none/cye net/minecraft/client/audio/ISound
 CLASS none/cyj
 	FIELD h playerNbt
+	METHOD a getRejectionMessage (Ljava/net/SocketAddress;Lcom/mojang/authlib/GameProfile;)Ljava/lang/String;
+	METHOD c getServer ()Lnet/minecraft/server/MinecraftServer;
 	METHOD u getPlayerNbt ()Lnone/fn;
 CLASS none/cyk net/minecraft/server/IntegratedServer
 	FIELD j LOGGER
