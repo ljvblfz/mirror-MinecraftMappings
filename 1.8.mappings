@@ -1369,7 +1369,6 @@ CLASS none/ew net/minecraft/util/EnumParticleType
 	FIELD P MOB_APPEARANCE
 	FIELD Q particleName
 	FIELD R particleID
-	FIELD S null
 	FIELD U PARTICLE_NAME_MAP
 	FIELD a EXPLOSION_NORMAL
 	FIELD b EXPLOSION_LARGE
@@ -2050,6 +2049,7 @@ CLASS none/hd net/minecraft/network/PacketBuffer
 	FIELD a byteBuf
 	METHOD <init> (Lio/netty/buffer/ByteBuf;)V
 		ARG 0 byteBuf
+	METHOD a readArray ()[B
 	METHOD a writeString (Ljava/lang/String;)Lnone/hd;
 		ARG 0 s
 	METHOD a writeUUID (Ljava/util/UUID;)V
@@ -2060,9 +2060,12 @@ CLASS none/hd net/minecraft/network/PacketBuffer
 	METHOD a writeNBT (Lnone/fn;)V
 		ARG 0 nbt
 	METHOD a writeChatMessageComponent (Lnone/ho;)V
+	METHOD a writeArray ([B)V
 	METHOD alloc ()Lio/netty/buffer/ByteBufAllocator;
 	METHOD array ()[B
 	METHOD arrayOffset ()I
+	METHOD b writeVarInt (I)V
+	METHOD b writeVarLong (J)V
 	METHOD bytesBefore (B)I
 	METHOD bytesBefore (IB)I
 	METHOD bytesBefore (IIB)I
@@ -2080,9 +2083,11 @@ CLASS none/hd net/minecraft/network/PacketBuffer
 	METHOD discardReadBytes ()Lio/netty/buffer/ByteBuf;
 	METHOD discardSomeReadBytes ()Lio/netty/buffer/ByteBuf;
 	METHOD duplicate ()Lio/netty/buffer/ByteBuf;
+	METHOD e readVarInt ()I
 	METHOD ensureWritable (I)Lio/netty/buffer/ByteBuf;
 	METHOD ensureWritable (IZ)I
 	METHOD equals (Ljava/lang/Object;)Z
+	METHOD f readVarLong ()J
 	METHOD forEachByte (IILio/netty/buffer/ByteBufProcessor;)I
 	METHOD forEachByte (Lio/netty/buffer/ByteBufProcessor;)I
 	METHOD forEachByteDesc (IILio/netty/buffer/ByteBufProcessor;)I
@@ -2836,11 +2841,19 @@ CLASS none/jx net/minecraft/network/play/packet/clientbound/PacketMaps
 	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/jy net/minecraft/network/play/packet/clientbound/PacketEntity
+	FIELD e yaw
+	FIELD f pitch
+	FIELD g onGround
+	FIELD h hasRotation
 	METHOD a (Lnone/aqu;)Lnone/wv;
 		ARG 0 dimension
 	METHOD a read (Lnone/hd;)V
 	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
+	METHOD d getYaw ()B
+	METHOD e getPitch ()B
+	METHOD f hasRotation ()Z
+	METHOD g onGround ()Z
 CLASS none/jz net/minecraft/network/play/packet/clientbound/PacketEntityRelativeMove
 	METHOD a read (Lnone/hd;)V
 	METHOD a handle (Lnone/hg;)V
@@ -3161,6 +3174,7 @@ CLASS none/lz net/minecraft/network/play/packet/serverbound/PacketEnchantItem
 	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
 CLASS none/ma net/minecraft/network/play/packet/serverbound/PacketClickWindow
+	METHOD a ()I
 	METHOD a read (Lnone/hd;)V
 	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
@@ -3254,6 +3268,8 @@ CLASS none/mr net/minecraft/network/play/data/EnumResourcePackStatus
 	FIELD c FAILED_DOWNLOAD
 	FIELD d ACCEPTED
 CLASS none/ms net/minecraft/network/play/packet/serverbound/PacketHeldItemChange
+	FIELD a slot
+	METHOD a getSlot ()I
 	METHOD a read (Lnone/hd;)V
 	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
@@ -3804,6 +3820,7 @@ CLASS none/rj net/minecraft/network/play/NetHandlerPlayServer
 	METHOD c update ()V
 	METHOD c kick (Ljava/lang/String;)V
 CLASS none/ro net/minecraft/network/handshake/NetHandlerHandshakeRemote
+	FIELD a minecraftServer
 	METHOD a handleHandshake (Lnone/mz;)V
 CLASS none/rq net/minecraft/network/login/NetHandlerLoginServer
 	METHOD a handleLoginStart (Lnone/ni;)V
@@ -3867,6 +3884,8 @@ CLASS none/sn net/minecraft/server/ServerConfigurationManager
 	METHOD g isOp (Lcom/mojang/authlib/GameProfile;)Z
 		ARG 0 profile
 	METHOD h getGameProfiles ()[Lcom/mojang/authlib/GameProfile;
+	METHOD i getBannedPlayers ()Lnone/sv;
+	METHOD j getBannedIPs ()Lnone/sd;
 	METHOD k saveAllPlayerData ()V
 	METHOD p getCurrentPlayerCount ()I
 	METHOD q getMaxPlayers ()I
@@ -3874,18 +3893,38 @@ CLASS none/sn net/minecraft/server/ServerConfigurationManager
 	METHOD u getPlayerNbt ()Lnone/fn;
 	METHOD v kickAllPlayers ()V
 CLASS none/sp net/minecraft/network/ListOps
-CLASS none/ss
-	METHOD b getElement (Ljava/lang/Object;)Lnone/sr;
+	METHOD a getUserNames ()[Ljava/lang/String;
+	METHOD a objectToString (Ljava/lang/Object;)Ljava/lang/String;
+CLASS none/sr
+	METHOD f getObject ()Ljava/lang/Object;
+CLASS none/ss rnet/minecraft/network/UserList
+	FIELD a LOGGER
+	FIELD b gson
+	FIELD c file
+	FIELD d users
+	METHOD a getUserNames ()[Ljava/lang/String;
+	METHOD a objectToString (Ljava/lang/Object;)Ljava/lang/String;
+	METHOD a addUser (Lnone/sr;)V
+		ARG 0 user
+	METHOD b getUser (Ljava/lang/Object;)Lnone/sr;
+	METHOD c removeUser (Ljava/lang/Object;)V
+		ARG 0 user
+	METHOD d hasUser (Ljava/lang/Object;)Z
+	METHOD e getUsers ()Ljava/util/Map;
+	METHOD f saveList ()V
 CLASS none/sv net/minecraft/network/ListBannedPlayers
+	METHOD a getUserNames ()[Ljava/lang/String;
+	METHOD a objectToString (Ljava/lang/Object;)Ljava/lang/String;
 CLASS none/sw net/minecraft/network/BanRecord
 CLASS none/sx net/minecraft/network/ListWhitelist
+	METHOD a getUserNames ()[Ljava/lang/String;
+	METHOD a objectToString (Ljava/lang/Object;)Ljava/lang/String;
 CLASS none/tk net/minecraft/stats/Achievement
 	FIELD a column
 	FIELD b row
 	FIELD c required
 	FIELD d displayItem
 	FIELD k descriptionKey
-	FIELD l null
 	FIELD m special
 	METHOD <init> (Ljava/lang/String;Ljava/lang/String;IILnone/amj;Lnone/tk;)V
 		ARG 0 key
@@ -3959,6 +3998,7 @@ CLASS none/tq net/minecraft/stats/Stat
 	FIELD g numberFormatter
 	FIELD h timeFormatter
 	FIELD i distanceFormatter
+	FIELD j tenthFormatter
 	FIELD k numberFormat
 	FIELD l decimalFormat
 	METHOD <init> (Ljava/lang/String;Lnone/ho;)V
@@ -3984,7 +4024,7 @@ CLASS none/ts net/minecraft/stats/StatTimeFormatter
 CLASS none/tt net/minecraft/stats/StatDistanceFormatter
 	METHOD a format (I)Ljava/lang/String;
 		ARG 0 n
-CLASS none/tu
+CLASS none/tu net/minecraft/stats/StatTenthFormatter
 	METHOD a format (I)Ljava/lang/String;
 CLASS none/tv net/minecraft/stats/StatFormatter
 	METHOD a format (I)Ljava/lang/String;
@@ -4024,10 +4064,17 @@ CLASS none/ty net/minecraft/stats/Stats
 	FIELD z mobKills
 	METHOD a initialize ()V
 	METHOD a getStat (Ljava/lang/String;)Lnone/tq;
+		ARG 0 stat
 	METHOD a createKillStat (Lnone/xc;)Lnone/tq;
 		ARG 0 entity
+	METHOD a handleBlockAliases ([Lnone/tq;)V
+	METHOD a blockAlias ([Lnone/tq;Lnone/atr;Lnone/atr;)V
+	METHOD b initItemCraftStats ()V
 	METHOD b createKilledByStat (Lnone/xc;)Lnone/tq;
 		ARG 0 entity
+	METHOD c initMineBlockStats ()V
+	METHOD d initUseItemStats ()V
+	METHOD e initBreakItemStats ()V
 CLASS none/ua
 	METHOD delegate ()Ljava/util/Set;
 CLASS none/uc net/minecraft/entity/EntitySet
@@ -6037,7 +6084,14 @@ CLASS none/adz net/minecraft/entity/item/EnumMinecartType
 	FIELD e SPAWNER
 	FIELD f HOPPER
 	FIELD g COMMAND_BLOCK
-	METHOD a getByID (I)Lnone/adz;
+	FIELD h TYPE_MAP
+	FIELD i id
+	FIELD j name
+	METHOD <init> (Ljava/lang/String;IILjava/lang/String;)V
+		ARG 2 id
+		ARG 3 name
+	METHOD a getId ()I
+	METHOD a getById (I)Lnone/adz;
 	METHOD b getName ()Ljava/lang/String;
 CLASS none/aea net/minecraft/entity/item/EntityMinecartChest
 	METHOD a destroyMinecartFrom (Lnone/wh;)V
@@ -6661,7 +6715,6 @@ CLASS none/ahh
 	FIELD g HAT
 	FIELD h id
 	FIELD j name
-	FIELD k null
 	METHOD <init> (Ljava/lang/String;IILjava/lang/String;)V
 		ARG 2 id
 		ARG 3 name
@@ -13924,6 +13977,13 @@ CLASS none/bpp net/minecraft/level/gen/layer/GenLayerZoom
 		ARG 0 seed
 		ARG 1 source
 		ARG 2 zoomLevel
+CLASS none/bpt
+	FIELD a x
+	FIELD b y
+	FIELD c z
+	FIELD j hash
+	METHOD a distance (Lnone/bpt;)F
+	METHOD b distanceSquared (Lnone/bpt;)F
 CLASS none/bqc net/minecraft/level/LevelData
 	FIELD a name
 	FIELD b requiresSave
@@ -15077,7 +15137,6 @@ CLASS none/btv net/minecraft/util/Timer
 	FIELD a hertz
 	FIELD b catchupTicks
 	FIELD c interpolation
-	FIELD e null
 	FIELD f lastSecondTime
 	FIELD g lastSystemTime
 	FIELD h lastMillisecondTime
@@ -15626,7 +15685,7 @@ CLASS none/bxo net/minecraft/client/gui/GuiSoundOptions
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
 CLASS none/bxq net/minecraft/client/gui/GuiMainMenu
-	FIELD r titleMessage
+	FIELD r titleSplash
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a mouseClicked (III)V
@@ -16068,6 +16127,7 @@ CLASS none/cbk net/minecraft/main/MinecraftProxy
 	METHOD <init> (Lnone/btw;Lcom/mojang/authlib/properties/PropertyMap;Ljava/net/Proxy;)V
 		ARG 0 session
 		ARG 1 propertyMap
+		ARG 2 proxy
 CLASS none/cbm net/minecraft/main/ThreadClientShutdown
 CLASS none/cbu net/minecraft/client/renderers/models/ModelArmorStandArmor
 	METHOD a setRotationAngles (FFFFFFLnone/wv;)V
@@ -16300,7 +16360,7 @@ CLASS none/cdz net/minecraft/client/texture/TextureOffset
 	FIELD a textureOffsetX
 	FIELD b textureOffsetY
 CLASS none/cec net/minecraft/network/login/NetHandlerLoginClient
-	FIELD a rLOGGER
+	FIELD a LOGGER
 	FIELD b minecraft
 	METHOD a handleLoginSuccess (Lnone/nd;)V
 	METHOD a handleEncryptionRequest (Lnone/ne;)V
@@ -16570,7 +16630,6 @@ CLASS none/cgi net/minecraft/level/entity/particle/ParticleHeartBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cgj net/minecraft/level/entity/particle/ParticleExplosionLarge
 	FIELD a EXPLOSION_PNG
-	FIELD aA null
 	METHOD a getParticleType ()I
 	METHOD s_ onUpdate ()V
 CLASS none/cgk net/minecraft/level/entity/particle/ParticleExplosionLargeBuilder
@@ -17313,6 +17372,7 @@ CLASS none/cmc
 	FIELD b name
 	FIELD e resourceLocation
 	FIELD f LOGGER
+	METHOD b (Ljava/lang/String;)Z
 	METHOD e getResourceLocation ()Lnone/oa;
 CLASS none/cmd empty/cmd
 CLASS none/cmg empty/cmg
@@ -17919,6 +17979,8 @@ CLASS none/cue net/minecraft/client/texture/TextureAtlasSprite
 	FIELD o vMax
 	FIELD p CLOCK
 	FIELD q COMPASS
+	METHOD <init> (Ljava/lang/String;)V
+		ARG 0 name
 	METHOD a setFrameList (Ljava/util/List;)V
 	METHOD b setWidth (I)V
 	METHOD c getWidth ()I
@@ -18142,7 +18204,7 @@ CLASS none/cxh
 	FIELD f resourceManager
 	FIELD o GENERATION_MARKER
 	FIELD p COMPASS_GENERATION_MARKER
-	FIELD q CLASS_GENERATION_MARKER
+	FIELD q CLOCK_GENERATION_MARKER
 	FIELD r BLOCK_ENTITY_MARKER
 CLASS none/cxk
 	METHOD a onReload (Lnone/cvk;)V
@@ -18151,7 +18213,6 @@ CLASS none/cxl
 	METHOD hashCode ()I
 	METHOD toString getFullName ()Ljava/lang/String;
 CLASS none/cxq
-	FIELD b null
 	METHOD compareTo (Lnone/cxq;)I
 CLASS none/cxt net/minecraft/client/audio/PositionedSound
 CLASS none/cxz net/minecraft/sound/EnumSoundType
@@ -18382,7 +18443,6 @@ CLASS none/dax net/minecraft/client/renderers/OpenGlHelper
 	FIELD I GL_OPERAND0_ALPHA
 	FIELD J GL_OPERAND1_ALPHA
 	FIELD K GL_OPERAND2_ALPHA
-	FIELD L null
 	FIELD M openGL21Capability
 	FIELD O vboAvailable
 	FIELD P GL_ARRAY_BUFFER
