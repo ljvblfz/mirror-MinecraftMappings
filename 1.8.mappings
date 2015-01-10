@@ -4171,22 +4171,22 @@ CLASS none/uv net/minecraft/util/MathHelper
 	METHOD a findMaxAbsoluteValue (DD)D
 		ARG 0 value1
 		ARG 1 value2
-	METHOD a reduceToRange (DDD)D
+	METHOD a fitToRange (DDD)D
 		ARG 0 value
-		ARG 1 knownLower
-		ARG 2 knownUpper
+		ARG 1 min
+		ARG 2 max
 	METHOD a sin (F)F
 		ARG 0 value
-	METHOD a findFirstFloatInMiddle (FFF)F
+	METHOD a fitToRange (FFF)F
 		ARG 0 value
-		ARG 1 knownLower
-		ARG 2 knownUpper
+		ARG 1 min
+		ARG 2 max
 	METHOD a absoluteValue (I)I
 		ARG 0 value
-	METHOD a findFirstIntInMiddle (III)I
+	METHOD a fitToRange (III)I
 		ARG 0 value
-		ARG 1 knownLower
-		ARG 2 knownUpper
+		ARG 1 min
+		ARG 2 max
 	METHOD a parseStringToDouble (Ljava/lang/String;D)D
 		ARG 0 value
 		ARG 1 failureDefaultValue
@@ -4219,6 +4219,10 @@ CLASS none/uv net/minecraft/util/MathHelper
 		ARG 0 valuesArray
 	METHOD b truncateToInt (D)I
 		ARG 0 value
+	METHOD b interpolate (DDD)D
+		ARG 0 lowValue
+		ARG 1 highValue
+		ARG 2 fraction
 	METHOD b cos (F)F
 		ARG 0 value
 	METHOD b roundUpToNearestPowerOfTwo (I)I
@@ -4812,6 +4816,9 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD b setSilent (Z)V
 	METHOD c getPosition ()Lnone/dt;
 	METHOD c getBrightness (F)F
+	METHOD c onMouseMoved (FF)V
+		ARG 0 dx
+		ARG 1 dy
 	METHOD c changeDimension (I)V
 		ARG 0 dimensionId
 	METHOD c setItemStackInSlot (ILnone/amj;)V
@@ -6275,6 +6282,7 @@ CLASS none/afa net/minecraft/entity/monster/EntityGhast
 	METHOD bA getMovementSpeed ()F
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
+	METHOD n isShooting ()Z
 	METHOD s_ onUpdate ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/afb
@@ -6831,6 +6839,7 @@ CLASS none/ahw net/minecraft/entity/projectile/EntityWitherSkull
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
 	METHOD ad canBeHit ()Z
 	METHOD au isOnFire ()Z
+	METHOD l isWitherInvulnerable ()Z
 CLASS none/ahz net/minecraft/entity/player/FoodStats
 	FIELD a foodLevel
 	FIELD b saturationLevel
@@ -14824,6 +14833,7 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	FIELD a IS_RUNNING_ON_MAC
 	FIELD aA twitchAuthenticator
 	FIELD aB displayBuffer
+	FIELD aC blockTextureAtlas
 	FIELD aD soundManager
 	FIELD aE musicTicker
 	FIELD aG mcSessionService
@@ -14877,7 +14887,7 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	FIELD t gameSettings
 	FIELD u mouseHelper
 	FIELD v dataDir
-	FIELD w isTakingScreenshot
+	FIELD w mouseGrabbed
 	FIELD x systemTime
 	FIELD y profiler
 	FIELD z running
@@ -14899,8 +14909,10 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	METHOD O getResourceManager ()Lnone/cvk;
 	METHOD P getResourcePackRepository ()Lnone/cvo;
 	METHOD Q getLanguageManager ()Lnone/cwe;
+	METHOD R getBlockTextureAtlas ()Lnone/cua;
 	METHOD S is64bit ()Z
 	METHOD T isPaused ()Z
+	METHOD U getSoundManager ()Lnone/czh;
 	METHOD V getCurrentMusicType ()Lnone/cyy;
 	METHOD Y getMinecraftSessionService ()Lcom/mojang/authlib/minecraft/MinecraftSessionService;
 	METHOD a run ()V
@@ -14915,7 +14927,7 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	METHOD aH isInMainThread ()Z
 	METHOD aa getViewEntity ()Lnone/wv;
 	METHOD ac isSnooperEnabled ()Z
-	METHOD ae getRenderManager ()Lnone/cpt;
+	METHOD ae getEntityRenderer ()Lnone/cpt;
 	METHOD af getItemRenderer ()Lnone/cqh;
 	METHOD ag getPlayerRenderer ()Lnone/cki;
 	METHOD ah getDebugFPS ()I
@@ -14946,14 +14958,20 @@ CLASS none/bsu net/minecraft/main/Minecraft
 	METHOD j getMaxFps ()I
 	METHOD l freeMemory ()V
 	METHOD m stop ()V
-	METHOD n startTakingScreenshot ()V
-	METHOD o stopTakingScreenshot ()V
+	METHOD n grabMouse ()V
+	METHOD o releaseMouse ()V
+	METHOD p onLostFocus ()V
 	METHOD q toggleFullscreen ()V
 	METHOD r tick ()V
 	METHOD t getNetHandler ()Lnone/cee;
 	METHOD v isFancyGraphicsEnabled ()Z
 	METHOD z getMinecraft ()Lnone/bsu;
 CLASS none/btm net/minecraft/util/MouseHelper
+	FIELD a dx
+	FIELD b dy
+	METHOD a grabMouse ()V
+	METHOD b releaseMouse ()V
+	METHOD c updateDelta ()V
 CLASS none/bto net/minecraft/client/settings/GameSettings
 	FIELD A overrideWidth
 	FIELD B overrideHeight
@@ -16640,6 +16658,7 @@ CLASS none/cgl net/minecraft/level/entity/particle/ParticleExplosionHuge
 CLASS none/cgm net/minecraft/level/entity/particle/ParticleExplosionHugeBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cgn
+	FIELD aB renderer
 	METHOD a getParticleType ()I
 	METHOD s_ onUpdate ()V
 CLASS none/cgp net/minecraft/level/entity/particle/ParticleSmokeLargeBuilder
@@ -16765,6 +16784,7 @@ CLASS none/cii
 CLASS none/cij net/minecraft/level/entity/particle/ParticleWaterDropBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cil net/minecraft/entity/player/EntityPlayerSP
+	METHOD i getSkinTextureLocation ()Lnone/oa;
 	METHOD v isSpectating ()Z
 CLASS none/cim
 	FIELD c jump
@@ -16999,13 +17019,20 @@ CLASS none/cjh net/minecraft/client/renderers/BlockVertex
 	FIELD b yFaceId
 	FIELD c zFaceId
 CLASS none/cji net/minecraft/client/renderers/GameRenderer
+	FIELD E lastFocusTime
+	FIELD a anaglyph3D
+	FIELD aa activeShaderGroup
 	FIELD ab SHADERS
+	FIELD ac activeShaderCount
+	FIELD ad alternativeShaderGroupActive
 	FIELD d SHADER_COUNT
 	FIELD e LOGGER
 	FIELD f RAIN_PNG
 	FIELD g SNOW_PNG
 	FIELD h minecraft
+	FIELD j random
 	METHOD a onReload (Lnone/cvk;)V
+	METHOD a loadShaderGroup (Lnone/oa;)V
 	METHOD a setViewEntity (Lnone/wv;)V
 	METHOD e tick ()V
 	METHOD h resetActiveTexture ()V
@@ -17118,7 +17145,7 @@ CLASS none/cjm net/minecraft/client/OpenGL
 	METHOD e enableLighting ()V
 	METHOD e glCullFace (I)V
 		ARG 0 mode
-	METHOD f disableLightinh ()V
+	METHOD f disableLighting ()V
 	METHOD f glLogicOp (I)V
 		ARG 0 opcode
 	METHOD g enableColorMaterial ()V
@@ -17286,7 +17313,7 @@ CLASS none/ckn net/minecraft/client/renderers/LevelRenderer
 	METHOD b onEntityRemoved (Lnone/wv;)V
 	METHOD j tick ()V
 	METHOD n initBlockDestroyStageSprites ()V
-CLASS none/ckt net/minecraft/client/util/QuadComparator
+CLASS none/ckt net/minecraft/util/QuadComparator
 	FIELD d buffer
 	METHOD compare (Ljava/lang/Integer;Ljava/lang/Integer;)I
 		ARG 0 id1
@@ -17471,76 +17498,137 @@ CLASS none/cop net/minecraft/client/renderers/BlockRenderer
 	METHOD j getBlockPos ()Lnone/dt;
 CLASS none/cpe net/minecraft/client/renderers/RenderArmorStand
 	FIELD a ARMOR_STAND_PNG
+	METHOD a getTextureLocation (Lnone/adi;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 	METHOD a rotateCorpse (Lnone/xm;FFF)V
 	METHOD b getModel ()Lnone/ccq;
 CLASS none/cpg net/minecraft/client/renderers/RenderArrow
 	FIELD a ARROW_PNG
+	METHOD a getTextureLocation (Lnone/ahj;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cph net/minecraft/client/renderers/RenderBat
 	FIELD a BAT_PNG
-	METHOD a getBatTextures (Lnone/abo;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/abo;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 	METHOD a rotateCorpse (Lnone/xm;FFF)V
 CLASS none/cpi net/minecraft/client/renderers/RenderBlaze
 	FIELD a BLAZE_PNG
+	METHOD a getTextureLocation (Lnone/aem;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cpj net/minecraft/client/renderers/RenderBoat
 	FIELD e BOAT_PNG
+	METHOD a getTextureLocation (Lnone/adu;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cpk net/minecraft/client/renderers/RenderCaveSpider
 	FIELD a CAVE_SPIDER_PNG
+	METHOD a getTextureLocation (Lnone/aeo;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/age;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cpl net/minecraft/client/renderers/RenderChicken
 	FIELD a CHICKEN_PNG
+	METHOD a getTextureLocation (Lnone/abr;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cpm net/minecraft/client/renderers/RenderCow
 	FIELD a COW_PNG
-	METHOD a getCowTextures (Lnone/abs;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/abs;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cpn net/minecraft/client/renderers/RenderCreeper
 	FIELD a CREEPER_PNG
+	METHOD a getTextureLocation (Lnone/aep;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cpo net/minecraft/client/renderers/RenderEntity
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cpp net/minecraft/client/renderers/RenderEnderCrystal
 	FIELD a ENDERCRYSTAL_PNG
+	METHOD a getTextureLocation (Lnone/ada;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cpq net/minecraft/client/renderers/RenderEnderdragon
 	FIELD e ENDERCRYSTAL_BEAM_PNG
 	FIELD j DRAGON_EXPLODING_PNG
 	FIELD k DRAGON_PNG
+	METHOD a getTextureLocation (Lnone/adb;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 	METHOD a rotateCorpse (Lnone/xm;FFF)V
 CLASS none/cpr net/minecraft/client/renderers/RenderEnderman
 	FIELD a ENDERMAN_PNG
+	FIELD e modelEnderman
+	METHOD a getTextureLocation (Lnone/aer;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cps net/minecraft/client/renderers/RenderEndermite
 	FIELD a ENDERMITE_PNG
+	METHOD a getTextureLocation (Lnone/aew;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cpt net/minecraft/client/renderers/EntityRenderer
 	FIELD a renderEngine
 	FIELD b level
 	FIELD g gameSettings
 	FIELD k entityRenderMap
 	FIELD n fontRenderer
+	METHOD a getRenderObject (Ljava/lang/Class;)Lnone/cpu;
+	METHOD a setLevel (Lnone/aqu;)V
 	METHOD a getEntityRenderObject (Lnone/wv;)Lnone/cpu;
+	METHOD a renderEntityWithPosYaw (Lnone/wv;DDDFF)Z
 	METHOD a renderEntityWithPosYaw (Lnone/wv;DDDFFZ)Z
+	METHOD c getFontRenderer ()Lnone/bty;
 CLASS none/cpu net/minecraft/client/renderers/Render
 	FIELD a SHADOW_PNG
+	FIELD b renderer
+	METHOD a getLevel ()Lnone/aqu;
+	METHOD a bindTexture (Lnone/oa;)V
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
+	METHOD c getFontRenderer ()Lnone/bty;
+	METHOD d getRenderer ()Lnone/cpt;
 CLASS none/cpv net/minecraft/client/renderers/RenderXBOrb
 	FIELD a EXPERIENCE_ORB_PNG
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/xk;)Lnone/oa;
 CLASS none/cpw net/minecraft/client/renderers/RenderFallingBlock
+	METHOD a getTextureLocation (Lnone/adv;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cpx net/minecraft/client/renderers/RenderFireball
+	METHOD a getTextureLocation (Lnone/ahl;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cpy net/minecraft/client/renderers/RenderFishingHook
 	FIELD a PARTICLES_PNG
+	METHOD a getTextureLocation (Lnone/ado;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cpz net/minecraft/client/renderers/RenderGhast
 	FIELD a GHAST_PNG
 	FIELD e GHAST_SHOOTING_PNG
+	METHOD a getTextureLocation (Lnone/afa;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cqa net/minecraft/client/renderers/RenderGiant
 	FIELD a ZOMBIE_PNG
+	METHOD a getTextureLocation (Lnone/aff;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cqc net/minecraft/client/renderers/RenderGuardian
 	FIELD e GUARDIAN_PNG
 	FIELD j GUARDIAN_ELDER_PNG
 	FIELD k GUARDIAN_BEAM_PNG
+	METHOD a getTextureLocation (Lnone/afg;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cqd net/minecraft/client/renderers/RenderHorse
 	FIELD e HORSE_WHITE_PNG
 	FIELD j MULE_PNG
 	FIELD k DONKEY_PNG
 	FIELD l HORSE_ZOMBIE_PNG
 	FIELD m HORSE_SKELETON_PNG
-	METHOD a (Lnone/abt;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/abt;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
+	METHOD b getHorseTextureLocation (Lnone/abt;)Lnone/oa;
 CLASS none/cqe
 	FIELD j STEVE_PNG
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/xn;)Lnone/oa;
 CLASS none/cqf net/minecraft/client/renderers/RenderItem
+	METHOD a getTextureLocation (Lnone/adw;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cqg net/minecraft/client/renderers/RenderItemFrame
 	FIELD a MAP_BACKGROUND_PNG
+	FIELD e minecraft
+	FIELD h itemRenderer
+	METHOD a getTextureLocation (Lnone/adk;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cqh net/minecraft/item/ItemRenderer
 	FIELD a zLevel
 	FIELD k ENCHANTED_ITEM_GLINT_PNG
@@ -17551,11 +17639,16 @@ CLASS none/cqh net/minecraft/item/ItemRenderer
 	METHOD b renderItemAndEffectIntoGUI (Lnone/amj;II)V
 CLASS none/cqs net/minecraft/client/renderers/RenderMagmaCube
 	FIELD a MAGMACUBE_PNG
-	METHOD a getMagmaCubeTextures (Lnone/afl;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/afl;)Lnone/oa;
 	METHOD a scaleMagmaCube (Lnone/afl;F)V
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cqt net/minecraft/client/renderers/RenderLeashKnot
 	FIELD a LEAD_KNOT_PNG
+	METHOD a getTextureLocation (Lnone/adl;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cqu net/minecraft/client/renderers/RenderLightningBolt
+	METHOD a getTextureLocation (Lnone/ads;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cqv
 	FIELD a LOGGER
 	FIELD f model
@@ -17563,21 +17656,34 @@ CLASS none/cqv
 	METHOD b getModel ()Lnone/ccq;
 CLASS none/cqx net/minecraft/client/renderers/RenderMinecartBase
 	FIELD e MINECART_PNG
+	METHOD a getTextureLocation (Lnone/adx;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cqy net/minecraft/client/renderers/RenderMinecartSpawner
 CLASS none/cqz net/minecraft/client/renderers/RenderLiving
 CLASS none/cra net/minecraft/client/renderers/RenderMooshroom
 	FIELD a MOOSHROOM_PNG
+	METHOD a getTextureLocation (Lnone/abx;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/crb net/minecraft/client/renderers/RenderOcelot
 	FIELD a CAT_BLACK_PNG
 	FIELD e CAT_OCELOT_PNG
 	FIELD j CAT_RED_PNG
 	FIELD k CAT_SIAMESE_PNG
+	METHOD a getTextureLocation (Lnone/aby;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/crc net/minecraft/client/renderers/RenderPainting
 	FIELD a PAINTINGS_PNG
+	METHOD a getTextureLocation (Lnone/adm;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/crd net/minecraft/client/renderers/RenderPig
 	FIELD a PIG_PNG
+	METHOD a getTextureLocation (Lnone/aca;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cre net/minecraft/client/renderers/RenderPigZombie
 	FIELD j ZOMBIE_PIGMAN_PNG
+	METHOD a getTextureLocation (Lnone/afo;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/xn;)Lnone/oa;
 CLASS none/crg net/minecraft/client/renderers/RenderRabbit
 	FIELD a RABBIT_BROWN_PNG
 	FIELD e RABBIT_WHITE_PNG
@@ -17587,29 +17693,53 @@ CLASS none/crg net/minecraft/client/renderers/RenderRabbit
 	FIELD m RABBIT_WHITE_SPLOTCHED_PNG
 	FIELD n RABBIT_TOAST_PNG
 	FIELD o RABBIT_CAERBANNOG_PNG
+	METHOD a getTextureLocation (Lnone/acb;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/crh net/minecraft/client/renderers/RenderSheep
 	FIELD a SHEEP_PNG
+	METHOD a getTextureLocation (Lnone/acl;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cri net/minecraft/client/renderers/RenderSilverfish
 	FIELD a SILVERFISH_PNG
+	METHOD a getTextureLocation (Lnone/aft;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/crj net/minecraft/client/renderers/RenderSkeleton
 	FIELD j SKELETON_PNG
 	FIELD k WITHER_SKELETON_PNG
+	METHOD a getTextureLocation (Lnone/afw;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/xn;)Lnone/oa;
 CLASS none/crl net/minecraft/client/renderers/RenderSlime
 	FIELD a SLIME_PNG
+	METHOD a getTextureLocation (Lnone/afy;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/crm net/minecraft/client/renderers/RenderSnowman
 	FIELD a SNOWMAN_PNG
+	METHOD a getTextureLocation (Lnone/acn;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 	METHOD b getModel ()Lnone/ccq;
 CLASS none/crn net/minecraft/client/renderers/RenderSpider
 	FIELD a SPIDER_PNG
+	METHOD a getTextureLocation (Lnone/age;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cro net/minecraft/client/renderers/RenderSquid
 	FIELD a SQUID_PNG
+	METHOD a getTextureLocation (Lnone/aco;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 	METHOD a rotateCorpse (Lnone/xm;FFF)V
-CLASS none/crp net/minecraft/client/renderers/RenderSnowball
+CLASS none/crp net/minecraft/client/renderers/RenderThrown
+	FIELD a item
+	FIELD e itemRenderer
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/crq net/minecraft/client/renderers/RenderPotion
 CLASS none/crr net/minecraft/client/renderers/RenderMinecartTNT
 CLASS none/crs net/minecraft/client/renderers/RenderPrimedTNT
+	METHOD a getTextureLocation (Lnone/aek;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/crt net/minecraft/client/renderers/RenderIronGolem
 	FIELD a IRON_GOLEM_PNG
+	METHOD a getTextureLocation (Lnone/acq;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 	METHOD a rotateCorpse (Lnone/xm;FFF)V
 CLASS none/cru net/minecraft/client/renderers/RenderVillager
 	FIELD a VILLAGER_PNG
@@ -17618,23 +17748,36 @@ CLASS none/cru net/minecraft/client/renderers/RenderVillager
 	FIELD k PRIEST_PNG
 	FIELD l SMITH_PNG
 	FIELD m BUTCHER_PNG
+	METHOD a getTextureLocation (Lnone/agp;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 	METHOD b getModel ()Lnone/ccq;
 CLASS none/crv net/minecraft/client/renderers/RenderWitch
 	FIELD a WITCH_PNG
+	METHOD a getTextureLocation (Lnone/agi;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/crw net/minecraft/client/renderers/RenderWither
 	FIELD a WITHER_INVULNERABLE_PNG
 	FIELD e WITHER_PNG
+	METHOD a getTextureLocation (Lnone/adf;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/crx net/minecraft/client/renderers/RenderWitherSkull
 	FIELD a WITHER_INVULNERABLE_PNG
 	FIELD e WITHER_PNG
+	METHOD a getTextureLocation (Lnone/ahw;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cry net/minecraft/client/renderers/RenderWolf
 	FIELD a WOLF_PNG
 	FIELD e WOLF_TAME_PNG
 	FIELD j WOLF_ANGRY_PNG
+	METHOD a getTextureLocation (Lnone/acu;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/crz net/minecraft/client/renderers/RenderZombie
 	FIELD j ZOMBIE_PNG
 	FIELD k ZOMBIE_VILLAGER_PNG
+	METHOD a getTextureLocation (Lnone/agj;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 	METHOD a rotateCorpse (Lnone/xm;FFF)V
+	METHOD a getTextureLocation (Lnone/xn;)Lnone/oa;
 CLASS none/csb
 	FIELD b ENCHANTED_ITEM_GLINT_PNG
 	METHOD a render (Lnone/xm;FFFFFFF)V
@@ -17712,7 +17855,9 @@ CLASS none/csz net/minecraft/client/renderers/RenderWolfCollar
 	FIELD b renderWolf
 	METHOD a render (Lnone/acu;FFFFFFF)V
 	METHOD a render (Lnone/xm;FFFFFFF)V
-CLASS none/ctc
+CLASS none/ctc net/minecraft/client/renderers/RenderPlayer
+	METHOD a getTextureLocation (Lnone/cil;)Lnone/oa;
+	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 	METHOD a rotateCorpse (Lnone/xm;FFF)V
 	METHOD b getModel ()Lnone/ccq;
 CLASS none/ctd net/minecraft/util/JsonBlendingMode
@@ -18105,7 +18250,7 @@ CLASS none/cuy
 	FIELD b LOGGER
 CLASS none/cuz
 	FIELD a LOGGER
-CLASS none/cva net/minecraft/client/renderers/RenderPlayer
+CLASS none/cva net/minecraft/client/PlayerResources
 	FIELD a STEVE_PNG
 	FIELD b ALEX_PNG
 CLASS none/cvb net/minecraft/client/resources/DefaultResourcePack
