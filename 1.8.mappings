@@ -2945,7 +2945,7 @@ CLASS none/kr net/minecraft/network/play/packet/clientbound/PacketLevelBorder
 	METHOD a read (Lnone/hd;)V
 	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
-CLASS none/kt net/minecraft/level/EnumLevelBorderAction
+CLASS none/kt net/minecraft/world/EnumLevelBorderAction
 	FIELD a SET_SIZE
 	FIELD b LERP_SIZE
 	FIELD c SET_CENTER
@@ -3558,7 +3558,7 @@ CLASS none/pk net/minecraft/scoreboard/ServerScoreboardManager
 		ARG 0 objective
 CLASS none/pm net/minecraft/server/gui/IUpdatePlayerListBox
 	METHOD c update ()V
-CLASS none/qj net/minecraft/level/LevelServerDemo
+CLASS none/qj net/minecraft/world/WorldServerDemo
 CLASS none/qk net/minecraft/demo/GameSessionDemo
 	METHOD <init> (Lnone/aqu;)V
 		ARG 0 level
@@ -3566,7 +3566,7 @@ CLASS none/qk net/minecraft/demo/GameSessionDemo
 		ARG 1 dimension
 	METHOD a (Lnone/ahd;Lnone/aqu;Lnone/amj;Lnone/dt;Lnone/ej;FFF)Z
 		ARG 1 dimension
-CLASS none/ql net/minecraft/level/LevelServerMulti
+CLASS none/ql net/minecraft/world/WorldServerMulti
 	CLASS qm
 		METHOD a onSizeChange (Lnone/bfb;D)V
 		METHOD a onCenterChange (Lnone/bfb;DD)V
@@ -3597,12 +3597,11 @@ CLASS none/qn net/minecraft/entity/EntityTracker
 		ARG 0 entity
 	METHOD b (Lnone/wv;Lnone/id;)V
 		ARG 0 entity
-CLASS none/qp net/minecraft/level/LevelManager
+CLASS none/qp net/minecraft/world/WorldManager
 	FIELD a minecraftServer
-	FIELD b levelServer
+	FIELD b worldServer
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnone/qt;)V
 		ARG 0 minecraftServer
-		ARG 1 levelServer
 	METHOD a markBlockRangeForRenderUpdate (IIIIII)V
 	METHOD a broadcastSound (ILnone/dt;I)V
 	METHOD a addParticle (IZDDDDDD[I)V
@@ -3622,9 +3621,11 @@ CLASS none/qq
 	FIELD b dimensionServer
 	METHOD <init> (Lnone/qt;)V
 		ARG 0 dimensionServer
-CLASS none/qs net/minecraft/level/gen/ServerChunkCache
+CLASS none/qs net/minecraft/world/gen/ServerChunkCache
 	FIELD b LOGGER
 	FIELD e levelGenerator
+	FIELD g cacheMap
+	FIELD h cachedChunks
 	FIELD i level
 	METHOD <init> (Lnone/qt;Lnone/bfq;Lnone/bfe;)V
 		ARG 0 level
@@ -3641,9 +3642,9 @@ CLASS none/qs net/minecraft/level/gen/ServerChunkCache
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
-	METHOD f ()Ljava/lang/String;
+	METHOD f getName ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
-CLASS none/qt net/minecraft/level/LevelServer
+CLASS none/qt net/minecraft/world/WorldServer
 	FIELD I minecraftServer
 	FIELD J entityTracker
 	FIELD L lastSyncedTickNextTick
@@ -3651,6 +3652,8 @@ CLASS none/qt net/minecraft/level/LevelServer
 	FIELD V tickNow
 	FIELD a LOGGER
 	FIELD b chunkCache
+	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnone/bqy;Lnone/bqo;ILnone/uw;)V
+		ARG 2 level
 	METHOD a saveWorldData ()V
 	METHOD a runTask (Ljava/lang/Runnable;)Lcom/google/common/util/concurrent/ListenableFuture;
 	METHOD a setLevelInitialized (Lnone/arb;)V
@@ -3662,7 +3665,7 @@ CLASS none/qt net/minecraft/level/LevelServer
 	METHOD a onEntityAdded (Lnone/wv;)V
 	METHOD a createExplosion (Lnone/wv;DDDFZZ)Lnone/aqo;
 	METHOD a tickPending (Z)Z
-	METHOD a saveWorld (ZLnone/uy;)V
+	METHOD a saveLevel (ZLnone/uy;)V
 	METHOD aH isInMainThread ()Z
 	METHOD aj setDebugLevelSettings ()V
 	METHOD b initialize ()Lnone/aqu;
@@ -4324,7 +4327,7 @@ CLASS none/vq net/minecraft/container/inventory/IInventory
 	METHOD p_ getMaxStackSize ()I
 CLASS none/vs
 	FIELD a RANDOM
-CLASS none/vt net/minecraft/level/EnumDifficulty
+CLASS none/vt net/minecraft/world/EnumDifficulty
 	FIELD a PEACEFUL
 	FIELD b EASY
 	FIELD c NORMAL
@@ -5436,7 +5439,7 @@ CLASS none/aau
 	METHOD a ()Z
 CLASS none/aav
 	METHOD a ()Z
-CLASS none/abl net/minecraft/level/storage/VillagesData
+CLASS none/abl net/minecraft/world/storage/VillagesData
 	FIELD b level
 	METHOD a getNameForDimension (Lnone/bgd;)Ljava/lang/String;
 	METHOD a load (Lnone/fn;)V
@@ -8024,7 +8027,7 @@ CLASS none/aql net/minecraft/client/renderers/BlockLayer
 	FIELD c CUTOUT
 	FIELD d TRANSLUCENT
 	FIELD e name
-CLASS none/aqm net/minecraft/level/ChunkCoordIntPair
+CLASS none/aqm net/minecraft/world/ChunkCoordIntPair
 	FIELD a chunkX
 	FIELD b chunkZ
 	METHOD <init> (II)V
@@ -8045,8 +8048,8 @@ CLASS none/aqm net/minecraft/level/ChunkCoordIntPair
 	METHOD d getMinZ ()I
 	METHOD e getMaxX ()I
 	METHOD f getMaxZ ()I
-CLASS none/aqo net/minecraft/level/Explosion
-CLASS none/aqp net/minecraft/level/ColorizerLeaves
+CLASS none/aqo net/minecraft/world/Explosion
+CLASS none/aqp net/minecraft/world/ColorizerLeaves
 	FIELD a colorBuffer
 	METHOD a getColorPine ()I
 	METHOD a getColor (DD)I
@@ -8056,7 +8059,7 @@ CLASS none/aqp net/minecraft/level/ColorizerLeaves
 		ARG 0 colorBuffer
 	METHOD b getColorBirch ()I
 	METHOD c getColorBasic ()I
-CLASS none/aqq net/minecraft/level/GameRules
+CLASS none/aqq net/minecraft/world/GameRules
 	FIELD a rules
 	METHOD a getGameRuleStringValue (Ljava/lang/String;)Ljava/lang/String;
 		ARG 0 ruleName
@@ -8073,7 +8076,7 @@ CLASS none/aqq net/minecraft/level/GameRules
 		ARG 0 ruleName
 	METHOD e ruleExists (Ljava/lang/String;)Z
 		ARG 0 ruleName
-CLASS none/aqr net/minecraft/level/GameRule
+CLASS none/aqr net/minecraft/world/GameRule
 	FIELD a stringValue
 	FIELD b booleanValue
 	FIELD c intValue
@@ -8085,18 +8088,18 @@ CLASS none/aqr net/minecraft/level/GameRule
 	METHOD b getBooleanValue ()Z
 	METHOD c getIntValue ()I
 	METHOD e getValueType ()Lnone/aqs;
-CLASS none/aqs net/minecraft/level/GameRulesEnumValueType
+CLASS none/aqs net/minecraft/world/GameRulesEnumValueType
 	FIELD a ANY_VALUE
 	FIELD b BOOLEAN_VALUE
 	FIELD c NUMERICAL_VALUE
-CLASS none/aqt net/minecraft/level/ColorizerGrass
+CLASS none/aqt net/minecraft/world/ColorizerGrass
 	FIELD a grassBuffer
 	METHOD a getGrassColor (DD)I
 		ARG 0 temperature
 		ARG 1 rainfall
 	METHOD a setGrassBiomeColorizer ([I)V
 		ARG 0 grassBuffer
-CLASS none/aqu net/minecraft/level/Level
+CLASS none/aqu net/minecraft/world/World
 	FIELD A villagesData
 	FIELD B profiler
 	FIELD C scoreboardManager
@@ -8109,7 +8112,7 @@ CLASS none/aqu net/minecraft/level/Level
 	FIELD J theCalendar
 	FIELD K ambientTickCountdown
 	FIELD L processingLoadedBlocks
-	FIELD M levelBorder
+	FIELD M worldBorder
 	FIELD a addedBlockEntitiesList
 	FIELD b blockEntitesToBeRemoved
 	FIELD c cloudColor
@@ -8129,17 +8132,17 @@ CLASS none/aqu net/minecraft/level/Level
 	FIELD q prevThunderingStrength
 	FIELD r thunderingStrength
 	FIELD s rand
-	FIELD t dimension
-	FIELD u levelAccesses
+	FIELD t dimensionType
+	FIELD u worldAccesses
 	FIELD v chunkCache
 	FIELD w saveHandler
-	FIELD x world
+	FIELD x dimension
 	FIELD y findingSpawnPoint
 	FIELD z worldStorage
 	METHOD <init> (Lnone/bqy;Lnone/bqo;Lnone/bgd;Lnone/uw;Z)V
 		ARG 0 saveHandler
-		ARG 1 world
-		ARG 2 dimension
+		ARG 1 dimension
+		ARG 2 dimensionType
 		ARG 3 profiler
 		ARG 4 isClient
 	METHOD A getChunkProviderName ()Ljava/lang/String;
@@ -8565,8 +8568,8 @@ CLASS none/aqu net/minecraft/level/Level
 	METHOD z getDebugLoadedEntities ()Ljava/lang/String;
 	METHOD z checkBlockIsPowered (Lnone/dt;)Z
 		ARG 0 rpos
-CLASS none/aqz net/minecraft/level/MinecraftException
-CLASS none/ara net/minecraft/level/ILevelAccess
+CLASS none/aqz net/minecraft/world/MinecraftException
+CLASS none/ara net/minecraft/world/IWorldAccess
 	METHOD a markBlockRangeForRenderUpdate (IIIIII)V
 		ARG 0 minX
 		ARG 1 minY
@@ -8608,7 +8611,7 @@ CLASS none/ara net/minecraft/level/ILevelAccess
 		ARG 0 blockPos
 	METHOD b onEntityRemoved (Lnone/wv;)V
 		ARG 0 entity
-CLASS none/arb net/minecraft/level/WorldSettings
+CLASS none/arb net/minecraft/world/LevelSettings
 	FIELD a seed
 	FIELD b gameType
 	FIELD c mapFeatures
@@ -8631,7 +8634,7 @@ CLASS none/arb net/minecraft/level/WorldSettings
 	METHOD h getGenerator ()Lnone/are;
 	METHOD i areCommandsAllowed ()Z
 	METHOD j getGeneratorOptions ()Ljava/lang/String;
-CLASS none/arc net/minecraft/level/GameMode
+CLASS none/arc net/minecraft/world/GameMode
 	FIELD a NOT_SET
 	FIELD b SURVIVAL
 	FIELD c CREATIVE
@@ -8647,7 +8650,7 @@ CLASS none/arc net/minecraft/level/GameMode
 	METHOD c shouldAllowBuilding ()Z
 	METHOD d isCreative ()Z
 	METHOD e isSurvival ()Z
-CLASS none/ard net/minecraft/level/IBlockAccess
+CLASS none/ard net/minecraft/world/IBlockAccess
 	METHOD G getGenerator ()Lnone/are;
 	METHOD W hasExtendedLevels ()Z
 	METHOD a getPowerTransmittedFromLocationFacing (Lnone/dt;Lnone/ej;)I
@@ -8664,8 +8667,8 @@ CLASS none/ard net/minecraft/level/IBlockAccess
 		ARG 0 blockPos
 	METHOD s getBlockEntityAt (Lnone/dt;)Lnone/bcm;
 		ARG 0 blockPos
-CLASS none/are net/minecraft/level/Generator
-	FIELD a WORLD_TYPES
+CLASS none/are net/minecraft/world/Generator
+	FIELD a DIMENSION_TYPES
 	FIELD b DEFAULT_LEVEL_TYPE
 	FIELD c FLAT
 	FIELD d LARGE_BIOMES
@@ -8689,7 +8692,7 @@ CLASS none/are net/minecraft/level/Generator
 	METHOD a getName ()Ljava/lang/String;
 	METHOD a getGenerator (I)Lnone/are;
 		ARG 0 typeID
-	METHOD a parseLevelType (Ljava/lang/String;)Lnone/are;
+	METHOD a parseDimensionType (Ljava/lang/String;)Lnone/are;
 		ARG 0 typeName
 	METHOD a setCanBeCreated (Z)Lnone/are;
 		ARG 0 canBeCreated
@@ -8702,20 +8705,20 @@ CLASS none/are net/minecraft/level/Generator
 	METHOD h getHasNotificationData ()Z
 	METHOD i setVersioned ()Lnone/are;
 	METHOD j setHasNotificationData ()Lnone/are;
-CLASS none/arf net/minecraft/level/EnumCeiling
+CLASS none/arf net/minecraft/world/EnumCeiling
 	FIELD a SKY
 	FIELD b BLOCK
 	FIELD c id
 	METHOD <init> (Ljava/lang/String;II)V
 		ARG 0 name
-CLASS none/arj net/minecraft/level/ChunkCache
+CLASS none/arj net/minecraft/world/ChunkCache
 	FIELD a chunkX
 	FIELD b chunkZ
 	FIELD c cache
 	FIELD d hasExtendedLevels
-	FIELD e level
+	FIELD e world
 	METHOD <init> (Lnone/aqu;Lnone/dt;Lnone/dt;I)V
-		ARG 0 level
+		ARG 0 world
 		ARG 1 pos1
 		ARG 2 pos2
 		ARG 3 radius
@@ -8741,16 +8744,16 @@ CLASS none/arj net/minecraft/level/ChunkCache
 		ARG 0 blockPos
 	METHOD s getBlockEntityAt (Lnone/dt;)Lnone/bcm;
 		ARG 0 blockPos
-CLASS none/ark net/minecraft/level/ScheduledBlockTick
+CLASS none/ark net/minecraft/world/ScheduledBlockTick
 	FIELD a blockPos
 	FIELD b scheduledTime
 	FIELD e block
 	METHOD a getBlock ()Lnone/atr;
 	METHOD a setScheduledTime (J)Lnone/ark;
-CLASS none/arl net/minecraft/level/biome/BiomeBeach
+CLASS none/arl net/minecraft/world/biome/BiomeBeach
 	METHOD <init> (I)V
 		ARG 0 biomeID
-CLASS none/arm net/minecraft/level/biome/Biome
+CLASS none/arm net/minecraft/world/biome/Biome
 	FIELD A FROZEN_RIVER
 	FIELD B ICE_PLAINS
 	FIELD C ICE_MOUNTAINS
@@ -8906,18 +8909,18 @@ CLASS none/arm net/minecraft/level/biome/Biome
 	METHOD l getBiomeClass ()Ljava/lang/Class;
 	METHOD m getTempType ()Lnone/arp;
 	METHOD n getBiomeArray ()[Lnone/arm;
-CLASS none/arn net/minecraft/level/biome/BiomeGenBaseSwitchCreatureType
+CLASS none/arn net/minecraft/world/biome/BiomeGenBaseSwitchCreatureType
 	FIELD a search
-CLASS none/aro net/minecraft/level/biome/HeightData
+CLASS none/aro net/minecraft/world/biome/HeightData
 	FIELD a height
 	FIELD b volatility
-CLASS none/arp net/minecraft/level/biome/TempCategory
+CLASS none/arp net/minecraft/world/biome/TempCategory
 	FIELD a OCEAN
 	FIELD b COLD
 	FIELD c MEDIUM
 	FIELD d WARM
-CLASS none/arq net/minecraft/level/biome/SpawnList
-CLASS none/arr net/minecraft/level/biome/BiomeCache
+CLASS none/arq net/minecraft/world/biome/SpawnList
+CLASS none/arr net/minecraft/world/biome/BiomeCache
 	CLASS ars BiomeCacheBlock
 		FIELD a rainfallValues
 		FIELD b biomes
@@ -8941,7 +8944,7 @@ CLASS none/arr net/minecraft/level/biome/BiomeCache
 	METHOD c getCachedBiomes (II)[Lnone/arm;
 		ARG 0 xPos
 		ARG 1 zPos
-CLASS none/ary net/minecraft/level/biome/Decorator
+CLASS none/ary net/minecraft/world/decorator/Decorator
 	FIELD A treesPerChunk
 	FIELD B dandelionsPerChunk
 	FIELD C randomGrassPerChunk
@@ -8954,7 +8957,7 @@ CLASS none/ary net/minecraft/level/biome/Decorator
 	FIELD J clayPerChunk
 	FIELD K hugeMushroomsPerChunk
 	FIELD L generateLakes
-	FIELD a level
+	FIELD a world
 	FIELD b rand
 	FIELD c blockPos
 	FIELD d generatorSettings
@@ -8990,7 +8993,7 @@ CLASS none/ary net/minecraft/level/biome/Decorator
 		ARG 0 tries
 		ARG 2 center
 		ARG 3 heightRange
-CLASS none/arz net/minecraft/level/biome/BiomeManager
+CLASS none/arz net/minecraft/world/biome/BiomeManager
 	FIELD b genBiomes
 	FIELD c biomeIndexLayer
 	FIELD d biomeCache
@@ -9047,12 +9050,12 @@ CLASS none/arz net/minecraft/level/biome/BiomeManager
 		ARG 2 levelZ
 		ARG 3 xSize
 		ARG 4 zSize
-CLASS none/asa net/minecraft/level/biome/BiomeDesert
+CLASS none/asa net/minecraft/world/biome/BiomeDesert
 	METHOD <init> (I)V
 		ARG 0 biomeID
 	METHOD a decorate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
 		ARG 1 rand
-CLASS none/asb net/minecraft/level/biome/BiomeExtremeHills
+CLASS none/asb net/minecraft/world/biome/BiomeExtremeHills
 	METHOD <init> (IZ)V
 		ARG 0 biomeID
 		ARG 1 typeFlag
@@ -9061,7 +9064,7 @@ CLASS none/asb net/minecraft/level/biome/BiomeExtremeHills
 	METHOD a decorate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
 	METHOD b subBiome (Lnone/arm;)Lnone/asb;
 	METHOD d createSubBiome (I)Lnone/arm;
-CLASS none/asc net/minecraft/level/biome/BiomeManagerSingle
+CLASS none/asc net/minecraft/world/biome/BiomeManagerSingle
 	FIELD b biome
 	FIELD c rainfall
 	METHOD <init> (Lnone/arm;F)V
@@ -9100,7 +9103,7 @@ CLASS none/asc net/minecraft/level/biome/BiomeManagerSingle
 		ARG 2 zPos
 		ARG 3 xSize
 		ARG 4 zSize
-CLASS none/asd net/minecraft/level/biome/BiomeForest
+CLASS none/asd net/minecraft/world/biome/BiomeForest
 	CLASS ase
 		METHOD a getRandomTreeGenerator (Ljava/util/Random;)Lnone/bhc;
 	CLASS asf
@@ -9115,10 +9118,10 @@ CLASS none/asd net/minecraft/level/biome/BiomeForest
 	METHOD a decorate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
 	METHOD b getGrassColorAt (Lnone/dt;)I
 	METHOD d createSubBiome (I)Lnone/arm;
-CLASS none/asg net/minecraft/level/biome/BiomeHell
+CLASS none/asg net/minecraft/world/biome/BiomeHell
 	METHOD <init> (I)V
 		ARG 0 biomeID
-CLASS none/ash net/minecraft/level/biome/BiomeIcy
+CLASS none/ash net/minecraft/world/biome/BiomeIcy
 	FIELD aD typeFlag
 	METHOD <init> (IZ)V
 		ARG 0 biomeID
@@ -9126,7 +9129,7 @@ CLASS none/ash net/minecraft/level/biome/BiomeIcy
 	METHOD a getRandomTreeGenerator (Ljava/util/Random;)Lnone/bhc;
 	METHOD a decorate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
 	METHOD d createSubBiome (I)Lnone/arm;
-CLASS none/asi net/minecraft/level/biome/BiomeJungle
+CLASS none/asi net/minecraft/world/biome/BiomeJungle
 	FIELD aD typeFlag
 	METHOD <init> (IZ)V
 		ARG 0 biomeID
@@ -9134,7 +9137,7 @@ CLASS none/asi net/minecraft/level/biome/BiomeJungle
 	METHOD a getRandomTreeGenerator (Ljava/util/Random;)Lnone/bhc;
 	METHOD a decorate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
 	METHOD b getRandomGrassGenerator (Ljava/util/Random;)Lnone/bhp;
-CLASS none/asj net/minecraft/level/biome/BiomeMesa
+CLASS none/asj net/minecraft/world/biome/BiomeMesa
 	FIELD aF noiseField1
 	FIELD aG noiseField2
 	FIELD aH noiseField3
@@ -9150,10 +9153,10 @@ CLASS none/asj net/minecraft/level/biome/BiomeMesa
 	METHOD b getGrassColorAt (Lnone/dt;)I
 	METHOD c getLeavesColorAt (Lnone/dt;)I
 	METHOD d createSubBiome (I)Lnone/arm;
-CLASS none/ask net/minecraft/level/biome/BiomeMushroomIsland
+CLASS none/ask net/minecraft/world/biome/BiomeMushroomIsland
 	METHOD <init> (I)V
 		ARG 0 biomeID
-CLASS none/asl net/minecraft/level/biome/BiomeMutated
+CLASS none/asl net/minecraft/world/biome/BiomeMutated
 	FIELD aE baseBiome
 	METHOD <init> (ILnone/arm;)V
 		ARG 0 biomeID
@@ -9166,21 +9169,21 @@ CLASS none/asl net/minecraft/level/biome/BiomeMutated
 	METHOD c getLeavesColorAt (Lnone/dt;)I
 	METHOD l getBiomeClass ()Ljava/lang/Class;
 	METHOD m getTempType ()Lnone/arp;
-CLASS none/asm net/minecraft/level/biome/BiomeOcean
+CLASS none/asm net/minecraft/world/biome/BiomeOcean
 	METHOD <init> (I)V
 		ARG 0 biomeID
 	METHOD a placeBlocksInBiome (Lnone/aqu;Ljava/util/Random;Lnone/bgk;IID)V
 	METHOD m getTempType ()Lnone/arp;
-CLASS none/asn net/minecraft/level/biome/BiomePlains
+CLASS none/asn net/minecraft/world/biome/BiomePlains
 	METHOD <init> (I)V
 		ARG 0 biomeID
 	METHOD a getRandomFlower (Ljava/util/Random;Lnone/dt;)Lnone/awa;
 	METHOD a decorate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
 	METHOD d createSubBiome (I)Lnone/arm;
-CLASS none/asp net/minecraft/level/biome/BiomeRiver
+CLASS none/asp net/minecraft/world/biome/BiomeRiver
 	METHOD <init> (I)V
 		ARG 0 biomeID
-CLASS none/asq net/minecraft/level/biome/BiomeSavanna
+CLASS none/asq net/minecraft/world/biome/BiomeSavanna
 	METHOD <init> (I)V
 		ARG 0 biomeID
 	METHOD a getRandomTreeGenerator (Ljava/util/Random;)Lnone/bhc;
@@ -9189,10 +9192,10 @@ CLASS none/asq net/minecraft/level/biome/BiomeSavanna
 CLASS none/asr
 	METHOD a placeBlocksInBiome (Lnone/aqu;Ljava/util/Random;Lnone/bgk;IID)V
 	METHOD a decorate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)V
-CLASS none/ass net/minecraft/level/biome/BiomeStoneBeach
+CLASS none/ass net/minecraft/world/biome/BiomeStoneBeach
 	METHOD <init> (I)V
 		ARG 0 biomeID
-CLASS none/ast net/minecraft/level/biome/BiomeSwampland
+CLASS none/ast net/minecraft/world/biome/BiomeSwampland
 	METHOD <init> (I)V
 		ARG 0 biomeID
 	METHOD a getRandomTreeGenerator (Ljava/util/Random;)Lnone/bhc;
@@ -9200,7 +9203,7 @@ CLASS none/ast net/minecraft/level/biome/BiomeSwampland
 	METHOD a placeBlocksInBiome (Lnone/aqu;Ljava/util/Random;Lnone/bgk;IID)V
 	METHOD b getGrassColorAt (Lnone/dt;)I
 	METHOD c getLeavesColorAt (Lnone/dt;)I
-CLASS none/asu net/minecraft/level/biome/BiomeTaiga
+CLASS none/asu net/minecraft/world/biome/BiomeTaiga
 	FIELD aH BOULDER_GENERATOR
 	FIELD aI typeFlag
 	METHOD <init> (II)V
@@ -9212,11 +9215,12 @@ CLASS none/asu net/minecraft/level/biome/BiomeTaiga
 	METHOD b getRandomGrassGenerator (Ljava/util/Random;)Lnone/bhp;
 	METHOD d createSubBiome (I)Lnone/arm;
 		ARG 0 biomeID
-CLASS none/asv net/minecraft/level/biome/BiomeTheEnd
+CLASS none/asv net/minecraft/world/biome/BiomeTheEnd
 	METHOD <init> (I)V
 		ARG 0 biomeID
 	METHOD a getSkyColor (F)I
-CLASS none/asw net/minecraft/level/decorator/EndDecorator
+CLASS none/asw net/minecraft/world/decorator/EndDecorator
+	FIELD M genFeature
 	METHOD a decorate (Lnone/arm;)V
 CLASS none/asy net/minecraft/block/BlockAir
 	METHOD a getBoundingBox (Lnone/aqu;Lnone/dt;Lnone/bec;)Lnone/brt;
@@ -12154,7 +12158,7 @@ CLASS none/bel
 	FIELD a dim
 CLASS none/ben
 	FIELD a JOINER
-CLASS none/bep net/minecraft/level/gen/feature/OreGenerationValidInBlockPredicate
+CLASS none/bep net/minecraft/world/gen/feature/OreGenerationValidInBlockPredicate
 	METHOD a create (Lnone/atr;)Lnone/bep;
 CLASS none/bes net/minecraft/block/BlockProperty
 	FIELD a clazz
@@ -12209,7 +12213,7 @@ CLASS none/bex net/minecraft/block/IBlockProperty
 		ARG 0 value
 	METHOD b getClass ()Ljava/lang/Class;
 	METHOD c getPossibleValues ()Ljava/util/Collection;
-CLASS none/bez net/minecraft/level/border/IBorderListener
+CLASS none/bez net/minecraft/world/border/IBorderListener
 	METHOD a onSizeChange (Lnone/bfb;D)V
 		ARG 0 border
 		ARG 1 size
@@ -12234,13 +12238,13 @@ CLASS none/bez net/minecraft/level/border/IBorderListener
 	METHOD c onDamageBufferChange (Lnone/bfb;D)V
 		ARG 0 border
 		ARG 1 damageBuffer
-CLASS none/bfa net/minecraft/level/border/EnumBorderStatus
+CLASS none/bfa net/minecraft/world/border/EnumBorderStatus
 	FIELD a GROWING
 	FIELD b SHRINKING
 	FIELD c STATIONARY
 	FIELD d id
 	METHOD a getStatus ()I
-CLASS none/bfb net/minecraft/level/border/LevelBorder
+CLASS none/bfb net/minecraft/world/border/WorldBorder
 	FIELD a listeners
 	FIELD b centerX
 	FIELD c centerZ
@@ -12302,7 +12306,7 @@ CLASS none/bfb net/minecraft/level/border/LevelBorder
 	METHOD o getTransitionSpeed ()D
 	METHOD p getWarningTime ()I
 	METHOD q getWarningDistance ()I
-CLASS none/bfe net/minecraft/level/IChunkProvider
+CLASS none/bfe net/minecraft/world/IChunkProvider
 	METHOD a chunkExists (II)Z
 		ARG 0 chunkX
 		ARG 1 chunkZ
@@ -12336,9 +12340,9 @@ CLASS none/bfe net/minecraft/level/IChunkProvider
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
-	METHOD f ()Ljava/lang/String;
+	METHOD f getName ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
-CLASS none/bff net/minecraft/level/chunk/NibbleArray
+CLASS none/bff net/minecraft/world/chunk/NibbleArray
 	FIELD a array
 	METHOD <init> ([B)V
 		ARG 0 array
@@ -12365,7 +12369,7 @@ CLASS none/bff net/minecraft/level/chunk/NibbleArray
 		ARG 2 rlocalZ
 	METHOD c shiftAddress (I)I
 		ARG 0 address
-CLASS none/bfg net/minecraft/level/chunk/EmptyChunk
+CLASS none/bfg net/minecraft/world/chunk/EmptyChunk
 	METHOD a generateHeightMap ()V
 	METHOD a isChunk (II)Z
 	METHOD a getRandForSeed (J)Ljava/util/Random;
@@ -12391,7 +12395,7 @@ CLASS none/bfg net/minecraft/level/chunk/EmptyChunk
 	METHOD e setChunkModified ()V
 	METHOD e removeBlockEntityAt (Lnone/dt;)V
 	METHOD f isEmpty ()Z
-CLASS none/bfh net/minecraft/level/chunk/Chunk
+CLASS none/bfh net/minecraft/world/chunk/Chunk
 	FIELD a chunkX
 	FIELD b chunkZ
 	FIELD c LOGGER
@@ -12400,7 +12404,7 @@ CLASS none/bfh net/minecraft/level/chunk/Chunk
 	FIELD f rainfallMap
 	FIELD g skylightUpdateMap
 	FIELD h chunkLoaded
-	FIELD i level
+	FIELD i world
 	FIELD j heightMap
 	FIELD k isGapLightingUpdated
 	FIELD l blockEntityMap
@@ -12415,11 +12419,9 @@ CLASS none/bfh net/minecraft/level/chunk/Chunk
 	FIELD v queuedLighting
 	FIELD w queuedBlockEntities
 	METHOD <init> (Lnone/aqu;II)V
-		ARG 0 level
 		ARG 1 chunkX
 		ARG 2 chunkZ
 	METHOD <init> (Lnone/aqu;Lnone/bgk;II)V
-		ARG 0 level
 		ARG 1 primer
 		ARG 2 chunkX
 		ARG 3 chunkZ
@@ -12581,13 +12583,14 @@ CLASS none/bfh net/minecraft/level/chunk/Chunk
 	METHOD v getHeightMapMinimum ()I
 	METHOD w getInhabitedTime ()J
 	METHOD y setFullSkylightUpdate ()V
-CLASS none/bfl net/minecraft/level/chunk/ChunkEnumCreateEntityType
+CLASS none/bfl net/minecraft/world/chunk/ChunkEnumCreateEntityType
 	FIELD a IMMEDIATE
 	FIELD b QUEUED
 	FIELD c CHECK
-CLASS none/bfm net/minecraft/level/chunk/storage/ChunkSection
+CLASS none/bfm net/minecraft/world/chunk/storage/ChunkSection
 	FIELD a yLocation
 	FIELD b numBlocksInSection
+	FIELD c numBlocksInChunk
 	FIELD d blockDataArray
 	FIELD e blockLightArray
 	FIELD f skyLightArray
@@ -12612,6 +12615,7 @@ CLASS none/bfm net/minecraft/level/chunk/storage/ChunkSection
 	METHOD a setBlockLightArray (Lnone/bff;)V
 	METHOD a setBlockDataArray ([C)V
 		ARG 0 newDataArray
+	METHOD b isNotEmpty ()Z
 	METHOD b getBlockAt (III)Lnone/atr;
 		ARG 0 localX
 		ARG 1 localY
@@ -12639,7 +12643,7 @@ CLASS none/bfm net/minecraft/level/chunk/storage/ChunkSection
 	METHOD g getBlockDataArray ()[C
 	METHOD h getBlockLightArray ()Lnone/bff;
 	METHOD i getSkyLightArray ()Lnone/bff;
-CLASS none/bfn net/minecraft/level/chunk/storage/NibbleArrayReader
+CLASS none/bfn net/minecraft/chunk/chunk/storage/NibbleArrayReader
 	FIELD a aByte
 	FIELD b offset1
 	FIELD c offset2
@@ -12647,7 +12651,7 @@ CLASS none/bfn net/minecraft/level/chunk/storage/NibbleArrayReader
 		ARG 0 localX
 		ARG 1 localY
 		ARG 2 localZ
-CLASS none/bfq net/minecraft/level/chunk/storage/IChunkLoader
+CLASS none/bfq net/minecraft/world/chunk/storage/IChunkLoader
 	METHOD a tickChunk ()V
 	METHOD a loadChunk (Lnone/aqu;II)Lnone/bfh;
 		ARG 0 level
@@ -12660,10 +12664,10 @@ CLASS none/bfq net/minecraft/level/chunk/storage/IChunkLoader
 	METHOD b saveExtraChunkData (Lnone/aqu;Lnone/bfh;)V
 		ARG 0 level
 		ARG 1 chunk
-CLASS none/bft net/minecraft/level/chunk/storage/ChunkInfo
+CLASS none/bft net/minecraft/world/chunk/storage/ChunkInfo
 	METHOD a writeChunkToNBT (Lnone/bfu;Lnone/fn;Lnone/arz;)V
 	METHOD a readChunkFromNBT (Lnone/fn;)Lnone/bfu;
-CLASS none/bfu net/minecraft/level/chunk/storage/AnvilConverterData
+CLASS none/bfu net/minecraft/world/chunk/storage/AnvilConverterData
 	FIELD a lastUpdateTime
 	FIELD b isTerrainPopulated
 	FIELD c heightmap
@@ -12676,7 +12680,7 @@ CLASS none/bfu net/minecraft/level/chunk/storage/AnvilConverterData
 	FIELD j blockTickList
 	FIELD k chunkXPos
 	FIELD l chunkZPos
-CLASS none/bfv net/minecraft/level/chunk/storage/RegionFile
+CLASS none/bfv net/minecraft/world/chunk/storage/RegionFile
 	FIELD a EMPTY_SECTORS
 	FIELD b fileName
 	FIELD c dataFile
@@ -12720,14 +12724,15 @@ CLASS none/bfv net/minecraft/level/chunk/storage/RegionFile
 	METHOD e getOffset (II)I
 		ARG 0 chunkX
 		ARG 1 chunkZ
-CLASS none/bfx net/minecraft/level/chunk/storage/RegionFileCache
+CLASS none/bfx net/minecraft/world/chunk/storage/RegionFileCache
+	FIELD a fileMap
 	METHOD a clearFileWriter ()V
 	METHOD a writeChunkToFile (Ljava/io/File;II)Lnone/bfv;
 		ARG 1 chunkX
 		ARG 2 chunkZ
 	METHOD c readRegionFile (Ljava/io/File;II)Ljava/io/DataInputStream;
 	METHOD d writeRegionFile (Ljava/io/File;II)Ljava/io/DataOutputStream;
-CLASS none/bfy net/minecraft/level/chunk/storage/ChunkLoader
+CLASS none/bfy net/minecraft/world/chunk/storage/ChunkLoader
 	FIELD a LOGGER
 	FIELD e regionFile
 	METHOD a tickChunk ()V
@@ -12742,9 +12747,9 @@ CLASS none/bfy net/minecraft/level/chunk/storage/ChunkLoader
 	METHOD a saveChunk (Lnone/aqu;Lnone/bfh;)V
 	METHOD b saveExtraData ()V
 	METHOD b saveExtraChunkData (Lnone/aqu;Lnone/bfh;)V
-CLASS none/bgd net/minecraft/level/Dimension
+CLASS none/bgd net/minecraft/world/Dimension
 	FIELD a MOON_PHASE_FACTORS
-	FIELD b level
+	FIELD b world
 	FIELD c biomeManager
 	FIELD d isHellDimension
 	FIELD e hasNoSky
@@ -12760,11 +12765,11 @@ CLASS none/bgd net/minecraft/level/Dimension
 	METHOD a calculateCelestialAngle (JF)F
 		ARG 0 elapsedTime
 		ARG 1 offsetTime
-	METHOD a setLevel (Lnone/aqu;)V
+	METHOD a setWorld (Lnone/aqu;)V
 	METHOD b registerBiomeManager ()V
 	METHOD b getFogColor (FF)Lnone/brw;
 	METHOD b doesXZShowFog (II)Z
-	METHOD c getLevelGenerator ()Lnone/bfe;
+	METHOD c getDimensionGenerator ()Lnone/bfe;
 	METHOD d isOverworld ()Z
 	METHOD e canRespawnHere ()Z
 	METHOD k getName ()Ljava/lang/String;
@@ -12775,7 +12780,7 @@ CLASS none/bgd net/minecraft/level/Dimension
 	METHOD p getLightBrightnessTable ()[F
 	METHOD q getId ()I
 	METHOD r getLevelBorder ()Lnone/bfb;
-CLASS none/bge net/minecraft/level/DimensionNether
+CLASS none/bge net/minecraft/world/DimensionNether
 	CLASS bgf
 		METHOD f getCenterX ()D
 		METHOD g getCenterZ ()D
@@ -12785,29 +12790,29 @@ CLASS none/bge net/minecraft/level/DimensionNether
 	METHOD b registerBiomeManager ()V
 	METHOD b getFogColor (FF)Lnone/brw;
 	METHOD b doesXZShowFog (II)Z
-	METHOD c getLevelGenerator ()Lnone/bfe;
+	METHOD c getDimensionGenerator ()Lnone/bfe;
 	METHOD d isOverworld ()Z
 	METHOD e canRespawnHere ()Z
 	METHOD k getName ()Ljava/lang/String;
 	METHOD l getDimensionNameSuffix ()Ljava/lang/String;
 	METHOD r getLevelBorder ()Lnone/bfb;
-CLASS none/bgg net/minecraft/level/DimensionOverworld
+CLASS none/bgg net/minecraft/world/DimensionOverworld
 	METHOD k getName ()Ljava/lang/String;
 	METHOD l getDimensionNameSuffix ()Ljava/lang/String;
-CLASS none/bgh net/minecraft/level/DimensionEnd
+CLASS none/bgh net/minecraft/world/DimensionEnd
 	METHOD a canCoordinateBeSpawn (II)Z
 	METHOD a calculateCelestialAngle (JF)F
 	METHOD b registerBiomeManager ()V
 	METHOD b getFogColor (FF)Lnone/brw;
 	METHOD b doesXZShowFog (II)Z
-	METHOD c getLevelGenerator ()Lnone/bfe;
+	METHOD c getDimensionGenerator ()Lnone/bfe;
 	METHOD d isOverworld ()Z
 	METHOD e canRespawnHere ()Z
 	METHOD k getName ()Ljava/lang/String;
 	METHOD l getDimensionNameSuffix ()Ljava/lang/String;
-CLASS none/bgj net/minecraft/level/gen/structure/RavineGenerator
+CLASS none/bgj net/minecraft/world/gen/structure/RavineGenerator
 	FIELD d widthArray
-CLASS none/bgk net/minecraft/level/chunk/ChunkPrimer
+CLASS none/bgk net/minecraft/world/chunk/ChunkPrimer
 	FIELD a blockArray
 	FIELD b defaultBlockState
 	METHOD a getBlockState (I)Lnone/bec;
@@ -12823,7 +12828,7 @@ CLASS none/bgk net/minecraft/level/chunk/ChunkPrimer
 	METHOD a setBlockState (ILnone/bec;)V
 		ARG 0 arrayPos
 		ARG 1 blockState
-CLASS none/bgl net/minecraft/level/gen/GeneratorSettings
+CLASS none/bgl net/minecraft/world/gen/GeneratorSettings
 	FIELD A useWaterLakes
 	FIELD B waterLakesChance
 	FIELD C useLavaLakes
@@ -12905,7 +12910,7 @@ CLASS none/bgl net/minecraft/level/gen/GeneratorSettings
 	METHOD <init> (Lnone/bgn;)V
 		ARG 0 settingsFactory
 CLASS none/bgm empty/bgm
-CLASS none/bgn net/minecraft/level/gen/GeneratorSettingsFactory
+CLASS none/bgn net/minecraft/world/gen/GeneratorSettingsFactory
 	FIELD A useRavines
 	FIELD B useWaterLakes
 	FIELD C waterLakesChance
@@ -12989,11 +12994,11 @@ CLASS none/bgn net/minecraft/level/gen/GeneratorSettingsFactory
 	METHOD a createWithOptions (Ljava/lang/String;)Lnone/bgn;
 		ARG 0 generationOptions
 	METHOD b getGeneratorSettings ()Lnone/bgl;
-CLASS none/bgo net/minecraft/level/gen/GeneratorSettingsSerializer
-CLASS none/bgp net/minecraft/level/gen/LevelGeneratorDebug
-	FIELD c level
+CLASS none/bgo net/minecraft/world/gen/GeneratorSettingsSerializer
+CLASS none/bgp net/minecraft/world/gen/LevelGeneratorDebug
+	FIELD c world
 	METHOD <init> (Lnone/aqu;)V
-		ARG 0 level
+		ARG 0 world
 	METHOD a chunkExists (II)Z
 		ARG 0 chunkX
 		ARG 1 chunkZ
@@ -13025,9 +13030,9 @@ CLASS none/bgp net/minecraft/level/gen/LevelGeneratorDebug
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
-	METHOD f ()Ljava/lang/String;
+	METHOD f getName ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
-CLASS none/bgq net/minecraft/level/gen/LevelGeneratorFlat
+CLASS none/bgq net/minecraft/world/gen/LevelGeneratorFlat
 	FIELD a level
 	FIELD b and
 	FIELD c blockStateArray
@@ -13070,9 +13075,9 @@ CLASS none/bgq net/minecraft/level/gen/LevelGeneratorFlat
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
-	METHOD f ()Ljava/lang/String;
+	METHOD f getName ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
-CLASS none/bgr net/minecraft/level/gen/LevelGeneratorNether
+CLASS none/bgr net/minecraft/world/gen/LevelGeneratorNether
 	FIELD A redMushroomGenerator
 	FIELD B netherBridgeGenerator
 	FIELD C netherCaveGenerator
@@ -13127,16 +13132,16 @@ CLASS none/bgr net/minecraft/level/gen/LevelGeneratorNether
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
-	METHOD f ()Ljava/lang/String;
+	METHOD f getName ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
-CLASS none/bgs net/minecraft/level/gen/structure/CaveGenerator
-CLASS none/bgt net/minecraft/level/gen/structure/StructureGenerator
+CLASS none/bgs net/minecraft/world/gen/structure/CaveGenerator
+CLASS none/bgt net/minecraft/world/gen/structure/StructureGenerator
 	FIELD a chunkWidth
 	FIELD b random
 	FIELD c level
 	METHOD a generateStructureInChunk (Lnone/bfe;Lnone/aqu;IILnone/bgk;)V
-CLASS none/bgu net/minecraft/level/gen/structure/CaveGeneratorHell
-CLASS none/bgv net/minecraft/level/gen/LevelGeneratorDefault
+CLASS none/bgu net/minecraft/world/gen/structure/CaveGeneratorHell
+CLASS none/bgv net/minecraft/world/gen/LevelGeneratorDefault
 	FIELD A oceanMonumentGenerator
 	FIELD B biomesForGeneration
 	FIELD a noiseGen5
@@ -13182,9 +13187,9 @@ CLASS none/bgv net/minecraft/level/gen/LevelGeneratorDefault
 	METHOD d unloadQueuedChunks ()Z
 	METHOD d generate (II)Lnone/bfh;
 	METHOD e canSave ()Z
-	METHOD f ()Ljava/lang/String;
+	METHOD f getName ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
-CLASS none/bgw net/minecraft/level/gen/LevelGeneratorEnd
+CLASS none/bgw net/minecraft/world/gen/LevelGeneratorEnd
 	FIELD a noiseGen4
 	FIELD b noiseGen5
 	FIELD c noiseData1
@@ -13244,28 +13249,28 @@ CLASS none/bgw net/minecraft/level/gen/LevelGeneratorEnd
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
-	METHOD f ()Ljava/lang/String;
+	METHOD f getName ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
-CLASS none/bhc net/minecraft/level/gen/feature/TreeGenerator
-CLASS none/bhd net/minecraft/level/gen/feature/TreeGeneratorBig
+CLASS none/bhc net/minecraft/world/gen/feature/TreeGenerator
+CLASS none/bhd net/minecraft/world/gen/feature/TreeGeneratorBig
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bhf net/minecraft/level/gen/feature/TreeGeneratorBirch
+CLASS none/bhf net/minecraft/world/gen/feature/TreeGeneratorBirch
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bhg net/minecraft/level/gen/feature/BoulderGenerator
+CLASS none/bhg net/minecraft/world/gen/feature/BoulderGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bhh net/minecraft/level/gen/feature/BonusChestGenerator
+CLASS none/bhh net/minecraft/world/gen/feature/BonusChestGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bhi net/minecraft/level/gen/feature/PlantGenerator
+CLASS none/bhi net/minecraft/world/gen/feature/PlantGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bhj net/minecraft/level/gen/feature/CactusGenerator
+CLASS none/bhj net/minecraft/world/gen/feature/CactusGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bhl net/minecraft/level/gen/feature/ClayGenerator
+CLASS none/bhl net/minecraft/world/gen/feature/ClayGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bhm net/minecraft/level/gen/feature/DeadBushGenerator
+CLASS none/bhm net/minecraft/world/gen/feature/DeadBushGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bhn net/minecraft/level/gen/feature/SandstoneWellGenerator
+CLASS none/bhn net/minecraft/world/gen/feature/SandstoneWellGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bho net/minecraft/level/gen/feature/DoublePlantGenerator
+CLASS none/bho net/minecraft/world/gen/feature/DoublePlantGenerator
 	FIELD a variant
 	METHOD a setVariant (Lnone/avk;)V
 		ARG 0 variant
@@ -13273,17 +13278,17 @@ CLASS none/bho net/minecraft/level/gen/feature/DoublePlantGenerator
 		ARG 0 level
 		ARG 1 random
 		ARG 2 blockPos
-CLASS none/bhp net/minecraft/level/gen/feature/FeatureGenerator
+CLASS none/bhp net/minecraft/world/gen/feature/FeatureGenerator
 	METHOD a setBlockAndMetadata (Lnone/aqu;Lnone/dt;Lnone/atr;I)V
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bhq net/minecraft/level/gen/feature/FlowerGenerator
+CLASS none/bhq net/minecraft/world/gen/feature/FlowerGenerator
 	FIELD a flowerBlock
 	FIELD b flowerBlockState
 	METHOD <init> (Lnone/avy;Lnone/awa;)V
 		ARG 0 flowerBlock
 		ARG 1 flowerType
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bhr net/minecraft/level/gen/feature/TreeGeneratorJungleUndergrowth
+CLASS none/bhr net/minecraft/world/gen/feature/TreeGeneratorJungleUndergrowth
 	FIELD a leavesTypeId
 	FIELD b woodTypeId
 	METHOD <init> (II)V
@@ -13293,11 +13298,11 @@ CLASS none/bhr net/minecraft/level/gen/feature/TreeGeneratorJungleUndergrowth
 		ARG 0 level
 		ARG 1 random
 		ARG 2 blockPos
-CLASS none/bhs net/minecraft/level/gen/feature/NetherFireGenerator
+CLASS none/bhs net/minecraft/world/gen/feature/NetherFireGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bht net/minecraft/level/gen/feature/GlowstoneHighGenerator
+CLASS none/bht net/minecraft/world/gen/feature/GlowstoneHighGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bhu net/minecraft/level/gen/feature/NetherLavaGenerator
+CLASS none/bhu net/minecraft/world/gen/feature/NetherLavaGenerator
 	FIELD a fluidBlock
 	FIELD b updateLater
 	METHOD <init> (Lnone/atr;Z)V
@@ -13307,13 +13312,13 @@ CLASS none/bhu net/minecraft/level/gen/feature/NetherLavaGenerator
 		ARG 0 level
 		ARG 1 rand
 		ARG 2 blockPos
-CLASS none/bhv net/minecraft/level/gen/feature/HugeMushroomGenerator
+CLASS none/bhv net/minecraft/world/gen/feature/HugeMushroomGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bhw net/minecraft/level/gen/feature/IcePathGenerator
+CLASS none/bhw net/minecraft/world/gen/feature/IcePathGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bhx net/minecraft/level/gen/feature/IceSpikeGenerator
+CLASS none/bhx net/minecraft/world/gen/feature/IceSpikeGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bhy net/minecraft/level/gen/feature/LakeGenerator
+CLASS none/bhy net/minecraft/world/gen/feature/LakeGenerator
 	FIELD a fluidBlock
 	METHOD <init> (Lnone/atr;)V
 		ARG 0 fluidBlock
@@ -13321,45 +13326,45 @@ CLASS none/bhy net/minecraft/level/gen/feature/LakeGenerator
 		ARG 0 level
 		ARG 1 rand
 		ARG 2 blockPos
-CLASS none/bhz net/minecraft/level/gen/feature/GlowstoneGenerator
+CLASS none/bhz net/minecraft/world/gen/feature/GlowstoneGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bia net/minecraft/level/gen/feature/TreeGeneratorMegaJungle
+CLASS none/bia net/minecraft/world/gen/feature/TreeGeneratorMegaJungle
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bib net/minecraft/level/gen/feature/TreeGeneratorMegaSpruce
+CLASS none/bib net/minecraft/world/gen/feature/TreeGeneratorMegaSpruce
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bic net/minecraft/level/gen/feature/TreeGeneratorMega
-CLASS none/bid net/minecraft/level/gen/feature/MelonsGenerator
+CLASS none/bic net/minecraft/world/gen/feature/TreeGeneratorMega
+CLASS none/bid net/minecraft/world/gen/feature/MelonsGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bie net/minecraft/level/gen/feature/DungeonGenerator
+CLASS none/bie net/minecraft/world/gen/feature/DungeonGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bif net/minecraft/level/gen/feature/MineralDepositGenerator
+CLASS none/bif net/minecraft/world/gen/feature/MineralDepositGenerator
 	FIELD a oreBlockState
 	FIELD b maxSpawnHeight
 	FIELD c oreGenerationValidInBlockPredicate
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/big net/minecraft/level/gen/feature/TreeGeneratorSpruceTaiga
+CLASS none/big net/minecraft/world/gen/feature/TreeGeneratorSpruceTaiga
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bih net/minecraft/level/gen/feature/PumpkinGenerator
+CLASS none/bih net/minecraft/world/gen/feature/PumpkinGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bii net/minecraft/level/gen/feature/ReedGenerator
+CLASS none/bii net/minecraft/world/gen/feature/ReedGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bij net/minecraft/level/gen/feature/TreeGeneratorDarkOak
+CLASS none/bij net/minecraft/world/gen/feature/TreeGeneratorDarkOak
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bik net/minecraft/level/gen/feature/BeachGenerator
+CLASS none/bik net/minecraft/world/gen/feature/BeachGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bil net/minecraft/level/gen/feature/TreeGeneratorAcacia
+CLASS none/bil net/minecraft/world/gen/feature/TreeGeneratorAcacia
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bim net/minecraft/level/gen/feature/ObsidianPillarGenerator
+CLASS none/bim net/minecraft/world/gen/feature/ObsidianPillarGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bin net/minecraft/level/gen/feature/FlowingLiquidGenerator
+CLASS none/bin net/minecraft/world/gen/feature/FlowingLiquidGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bio net/minecraft/level/gen/feature/TreeGeneratorSpruce
+CLASS none/bio net/minecraft/world/gen/feature/TreeGeneratorSpruce
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bip net/minecraft/level/gen/feature/TreeGeneratorSwamp
+CLASS none/bip net/minecraft/world/gen/feature/TreeGeneratorSwamp
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/biq net/minecraft/level/gen/feature/FoliageGenerator
+CLASS none/biq net/minecraft/world/gen/feature/FoliageGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bir net/minecraft/level/gen/feature/TreeGeneratorSmall
+CLASS none/bir net/minecraft/world/gen/feature/TreeGeneratorSmall
 	FIELD a minTreeHeight
 	FIELD b vinesGrow
 	FIELD c metaWood
@@ -13368,11 +13373,11 @@ CLASS none/bir net/minecraft/level/gen/feature/TreeGeneratorSmall
 		ARG 0 vinesGrow
 	METHOD a growVines (Lnone/aqu;Lnone/dt;I)V
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bis net/minecraft/level/gen/feature/VinesGenerator
+CLASS none/bis net/minecraft/world/gen/feature/VinesGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/bit net/minecraft/level/gen/feature/LilyPadGenerator
+CLASS none/bit net/minecraft/world/gen/feature/LilyPadGenerator
 	METHOD b generate (Lnone/aqu;Ljava/util/Random;Lnone/dt;)Z
-CLASS none/biv net/minecraft/level/gen/FlatGeneratorInfo
+CLASS none/biv net/minecraft/world/gen/FlatGeneratorInfo
 	FIELD a flatLayers
 	FIELD b features
 	FIELD c biomeID
@@ -13390,7 +13395,7 @@ CLASS none/biv net/minecraft/level/gen/FlatGeneratorInfo
 	METHOD c getLayers ()Ljava/util/List;
 	METHOD d calculateMinimumYsFromHeights ()V
 	METHOD e getDefaultFlatGenerator ()Lnone/biv;
-CLASS none/biw net/minecraft/level/gen/FlatLayerInfo
+CLASS none/biw net/minecraft/world/gen/FlatLayerInfo
 	FIELD b layerBlock
 	FIELD c layerHeight
 	FIELD d minimumLayerY
@@ -13411,7 +13416,7 @@ CLASS none/biw net/minecraft/level/gen/FlatLayerInfo
 	METHOD d getMinimumLayerY ()I
 	METHOD e getLayerBlock ()Lnone/atr;
 	METHOD f getLayerBlockMetadata ()I
-CLASS none/bjb net/minecraft/level/gen/structure/StructureBoundingBox
+CLASS none/bjb net/minecraft/world/gen/structure/StructureBoundingBox
 	FIELD a minX
 	FIELD b minY
 	FIELD c minZ
@@ -13455,8 +13460,8 @@ CLASS none/bjb net/minecraft/level/gen/structure/StructureBoundingBox
 	METHOD d ySize ()I
 	METHOD e zSize ()I
 	METHOD g writeRangeToNBT ()Lnone/ft;
-CLASS none/bjd net/minecraft/level/gen/structure/MineshaftGenerator
-CLASS none/bjg net/minecraft/level/gen/structure/ComponentMineshaftCorridor
+CLASS none/bjd net/minecraft/world/gen/structure/MineshaftGenerator
+CLASS none/bjg net/minecraft/world/gen/structure/ComponentMineshaftCorridor
 	FIELD a hasRails
 	FIELD b hasSpiders
 	FIELD c spawnerPlaced
@@ -13484,67 +13489,67 @@ CLASS none/bji
 CLASS none/bjj
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
-CLASS none/bjk net/minecraft/level/gen/structure/MineshaftStart
-CLASS none/bjl net/minecraft/level/gen/structure/NetherFortressGenerator
-CLASS none/bjm net/minecraft/level/gen/structure/NetherBridgeStart
+CLASS none/bjk net/minecraft/world/gen/structure/MineshaftStart
+CLASS none/bjl net/minecraft/world/gen/structure/NetherFortressGenerator
+CLASS none/bjm net/minecraft/world/gen/structure/NetherBridgeStart
 	METHOD <init> (Lnone/aqu;Ljava/util/Random;II)V
 		ARG 0 level
 		ARG 1 rand
 		ARG 2 chunkX
 		ARG 3 chunkZ
-CLASS none/bjn net/minecraft/level/gen/structure/ComponentNetherFortress
-CLASS none/bjp net/minecraft/level/gen/structure/ComponentNetherBridgeCrossing3
+CLASS none/bjn net/minecraft/world/gen/structure/ComponentNetherFortress
+CLASS none/bjp net/minecraft/world/gen/structure/ComponentNetherBridgeCrossing3
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
-CLASS none/bjq net/minecraft/level/gen/structure/ComponentNetherBridgeEnd
+CLASS none/bjq net/minecraft/world/gen/structure/ComponentNetherBridgeEnd
 	FIELD b fillSeed
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
-CLASS none/bjr net/minecraft/level/gen/structure/ComponentNetherBridgeStraight
+CLASS none/bjr net/minecraft/world/gen/structure/ComponentNetherBridgeStraight
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
-CLASS none/bjs net/minecraft/level/gen/structure/ComponentNetherBridgeCorridor3
+CLASS none/bjs net/minecraft/world/gen/structure/ComponentNetherBridgeCorridor3
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
-CLASS none/bjt net/minecraft/level/gen/structure/ComponentNetherBridgeCorridor4
+CLASS none/bjt net/minecraft/world/gen/structure/ComponentNetherBridgeCorridor4
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
-CLASS none/bju net/minecraft/level/gen/structure/ComponentNetherBridgeEntrance
+CLASS none/bju net/minecraft/world/gen/structure/ComponentNetherBridgeEntrance
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
-CLASS none/bjv net/minecraft/level/gen/structure/ComponentNetherBridgeCrossing2
+CLASS none/bjv net/minecraft/world/gen/structure/ComponentNetherBridgeCrossing2
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
-CLASS none/bjw net/minecraft/level/gen/structure/ComponentNetherBridgeCorridor
+CLASS none/bjw net/minecraft/world/gen/structure/ComponentNetherBridgeCorridor
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
-CLASS none/bjx net/minecraft/level/gen/structure/ComponentNetherBridgeCorridor5
+CLASS none/bjx net/minecraft/world/gen/structure/ComponentNetherBridgeCorridor5
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
-CLASS none/bjy net/minecraft/level/gen/structure/ComponentNetherBridgeCorridor2
+CLASS none/bjy net/minecraft/world/gen/structure/ComponentNetherBridgeCorridor2
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
-CLASS none/bjz net/minecraft/level/gen/structure/ComponentNetherBridgeNetherStalkRoom
+CLASS none/bjz net/minecraft/world/gen/structure/ComponentNetherBridgeNetherStalkRoom
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
-CLASS none/bka net/minecraft/level/gen/structure/ComponentNetherBridgeThrone
+CLASS none/bka net/minecraft/world/gen/structure/ComponentNetherBridgeThrone
 	FIELD b hasSpawner
 	METHOD a createValidComponent (Ljava/util/List;Ljava/util/Random;IIIILnone/ej;)Lnone/bka;
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
-CLASS none/bkb net/minecraft/level/gen/structure/ComponentNetherBridgePiece
+CLASS none/bkb net/minecraft/world/gen/structure/ComponentNetherBridgePiece
 	METHOD a isAboveGround (Lnone/bjb;)Z
 	METHOD a getNextComponentNormal (Lnone/bkf;Ljava/util/List;Ljava/util/Random;IIZ)Lnone/bms;
 	METHOD b getNextComponentX (Lnone/bkf;Ljava/util/List;Ljava/util/Random;IIZ)Lnone/bms;
 	METHOD c getNextComponentZ (Lnone/bkf;Ljava/util/List;Ljava/util/Random;IIZ)Lnone/bms;
-CLASS none/bkd net/minecraft/level/gen/structure/ComponentNetherBridgeCrossing
+CLASS none/bkd net/minecraft/world/gen/structure/ComponentNetherBridgeCrossing
 	METHOD a createValidComponent (Ljava/util/List;Ljava/util/Random;IIILnone/ej;I)Lnone/bkd;
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
 CLASS none/bke
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
-CLASS none/bkf net/minecraft/level/gen/structure/ComponentNetherBridgeStartPiece
-CLASS none/bkg net/minecraft/level/gen/structure/OceanMonumentGenerator
-CLASS none/bkh net/minecraft/level/gen/structure/OceanMonumentStart
+CLASS none/bkf net/minecraft/world/gen/structure/ComponentNetherBridgeStartPiece
+CLASS none/bkg net/minecraft/world/gen/structure/OceanMonumentGenerator
+CLASS none/bkh net/minecraft/world/gen/structure/OceanMonumentStart
 CLASS none/bkr
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 CLASS none/bkt
@@ -13563,31 +13568,31 @@ CLASS none/bkz
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 CLASS none/bla
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
-CLASS none/blb net/minecraft/level/gen/structure/StructureGuardianTemple
+CLASS none/blb net/minecraft/world/gen/structure/StructureGuardianTemple
 CLASS none/blc
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 CLASS none/bld
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 CLASS none/ble
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
-CLASS none/blg net/minecraft/level/gen/structure/TempleGenerator
-CLASS none/blh net/minecraft/level/gen/structure/TempleStart
+CLASS none/blg net/minecraft/world/gen/structure/TempleGenerator
+CLASS none/blh net/minecraft/world/gen/structure/TempleStart
 CLASS none/blk
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 CLASS none/bll
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
-CLASS none/bln net/minecraft/level/gen/structure/ComponentScatteredFeature
-CLASS none/blo net/minecraft/level/gen/structure/ComponentScatteredFeatureSwampHut
+CLASS none/bln net/minecraft/world/gen/structure/ComponentScatteredFeature
+CLASS none/blo net/minecraft/world/gen/structure/ComponentScatteredFeatureSwampHut
 	FIELD e hasWitch
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
-CLASS none/blp net/minecraft/level/gen/structure/StrongholdGenerator
-CLASS none/blq net/minecraft/level/gen/structure/StrongholdStart
+CLASS none/blp net/minecraft/world/gen/structure/StrongholdGenerator
+CLASS none/blq net/minecraft/world/gen/structure/StrongholdStart
 	METHOD <init> (Lnone/aqu;Ljava/util/Random;II)V
 		ARG 0 level
 		ARG 1 rand
 		ARG 2 chunkX
 		ARG 3 chunkZ
-CLASS none/blr net/minecraft/level/gen/structure/StrongholdComponents
+CLASS none/blr net/minecraft/world/gen/structure/StrongholdComponents
 	FIELD a totalWeight
 	FIELD b COMPONENT_WEIGHT_ARRAY
 	FIELD c structureComponentList
@@ -13629,7 +13634,7 @@ CLASS none/bmd
 CLASS none/bme
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
-CLASS none/bmg net/minecraft/level/gen/structure/StrongholdComponentsStairs
+CLASS none/bmg net/minecraft/world/gen/structure/StrongholdComponentsStairs
 	METHOD <init> (ILjava/util/Random;II)V
 		ARG 1 rand
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
@@ -13640,21 +13645,21 @@ CLASS none/bmi
 CLASS none/bmj
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
-CLASS none/bmk net/minecraft/level/gen/structure/StrongholdComponentsStronghold
+CLASS none/bmk net/minecraft/world/gen/structure/StrongholdComponentsStronghold
 	FIELD d doorPiece
-CLASS none/bml net/minecraft/level/gen/structure/StrongholdPiecesDoor
+CLASS none/bml net/minecraft/world/gen/structure/StrongholdPiecesDoor
 	FIELD a OPENING
 	FIELD b WOOD_DOOR
 	FIELD c GRATES
 	FIELD d IRON_DOOR
-CLASS none/bmm net/minecraft/level/gen/structure/StructureFeatureGenerator
-CLASS none/bmq net/minecraft/level/gen/structure/StructureIO
+CLASS none/bmm net/minecraft/world/gen/structure/StructureFeatureGenerator
+CLASS none/bmq net/minecraft/world/gen/structure/StructureIO
 	FIELD a LOGGER
 	METHOD a registerComponent (Ljava/lang/Class;Ljava/lang/String;)V
-CLASS none/bmr net/minecraft/level/storage/FeaturesData
+CLASS none/bmr net/minecraft/world/storage/FeaturesData
 	METHOD a load (Lnone/fn;)V
 	METHOD b save (Lnone/fn;)V
-CLASS none/bms net/minecraft/level/gen/structure/StructureComponent
+CLASS none/bms net/minecraft/world/gen/structure/StructureComponent
 	FIELD l boundingBox
 	FIELD m facing
 	METHOD a getXWithOffset (II)I
@@ -13668,7 +13673,7 @@ CLASS none/bms net/minecraft/level/gen/structure/StructureComponent
 	METHOD b getZWithOffset (II)I
 	METHOD b fillCurrentPositionBlocksDownwards (Lnone/aqu;Lnone/bec;IIILnone/bjb;)V
 	METHOD d getYWithOffset (I)I
-CLASS none/bmv net/minecraft/level/gen/structure/StructureStart
+CLASS none/bmv net/minecraft/world/gen/structure/StructureStart
 	FIELD a components
 	FIELD b boundingBox
 	FIELD c chunkX
@@ -13696,8 +13701,8 @@ CLASS none/bmv net/minecraft/level/gen/structure/StructureStart
 	METHOD b getComponents ()Ljava/util/LinkedList;
 	METHOD e getChunkX ()I
 	METHOD f getChunkZ ()I
-CLASS none/bmw net/minecraft/level/gen/structure/VillageGenerator
-CLASS none/bmx net/minecraft/level/gen/structure/StructureVillage
+CLASS none/bmw net/minecraft/world/gen/structure/VillageGenerator
+CLASS none/bmx net/minecraft/world/gen/structure/StructureVillage
 	METHOD <init> (Lnone/aqu;Ljava/util/Random;III)V
 		ARG 0 level
 		ARG 1 rand
@@ -13705,7 +13710,7 @@ CLASS none/bmx net/minecraft/level/gen/structure/StructureVillage
 		ARG 3 chunkZ
 CLASS none/bna
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
-CLASS none/bnb net/minecraft/level/gen/structure/ComponentVillageField
+CLASS none/bnb net/minecraft/world/gen/structure/ComponentVillageField
 	FIELD a cropTypeA
 	FIELD b cropTypeB
 	FIELD c cropTypeC
@@ -13717,11 +13722,11 @@ CLASS none/bnd
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 CLASS none/bnf
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
-CLASS none/bng net/minecraft/level/gen/structure/ComponentVillageHouse4
+CLASS none/bng net/minecraft/world/gen/structure/ComponentVillageHouse4
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 CLASS none/bnh
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
-CLASS none/bni net/minecraft/level/gen/structure/ComponentVillageChurch
+CLASS none/bni net/minecraft/world/gen/structure/ComponentVillageChurch
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 CLASS none/bnj
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
@@ -13730,19 +13735,19 @@ CLASS none/bnl
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
 CLASS none/bnm
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
-CLASS none/bnn net/minecraft/level/gen/structure/ComponentVillage
+CLASS none/bnn net/minecraft/world/gen/structure/ComponentVillage
 	METHOD a fillWithBlocks (Lnone/aqu;Lnone/bec;IIILnone/bjb;)V
 	METHOD a fillWithBlocks (Lnone/aqu;Lnone/bjb;IIIIIILnone/bec;Lnone/bec;Z)V
 	METHOD b fillCurrentPositionBlocksDownwards (Lnone/aqu;Lnone/bec;IIILnone/bjb;)V
 CLASS none/bnp
 	METHOD a addComponentParts (Lnone/aqu;Ljava/util/Random;Lnone/bjb;)Z
 	METHOD a buildComponent (Lnone/bms;Ljava/util/List;Ljava/util/Random;)V
-CLASS none/bnu net/minecraft/level/gen/noisegen/Perlin3d
-CLASS none/bnv net/minecraft/level/gen/noisegen/Perlin3dOctaves
+CLASS none/bnu net/minecraft/world/gen/noise/Perlin3d
+CLASS none/bnv net/minecraft/world/gen/noise/Perlin3dOctaves
 	METHOD a generateNoise ([DIIIIIIDDD)[D
-CLASS none/bnw net/minecraft/level/gen/noisegen/Simplex2dOctaves
-CLASS none/bnz net/minecraft/level/gen/noisegen/Simplex2d
-CLASS none/boa net/minecraft/level/gen/noisegen/NoiseGenAbstract
+CLASS none/bnw net/minecraft/world/gen/noise/Simplex2dOctaves
+CLASS none/bnz net/minecraft/world/gen/noise/Simplex2d
+CLASS none/boa net/minecraft/world/gen/noise/NoiseGenAbstract
 CLASS none/boc net/minecraft/block/material/MaterialLogic
 	METHOD <init> (Lnone/boh;)V
 		ARG 0 color
@@ -13878,7 +13883,7 @@ CLASS none/boi net/minecraft/block/material/MaterialPortal
 	METHOD a isSolid ()Z
 	METHOD b blocksLight ()Z
 	METHOD c blocksMovement ()Z
-CLASS none/bok net/minecraft/level/gen/layer/GenLayerDeepOcean
+CLASS none/bok net/minecraft/world/gen/layer/GenLayerDeepOcean
 	METHOD <init> (JLnone/bpa;)V
 		ARG 0 baseSeed
 		ARG 1 source
@@ -13901,7 +13906,7 @@ CLASS none/bos
 	METHOD a getInts (IIII)[I
 CLASS none/bow
 	METHOD b smoothBiomesElseRandom (IIII)I
-CLASS none/boy net/minecraft/level/gen/layer/IntCache
+CLASS none/boy net/minecraft/world/gen/layer/IntCache
 	FIELD a intCacheSize
 	FIELD b freeSmallArrays
 	FIELD c inUseSmallArrays
@@ -13912,7 +13917,7 @@ CLASS none/boy net/minecraft/level/gen/layer/IntCache
 	METHOD b getDebugInfo ()Ljava/lang/String;
 CLASS none/boz
 	METHOD a getInts (IIII)[I
-CLASS none/bpa net/minecraft/level/gen/layer/GenLayerBase
+CLASS none/bpa net/minecraft/world/gen/layer/GenLayerBase
 	FIELD a sourceLayer
 	FIELD b baseSeed
 	FIELD c levelGenSeed
@@ -13953,7 +13958,7 @@ CLASS none/bpe
 	METHOD a getInts (IIII)[I
 CLASS none/bpf
 	METHOD a getInts (IIII)[I
-CLASS none/bpg net/minecraft/level/gen/layer/GenLayerRiverInit
+CLASS none/bpg net/minecraft/world/gen/layer/GenLayerRiverInit
 	METHOD <init> (JLnone/bpa;)V
 		ARG 0 baseSeed
 		ARG 1 source
@@ -13973,7 +13978,7 @@ CLASS none/bpk
 	METHOD a getInts (IIII)[I
 CLASS none/bpo
 	METHOD a getInts (IIII)[I
-CLASS none/bpp net/minecraft/level/gen/layer/GenLayerZoom
+CLASS none/bpp net/minecraft/world/gen/layer/GenLayerZoom
 	METHOD <init> (JLnone/bpa;)V
 		ARG 0 baseSeed
 		ARG 1 source
@@ -13993,7 +13998,7 @@ CLASS none/bpt
 	FIELD j hash
 	METHOD a distance (Lnone/bpt;)F
 	METHOD b distanceSquared (Lnone/bpt;)F
-CLASS none/bqc net/minecraft/level/LevelData
+CLASS none/bqc net/minecraft/world/WorldData
 	FIELD a name
 	FIELD b requiresSave
 	METHOD <init> (Ljava/lang/String;)V
@@ -14011,7 +14016,7 @@ CLASS none/bqd net/minecraft/util/Vec4b
 	METHOD b getSecond ()B
 	METHOD c getThird ()B
 	METHOD d getFourth ()B
-CLASS none/bqe net/minecraft/level/storage/MapData
+CLASS none/bqe net/minecraft/world/storage/MapData
 	FIELD b xCenter
 	FIELD c zCenter
 	FIELD d dimensionID
@@ -14023,12 +14028,12 @@ CLASS none/bqe net/minecraft/level/storage/MapData
 		ARG 2 scale
 	METHOD a load (Lnone/fn;)V
 	METHOD b save (Lnone/fn;)V
-CLASS none/bqi net/minecraft/level/storage/SaveHandlerAnvil
+CLASS none/bqi net/minecraft/world/storage/SaveHandlerAnvil
 	METHOD a flush ()V
 	METHOD a getChunkLoader (Lnone/bgd;)Lnone/bfq;
 	METHOD a saveWorldInfoWithPlayer (Lnone/bqo;Lnone/fn;)V
 		ARG 0 world
-CLASS none/bqj net/minecraft/level/storage/SaveLoaderAnvil
+CLASS none/bqj net/minecraft/world/storage/SaveLoaderAnvil
 	FIELD b LOGGER
 	METHOD a getSaveFormatName ()Ljava/lang/String;
 	METHOD a convertMapFormat (Ljava/lang/String;Lnone/uy;)Z
@@ -14036,10 +14041,9 @@ CLASS none/bqj net/minecraft/level/storage/SaveLoaderAnvil
 	METHOD b getSaveList ()Ljava/util/List;
 	METHOD c getCurrentVersion ()I
 	METHOD d flushCache ()V
-CLASS none/bql net/minecraft/level/WorldMulti
-	FIELD b mainWorldInstance
+CLASS none/bql net/minecraft/world/LevelMulti
+	FIELD b mainLevelInstance
 	METHOD <init> (Lnone/bqo;)V
-		ARG 0 mainWorldInstance
 	METHOD a getNbtTagCompound ()Lnone/fn;
 	METHOD a setSpawnX (I)V
 	METHOD a setName (Ljava/lang/String;)V
@@ -14082,7 +14086,7 @@ CLASS none/bql net/minecraft/level/WorldMulti
 	METHOD x getGameRules ()Lnone/aqq;
 	METHOD y getDifficulty ()Lnone/vt;
 	METHOD z isDifficultyLocked ()Z
-CLASS none/bqm net/minecraft/level/storage/SaveHandlerOld
+CLASS none/bqm net/minecraft/world/storage/SaveHandlerOld
 	FIELD a LOGGER
 	FIELD b saveFile
 	FIELD c playerDataFile
@@ -14114,7 +14118,7 @@ CLASS none/bqm net/minecraft/level/storage/SaveHandlerOld
 	METHOD f getAvailablePlayerData ()[Ljava/lang/String;
 	METHOD g getLevelDirectoryName ()Ljava/lang/String;
 	METHOD h createSessionLock ()V
-CLASS none/bqn net/minecraft/level/storage/SaveLoaderOld
+CLASS none/bqn net/minecraft/world/storage/SaveLoaderOld
 	FIELD a saveFile
 	FIELD b LOGGER
 	METHOD <init> (Ljava/io/File;)V
@@ -14138,7 +14142,7 @@ CLASS none/bqn net/minecraft/level/storage/SaveLoaderOld
 		ARG 0 directory
 	METHOD e deleteLevelDirectory (Ljava/lang/String;)Z
 		ARG 0 directory
-CLASS none/bqo net/minecraft/level/World
+CLASS none/bqo net/minecraft/world/Level
 	CLASS bqp
 		METHOD call ()Ljava/lang/String;
 	FIELD A difficultyLocked
@@ -14289,7 +14293,7 @@ CLASS none/bqo net/minecraft/level/World
 	METHOD x getGameRules ()Lnone/aqq;
 	METHOD y getDifficulty ()Lnone/vt;
 	METHOD z isDifficultyLocked ()Z
-CLASS none/bqy net/minecraft/level/ISaveHandler
+CLASS none/bqy net/minecraft/world/ISaveHandler
 	METHOD a flush ()V
 	METHOD a getFileFromName (Ljava/lang/String;)Ljava/io/File;
 	METHOD a getChunkLoader (Lnone/bgd;)Lnone/bfq;
@@ -14300,7 +14304,7 @@ CLASS none/bqy net/minecraft/level/ISaveHandler
 	METHOD d getWorld ()Lnone/bqo;
 	METHOD e getPlayerSaveHandler ()Lnone/brl;
 	METHOD g getLevelDirectoryName ()Ljava/lang/String;
-CLASS none/bra net/minecraft/level/ISaveLoader
+CLASS none/bra net/minecraft/world/storage/ISaveLoader
 	METHOD a getSaveFormatName ()Ljava/lang/String;
 	METHOD a renameWorld (Ljava/lang/String;Ljava/lang/String;)V
 	METHOD a convertMapFormat (Ljava/lang/String;Lnone/uy;)Z
@@ -14310,7 +14314,7 @@ CLASS none/bra net/minecraft/level/ISaveLoader
 	METHOD d flushCache ()V
 	METHOD d createNewSaveFile (Ljava/lang/String;)Z
 	METHOD e deleteLevelDirectory (Ljava/lang/String;)Z
-CLASS none/brb net/minecraft/level/storage/SaveFormatComparer
+CLASS none/brb net/minecraft/world/storage/SaveFormatComparer
 	FIELD a fileName
 	FIELD b displayName
 	FIELD c lastTimePlayed
@@ -14338,7 +14342,7 @@ CLASS none/brb net/minecraft/level/storage/SaveFormatComparer
 	METHOD f getGameType ()Lnone/arc;
 	METHOD g getIsHardcore ()Z
 	METHOD h getCommandsEnabled ()Z
-CLASS none/brk net/minecraft/level/storage/SaveHandlerClientDummy
+CLASS none/brk net/minecraft/world/storage/SaveHandlerClientDummy
 	METHOD a flush ()V
 	METHOD a getFileFromName (Ljava/lang/String;)Ljava/io/File;
 	METHOD a getChunkLoader (Lnone/bgd;)Lnone/bfq;
@@ -14349,17 +14353,17 @@ CLASS none/brk net/minecraft/level/storage/SaveHandlerClientDummy
 	METHOD d getWorld ()Lnone/bqo;
 	METHOD e getPlayerSaveHandler ()Lnone/brl;
 	METHOD g getLevelDirectoryName ()Ljava/lang/String;
-CLASS none/brl net/minecraft/level/storage/IPlayerFileData
+CLASS none/brl net/minecraft/world/storage/IPlayerFileData
 	METHOD a savePlayerData (Lnone/ahd;)V
 		ARG 0 entPlayer
 	METHOD b readPlayerData (Lnone/ahd;)Lnone/fn;
 		ARG 0 entPlayer
 	METHOD f getAvailablePlayerData ()[Ljava/lang/String;
-CLASS none/brm net/minecraft/level/storage/WorldStorageClient
+CLASS none/brm net/minecraft/world/storage/WorldStorageClient
 	METHOD a saveAllWorldData ()V
 	METHOD a instantiateLevelData (Ljava/lang/Class;Ljava/lang/String;)Lnone/bqc;
 	METHOD a addLevelData (Ljava/lang/String;Lnone/bqc;)V
-CLASS none/brn net/minecraft/level/storage/WorldStorage
+CLASS none/brn net/minecraft/world/storage/WorldStorage
 	FIELD a levelDataObjects
 	FIELD b saveHandler
 	FIELD c levelDataSaveList
@@ -14374,6 +14378,7 @@ CLASS none/brn net/minecraft/level/storage/WorldStorage
 		ARG 1 levelData
 	METHOD a saveLevelData (Lnone/bqc;)V
 		ARG 0 levelData
+CLASS none/brq net/minecraft/world/storage/IThreadedFileIO
 CLASS none/brt net/minecraft/util/AxisAlignedBB
 	FIELD a minX
 	FIELD b minY
@@ -14647,7 +14652,7 @@ CLASS none/bsd net/minecraft/scoreboard/ScoreboardManager
 		ARG 0 objective
 	METHOD k removeObjective (Lnone/bry;)V
 		ARG 0 objective
-CLASS none/bse net/minecraft/level/storage/ScoreboardData
+CLASS none/bse net/minecraft/world/storage/ScoreboardData
 	FIELD b LOGGER
 	FIELD c manager
 	FIELD d nbt
@@ -16528,8 +16533,15 @@ CLASS none/cee net/minecraft/network/play/NetHandlerPlayClient
 		ARG 0 packet
 CLASS none/cek
 	FIELD a indices
-CLASS none/cel net/minecraft/level/gen/ClientChunkCache
+CLASS none/cel net/minecraft/world/gen/ClientChunkCache
+	FIELD a LOGGER
+	FIELD b chunk
+	FIELD c cacheMap
+	FIELD d cachedChunks
+	FIELD e world
 	METHOD a chunkExists (II)Z
+		ARG 0 chunkX
+		ARG 1 chunkZ
 	METHOD a getFeatureClosestToPosition (Lnone/aqu;Ljava/lang/String;Lnone/dt;)Lnone/dt;
 	METHOD a provideChunk (Lnone/dt;)Lnone/bfh;
 	METHOD a getSpawnableAtPos (Lnone/xp;Lnone/dt;)Ljava/util/List;
@@ -16538,14 +16550,17 @@ CLASS none/cel net/minecraft/level/gen/ClientChunkCache
 	METHOD d unloadQueuedChunks ()Z
 	METHOD d generate (II)Lnone/bfh;
 	METHOD e canSave ()Z
-	METHOD f ()Ljava/lang/String;
+	METHOD f getName ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
 CLASS none/cem net/minecraft/client/multiplayer/PlayerControllerMP
 	FIELD i gameMode
 	METHOD a windowClick (IIIILnone/ahd;)Lnone/amj;
 	METHOD a setGameType (Lnone/arc;)V
-CLASS none/cen net/minecraft/level/LevelClient
+CLASS none/cen net/minecraft/world/WorldClient
 	FIELD b chunkCache
+	METHOD <init> (Lnone/cee;Lnone/arb;ILnone/vt;Lnone/uw;)V
+		ARG 1 worldSettings
+		ARG 2 dimensionId
 	METHOD H sendQuittingDisconnectingPacket ()V
 	METHOD a playSoundEffect (DDDLjava/lang/String;FFZ)V
 	METHOD a getEntity (I)Lnone/wv;
@@ -16582,100 +16597,100 @@ CLASS none/cez
 		METHOD a handlePingResponse (Lnone/nn;)V
 		METHOD a handleStatusResponse (Lnone/no;)V
 			ARG 0 packet
-CLASS none/cff net/minecraft/level/entity/particle/ParticleItem
+CLASS none/cff net/minecraft/entity/particle/ParticleItem
 	METHOD a getParticleType ()I
-CLASS none/cfg net/minecraft/level/entity/particle/ParticleBarrierBuilder
+CLASS none/cfg net/minecraft/entity/particle/ParticleBarrierBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/cfh net/minecraft/level/entity/particle/ParticleItemCrack
+CLASS none/cfh net/minecraft/entity/particle/ParticleItemCrack
 	METHOD a getParticleType ()I
-CLASS none/cfi net/minecraft/level/entity/particle/ParticleItemCrackBuilder
+CLASS none/cfi net/minecraft/entity/particle/ParticleItemCrackBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/cfj net/minecraft/level/entity/particle/ParticleSlimeBuilder
+CLASS none/cfj net/minecraft/entity/particle/ParticleSlimeBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/cfk net/minecraft/level/entity/particle/ParticleSnowballBuilder
+CLASS none/cfk net/minecraft/entity/particle/ParticleSnowballBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cfl
 	METHOD s_ onUpdate ()V
-CLASS none/cfm net/minecraft/level/entity/particle/ParticleWaterBubbleBuilder
+CLASS none/cfm net/minecraft/entity/particle/ParticleWaterBubbleBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/cfn net/minecraft/level/entity/particle/ParticleCrit
+CLASS none/cfn net/minecraft/entity/particle/ParticleCrit
 	METHOD s_ onUpdate ()V
-CLASS none/cfo net/minecraft/level/entity/particle/ParticleCritMagicBuilder
+CLASS none/cfo net/minecraft/entity/particle/ParticleCritMagicBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/cfp net/minecraft/level/entity/particle/ParticleCritBuilder
+CLASS none/cfp net/minecraft/entity/particle/ParticleCritBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/cfq net/minecraft/level/entity/particle/ParticleDripLiquid
+CLASS none/cfq net/minecraft/entity/particle/ParticleDripLiquid
 	METHOD c getBrightness (F)F
 	METHOD s_ onUpdate ()V
-CLASS none/cfr net/minecraft/level/entity/particle/ParticleDripLavaBuilder
+CLASS none/cfr net/minecraft/entity/particle/ParticleDripLavaBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/cfs net/minecraft/level/entity/particle/ParticleDripWaterBuilder
+CLASS none/cfs net/minecraft/entity/particle/ParticleDripWaterBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/cft net/minecraft/level/entity/particle/ParticleEnchantmentTable
+CLASS none/cft net/minecraft/entity/particle/ParticleEnchantmentTable
 	METHOD c getBrightness (F)F
 	METHOD s_ onUpdate ()V
-CLASS none/cfu net/minecraft/level/entity/particle/ParticleEnchantmentTableBuilder
+CLASS none/cfu net/minecraft/entity/particle/ParticleEnchantmentTableBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/cfv net/minecraft/level/entity/particle/ParticleExplosionNormal
+CLASS none/cfv net/minecraft/entity/particle/ParticleExplosionNormal
 	METHOD s_ onUpdate ()V
-CLASS none/cfw net/minecraft/level/entity/particle/ParticleExplosionNormalBuilder
+CLASS none/cfw net/minecraft/entity/particle/ParticleExplosionNormalBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/cfz net/minecraft/level/entity/particle/ParticleFireworksSpark
+CLASS none/cfz net/minecraft/entity/particle/ParticleFireworksSpark
 	METHOD ae canBePushed ()Z
 	METHOD c getBrightness (F)F
 	METHOD s_ onUpdate ()V
 CLASS none/cga
 	METHOD a getParticleType ()I
 	METHOD s_ onUpdate ()V
-CLASS none/cgb net/minecraft/level/entity/particle/ParticleFireworksSparkBuilder
+CLASS none/cgb net/minecraft/entity/particle/ParticleFireworksSparkBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/cgc net/minecraft/level/entity/particle/ParticleFlame
+CLASS none/cgc net/minecraft/entity/particle/ParticleFlame
 	METHOD c getBrightness (F)F
 	METHOD s_ onUpdate ()V
-CLASS none/cgd net/minecraft/level/entity/particle/ParticleFlameBuilder
+CLASS none/cgd net/minecraft/entity/particle/ParticleFlameBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/cge net/minecraft/level/entity/particle/ParticleFootstep
+CLASS none/cge net/minecraft/entity/particle/ParticleFootstep
 	FIELD a FOOTPRINT_PNG
 	METHOD a getParticleType ()I
 	METHOD s_ onUpdate ()V
-CLASS none/cgf net/minecraft/level/entity/particle/ParticleFootstepBuilder
+CLASS none/cgf net/minecraft/entity/particle/ParticleFootstepBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/cgg net/minecraft/level/entity/particle/ParticleHeart
+CLASS none/cgg net/minecraft/entity/particle/ParticleHeart
 	METHOD s_ onUpdate ()V
-CLASS none/cgh net/minecraft/level/entity/particle/ParticleVillagerAngryBuilder
+CLASS none/cgh net/minecraft/entity/particle/ParticleVillagerAngryBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/cgi net/minecraft/level/entity/particle/ParticleHeartBuilder
+CLASS none/cgi net/minecraft/entity/particle/ParticleHeartBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/cgj net/minecraft/level/entity/particle/ParticleExplosionLarge
+CLASS none/cgj net/minecraft/entity/particle/ParticleExplosionLarge
 	FIELD a EXPLOSION_PNG
 	METHOD a getParticleType ()I
 	METHOD s_ onUpdate ()V
-CLASS none/cgk net/minecraft/level/entity/particle/ParticleExplosionLargeBuilder
+CLASS none/cgk net/minecraft/entity/particle/ParticleExplosionLargeBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/cgl net/minecraft/level/entity/particle/ParticleExplosionHuge
+CLASS none/cgl net/minecraft/entity/particle/ParticleExplosionHuge
 	METHOD a getParticleType ()I
 	METHOD s_ onUpdate ()V
-CLASS none/cgm net/minecraft/level/entity/particle/ParticleExplosionHugeBuilder
+CLASS none/cgm net/minecraft/entity/particle/ParticleExplosionHugeBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cgn
 	FIELD aB renderer
 	METHOD a getParticleType ()I
 	METHOD s_ onUpdate ()V
-CLASS none/cgp net/minecraft/level/entity/particle/ParticleSmokeLargeBuilder
+CLASS none/cgp net/minecraft/entity/particle/ParticleSmokeLargeBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/cgq net/minecraft/level/entity/particle/ParticleLava
+CLASS none/cgq net/minecraft/entity/particle/ParticleLava
 	METHOD c getBrightness (F)F
 	METHOD s_ onUpdate ()V
-CLASS none/cgr net/minecraft/level/entity/particle/ParticleLavaBuilder
+CLASS none/cgr net/minecraft/entity/particle/ParticleLavaBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/cgs net/minecraft/level/entity/particle/ParticleMobAppearance
+CLASS none/cgs net/minecraft/entity/particle/ParticleMobAppearance
 	METHOD a getParticleType ()I
 	METHOD s_ onUpdate ()V
-CLASS none/cgt net/minecraft/level/entity/particle/ParticleMobAppearanceBuilder
+CLASS none/cgt net/minecraft/entity/particle/ParticleMobAppearanceBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/cgu net/minecraft/level/entity/particle/ParticleNote
+CLASS none/cgu net/minecraft/entity/particle/ParticleNote
 	METHOD s_ onUpdate ()V
-CLASS none/cgv net/minecraft/level/entity/particle/ParticleNoteBuilder
+CLASS none/cgv net/minecraft/entity/particle/ParticleNoteBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cgw net/minecraft/entity/particle/EntityParticle
 	FIELD ap colorR
@@ -16719,69 +16734,69 @@ CLASS none/cgx net/minecraft/client/renderers/EffectRenderer
 CLASS none/chc net/minecraft/client/particle/IParticleFactory
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 		ARG 1 level
-CLASS none/chd net/minecraft/level/entity/particle/ParticleCloud
+CLASS none/chd net/minecraft/entity/particle/ParticleCloud
 	METHOD s_ onUpdate ()V
-CLASS none/che net/minecraft/level/entity/particle/ParticleCloudBuilder
+CLASS none/che net/minecraft/entity/particle/ParticleCloudBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/chf net/minecraft/level/entity/particle/ParticlePortal
+CLASS none/chf net/minecraft/entity/particle/ParticlePortal
 	METHOD c getBrightness (F)F
 	METHOD s_ onUpdate ()V
-CLASS none/chg net/minecraft/level/entity/particle/ParticlePortalBuilder
+CLASS none/chg net/minecraft/entity/particle/ParticlePortalBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/chh net/minecraft/level/entity/particle/ParticleRedstone
+CLASS none/chh net/minecraft/entity/particle/ParticleRedstone
 	METHOD s_ onUpdate ()V
-CLASS none/chi net/minecraft/level/entity/particle/ParticleRedstoneBuilder
+CLASS none/chi net/minecraft/entity/particle/ParticleRedstoneBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/chj
 	METHOD s_ onUpdate ()V
 CLASS none/chk empty/chk
-CLASS none/chl net/minecraft/level/entity/particle/ParticleSmokeNormalBuilder
+CLASS none/chl net/minecraft/entity/particle/ParticleSmokeNormalBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/chm
 	METHOD s_ onUpdate ()V
-CLASS none/chn net/minecraft/level/entity/particle/ParticleSnowShovelBuilder
+CLASS none/chn net/minecraft/entity/particle/ParticleSnowShovelBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cho
 	METHOD s_ onUpdate ()V
-CLASS none/chp net/minecraft/level/entity/particle/ParticleSpellMobAmbientBuilder
+CLASS none/chp net/minecraft/entity/particle/ParticleSpellMobAmbientBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/chq net/minecraft/level/entity/particle/ParticleSpellInstaltBuilder
+CLASS none/chq net/minecraft/entity/particle/ParticleSpellInstaltBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/chr net/minecraft/level/entity/particle/ParticleSpellMobBuilder
+CLASS none/chr net/minecraft/entity/particle/ParticleSpellMobBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/chs net/minecraft/level/entity/particle/ParticleSpellBuilder
+CLASS none/chs net/minecraft/entity/particle/ParticleSpellBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/cht net/minecraft/level/entity/particle/ParticleSpellWitchBuilder
+CLASS none/cht net/minecraft/entity/particle/ParticleSpellWitchBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/chv net/minecraft/level/entity/particle/ParticleWaterSplashBuilder
+CLASS none/chv net/minecraft/entity/particle/ParticleWaterSplashBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/chw
 	METHOD s_ onUpdate ()V
-CLASS none/chx net/minecraft/level/entity/particle/ParticleSuspendedBuilder
+CLASS none/chx net/minecraft/entity/particle/ParticleSuspendedBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/chy
 	METHOD s_ onUpdate ()V
-CLASS none/chz net/minecraft/level/entity/particle/ParticleVillagerHappyBuilder
+CLASS none/chz net/minecraft/entity/particle/ParticleVillagerHappyBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/cia net/minecraft/level/entity/particle/chw
+CLASS none/cia net/minecraft/entity/particle/chw
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/cib net/minecraft/level/entity/particle/ParticleBlockDust
-CLASS none/cic net/minecraft/level/entity/particle/ParticleBlockDustBuilder
+CLASS none/cib net/minecraft/entity/particle/ParticleBlockDust
+CLASS none/cic net/minecraft/entity/particle/ParticleBlockDustBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
-CLASS none/cid net/minecraft/level/entity/particle/ParticleBlockCrack
+CLASS none/cid net/minecraft/entity/particle/ParticleBlockCrack
 	METHOD a getParticleType ()I
-CLASS none/cie net/minecraft/level/entity/particle/ParticleBlockCrackBuilder
+CLASS none/cie net/minecraft/entity/particle/ParticleBlockCrackBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cif
 	METHOD a getParticleType ()I
 	METHOD s_ onUpdate ()V
 CLASS none/cig
 	METHOD s_ onUpdate ()V
-CLASS none/cih net/minecraft/level/entity/particle/ParticleWaterWakeBuilder
+CLASS none/cih net/minecraft/entity/particle/ParticleWaterWakeBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cii
 	METHOD s_ onUpdate ()V
-CLASS none/cij net/minecraft/level/entity/particle/ParticleWaterDropBuilder
+CLASS none/cij net/minecraft/entity/particle/ParticleWaterDropBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cil net/minecraft/entity/player/EntityPlayerSP
 	METHOD i getSkinTextureLocation ()Lnone/oa;
@@ -18871,7 +18886,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD x systemExitNow ()V
 	METHOD y onTick ()V
 	METHOD z updateTimeLightAndEntities ()V
-CLASS net/minecraft/server/MinecraftServer$pd net/minecraft/level/ConvertingProcessUpdate
+CLASS net/minecraft/server/MinecraftServer$pd net/minecraft/server/ConvertingProcessUpdate
 CLASS net/minecraft/client/ClientBrandRetriever net/minecraft/client/ClientBrandRetriever
 	METHOD getClientModName ()Ljava/lang/String;
 CLASS net/minecraft/realms/RealmsServerStatusPinger
