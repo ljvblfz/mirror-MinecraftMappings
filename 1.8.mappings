@@ -6234,7 +6234,6 @@ CLASS none/aep net/minecraft/entity/monster/EntityCreeper
 	METHOD s_ onUpdate ()V
 CLASS none/aer net/minecraft/entity/monster/EntityEnderman
 	METHOD A getDroppedItem ()Lnone/alq;
-	METHOD a doInteractionWith (Lnone/ahd;)Z
 	METHOD a setCarriedBlockState (Lnone/bec;)V
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
@@ -6342,7 +6341,6 @@ CLASS none/afo net/minecraft/entity/monster/EntityPigZombie
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD a attackEntityFrom (Lnone/wh;F)Z
-	METHOD a mount (Lnone/wv;)V
 	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD b setDamager (Lnone/xm;)V
@@ -8705,7 +8703,7 @@ CLASS none/are net/minecraft/world/Generator
 	METHOD h getHasNotificationData ()Z
 	METHOD i setVersioned ()Lnone/are;
 	METHOD j setHasNotificationData ()Lnone/are;
-CLASS none/arf net/minecraft/world/EnumCeiling
+CLASS none/arf net/minecraft/world/EnumLight
 	FIELD a SKY
 	FIELD b BLOCK
 	FIELD c id
@@ -15790,7 +15788,6 @@ CLASS none/bxv net/minecraft/client/gui/GuiStats
 		ARG 0 parent
 	METHOD a onLoaded ()V
 	METHOD a drawScreen (IIF)V
-	METHOD a drawHorizontalLine (IIII)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
 	METHOD d doesGuiPauseGame ()Z
