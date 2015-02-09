@@ -15688,7 +15688,6 @@ CLASS none/bxi net/minecraft/client/gui/GuiLanServer
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
 CLASS none/bxj net/minecraft/client/gui/GuiSkinCustomization
-	CLASS bxl net/minecraft/client/gui/button/bxl
 CLASS none/bxk empty/bxk
 CLASS none/bxm net/minecraft/client/gui/GuiSnooper
 	CLASS bxn
@@ -15703,7 +15702,7 @@ CLASS none/bxm net/minecraft/client/gui/GuiSnooper
 	METHOD b initGui ()V
 	METHOD k handleMouseInput ()V
 CLASS none/bxo net/minecraft/client/gui/GuiSoundOptions
-	CLASS bxp net/minecraft/client/gui/bxp
+	CLASS bxp
 		METHOD a mouseReleased (II)V
 		METHOD a getHoverState (Z)I
 		METHOD b mouseDragged (Lnone/bsu;II)V
