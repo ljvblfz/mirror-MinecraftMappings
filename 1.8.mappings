@@ -58,20 +58,6 @@ CLASS none/a net/minecraft/util/ChatStyle
 	METHOD toString ()Ljava/lang/String;
 	METHOD values ()[Lnone/a;
 CLASS none/b net/minecraft/crash/CrashReport
-	CLASS c
-		METHOD call ()Ljava/lang/String;
-	CLASS d
-		METHOD call ()Ljava/lang/String;
-	CLASS e
-		METHOD call ()Ljava/lang/String;
-	CLASS f
-		METHOD call ()Ljava/lang/String;
-	CLASS g
-		METHOD call ()Ljava/lang/String;
-	CLASS h
-		METHOD call ()Ljava/lang/String;
-	CLASS i
-		METHOD call ()Ljava/lang/String;
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD b message Ljava/lang/String;
 	FIELD c cause Ljava/lang/Throwable;
@@ -287,8 +273,6 @@ CLASS none/z net/minecraft/command/CommandBase
 	METHOD c getEntityStrict (Lnone/ae;Ljava/lang/String;)Ljava/util/List;
 		ARG 0 sender
 		ARG 1 input
-	METHOD compareTo (Lnone/ac;)I
-		ARG 0 command
 	METHOD d getAsBoolean (Ljava/lang/String;)Z
 		ARG 0 s
 	METHOD d getPlayerName (Lnone/ae;Ljava/lang/String;)Ljava/lang/String;
@@ -410,42 +394,9 @@ CLASS none/ag net/minecraft/command/EnumResultStatsType
 	METHOD c getIds ()[Ljava/lang/String;
 	METHOD values ()[Lnone/ag;
 CLASS none/ah net/minecraft/command/EntitySelector
-	CLASS ai
-		METHOD apply (Lnone/wv;)Z
-			ARG 0 entity
-	CLASS aj
-		METHOD apply (Lnone/wv;)Z
-			ARG 0 entity
-	CLASS ak
-		METHOD apply (Lnone/wv;)Z
-			ARG 0 entity
-	CLASS al
-		METHOD compare (Lnone/wv;Lnone/wv;)I
-			ARG 0 entity1
-			ARG 1 entity2
-	CLASS an
-		METHOD apply (Lnone/wv;)Z
-			ARG 0 entity
-	CLASS ao
-		METHOD apply (Lnone/wv;)Z
-			ARG 0 entity
-	CLASS ap
-		METHOD apply (Lnone/wv;)Z
-			ARG 0 entity
-	CLASS aq
-		METHOD apply (Lnone/wv;)Z
-			ARG 0 entity
-	CLASS ar
-		METHOD apply (Lnone/wv;)Z
-			ARG 0 entity
 	CLASS as
 		FIELD c minimumRadiusSquared I
 		FIELD e radiusSquared I
-		METHOD apply (Lnone/wv;)Z
-			ARG 0 entity
-	CLASS at
-		METHOD apply (Lnone/wv;)Z
-			ARG 0 entity
 	FIELD a SELECTOR_PATTERN Ljava/util/regex/Pattern;
 	FIELD b INT_LIST_PATTERN Ljava/util/regex/Pattern;
 	FIELD c KEY_VALUE_PATTERN Ljava/util/regex/Pattern;
@@ -529,8 +480,6 @@ CLASS none/ah net/minecraft/command/EntitySelector
 	METHOD h containsPosition (Ljava/util/Map;)Z
 		ARG 0 params
 CLASS none/am net/minecraft/util/EntityIsPlayerPredicate
-	METHOD apply (Lnone/wv;)Z
-		ARG 0 entity
 CLASS none/au net/minecraft/command/CommandAchievement
 	METHOD a getPermissionLevel ()I
 	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
@@ -1198,8 +1147,6 @@ CLASS none/dt net/minecraft/util/BlockPos
 	METHOD d south ()Lnone/dt;
 	METHOD d north (I)Lnone/dt;
 		ARG 0 blocks
-	METHOD d (Lnone/fd;)Lnone/dt;
-		ARG 0 vec
 	METHOD d crossProduct (Lnone/fd;)Lnone/fd;
 	METHOD e west ()Lnone/dt;
 	METHOD e south (I)Lnone/dt;
@@ -1471,8 +1418,6 @@ CLASS none/fd net/minecraft/util/Vec3i
 		ARG 0 x
 		ARG 1 y
 		ARG 2 z
-	METHOD compareTo (Lnone/fd;)I
-		ARG 0 vec
 	METHOD d distanceFromCenterSquared (DDD)D
 		ARG 0 x
 		ARG 1 y
@@ -1909,17 +1854,10 @@ CLASS none/gn net/minecraft/network/NettyEncryptingDecoder
 	FIELD a decryptionCodec Lnone/gm;
 	METHOD <init> (Ljavax/crypto/Cipher;)V
 		ARG 0 cipher
-	METHOD decode (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Ljava/util/List;)V
-		ARG 0 channelHandlerContext
-		ARG 1 byteBuf
 CLASS none/go net/minecraft/network/NettyEncryptionEncoder
 	FIELD a encryptionCodec Lnone/gm;
 	METHOD <init> (Ljavax/crypto/Cipher;)V
 		ARG 0 cipher
-	METHOD encode (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Lio/netty/buffer/ByteBuf;)V
-		ARG 0 channelHandlerContext
-		ARG 1 byteBuf1
-		ARG 2 byteBuf2
 CLASS none/gp net/minecraft/network/NettyCompressionDecoder
 	FIELD a inflater Ljava/util/zip/Inflater;
 	FIELD b serverByteThreshold I
@@ -1991,8 +1929,6 @@ CLASS none/gr net/minecraft/network/NetworkManager
 		ARG 0 channelHandlerContext
 	METHOD channelInactive (Lio/netty/channel/ChannelHandlerContext;)V
 		ARG 0 channelHandlerContext
-	METHOD channelRead0 (Lio/netty/channel/ChannelHandlerContext;Lnone/id;)V
-		ARG 0 channelHandlerContext
 	METHOD exceptionCaught (Lio/netty/channel/ChannelHandlerContext;Ljava/lang/Throwable;)V
 		ARG 0 channelHandlerContext
 	METHOD f isEncrypted ()Z
@@ -2004,10 +1940,8 @@ CLASS none/gr net/minecraft/network/NetworkManager
 	METHOD l processDisconnect ()V
 	METHOD m processSendQueue ()V
 CLASS none/gs net/minecraft/network/ClientEventLoopFactory
-	METHOD b createEventLoop ()Lio/netty/channel/nio/NioEventLoopGroup;
 	METHOD b createEventLoop ()Ljava/lang/Object;
 CLASS none/gt net/minecraft/network/LocalClientEventLoopFactory
-	METHOD b createEventLoop ()Lio/netty/channel/local/LocalEventLoopGroup;
 	METHOD b createEventLoop ()Ljava/lang/Object;
 CLASS none/gx net/minecraft/network/QueuedPacketWrite
 	FIELD a packet Lnone/id;
@@ -2230,9 +2164,6 @@ CLASS none/hf net/minecraft/util/MessageSerializer
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD b MARKER_PACKET_SENT Lorg/apache/logging/log4j/Marker;
 	FIELD c direction Lnone/ie;
-	METHOD encode (Lio/netty/channel/ChannelHandlerContext;Lnone/id;Lio/netty/buffer/ByteBuf;)V
-		ARG 0 channelHandlerContext
-		ARG 2 byteBuf
 CLASS none/hg net/minecraft/network/INetHandler
 	METHOD a onDisconnect (Lnone/ho;)V
 		ARG 0 reason
@@ -2241,10 +2172,6 @@ CLASS none/hh net/minecraft/util/MessageDeserializer2
 		ARG 0 channelHandlerContext
 		ARG 1 byteBuf
 CLASS none/hi net/minecraft/util/MessageSerializer2
-	METHOD encode (Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Lio/netty/buffer/ByteBuf;)V
-		ARG 0 channelHandlerContext
-		ARG 1 byteBuf1
-		ARG 2 byteBuf2
 CLASS none/hj net/minecraft/chat/BaseComponent
 	FIELD a list Ljava/util/List;
 	FIELD b style Lnone/hv;
@@ -2398,21 +2325,12 @@ CLASS none/hw net/minecraft/chat/StyleRoot
 	METHOD k getStyleString ()Ljava/lang/String;
 	METHOD m cloneWithParent ()Lnone/hv;
 	METHOD n cloneWithoutParent ()Lnone/hv;
-CLASS none/hx
-	METHOD deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnone/hv;
-		ARG 0 jsonElement
-		ARG 1 type
-		ARG 2 jsonDeserializationContext
-	METHOD serialize (Lnone/hv;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement;
-		ARG 1 type
-		ARG 2 jsonSerializationContext
 CLASS none/hy net/minecraft/chat/TextComponent
 	FIELD b text Ljava/lang/String;
 	METHOD <init> (Ljava/lang/String;)V
 		ARG 0 text
 	METHOD e getComponentText ()Ljava/lang/String;
 	METHOD f cloneComponent ()Lnone/ho;
-	METHOD f cloneComponent ()Lnone/hy;
 	METHOD g getText ()Ljava/lang/String;
 CLASS none/hz net/minecraft/chat/TranslatableComponent
 	FIELD b list Ljava/util/List;
@@ -2424,7 +2342,6 @@ CLASS none/hz net/minecraft/chat/TranslatableComponent
 	METHOD a setStyle (Lnone/hv;)Lnone/ho;
 	METHOD e getComponentText ()Ljava/lang/String;
 	METHOD f cloneComponent ()Lnone/ho;
-	METHOD f cloneComponent ()Lnone/hz;
 	METHOD g translateToCurrentLanguage ()V
 	METHOD i getKey ()Ljava/lang/String;
 	METHOD j getArgs ()[Ljava/lang/Object;
@@ -3392,21 +3309,7 @@ CLASS none/np net/minecraft/network/status/data/StatusResponse
 	METHOD c getMinecraftVersion ()Lnone/nt;
 CLASS none/nq net/minecraft/network/status/data/ServerPlayerInfo
 CLASS none/nr net/minecraft/network/status/data/ServerPlayerInfoDeserializer
-	METHOD deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnone/nq;
-		ARG 0 jsonElement
-		ARG 1 type
-		ARG 2 jsonDeserializationContext
-	METHOD serialize (Lnone/nq;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement;
-		ARG 1 type
-		ARG 2 jsonSerializationContext
 CLASS none/ns net/minecraft/network/status/data/StatusResponseDeserializer
-	METHOD deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnone/np;
-		ARG 0 jsonElement
-		ARG 1 type
-		ARG 2 jsonDeserializationContext
-	METHOD serialize (Lnone/np;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement;
-		ARG 1 type
-		ARG 2 jsonSerializationContext
 CLASS none/nt net/minecraft/network/status/data/MinecraftVersion
 	FIELD a gameVersion Ljava/lang/String;
 	FIELD b protocolVersion I
@@ -3416,13 +3319,6 @@ CLASS none/nt net/minecraft/network/status/data/MinecraftVersion
 	METHOD a getGameVersion ()Ljava/lang/String;
 	METHOD b getProtocolVersion ()I
 CLASS none/nu net/minecraft/network/status/data/MinecraftVersionDeserializer
-	METHOD deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnone/nt;
-		ARG 0 jsonElement
-		ARG 1 type
-		ARG 2 jsonDeserializationContext
-	METHOD serialize (Lnone/nt;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement;
-		ARG 1 type
-		ARG 2 jsonSerializationContext
 CLASS none/nv net/minecraft/network/status/INetHandlerStatusServer
 	METHOD a handlePingRequest (Lnone/nw;)V
 		ARG 0 packet
@@ -3783,10 +3679,8 @@ CLASS none/rc net/minecraft/network/NetworkSystem
 	METHOD b stopListening ()V
 	METHOD c networkTick ()V
 CLASS none/rd net/minecraft/network/ServerEventLoopFactory
-	METHOD b createEventLoop ()Lio/netty/channel/nio/NioEventLoopGroup;
 	METHOD b createEventLoop ()Ljava/lang/Object;
 CLASS none/re net/minecraft/network/LocalServerEventLoopFactory
-	METHOD b createEventLoop ()Lio/netty/channel/local/LocalEventLoopGroup;
 	METHOD b createEventLoop ()Ljava/lang/Object;
 CLASS none/rj net/minecraft/network/play/NetHandlerPlayServer
 	FIELD a manager Lnone/gr;
@@ -4105,9 +3999,6 @@ CLASS none/ul net/minecraft/util/CaseInsensitiveHashMap
 	METHOD put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 		ARG 0 key
 		ARG 1 value
-	METHOD put (Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;
-		ARG 0 key
-		ARG 1 value
 	METHOD putAll (Ljava/util/Map;)V
 		ARG 0 map
 	METHOD remove (Ljava/lang/Object;)Ljava/lang/Object;
@@ -4280,8 +4171,6 @@ CLASS none/ux net/minecraft/profiler/ProfilerEntry
 		ARG 1 sectionPercent
 		ARG 2 processPercent
 	METHOD a getEntryColor ()I
-	METHOD compareTo (Lnone/ux;)I
-		ARG 0 profilerEntry
 CLASS none/uy net/minecraft/util/IProgressBar
 	METHOD a setProgressBarPercentage (I)V
 	METHOD b (Ljava/lang/String;)V
@@ -4908,17 +4797,9 @@ CLASS none/xe net/minecraft/util/EntityPredicates
 	FIELD c HAS_PLAYER_INVENTORY Lcom/google/common/base/Predicate;
 	FIELD d NOT_SPECTATING Lcom/google/common/base/Predicate;
 CLASS none/xf net/minecraft/util/EntityAlivePredicate
-	METHOD apply (Lnone/wv;)Z
-		ARG 0 entity
 CLASS none/xg net/minecraft/util/EntityNotRiddenPredicate
-	METHOD apply (Lnone/wv;)Z
-		ARG 0 entity
 CLASS none/xh net/minecraft/util/EntityHasPlayerInventoryPredicate
-	METHOD apply (Lnone/wv;)Z
-		ARG 0 entity
 CLASS none/xi net/minecraft/util/EntityNotSpectatingPredicate
-	METHOD apply (Lnone/wv;)Z
-		ARG 0 entity
 CLASS none/xk net/minecraft/entity/EntityXPOrb
 	FIELD b age I
 	FIELD d health I
@@ -5255,11 +5136,7 @@ CLASS none/yf net/minecraft/entity/attribute/AttributeMap
 	FIELD d byDisplayName Ljava/util/Map;
 	FIELD e watched Ljava/util/Set;
 	METHOD a getAttribute (Ljava/lang/String;)Lnone/xz;
-	METHOD a getAttribute (Ljava/lang/String;)Lnone/ye;
-		ARG 0 name
 	METHOD a getAttribute (Lnone/xy;)Lnone/xz;
-		ARG 0 attribute
-	METHOD a getAttribute (Lnone/xy;)Lnone/ye;
 		ARG 0 attribute
 	METHOD a onAttributeChanged (Lnone/xz;)V
 		ARG 0 attribute
@@ -6378,9 +6255,6 @@ CLASS none/afv
 	METHOD a ()Z
 	METHOD e opUpdate ()V
 CLASS none/afw net/minecraft/entity/monster/EntitySkeleton
-	CLASS afx
-		METHOD apply (Lnone/wv;)Z
-			ARG 0 entity
 	FIELD b arrowAttackGoal Lnone/zz;
 	FIELD c targetGoal Lnone/zk;
 	METHOD <init> (Lnone/aqu;)V
@@ -8004,7 +7878,6 @@ CLASS none/aqi net/minecraft/entity/SpawnLogic
 	FIELD a delay I
 	FIELD b entityID Ljava/lang/String;
 	FIELD c spawnPotentials Ljava/util/List;
-	FIELD d defaultSpawnPotential Lnone/aqj;
 	FIELD g minSpawnDelay I
 	FIELD h maxSpawnDelay I
 	FIELD i spawnCount I
@@ -14141,8 +14014,6 @@ CLASS none/bqn net/minecraft/world/storage/SaveLoaderOld
 	METHOD e deleteLevelDirectory (Ljava/lang/String;)Z
 		ARG 0 directory
 CLASS none/bqo net/minecraft/world/Level
-	CLASS bqp
-		METHOD call ()Ljava/lang/String;
 	FIELD A difficultyLocked Z
 	FIELD B borderCenterX D
 	FIELD C borderCenterZ D
@@ -14333,8 +14204,6 @@ CLASS none/brb net/minecraft/world/storage/SaveFormatComparer
 	METHOD a getFileName ()Ljava/lang/String;
 	METHOD b getDisplayName ()Ljava/lang/String;
 	METHOD c getSizeOnDisk ()J
-	METHOD compareTo (Lnone/brb;)I
-		ARG 0 saveFormatComparer
 	METHOD d requireConversion ()Z
 	METHOD e getLastTimePlayed ()J
 	METHOD f getGameType ()Lnone/arc;
@@ -14567,9 +14436,6 @@ CLASS none/bsa net/minecraft/scoreboard/Score
 	METHOD f getManager ()Lnone/bsd;
 	METHOD g isLocked ()Z
 CLASS none/bsb net/minecraft/scoreboard/ScoreAlphabeticalComparator
-	METHOD compare (Lnone/bsa;Lnone/bsa;)I
-		ARG 0 score1
-		ARG 1 score2
 CLASS none/bsd net/minecraft/scoreboard/ScoreboardManager
 	FIELD a nameToObjective Ljava/util/Map;
 	FIELD b criteriaToObjectives Ljava/util/Map;
@@ -14786,7 +14652,6 @@ CLASS none/bsr net/minecraft/client/KeyBinding
 	METHOD b setKey (I)V
 		ARG 0 keyCode
 	METHOD c getCategories ()Ljava/util/Set;
-	METHOD compareTo (Lnone/bsr;)I
 	METHOD d hasChanged ()Z
 	METHOD e getCategory ()Ljava/lang/String;
 	METHOD f isBeingPressed ()Z
@@ -15461,7 +15326,6 @@ CLASS none/bwd net/minecraft/client/gui/GuiCreateFlatWorld
 	FIELD g titleString Ljava/lang/String;
 	FIELD h tileString Ljava/lang/String;
 	FIELD i heightString Ljava/lang/String;
-	FIELD r selectionList Lnone/bwe;
 	FIELD s addLayerButton Lnone/bug;
 	FIELD t editLayerButton Lnone/bug;
 	FIELD u removeLayerButton Lnone/bug;
@@ -15564,7 +15428,6 @@ CLASS none/bws net/minecraft/client/gui/GuiLanguage
 		METHOD b getListItemCount ()I
 		METHOD k getScrolledHeight ()I
 	FIELD a parentGui Lnone/bxf;
-	FIELD f languageList Lnone/bwt;
 	FIELD g theGameSettings Lnone/bto;
 	FIELD h languageManager Lnone/cwe;
 	FIELD r doneButton Lnone/buw;
@@ -16724,10 +16587,6 @@ CLASS none/cgw net/minecraft/entity/particle/EntityParticle
 	METHOD s_ onUpdate ()V
 	METHOD toString ()Ljava/lang/String;
 CLASS none/cgx net/minecraft/client/renderers/EffectRenderer
-	CLASS cgy
-		METHOD call ()Ljava/lang/String;
-	CLASS cgz
-		METHOD call ()Ljava/lang/String;
 	FIELD a level Lnone/aqu;
 	FIELD b PARTICLES_PNG Lnone/oa;
 	FIELD f random Ljava/util/Random;
@@ -17335,9 +17194,6 @@ CLASS none/ckn net/minecraft/client/renderers/LevelRenderer
 	METHOD n initBlockDestroyStageSprites ()V
 CLASS none/ckt net/minecraft/util/QuadComparator
 	FIELD d buffer Ljava/nio/FloatBuffer;
-	METHOD compare (Ljava/lang/Integer;Ljava/lang/Integer;)I
-		ARG 0 id1
-		ARG 1 id2
 CLASS none/ckw net/minecraft/client/shader/FrameBuffer
 	FIELD a textureWidth I
 	FIELD b textureHeight I
@@ -17576,7 +17432,6 @@ CLASS none/cpr net/minecraft/client/renderers/RenderEnderman
 	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cps net/minecraft/client/renderers/RenderEndermite
 	FIELD a ENDERMITE_PNG Lnone/oa;
-	METHOD a getTextureLocation (Lnone/aew;)Lnone/oa;
 	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cpt net/minecraft/client/renderers/EntityRenderer
 	FIELD a renderEngine Lnone/cug;
@@ -17721,7 +17576,6 @@ CLASS none/crh net/minecraft/client/renderers/RenderSheep
 	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/cri net/minecraft/client/renderers/RenderSilverfish
 	FIELD a SILVERFISH_PNG Lnone/oa;
-	METHOD a getTextureLocation (Lnone/aft;)Lnone/oa;
 	METHOD a getTextureLocation (Lnone/wv;)Lnone/oa;
 CLASS none/crj net/minecraft/client/renderers/RenderSkeleton
 	FIELD j SKELETON_PNG Lnone/oa;
@@ -18108,7 +17962,6 @@ CLASS none/ctw net/minecraft/client/texture/TextureAtlas
 CLASS none/ctx
 	FIELD b width I
 	FIELD c height I
-	METHOD compareTo (Lnone/ctx;)I
 	METHOD toString ()Ljava/lang/String;
 CLASS none/cty
 	FIELD a originX I
@@ -18310,8 +18163,6 @@ CLASS none/cwd net/minecraft/client/resources/data/LanguageMetadata
 		ARG 3 bidirectional
 	METHOD a getID ()Ljava/lang/String;
 	METHOD b isBidirectional ()Z
-	METHOD compareTo (Lnone/cwd;)I
-		ARG 0 languageMetadata
 	METHOD equals (Ljava/lang/Object;)Z
 		ARG 0 o
 	METHOD hashCode ()I
@@ -18341,7 +18192,6 @@ CLASS none/cwr net/minecraft/client/resources/data/FontMetadataSection
 CLASS none/cws net/minecraft/client/resources/data/FontMetadataSectionSerializer
 CLASS none/cwu net/minecraft/client/resources/data/LanguageMetadataSection
 CLASS none/cwv net/minecraft/client/resources/data/LanguageMetadataSectionSerializer
-	METHOD deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnone/cwu;
 CLASS none/cwx net/minecraft/client/resources/data/PackMetadataSection
 CLASS none/cwy net/minecraft/client/resources/data/PackMetadataSectionSerializer
 CLASS none/cxb net/minecraft/client/resources/data/TextureMetadataSection
@@ -18377,8 +18227,6 @@ CLASS none/cxl
 	METHOD equals (Ljava/lang/Object;)Z
 	METHOD hashCode ()I
 	METHOD toString getFullName ()Ljava/lang/String;
-CLASS none/cxq
-	METHOD compareTo (Lnone/cxq;)I
 CLASS none/cxt net/minecraft/client/audio/PositionedSound
 CLASS none/cxz net/minecraft/sound/EnumSoundType
 	FIELD a MASTER Lnone/cxz;
@@ -18473,7 +18321,6 @@ CLASS none/czl net/minecraft/client/audio/SoundRegistry
 CLASS none/czm net/minecraft/client/audio/ISoundEventAccessor
 CLASS none/czn net/minecraft/client/audio/SoundEventAccessor
 	FIELD a poolEntry Lnone/cyz;
-	METHOD g clone ()Lnone/cyz;
 CLASS none/czp net/minecraft/client/stream/AchievementMetadata
 	METHOD <init> (Lnone/tk;)V
 		ARG 0 achievement
