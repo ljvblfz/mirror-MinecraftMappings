@@ -15688,6 +15688,7 @@ CLASS none/bxi net/minecraft/client/gui/GuiLanServer
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
 CLASS none/bxj net/minecraft/client/gui/GuiSkinCustomization
+	CLASS bxl net/minecraft/client/gui/button/bxl
 CLASS none/bxk empty/bxk
 CLASS none/bxm net/minecraft/client/gui/GuiSnooper
 	CLASS bxn
@@ -15702,6 +15703,11 @@ CLASS none/bxm net/minecraft/client/gui/GuiSnooper
 	METHOD b initGui ()V
 	METHOD k handleMouseInput ()V
 CLASS none/bxo net/minecraft/client/gui/GuiSoundOptions
+	CLASS bxp net/minecraft/client/gui/bxp
+		METHOD a mouseReleased (II)V
+		METHOD a getHoverState (Z)I
+		METHOD b mouseDragged (Lnone/bsu;II)V
+		METHOD c mousePressed (Lnone/bsu;II)Z
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/bug;)V
 	METHOD b initGui ()V
@@ -15769,7 +15775,8 @@ CLASS none/bxv net/minecraft/client/gui/GuiStats
 		METHOD a selectItem (IZII)V
 		METHOD b getListItemCount ()I
 		METHOD k getScrolledHeight ()I
-	CLASS bxz
+	CLASS bxz GuiSlotStatsItem
+		FIELD u slotGuiStats
 		METHOD a drawListItem (IIIIII)V
 	CLASS byb
 		METHOD a drawBackground ()V
@@ -15778,7 +15785,7 @@ CLASS none/bxv net/minecraft/client/gui/GuiStats
 		METHOD a selectItem (IZII)V
 		METHOD b getListItemCount ()I
 		METHOD k getScrolledHeight ()I
-	CLASS byc
+	CLASS byc GuiSlotStats
 		METHOD a drawBackground ()V
 		METHOD a isListItemSelected (I)Z
 		METHOD a selectItem (IZII)V
@@ -16399,6 +16406,8 @@ CLASS none/cee net/minecraft/network/play/NetHandlerPlayClient
 			ARG 0 o
 	CLASS ceh
 		METHOD run ()V
+		CLASS cei
+			METHOD a onChoice (ZI)V
 	FIELD b LOGGER
 	FIELD c manager
 	FIELD d profile
@@ -18692,35 +18701,8 @@ CLASS none/dax net/minecraft/client/renderers/OpenGlHelper
 		ARG 0 texture
 	METHOD l glClientActiveTexture (I)V
 		ARG 0 texture
-CLASS none/bws$bwt net/minecraft/client/gui/GuiSlotLanguage
-	METHOD a drawSlot (IIIIII)V
-CLASS none/bxj$bxl net/minecraft/client/gui/button/bxl
-CLASS none/bxo$bxp net/minecraft/client/gui/bxp
-	METHOD a mouseReleased (II)V
-	METHOD a getHoverState (Z)I
-	METHOD b mouseDragged (Lnone/bsu;II)V
-	METHOD c mousePressed (Lnone/bsu;II)Z
-CLASS none/bxv$bxw
-	METHOD a drawSlot (IIIIII)V
-CLASS none/bxv$bxy
-	METHOD a drawSlot (IIIIII)V
-CLASS none/bxv$bxz net/minecraft/client/gui/GuiSlotStatsItem
-	FIELD u slotGuiStats
-	METHOD a drawSlot (IIIIII)V
-CLASS none/bxv$byb
-	METHOD a drawSlot (IIIIII)V
-CLASS none/bxv$byc net/minecraft/client/gui/GuiSlotStats
-CLASS none/byf$byh net/minecraft/client/gui/byh
-CLASS none/byn$byo net/minecraft/client/gui/button/byo
-CLASS none/byn$byp net/minecraft/client/gui/button/byp
-CLASS none/byn$byq net/minecraft/client/gui/button/byq
-CLASS none/cah$cai
-	METHOD a drawSlot (IIIIII)V
-CLASS none/cee$ceh
-	CLASS cei
-		METHOD a onChoice (ZI)V
 CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
-	CLASS pd
+	CLASS pd ConvertingProcessUpdate
 		METHOD a setProgressBarPercentage (I)V
 			ARG 0 percentage
 		METHOD b (Ljava/lang/String;)V
@@ -18883,7 +18865,6 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD x systemExitNow ()V
 	METHOD y onTick ()V
 	METHOD z updateTimeLightAndEntities ()V
-CLASS net/minecraft/server/MinecraftServer$pd net/minecraft/server/ConvertingProcessUpdate
 CLASS net/minecraft/client/ClientBrandRetriever net/minecraft/client/ClientBrandRetriever
 	METHOD getClientModName ()Ljava/lang/String;
 CLASS net/minecraft/realms/RealmsServerStatusPinger
