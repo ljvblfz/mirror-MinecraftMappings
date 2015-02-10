@@ -3528,6 +3528,7 @@ CLASS none/qs net/minecraft/world/gen/ServerChunkCache
 	METHOD a chunkExists (II)Z
 	METHOD a getFeatureClosestToPosition (Lnone/aqu;Ljava/lang/String;Lnone/dt;)Lnone/dt;
 		ARG 0 dimension
+	METHOD a populate (Lnone/bfe;II)V
 	METHOD a provideChunk (Lnone/dt;)Lnone/bfh;
 	METHOD a getSpawnableAtPos (Lnone/xp;Lnone/dt;)Ljava/util/List;
 	METHOD a saveAllChunks (ZLnone/uy;)Z
@@ -12876,7 +12877,7 @@ CLASS none/bgp net/minecraft/world/gen/LevelGeneratorDebug
 	METHOD a getFeatureClosestToPosition (Lnone/aqu;Ljava/lang/String;Lnone/dt;)Lnone/dt;
 		ARG 0 level
 		ARG 2 blockPos
-	METHOD a (Lnone/bfe;II)V
+	METHOD a populate (Lnone/bfe;II)V
 		ARG 0 chunkProvider
 		ARG 1 chunkX
 		ARG 2 chunkZ
@@ -12924,7 +12925,7 @@ CLASS none/bgq net/minecraft/world/gen/LevelGeneratorFlat
 	METHOD a getFeatureClosestToPosition (Lnone/aqu;Ljava/lang/String;Lnone/dt;)Lnone/dt;
 		ARG 0 level
 		ARG 2 blockPos
-	METHOD a (Lnone/bfe;II)V
+	METHOD a populate (Lnone/bfe;II)V
 		ARG 0 chunkProvider
 		ARG 1 chunkX
 		ARG 2 chunkZ
@@ -12988,7 +12989,7 @@ CLASS none/bgr net/minecraft/world/gen/LevelGeneratorNether
 		ARG 1 chunkZ
 		ARG 2 chunkPrimer
 	METHOD a getFeatureClosestToPosition (Lnone/aqu;Ljava/lang/String;Lnone/dt;)Lnone/dt;
-	METHOD a (Lnone/bfe;II)V
+	METHOD a populate (Lnone/bfe;II)V
 	METHOD a provideChunk (Lnone/dt;)Lnone/bfh;
 	METHOD a getSpawnableAtPos (Lnone/xp;Lnone/dt;)Ljava/util/List;
 	METHOD a saveAllChunks (ZLnone/uy;)Z
@@ -13088,7 +13089,7 @@ CLASS none/bgw net/minecraft/world/gen/LevelGeneratorEnd
 	METHOD a getFeatureClosestToPosition (Lnone/aqu;Ljava/lang/String;Lnone/dt;)Lnone/dt;
 		ARG 0 level
 		ARG 2 blockPos
-	METHOD a (Lnone/bfe;II)V
+	METHOD a populate (Lnone/bfe;II)V
 		ARG 0 chunkProvider
 		ARG 1 chunkX
 		ARG 2 chunkZ
@@ -15762,7 +15763,7 @@ CLASS none/byz net/minecraft/client/gui/GuiContainerCreative
 	CLASS bzb
 		METHOD a isItemValid (Lnone/amj;)Z
 		METHOD d getStack ()Lnone/amj;
-		METHOD e getHasStack ()Z
+		METHOD e hasStack ()Z
 	FIELD E listener Lnone/byy;
 	FIELD w tabIndex I
 	METHOD a keyTyped (CI)V
@@ -16411,6 +16412,7 @@ CLASS none/cel net/minecraft/world/gen/ClientChunkCache
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD a getFeatureClosestToPosition (Lnone/aqu;Ljava/lang/String;Lnone/dt;)Lnone/dt;
+	METHOD a populate (Lnone/bfe;II)V
 	METHOD a provideChunk (Lnone/dt;)Lnone/bfh;
 	METHOD a getSpawnableAtPos (Lnone/xp;Lnone/dt;)Ljava/util/List;
 	METHOD a saveAllChunks (ZLnone/uy;)Z
