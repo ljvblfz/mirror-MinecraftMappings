@@ -551,6 +551,14 @@ CLASS none/ba net/minecraft/command/CommandClone
 	METHOD c getName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
+CLASS none/bb net/minecraft/commandCommandClone_StaticCloneData
+	FIELD a blockPos Lnone/dt;
+	FIELD b blockState Lnone/bec;
+	FIELD c NbtTagInfo Lnone/fn;
+	METHOD <init> (Lnone/dt;Lnone/bec;Lnone/fn;)V
+		ARG 0 blockPos
+		ARG 1 blockState
+		ARG 2 nbtTagInfo
 CLASS none/bc net/minecraft/command/CommandCompare
 	METHOD a getPermissionLevel ()I
 	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
@@ -967,13 +975,18 @@ CLASS none/cr net/minecraft/command/CommandSpreadPlayers
 	METHOD c getName ()Ljava/lang/String;
 	METHOD c getUnlocalizedUsage (Lnone/ae;)Ljava/lang/String;
 		ARG 0 serverCommandUser
-CLASS none/cs
+CLASS none/cs net/minecraft/command/CommandSpreadPlayers_Position
+	FIELD a x D
+	FIELD b z D
 	METHOD a (Ljava/util/Random;DDDD)V
 		ARG 0 random
 		ARG 1 min
 		ARG 2 min2
 		ARG 3 max
 		ARG 4 max2
+	METHOD a getDistance (Lnone/cs;)D
+	METHOD b getDistance ()F
+	METHOD b displace (Lnone/cs;)V
 CLASS none/ct net/minecraft/command/CommandStats
 	METHOD a getPermissionLevel ()I
 	METHOD a execute (Lnone/ae;[Ljava/lang/String;)V
@@ -1157,7 +1170,7 @@ CLASS none/dt net/minecraft/util/BlockPos
 	METHOD g asLong ()J
 	METHOD g east (I)Lnone/dt;
 		ARG 0 blocks
-CLASS none/dy
+CLASS none/dy net/minecraft/util/BlockPos_MutableBlockPos
 	FIELD b x I
 	FIELD c y I
 	FIELD d z I
@@ -1173,7 +1186,25 @@ CLASS none/dz net/minecraft/dispenser/IBlockSource
 CLASS none/ea net/minecraft/block/BlockSourceImpl
 CLASS none/eb net/minecraft/util/Cartesian
 CLASS none/ec empty/ec
+CLASS none/ed net/minecraft/util/Cartesian_GetList
+CLASS none/ee net/minecraft/util/Cartesian_Product
+	FIELD a clazz Ljava/lang/Class;
+	FIELD b iterables [Ljava/lang/Iterable;
+	METHOD <init> (Ljava/lang/Class;[Ljava/lang/Iterable;)V
+		ARG 0 clazz
+		ARG 1 iterables
+CLASS none/ef net/minecraft/util/Cartesian_ProductIterator
+	FIELD a index I
+	FIELD b iterables [Ljava/lang/Iterable;
+	FIELD c iterators [Ljava/util/Iterator;
+	FIELD d results [Ljava/lang/Object;
+	METHOD <init> (Ljava/lang/Class;[Ljava/lang/Iterable;)V
+		ARG 0 clazz
+		ARG 1 iterables
+	METHOD a synthNext ()[Ljava/lang/Object;
+	METHOD b reset ()V
 CLASS none/eg net/minecraft/dispenser/DispenseBehaviorDefault
+	METHOD a dispense (Lnone/dz;Lnone/amj;)Lnone/amj;
 CLASS none/eh net/minecraft/util/RegistryNamedspaced
 	FIELD d defaultKey Ljava/lang/Object;
 	FIELD e currentRegistryItem Ljava/lang/Object;
@@ -1258,6 +1289,11 @@ CLASS none/en net/minecraft/util/Orientation
 	METHOD a (Ljava/util/Random;)Lnone/ej;
 		ARG 0 random
 CLASS none/eo net/minecraft/dispenser/IDispenseBehavior
+	METHOD a dispense (Lnone/dz;Lnone/amj;)Lnone/amj;
+CLASS none/ep net/minecraft/dispenser/IDispenseBehavior_1
+	METHOD a dispense (Lnone/dz;Lnone/amj;)Lnone/amj;
+		ARG 0 blockSource
+		ARG 1 itemStack
 CLASS none/eq net/minecraft/util/IObjectIntIterable
 CLASS none/er net/minecraft/util/ObjectIntIdentityMap
 	FIELD a identityHashMap Ljava/util/IdentityHashMap;
@@ -1836,6 +1872,29 @@ CLASS none/gg net/minecraft/nbt/JsonToNBT
 	FIELD b PATTERN Ljava/util/regex/Pattern;
 	METHOD a toNbt (Ljava/lang/String;)Lnone/fn;
 		ARG 0 jsonString
+CLASS none/gh net/minecraft/nbt/JsonToNbt_Any
+	FIELD a json Ljava/lang/String;
+	METHOD a parse ()Lnone/gd;
+CLASS none/gi net/minecraft/nbt/JsonToNbt_Compound
+	METHOD <init> (Ljava/lang/String;)V
+		ARG 0 json
+	METHOD a parse ()Lnone/gd;
+CLASS none/gj net/minecraft/nbt/JsonToNbt_List
+	METHOD a parse ()Lnone/gd;
+CLASS none/gk net/minecraft/nbt/JsonToNbt_Primitive
+	FIELD b jsonValue Ljava/lang/String;
+	FIELD c DOUBLE Ljava/util/regex/Pattern;
+	FIELD d FLOAT Ljava/util/regex/Pattern;
+	FIELD e BYTE Ljava/util/regex/Pattern;
+	FIELD f LONG Ljava/util/regex/Pattern;
+	FIELD g SHORT Ljava/util/regex/Pattern;
+	FIELD h INT Ljava/util/regex/Pattern;
+	FIELD i DOUBLE_UNTYPED Ljava/util/regex/Pattern;
+	FIELD j SPLITTER Lcom/google/common/base/Splitter;
+	METHOD <init> (Ljava/lang/String;Ljava/lang/String;)V
+		ARG 0 json
+		ARG 1 jsonValue
+	METHOD a parse ()Lnone/gd;
 CLASS none/gm net/minecraft/network/NettyEncryptionTranslator
 	FIELD a cipher Ljavax/crypto/Cipher;
 	FIELD b decryptedBytes [B
@@ -1977,8 +2036,10 @@ CLASS none/gy net/minecraft/network/ConnectionState
 		ARG 0 direction
 		ARG 1 packet
 	METHOD values ()[Lnone/gy;
-CLASS none/gz
+CLASS none/gz net/minecraft/network/EnumConnectionState_3
 CLASS none/ha net/minecraft/network/Packet
+CLASS none/hb net/minecraft/network/EnumConnectionState_2
+CLASS none/hc net/minecraft/network/EnumConnectionState_1
 CLASS none/hd net/minecraft/network/PacketBuffer
 	FIELD a byteBuf Lio/netty/buffer/ByteBuf;
 	METHOD <init> (Lio/netty/buffer/ByteBuf;)V
@@ -2187,6 +2248,10 @@ CLASS none/hj net/minecraft/chat/BaseComponent
 	METHOD b getStyle ()Lnone/hv;
 	METHOD c getUnformattedText ()Ljava/lang/String;
 	METHOD d getFormattedText ()Ljava/lang/String;
+CLASS none/hk net/minecraft/util/ChatComponentStyle_1
+	METHOD a getIterator (Lnone/ho;)Ljava/util/Iterator;
+CLASS none/hl net/minecraft/util/ChatComponentStyle_2
+	METHOD a cloneComponent (Lnone/ho;)Lnone/ho;
 CLASS none/hm net/minecraft/chat/ClickEvent
 CLASS none/hn net/minecraft/client/gui/EnumClickActionTypes
 	FIELD a OPEN_URL Lnone/hn;
@@ -2257,7 +2322,7 @@ CLASS none/hu net/minecraft/chat/SelectorComponent
 	METHOD e getComponentText ()Ljava/lang/String;
 	METHOD f cloneComponent ()Lnone/ho;
 	METHOD g getPattern ()Ljava/lang/String;
-CLASS none/hv net/minecraft/chat/Style
+CLASS none/hv net/minecraft/chat/ChatStyle
 	FIELD a parent Lnone/hv;
 	FIELD b textColor Lnone/a;
 	FIELD c isBold Ljava/lang/Boolean;
@@ -2325,6 +2390,15 @@ CLASS none/hw net/minecraft/chat/StyleRoot
 	METHOD k getStyleString ()Ljava/lang/String;
 	METHOD m cloneWithParent ()Lnone/hv;
 	METHOD n cloneWithoutParent ()Lnone/hv;
+CLASS none/hx net/minecraft/chat/ChatStyle_Serializer
+	METHOD a deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnone/hv;
+		ARG 0 jsonElement
+		ARG 1 type
+		ARG 2 jsonDeserializationContext
+	METHOD a serialize (Lnone/hv;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement;
+		ARG 0 chatStyle
+		ARG 1 type
+		ARG 2 jsonSerializationContext
 CLASS none/hy net/minecraft/chat/TextComponent
 	FIELD b text Ljava/lang/String;
 	METHOD <init> (Ljava/lang/String;)V
@@ -2722,6 +2796,9 @@ CLASS none/jq net/minecraft/network/play/packet/clientbound/PacketChunkData
 	METHOD a read (Lnone/hd;)V
 	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
+CLASS none/jr net/minecraft/network/play/packet/serverbound/S21PacketChunkData_Extracted
+	FIELD a data [B
+	FIELD b dataSize I
 CLASS none/js net/minecraft/network/play/packet/clientbound/PacketMapChunkBulk
 	METHOD a getChunkCount ()I
 	METHOD a getX (I)I
@@ -2807,6 +2884,7 @@ CLASS none/ke net/minecraft/network/play/packet/clientbound/PacketCombat
 	METHOD a read (Lnone/hd;)V
 	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
+CLASS none/kf net/minecraft/network/play/packet/serverbound/S42PacketCombatEvent_SwitchEvent
 CLASS none/kg net/minecraft/network/play/data/EnumCombatState
 	FIELD a ENTER_COMBAT Lnone/kg;
 	FIELD b END_COMBAT Lnone/kg;
@@ -2817,6 +2895,7 @@ CLASS none/kh net/minecraft/network/play/packet/clientbound/PacketPlayerListItem
 	METHOD a handle (Lnone/hg;)V
 	METHOD b getAction ()Lnone/kj;
 	METHOD b write (Lnone/hd;)V
+CLASS none/ki net/minecraft/network/play/packet/serverbound/S38PacketPlayerListItem_SwitchAction
 CLASS none/kj net/minecraft/network/play/data/EnumPlayerListAction
 	FIELD a ADD_PLAYER Lnone/kj;
 	FIELD b UPDATE_GAME_MODE Lnone/kj;
@@ -2862,6 +2941,7 @@ CLASS none/kr net/minecraft/network/play/packet/clientbound/PacketLevelBorder
 	METHOD a read (Lnone/hd;)V
 	METHOD a handle (Lnone/hg;)V
 	METHOD b write (Lnone/hd;)V
+CLASS none/ks net/minecraft/network/play/packet/serverbound/S44PacketWorldBorder_Switch
 CLASS none/kt net/minecraft/world/EnumLevelBorderAction
 	FIELD a SET_SIZE Lnone/kt;
 	FIELD b LERP_SIZE Lnone/kt;
@@ -3386,11 +3466,14 @@ CLASS none/oq net/minecraft/dispenser/DispenseBehaviorPotion
 	CLASS or
 		METHOD a (Lnone/aqu;Lnone/ex;)Lnone/aho;
 			ARG 0 dimension
+	METHOD a dispense (Lnone/dz;Lnone/amj;)Lnone/amj;
 CLASS none/os net/minecraft/dispenser/DispenseBehaviorSpawnEgg
 CLASS none/ot net/minecraft/dispenser/DispenseBehaviorFireworks
 CLASS none/ou net/minecraft/dispenser/DispenseBehaviorFireCharge
 CLASS none/ov net/minecraft/dispenser/DispenseBehaviorBoat
 CLASS none/ow net/minecraft/util/JsonException
+CLASS none/ox empty/ox
+CLASS none/oy net/minecraft/client/util/JsonException_Entry
 CLASS none/pc net/minecraft/util/StackInfoPrintStream
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD b prefix Ljava/lang/String;
@@ -3454,6 +3537,21 @@ CLASS none/pk net/minecraft/scoreboard/ServerScoreboardManager
 		ARG 0 objective
 CLASS none/pm net/minecraft/server/gui/IUpdatePlayerListBox
 	METHOD c update ()V
+CLASS none/qi rnet/minecraft/client/renderers/DestroyBlockProgress
+	FIELD a playerID I
+	FIELD b blockPos Lnone/dt;
+	FIELD c progress I
+	FIELD d tickCreatedOn I
+	METHOD <init> (ILnone/dt;)V
+		ARG 0 playerID
+		ARG 1 blockPos
+	METHOD a setProgress (I)V
+		ARG 0 progress
+	METHOD b getPosition ()Lnone/dt;
+	METHOD b setCreationTick (I)V
+		ARG 0 tickCreatedOn
+	METHOD c getProgress ()I
+	METHOD d getCreationTick ()I
 CLASS none/qj net/minecraft/world/WorldServerDemo
 CLASS none/qk net/minecraft/demo/GameSessionDemo
 	METHOD <init> (Lnone/aqu;)V
@@ -3512,11 +3610,69 @@ CLASS none/qp net/minecraft/world/WorldManager
 	METHOD b sendBlockBreakProgress (Lnone/dt;)V
 	METHOD b onEntityRemoved (Lnone/wv;)V
 		ARG 0 entity
-CLASS none/qq
+CLASS none/qq net/minecraft/server/management/PlayerManager
+	CLASS qr
+		FIELD b playersWatchingChunk Ljava/util/List;
+		FIELD c chunkCoords Lnone/aqm;
+		FIELD d locationOfBlockChange [S
+		FIELD e numBlocksToUpdate I
+		FIELD f EbsToUpdateMap I
+		FIELD g previousWorldTime J
+		METHOD a processChunk ()V
+		METHOD a flagBlockToUpdate (III)V
+			ARG 0 xRel
+			ARG 1 y
+			ARG 2 zRel
+		METHOD a sendBlockEntityToAllPlayersWatchingChunk (Lnone/bcm;)V
+			ARG 0 blockEntity
+		METHOD a updateInhabitedTime (Lnone/bfh;)V
+			ARG 0 chunk
+		METHOD a sendToAllPlayersWatchingChunk (Lnone/id;)V
+			ARG 0 packet
+		METHOD a addPlayer (Lnone/qw;)V
+			ARG 0 entityPlayerMP
+		METHOD b update ()V
+		METHOD b removePlayer (Lnone/qw;)V
+			ARG 0 entityPlayerMP
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD b dimensionServer Lnone/qt;
+	FIELD b worldServer Lnone/qt;
+	FIELD c players Ljava/util/List;
+	FIELD d playerInstances Lnone/ur;
+	FIELD e playerInstancesToUpdate Ljava/util/List;
+	FIELD f playerInstanceList Ljava/util/List;
+	FIELD g playerViewRadius I
+	FIELD h previousTotalWorldTime J
+	FIELD i xzDirectionVectors [[I
 	METHOD <init> (Lnone/qt;)V
 		ARG 0 dimensionServer
+	METHOD a getWorldServer ()Lnone/qt;
+	METHOD a setPlayerViewRadius (I)V
+		ARG 0 viewRadius
+	METHOD a hasPlayerInstance (II)Z
+		ARG 0 chunkX
+		ARG 1 chunkZ
+	METHOD a checkOverlaps (IIIII)Z
+		ARG 0 x1
+		ARG 1 z1
+		ARG 2 x2
+		ARG 3 z2
+		ARG 4 range
+	METHOD a markBlockForUpdate (Lnone/dt;)V
+		ARG 0 blockPos
+	METHOD a addPlayer (Lnone/qw;)V
+		ARG 0 entityPlayerMP
+	METHOD a isPlayerWatchingChunk (Lnone/qw;II)Z
+		ARG 0 entityPlayerMP
+		ARG 1 chunkX
+		ARG 2 chunkZ
+	METHOD b updatePlayerInstances ()V
+	METHOD b getFurthestViewableBlock (I)I
+	METHOD b filterChunkLoadQueue (Lnone/qw;)V
+		ARG 0 entityPlayerMP
+	METHOD c removePlayer (Lnone/qw;)V
+		ARG 0 entityPlayerMP
+	METHOD d updateMountedMovingPlayer (Lnone/qw;)V
+		ARG 0 entityPlayerMP
 CLASS none/qs net/minecraft/world/gen/ServerChunkCache
 	FIELD b LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD e levelGenerator Lnone/bfe;
@@ -3584,52 +3740,91 @@ CLASS none/qw net/minecraft/entity/player/EntityPlayerMP
 	FIELD a netServerHandler Lnone/rj;
 	FIELD bF LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD bG locale Ljava/lang/String;
+	FIELD bH destroyedItemsCache Ljava/util/List;
+	FIELD bI statsFile Lnone/tp;
+	FIELD bJ effectiveHealth F
+	FIELD bK lastHealth F
+	FIELD bL lastFoodLevel I
 	FIELD b server Lnet/minecraft/server/MinecraftServer;
-	FIELD bS entity Lnone/wv;
+	FIELD bM wasHungry Z
+	FIELD bN lastExperience I
+	FIELD bO respawnInvulTicks I
+	FIELD bP chatVisibility Lnone/ahg;
+	FIELD bQ chatColors Z
+	FIELD bR lastActiveTime J
+	FIELD bS spectatingEntity Lnone/wv;
+	FIELD bT currentWindowID I
 	FIELD c session Lnone/qx;
+	FIELD d managedPosX D
+	FIELD e managedPosZ D
+	FIELD f loadedChunks Ljava/util/List;
+	FIELD g onlyChangingQuantity Z
+	FIELD h ping I
+	FIELD i playerBeatTheEnd Z
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnone/qt;Lcom/mojang/authlib/GameProfile;Lnone/qx;)V
 		ARG 0 minecraftServer
 		ARG 1 dimensionServer
 		ARG 2 gameProfile
-	METHOD a (DZLnone/atr;Lnone/dt;)V
+		ARG 3 session
+	METHOD a setPositionUpdate (DDD)V
+	METHOD a updateFall (DZLnone/atr;Lnone/dt;)V
 		ARG 2 block
 	METHOD a addXpLevels (I)V
+		ARG 0 xp
 	METHOD a canUseCommand (ILjava/lang/String;)Z
 	METHOD a openHorseInventory (Lnone/abt;Lnone/vq;)V
+	METHOD a canAttackPlayer (Lnone/ahd;)Z
+		ARG 0 entityPlayer
 	METHOD a openMerchantInventory (Lnone/aqb;)V
+	METHOD a sendBlockEntityUpdate (Lnone/bcm;)V
+		ARG 0 blockEntity
 	METHOD a openSignEditor (Lnone/bdj;)V
 	METHOD a trySleepInBed (Lnone/dt;)Lnone/ahf;
+		ARG 0 bedCoords
 	METHOD a readFromNBT (Lnone/fn;)V
 		ARG 0 nbtMap
 	METHOD a sendChat (Lnone/ho;)V
+	METHOD a isSpectating (Lnone/qw;)Z
+		ARG 0 entityPlayerMP
 	METHOD a addStat (Lnone/tq;I)V
 	METHOD a openInventory (Lnone/vq;)V
 	METHOD a openBenchInterface (Lnone/vv;)V
 	METHOD a handleDeathFrom (Lnone/wh;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+		ARG 0 source
+	METHOD a attackEntity (Lnone/wh;F)Z
+		ARG 0 source
+	METHOD a addNewPotionEffect (Lnone/wq;)V
+	METHOD a changePotionEffect (Lnone/wq;Z)V
 	METHOD a mount (Lnone/wv;)V
 		ARG 0 entity
-	METHOD a (Lnone/wv;I)V
+	METHOD a pickupItem (Lnone/wv;I)V
 		ARG 0 entity
+	METHOD a wakePlayer (ZZZ)V
 	METHOD b subtractXpLevels (I)V
+		ARG 0 xp
 	METHOD b writeToNBT (Lnone/fn;)V
 		ARG 0 nbtMap
+	METHOD b finishPotionEffect (Lnone/wq;)V
 	METHOD b (Lnone/wv;)V
 		ARG 0 entity
 	METHOD c getPosition ()Lnone/dt;
 	METHOD c changeDimension (I)V
+		ARG 0 dimensionID
 	METHOD c (Lnone/wv;)V
 		ARG 0 entity
+	METHOD cq isPVPEnabled ()Z
 	METHOD e (Lnone/wv;)V
 		ARG 0 entity
 	METHOD f (Lnone/wv;)V
 		ARG 0 entity
 	METHOD f_ addAsListenerToOpenContainer ()V
 	METHOD g_ enterCombat ()V
+	METHOD h_ updateBiomesExplored ()V
 	METHOD j endCombat ()V
+	METHOD l onUpdateEntity ()V
 	METHOD n closeScreen ()V
 	METHOD s doSwallowAction ()V
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 	METHOD t sendPlayerAbilities ()V
 	METHOD v isSpectating ()Z
 CLASS none/qx net/minecraft/network/GameSession
@@ -4560,89 +4755,145 @@ CLASS none/wq net/minecraft/potion/PotionEffect
 CLASS none/ws net/minecraft/entity/EntityAgeable
 	FIELD a age I
 	FIELD b forcedAge I
+	METHOD a setSize (FF)V
 	METHOD a doInteractionWith (Lnone/ahd;)Z
 		ARG 0 player
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws;
 	METHOD b setAge (I)V
 	METHOD b writeToNBT (Lnone/fn;)V
+	METHOD h init ()V
 	METHOD i_ isBaby ()Z
 	METHOD l getAge ()I
+	METHOD m entityInit ()V
 	METHOD n attackGoals ()V
 CLASS none/wt net/minecraft/entity/IMob
 CLASS none/wv net/minecraft/entity/Entity
 	FIELD A previousYaw F
 	FIELD B previousPitch F
 	FIELD C onGround Z
-	FIELD G markedForKnockback Z
-	FIELD H insideWeb Z
+	FIELD D hasCollidedHorizontally Z
+	FIELD E hasCollidedVertically Z
+	FIELD F hasCollided Z
+	FIELD G velocityChanged Z
+	FIELD H inWeb Z
 	FIELD I isDead Z
 	FIELD J width F
 	FIELD K height F
+	FIELD L prevDistanceWalkedModified F
+	FIELD M distanceWalkedModified F
+	FIELD N distanceWalkedOnStepModified F
 	FIELD O fallDistance F
-	FIELD T noGravity Z
-	FIELD V random Ljava/util/Random;
+	FIELD P xPosLastTick D
+	FIELD Q yPosLastTick D
+	FIELD R zPosLastTick D
+	FIELD S stepHeight F
+	FIELD T noClip Z
+	FIELD U collisionReduction F
+	FIELD V rand Ljava/util/Random;
 	FIELD W tickCounter I
+	FIELD X fireResistance I
 	FIELD Y inWater Z
+	FIELD Z hurtResistanceTime I
 	FIELD a ZEROED_BOUNDING_BOX Lnone/brt;
-	FIELD ab underwater Z
+	FIELD aa firstUpdate Z
+	FIELD ab isImmuneToFire Z
 	FIELD ac dataWatcher Lnone/xv;
+	FIELD ad addedToChunk Z
 	FIELD ae chunkX I
 	FIELD af chunkY I
 	FIELD ag chunkZ I
+	FIELD ah ignoreFrustrumCheck Z
+	FIELD ai isAirBorne Z
 	FIELD aj portalCooldown I
 	FIELD ak insidePortal Z
 	FIELD al portalTimer I
 	FIELD am dimensionId I
 	FIELD an compassDirection I
 	FIELD ao uuid Ljava/util/UUID;
+	FIELD ap entityRiderPitchDelta D
+	FIELD aq entityRiderYawDelta D
 	FIELD ar invulnerable Z
 	FIELD as commandResultStats Lnone/af;
+	FIELD b nextEntityID I
+	FIELD bU xPosServer I
+	FIELD bV yPosServer I
+	FIELD bW zPosServer I
 	FIELD c id I
 	FIELD f boundingBox Lnone/brt;
-	FIELD g outsideLevelBorder Z
+	FIELD g outsideBorder Z
+	FIELD h nextStepDistance I
 	FIELD i fire I
+	FIELD j renderDistanceWeight D
+	FIELD k preventSpawning Z
 	FIELD l riderEntity Lnone/wv;
 	FIELD m riddenEntity Lnone/wv;
-	FIELD o level Lnone/aqu;
-	FIELD p previousLevelX D
-	FIELD q previousLevelY D
-	FIELD r previousLevelZ D
-	FIELD s levelX D
-	FIELD t levelY D
-	FIELD u levelZ D
+	FIELD n forceSpawn Z
+	FIELD o world Lnone/aqu;
+	FIELD p prevXPos D
+	FIELD q prevYPos D
+	FIELD r prevZPos D
+	FIELD s xPos D
+	FIELD t yPos D
+	FIELD u zPos D
 	FIELD v motionX D
 	FIELD w motionY D
 	FIELD x motionZ D
 	FIELD y yaw F
 	FIELD z pitch F
+	METHOD <init> (Lnone/aqu;)V
+		ARG 0 world
 	METHOD F getEntityId ()I
 	METHOD G onKillCommand ()V
 	METHOD H getDataWatcher ()Lnone/xv;
+	METHOD I prepareForSpawn ()V
 	METHOD J kill ()V
-	METHOD K onTick ()V
+	METHOD K tick ()V
 	METHOD L getPortalDelay ()I
 	METHOD M applyLavaDamage ()V
 	METHOD N extinguish ()V
 	METHOD O fallFromLevel ()V
 	METHOD P getSwimSound ()Ljava/lang/String;
+	METHOD Q doBlockCollisions ()V
+	METHOD R isSilent ()Z
+	METHOD S getNullBoundingBox ()Lnone/brt;
 	METHOD T isUnderwater ()Z
+	METHOD U isWet ()Z
 	METHOD V isInWater ()Z
-	METHOD W checkEntityIsInWater ()Z
-	METHOD X onEnterWater ()V
+	METHOD W isEntityInWater ()Z
+	METHOD X enterWater ()V
 	METHOD Y checkDoSprintEffect ()V
 	METHOD Z doSprintEffect ()V
 	METHOD a handleEntityStatusPacket (B)V
 		ARG 0 entityStatusByte
+	METHOD a isInRangeToRender (D)Z
+		ARG 0 dist
+	METHOD a setPositionUpdate (DDD)V
+	METHOD a setPositionAndRotation (DDDFF)V
+		ARG 0 xPos
+		ARG 1 yPos
+		ARG 2 zPos
+		ARG 3 yaw
+		ARG 4 pitch
 	METHOD a updateKinetics (DDDFFIZ)V
 		ARG 0 newPosX
 		ARG 1 newPosY
 		ARG 2 newPosZ
 		ARG 3 newYaw
 		ARG 4 newPitch
+	METHOD a raytrace (DF)Lnone/bru;
+	METHOD a updateFall (DZLnone/atr;Lnone/dt;)V
+		ARG 1 isFalling
+		ARG 2 block
+		ARG 3 blockPos
+	METHOD a setSize (FF)V
+		ARG 0 width
+		ARG 1 height
+	METHOD a moveFlying (FFF)V
 	METHOD a canUseCommand (ILjava/lang/String;)Z
 	METHOD a setCustomName (Ljava/lang/String;)V
 	METHOD a playSound (Ljava/lang/String;FF)V
+		ARG 0 soundName
 	METHOD a applyLightningDamage (Lnone/ads;)V
 		ARG 0 bolt
 	METHOD a setResultStat (Lnone/ag;I)V
@@ -4657,58 +4908,109 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD a spawnDroppedItemStack (Lnone/amj;F)Lnone/adw;
 		ARG 0 itemStack
 		ARG 1 spawnOffsetY
-	METHOD a setLevel (Lnone/aqu;)V
-		ARG 0 level
+	METHOD a getExplosionResistance (Lnone/aqo;Lnone/aqu;Lnone/dt;Lnone/bec;)F
+	METHOD a canExplode (Lnone/aqo;Lnone/aqu;Lnone/dt;Lnone/bec;F)Z
+	METHOD a setWorld (Lnone/aqu;)V
+		ARG 0 world
 	METHOD a isInMaterial (Lnone/bof;)Z
 		ARG 0 material
 	METHOD a setBoundingBox (Lnone/brt;)V
+	METHOD a setPositionAndRotation (Lnone/dt;FF)V
+		ARG 0 blockPos
+		ARG 1 yaw
+		ARG 2 pitch
+	METHOD a playStepSound (Lnone/dt;Lnone/atr;)V
+		ARG 0 blockPos
+		ARG 1 block
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a sendChat (Lnone/ho;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a addCrashInfo (Lnone/j;)V
+	METHOD a isSpectating (Lnone/qw;)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
+		ARG 0 source
+		ARG 1 unused
 	METHOD a mount (Lnone/wv;)V
 		ARG 0 mountedEntity
 	METHOD a asNbtList ([D)Lnone/fv;
 	METHOD a asNbtList ([F)Lnone/fv;
 	METHOD aA getOxygen ()I
 	METHOD aB onInsideWeb ()V
+	METHOD aC getParts ()[Lnone/wv;
 	METHOD aD getHeadPitch ()F
+	METHOD aE canAttackWithItem ()Z
+	METHOD aF getMaxFallHeight ()I
 	METHOD aG getCompassDirection ()I
+	METHOD aH doesNotTriggerPressurePlate ()Z
+	METHOD aI canRenderOnFire ()Z
 	METHOD aJ getUuid ()Ljava/util/UUID;
+	METHOD aK isPushedByWater ()Z
 	METHOD aL getCustomName ()Ljava/lang/String;
 	METHOD aM isCustomNameVisible ()Z
+	METHOD aN renderNameTag ()Z
 	METHOD aO getFacing ()Lnone/ej;
+	METHOD aP getHoverEvent ()Lnone/hr;
 	METHOD aQ getBoundingBox ()Lnone/brt;
 	METHOD aR getEyeHeight ()F
 	METHOD aS getOutsideLevelBorder ()Z
 	METHOD aT getCommandResultStats ()Lnone/af;
+	METHOD aU getNBTTagCompound ()Lnone/fn;
 	METHOD aa getSplashSound ()Ljava/lang/String;
 	METHOD ab isInLava ()Z
-	METHOD ac markForKnockback ()V
+	METHOD ac knockbacked ()V
 	METHOD ad canBeHit ()Z
 	METHOD ae canBePushed ()Z
+	METHOD af shouldSetPosAfterLoading ()Z
+	METHOD ag getEntityString ()Ljava/lang/String;
+	METHOD ah onChunkLoad ()V
 	METHOD ai isEntityAlive ()Z
+	METHOD aj isEntityInsideSolidBlock ()Z
+	METHOD ak updateRidden ()V
+	METHOD al updateRiderPosition ()V
+	METHOD am getMountedYOffset ()D
 	METHOD an getRiderMountHeight ()D
+	METHOD ao getCollisionBorderSize ()F
+	METHOD ap getRotation ()Lnone/brw;
 	METHOD aq doEnterPortal ()V
 	METHOD ar getPortalCooldownTicks ()I
+	METHOD as performHurtAnim ()V
 	METHOD at getArmorEquipment ()[Lnone/amj;
 	METHOD au isOnFire ()Z
 	METHOD av isRiding ()Z
 	METHOD aw isSneaking ()Z
 	METHOD ax isSprinting ()Z
-	METHOD ay getInvisible ()Z
-	METHOD b updatePosition (DDD)V
+	METHOD ay isInvisible ()Z
+	METHOD az isEating ()Z
+	METHOD b setPosition (DDD)V
 		ARG 0 x
 		ARG 1 y
 		ARG 2 z
-	METHOD b setLocationAndAngles (DDDFF)V
+	METHOD b setPositionAndRotationLastTick (DDDFF)V
+		ARG 0 xPosLastTick
+		ARG 1 yPosLastTick
+		ARG 2 zPosLastTick
+		ARG 3 yaw
+		ARG 4 pitch
+	METHOD b getCombinedLight (F)I
+		ARG 0 unused
 	METHOD b updateYawAndPitch (FF)V
+		ARG 0 yaw
+		ARG 1 pitch
+	METHOD b setFlag (IZ)V
+		ARG 0 pos
+		ARG 1 flag
+	METHOD b isLiquidPresentInAABB (Lnone/brt;)Z
+		ARG 0 aabb
 	METHOD b distanceSquared (Lnone/dt;)D
+		ARG 0 blockPos
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD b isInvulnerableFor (Lnone/wh;)Z
 		ARG 0 source
+	METHOD b addToPlayerScore (Lnone/wv;I)V
 	METHOD b setSilent (Z)V
 	METHOD c getPosition ()Lnone/dt;
+	METHOD c isOffsetPosInLiquid (DDD)Z
 	METHOD c getBrightness (F)F
+		ARG 0 unused
 	METHOD c onMouseMoved (FF)V
 		ARG 0 dx
 		ARG 1 dy
@@ -4717,23 +5019,35 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD c setItemStackInSlot (ILnone/amj;)V
 		ARG 1 itemStack
 	METHOD c distanceFromCenterSquared (Lnone/dt;)D
+		ARG 0 blockPos
+	METHOD c saveMountToNBT (Lnone/fn;)Z
+	METHOD c setSneaking (Z)V
 	METHOD d getVec3 ()Lnone/brw;
-	METHOD d applyMotion (DDD)V
+	METHOD d move (DDD)V
 		ARG 0 moveX
 		ARG 1 moveY
 		ARG 2 moveZ
+	METHOD d getRotationVector (F)Lnone/brw;
 	METHOD d setEntityId (I)V
 		ARG 0 id
 	METHOD d replaceItem (ILnone/amj;)Z
 		ARG 0 slot
 	METHOD d onCollide (Lnone/ahd;)V
+		ARG 0 entityPlayer
+	METHOD d readMountFromNBT (Lnone/fn;)Z
+	METHOD d setSprinting (Z)V
 	METHOD d_ getName ()Ljava/lang/String;
 	METHOD e getLevel ()Lnone/aqu;
 	METHOD e distanceSquared (DDD)D
+		ARG 0 xPos
+		ARG 1 yPos
+		ARG 2 zPos
+	METHOD e getEyePosition (F)Lnone/brw;
 	METHOD e onHitGround (FF)V
 	METHOD e setOnFire (I)V
 		ARG 0 timeInSeconds
 	METHOD e onUseByPlayer (Lnone/ahd;)Z
+		ARG 0 entityPlayer
 	METHOD e saveToNbt (Lnone/fn;)V
 		ARG 0 compound
 	METHOD e setInvisible (Z)V
@@ -4741,16 +5055,39 @@ CLASS none/wv net/minecraft/entity/Entity
 	METHOD equals (Ljava/lang/Object;)Z
 	METHOD f getEntity ()Lnone/wv;
 	METHOD f distance (DDD)D
+		ARG 0 xPos
+		ARG 1 yPos
+		ARG 2 zPos
 	METHOD f setHeadPitch (F)V
+		ARG 0 pitch
+	METHOD f getRotationVector (FF)Lnone/brw;
+		ARG 0 pitch
+		ARG 1 yaw
 	METHOD f applyFireTickDamage (I)V
+		ARG 0 damage
+	METHOD f isInvisibleToPlayer (Lnone/ahd;)Z
 	METHOD f readFromNbt (Lnone/fn;)V
 		ARG 0 compound
+	METHOD f setEating (Z)V
+	METHOD g addVelocity (DDD)V
+		ARG 0 xVel
+		ARG 1 yVel
+		ARG 2 zVel
 	METHOD g getBooleanFromDataWatcher (I)Z
+		ARG 0 pos
+	METHOD g setNBTTagCompound (Lnone/fn;)V
 	METHOD g distance (Lnone/wv;)F
+		ARG 0 entity
 	METHOD g setCustomNameVisible (Z)V
+	METHOD h init ()V
+	METHOD h isInRangeToRender (DDD)Z
+		ARG 0 xPos
+		ARG 1 yPos
+		ARG 2 zPos
 	METHOD h setOxygen (I)V
 		ARG 0 oxygenLevel
 	METHOD h distanceSquared (Lnone/wv;)D
+		ARG 0 entity
 	METHOD h setOutsideLevelBorder (Z)V
 	METHOD hashCode ()I
 	METHOD i setVelocity (DDD)V
@@ -4758,8 +5095,20 @@ CLASS none/wv net/minecraft/entity/Entity
 		ARG 1 velocityY
 		ARG 2 velocityZ
 	METHOD i applyCollisionWithEntity (Lnone/wv;)V
+		ARG 0 entity
+	METHOD j pushOutOfBlocks (DDD)Z
+		ARG 0 xPos
+		ARG 1 yPos
+		ARG 2 zPos
+	METHOD j getCollisionBox (Lnone/wv;)Lnone/brt;
+	METHOD k isEquals (Lnone/wv;)Z
 	METHOD k_ hasCustomName ()Z
-	METHOD s_ onUpdate ()V
+	METHOD l hitByEntity (Lnone/wv;)Z
+	METHOD m entityInit ()V
+	METHOD m copyPositionAndRotation (Lnone/wv;)V
+	METHOD n copy (Lnone/wv;)V
+	METHOD r_ canTriggerWalking ()Z
+	METHOD s_ update ()V
 	METHOD t_ shouldReceiveCommandFeedback ()Z
 	METHOD toString ()Ljava/lang/String;
 CLASS none/xb net/minecraft/entity/EntityRegistry
@@ -4805,29 +5154,63 @@ CLASS none/xk net/minecraft/entity/EntityXPOrb
 	FIELD b age I
 	FIELD d health I
 	FIELD e experience I
-	METHOD W checkEntityIsInWater ()Z
+	METHOD W isEntityInWater ()Z
 	METHOD a roundExpToLevel (I)I
 		ARG 0 exp
 	METHOD a readFromNBT (Lnone/fn;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
+	METHOD aE canAttackWithItem ()Z
+	METHOD b getCombinedLight (F)I
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD d onCollide (Lnone/ahd;)V
 	METHOD f applyFireTickDamage (I)V
+	METHOD h init ()V
 	METHOD j getExperience ()I
 	METHOD l getLevels ()I
-	METHOD s_ onUpdate ()V
+	METHOD r_ canTriggerWalking ()Z
+	METHOD s_ update ()V
 CLASS none/xl
+	METHOD a updateFall (DZLnone/atr;Lnone/dt;)V
 	METHOD e onHitGround (FF)V
-CLASS none/xm net/minecraft/entity/EntityLiving
+	METHOD g moveByHeading (FF)V
+	METHOD j_ isOnLadder ()Z
+CLASS none/xm net/minecraft/entity/EntityLivingAbstract
+	FIELD aA limbSwing F
+	FIELD aB maxHurtResistantTime I
+	FIELD aC prevCameraPitch F
+	FIELD aD cameraPitch F
 	FIELD aG headYaw F
 	FIELD aH previousHeadYaw F
 	FIELD aI headPitch F
 	FIELD aJ previousHeadPitch F
-	FIELD aL hurtedByPlayer Lnone/ahd;
+	FIELD aK jumpFactor F
+	FIELD aL attackingPlayer Lnone/ahd;
+	FIELD a SPRINTING_SPEED_BOOST_MODIFIER_UUID Ljava/util/UUID;
+	FIELD aM recentlyHit I
+	FIELD aN dead Z
+	FIELD aO entityAge I
+	FIELD aP prevGroundSpeedFactor F
+	FIELD aQ groundSpeedFactor F
+	FIELD aR movedDistance F
+	FIELD aS prevMovedDistance F
+	FIELD aU scoreValue I
+	FIELD aV lastDamage F
+	FIELD aW isJumping Z
 	FIELD aX moveStrafing F
 	FIELD aY moveForward F
+	FIELD aZ randomYawVelocity F
+	FIELD ap swingInProgress Z
+	FIELD aq swingProgress I
+	FIELD ar arrowHitTime I
 	FIELD as hurtTime I
+	FIELD at maxHurtTime I
+	FIELD au attackedAtYaw F
 	FIELD av deathTime I
+	FIELD aw prevSwingProgress F
+	FIELD ax swingProgress F
+	FIELD ay prevLimbSwingAmount F
+	FIELD az limbSwingAmount F
+	FIELD b SPRINTING_SPEED_BOOST_MODIFIER Lnone/ya;
 	FIELD ba networkLagTicks I
 	FIELD bb lastSyncedX D
 	FIELD bc lastSyncedY D
@@ -4836,43 +5219,81 @@ CLASS none/xm net/minecraft/entity/EntityLiving
 	FIELD bf lastSyncedPitch D
 	FIELD bg damagerEntity Lnone/xm;
 	FIELD bh hurtByTimestamp I
+	FIELD bi lastAttacker Lnone/xm;
+	FIELD bj lastAttackerTime I
+	FIELD bk groundMovementFactor F
+	FIELD bl jumpTicks I
 	FIELD bm absorptionHealth F
 	FIELD c attributes Lnone/yc;
 	FIELD f deathReporter Lnone/wg;
 	FIELD g activeEffects Ljava/util/Map;
+	FIELD h previousEquipment [Lnone/amj;
+	FIELD i potionsNeedUpdate Z
 	METHOD G onKillCommand ()V
-	METHOD K onTick ()V
+	METHOD K tick ()V
 	METHOD O fallFromLevel ()V
 	METHOD a handleEntityStatusPacket (B)V
 	METHOD a updateKinetics (DDDFFIZ)V
+	METHOD a updateFall (DZLnone/atr;Lnone/dt;)V
+	METHOD a isOnTeam (Lnone/bsf;)Z
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a handleDeathFrom (Lnone/wh;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD a hasPotion (Lnone/wp;)Z
+	METHOD a addNewPotionEffect (Lnone/wq;)V
+	METHOD a changePotionEffect (Lnone/wq;Z)V
 	METHOD a mount (Lnone/wv;)V
+		ARG 0 mountedEntity
+	METHOD a knockback (Lnone/wv;FDD)V
+	METHOD a pickupItem (Lnone/wv;I)V
 	METHOD a getAttribute (Lnone/xy;)Lnone/xz;
+	METHOD a dropEquipment (ZI)V
 	METHOD aD getHeadPitch ()F
+	METHOD aN renderNameTag ()Z
 	METHOD aW setAttributes ()V
 	METHOD aX breathesUnderwater ()Z
+	METHOD aY onDeathUpdate ()V
 	METHOD aZ isAdult ()Z
-	METHOD ac markForKnockback ()V
+	METHOD ac knockbacked ()V
 	METHOD ad canBeHit ()Z
 	METHOD ae canBePushed ()Z
 	METHOD ai isEntityAlive ()Z
+	METHOD ak updateRidden ()V
+	METHOD ap getRotation ()Lnone/brw;
+	METHOD as performHurtAnim ()V
 	METHOD at getArmorEquipment ()[Lnone/amj;
 	METHOD b getDroppedXp (Lnone/ahd;)I
+	METHOD b renderBrokenItemStack (Lnone/amj;)V
 	METHOD b writeToNBT (Lnone/fn;)V
+	METHOD b applyArmorToDamage (Lnone/wh;F)F
 	METHOD b getPotion (Lnone/wp;)Lnone/wq;
+	METHOD b finishPotionEffect (Lnone/wq;)V
 	METHOD b setDamager (Lnone/xm;)V
 		ARG 0 damagerEntity
 	METHOD b spawnLoot (ZI)V
 	METHOD bA getMovementSpeed ()F
+	METHOD bB ()F
+	METHOD bC isMovementBlocked ()Z
+	METHOD bD getJumpVelocity ()F
+	METHOD bE jump ()V
+	METHOD bF floatInWater ()V
+	METHOD bG floatInLava ()V
+	METHOD bH getGroundMovementFactor ()F
 	METHOD bI isInBed ()Z
+	METHOD bJ updateEntityAI ()V
+	METHOD bK collideWithNearbyEntities ()V
+	METHOD bL isServerWorld ()Z
 	METHOD bM getAbsorptionHealth ()F
 	METHOD bN getTeam ()Lnone/bsf;
+	METHOD bO setPotionsUpdate ()V
+	METHOD ba isPlayer ()Z
 	METHOD bb getRandom ()Ljava/util/Random;
 	METHOD bc getDamagerEntity ()Lnone/xm;
 	METHOD bd getHurtByTimestamp ()I
+	METHOD be getLastAttacker ()Lnone/xm;
+	METHOD bf getLastAttackedTime ()I
+	METHOD bg getAge ()I
+	METHOD bh updatePotionEffects ()V
 	METHOD bj clearEffects ()V
 	METHOD bk getEffects ()Ljava/util/Collection;
 	METHOD bl isUndead ()Z
@@ -4880,33 +5301,65 @@ CLASS none/xm net/minecraft/entity/EntityLiving
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD bp spawnSpecialLoot ()V
+	METHOD bq getTotalArmorValue ()I
 	METHOD br getDeathReporter ()Lnone/wg;
 	METHOD bs getAttacker ()Lnone/xm;
 	METHOD bt getMaxHealth ()F
+	METHOD bu getNumArrowsInEntity ()I
 	METHOD bv swingItem ()V
+	METHOD bw updateArmSwingProgress ()V
+	METHOD bx getAttributeMap ()Lnone/yc;
+	METHOD by getCreatureAttribute ()Lnone/xs;
 	METHOD bz getCurrentlyHoldingItemStack ()Lnone/amj;
 	METHOD c setItemStackInSlot (ILnone/amj;)V
+		ARG 0 slotNum
+		ARG 1 itemStack
+	METHOD c applyPotionDamage (Lnone/wh;F)F
+	METHOD c addPotionEffect (Lnone/wq;)V
+	METHOD c isOnSameTeam (Lnone/xm;)Z
+	METHOD d getRotationVector (F)Lnone/brw;
 	METHOD d damageEntity (Lnone/wh;F)V
 		ARG 0 source
 		ARG 1 damage
+	METHOD d isPotionApplicable (Lnone/wq;)Z
+	METHOD d setSprinting (Z)V
 	METHOD e onHitGround (FF)V
 	METHOD f setHeadPitch (F)V
 	METHOD g heal (F)V
+		ARG 0 healAmount
+	METHOD g moveByHeading (FF)V
 	METHOD g_ enterCombat ()V
+	METHOD h init ()V
 	METHOD h setHealth (F)V
+		ARG 0 health
+	METHOD i damageArmor (F)V
+	METHOD i setJumping (Z)V
 	METHOD i_ isBaby ()Z
 	METHOD j endCombat ()V
+	METHOD j setGroundMovementFactor (F)V
 	METHOD j getModifiedOxygenAfterConsumption (I)I
+	METHOD j_ isOnLadder ()Z
+	METHOD k getSwingProgress (F)F
 	METHOD k hasEffect (I)Z
 	METHOD l setAbsorptionHealth (F)V
 		ARG 0 absorptionHealth
 	METHOD l removeEffect (I)V
-	METHOD m (I)V
+	METHOD m entityInit ()V
+	METHOD m removePotionEffect (I)V
 		ARG 0 effectID
+	METHOD n getArmSwingAnimEnd ()I
 	METHOD n getFallDamageSound (I)Ljava/lang/String;
 		ARG 0 fallDamageAmount
+	METHOD o setNumArrowsInEntity (I)V
+		ARG 0 numArrows
 	METHOD p getEquipmentInSlot (I)Lnone/amj;
-	METHOD s_ onUpdate ()V
+	METHOD p setLastAttacker (Lnone/wv;)V
+	METHOD q getCurrentArmor (I)Lnone/amj;
+	METHOD q dismount (Lnone/wv;)V
+	METHOD r attackEntityAsMob (Lnone/wv;)Z
+	METHOD s collideWithEntity (Lnone/wv;)V
+	METHOD s_ update ()V
+	METHOD t isVisible (Lnone/wv;)Z
 CLASS none/xn net/minecraft/entity/EntityMob
 	FIELD bg goals2 Lnone/zc;
 	FIELD bh dropChances [F
@@ -4919,17 +5372,21 @@ CLASS none/xn net/minecraft/entity/EntityMob
 	FIELD i goals Lnone/zc;
 	METHOD A getDroppedItem ()Lnone/alq;
 	METHOD C canDespawn ()Z
-	METHOD K onTick ()V
+	METHOD K tick ()V
 	METHOD a handleEntityStatusPacket (B)V
 	METHOD a setDropChance (IF)V
 	METHOD a doInteractionWith (Lnone/ahd;)Z
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
+	METHOD a dropEquipment (ZI)V
+	METHOD aF getMaxFallHeight ()I
 	METHOD aW setAttributes ()V
 	METHOD at getArmorEquipment ()[Lnone/amj;
 	METHOD b getDroppedXp (Lnone/ahd;)I
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD b spawnLoot (ZI)V
+	METHOD bJ updateEntityAI ()V
+	METHOD bL isServerWorld ()Z
 	METHOD bW setPersistenceRequired ()V
 	METHOD bX getCanPickUpLoot ()Z
 	METHOD bY isPersistenceRequired ()Z
@@ -4938,11 +5395,15 @@ CLASS none/xn net/minecraft/entity/EntityMob
 	METHOD cd getNoAI ()Z
 	METHOD d replaceItem (ILnone/amj;)Z
 	METHOD e onUseByPlayer (Lnone/ahd;)Z
+	METHOD h init ()V
+	METHOD j setGroundMovementFactor (F)V
 	METHOD j setCanPickUpLoot (Z)V
 	METHOD k setNoAI (Z)V
+	METHOD m entityInit ()V
 	METHOD n attackGoals ()V
 	METHOD p getEquipmentInSlot (I)Lnone/amj;
-	METHOD s_ onUpdate ()V
+	METHOD q getCurrentArmor (I)Lnone/amj;
+	METHOD s_ update ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/xo net/minecraft/entity/EnumMobType
 	FIELD a ON_GROUND Lnone/xo;
@@ -5025,8 +5486,10 @@ CLASS none/xx net/minecraft/entity/EntityTamable
 		ARG 0 ownerName
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bN getTeam ()Lnone/bsf;
+	METHOD c isOnSameTeam (Lnone/xm;)Z
 	METHOD cj isOwned ()Z
 	METHOD cl isSitting ()Z
+	METHOD h init ()V
 	METHOD m setOwned (Z)V
 	METHOD n setSitting (Z)V
 CLASS none/xy net/minecraft/entity/attribute/IAttribute
@@ -5329,18 +5792,25 @@ CLASS none/abn net/minecraft/entity/EntityFlyingCreature
 CLASS none/abo net/minecraft/entity/passive/EntityBat
 	METHOD <init> (Lnone/aqu;)V
 		ARG 0 level
+	METHOD a updateFall (DZLnone/atr;Lnone/dt;)V
 	METHOD a readFromNBT (Lnone/fn;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
+	METHOD aH doesNotTriggerPressurePlate ()Z
 	METHOD aR getEyeHeight ()F
 	METHOD aW setAttributes ()V
 	METHOD ae canBePushed ()Z
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bA getMovementSpeed ()F
+	METHOD bB ()F
+	METHOD bK collideWithNearbyEntities ()V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD e onHitGround (FF)V
+	METHOD h init ()V
 	METHOD n getIsBatHanging ()Z
-	METHOD s_ onUpdate ()V
+	METHOD r_ canTriggerWalking ()Z
+	METHOD s collideWithEntity (Lnone/wv;)V
+	METHOD s_ update ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/abq net/minecraft/entity/passive/EntityAnimal
 	FIELD bk inLove I
@@ -5348,18 +5818,21 @@ CLASS none/abq net/minecraft/entity/passive/EntityAnimal
 	METHOD a handleEntityStatusPacket (B)V
 	METHOD a doInteractionWith (Lnone/ahd;)Z
 	METHOD a readFromNBT (Lnone/fn;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD b getDroppedXp (Lnone/ahd;)I
 	METHOD b writeToNBT (Lnone/fn;)V
+	METHOD m entityInit ()V
 CLASS none/abr net/minecraft/entity/passive/EntityChicken
 	FIELD bq eggLayTime I
 	FIELD br chickenJockey Z
 	METHOD A getDroppedItem ()Lnone/alq;
 	METHOD C canDespawn ()Z
+	METHOD a playStepSound (Lnone/dt;Lnone/atr;)V
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws;
 	METHOD aR getEyeHeight ()F
 	METHOD aW setAttributes ()V
+	METHOD al updateRiderPosition ()V
 	METHOD b getDroppedXp (Lnone/ahd;)I
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD b spawnLoot (ZI)V
@@ -5368,10 +5841,12 @@ CLASS none/abr net/minecraft/entity/passive/EntityChicken
 	METHOD cj isChickenJockey ()Z
 	METHOD e onHitGround (FF)V
 	METHOD l setChickenJockey (Z)V
+	METHOD m entityInit ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/abs net/minecraft/entity/passive/EntityCow
 	METHOD A getDroppedItem ()Lnone/alq;
 	METHOD a doInteractionWith (Lnone/ahd;)Z
+	METHOD a playStepSound (Lnone/dt;Lnone/atr;)V
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws;
 	METHOD aR getEyeHeight ()F
 	METHOD aW setAttributes ()V
@@ -5387,21 +5862,25 @@ CLASS none/abt net/minecraft/entity/passive/EntityHorse
 	METHOD A getDroppedItem ()Lnone/alq;
 	METHOD a handleEntityStatusPacket (B)V
 	METHOD a doInteractionWith (Lnone/ahd;)Z
+	METHOD a playStepSound (Lnone/dt;Lnone/atr;)V
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD a handleDeathFrom (Lnone/wh;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws;
 	METHOD a dropInventoryContents (Lnone/wv;Lnone/aic;)V
 	METHOD aR getEyeHeight ()F
 	METHOD aW setAttributes ()V
 	METHOD ae canBePushed ()Z
+	METHOD al updateRiderPosition ()V
 	METHOD b setOwner (Ljava/lang/String;)V
 		ARG 0 ownerName
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bA getMovementSpeed ()F
+	METHOD bC isMovementBlocked ()Z
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
+	METHOD bq getTotalArmorValue ()I
 	METHOD c setWatchedBoolean (IZ)V
 	METHOD cA getTemper ()I
 	METHOD cC dropChest ()V
@@ -5418,14 +5897,19 @@ CLASS none/abt net/minecraft/entity/passive/EntityHorse
 	METHOD d_ getName ()Ljava/lang/String;
 	METHOD e onHitGround (FF)V
 	METHOD f getArmorMaterialId (Lnone/amj;)I
+	METHOD f setEating (Z)V
+	METHOD g moveByHeading (FF)V
+	METHOD h init ()V
+	METHOD j_ isOnLadder ()Z
 	METHOD l setTame (Z)V
+	METHOD m entityInit ()V
 	METHOD n setBred (Z)V
 	METHOD o setChestedHorse (Z)V
 	METHOD p setHasReproduced (Z)V
 	METHOD r setType (I)V
 	METHOD r setEatingHaystack (Z)V
 	METHOD s setVariant (I)V
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 	METHOD t setTemper (I)V
 	METHOD w getWatchedBoolean (I)Z
 		ARG 0 bit
@@ -5447,7 +5931,7 @@ CLASS none/aby net/minecraft/entity/passive/EntityOcelot
 	METHOD a doInteractionWith (Lnone/ahd;)Z
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws;
 	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
@@ -5458,13 +5942,16 @@ CLASS none/aby net/minecraft/entity/passive/EntityOcelot
 	METHOD cr getCatType ()I
 	METHOD d_ getName ()Ljava/lang/String;
 	METHOD e onHitGround (FF)V
+	METHOD h init ()V
 	METHOD m setOwned (Z)V
 	METHOD r setCatType (I)V
+	METHOD r attackEntityAsMob (Lnone/wv;)Z
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/aca net/minecraft/entity/passive/EntityPig
 	METHOD A getDroppedItem ()Lnone/alq;
 	METHOD a applyLightningDamage (Lnone/ads;)V
 	METHOD a doInteractionWith (Lnone/ahd;)Z
+	METHOD a playStepSound (Lnone/dt;Lnone/atr;)V
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws;
 	METHOD aW setAttributes ()V
@@ -5474,6 +5961,7 @@ CLASS none/aca net/minecraft/entity/passive/EntityPig
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD cj isSaddled ()Z
 	METHOD e onHitGround (FF)V
+	METHOD h init ()V
 	METHOD l setSaddled (Z)V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/acb net/minecraft/entity/passive/EntityRabbit
@@ -5482,16 +5970,21 @@ CLASS none/acb net/minecraft/entity/passive/EntityRabbit
 	METHOD a handleEntityStatusPacket (B)V
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws;
 	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD b spawnLoot (ZI)V
+	METHOD bD getJumpVelocity ()F
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD bp spawnSpecialLoot ()V
+	METHOD bq getTotalArmorValue ()I
 	METHOD cl getRabbitType ()I
+	METHOD h init ()V
+	METHOD m entityInit ()V
 	METHOD r setRabbitType (I)V
+	METHOD r attackEntityAsMob (Lnone/wv;)Z
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/ace
 	FIELD a NONE Lnone/ace;
@@ -5512,6 +6005,7 @@ CLASS none/acl net/minecraft/entity/passive/EntitySheep
 	METHOD A getDroppedItem ()Lnone/alq;
 	METHOD a handleEntityStatusPacket (B)V
 	METHOD a doInteractionWith (Lnone/ahd;)Z
+	METHOD a playStepSound (Lnone/dt;Lnone/atr;)V
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws;
@@ -5524,7 +6018,9 @@ CLASS none/acl net/minecraft/entity/passive/EntitySheep
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD cj getDyeColor ()Lnone/akv;
 	METHOD ck isSheared ()Z
+	METHOD h init ()V
 	METHOD l setSheared (Z)V
+	METHOD m entityInit ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/acn net/minecraft/entity/monster/EntitySnowMan
 	METHOD A getDroppedItem ()Lnone/alq;
@@ -5532,6 +6028,7 @@ CLASS none/acn net/minecraft/entity/monster/EntitySnowMan
 	METHOD aR getEyeHeight ()F
 	METHOD aW setAttributes ()V
 	METHOD b spawnLoot (ZI)V
+	METHOD m entityInit ()V
 CLASS none/aco net/minecraft/entity/passive/EntitySquid
 	METHOD A getDroppedItem ()Lnone/alq;
 	METHOD V isInWater ()Z
@@ -5542,12 +6039,16 @@ CLASS none/aco net/minecraft/entity/passive/EntitySquid
 	METHOD bA getMovementSpeed ()F
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
+	METHOD g moveByHeading (FF)V
+	METHOD m entityInit ()V
+	METHOD r_ canTriggerWalking ()Z
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/acp
 	METHOD a ()Z
 	METHOD e opUpdate ()V
 CLASS none/acq net/minecraft/entity/monster/EntityIronGolem
 	METHOD a handleEntityStatusPacket (B)V
+	METHOD a playStepSound (Lnone/dt;Lnone/atr;)V
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a handleDeathFrom (Lnone/wh;)V
 	METHOD aW setAttributes ()V
@@ -5556,11 +6057,16 @@ CLASS none/acq net/minecraft/entity/monster/EntityIronGolem
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD cl isPlayerCreated ()Z
+	METHOD h init ()V
 	METHOD j getModifiedOxygenAfterConsumption (I)I
 	METHOD l setPlayerCreated (Z)V
+	METHOD m entityInit ()V
+	METHOD r attackEntityAsMob (Lnone/wv;)Z
+	METHOD s collideWithEntity (Lnone/wv;)V
 CLASS none/act net/minecraft/entity/EntityUnderwaterCreature
 	METHOD C canDespawn ()Z
-	METHOD K onTick ()V
+	METHOD K tick ()V
+	METHOD aK isPushedByWater ()Z
 	METHOD aX breathesUnderwater ()Z
 	METHOD b getDroppedXp (Lnone/ahd;)I
 CLASS none/acu net/minecraft/entity/passive/EntityWolf
@@ -5569,8 +6075,9 @@ CLASS none/acu net/minecraft/entity/passive/EntityWolf
 	METHOD a handleEntityStatusPacket (B)V
 	METHOD a doInteractionWith (Lnone/ahd;)Z
 	METHOD a setCollarColor (Lnone/akv;)V
+	METHOD a playStepSound (Lnone/dt;Lnone/atr;)V
 	METHOD a readFromNBT (Lnone/fn;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD a createChildFrom (Lnone/ws;)Lnone/ws;
 	METHOD aR getEyeHeight ()F
 	METHOD aW setAttributes ()V
@@ -5580,9 +6087,12 @@ CLASS none/acu net/minecraft/entity/passive/EntityWolf
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD ct isAngry ()Z
 	METHOD cu getCollarColor ()Lnone/akv;
+	METHOD h init ()V
+	METHOD m entityInit ()V
 	METHOD m setOwned (Z)V
 	METHOD o setAngry (Z)V
-	METHOD s_ onUpdate ()V
+	METHOD r attackEntityAsMob (Lnone/wv;)Z
+	METHOD s_ update ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/acx
 	METHOD bm getHealth ()F
@@ -5593,37 +6103,52 @@ CLASS none/acy net/minecraft/entity/IEntityMultiPart
 		ARG 2 damage
 CLASS none/acz net/minecraft/entity/boss/EntityDragonPart
 	METHOD a readFromNBT (Lnone/fn;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD ad canBeHit ()Z
 	METHOD b writeToNBT (Lnone/fn;)V
+	METHOD h init ()V
+	METHOD k isEquals (Lnone/wv;)Z
 CLASS none/ada net/minecraft/entity/item/EntityEnderCrystal
 	METHOD a readFromNBT (Lnone/fn;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD ad canBeHit ()Z
 	METHOD b writeToNBT (Lnone/fn;)V
-	METHOD s_ onUpdate ()V
+	METHOD h init ()V
+	METHOD r_ canTriggerWalking ()Z
+	METHOD s_ update ()V
 CLASS none/adb net/minecraft/entity/boss/EntityDragon
 	METHOD G onKillCommand ()V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
+	METHOD aC getParts ()[Lnone/wv;
 	METHOD aW setAttributes ()V
+	METHOD aY onDeathUpdate ()V
 	METHOD ad canBeHit ()Z
+	METHOD b isLiquidPresentInAABB (Lnone/brt;)Z
 	METHOD bA getMovementSpeed ()F
 	METHOD bn getHurtSound ()Ljava/lang/String;
+	METHOD h init ()V
+	METHOD m entityInit ()V
 	METHOD n attackGoals ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/adf net/minecraft/entity/boss/EntityWither
 	METHOD a readFromNBT (Lnone/fn;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD a mount (Lnone/wv;)V
 	METHOD a shoot (Lnone/xm;F)V
 	METHOD aB onInsideWeb ()V
 	METHOD aW setAttributes ()V
+	METHOD b getCombinedLight (F)I
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD b spawnLoot (ZI)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
+	METHOD bq getTotalArmorValue ()I
+	METHOD by getCreatureAttribute ()Lnone/xs;
+	METHOD c addPotionEffect (Lnone/wq;)V
 	METHOD cj isInvulnerable ()I
 	METHOD e onHitGround (FF)V
+	METHOD h init ()V
+	METHOD m entityInit ()V
 	METHOD n attackGoals ()V
 	METHOD r setInvulnerable (I)V
 	METHOD z getIdleSound ()Ljava/lang/String;
@@ -5655,7 +6180,7 @@ CLASS none/adi net/minecraft/entity/item/EntityArmorStand
 		ARG 0 headRotations
 	METHOD a readFromNBT (Lnone/fn;)V
 		ARG 0 nbtTagCompound
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD a setSmall (Z)V
 		ARG 0 b
 	METHOD aR getEyeHeight ()F
@@ -5665,6 +6190,8 @@ CLASS none/adi net/minecraft/entity/item/EntityArmorStand
 		ARG 0 bodyRotations
 	METHOD b writeToNBT (Lnone/fn;)V
 		ARG 0 nbtTagCompound
+	METHOD bK collideWithNearbyEntities ()V
+	METHOD bL isServerWorld ()Z
 	METHOD bz getCurrentlyHoldingItemStack ()Lnone/amj;
 	METHOD c setItemStackInSlot (ILnone/amj;)V
 	METHOD c setLeftArmRotations (Lnone/fa;)V
@@ -5678,6 +6205,8 @@ CLASS none/adi net/minecraft/entity/item/EntityArmorStand
 		ARG 0 invisible
 	METHOD f setRightLegRotations (Lnone/fa;)V
 		ARG 0 rightLegRotations
+	METHOD g moveByHeading (FF)V
+	METHOD h init ()V
 	METHOD h setPose (Lnone/fn;)V
 		ARG 0 nbtTagCompound
 	METHOD i_ isBaby ()Z
@@ -5691,9 +6220,11 @@ CLASS none/adi net/minecraft/entity/item/EntityArmorStand
 	METHOD p getNoGravity ()Z
 	METHOD p getEquipmentInSlot (I)Lnone/amj;
 	METHOD q getShowArms ()Z
+	METHOD q getCurrentArmor (I)Lnone/amj;
 	METHOD r getNoBasePlate ()Z
 	METHOD s getHeadRotations ()Lnone/fa;
-	METHOD s_ onUpdate ()V
+	METHOD s collideWithEntity (Lnone/wv;)V
+	METHOD s_ update ()V
 	METHOD t getBodyRotations ()Lnone/fa;
 	METHOD u getLeftArmRotations ()Lnone/fa;
 	METHOD v getRightArmRotations ()Lnone/fa;
@@ -5704,41 +6235,51 @@ CLASS none/adj net/minecraft/entity/EntityHanging
 	FIELD a blockPos Lnone/dt;
 	METHOD a setFacing (Lnone/ej;)V
 	METHOD a readFromNBT (Lnone/fn;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD aO getFacing ()Lnone/ej;
 	METHOD ad canBeHit ()Z
-	METHOD b updatePosition (DDD)V
+	METHOD af shouldSetPosAfterLoading ()Z
+	METHOD b setPosition (DDD)V
 	METHOD b writeToNBT (Lnone/fn;)V
-	METHOD d applyMotion (DDD)V
+	METHOD d move (DDD)V
+	METHOD g addVelocity (DDD)V
+	METHOD h init ()V
 	METHOD l getMinX ()I
+	METHOD l hitByEntity (Lnone/wv;)Z
 	METHOD m getMinY ()I
 	METHOD n getBlockPos ()Lnone/dt;
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/adk net/minecraft/entity/item/EntityItemFrame
 	FIELD c itemDropChance F
+	METHOD a isInRangeToRender (D)Z
 	METHOD a setItemRotation (IZ)V
 	METHOD a setItemStack (Lnone/amj;Z)V
 	METHOD a readFromNBT (Lnone/fn;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
+	METHOD ao getCollisionBorderSize ()F
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD e onUseByPlayer (Lnone/ahd;)Z
+	METHOD h init ()V
 	METHOD l getMinX ()I
 	METHOD m getMinY ()I
 	METHOD o getItemStack ()Lnone/amj;
 	METHOD p getItemRotation ()I
 CLASS none/adl net/minecraft/entity/EntityLeashKnot
+	METHOD a isInRangeToRender (D)Z
 	METHOD a setFacing (Lnone/ej;)V
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD aR getEyeHeight ()F
 	METHOD b writeToNBT (Lnone/fn;)V
+	METHOD d readMountFromNBT (Lnone/fn;)Z
 	METHOD e onUseByPlayer (Lnone/ahd;)Z
+	METHOD h init ()V
 	METHOD l getMinX ()I
 	METHOD m getMinY ()I
 CLASS none/adm net/minecraft/entity/item/EntityPainting
 	FIELD c paintingArt Lnone/adn;
 	METHOD a updateKinetics (DDDFFIZ)V
 	METHOD a readFromNBT (Lnone/fn;)V
-	METHOD b setLocationAndAngles (DDDFF)V
+	METHOD b setPositionAndRotationLastTick (DDDFF)V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD l getMinX ()I
 	METHOD m getMinY ()I
@@ -5802,15 +6343,18 @@ CLASS none/ado net/minecraft/entity/projectile/EntityFishingHook
 	FIELD h blockY I
 	FIELD i blockZ I
 	METHOD J kill ()V
+	METHOD a isInRangeToRender (D)Z
 	METHOD a updateKinetics (DDDFFIZ)V
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD b writeToNBT (Lnone/fn;)V
+	METHOD h init ()V
 	METHOD i setVelocity (DDD)V
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/ads net/minecraft/entity/effect/EntityLightningBolt
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD b writeToNBT (Lnone/fn;)V
-	METHOD s_ onUpdate ()V
+	METHOD h init ()V
+	METHOD s_ update ()V
 CLASS none/adu net/minecraft/entity/item/EntityBoat
 	FIELD ap velocityY D
 	FIELD aq velocityZ D
@@ -5821,24 +6365,31 @@ CLASS none/adu net/minecraft/entity/item/EntityBoat
 	FIELD g lastSyncedYaw D
 	FIELD h lastSyncedPitch D
 	FIELD i velocityX D
+	METHOD S getNullBoundingBox ()Lnone/brt;
 	METHOD a updateKinetics (DDDFFIZ)V
 		ARG 0 newPosX
 		ARG 1 newPosY
 		ARG 2 newPosZ
 		ARG 3 newYaw
 		ARG 4 newPitch
+	METHOD a updateFall (DZLnone/atr;Lnone/dt;)V
 	METHOD a readFromNBT (Lnone/fn;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD ad canBeHit ()Z
 	METHOD ae canBePushed ()Z
+	METHOD al updateRiderPosition ()V
 	METHOD an getRiderMountHeight ()D
+	METHOD as performHurtAnim ()V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD e onUseByPlayer (Lnone/ahd;)Z
+	METHOD h init ()V
 	METHOD i setVelocity (DDD)V
 		ARG 0 velocityX
 		ARG 1 velocityY
 		ARG 2 velocityZ
-	METHOD s_ onUpdate ()V
+	METHOD j getCollisionBox (Lnone/wv;)Lnone/brt;
+	METHOD r_ canTriggerWalking ()Z
+	METHOD s_ update ()V
 CLASS none/adv net/minecraft/entity/item/EntityFallingBlock
 	FIELD a time I
 	FIELD b dropItem Z
@@ -5848,13 +6399,17 @@ CLASS none/adv net/minecraft/entity/item/EntityFallingBlock
 	FIELD g fallHurtMax I
 	FIELD h fallHurtAmount F
 	METHOD a readFromNBT (Lnone/fn;)V
+	METHOD a addCrashInfo (Lnone/j;)V
 	METHOD a setHurtEntities (Z)V
+	METHOD aI canRenderOnFire ()Z
 	METHOD ad canBeHit ()Z
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD e onHitGround (FF)V
+	METHOD h init ()V
 	METHOD j getLevel ()Lnone/aqu;
 	METHOD l getBlockState ()Lnone/bec;
-	METHOD s_ onUpdate ()V
+	METHOD r_ canTriggerWalking ()Z
+	METHOD s_ update ()V
 CLASS none/adw net/minecraft/entity/item/EntityItem
 	FIELD b LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD c age I
@@ -5864,7 +6419,7 @@ CLASS none/adw net/minecraft/entity/item/EntityItem
 	FIELD g owner Ljava/lang/String;
 	METHOD <init> (Lnone/aqu;)V
 		ARG 0 level
-	METHOD W checkEntityIsInWater ()Z
+	METHOD W isEntityInWater ()Z
 	METHOD a setPickupDelay (I)V
 		ARG 0 pickupDelay
 	METHOD a tryGroup (Lnone/adw;)Z
@@ -5873,9 +6428,10 @@ CLASS none/adw net/minecraft/entity/item/EntityItem
 		ARG 0 item
 	METHOD a readFromNBT (Lnone/fn;)V
 		ARG 0 nbt
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 		ARG 0 source
 		ARG 1 damage
+	METHOD aE canAttackWithItem ()Z
 	METHOD b setOwner (Ljava/lang/String;)V
 		ARG 0 owner
 	METHOD b writeToNBT (Lnone/fn;)V
@@ -5889,6 +6445,7 @@ CLASS none/adw net/minecraft/entity/item/EntityItem
 	METHOD d_ getName ()Ljava/lang/String;
 	METHOD f applyFireTickDamage (I)V
 		ARG 0 damage
+	METHOD h init ()V
 	METHOD j setDecreasedLifeSpan ()V
 	METHOD l getItem ()Lnone/amj;
 	METHOD m getOwner ()Ljava/lang/String;
@@ -5897,8 +6454,9 @@ CLASS none/adw net/minecraft/entity/item/EntityItem
 	METHOD p setShortPickupDelay ()V
 	METHOD q setNoPickupDelay ()V
 	METHOD r setLongPickupDelay ()V
+	METHOD r_ canTriggerWalking ()Z
 	METHOD s hasPickupDelay ()Z
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 	METHOD u setImportantDrop ()V
 	METHOD v setAsGiveDrop ()V
 	METHOD w tryGroup ()V
@@ -5915,6 +6473,7 @@ CLASS none/adx net/minecraft/entity/item/EntityMinecart
 	FIELD h lastSyncedYaw D
 	FIELD i lastSyncedPitch D
 	METHOD J kill ()V
+	METHOD S getNullBoundingBox ()Lnone/brt;
 	METHOD a getPositionOnRails (DDDD)Lnone/brw;
 		ARG 0 posX
 		ARG 1 posY
@@ -5933,21 +6492,24 @@ CLASS none/adx net/minecraft/entity/item/EntityMinecart
 		ARG 1 railBlockState
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a destroyMinecartFrom (Lnone/wh;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD a setHasCustomDisplayBlock (Z)V
 	METHOD aL getCustomName ()Ljava/lang/String;
 	METHOD ad canBeHit ()Z
 	METHOD ae canBePushed ()Z
 	METHOD an getRiderMountHeight ()D
-	METHOD b updatePosition (DDD)V
+	METHOD as performHurtAnim ()V
+	METHOD b setPosition (DDD)V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD d_ getName ()Ljava/lang/String;
 	METHOD e_ getNameComponent ()Lnone/ho;
+	METHOD h init ()V
 	METHOD i setVelocity (DDD)V
 		ARG 0 velocityX
 		ARG 1 velocityY
 		ARG 2 velocityZ
 	METHOD i applyCollisionWithEntity (Lnone/wv;)V
+	METHOD j getCollisionBox (Lnone/wv;)Lnone/brt;
 	METHOD k getPositionOnRails (DDD)Lnone/brw;
 		ARG 0 posX
 		ARG 1 posY
@@ -5957,8 +6519,9 @@ CLASS none/adx net/minecraft/entity/item/EntityMinecart
 	METHOD m getSpeedLimit ()D
 	METHOD n doMotionOffRails ()V
 	METHOD o applyNormalTickSlowdown ()V
+	METHOD r_ canTriggerWalking ()Z
 	METHOD s getMinecartType ()Lnone/adz;
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 	METHOD t getDisplayBlockState ()Lnone/bec;
 	METHOD u getEmptyDisplayBlockState ()Lnone/bec;
 	METHOD v getDisplayOffset ()I
@@ -5996,6 +6559,7 @@ CLASS none/aeb net/minecraft/entity/item/EntityMinecartCommandBlock
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD e onUseByPlayer (Lnone/ahd;)Z
+	METHOD h init ()V
 	METHOD j getCommand ()Lnone/aqf;
 	METHOD s getMinecartType ()Lnone/adz;
 	METHOD u getEmptyDisplayBlockState ()Lnone/bec;
@@ -6022,10 +6586,11 @@ CLASS none/aee net/minecraft/entity/item/EntityMinecartFurnace
 	METHOD a destroyMinecartFrom (Lnone/wh;)V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD e onUseByPlayer (Lnone/ahd;)Z
+	METHOD h init ()V
 	METHOD m getSpeedLimit ()D
 	METHOD o applyNormalTickSlowdown ()V
 	METHOD s getMinecartType ()Lnone/adz;
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 	METHOD u getEmptyDisplayBlockState ()Lnone/bec;
 CLASS none/aef net/minecraft/entity/item/EntityMinecartHopper
 	METHOD a activate (IIIZ)V
@@ -6034,7 +6599,7 @@ CLASS none/aef net/minecraft/entity/item/EntityMinecartHopper
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD e onUseByPlayer (Lnone/ahd;)Z
 	METHOD s getMinecartType ()Lnone/adz;
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 	METHOD u getEmptyDisplayBlockState ()Lnone/bec;
 	METHOD w getDefaultDisplayOffset ()I
 CLASS none/aeg net/minecraft/entity/item/EntityMinecartEmpty
@@ -6051,21 +6616,23 @@ CLASS none/aeh net/minecraft/entity/item/EntityMinecartSpawner
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD j getSpawnLogic ()Lnone/aqi;
 	METHOD s getMinecartType ()Lnone/adz;
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 	METHOD u getEmptyDisplayBlockState ()Lnone/bec;
 CLASS none/aej net/minecraft/entity/item/EntityMinecartTNT
 	FIELD a fuse I
 	METHOD a handleEntityStatusPacket (B)V
 	METHOD a activate (IIIZ)V
+	METHOD a getExplosionResistance (Lnone/aqo;Lnone/aqu;Lnone/dt;Lnone/bec;)F
+	METHOD a canExplode (Lnone/aqo;Lnone/aqu;Lnone/dt;Lnone/bec;F)Z
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a destroyMinecartFrom (Lnone/wh;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD e onHitGround (FF)V
 	METHOD j prime ()V
 	METHOD l getFuse ()I
 	METHOD s getMinecartType ()Lnone/adz;
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 	METHOD u getEmptyDisplayBlockState ()Lnone/bec;
 	METHOD y isPrimed ()Z
 CLASS none/aek net/minecraft/entity/item/EntityTNTPrimed
@@ -6074,18 +6641,23 @@ CLASS none/aek net/minecraft/entity/item/EntityTNTPrimed
 	METHOD aR getEyeHeight ()F
 	METHOD ad canBeHit ()Z
 	METHOD b writeToNBT (Lnone/fn;)V
-	METHOD s_ onUpdate ()V
+	METHOD h init ()V
+	METHOD r_ canTriggerWalking ()Z
+	METHOD s_ update ()V
 CLASS none/aem net/minecraft/entity/monster/EntityBlaze
 	METHOD <init> (Lnone/aqu;)V
 		ARG 0 level
 	METHOD A getDroppedItem ()Lnone/alq;
 	METHOD aW setAttributes ()V
 	METHOD au isOnFire ()Z
+	METHOD b getCombinedLight (F)I
 	METHOD b spawnLoot (ZI)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD c getBrightness (F)F
 	METHOD e onHitGround (FF)V
+	METHOD h init ()V
+	METHOD m entityInit ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/aen
 	METHOD a ()Z
@@ -6094,6 +6666,7 @@ CLASS none/aeo net/minecraft/entity/monster/EntityCaveSpider
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD aR getEyeHeight ()F
 	METHOD aW setAttributes ()V
+	METHOD r attackEntityAsMob (Lnone/wv;)Z
 CLASS none/aep net/minecraft/entity/monster/EntityCreeper
 	FIELD bk fuse I
 	FIELD bl explosionRadius I
@@ -6102,6 +6675,7 @@ CLASS none/aep net/minecraft/entity/monster/EntityCreeper
 	METHOD a doInteractionWith (Lnone/ahd;)Z
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a handleDeathFrom (Lnone/wh;)V
+	METHOD aF getMaxFallHeight ()I
 	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
@@ -6109,12 +6683,14 @@ CLASS none/aep net/minecraft/entity/monster/EntityCreeper
 	METHOD cl isIgnited ()Z
 	METHOD cm ignite ()V
 	METHOD e onHitGround (FF)V
-	METHOD s_ onUpdate ()V
+	METHOD h init ()V
+	METHOD r attackEntityAsMob (Lnone/wv;)Z
+	METHOD s_ update ()V
 CLASS none/aer net/minecraft/entity/monster/EntityEnderman
 	METHOD A getDroppedItem ()Lnone/alq;
 	METHOD a setCarriedBlockState (Lnone/bec;)V
 	METHOD a readFromNBT (Lnone/fn;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD aR getEyeHeight ()F
 	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
@@ -6122,7 +6698,9 @@ CLASS none/aer net/minecraft/entity/monster/EntityEnderman
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD ck getCarriedBlockState ()Lnone/bec;
+	METHOD h init ()V
 	METHOD k tryTeleport (DDD)Z
+	METHOD m entityInit ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/aet
 	METHOD a ()Z
@@ -6139,6 +6717,7 @@ CLASS none/aew net/minecraft/entity/EntityEndermite
 	METHOD <init> (Lnone/aqu;)V
 		ARG 0 level
 	METHOD A getDroppedItem ()Lnone/alq;
+	METHOD a playStepSound (Lnone/dt;Lnone/atr;)V
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a setPlayerSpawned (Z)V
 	METHOD aR getEyeHeight ()F
@@ -6146,15 +6725,18 @@ CLASS none/aew net/minecraft/entity/EntityEndermite
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
+	METHOD by getCreatureAttribute ()Lnone/xs;
+	METHOD m entityInit ()V
 	METHOD n isPlayerSpawned ()Z
-	METHOD s_ onUpdate ()V
+	METHOD r_ canTriggerWalking ()Z
+	METHOD s_ update ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/aex net/minecraft/entity/IEnemy
 CLASS none/afa net/minecraft/entity/monster/EntityGhast
 	FIELD a explosionPower I
 	METHOD A getDroppedItem ()Lnone/alq;
 	METHOD a readFromNBT (Lnone/fn;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD aR getEyeHeight ()F
 	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
@@ -6162,8 +6744,9 @@ CLASS none/afa net/minecraft/entity/monster/EntityGhast
 	METHOD bA getMovementSpeed ()F
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
+	METHOD h init ()V
 	METHOD n isShooting ()Z
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/afb
 	METHOD a ()Z
@@ -6180,7 +6763,7 @@ CLASS none/aff net/minecraft/entity/monster/EntityGiantZombie
 	METHOD aW setAttributes ()V
 CLASS none/afg net/minecraft/entity/monster/EntityGuardian
 	METHOD a readFromNBT (Lnone/fn;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD a (Z)V
 	METHOD aR getEyeHeight ()F
 	METHOD aW setAttributes ()V
@@ -6190,6 +6773,10 @@ CLASS none/afg net/minecraft/entity/monster/EntityGuardian
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD bp spawnSpecialLoot ()V
 	METHOD cl isElder ()Z
+	METHOD g moveByHeading (FF)V
+	METHOD h init ()V
+	METHOD m entityInit ()V
+	METHOD r_ canTriggerWalking ()Z
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/afi
 	METHOD a ()Z
@@ -6198,27 +6785,33 @@ CLASS none/afl net/minecraft/entity/monster/EntityMagmaCube
 	METHOD A getDroppedItem ()Lnone/alq;
 	METHOD aW setAttributes ()V
 	METHOD au isOnFire ()Z
+	METHOD b getCombinedLight (F)I
 	METHOD b spawnLoot (ZI)V
+	METHOD bE jump ()V
+	METHOD bG floatInLava ()V
+	METHOD bq getTotalArmorValue ()I
 	METHOD c getBrightness (F)F
 	METHOD cd createChildSlime ()Lnone/afy;
 	METHOD e onHitGround (FF)V
 CLASS none/afm net/minecraft/entity/monster/EntityMonster
 	METHOD P getSwimSound ()Ljava/lang/String;
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD aW setAttributes ()V
 	METHOD aZ isAdult ()Z
 	METHOD aa getSplashSound ()Ljava/lang/String;
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
+	METHOD m entityInit ()V
 	METHOD n getFallDamageSound (I)Ljava/lang/String;
-	METHOD s_ onUpdate ()V
+	METHOD r attackEntityAsMob (Lnone/wv;)Z
+	METHOD s_ update ()V
 CLASS none/afo net/minecraft/entity/monster/EntityPigZombie
 	FIELD bl anger I
 	FIELD bn hurtBy Ljava/util/UUID;
 	METHOD a doInteractionWith (Lnone/ahd;)Z
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD aW setAttributes ()V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD b setDamager (Lnone/xm;)V
@@ -6227,7 +6820,7 @@ CLASS none/afo net/minecraft/entity/monster/EntityPigZombie
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD bp spawnSpecialLoot ()V
 	METHOD n attackGoals ()V
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/afp
 	METHOD a ()Z
@@ -6243,12 +6836,15 @@ CLASS none/afs net/minecraft/entity/attribute/GenericAttributes
 	METHOD a toNbtTagCompound (Lnone/ya;)Lnone/fn;
 CLASS none/aft net/minecraft/entity/monster/EntitySilverfish
 	METHOD A getDroppedItem ()Lnone/alq;
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a playStepSound (Lnone/dt;Lnone/atr;)V
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD aR getEyeHeight ()F
 	METHOD aW setAttributes ()V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
-	METHOD s_ onUpdate ()V
+	METHOD by getCreatureAttribute ()Lnone/xs;
+	METHOD r_ canTriggerWalking ()Z
+	METHOD s_ update ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/afu
 	METHOD a ()Z
@@ -6262,20 +6858,27 @@ CLASS none/afw net/minecraft/entity/monster/EntitySkeleton
 		ARG 0 level
 	METHOD A getDroppedItem ()Lnone/alq;
 	METHOD a setSkeletonType (I)V
+	METHOD a playStepSound (Lnone/dt;Lnone/atr;)V
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD a handleDeathFrom (Lnone/wh;)V
 	METHOD a shoot (Lnone/xm;F)V
 	METHOD aR getEyeHeight ()F
 	METHOD aW setAttributes ()V
+	METHOD ak updateRidden ()V
+	METHOD am getMountedYOffset ()D
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD b spawnLoot (ZI)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD bp spawnSpecialLoot ()V
+	METHOD by getCreatureAttribute ()Lnone/xs;
 	METHOD c setItemStackInSlot (ILnone/amj;)V
 	METHOD ck getSkeletonType ()I
+	METHOD h init ()V
+	METHOD m entityInit ()V
 	METHOD n attackGoals ()V
+	METHOD r attackEntityAsMob (Lnone/wv;)Z
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/afy net/minecraft/entity/monster/EntitySlime
 	FIELD b squishFactor F
@@ -6289,13 +6892,15 @@ CLASS none/afy net/minecraft/entity/monster/EntitySlime
 	METHOD aR getEyeHeight ()F
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bA getMovementSpeed ()F
+	METHOD bE jump ()V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD cd createChildSlime ()Lnone/afy;
 	METHOD ck getSize ()I
 	METHOD d onCollide (Lnone/ahd;)V
+	METHOD h init ()V
 	METHOD i applyCollisionWithEntity (Lnone/wv;)V
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/afz
 	METHOD a ()Z
 	METHOD e opUpdate ()V
@@ -6312,6 +6917,7 @@ CLASS none/agd
 	METHOD e opUpdate ()V
 CLASS none/age net/minecraft/entity/monster/EntitySpider
 	METHOD A getDroppedItem ()Lnone/alq;
+	METHOD a playStepSound (Lnone/dt;Lnone/atr;)V
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD aB onInsideWeb ()V
 	METHOD aR getEyeHeight ()F
@@ -6319,7 +6925,11 @@ CLASS none/age net/minecraft/entity/monster/EntitySpider
 	METHOD b spawnLoot (ZI)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
-	METHOD s_ onUpdate ()V
+	METHOD by getCreatureAttribute ()Lnone/xs;
+	METHOD d isPotionApplicable (Lnone/wq;)Z
+	METHOD h init ()V
+	METHOD j_ isOnLadder ()Z
+	METHOD s_ update ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/agh
 	METHOD a ()Z
@@ -6331,34 +6941,45 @@ CLASS none/agi net/minecraft/entity/monster/EntityWitch
 	METHOD b spawnLoot (ZI)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
+	METHOD c applyPotionDamage (Lnone/wh;F)F
+	METHOD h init ()V
+	METHOD m entityInit ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/agj net/minecraft/entity/monster/EntityZombie
 	FIELD bm conversionTime I
 	METHOD A getDroppedItem ()Lnone/alq;
 	METHOD C canDespawn ()Z
 	METHOD a handleEntityStatusPacket (B)V
+	METHOD a setSize (FF)V
 	METHOD a setConversionTime (I)V
 	METHOD a doInteractionWith (Lnone/ahd;)Z
+	METHOD a playStepSound (Lnone/dt;Lnone/atr;)V
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD a onSpawnWithEgg (Lnone/vu;Lnone/xq;)Lnone/xq;
 	METHOD a handleDeathFrom (Lnone/wh;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD a setCanBreakDoors (Z)V
 	METHOD aR getEyeHeight ()F
 	METHOD aW setAttributes ()V
+	METHOD am getMountedYOffset ()D
 	METHOD b getDroppedXp (Lnone/ahd;)I
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
 	METHOD bp spawnSpecialLoot ()V
+	METHOD bq getTotalArmorValue ()I
+	METHOD by getCreatureAttribute ()Lnone/xs;
 	METHOD cl getCanBreakDoors ()Z
 	METHOD cm isVillager ()Z
 	METHOD cn isConverting ()Z
+	METHOD h init ()V
 	METHOD i_ isBaby ()Z
 	METHOD l setBaby (Z)V
+	METHOD m entityInit ()V
 	METHOD m setVillager (Z)V
 	METHOD n attackGoals ()V
-	METHOD s_ onUpdate ()V
+	METHOD r attackEntityAsMob (Lnone/wv;)Z
+	METHOD s_ update ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
 CLASS none/agn
 	METHOD a_ setTradingPlayer (Lnone/ahd;)V
@@ -6396,6 +7017,7 @@ CLASS none/agp net/minecraft/entity/passive/EntityVillager
 	METHOD cu initializeOffers ()V
 	METHOD d replaceItem (ILnone/amj;)Z
 	METHOD e_ getNameComponent ()Lnone/ho;
+	METHOD h init ()V
 	METHOD n attackGoals ()V
 	METHOD r setProfession (I)V
 	METHOD u_ getTradingPlayer ()Lnone/ahd;
@@ -6484,10 +7106,11 @@ CLASS none/ahd net/minecraft/entity/player/EntityPlayer
 	FIELD f xpSeed I
 	FIELD g activeItemStack Lnone/amj;
 	FIELD h itemUseTimer I
+	METHOD I prepareForSpawn ()V
 	METHOD J kill ()V
 	METHOD L getPortalDelay ()I
 	METHOD P getSwimSound ()Ljava/lang/String;
-	METHOD X onEnterWater ()V
+	METHOD X enterWater ()V
 	METHOD a handleEntityStatusPacket (B)V
 	METHOD a increaseExhaustion (F)V
 		ARG 0 amount
@@ -6497,6 +7120,7 @@ CLASS none/ahd net/minecraft/entity/player/EntityPlayer
 	METHOD a openHorseInventory (Lnone/abt;Lnone/vq;)V
 	METHOD a joinEntityItemWithLevel (Lnone/adw;)V
 		ARG 0 entity
+	METHOD a canAttackPlayer (Lnone/ahd;)Z
 	METHOD a dropItemStack (Lnone/amj;Z)Lnone/adw;
 	METHOD a dropItemStack (Lnone/amj;ZZ)Lnone/adw;
 	METHOD a openMerchantInventory (Lnone/aqb;)V
@@ -6513,12 +7137,18 @@ CLASS none/ahd net/minecraft/entity/player/EntityPlayer
 	METHOD a openInventory (Lnone/vq;)V
 	METHOD a openBenchInterface (Lnone/vv;)V
 	METHOD a handleDeathFrom (Lnone/wh;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD a dropItemFromSelectedHotbarSlot (Z)Lnone/adw;
+	METHOD a wakePlayer (ZZZ)V
 	METHOD aB onInsideWeb ()V
+	METHOD aK isPushedByWater ()Z
+	METHOD aN renderNameTag ()Z
 	METHOD aR getEyeHeight ()F
 	METHOD aW setAttributes ()V
 	METHOD aa getSplashSound ()Ljava/lang/String;
+	METHOD aj isEntityInsideSolidBlock ()Z
+	METHOD ak updateRidden ()V
+	METHOD am getMountedYOffset ()D
 	METHOD ar getPortalCooldownTicks ()I
 	METHOD at getArmorEquipment ()[Lnone/amj;
 	METHOD b subtractXpLevels (I)V
@@ -6529,7 +7159,12 @@ CLASS none/ahd net/minecraft/entity/player/EntityPlayer
 		ARG 0 block
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD b incrementStat (Lnone/tq;)V
+	METHOD b addToPlayerScore (Lnone/wv;I)V
+	METHOD bC isMovementBlocked ()Z
+	METHOD bE jump ()V
+	METHOD bH getGroundMovementFactor ()F
 	METHOD bI isInBed ()Z
+	METHOD bJ updateEntityAI ()V
 	METHOD bM getAbsorptionHealth ()F
 	METHOD bN getTeam ()Lnone/bsf;
 	METHOD bP getActiveItemStack ()Lnone/amj;
@@ -6540,8 +7175,10 @@ CLASS none/ahd net/minecraft/entity/player/EntityPlayer
 	METHOD bU resetItemUseTimer ()V
 	METHOD bW getScore ()I
 	METHOD bY getActiveHotbarSlot ()Lnone/amj;
+	METHOD ba isPlayer ()Z
 	METHOD bn getHurtSound ()Ljava/lang/String;
 	METHOD bo getDeathSound ()Ljava/lang/String;
+	METHOD bq getTotalArmorValue ()I
 	METHOD bz getCurrentlyHoldingItemStack ()Lnone/amj;
 	METHOD c setItemStackInSlot (ILnone/amj;)V
 		ARG 0 slotIndex
@@ -6561,17 +7198,24 @@ CLASS none/ahd net/minecraft/entity/player/EntityPlayer
 	METHOD d_ getName ()Ljava/lang/String;
 	METHOD e onHitGround (FF)V
 	METHOD e_ getNameComponent ()Lnone/ho;
+	METHOD f isInvisibleToPlayer (Lnone/ahd;)Z
+	METHOD g moveByHeading (FF)V
+	METHOD h init ()V
+	METHOD i damageArmor (F)V
 	METHOD j canEat (Z)Z
 		ARG 0 ignoreHunger
 	METHOD l setAbsorptionHealth (F)V
+	METHOD m entityInit ()V
 	METHOD n closeScreen ()V
 	METHOD n getFallDamageSound (I)Ljava/lang/String;
 	METHOD p getEquipmentInSlot (I)Lnone/amj;
 		ARG 0 slotIndex
+	METHOD q getCurrentArmor (I)Lnone/amj;
 	METHOD r setScore (I)V
+	METHOD r_ canTriggerWalking ()Z
 	METHOD s doSwallowAction ()V
 	METHOD s addToScore (I)V
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 	METHOD t sendPlayerAbilities ()V
 	METHOD t_ shouldReceiveCommandFeedback ()Z
 	METHOD u addXp (I)V
@@ -6616,21 +7260,28 @@ CLASS none/ahj net/minecraft/entity/projectile/EntityArrow
 	FIELD i inGround Z
 	METHOD a updateKinetics (DDDFFIZ)V
 	METHOD a readFromNBT (Lnone/fn;)V
+	METHOD aE canAttackWithItem ()Z
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD c setInitialProjectileMotion (DDDFF)V
 	METHOD d onCollide (Lnone/ahd;)V
+	METHOD h init ()V
 	METHOD i setVelocity (DDD)V
-	METHOD s_ onUpdate ()V
+	METHOD r_ canTriggerWalking ()Z
+	METHOD s_ update ()V
 CLASS none/ahk net/minecraft/entity/item/EntityEnderEye
 	FIELD a targetX D
 	FIELD b targetY D
 	FIELD c targetZ D
+	METHOD a isInRangeToRender (D)Z
 	METHOD a setEnderEyeTargetForStrongholdAt (Lnone/dt;)V
 	METHOD a readFromNBT (Lnone/fn;)V
+	METHOD aE canAttackWithItem ()Z
+	METHOD b getCombinedLight (F)I
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD c getBrightness (F)F
+	METHOD h init ()V
 	METHOD i setVelocity (DDD)V
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/ahl net/minecraft/entity/projectile/EntityFireball
 	FIELD a shooter Lnone/xm;
 	FIELD e xTile I
@@ -6642,23 +7293,31 @@ CLASS none/ahl net/minecraft/entity/projectile/EntityFireball
 		ARG 0 level
 	METHOD <init> (Lnone/aqu;DDDDDD)V
 		ARG 0 level
+	METHOD a isInRangeToRender (D)Z
 	METHOD a onHit (Lnone/bru;)V
 	METHOD a readFromNBT (Lnone/fn;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD ad canBeHit ()Z
+	METHOD ao getCollisionBorderSize ()F
+	METHOD b getCombinedLight (F)I
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD c getBrightness (F)F
-	METHOD s_ onUpdate ()V
+	METHOD h init ()V
+	METHOD s_ update ()V
 CLASS none/ahm net/minecraft/entity/item/EntityFireworkRocket
 	FIELD a life I
 	FIELD b lifeTime I
 	METHOD a handleEntityStatusPacket (B)V
 		ARG 0 entityStatusByte
+	METHOD a isInRangeToRender (D)Z
 	METHOD a readFromNBT (Lnone/fn;)V
+	METHOD aE canAttackWithItem ()Z
+	METHOD b getCombinedLight (F)I
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD c getBrightness (F)F
+	METHOD h init ()V
 	METHOD i setVelocity (DDD)V
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/ahn net/minecraft/entity/projectile/EntityLargeFireball
 	FIELD e explosionPower I
 	METHOD a onHit (Lnone/bru;)V
@@ -6671,7 +7330,7 @@ CLASS none/aho net/minecraft/entity/projectile/IProjectile
 		ARG 2 motionZ
 CLASS none/ahp net/minecraft/entity/projectile/EntitySmallFireball
 	METHOD a onHit (Lnone/bru;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD ad canBeHit ()Z
 CLASS none/ahq net/minecraft/entity/projectile/EntitySnowball
 	METHOD <init> (Lnone/aqu;)V
@@ -6691,17 +7350,19 @@ CLASS none/ahr net/minecraft/entity/projectile/EntityProjectile
 	FIELD e blockZ I
 	FIELD f inBlock Lnone/atr;
 	FIELD h ownerName Ljava/lang/String;
+	METHOD a isInRangeToRender (D)Z
 	METHOD a onHit (Lnone/bru;)V
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD c setInitialProjectileMotion (DDDFF)V
+	METHOD h init ()V
 	METHOD i setVelocity (DDD)V
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/ahs net/minecraft/entity/projectile/EntityThrownEgg
 	METHOD a onHit (Lnone/bru;)V
 CLASS none/aht net/minecraft/entity/projectile/EntityThrownEnderPearl
 	METHOD a onHit (Lnone/bru;)V
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/ahu net/minecraft/entity/projectile/EntityExpBottle
 	METHOD a onHit (Lnone/bru;)V
 CLASS none/ahv net/minecraft/entity/projectile/EntityThrownPotion
@@ -6711,10 +7372,12 @@ CLASS none/ahv net/minecraft/entity/projectile/EntityThrownPotion
 	METHOD a readFromNBT (Lnone/fn;)V
 	METHOD b writeToNBT (Lnone/fn;)V
 CLASS none/ahw net/minecraft/entity/projectile/EntityWitherSkull
+	METHOD a getExplosionResistance (Lnone/aqo;Lnone/aqu;Lnone/dt;Lnone/bec;)F
 	METHOD a onHit (Lnone/bru;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD ad canBeHit ()Z
 	METHOD au isOnFire ()Z
+	METHOD h init ()V
 	METHOD l isWitherInvulnerable ()Z
 CLASS none/ahz net/minecraft/entity/player/FoodStats
 	FIELD a foodLevel I
@@ -7773,12 +8436,31 @@ CLASS none/apg net/minecraft/enchantment/EnumEnchantmentType
 	METHOD a canItemBeEnchanted (Lnone/alq;)Z
 		ARG 0 item
 CLASS none/aph net/minecraft/enchantment/EnchantmentHelper
+	FIELD a rand Ljava/util/Random;
+	FIELD b damageMod Lnone/apn;
+	FIELD c livingMod Lnone/apm;
+	FIELD d hurtIterator Lnone/apk;
+	FIELD e damageIterator Lnone/apj;
 	METHOD a getEnchantLevel (ILnone/amj;)I
 		ARG 0 enchantID
 	METHOD a getMaxEnchantmentLevelFrom (I[Lnone/amj;)I
+	METHOD a setEnchantments (Ljava/util/Map;Lnone/amj;)V
+	METHOD a calculateEnchantability (Ljava/util/Random;IILnone/amj;)I
+		ARG 2 maxEnchantPower
+	METHOD a addRandomEnchantment (Ljava/util/Random;Lnone/amj;I)Lnone/amj;
+		ARG 2 enchantableLevel
 	METHOD a getIdToLevelEnchantmentMap (Lnone/amj;)Ljava/util/Map;
 	METHOD a getFirstArmorWith (Lnone/apf;Lnone/xm;)Lnone/amj;
+	METHOD a applyEnchantmentModifier (Lnone/apl;Lnone/amj;)V
+	METHOD a applyEnchantmentModifier (Lnone/apl;[Lnone/amj;)V
+	METHOD a getWaterBreathingLevel (Lnone/wv;)I
 	METHOD a getCurrentItemKnockBackLevel (Lnone/xm;)I
+	METHOD a getEnchantmentModifierDamage ([Lnone/amj;Lnone/wh;)I
+	METHOD b manEnchantmentData (ILnone/amj;)Ljava/util/Map;
+		ARG 0 enchantabilitylevel
+	METHOD b buildEnchantmentList (Ljava/util/Random;Lnone/amj;I)Ljava/util/List;
+		ARG 2 totalEnchantabilityLevel
+	METHOD b getDepthStriderLevel (Lnone/wv;)I
 	METHOD b getCurrentItemFireAspectLevel (Lnone/xm;)I
 	METHOD c getCurrentItemEfficiencyLevel (Lnone/xm;)I
 	METHOD e hasCurrentItemSilkTouch (Lnone/xm;)Z
@@ -7788,6 +8470,22 @@ CLASS none/aph net/minecraft/enchantment/EnchantmentHelper
 	METHOD i getCurrentItemLootingLevel (Lnone/xm;)I
 	METHOD j hasAquaAffinityArmor (Lnone/xm;)Z
 CLASS none/api empty/api
+CLASS none/apj net/minecraft/enchantment/DamageIterator
+	METHOD a calculate (Lnone/apf;I)V
+CLASS none/apk net/minecraft/enchantment/HurtIterator
+	FIELD a entityLiving Lnone/xm;
+	FIELD b entity Lnone/wv;
+	METHOD a calculate (Lnone/apf;I)V
+CLASS none/apl net/minecraft/enchantment/IModifier
+	METHOD a calculate (Lnone/apf;I)V
+CLASS none/apm net/minecraft/enchantment/ModifierLiving
+	FIELD a livingModifier F
+	FIELD b entityLiving Lnone/xs;
+	METHOD a calculate (Lnone/apf;I)V
+CLASS none/apn net/minecraft/enchantment/ModifierDamage
+	FIELD a damageModifier I
+	FIELD b source Lnone/wh;
+	METHOD a calculate (Lnone/apf;I)V
 CLASS none/apo net/minecraft/enchantment/EnchantmentInstance
 	FIELD b enchantment Lnone/apf;
 	FIELD c level I
@@ -16480,53 +17178,58 @@ CLASS none/cfj net/minecraft/entity/particle/ParticleSlimeBuilder
 CLASS none/cfk net/minecraft/entity/particle/ParticleSnowballBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cfl
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/cfm net/minecraft/entity/particle/ParticleWaterBubbleBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cfn net/minecraft/entity/particle/ParticleCrit
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/cfo net/minecraft/entity/particle/ParticleCritMagicBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cfp net/minecraft/entity/particle/ParticleCritBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cfq net/minecraft/entity/particle/ParticleDripLiquid
+	METHOD b getCombinedLight (F)I
 	METHOD c getBrightness (F)F
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/cfr net/minecraft/entity/particle/ParticleDripLavaBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cfs net/minecraft/entity/particle/ParticleDripWaterBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cft net/minecraft/entity/particle/ParticleEnchantmentTable
+	METHOD b getCombinedLight (F)I
 	METHOD c getBrightness (F)F
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/cfu net/minecraft/entity/particle/ParticleEnchantmentTableBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cfv net/minecraft/entity/particle/ParticleExplosionNormal
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/cfw net/minecraft/entity/particle/ParticleExplosionNormalBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cfz net/minecraft/entity/particle/ParticleFireworksSpark
+	METHOD S getNullBoundingBox ()Lnone/brt;
 	METHOD ae canBePushed ()Z
+	METHOD b getCombinedLight (F)I
 	METHOD c getBrightness (F)F
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/cga
 	METHOD a getParticleType ()I
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/cgb net/minecraft/entity/particle/ParticleFireworksSparkBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cgc net/minecraft/entity/particle/ParticleFlame
+	METHOD b getCombinedLight (F)I
 	METHOD c getBrightness (F)F
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/cgd net/minecraft/entity/particle/ParticleFlameBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cge net/minecraft/entity/particle/ParticleFootstep
 	FIELD a FOOTPRINT_PNG Lnone/oa;
 	METHOD a getParticleType ()I
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/cgf net/minecraft/entity/particle/ParticleFootstepBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cgg net/minecraft/entity/particle/ParticleHeart
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/cgh net/minecraft/entity/particle/ParticleVillagerAngryBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cgi net/minecraft/entity/particle/ParticleHeartBuilder
@@ -16534,32 +17237,34 @@ CLASS none/cgi net/minecraft/entity/particle/ParticleHeartBuilder
 CLASS none/cgj net/minecraft/entity/particle/ParticleExplosionLarge
 	FIELD a EXPLOSION_PNG Lnone/oa;
 	METHOD a getParticleType ()I
-	METHOD s_ onUpdate ()V
+	METHOD b getCombinedLight (F)I
+	METHOD s_ update ()V
 CLASS none/cgk net/minecraft/entity/particle/ParticleExplosionLargeBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cgl net/minecraft/entity/particle/ParticleExplosionHuge
 	METHOD a getParticleType ()I
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/cgm net/minecraft/entity/particle/ParticleExplosionHugeBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cgn
 	FIELD aB renderer Lnone/cpt;
 	METHOD a getParticleType ()I
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/cgp net/minecraft/entity/particle/ParticleSmokeLargeBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cgq net/minecraft/entity/particle/ParticleLava
+	METHOD b getCombinedLight (F)I
 	METHOD c getBrightness (F)F
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/cgr net/minecraft/entity/particle/ParticleLavaBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cgs net/minecraft/entity/particle/ParticleMobAppearance
 	METHOD a getParticleType ()I
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/cgt net/minecraft/entity/particle/ParticleMobAppearanceBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cgu net/minecraft/entity/particle/ParticleNote
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/cgv net/minecraft/entity/particle/ParticleNoteBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cgw net/minecraft/entity/particle/EntityParticle
@@ -16575,6 +17280,7 @@ CLASS none/cgw net/minecraft/entity/particle/EntityParticle
 	METHOD a getParticleType ()I
 	METHOD a setTex (Lnone/cue;)V
 	METHOD a readFromNBT (Lnone/fn;)V
+	METHOD aE canAttackWithItem ()Z
 	METHOD b getR ()F
 	METHOD b setColor (FFF)V
 		ARG 0 colorR
@@ -16582,11 +17288,13 @@ CLASS none/cgw net/minecraft/entity/particle/EntityParticle
 		ARG 2 colorB
 	METHOD b writeToNBT (Lnone/fn;)V
 	METHOD g getG ()F
+	METHOD h init ()V
 	METHOD i getB ()F
 	METHOD j getAlpha ()F
 	METHOD k incrementTextureIndexX ()V
 	METHOD k setMiscTex (I)V
-	METHOD s_ onUpdate ()V
+	METHOD r_ canTriggerWalking ()Z
+	METHOD s_ update ()V
 	METHOD toString ()Ljava/lang/String;
 CLASS none/cgx net/minecraft/client/renderers/EffectRenderer
 	FIELD a level Lnone/aqu;
@@ -16601,29 +17309,30 @@ CLASS none/chc net/minecraft/client/particle/IParticleFactory
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 		ARG 1 level
 CLASS none/chd net/minecraft/entity/particle/ParticleCloud
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/che net/minecraft/entity/particle/ParticleCloudBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/chf net/minecraft/entity/particle/ParticlePortal
+	METHOD b getCombinedLight (F)I
 	METHOD c getBrightness (F)F
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/chg net/minecraft/entity/particle/ParticlePortalBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/chh net/minecraft/entity/particle/ParticleRedstone
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/chi net/minecraft/entity/particle/ParticleRedstoneBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/chj
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/chk empty/chk
 CLASS none/chl net/minecraft/entity/particle/ParticleSmokeNormalBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/chm
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/chn net/minecraft/entity/particle/ParticleSnowShovelBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cho
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/chp net/minecraft/entity/particle/ParticleSpellMobAmbientBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/chq net/minecraft/entity/particle/ParticleSpellInstaltBuilder
@@ -16637,11 +17346,11 @@ CLASS none/cht net/minecraft/entity/particle/ParticleSpellWitchBuilder
 CLASS none/chv net/minecraft/entity/particle/ParticleWaterSplashBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/chw
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/chx net/minecraft/entity/particle/ParticleSuspendedBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/chy
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/chz net/minecraft/entity/particle/ParticleVillagerHappyBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cia net/minecraft/entity/particle/chw
@@ -16655,13 +17364,13 @@ CLASS none/cie net/minecraft/entity/particle/ParticleBlockCrackBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cif
 	METHOD a getParticleType ()I
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/cig
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/cih net/minecraft/entity/particle/ParticleWaterWakeBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cii
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 CLASS none/cij net/minecraft/entity/particle/ParticleWaterDropBuilder
 	METHOD a newParticle (ILnone/aqu;DDDDDD[I)Lnone/cgw;
 CLASS none/cil net/minecraft/entity/player/EntityPlayerSP
@@ -16694,30 +17403,35 @@ CLASS none/cio net/minecraft/entity/EntityClientPlayerMP
 	METHOD a addStat (Lnone/tq;I)V
 	METHOD a openInventory (Lnone/vq;)V
 	METHOD a openBenchInterface (Lnone/vv;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 		ARG 1 damage
 	METHOD a mount (Lnone/wv;)V
 	METHOD a dropItemFromSelectedHotbarSlot (Z)Lnone/adw;
 		ARG 0 dropStack
 	METHOD aw isSneaking ()Z
+	METHOD bJ updateEntityAI ()V
+	METHOD bL isServerWorld ()Z
 	METHOD bv swingItem ()V
 	METHOD c getPosition ()Lnone/dt;
 	METHOD ca respawnPlayer ()V
 	METHOD d damageEntity (Lnone/wh;F)V
 		ARG 1 amount
+	METHOD d setSprinting (Z)V
 	METHOD e sendChatMessage (Ljava/lang/String;)V
 		ARG 0 message
 	METHOD f setSomeString (Ljava/lang/String;)V
 		ARG 0 someString
 	METHOD g heal (F)V
 		ARG 0 amount
+	METHOD j pushOutOfBlocks (DDD)Z
+	METHOD m entityInit ()V
 	METHOD m setPlayerSPHealth (F)V
 		ARG 0 health
 	METHOD n closeScreen ()V
 	METHOD p sendMotionUpdates ()V
 	METHOD q closeWindow ()V
 	METHOD r sendHorseJump ()V
-	METHOD s_ onUpdate ()V
+	METHOD s_ update ()V
 	METHOD t sendPlayerAbilities ()V
 	METHOD u sendOpenInventory ()V
 	METHOD w getSomeString ()Ljava/lang/String;
@@ -16727,10 +17441,11 @@ CLASS none/cip net/minecraft/entity/EntityOtherPlayerMP
 	METHOD a updateKinetics (DDDFFIZ)V
 	METHOD a canUseCommand (ILjava/lang/String;)Z
 	METHOD a sendChat (Lnone/ho;)V
-	METHOD a attackEntityFrom (Lnone/wh;F)Z
+	METHOD a attackEntity (Lnone/wh;F)Z
 	METHOD c getPosition ()Lnone/dt;
 	METHOD c setItemStackInSlot (ILnone/amj;)V
-	METHOD s_ onUpdate ()V
+	METHOD m entityInit ()V
+	METHOD s_ update ()V
 CLASS none/ciq
 	METHOD a getInterfaceContainer (Lnone/ahb;Lnone/ahd;)Lnone/aib;
 	METHOD k getBlockID ()Ljava/lang/String;
