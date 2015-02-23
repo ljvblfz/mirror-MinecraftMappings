@@ -5119,7 +5119,7 @@ CLASS none/xb net/minecraft/entity/EntityRegistry
 	FIELD e ID_TO_CLASS Ljava/util/Map;
 	FIELD f CLASS_TO_ID Ljava/util/Map;
 	FIELD g NAME_TO_ID Ljava/util/Map;
-	METHOD a getClass (I)Ljava/lang/Class;
+	METHOD a getClass2 (I)Ljava/lang/Class;
 		ARG 0 id
 	METHOD a registerEntity (Ljava/lang/Class;Ljava/lang/String;I)V
 		ARG 0 clazz
@@ -12734,7 +12734,7 @@ CLASS none/bes net/minecraft/block/BlockProperty
 	FIELD a clazz Ljava/lang/Class;
 	FIELD b name Ljava/lang/String;
 	METHOD a getName ()Ljava/lang/String;
-	METHOD b getClass ()Ljava/lang/Class;
+	METHOD b getClass2 ()Ljava/lang/Class;
 CLASS none/bet net/minecraft/block/BlockPropertyBoolean
 	FIELD a possibleValues Lcom/google/common/collect/ImmutableSet;
 	METHOD a getNameOfValue (Ljava/lang/Boolean;)Ljava/lang/String;
@@ -12781,7 +12781,7 @@ CLASS none/bex net/minecraft/block/IBlockProperty
 	METHOD a getName ()Ljava/lang/String;
 	METHOD a getNameOfValue (Ljava/lang/Comparable;)Ljava/lang/String;
 		ARG 0 value
-	METHOD b getClass ()Ljava/lang/Class;
+	METHOD b getClass2 ()Ljava/lang/Class;
 	METHOD c getPossibleValues ()Ljava/util/Collection;
 CLASS none/bez net/minecraft/world/border/IBorderListener
 	METHOD a onSizeChange (Lnone/bfb;D)V
