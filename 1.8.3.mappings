@@ -9650,9 +9650,19 @@ CLASS none/aex net/minecraft/world/decorator/EndDecorator
 	FIELD M genFeature Lnone/aou;
 	METHOD a decorate (Lnone/adz;)V
 CLASS none/aez net/minecraft/block/BlockAir
+	METHOD a (Lnone/adn;Lnone/ck;)Z
+		ARG 0 world
+		ARG 1 blockPos
 	METHOD a getBoundingBox (Lnone/adn;Lnone/ck;Lnone/ama;)Lnone/auh;
+		ARG 0 world
+		ARG 1 blockPos
+		ARG 2 blockState
 	METHOD a dropItems (Lnone/adn;Lnone/ck;Lnone/ama;FI)V
+		ARG 0 world
+		ARG 1 blockPos
+		ARG 2 blockState
 	METHOD a canCollide (Lnone/ama;Z)Z
+		ARG 0 blockState
 	METHOD b getRenderType ()I
 	METHOD c isOpaque ()Z
 CLASS none/afa net/minecraft/block/BlockAnvil
@@ -9665,7 +9675,13 @@ CLASS none/afa net/minecraft/block/BlockAnvil
 	FIELD b DAMAGE Lnone/amo;
 	METHOD a getBlockStateForMetadata (I)Lnone/ama;
 	METHOD a onRightClicked (Lnone/adn;Lnone/ck;Lnone/ama;Lnone/wo;Lnone/cr;FFF)Z
+		ARG 0 world
+		ARG 1 blockPos
+		ARG 2 blockState
 	METHOD a getStateAfterPlacement (Lnone/adn;Lnone/ck;Lnone/cr;FFFILnone/ps;)Lnone/ama;
+		ARG 0 world
+		ARG 1 blockPos
+		ARG 2 facing
 	METHOD a updateCollisionHitbox (Lnone/adr;Lnone/ck;)V
 	METHOD a isFaceExposed (Lnone/adr;Lnone/ck;Lnone/cr;)Z
 	METHOD a getItemData (Lnone/ama;)I
@@ -9700,6 +9716,7 @@ CLASS none/afb net/minecraft/block/BlockBannerBase
 	METHOD c isOpaque ()Z
 	METHOD c getItem (Lnone/adn;Lnone/ck;)Lnone/zx;
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD g canProvidePower ()Z
 CLASS none/afc net/minecraft/block/BlockBarrier
 	METHOD a dropItems (Lnone/adn;Lnone/ck;Lnone/ama;FI)V
 	METHOD b getRenderType ()I
@@ -9728,7 +9745,7 @@ CLASS none/afe net/minecraft/block/BlockPressurePlate
 	METHOD d hasFullCubeHitbox ()Z
 	METHOD d canPlace (Lnone/adn;Lnone/ck;)Z
 	METHOD f getWeightOnPressurePlateAt (Lnone/adn;Lnone/ck;)I
-	METHOD g canEmitPower ()Z
+	METHOD g canProvidePower ()Z
 	METHOD j updateTargetingHitbox ()V
 	METHOD k getMobilityFlag ()I
 CLASS none/aff net/minecraft/block/BlockRailBase
@@ -10165,6 +10182,7 @@ CLASS none/afi net/minecraft/block/Block
 	METHOD f getBlockName ()Ljava/lang/String;
 	METHOD f getIntDataForBlockState (Lnone/ama;)I
 		ARG 0 state
+	METHOD g canProvidePower ()Z
 	METHOD g getHardness (Lnone/adn;Lnone/ck;)F
 		ARG 0 level
 		ARG 1 position
@@ -11715,6 +11733,7 @@ CLASS none/ajm net/minecraft/block/BlockSignBase
 	METHOD c isOpaque ()Z
 	METHOD c getItem (Lnone/adn;Lnone/ck;)Lnone/zx;
 	METHOD d hasFullCubeHitbox ()Z
+	METHOD g canProvidePower ()Z
 CLASS none/ajn net/minecraft/block/BlockSkull
 	FIELD a facing Lnone/amm;
 	FIELD b noDrop Lnone/aml;
@@ -12208,15 +12227,41 @@ CLASS none/akt net/minecraft/block/BlockCarpet
 	METHOD j updateTargetingHitbox ()V
 CLASS none/aku net/minecraft/block/BlockYellowFlower
 	METHOD l getFlowerBlockColor ()Lnone/agx$b;
-CLASS none/akv net/minecraft/blockentity/BlockEntityBanner
+CLASS none/akv net/minecraft/block/entity/BlockEntityBanner
+	CLASS a EnumBannerPattern
 	CLASS none/akv$a
 		FIELD J BRICKS Lnone/akv$a;
 		FIELD K SKULL Lnone/akv$a;
 		FIELD L FLOWER Lnone/akv$a;
 		FIELD M MOJANG Lnone/akv$a;
+	FIELD a baseColor I
+	FIELD f patterns Lnone/dv;
+	FIELD g hasPattern Z
+	FIELD h patternList Ljava/util/List;
+	FIELD i colorList Ljava/util/List;
+	FIELD j patternResourceLocation Ljava/lang/String;
 	METHOD a load (Lnone/dp;)V
+		ARG 0 nbt
+	METHOD a save (Lnone/dp;ILnone/dv;)V
+		ARG 0 nbt
+		ARG 1 baseColor
+		ARG 2 patternList
+	METHOD a setItemValues (Lnone/zy;)V
+		ARG 0 itemStack
+	METHOD b getBaseColor ()I
 	METHOD b save (Lnone/dp;)V
-CLASS none/akw net/minecraft/blockentity/BlockEntityBeacon
+		ARG 0 nbt
+	METHOD b getBaseColor (Lnone/zy;)I
+		ARG 0 itemStack
+	METHOD c getPatternList (Lnone/zy;)I
+		ARG 0 itemStack
+	METHOD d getPatterns ()Lnone/dv;
+	METHOD e removeBannerData (Lnone/zy;)V
+		ARG 0 itemStack
+	METHOD g getPatternResourceLocation ()Ljava/lang/String;
+	METHOD h initializeBannerData ()V
+	METHOD y_ getDescriptionPacket ()Lnone/fg;
+CLASS none/akw net/minecraft/block/entity/BlockEntityBeacon
 	FIELD i valid Z
 	FIELD j pyramidHeight I
 	FIELD k primaryEffectID I
@@ -12255,33 +12300,54 @@ CLASS none/akw net/minecraft/blockentity/BlockEntityBeacon
 	METHOD m updateTick ()V
 	METHOD o_ getSize ()I
 	METHOD q_ getMaxStackSize ()I
-CLASS none/akx net/minecraft/blockentity/BlockEntity
+	METHOD s getMaxRenderDistanceSq ()D
+	METHOD y_ getDescriptionPacket ()Lnone/fg;
+CLASS none/akx net/minecraft/block/entity/BlockEntity
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD b level Lnone/adn;
-	FIELD c blockCoords Lnone/ck;
+	FIELD b world Lnone/adn;
+	FIELD c blockPos Lnone/ck;
+	FIELD d entityInvalid Z
 	FIELD e block Lnone/afi;
 	FIELD f idToClassRegistry Ljava/util/Map;
 	FIELD g classToIdRegistry Ljava/util/Map;
+	FIELD h blockMetadata I
+	METHOD D setValid ()V
+	METHOD E updateContainingBlockInfo ()V
+	METHOD a getDistanceSq (DDD)D
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
 	METHOD a register (Ljava/lang/Class;Ljava/lang/String;)V
 	METHOD a setLevel (Lnone/adn;)V
 		ARG 0 level
+	METHOD a addInfoToCrashReport (Lnone/c;)V
+		ARG 0 crashReport
 	METHOD a setPosition (Lnone/ck;)V
+		ARG 0 blockPos
 	METHOD a load (Lnone/dp;)V
+		ARG 0 nbt
 	METHOD b save (Lnone/dp;)V
+		ARG 0 nbt
 	METHOD c onEvent (II)Z
+	METHOD c createAndLoadEntity (Lnone/dp;)Lnone/akx;
+		ARG 0 nbt
 	METHOD p_ onChanged ()V
+	METHOD s getMaxRenderDistanceSq ()D
 	METHOD t checkHasDimension ()Z
 	METHOD u getBlockMetadata ()I
 	METHOD v getBlockCoords ()Lnone/ck;
 	METHOD w getBlock ()Lnone/afi;
+	METHOD x isInvalid ()Z
+	METHOD y setInvalid ()V
+	METHOD y_ getDescriptionPacket ()Lnone/fg;
 	METHOD z getDimension ()Lnone/adn;
-CLASS none/aky net/minecraft/blockentity/BlockEntityBrewingStand
+CLASS none/aky net/minecraft/block/entity/BlockEntityBrewingStand
 	METHOD a load (Lnone/dp;)V
 	METHOD a getInterfaceContainer (Lnone/wn;Lnone/wo;)Lnone/xj;
 	METHOD b save (Lnone/dp;)V
 	METHOD c update ()V
 	METHOD k getBlockID ()Ljava/lang/String;
-CLASS none/akz net/minecraft/blockentity/BlockEntityChest
+CLASS none/akz net/minecraft/block/entity/BlockEntityChest
 	FIELD a neighborsAreSet Z
 	FIELD f northBlockEntity Lnone/akz;
 	FIELD g eastBlockEntity Lnone/akz;
@@ -12289,6 +12355,7 @@ CLASS none/akz net/minecraft/blockentity/BlockEntityChest
 	FIELD i southBlockEntity Lnone/akz;
 	FIELD l viewers I
 	FIELD m stacks [Lnone/zy;
+	METHOD E updateContainingBlockInfo ()V
 	METHOD a getStack (I)Lnone/zy;
 	METHOD a retrieveFromStack (II)Lnone/zy;
 	METHOD a setStack (ILnone/zy;)V
@@ -12314,22 +12381,24 @@ CLASS none/akz net/minecraft/blockentity/BlockEntityChest
 	METHOD m setNeighboringBlockEnities ()V
 	METHOD o_ getSize ()I
 	METHOD q_ getMaxStackSize ()I
-CLASS none/ala net/minecraft/blockentity/BlockEntityCommandBlock
+	METHOD y setInvalid ()V
+CLASS none/ala net/minecraft/block/entity/BlockEntityCommandBlock
 	FIELD a commandSender Lnone/add;
 	METHOD a load (Lnone/dp;)V
 	METHOD b getCommandSender ()Lnone/add;
 	METHOD b save (Lnone/dp;)V
 	METHOD c getCommandResultStats ()Lnone/o;
-CLASS none/alb net/minecraft/blockentity/BlockEntityComparator
+	METHOD y_ getDescriptionPacket ()Lnone/fg;
+CLASS none/alb net/minecraft/block/entity/BlockEntityComparator
 	FIELD a outputSignal I
 	METHOD a setOutputSignal (I)V
 		ARG 0 outputSignal
 	METHOD a load (Lnone/dp;)V
 	METHOD b getOutputSignal ()I
 	METHOD b save (Lnone/dp;)V
-CLASS none/alc net/minecraft/blockentity/BlockEntityDaylightDetector
+CLASS none/alc net/minecraft/block/entity/BlockEntityDaylightDetector
 	METHOD c update ()V
-CLASS none/ald net/minecraft/blockentity/BlockEntityDispenser
+CLASS none/ald net/minecraft/block/entity/BlockEntityDispenser
 	FIELD a name Ljava/lang/String;
 	FIELD g inventory [Lnone/zy;
 	METHOD a getStack (I)Lnone/zy;
@@ -12352,10 +12421,10 @@ CLASS none/ald net/minecraft/blockentity/BlockEntityDispenser
 	METHOD l_ hasName ()Z
 	METHOD o_ getSize ()I
 	METHOD q_ getMaxStackSize ()I
-CLASS none/ale net/minecraft/blockentity/BlockEntityDropper
+CLASS none/ale net/minecraft/block/entity/BlockEntityDropper
 	METHOD e_ getName ()Ljava/lang/String;
 	METHOD k getBlockID ()Ljava/lang/String;
-CLASS none/alf net/minecraft/blockentity/BlockEntityEnchantmentTable
+CLASS none/alf net/minecraft/block/entity/BlockEntityEnchantmentTable
 	FIELD o random Ljava/util/Random;
 	FIELD p name Ljava/lang/String;
 	METHOD a load (Lnone/dp;)V
@@ -12364,10 +12433,11 @@ CLASS none/alf net/minecraft/blockentity/BlockEntityEnchantmentTable
 	METHOD c update ()V
 	METHOD k getBlockID ()Ljava/lang/String;
 	METHOD l_ hasName ()Z
-CLASS none/alg net/minecraft/blockentity/BlockEntityEnderChest
+CLASS none/alg net/minecraft/block/entity/BlockEntityEnderChest
 	METHOD c update ()V
 	METHOD c onEvent (II)Z
-CLASS none/alh net/minecraft/blockentity/BlockEntityFlowerPot
+	METHOD y setInvalid ()V
+CLASS none/alh net/minecraft/block/entity/BlockEntityFlowerPot
 	FIELD a item Lnone/zx;
 	FIELD f metadata I
 	METHOD <init> (Lnone/zx;I)V
@@ -12380,37 +12450,39 @@ CLASS none/alh net/minecraft/blockentity/BlockEntityFlowerPot
 	METHOD b getItem ()Lnone/zx;
 	METHOD b save (Lnone/dp;)V
 	METHOD c getData ()I
-CLASS none/ali net/minecraft/blockentity/BlockEntityFurnace
+	METHOD y_ getDescriptionPacket ()Lnone/fg;
+CLASS none/ali net/minecraft/block/entity/BlockEntityFurnace
 	METHOD a load (Lnone/dp;)V
 	METHOD a getInterfaceContainer (Lnone/wn;Lnone/wo;)Lnone/xj;
 	METHOD b save (Lnone/dp;)V
 	METHOD c update ()V
 	METHOD k getBlockID ()Ljava/lang/String;
-CLASS none/alk net/minecraft/blockentity/BlockEntityHopper
+CLASS none/alk net/minecraft/block/entity/BlockEntityHopper
 	METHOD a load (Lnone/dp;)V
 	METHOD a getInterfaceContainer (Lnone/wn;Lnone/wo;)Lnone/xj;
 	METHOD b save (Lnone/dp;)V
 	METHOD c update ()V
 	METHOD k getBlockID ()Ljava/lang/String;
 	METHOD p_ onChanged ()V
-CLASS none/all net/minecraft/blockentity/BlockEntityContainer
+CLASS none/all net/minecraft/block/entity/BlockEntityContainer
 	FIELD a lock Lnone/oo;
 	METHOD a load (Lnone/dp;)V
 	METHOD a setLock (Lnone/oo;)V
 	METHOD b save (Lnone/dp;)V
 	METHOD i getLock ()Lnone/oo;
 	METHOD r_ isLocked ()Z
-CLASS none/alm net/minecraft/blockentity/BlockEntityMobSpawner
+CLASS none/alm net/minecraft/block/entity/BlockEntityMobSpawner
 	FIELD a spawnLogic Lnone/ade;
 	METHOD a load (Lnone/dp;)V
 	METHOD b getSpawnerLogic ()Lnone/ade;
 	METHOD b save (Lnone/dp;)V
 	METHOD c update ()V
 	METHOD c onEvent (II)Z
-CLASS none/aln net/minecraft/blockentity/BlockEntityNoteBlock
+	METHOD y_ getDescriptionPacket ()Lnone/fg;
+CLASS none/aln net/minecraft/block/entity/BlockEntityNoteBlock
 	METHOD a load (Lnone/dp;)V
 	METHOD b save (Lnone/dp;)V
-CLASS none/alo net/minecraft/blockentity/BlockEntitySign
+CLASS none/alo net/minecraft/block/entity/BlockEntitySign
 	FIELD a signText [Lnone/ev;
 	FIELD f lineBeingEdited I
 	FIELD g editable Z
@@ -12419,10 +12491,29 @@ CLASS none/alo net/minecraft/blockentity/BlockEntitySign
 		ARG 0 editable
 	METHOD b isEditable ()Z
 	METHOD b save (Lnone/dp;)V
-CLASS none/alp net/minecraft/blockentity/BlockEntitySkull
+	METHOD y_ getDescriptionPacket ()Lnone/fg;
+CLASS none/alp net/minecraft/block/entity/BlockEntitySkull
+	FIELD a skullType I
+	FIELD f Rotation I
+	FIELD g playerProfile Lcom/mojang/authlib/GameProfile;
+	METHOD a setType (I)V
+		ARG 0 skullType
+	METHOD a setPlayerProfile (Lcom/mojang/authlib/GameProfile;)V
+		ARG 0 playerProfile
 	METHOD a load (Lnone/dp;)V
+		ARG 0 nbt
+	METHOD b getPlayerProfile ()Lcom/mojang/authlib/GameProfile;
+	METHOD b setRotation (I)V
+		ARG 0 rotation
+	METHOD b updateGameProfile (Lcom/mojang/authlib/GameProfile;)Lcom/mojang/authlib/GameProfile;
+		ARG 0 gameProfile
 	METHOD b save (Lnone/dp;)V
-CLASS none/alq net/minecraft/blockentity/BlockEntityEndPortal
+		ARG 0 nbt
+	METHOD c getSkullType ()I
+	METHOD d getRotation ()I
+	METHOD e updatePlayerProfile ()V
+	METHOD y_ getDescriptionPacket ()Lnone/fg;
+CLASS none/alq net/minecraft/block/entity/BlockEntityEndPortal
 CLASS none/alt net/minecraft/block/BlockPistonBase
 	FIELD a facing Lnone/amm;
 	FIELD b extended Lnone/aml;
@@ -12464,7 +12555,7 @@ CLASS none/alu net/minecraft/block/BlockPistonHead
 	METHOD d hasFullCubeHitbox ()Z
 	METHOD d canPlace (Lnone/adn;Lnone/ck;)Z
 	METHOD e initPropertyManager ()Lnone/amb;
-CLASS none/alv net/minecraft/blockentity/BlockEntityPiston
+CLASS none/alv net/minecraft/block/entity/BlockEntityPiston
 	METHOD a load (Lnone/dp;)V
 	METHOD b save (Lnone/dp;)V
 	METHOD c update ()V
@@ -12493,7 +12584,7 @@ CLASS none/alw net/minecraft/block/BlockPistonMoving
 CLASS none/alz net/minecraft/block/BlockStateBase
 	FIELD a JOINER Lcom/google/common/base/Joiner;
 	METHOD a cycleProperty (Lnone/amp;)Lnone/ama;
-CLASS none/ama net/minecraft/block/IBlockState
+CLASS none/ama net/minecraft/block/state/IBlockState
 	METHOD a getPropertiesKeySet ()Ljava/util/Collection;
 	METHOD a cycleProperty (Lnone/amp;)Lnone/ama;
 		ARG 0 property
@@ -13019,7 +13110,7 @@ CLASS none/ana net/minecraft/world/chunk/storage/ChunkSection
 	METHOD g getBlockDataArray ()[C
 	METHOD h getBlockLightArray ()Lnone/amx;
 	METHOD i getSkyLightArray ()Lnone/amx;
-CLASS none/anb net/minecraft/chunk/chunk/storage/NibbleArrayReader
+CLASS none/anb net/minecraft/world/chunk/storage/NibbleArrayReader
 	FIELD a aByte [B
 	FIELD b offset1 I
 	FIELD c offset2 I
@@ -14191,7 +14282,7 @@ CLASS none/arn net/minecraft/block/material/Material
 	METHOD p setAdventureModeExempt ()Lnone/arn;
 	METHOD r getColor ()Lnone/aro;
 	METHOD s setTranslucent ()Lnone/arn;
-CLASS none/aro net/minecraft/block/Color
+CLASS none/aro net/minecraft/block/material/MapColor
 	FIELD A BLUE Lnone/aro;
 	FIELD B BROWN Lnone/aro;
 	FIELD C GREEN Lnone/aro;
@@ -14203,9 +14294,9 @@ CLASS none/aro net/minecraft/block/Color
 	FIELD I EMERALD Lnone/aro;
 	FIELD J PURPLE_BLACK Lnone/aro;
 	FIELD K DARK_RED Lnone/aro;
-	FIELD L color I
-	FIELD M mapColorID I
-	FIELD a REGISTRY_ARRAY [Lnone/aro;
+	FIELD L colorValue I
+	FIELD M colorIndex I
+	FIELD a MAP_COLOR_ARRAY [Lnone/aro;
 	FIELD b AIR Lnone/aro;
 	FIELD c GRASS Lnone/aro;
 	FIELD d SAND Lnone/aro;
@@ -14232,8 +14323,8 @@ CLASS none/aro net/minecraft/block/Color
 	FIELD y CYAN Lnone/aro;
 	FIELD z PURPLE Lnone/aro;
 	METHOD <init> (II)V
-		ARG 0 mapColorID
-		ARG 1 color
+		ARG 0 colorIndex
+		ARG 1 colorValue
 	METHOD a returnColor (I)I
 		ARG 0 colorModifier
 CLASS none/arp net/minecraft/block/material/MaterialPortal
@@ -14814,19 +14905,49 @@ CLASS none/auj net/minecraft/util/Vec3
 	FIELD a x D
 	FIELD b y D
 	FIELD c z D
+	METHOD <init> (DDD)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD <init> (Lnone/dg;)V
+		ARG 0 vec
 	METHOD a getUnitVector ()Lnone/auj;
 	METHOD a subtractVector (DDD)Lnone/auj;
+		ARG 0 x
+		ARG 1 y
+		ARG 2 rz
 	METHOD a rotateAroundX (F)Lnone/auj;
+		ARG 0 angle
 	METHOD a getNYDistance (Lnone/auj;)Lnone/auj;
+		ARG 0 vec
+	METHOD a getIntermediateWithX (Lnone/auj;D)Lnone/auj;
+		ARG 0 vec
+		ARG 1 x
 	METHOD b getLength ()D
 	METHOD b addVector (DDD)Lnone/auj;
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
 	METHOD b rotateAroundY (F)Lnone/auj;
+		ARG 0 angle
 	METHOD b multiplyVector (Lnone/auj;)D
+		ARG 0 vec
+	METHOD b getIntermediateWithY (Lnone/auj;D)Lnone/auj;
+		ARG 0 vec
+		ARG 1 y
 	METHOD c calcCrossProduct (Lnone/auj;)Lnone/auj;
+		ARG 0 vec
+	METHOD c getIntermediateWithZ (Lnone/auj;D)Lnone/auj;
+		ARG 0 vec
+		ARG 1 z
 	METHOD d subtractVector (Lnone/auj;)Lnone/auj;
+		ARG 0 vec
 	METHOD e addVector (Lnone/auj;)Lnone/auj;
+		ARG 0 vec
 	METHOD f getDistance (Lnone/auj;)D
+		ARG 0 vec
 	METHOD g getSquaredDistance (Lnone/auj;)D
+		ARG 0 vec
 CLASS none/aul net/minecraft/scoreboard/ScoreboardObjective
 	FIELD a manager Lnone/aup;
 	FIELD b name Ljava/lang/String;
