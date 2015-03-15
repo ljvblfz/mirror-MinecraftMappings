@@ -3489,7 +3489,7 @@ CLASS none/kl net/minecraft/scoreboard/ServerScoreboardManager
 		ARG 0 objective
 CLASS none/kn net/minecraft/server/gui/IUpdatePlayerListBox
 	METHOD c update ()V
-CLASS none/kx rnet/minecraft/client/renderers/DestroyBlockProgress
+CLASS none/kx net/minecraft/client/renderers/DestroyBlockProgress
 	FIELD a playerID I
 	FIELD b blockPos Lnone/ck;
 	FIELD c progress I
@@ -3903,7 +3903,7 @@ CLASS none/lz net/minecraft/network/ListOps
 	METHOD a objectToString (Ljava/lang/Object;)Ljava/lang/String;
 CLASS none/mb
 	METHOD f getObject ()Ljava/lang/Object;
-CLASS none/mc rnet/minecraft/network/UserList
+CLASS none/mc net/minecraft/network/UserList
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD b gson Lcom/google/gson/Gson;
 	FIELD c file Ljava/io/File;
