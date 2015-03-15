@@ -18839,7 +18839,6 @@ CLASS none/bqk tv/twitch/TwitchBroadcaster
 		FIELD l Stopping Lnone/bqk$a;
 		FIELD m Paused Lnone/bqk$a;
 		FIELD n IngestTesting Lnone/bqk$a;
-	CLASS none/b none/b
 	CLASS none/bqk$3 czx
 	CLASS none/bqk$a EnumTwitchStatus
 		FIELD a UNINITIALIZED Lnone/bqk$a;
