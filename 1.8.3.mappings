@@ -4088,6 +4088,85 @@ CLASS none/nf net/minecraft/entity/EntitySet
 CLASS none/nh
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
 CLASS none/nj net/minecraft/util/JsonUtils
+	METHOD a isString (Lcom/google/gson/JsonElement;)Z
+		ARG 0 elem
+	METHOD a elemToString (Lcom/google/gson/JsonElement;Ljava/lang/String;)Ljava/lang/String;
+		ARG 0 elem
+		ARG 1 keyOnOwner
+	METHOD a isPropString (Lcom/google/gson/JsonObject;Ljava/lang/String;)Z
+		ARG 0 obj
+		ARG 1 key
+	METHOD a getFloatByKey (Lcom/google/gson/JsonObject;Ljava/lang/String;F)F
+		ARG 0 obj
+		ARG 1 key
+		ARG 2 defaultTo
+	METHOD a getIntByKey (Lcom/google/gson/JsonObject;Ljava/lang/String;I)I
+		ARG 0 obj
+		ARG 1 key
+		ARG 2 defaultTo
+	METHOD a getArrayByKey (Lcom/google/gson/JsonObject;Ljava/lang/String;Lcom/google/gson/JsonArray;)Lcom/google/gson/JsonArray;
+		ARG 0 obj
+		ARG 1 key
+		ARG 2 defaultTo
+	METHOD a getObjectByKey (Lcom/google/gson/JsonObject;Ljava/lang/String;Lcom/google/gson/JsonObject;)Lcom/google/gson/JsonObject;
+		ARG 0 obj
+		ARG 1 key
+		ARG 2 defaultTo
+	METHOD a getStringByKey (Lcom/google/gson/JsonObject;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+		ARG 0 obj
+		ARG 1 key
+		ARG 2 defaultTo
+	METHOD a getBooleanByKey (Lcom/google/gson/JsonObject;Ljava/lang/String;Z)Z
+		ARG 0 obj
+		ARG 1 key
+		ARG 2 defaultTo
+	METHOD b elemToBoolean (Lcom/google/gson/JsonElement;Ljava/lang/String;)Z
+		ARG 0 elem
+		ARG 1 keyOnOwner
+	METHOD c isPropBoolean (Lcom/google/gson/JsonObject;Ljava/lang/String;)Z
+		ARG 0 obj
+		ARG 1 key
+	METHOD d getElementType (Lcom/google/gson/JsonElement;)Ljava/lang/String;
+		ARG 0 element
+	METHOD d elemToFloat (Lcom/google/gson/JsonElement;Ljava/lang/String;)F
+		ARG 0 elem
+		ARG 1 keyOnOwner
+	METHOD d isPropArray (Lcom/google/gson/JsonObject;Ljava/lang/String;)Z
+		ARG 0 obj
+		ARG 1 key
+	METHOD f elemToInt (Lcom/google/gson/JsonElement;Ljava/lang/String;)I
+		ARG 0 elem
+		ARG 1 keyOnOwner
+	METHOD f isPropPrimitive (Lcom/google/gson/JsonObject;Ljava/lang/String;)Z
+		ARG 0 obj
+		ARG 1 key
+	METHOD g objKeyValid (Lcom/google/gson/JsonObject;Ljava/lang/String;)Z
+		ARG 0 obj
+		ARG 1 key
+	METHOD h getStringByKey (Lcom/google/gson/JsonObject;Ljava/lang/String;)Ljava/lang/String;
+		ARG 0 obj
+		ARG 1 key
+	METHOD i getBooleanByKey (Lcom/google/gson/JsonObject;Ljava/lang/String;)Z
+		ARG 0 obj
+		ARG 1 key
+	METHOD k getFloatByKey (Lcom/google/gson/JsonObject;Ljava/lang/String;)F
+		ARG 0 obj
+		ARG 1 key
+	METHOD l elemToObject (Lcom/google/gson/JsonElement;Ljava/lang/String;)Lcom/google/gson/JsonObject;
+		ARG 0 element
+		ARG 1 keyOnOwner
+	METHOD m elemToArray (Lcom/google/gson/JsonElement;Ljava/lang/String;)Lcom/google/gson/JsonArray;
+		ARG 0 element
+		ARG 1 keyOnOwner
+	METHOD m getIntByKey (Lcom/google/gson/JsonObject;Ljava/lang/String;)I
+		ARG 0 obj
+		ARG 1 key
+	METHOD s getObjectByKey (Lcom/google/gson/JsonObject;Ljava/lang/String;)Lcom/google/gson/JsonObject;
+		ARG 0 obj
+		ARG 1 key
+	METHOD t getArrayByKey (Lcom/google/gson/JsonObject;Ljava/lang/String;)Lcom/google/gson/JsonArray;
+		ARG 0 obj
+		ARG 1 key
 CLASS none/nk
 	FIELD c LOGGER Lorg/apache/logging/log4j/Logger;
 CLASS none/nl net/minecraft/util/CaseInsensitiveHashMap
@@ -12228,7 +12307,6 @@ CLASS none/akt net/minecraft/block/BlockCarpet
 CLASS none/aku net/minecraft/block/BlockYellowFlower
 	METHOD l getFlowerBlockColor ()Lnone/agx$b;
 CLASS none/akv net/minecraft/block/entity/BlockEntityBanner
-	CLASS a EnumBannerPattern
 	CLASS none/akv$a
 		FIELD J BRICKS Lnone/akv$a;
 		FIELD K SKULL Lnone/akv$a;
@@ -18746,6 +18824,22 @@ CLASS none/bqi net/minecraft/client/stream/Metadata
 	METHOD b encode ()Ljava/lang/String;
 	METHOD c getName ()Ljava/lang/String;
 CLASS none/bqk tv/twitch/TwitchBroadcaster
+	CLASS a Status
+		FIELD a Uninitialized Lnone/bqk$a;
+		FIELD b Initialized Lnone/bqk$a;
+		FIELD c Authenticating Lnone/bqk$a;
+		FIELD d Authenticated Lnone/bqk$a;
+		FIELD e LoggingIn Lnone/bqk$a;
+		FIELD f LoggedIn Lnone/bqk$a;
+		FIELD g FindingIngestServer Lnone/bqk$a;
+		FIELD h ReceivedIngestServers Lnone/bqk$a;
+		FIELD i ReadyToBroadcast Lnone/bqk$a;
+		FIELD j Starting Lnone/bqk$a;
+		FIELD k Broadcasting Lnone/bqk$a;
+		FIELD l Stopping Lnone/bqk$a;
+		FIELD m Paused Lnone/bqk$a;
+		FIELD n IngestTesting Lnone/bqk$a;
+	CLASS none/b none/b
 	CLASS none/bqk$3 czx
 	CLASS none/bqk$a EnumTwitchStatus
 		FIELD a UNINITIALIZED Lnone/bqk$a;
@@ -18813,8 +18907,23 @@ CLASS none/bql tv/twitch/ChatController
 	CLASS none/bql$e dah
 	FIELD q LOGGER Lorg/apache/logging/log4j/Logger;
 CLASS none/bqm tv/twitch/ServerConnector
+	CLASS a StateChangeable
+		METHOD a changeState (Lnone/bqm;Lnone/bqm$b;)V
+			ARG 0 serverConnector
+			ARG 1 newState
+	CLASS b State
+		FIELD a Uninitialized Lnone/bqm$b;
+		FIELD b Starting Lnone/bqm$b;
+		FIELD c ConnectingToServer Lnone/bqm$b;
+		FIELD d TestingServer Lnone/bqm$b;
+		FIELD e DoneTestingServer Lnone/bqm$b;
+		FIELD f Finished Lnone/bqm$b;
+		FIELD g Cancelling Lnone/bqm$b;
+		FIELD h Cancelled Lnone/bqm$b;
+		FIELD i Failed Lnone/bqm$b;
 	CLASS none/bqm$3 dal
 	CLASS none/bqm$a dam
+	CLASS none/bqm$a
 	CLASS none/bqm$b EnumConnectionState
 		FIELD a UNINITIALIZED Lnone/bqm$b;
 		FIELD b STARTING Lnone/bqm$b;
@@ -18825,11 +18934,18 @@ CLASS none/bqm tv/twitch/ServerConnector
 		FIELD g CANCELLING Lnone/bqm$b;
 		FIELD h CANCELLED Lnone/bqm$b;
 		FIELD i FAILED Lnone/bqm$b;
+	FIELD a stateChangeListener Lnone/bqm$a;
+	FIELD d state Lnone/bqm$b;
+	METHOD a setStateChangeListener (Lnone/bqm$a;)V
+		ARG 0 listener
+	METHOD a setState (Lnone/bqm$b;)V
+		ARG 0 state
 CLASS none/bqn tv/twitch/dao
 	CLASS none/bqn$a EnumTwitchError
 		FIELD a ERROR Lnone/bqn$a;
 		FIELD b INVALID_TOKEN Lnone/bqn$a;
 CLASS none/bqo tv/twitch/TwitchAuthenticator
+	FIELD a STREAM_MARKER Lorg/apache/logging/log4j/Marker;
 	FIELD b LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD c broadcaster Lnone/bqk;
 	FIELD d chatController Lnone/bql;
@@ -18837,6 +18953,7 @@ CLASS none/bqo tv/twitch/TwitchAuthenticator
 	FIELD q error Lnone/bqn$a;
 	METHOD <init> (Lnone/avf;Lcom/mojang/authlib/properties/Property;)V
 		ARG 0 minecraft
+	METHOD a changeState (Lnone/bqm;Lnone/bqm$b;)V
 CLASS none/bqp tv/twitch/dat
 CLASS none/bqt net/minecraft/client/renderers/OpenGlHelper
 	FIELD A GL_SOURCE1_RGB I
