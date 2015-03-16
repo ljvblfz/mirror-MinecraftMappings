@@ -106,6 +106,10 @@ CLASS none/c net/minecraft/crash/CrashReportCategory
 		ARG 0 crashLogger
 		ARG 1 name
 	METHOD a getStackTraceElementsArray ()[Ljava/lang/StackTraceElement;
+	METHOD a formatLocation (DDD)Ljava/lang/String;
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
 	METHOD a getStackLength (I)I
 	METHOD a (Ljava/lang/StackTraceElement;Ljava/lang/StackTraceElement;)Z
 		ARG 0 stackTraceElement1
@@ -125,6 +129,8 @@ CLASS none/c net/minecraft/crash/CrashReportCategory
 		ARG 0 crashLogInfo
 	METHOD a (Lnone/c;Lnone/ck;Lnone/ama;)V
 		ARG 0 crashLogInfo
+	METHOD a formatBlockPos (Lnone/ck;)Ljava/lang/String;
+		ARG 0 pos
 CLASS none/f net/minecraft/crash/CrashReportException
 	FIELD a crashLogger Lnone/b;
 	METHOD <init> (Lnone/b;)V
@@ -14920,6 +14926,7 @@ CLASS none/auh net/minecraft/util/AxisAlignedBB
 	METHOD <init> (Lnone/ck;Lnone/ck;)V
 		ARG 0 min
 		ARG 1 max
+	METHOD a averageSideLength ()D
 	METHOD a moveBoundOutward (DDD)Lnone/auh;
 		ARG 0 x
 		ARG 1 y
@@ -15543,6 +15550,7 @@ CLASS none/avi net/minecraft/client/settings/GameSettings
 		FIELD O STREAM_MIC_TOGGLE_BEHAVIOR Lnone/avi$a;
 		FIELD P BLOCK_ALTERNATIVES Lnone/avi$a;
 		FIELD Q REDUCED_DEBUG_INFO Lnone/avi$a;
+		FIELD R ENTITY_SHADOWS Lnone/avi$a;
 		FIELD S enumBoolean Z
 		FIELD T isNumerical Z
 		FIELD U enumString Ljava/lang/String;
@@ -15605,6 +15613,7 @@ CLASS none/avi net/minecraft/client/settings/GameSettings
 	FIELD R streamChatEnabled I
 	FIELD S streamChatUserFilter I
 	FIELD T streamMicToggleBehavior I
+	FIELD V entityShadows Z
 	FIELD W keyBindForward Lnone/avc;
 	FIELD X keyBindLeft Lnone/avc;
 	FIELD Y keyBindBack Lnone/avc;
@@ -15621,6 +15630,14 @@ CLASS none/avi net/minecraft/client/settings/GameSettings
 	FIELD aM forceUnicodeFont Z
 	FIELD aN LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD aO GSON Lcom/google/gson/Gson;
+	FIELD aQ GUI_SCALE_UNLOCALIZED_NAMES [Ljava/lang/String;
+	FIELD aR PARTICLES_UNLOCALIZED_NAMES [Ljava/lang/String;
+	FIELD aS AO_UNLOCALIZED_NAMES [Ljava/lang/String;
+	FIELD aT STREAM_COMPRESSION_UNLOCALIZED_NAMES [Ljava/lang/String;
+	FIELD aU STREAM_CHAT_ENABLED_UNLOCALIZED_NAMES [Ljava/lang/String;
+	FIELD aV STREAM_CHAT_FILTER_UNLOCALIZED_NAMES [Ljava/lang/String;
+	FIELD aW STREAM_MIC_UNLOCALIZED_NAMES [Ljava/lang/String;
+	FIELD aX GRAPHICS_UNLOCALIZED_NAMES [Ljava/lang/String;
 	FIELD aa keyBindJump Lnone/avc;
 	FIELD ab keyBindSneak Lnone/avc;
 	FIELD ac keyBindInventory Lnone/avc;
@@ -17372,6 +17389,7 @@ CLASS none/bfe net/minecraft/client/renderers/BufferBuilder
 		ARG 2 zOffset
 	METHOD c getColorIndex (I)I
 		ARG 0 index
+	METHOD d next ()V
 	METHOD d setNormal (FFF)V
 		ARG 0 x
 		ARG 1 y
@@ -18719,8 +18737,19 @@ CLASS none/bph net/minecraft/sound/EnumSoundType
 	FIELD f MOBS Lnone/bph;
 	FIELD g ANIMALS Lnone/bph;
 	FIELD h PLAYERS Lnone/bph;
-	FIELD i AMBIANT Lnone/bph;
+	FIELD i AMBIENT Lnone/bph;
+	FIELD j typeByName Ljava/util/Map;
+	FIELD k typeById Ljava/util/Map;
+	FIELD l typeName Ljava/lang/String;
+	FIELD m typeId I
+	METHOD a getName ()Ljava/lang/String;
+	METHOD a getByName (Ljava/lang/String;)Lnone/bph;
+	METHOD b getId ()I
 CLASS none/bpi
+	CLASS none/bpi$a
+		CLASS none/bpi$a$a
+			FIELD a FILE Lnone/bpi$a$a;
+			FIELD b SOUND_EVENT Lnone/bpi$a$a;
 CLASS none/bpk net/minecraft/client/audio/ISound
 CLASS none/bpo
 	FIELD f playerNbt Lnone/dp;
@@ -18824,21 +18853,6 @@ CLASS none/bqi net/minecraft/client/stream/Metadata
 	METHOD b encode ()Ljava/lang/String;
 	METHOD c getName ()Ljava/lang/String;
 CLASS none/bqk tv/twitch/TwitchBroadcaster
-	CLASS a Status
-		FIELD a Uninitialized Lnone/bqk$a;
-		FIELD b Initialized Lnone/bqk$a;
-		FIELD c Authenticating Lnone/bqk$a;
-		FIELD d Authenticated Lnone/bqk$a;
-		FIELD e LoggingIn Lnone/bqk$a;
-		FIELD f LoggedIn Lnone/bqk$a;
-		FIELD g FindingIngestServer Lnone/bqk$a;
-		FIELD h ReceivedIngestServers Lnone/bqk$a;
-		FIELD i ReadyToBroadcast Lnone/bqk$a;
-		FIELD j Starting Lnone/bqk$a;
-		FIELD k Broadcasting Lnone/bqk$a;
-		FIELD l Stopping Lnone/bqk$a;
-		FIELD m Paused Lnone/bqk$a;
-		FIELD n IngestTesting Lnone/bqk$a;
 	CLASS none/bqk$3 czx
 	CLASS none/bqk$a EnumTwitchStatus
 		FIELD a UNINITIALIZED Lnone/bqk$a;
@@ -18906,23 +18920,11 @@ CLASS none/bql tv/twitch/ChatController
 	CLASS none/bql$e dah
 	FIELD q LOGGER Lorg/apache/logging/log4j/Logger;
 CLASS none/bqm tv/twitch/ServerConnector
-	CLASS a StateChangeable
-		METHOD a changeState (Lnone/bqm;Lnone/bqm$b;)V
+	CLASS none/bqm$3 dal
+	CLASS none/bqm$a StateChangeListener
+		METHOD a onConnectionStateChange (Lnone/bqm;Lnone/bqm$b;)V
 			ARG 0 serverConnector
 			ARG 1 newState
-	CLASS b State
-		FIELD a Uninitialized Lnone/bqm$b;
-		FIELD b Starting Lnone/bqm$b;
-		FIELD c ConnectingToServer Lnone/bqm$b;
-		FIELD d TestingServer Lnone/bqm$b;
-		FIELD e DoneTestingServer Lnone/bqm$b;
-		FIELD f Finished Lnone/bqm$b;
-		FIELD g Cancelling Lnone/bqm$b;
-		FIELD h Cancelled Lnone/bqm$b;
-		FIELD i Failed Lnone/bqm$b;
-	CLASS none/bqm$3 dal
-	CLASS none/bqm$a dam
-	CLASS none/bqm$a
 	CLASS none/bqm$b EnumConnectionState
 		FIELD a UNINITIALIZED Lnone/bqm$b;
 		FIELD b STARTING Lnone/bqm$b;
@@ -18943,6 +18945,8 @@ CLASS none/bqn tv/twitch/dao
 	CLASS none/bqn$a EnumTwitchError
 		FIELD a ERROR Lnone/bqn$a;
 		FIELD b INVALID_TOKEN Lnone/bqn$a;
+	METHOD E getError ()Lnone/bqn$a;
+	METHOD f shutdownStream ()V
 CLASS none/bqo tv/twitch/TwitchAuthenticator
 	FIELD a STREAM_MARKER Lorg/apache/logging/log4j/Marker;
 	FIELD b LOGGER Lorg/apache/logging/log4j/Logger;
@@ -18952,8 +18956,14 @@ CLASS none/bqo tv/twitch/TwitchAuthenticator
 	FIELD q error Lnone/bqn$a;
 	METHOD <init> (Lnone/avf;Lcom/mojang/authlib/properties/Property;)V
 		ARG 0 minecraft
-	METHOD a changeState (Lnone/bqm;Lnone/bqm$b;)V
+	METHOD E getError ()Lnone/bqn$a;
+	METHOD a onConnectionStateChange (Lnone/bqm;Lnone/bqm$b;)V
+		ARG 0 serverConnector
+		ARG 1 newState
+	METHOD f shutdownStream ()V
 CLASS none/bqp tv/twitch/dat
+	METHOD E getError ()Lnone/bqn$a;
+	METHOD f shutdownStream ()V
 CLASS none/bqt net/minecraft/client/renderers/OpenGlHelper
 	FIELD A GL_SOURCE1_RGB I
 	FIELD B GL_SOURCE2_RGB I
