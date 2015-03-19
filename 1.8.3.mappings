@@ -2396,6 +2396,7 @@ CLASS none/fb net/minecraft/chat/TextComponent
 	METHOD e getComponentText ()Ljava/lang/String;
 	METHOD f cloneComponent ()Lnone/ev;
 	METHOD g getText ()Ljava/lang/String;
+	METHOD h cloneComponent ()Lnone/fb;
 CLASS none/fc net/minecraft/chat/TranslatableComponent
 	FIELD b list Ljava/util/List;
 	FIELD c PATTERN Ljava/util/regex/Pattern;
@@ -7046,6 +7047,7 @@ CLASS none/wn net/minecraft/entity/player/InventoryPlayer
 	FIELD e hasChanged Z
 	FIELD f mouseHeldItemStack Lnone/zy;
 	METHOD a getStack (I)Lnone/zy;
+		ARG 0 slot
 	METHOD a retrieveFromStack (II)Lnone/zy;
 		ARG 0 slotIndex
 		ARG 1 amount
@@ -7079,12 +7081,15 @@ CLASS none/wn net/minecraft/entity/player/InventoryPlayer
 		ARG 0 direction
 	METHOD d getFirstMergeableSlotIndex (Lnone/zy;)I
 	METHOD e overflowAfterAddItemStack (Lnone/zy;)I
+	METHOD e_ getName ()Ljava/lang/String;
+	METHOD f_ getLocalizedName ()Lnone/ev;
 	METHOD g getFieldAmount ()I
 	METHOD h getSelectedHotbarSlot ()Lnone/zy;
 	METHOD i getInventoryWidth ()I
 	METHOD j getFirstEmptySlotIndex ()I
 	METHOD k onPlayerUpdate ()V
 	METHOD l clear ()V
+	METHOD l_ isNameUnlocalizable ()Z
 	METHOD m getTotalArmorValue ()I
 	METHOD n dropAllContent ()V
 	METHOD o_ getSize ()I
@@ -15832,6 +15837,7 @@ CLASS none/avf net/minecraft/main/Minecraft
 	METHOD p onLostFocus ()V
 	METHOD q toggleFullscreen ()V
 	METHOD s tick ()V
+	METHOD t isDemo ()Z
 	METHOD u getNetHandler ()Lnone/bcz;
 	METHOD v isFancyGraphicsEnabled ()Z
 CLASS none/avg net/minecraft/util/MouseHelper
@@ -16664,6 +16670,7 @@ CLASS none/ayp net/minecraft/client/gui/GuiBook
 	METHOD e updateScreen ()V
 	METHOD m onGuiClosed ()V
 CLASS none/ayq net/minecraft/client/gui/GuiBrewingStand
+	FIELD u RESOURCE_GUI_BREWING_STAND Lnone/jz;
 	METHOD a drawGuiContainerBackgroundLayer (FII)V
 	METHOD b drawGuiContainerForegroundLayer (II)V
 CLASS none/ayr net/minecraft/client/gui/GuiCommandBlock
@@ -18827,7 +18834,10 @@ CLASS none/bmj net/minecraft/client/texture/TextureAtlasSprite
 	METHOD k getFrameCount ()I
 CLASS none/bmk net/minecraft/client/texture/TextureManager
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD d idPerName Ljava/util/Map;
 	FIELD e resourceManager Lnone/bnj;
+	METHOD a createDynamicResource (Ljava/lang/String;Lnone/bma;)Lnone/jz;
+		ARG 0 resourceName
 	METHOD a onReload (Lnone/bnj;)V
 	METHOD a bindTexture (Lnone/jz;)V
 	METHOD a loadTexture (Lnone/jz;Lnone/bml;)Z
@@ -18929,17 +18939,50 @@ CLASS none/bmw net/minecraft/client/renderers/vertex/VertexFormatElement
 	METHOD d getElementCount ()I
 	METHOD e getIndex ()I
 	METHOD f isPositionElement ()Z
-CLASS none/bmy
+CLASS none/bmy net/minecraft/client/resources/ResourcePackReaderBase
+	FIELD a file Ljava/io/File;
 	FIELD b LOGGER Lorg/apache/logging/log4j/Logger;
+	METHOD <init> (Ljava/io/File;)V
+		ARG 0 file
+	METHOD a getIcon ()Ljava/awt/image/BufferedImage;
+	METHOD a getRelativePath (Ljava/io/File;Ljava/io/File;)Ljava/lang/String;
+	METHOD a getResource (Ljava/lang/String;)Ljava/io/InputStream;
+	METHOD a getResourceAsStream (Lnone/jz;)Ljava/io/InputStream;
+	METHOD b getFilename ()Ljava/lang/String;
+	METHOD b hasResource (Ljava/lang/String;)Z
+	METHOD b hasResourceLocation (Lnone/jz;)Z
+	METHOD c fileCaseWarning (Ljava/lang/String;)V
+	METHOD c resourcePath (Lnone/jz;)Ljava/lang/String;
 CLASS none/bmz
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
 CLASS none/bna net/minecraft/client/PlayerResources
 	FIELD a STEVE_PNG Lnone/jz;
 	FIELD b ALEX_PNG Lnone/jz;
-CLASS none/bnb net/minecraft/client/resources/DefaultResourcePack
+CLASS none/bnb net/minecraft/client/resources/DefaultResourcePackReader
+	FIELD a SUPPORTED_RESOURCES Ljava/util/Set;
+	METHOD a getIcon ()Ljava/awt/image/BufferedImage;
+	METHOD a getResourceAsStream (Lnone/jz;)Ljava/io/InputStream;
+	METHOD b getFilename ()Ljava/lang/String;
+	METHOD b hasResourceLocation (Lnone/jz;)Z
+	METHOD c getSupported ()Ljava/util/Set;
 	METHOD c setIcon (Lnone/jz;)Ljava/io/InputStream;
 CLASS none/bnc
 	FIELD b LOGGER Lorg/apache/logging/log4j/Logger;
+CLASS none/bnd net/minecraft/client/resources/ZippedResourcePackReader
+	FIELD b SLASH_SPLITTER Lcom/google/common/base/Splitter;
+	FIELD c zipFile Ljava/util/zip/ZipFile;
+	METHOD <init> (Ljava/io/File;)V
+		ARG 0 file
+	METHOD a getResource (Ljava/lang/String;)Ljava/io/InputStream;
+		ARG 0 resourcePath
+	METHOD b hasResource (Ljava/lang/String;)Z
+		ARG 0 resourcePath
+	METHOD c getSupported ()Ljava/util/Set;
+	METHOD d getZipfile ()Ljava/util/zip/ZipFile;
+CLASS none/bne net/minecraft/client/resources/DirectoryResourcePackReader
+	METHOD a getResource (Ljava/lang/String;)Ljava/io/InputStream;
+	METHOD b hasResource (Ljava/lang/String;)Z
+	METHOD c getSupported ()Ljava/util/Set;
 CLASS none/bnf net/minecraft/client/resources/FoliageColorReloadListener
 	FIELD a FOLIAGE_PNG Lnone/jz;
 	METHOD a onReload (Lnone/bnj;)V
@@ -18953,8 +18996,32 @@ CLASS none/bni net/minecraft/client/resources/IResourcePack
 CLASS none/bnj net/minecraft/client/resources/IResourceManager
 CLASS none/bnk net/minecraft/client/resources/IResourceManagerReloadListener
 	METHOD a onReload (Lnone/bnj;)V
+CLASS none/bnl net/minecraft/client/resources/IResourcePackReader
+	METHOD a getIcon ()Ljava/awt/image/BufferedImage;
+	METHOD a getResourceAsStream (Lnone/jz;)Ljava/io/InputStream;
+	METHOD b getFilename ()Ljava/lang/String;
+	METHOD b hasResourceLocation (Lnone/jz;)Z
+	METHOD c getSupported ()Ljava/util/Set;
+CLASS none/bnm net/minecraft/client/resource/ResourceNotFoundException
+	METHOD <init> (Ljava/io/File;Ljava/lang/String;)V
+		ARG 0 resourcePackFile
+		ARG 1 resource
 CLASS none/bnn net/minecraft/client/resources/ResourcePackRepository
+	CLASS none/bnn$a ResourcePack
+		FIELD b location Ljava/io/File;
+		FIELD d metadata Lnone/bok;
+		FIELD e icon Ljava/awt/image/BufferedImage;
+		FIELD f iconTexture Lnone/jz;
+		METHOD <init> (Lnone/bnn;Ljava/io/File;)V
+			ARG 1 location
+		METHOD a bindIconTexture (Lnone/bmk;)V
+		METHOD e getDescription ()Ljava/lang/String;
+	FIELD a defaultResourcePack Lnone/bnl;
+	FIELD c LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD e resourcePackFolder Ljava/io/File;
+	FIELD h lock Ljava/util/concurrent/locks/ReentrantLock;
 	METHOD a fetchResourcePack (Ljava/lang/String;Ljava/lang/String;)Lcom/google/common/util/concurrent/ListenableFuture;
+		ARG 1 hash
 CLASS none/bno net/minecraft/client/resources/SimpleReloadableResourceManager
 	METHOD a registerReloadListener (Lnone/bnk;)V
 CLASS none/bnp
@@ -19069,6 +19136,12 @@ CLASS none/bpp net/minecraft/server/IntegratedServer
 	FIELD k LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD l minecraft Lnone/avf;
 	FIELD m levelSettings Lnone/adq;
+	FIELD n isPaused Z
+	FIELD p lanPingServerThread Lnone/bps;
+	METHOD <init> (Lnone/avf;)V
+		ARG 0 minecraft
+	METHOD <init> (Lnone/avf;Ljava/lang/String;Ljava/lang/String;Lnone/adq;)V
+		ARG 0 minecraft
 	METHOD a loadWorld (Ljava/lang/String;Ljava/lang/String;JLnone/ads;Ljava/lang/String;)V
 	METHOD a setGameType (Lnone/adq$a;)V
 	METHOD a shareToLAN (Lnone/adq$a;Z)Ljava/lang/String;
@@ -19515,6 +19588,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD f setCanSpawnNPCs (Z)V
 	METHOD f_ getNameComponent ()Lnone/ev;
 	METHOD g setAllowPvp (Z)V
+	METHOD getServerModName getServerModName ()Ljava/lang/String;
 	METHOD h getServerCommandManager ()Lnone/be;
 	METHOD h setAllowFlight (Z)V
 	METHOD i startServer ()Z
@@ -19538,5 +19612,5 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD y systemExitNow ()V
 	METHOD z onTick ()V
 CLASS net/minecraft/client/ClientBrandRetriever net/minecraft/client/ClientBrandRetriever
-	METHOD getClientModName ()Ljava/lang/String;
+	METHOD getClientModName getClientModName ()Ljava/lang/String;
 CLASS net/minecraft/realms/RealmsServerStatusPinger
