@@ -369,12 +369,14 @@ CLASS none/n net/minecraft/command/ICommandSender
 		ARG 1 value
 	METHOD c getPosition ()Lnone/ck;
 	METHOD d getVec3 ()Lnone/auj;
-	METHOD e getLevel ()Lnone/adn;
+	METHOD e getWorld ()Lnone/adn;
 	METHOD e_ getName ()Ljava/lang/String;
 	METHOD f getEntity ()Lnone/pl;
 	METHOD f_ getNameComponent ()Lnone/ev;
 	METHOD u_ shouldReceiveCommandFeedback ()Z
 CLASS none/o net/minecraft/command/CommandResultStats
+	CLASS none/o$1
+		METHOD e getWorld ()Lnone/adn;
 	CLASS none/o$a EnumResultStatsType
 		FIELD a SUCCESS_COUNT Lnone/o$a;
 		FIELD b AFFECTED_BLOCKS Lnone/o$a;
@@ -640,6 +642,8 @@ CLASS none/ad net/minecraft/command/CommandEntityData
 	METHOD c getUnlocalizedUsage (Lnone/n;)Ljava/lang/String;
 		ARG 0 serverCommandUser
 CLASS none/ae net/minecraft/command/CommandExecuteAt
+	CLASS none/ae$1
+		METHOD e getWorld ()Lnone/adn;
 	METHOD a getPermissionLevel ()I
 	METHOD a execute (Lnone/n;[Ljava/lang/String;)V
 		ARG 0 serverCommandUser
@@ -1290,7 +1294,7 @@ CLASS none/cr net/minecraft/util/Facing
 	METHOD m getBlockCoords ()Lnone/dg;
 	METHOD n getXRotation ()Lnone/cr;
 	METHOD p getZRotation ()Lnone/cr;
-	METHOD values ()[Lnone/cr;
+	METHOD values values ()[Lnone/cr;
 CLASS none/cs net/minecraft/dispenser/IDispenseBehavior
 	CLASS none/cs$1 IDispenseBehavior_1
 		METHOD a dispense (Lnone/cl;Lnone/zy;)Lnone/zy;
@@ -3956,6 +3960,9 @@ CLASS none/me net/minecraft/network/BanRecord
 CLASS none/mf net/minecraft/network/ListWhitelist
 	METHOD a getUserNames ()[Ljava/lang/String;
 	METHOD a objectToString (Ljava/lang/Object;)Ljava/lang/String;
+CLASS none/mk net/minecraft/command/RconSender
+	FIELD a sender Lnone/mk;
+	METHOD e getWorld ()Lnone/adn;
 CLASS none/mr net/minecraft/stats/Achievement
 	FIELD a column I
 	FIELD b row I
@@ -4408,7 +4415,7 @@ CLASS none/oe net/minecraft/util/TaskQueue
 	METHOD a runTask (Ljava/lang/Runnable;)Lcom/google/common/util/concurrent/ListenableFuture;
 		ARG 0 task
 	METHOD aI isInMainThread ()Z
-CLASS none/og
+CLASS none/og net/minecraft/container/DoubleContainer
 	METHOD a setLock (Lnone/oo;)V
 	METHOD i getLock ()Lnone/oo;
 	METHOD r_ isLocked ()Z
@@ -5054,7 +5061,7 @@ CLASS none/pl net/minecraft/entity/Entity
 	METHOD d onCollide (Lnone/wo;)V
 		ARG 0 entityPlayer
 	METHOD d setSprinting (Z)V
-	METHOD e getLevel ()Lnone/adn;
+	METHOD e getWorld ()Lnone/adn;
 	METHOD e distanceSquared (DDD)D
 		ARG 0 xPos
 		ARG 1 yPos
@@ -5447,12 +5454,16 @@ CLASS none/pu net/minecraft/entity/CreatureTypes
 	METHOD b getMaxAmountInWorld ()I
 	METHOD d isPeacefulCreature ()Z
 	METHOD e isAnimal ()Z
+CLASS none/pv empty/pv
 CLASS none/pw net/minecraft/entity/MobTypes
 	FIELD a MOB_TYPES Ljava/util/HashMap;
 	METHOD a getMobType (Ljava/lang/Class;)Lnone/pt$a;
 		ARG 0 mobClass
-CLASS none/py
+CLASS none/px net/minecraft/entity/EnumCreatureAttribute
+	FIELD b UNDEAD Lnone/px;
+CLASS none/py net/minecraft/entity/ITamable
 	METHOD b getOwner ()Ljava/lang/String;
+	METHOD m_ getTamableEntity ()Lnone/pl;
 CLASS none/pz net/minecraft/entity/EntityCreature
 	FIELD bk FLEEING_SPEED_ID Ljava/util/UUID;
 	FIELD bl FLEEING_SPEED_BONUS Lnone/qe;
@@ -5497,6 +5508,8 @@ CLASS none/qa net/minecraft/entity/DataWatcher
 		ARG 0 id
 CLASS none/qb net/minecraft/entity/EntityTamable
 	FIELD bm goalSit Lnone/sf;
+	METHOD <init> (Lnone/adn;)V
+		ARG 0 world
 	METHOD a handleEntityStatusPacket (B)V
 	METHOD a readFromNBT (Lnone/dp;)V
 	METHOD a handleDeathFrom (Lnone/ox;)V
@@ -5510,6 +5523,7 @@ CLASS none/qb net/minecraft/entity/EntityTamable
 	METHOD cn isOwned ()Z
 	METHOD h init ()V
 	METHOD m setOwned (Z)V
+	METHOD m_ getTamableEntity ()Lnone/pl;
 	METHOD n setSitting (Z)V
 CLASS none/qc net/minecraft/entity/attribute/IAttribute
 	METHOD a getName ()Ljava/lang/String;
@@ -6110,7 +6124,9 @@ CLASS none/ub net/minecraft/entity/passive/EntityWolf
 CLASS none/ud
 	METHOD bn getHealth ()F
 	METHOD bu getMaxHealth ()F
+	METHOD f_ ()Lnone/ev;
 CLASS none/ue net/minecraft/entity/IEntityMultiPart
+	METHOD a getWorld ()Lnone/adn;
 	METHOD a (Lnone/uf;Lnone/ox;F)Z
 		ARG 1 source
 		ARG 2 damage
@@ -6131,6 +6147,7 @@ CLASS none/ug net/minecraft/entity/item/EntityEnderCrystal
 	METHOD t_ update ()V
 CLASS none/uh net/minecraft/entity/boss/EntityDragon
 	METHOD G onKillCommand ()V
+	METHOD a getWorld ()Lnone/adn;
 	METHOD a attackEntity (Lnone/ox;F)Z
 	METHOD aB getParts ()[Lnone/pl;
 	METHOD aX setAttributes ()V
@@ -6363,6 +6380,9 @@ CLASS none/us net/minecraft/entity/projectile/EntityFishingHook
 	METHOD h init ()V
 	METHOD i setVelocity (DDD)V
 	METHOD t_ update ()V
+CLASS none/uv
+	METHOD <init> (Lnone/adn;)V
+		ARG 0 world
 CLASS none/uw net/minecraft/entity/effect/EntityLightningBolt
 	METHOD a readFromNBT (Lnone/dp;)V
 	METHOD b writeToNBT (Lnone/dp;)V
@@ -6563,6 +6583,8 @@ CLASS none/vc net/minecraft/entity/item/EntityMinecartChest
 	METHOD u getEmptyDisplayBlockState ()Lnone/ama;
 	METHOD w getDefaultDisplayOffset ()I
 CLASS none/vd net/minecraft/entity/item/EntityMinecartCommandBlock
+	CLASS none/vd$1
+		METHOD e getWorld ()Lnone/adn;
 	FIELD a command Lnone/add;
 	METHOD a activate (IIIZ)V
 	METHOD a readFromNBT (Lnone/dp;)V
@@ -6602,6 +6624,13 @@ CLASS none/vf net/minecraft/entity/item/EntityMinecartFurnace
 	METHOD t_ update ()V
 	METHOD u getEmptyDisplayBlockState ()Lnone/ama;
 CLASS none/vg net/minecraft/entity/item/EntityMinecartHopper
+	METHOD <init> (Lnone/adn;)V
+		ARG 0 world
+	METHOD <init> (Lnone/adn;DDD)V
+		ARG 0 world
+	METHOD A getX ()D
+	METHOD B getY ()D
+	METHOD C getZ ()D
 	METHOD a activate (IIIZ)V
 	METHOD a readFromNBT (Lnone/dp;)V
 	METHOD a destroyMinecartFrom (Lnone/ox;)V
@@ -6611,6 +6640,7 @@ CLASS none/vg net/minecraft/entity/item/EntityMinecartHopper
 	METHOD t_ update ()V
 	METHOD u getEmptyDisplayBlockState ()Lnone/ama;
 	METHOD w getDefaultDisplayOffset ()I
+	METHOD z getWorld ()Lnone/adn;
 CLASS none/vh net/minecraft/entity/item/EntityMinecartEmpty
 	METHOD a activate (IIIZ)V
 	METHOD e onUseByPlayer (Lnone/wo;)Z
@@ -8255,6 +8285,7 @@ CLASS none/aar net/minecraft/item/ItemShovel
 	METHOD b givesSpecialDropOnBlock (Lnone/afi;)Z
 CLASS none/aas net/minecraft/item/ItemSign
 	METHOD a onBlockPlace (Lnone/zy;Lnone/wo;Lnone/adn;Lnone/ck;Lnone/cr;FFF)Z
+CLASS none/aat net/minecraft/item/ItemNetherStar
 CLASS none/aau net/minecraft/item/ItemSkull
 	FIELD a SKULL_TYPES [Ljava/lang/String;
 	METHOD a getDataValueForBlockVersion (I)I
@@ -12728,6 +12759,8 @@ CLASS none/akz net/minecraft/block/entity/BlockEntityChest
 	METHOD q_ getMaxStackSize ()I
 	METHOD y setInvalid ()V
 CLASS none/ala net/minecraft/block/entity/BlockEntityCommandBlock
+	CLASS none/ala$1
+		METHOD e getWorld ()Lnone/adn;
 	FIELD a commandSender Lnone/add;
 	METHOD a load (Lnone/dp;)V
 	METHOD b getCommandSender ()Lnone/add;
@@ -12802,7 +12835,15 @@ CLASS none/ali net/minecraft/block/entity/BlockEntityFurnace
 	METHOD b save (Lnone/dp;)V
 	METHOD c update ()V
 	METHOD k getBlockID ()Ljava/lang/String;
+CLASS none/alj net/minecraft/container/inventory/IHopperInventory
+	METHOD A getX ()D
+	METHOD B getY ()D
+	METHOD C getZ ()D
+	METHOD z getWorld ()Lnone/adn;
 CLASS none/alk net/minecraft/block/entity/BlockEntityHopper
+	METHOD A getX ()D
+	METHOD B getY ()D
+	METHOD C getZ ()D
 	METHOD a load (Lnone/dp;)V
 	METHOD a getInterfaceContainer (Lnone/wn;Lnone/wo;)Lnone/xj;
 	METHOD b save (Lnone/dp;)V
@@ -12828,6 +12869,10 @@ CLASS none/aln net/minecraft/block/entity/BlockEntityNoteBlock
 	METHOD a load (Lnone/dp;)V
 	METHOD b save (Lnone/dp;)V
 CLASS none/alo net/minecraft/block/entity/BlockEntitySign
+	CLASS none/alo$1
+		METHOD e getWorld ()Lnone/adn;
+	CLASS none/alo$2
+		METHOD e getWorld ()Lnone/adn;
 	FIELD a signText [Lnone/ev;
 	FIELD f lineBeingEdited I
 	FIELD g editable Z
@@ -14209,6 +14254,11 @@ CLASS none/aow net/minecraft/world/gen/feature/TreeGeneratorJungleUndergrowth
 		ARG 2 blockPos
 CLASS none/aox net/minecraft/world/gen/feature/NetherFireGenerator
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
+CLASS none/aoy net/minecraft/world/gen/feature/NetherGlowstoneGenerator
+	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
+		ARG 0 world
+		ARG 1 rnd
+		ARG 2 blockPos
 CLASS none/aoz net/minecraft/world/gen/feature/NetherLavaGenerator
 	FIELD a fluidBlock Lnone/afi;
 	FIELD b updateLater Z
@@ -15245,6 +15295,7 @@ CLASS none/atq net/minecraft/world/ISaveHandler
 	METHOD d getWorld ()Lnone/atp;
 	METHOD e getPlayerSaveHandler ()Lnone/atz;
 	METHOD g getLevelDirectoryName ()Ljava/lang/String;
+CLASS none/atr net/minecraft/world/storage/InvalidSaveFolderException
 CLASS none/ats net/minecraft/world/storage/ISaveLoader
 	METHOD a getSaveFormatName ()Ljava/lang/String;
 	METHOD a renameWorld (Ljava/lang/String;Ljava/lang/String;)V
@@ -16245,6 +16296,10 @@ CLASS none/avu net/minecraft/client/gui/GuiNewChat
 	METHOD d resetScroll ()V
 	METHOD e getChatOpen ()Z
 	METHOD h getChatScale ()F
+CLASS none/avv
+	METHOD a (Ljava/lang/String;Z)Ljava/lang/String;
+		ARG 0 message
+		ARG 1 keepColors
 CLASS none/avw net/minecraft/client/gui/GuiDebug
 	FIELD a minecraft Lnone/avf;
 	FIELD f fontRenderer Lnone/avo;
@@ -16295,15 +16350,18 @@ CLASS none/awe
 	METHOD a isListItemSelected (I)Z
 	METHOD a drawListItem (IIIIII)V
 	METHOD a selectItem (IZII)V
+	METHOD b getSlot (I)Lnone/awe$a;
 CLASS none/awf net/minecraft/client/gui/button/GuiSmallButton
 	METHOD c returnEnumOptions ()Lnone/avi$a;
 CLASS none/awg
 	CLASS none/awg$a
 		FIELD a mc Lnone/avf;
 	METHOD b getListItemCount ()I
+	METHOD b getSlot (I)Lnone/awe$a;
 	METHOD d getScrollbarHorizontalPosition ()I
 CLASS none/awh
 	METHOD b getListItemCount ()I
+	METHOD b getSlot (I)Lnone/awe$a;
 	METHOD d getScrollbarHorizontalPosition ()I
 CLASS none/awi net/minecraft/client/gui/GuiScoreboard
 	FIELD f mc Lnone/avf;
@@ -16331,7 +16389,7 @@ CLASS none/awk net/minecraft/client/gui/button/bvl
 	METHOD a getHoverState (Z)I
 	METHOD b mouseDragged (Lnone/avf;II)V
 	METHOD c mousePressed (Lnone/avf;II)Z
-CLASS none/awl
+CLASS none/awl net/minecraft/client/gui/GuiStreamIndicator
 	FIELD b mc Lnone/avf;
 CLASS none/awn net/minecraft/client/gui/GuiSpectatorWidgets
 	FIELD a SPECTATOR_WIDGETS_PNG Lnone/jz;
@@ -16707,6 +16765,7 @@ CLASS none/ayh net/minecraft/client/gui/ILoadableGui
 CLASS none/ayj
 	FIELD v mc Lnone/avf;
 	METHOD b getListItemCount ()I
+	METHOD b getSlot (I)Lnone/awe$a;
 	METHOD d getScrollbarHorizontalPosition ()I
 CLASS none/ayk net/minecraft/client/gui/GuiControls
 	METHOD a keyTyped (CI)V
@@ -16880,6 +16939,7 @@ CLASS none/azf net/minecraft/client/gui/GuiEditSign
 	METHOD m onGuiClosed ()V
 CLASS none/azi net/minecraft/client/gui/GuiMultiplayer
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD i serverDataStorage Lnone/bdg;
 	METHOD a keyTyped (CI)V
 	METHOD a drawScreen (IIF)V
 	METHOD a mouseClicked (III)V
@@ -16892,12 +16952,32 @@ CLASS none/azi net/minecraft/client/gui/GuiMultiplayer
 	METHOD m onGuiClosed ()V
 CLASS none/azj net/minecraft/client/gui/GuiSlotServer
 	FIELD a mc Lnone/avf;
-CLASS none/azl
+CLASS none/azk net/minecraft/client/gui/GuiLanServerSlot
+	FIELD a minecraft Lnone/avf;
+	FIELD c guiMultiplayer Lnone/azi;
+	FIELD d lastUpdated J
+CLASS none/azl net/minecraft/client/gui/GuiServerSlot
+	FIELD a logger Lorg/apache/logging/log4j/Logger;
 	FIELD c UNKNOWN_SERVER_PNG Lnone/jz;
 	FIELD d SERVER_SELECTION_PNG Lnone/jz;
+	FIELD e guiMultiplayer Lnone/azi;
+	FIELD f minecraft Lnone/avf;
+	FIELD g serverData Lnone/bdf;
+	FIELD h resourceLocation Lnone/jz;
+	FIELD j textureImage Lnone/bma;
 CLASS none/azm
+	FIELD u guiMultiplayer Lnone/azi;
+	FIELD v serverSlots Ljava/util/List;
+	FIELD w lanServerSlots Ljava/util/List;
+	FIELD x guiSlot Lnone/awe$a;
+	METHOD <init> (Lnone/azi;Lnone/avf;IIIII)V
+		ARG 0 guiMultiplayer
+		ARG 1 minecraft
 	METHOD a isListItemSelected (I)Z
+	METHOD a loadServersFromStorage (Lnone/bdg;)V
 	METHOD b getListItemCount ()I
+	METHOD b getSlot (I)Lnone/awe$a;
+		ARG 0 index
 	METHOD d getScrollbarHorizontalPosition ()I
 CLASS none/azp net/minecraft/client/gui/GuiSelectResourcePack
 	METHOD a drawScreen (IIF)V
@@ -16906,9 +16986,15 @@ CLASS none/azp net/minecraft/client/gui/GuiSelectResourcePack
 	METHOD b initGui ()V
 	METHOD b mouseMovedOrUp (III)V
 	METHOD k handleMouseInput ()V
-CLASS none/azv
+CLASS none/azu net/minecraft/client/gui/GuiResourcePackAvailableList
+	METHOD e getTitle ()Ljava/lang/String;
+CLASS none/azv net/minecraft/client/gui/GuiResourcePackList
 	METHOD b getListItemCount ()I
+	METHOD b getSlot (I)Lnone/awe$a;
 	METHOD d getScrollbarHorizontalPosition ()I
+	METHOD e getTitle ()Ljava/lang/String;
+CLASS none/azw net/minecraft/client/gui/GuiResourcePackSelectedList
+	METHOD e getTitle ()Ljava/lang/String;
 CLASS none/azz net/minecraft/client/gui/GuiTwitchIngest
 	METHOD a drawScreen (IIF)V
 	METHOD a actionPerformed (Lnone/avt;)V
@@ -17493,6 +17579,29 @@ CLASS none/bdf net/minecraft/network/ServerData
 	FIELD b serverIP Ljava/lang/String;
 	METHOD a setHideAddress (Lnone/bdf$a;)V
 	METHOD b getResourcePackSetting ()Lnone/bdf$a;
+CLASS none/bdg net/minecraft/client/multiplayer/ServerDataStorage
+	FIELD a logger Lorg/apache/logging/log4j/Logger;
+	FIELD b minecraft Lnone/avf;
+	FIELD c serverList Ljava/util/List;
+	METHOD <init> (Lnone/avf;)V
+		ARG 0 minecraft
+	METHOD a loadServers ()V
+	METHOD a getServer (I)Lnone/bdf;
+		ARG 0 index
+	METHOD a swapServers (II)V
+		ARG 0 i1
+		ARG 1 i2
+	METHOD a setServer (ILnone/bdf;)V
+		ARG 0 index
+		ARG 1 serverData
+	METHOD a addServer (Lnone/bdf;)V
+		ARG 0 serverData
+	METHOD b saveServers ()V
+	METHOD b removeServer (I)V
+		ARG 0 index
+	METHOD b updateServer (Lnone/bdf;)V
+		ARG 0 serverData
+	METHOD c getSize ()I
 CLASS none/bdh
 CLASS none/bdk net/minecraft/entity/particle/ParticleItem
 	CLASS none/bdk$a ParticleBarrierBuilder
@@ -19712,7 +19821,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD d getFile (Ljava/lang/String;)Ljava/io/File;
 	METHOD d setOnlineMode (Z)V
 		ARG 0 online
-	METHOD e getLevel ()Lnone/adn;
+	METHOD e getWorld ()Lnone/adn;
 	METHOD e setCanSpawnAnimals (Z)V
 	METHOD e_ getName ()Ljava/lang/String;
 	METHOD f getEntity ()Lnone/pl;
