@@ -5427,7 +5427,7 @@ CLASS none/pt net/minecraft/entity/EntityMob
 	METHOD q getCurrentArmor (I)Lnone/zy;
 	METHOD t_ update ()V
 	METHOD z getIdleSound ()Ljava/lang/String;
-CLASS none/pu net/minecraft/entity/EnumCreatureType
+CLASS none/pu net/minecraft/entity/CreatureTypes
 	FIELD a MONSTER Lnone/pu;
 	FIELD b CREATURE Lnone/pu;
 	FIELD c AMBIENT Lnone/pu;
@@ -5439,6 +5439,7 @@ CLASS none/pu net/minecraft/entity/EnumCreatureType
 	FIELD i isAnimal Z
 	METHOD <init> (Ljava/lang/String;ILjava/lang/Class;ILnone/arn;ZZ)V
 		ARG 0 name
+		ARG 3 className
 		ARG 4 creatureMaterial
 		ARG 5 isPeaceful
 		ARG 6 isAnimal
@@ -9577,14 +9578,22 @@ CLASS none/aec net/minecraft/world/decorator/Decorator
 	FIELD x cactusGenerator Lnone/aou;
 	FIELD y lilyPadGenerator Lnone/aou;
 	FIELD z lilypadsPerChunk I
+	METHOD a generateOres ()V
 	METHOD a generateWithin (ILnone/aou;II)V
 		ARG 0 tries
+		ARG 1 featureGen
 		ARG 2 minHeight
 		ARG 3 maxHeight
 	METHOD a decorateChunk (Lnone/adn;Ljava/util/Random;Lnone/adz;Lnone/ck;)V
+		ARG 0 world
+		ARG 1 rand
+		ARG 2 biome
+		ARG 3 blockPos
 	METHOD a decorate (Lnone/adz;)V
+		ARG 0 biome
 	METHOD b generateAround (ILnone/aou;II)V
 		ARG 0 tries
+		ARG 1 featureGen
 		ARG 2 center
 		ARG 3 heightRange
 CLASS none/aed net/minecraft/world/biome/BiomeManager
@@ -9901,6 +9910,7 @@ CLASS none/aew net/minecraft/world/biome/BiomeTheEnd
 CLASS none/aex net/minecraft/world/decorator/EndDecorator
 	FIELD M genFeature Lnone/aou;
 	METHOD a decorate (Lnone/adz;)V
+		ARG 0 biome
 CLASS none/aez net/minecraft/block/BlockAir
 	METHOD a (Lnone/adn;Lnone/ck;)Z
 		ARG 0 world
@@ -13467,6 +13477,7 @@ CLASS none/ana net/minecraft/world/chunk/storage/ChunkSection
 		ARG 2 localZ
 		ARG 3 state
 	METHOD a setBlockLightArray (Lnone/amx;)V
+		ARG 0 nibbleArray
 	METHOD a setBlockDataArray ([C)V
 		ARG 0 newDataArray
 	METHOD b isNotEmpty ()Z
@@ -13480,6 +13491,7 @@ CLASS none/ana net/minecraft/world/chunk/storage/ChunkSection
 		ARG 2 z
 		ARG 3 lightLevel
 	METHOD b setSkyLightArray (Lnone/amx;)V
+		ARG 0 nibbleArray
 	METHOD c getBlockMetadataAt (III)I
 		ARG 0 localX
 		ARG 1 localY
@@ -13501,11 +13513,11 @@ CLASS none/anb net/minecraft/world/chunk/storage/NibbleArrayReader
 	FIELD a aByte [B
 	FIELD b offset1 I
 	FIELD c offset2 I
-	METHOD a (III)I
+	METHOD a store (III)I
 		ARG 0 localX
 		ARG 1 localY
 		ARG 2 localZ
-CLASS none/ane net/minecraft/world/chunk/storage/IChunkLoader
+CLASS none/ane net/minecraft/world/chunk/storage/IChunkIO
 	METHOD a tickChunk ()V
 	METHOD a loadChunk (Lnone/adn;II)Lnone/amz;
 		ARG 0 level
@@ -13530,10 +13542,17 @@ CLASS none/anh net/minecraft/world/chunk/storage/ChunkInfo
 		FIELD h entityList Lnone/dv;
 		FIELD i blockEntityList Lnone/dv;
 		FIELD j blockTickList Lnone/dv;
-		FIELD k chunkXPos I
-		FIELD l chunkZPos I
+		FIELD k chunkX I
+		FIELD l chunkZ I
+		METHOD <init> (II)V
+			ARG 0 chunkX
+			ARG 1 chunkZ
 	METHOD a writeChunkToNBT (Lnone/anh$a;Lnone/dp;Lnone/aed;)V
+		ARG 0 anvilData
+		ARG 1 tagCompound
+		ARG 2 biomes
 	METHOD a readChunkFromNBT (Lnone/dp;)Lnone/anh$a;
+		ARG 0 tagCompound
 CLASS none/ani net/minecraft/world/chunk/storage/RegionFile
 	FIELD a EMPTY_SECTORS [B
 	FIELD b fileName Ljava/io/File;
@@ -13578,29 +13597,65 @@ CLASS none/ani net/minecraft/world/chunk/storage/RegionFile
 	METHOD e getOffset (II)I
 		ARG 0 chunkX
 		ARG 1 chunkZ
-CLASS none/anj net/minecraft/world/chunk/storage/RegionFileCache
+CLASS none/anj net/minecraft/world/chunk/storage/RegionFileIO
 	FIELD a fileMap Ljava/util/Map;
 	METHOD a clearFileWriter ()V
 	METHOD a writeChunkToFile (Ljava/io/File;II)Lnone/ani;
+		ARG 0 destFile
 		ARG 1 chunkX
 		ARG 2 chunkZ
 	METHOD c readRegionFile (Ljava/io/File;II)Ljava/io/DataInputStream;
+		ARG 0 sourceFile
+		ARG 1 chunkX
+		ARG 2 chunkZ
 	METHOD d writeRegionFile (Ljava/io/File;II)Ljava/io/DataOutputStream;
-CLASS none/ank net/minecraft/world/chunk/storage/ChunkLoader
+		ARG 0 destFile
+		ARG 1 chunkX
+		ARG 2 chunkZ
+CLASS none/ank net/minecraft/world/chunk/storage/ChunkIO
+	CLASS none/ank$a CachedChunk
+		FIELD a chunkCoords Lnone/adh;
+		FIELD b chunkData Lnone/dp;
+		METHOD <init> (Lnone/adh;Lnone/dp;)V
+			ARG 0 coordPair
+			ARG 1 tagCompound
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD b writeQueue Ljava/util/List;
+	FIELD c queuedChunkMap Ljava/util/Set;
+	FIELD d lockObject Ljava/lang/Object;
 	FIELD e regionFile Ljava/io/File;
+	METHOD <init> (Ljava/io/File;)V
+		ARG 0 regionFile
 	METHOD a tickChunk ()V
+	METHOD a queueForLoad (Lnone/adh;Lnone/dp;)V
+		ARG 0 chunkCoordPair
+		ARG 1 tagCompound
 	METHOD a loadChunk (Lnone/adn;II)Lnone/amz;
 		ARG 0 level
 		ARG 1 chunkX
 		ARG 2 chunkZ
-	METHOD a checkChunkLoadingErrors (Lnone/adn;IILnone/dp;)Lnone/amz;
+	METHOD a checkForErrorsAndLoad (Lnone/adn;IILnone/dp;)Lnone/amz;
 		ARG 0 level
 		ARG 1 chunkX
 		ARG 2 chunkZ
+		ARG 3 tagCompound
 	METHOD a saveChunk (Lnone/adn;Lnone/amz;)V
+		ARG 0 world
+		ARG 1 chunk
+	METHOD a readChunkFromNbt (Lnone/adn;Lnone/dp;)Lnone/amz;
+		ARG 0 world
+		ARG 1 tagCompound
+	METHOD a writeChunkToNbt (Lnone/amz;Lnone/adn;Lnone/dp;)V
+		ARG 0 chunk
+		ARG 1 world
+		ARG 2 tagCompound
+	METHOD a writeToDisk (Lnone/ank$a;)V
+		ARG 0 chunkToWrite
 	METHOD b saveExtraData ()V
 	METHOD b saveExtraChunkData (Lnone/adn;Lnone/amz;)V
+		ARG 0 world
+		ARG 1 chunk
+	METHOD c tryWrite ()Z
 CLASS none/ann net/minecraft/world/Dimension
 	FIELD a MOON_PHASE_FACTORS [F
 	FIELD b world Lnone/adn;
@@ -13847,6 +13902,9 @@ CLASS none/anu net/minecraft/world/gen/GeneratorSettings
 	METHOD <init> (Lnone/anu$a;)V
 		ARG 0 settingsFactory
 CLASS none/anv net/minecraft/world/gen/LevelGeneratorDebug
+	FIELD a blockList Ljava/util/List;
+	FIELD b width I
+	FIELD c length I
 	FIELD d world Lnone/adn;
 	METHOD <init> (Lnone/adn;)V
 		ARG 0 world
@@ -14015,6 +14073,7 @@ CLASS none/aob net/minecraft/world/gen/LevelGeneratorDefault
 	FIELD y templeGenerator Lnone/aqn;
 	FIELD z ravineGenerator Lnone/anz;
 	METHOD <init> (Lnone/adn;JZLjava/lang/String;)V
+		ARG 0 world
 		ARG 3 generatorOptions
 	METHOD a chunkExists (II)Z
 		ARG 0 chunkX
@@ -14023,6 +14082,10 @@ CLASS none/aob net/minecraft/world/gen/LevelGeneratorDefault
 	METHOD a generateTerrain (IILnone/ant;)V
 		ARG 0 chunkX
 		ARG 1 chunkZ
+		ARG 2 primer
+	METHOD a (IILnone/ant;[Lnone/adz;)V
+		ARG 2 primer
+		ARG 3 biomeArray
 	METHOD a getFeatureClosestToPosition (Lnone/adn;Ljava/lang/String;Lnone/ck;)Lnone/ck;
 	METHOD a populate (Lnone/amw;II)V
 		ARG 1 chunkX
@@ -14036,6 +14099,8 @@ CLASS none/aob net/minecraft/world/gen/LevelGeneratorDefault
 	METHOD c saveExtraData ()V
 	METHOD d unloadQueuedChunks ()Z
 	METHOD d generate (II)Lnone/amz;
+		ARG 0 chunkX
+		ARG 1 chunkZ
 	METHOD e canSave ()Z
 	METHOD f getName ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
@@ -14494,8 +14559,14 @@ CLASS none/aqs net/minecraft/world/gen/structure/StructureIO
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
 	METHOD a registerComponent (Ljava/lang/Class;Ljava/lang/String;)V
 CLASS none/aqt net/minecraft/world/storage/FeaturesData
+	FIELD b tagCompound Lnone/dp;
+	METHOD a getTagCompound ()Lnone/dp;
 	METHOD a load (Lnone/dp;)V
+		ARG 0 tagCompound
+	METHOD a (Lnone/dp;II)V
+		ARG 0 tagCompound
 	METHOD b save (Lnone/dp;)V
+		ARG 0 tagCompound
 CLASS none/aqu net/minecraft/world/gen/structure/StructureComponent
 	FIELD l boundingBox Lnone/aqf;
 	FIELD m facing Lnone/cr;
@@ -14865,17 +14936,41 @@ CLASS none/atg net/minecraft/util/Vec4b
 	METHOD c getThird ()B
 	METHOD d getFourth ()B
 CLASS none/ath net/minecraft/world/storage/MapData
+	CLASS none/ath$a MapInfo
+		FIELD a entPlayer Lnone/wo;
+		METHOD <init> (Lnone/ath;Lnone/wo;)V
+			ARG 1 entPlayer
+		METHOD a (Lnone/zy;)Lnone/fg;
+			ARG 0 itemStack
 	FIELD b xCenter I
 	FIELD c zCenter I
 	FIELD d dimensionID B
 	FIELD e scale B
 	FIELD f colors [B
+	FIELD g playersArrayList Ljava/util/List;
+	FIELD h playersVisibleOnMap Ljava/util/Map;
+	FIELD i playersHashMap Ljava/util/Map;
 	METHOD a setCenterForScale (DDI)V
 		ARG 0 oldCenterX
 		ARG 1 oldCenterZ
 		ARG 2 scale
+	METHOD a addPlayerToMap (ILnone/adn;Ljava/lang/String;DDD)V
+		ARG 1 world
+		ARG 3 posX
+		ARG 4 posZ
 	METHOD a load (Lnone/dp;)V
+		ARG 0 tagCompound
+	METHOD a (Lnone/wo;)Lnone/ath$a;
+		ARG 0 entPlayer
+	METHOD a updateVisiblePlayers (Lnone/wo;Lnone/zy;)V
+		ARG 0 entPlayer
+		ARG 1 itemStack
+	METHOD a (Lnone/zy;Lnone/adn;Lnone/wo;)Lnone/fg;
+		ARG 0 itemStack
+		ARG 1 world
+		ARG 2 entPlayer
 	METHOD b save (Lnone/dp;)V
+		ARG 0 tagCompound
 CLASS none/atk net/minecraft/world/storage/SaveHandlerAnvil
 	METHOD a flush ()V
 	METHOD a getChunkLoader (Lnone/ann;)Lnone/ane;
@@ -15222,7 +15317,20 @@ CLASS none/aub net/minecraft/world/storage/WorldStorage
 		ARG 1 levelData
 	METHOD a saveLevelData (Lnone/atf;)V
 		ARG 0 levelData
+CLASS none/aud net/minecraft/world/storage/FileIOWorker
+	FIELD a WORKER_INSTANCE Lnone/aud;
+	FIELD b threadedIOQueue Ljava/util/List;
+	FIELD c writeQueuedCounter J
+	FIELD d savedIOCounter J
+	FIELD e isThreadWaiting Z
+	METHOD a getThread ()Lnone/aud;
+	METHOD a queueIO (Lnone/aue;)V
+		ARG 0 ItemToQueue
+	METHOD b waitForFinish ()V
+	METHOD c processQueue ()V
+	METHOD run run ()V
 CLASS none/aue net/minecraft/world/storage/IThreadedFileIO
+	METHOD c tryWrite ()Z
 CLASS none/auh net/minecraft/util/AxisAlignedBB
 	FIELD a minX D
 	FIELD b minY D
@@ -17306,17 +17414,41 @@ CLASS none/bda net/minecraft/world/gen/ClientChunkCache
 	FIELD c cacheMap Lnone/nr;
 	FIELD d cachedChunks Ljava/util/List;
 	FIELD e world Lnone/adn;
+	METHOD <init> (Lnone/adn;)V
+		ARG 0 world
 	METHOD a chunkExists (II)Z
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD a getFeatureClosestToPosition (Lnone/adn;Ljava/lang/String;Lnone/ck;)Lnone/ck;
+		ARG 0 world
+		ARG 2 blockPos
 	METHOD a populate (Lnone/amw;II)V
+		ARG 0 chunkProvider
+		ARG 1 chunkX
+		ARG 2 chunkZ
+	METHOD a (Lnone/amw;Lnone/amz;II)Z
+		ARG 0 chunkProvider
+		ARG 1 chunk
+	METHOD a (Lnone/amz;II)V
+		ARG 0 chunk
 	METHOD a provideChunk (Lnone/ck;)Lnone/amz;
+		ARG 0 blockPos
 	METHOD a getSpawnableAtPos (Lnone/pu;Lnone/ck;)Ljava/util/List;
+		ARG 0 creatureType
+		ARG 1 blockPos
 	METHOD a saveAllChunks (ZLnone/nv;)Z
+		ARG 1 progressBar
+	METHOD b deleteChunk (II)V
+		ARG 0 chunkX
+		ARG 1 chunkZ
 	METHOD c saveExtraData ()V
+	METHOD c createChunk (II)Lnone/amz;
+		ARG 0 chunkX
+		ARG 1 chunkZ
 	METHOD d unloadQueuedChunks ()Z
 	METHOD d generate (II)Lnone/amz;
+		ARG 0 chunkX
+		ARG 1 chunkZ
 	METHOD e canSave ()Z
 	METHOD f getName ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
