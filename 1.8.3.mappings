@@ -3630,27 +3630,67 @@ CLASS none/ld net/minecraft/server/management/PlayerManager
 	METHOD d updateMountedMovingPlayer (Lnone/lg;)V
 		ARG 0 entityPlayerMP
 CLASS none/le net/minecraft/world/gen/ServerChunkCache
+	FIELD a forceLoadChunk Z
 	FIELD b LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD e levelGenerator Lnone/amw;
-	FIELD g cacheMap Lnone/nr;
-	FIELD h cachedChunks Ljava/util/List;
-	FIELD i level Lnone/lf;
+	FIELD c chunkPositionsToUnload Ljava/util/Set;
+	FIELD d emptyChunk Lnone/amz;
+	FIELD e chunkGenerator Lnone/amw;
+	FIELD f chunkIO Lnone/ane;
+	FIELD g loadedChunksByPosition Lnone/nr;
+	FIELD h loadedChunks Ljava/util/List;
+	FIELD i worldServer Lnone/lf;
 	METHOD <init> (Lnone/lf;Lnone/ane;Lnone/amw;)V
-		ARG 0 level
+		ARG 0 worldServer
+		ARG 1 chunkIO
+		ARG 2 chunkProvider
+	METHOD a getLoadedChunks ()Ljava/util/List;
 	METHOD a chunkExists (II)Z
+		ARG 0 chunkX
+		ARG 1 chunkZ
 	METHOD a getFeatureClosestToPosition (Lnone/adn;Ljava/lang/String;Lnone/ck;)Lnone/ck;
 		ARG 0 dimension
+		ARG 1 feature
+		ARG 2 pos
 	METHOD a populate (Lnone/amw;II)V
+		ARG 0 chunkProvider
+		ARG 1 chunkX
+		ARG 2 chunkZ
+	METHOD a generateMonuments (Lnone/amw;Lnone/amz;II)Z
+		ARG 0 chunkProvider
+		ARG 1 chunk
+		ARG 2 chunkX
+		ARG 3 chunkZ
+	METHOD a saveEntities (Lnone/amz;)V
+		ARG 0 chunk
+	METHOD a generateStructures (Lnone/amz;II)V
+		ARG 0 chunk
+		ARG 1 chunkX
+		ARG 2 chunkZ
 	METHOD a provideChunk (Lnone/ck;)Lnone/amz;
+		ARG 0 pos
 	METHOD a getSpawnableAtPos (Lnone/pu;Lnone/ck;)Ljava/util/List;
+		ARG 0 creatureTypes
+		ARG 1 pos
 	METHOD a saveAllChunks (ZLnone/nv;)Z
+		ARG 0 alwaysTrue
+		ARG 1 progress
+	METHOD b unloadAllChunks ()V
+	METHOD b unloadChunk (II)V
+		ARG 0 chunkX
+		ARG 1 chunkZ
+	METHOD b saveChunk (Lnone/amz;)V
 	METHOD c saveExtraData ()V
 	METHOD c loadChunk (II)Lnone/amz;
+		ARG 0 chunkX
+		ARG 1 chunkZ
 	METHOD d unloadQueuedChunks ()Z
-	METHOD d generate (II)Lnone/amz;
+	METHOD d getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
+	METHOD e readChunk (II)Lnone/amz;
+		ARG 0 chunkX
+		ARG 1 chunkZ
 	METHOD f getName ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
 CLASS none/lf net/minecraft/world/WorldServer
@@ -3661,6 +3701,7 @@ CLASS none/lf net/minecraft/world/WorldServer
 	FIELD V tickNow Ljava/util/List;
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD b chunkCache Lnone/le;
+	FIELD c disableSaving Z
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnone/atq;Lnone/atp;ILnone/nu;)V
 		ARG 2 level
 	METHOD a saveWorldData ()V
@@ -4123,6 +4164,7 @@ CLASS none/nd
 	METHOD delegate ()Ljava/util/Set;
 CLASS none/nf net/minecraft/entity/EntitySet
 	FIELD c entitySet Ljava/util/Set;
+	METHOD c getEntities (Ljava/lang/Class;)Ljava/lang/Iterable;
 CLASS none/nh
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
 CLASS none/nj net/minecraft/util/JsonUtils
@@ -13175,12 +13217,12 @@ CLASS none/amw net/minecraft/world/IChunkProvider
 		ARG 0 chunkProvider
 		ARG 1 chunkX
 		ARG 2 chunkZ
-	METHOD a (Lnone/amw;Lnone/amz;II)Z
+	METHOD a generateMonuments (Lnone/amw;Lnone/amz;II)Z
 		ARG 0 chunkProvider
 		ARG 1 chunk
 		ARG 2 chunkX
 		ARG 3 chunkZ
-	METHOD a (Lnone/amz;II)V
+	METHOD a generateStructures (Lnone/amz;II)V
 		ARG 0 chunk
 		ARG 1 chunkX
 		ARG 2 chunkZ
@@ -13190,10 +13232,11 @@ CLASS none/amw net/minecraft/world/IChunkProvider
 		ARG 0 creatureType
 		ARG 1 blockPos
 	METHOD a saveAllChunks (ZLnone/nv;)Z
+		ARG 0 alwaysTrue
 		ARG 1 progressBar
 	METHOD c saveExtraData ()V
 	METHOD d unloadQueuedChunks ()Z
-	METHOD d generate (II)Lnone/amz;
+	METHOD d getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
@@ -13236,7 +13279,8 @@ CLASS none/amy net/minecraft/world/chunk/EmptyChunk
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD a getRandForSeed (J)Ljava/util/Random;
-	METHOD a (Ljava/lang/Class;Lnone/auh;Ljava/util/List;Lcom/google/common/base/Predicate;)V
+		ARG 0 seed
+	METHOD a findEntities (Ljava/lang/Class;Lnone/auh;Ljava/util/List;Lcom/google/common/base/Predicate;)V
 		ARG 0 ent
 		ARG 1 aabb
 		ARG 2 entList
@@ -13265,7 +13309,8 @@ CLASS none/amy net/minecraft/world/chunk/EmptyChunk
 		ARG 0 ent
 	METHOD a removeEntity (Lnone/pl;I)V
 		ARG 0 ent
-	METHOD a (Lnone/pl;Lnone/auh;Ljava/util/List;Lcom/google/common/base/Predicate;)V
+		ARG 1 cubeY
+	METHOD a findEntitiesExcept (Lnone/pl;Lnone/auh;Ljava/util/List;Lcom/google/common/base/Predicate;)V
 		ARG 0 ent
 		ARG 1 aabb
 		ARG 2 entList
@@ -13348,8 +13393,11 @@ CLASS none/amz net/minecraft/world/chunk/Chunk
 		ARG 3 maxY
 	METHOD a getRandForSeed (J)Ljava/util/Random;
 		ARG 0 seed
-	METHOD a (Ljava/lang/Class;Lnone/auh;Ljava/util/List;Lcom/google/common/base/Predicate;)V
+	METHOD a findEntities (Ljava/lang/Class;Lnone/auh;Ljava/util/List;Lcom/google/common/base/Predicate;)V
+		ARG 0 entityClass
 		ARG 1 aabb
+		ARG 2 entities
+		ARG 3 predicate
 	METHOD a getLightAt (Lnone/adt;Lnone/ck;)I
 		ARG 0 ceiling
 		ARG 1 blockPos
@@ -13388,7 +13436,7 @@ CLASS none/amz net/minecraft/world/chunk/Chunk
 	METHOD a removeEntity (Lnone/pl;I)V
 		ARG 0 ent
 		ARG 1 cubeY
-	METHOD a (Lnone/pl;Lnone/auh;Ljava/util/List;Lcom/google/common/base/Predicate;)V
+	METHOD a findEntitiesExcept (Lnone/pl;Lnone/auh;Ljava/util/List;Lcom/google/common/base/Predicate;)V
 		ARG 0 ent
 		ARG 1 aabb
 		ARG 2 entList
@@ -13963,10 +14011,10 @@ CLASS none/anv net/minecraft/world/gen/LevelGeneratorDebug
 		ARG 0 chunkProvider
 		ARG 1 chunkX
 		ARG 2 chunkZ
-	METHOD a (Lnone/amw;Lnone/amz;II)Z
+	METHOD a generateMonuments (Lnone/amw;Lnone/amz;II)Z
 		ARG 0 chunkProvider
 		ARG 1 chunk
-	METHOD a (Lnone/amz;II)V
+	METHOD a generateStructures (Lnone/amz;II)V
 		ARG 0 chunk
 	METHOD a provideChunk (Lnone/ck;)Lnone/amz;
 		ARG 0 blockPos
@@ -13980,7 +14028,7 @@ CLASS none/anv net/minecraft/world/gen/LevelGeneratorDebug
 		ARG 1 levelZ
 	METHOD c saveExtraData ()V
 	METHOD d unloadQueuedChunks ()Z
-	METHOD d generate (II)Lnone/amz;
+	METHOD d getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
@@ -14011,10 +14059,10 @@ CLASS none/anw net/minecraft/world/gen/LevelGeneratorFlat
 		ARG 0 chunkProvider
 		ARG 1 chunkX
 		ARG 2 chunkZ
-	METHOD a (Lnone/amw;Lnone/amz;II)Z
+	METHOD a generateMonuments (Lnone/amw;Lnone/amz;II)Z
 		ARG 0 chunkProvider
 		ARG 1 chunk
-	METHOD a (Lnone/amz;II)V
+	METHOD a generateStructures (Lnone/amz;II)V
 		ARG 0 chunk
 	METHOD a provideChunk (Lnone/ck;)Lnone/amz;
 		ARG 0 blockPos
@@ -14025,7 +14073,7 @@ CLASS none/anw net/minecraft/world/gen/LevelGeneratorFlat
 		ARG 1 progressBar
 	METHOD c saveExtraData ()V
 	METHOD d unloadQueuedChunks ()Z
-	METHOD d generate (II)Lnone/amz;
+	METHOD d getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
@@ -14071,6 +14119,8 @@ CLASS none/anx net/minecraft/world/gen/LevelGeneratorNether
 		ARG 2 chunkPrimer
 	METHOD a getFeatureClosestToPosition (Lnone/adn;Ljava/lang/String;Lnone/ck;)Lnone/ck;
 	METHOD a populate (Lnone/amw;II)V
+	METHOD a generateMonuments (Lnone/amw;Lnone/amz;II)Z
+	METHOD a generateStructures (Lnone/amz;II)V
 	METHOD a provideChunk (Lnone/ck;)Lnone/amz;
 	METHOD a getSpawnableAtPos (Lnone/pu;Lnone/ck;)Ljava/util/List;
 	METHOD a saveAllChunks (ZLnone/nv;)Z
@@ -14081,7 +14131,7 @@ CLASS none/anx net/minecraft/world/gen/LevelGeneratorNether
 		ARG 2 chunkPrimer
 	METHOD c saveExtraData ()V
 	METHOD d unloadQueuedChunks ()Z
-	METHOD d generate (II)Lnone/amz;
+	METHOD d getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
@@ -14135,15 +14185,16 @@ CLASS none/aob net/minecraft/world/gen/LevelGeneratorDefault
 	METHOD a populate (Lnone/amw;II)V
 		ARG 1 chunkX
 		ARG 2 chunkZ
-	METHOD a (Lnone/amw;Lnone/amz;II)Z
+	METHOD a generateMonuments (Lnone/amw;Lnone/amz;II)Z
 		ARG 2 chunkX
 		ARG 3 chunkZ
+	METHOD a generateStructures (Lnone/amz;II)V
 	METHOD a provideChunk (Lnone/ck;)Lnone/amz;
 	METHOD a getSpawnableAtPos (Lnone/pu;Lnone/ck;)Ljava/util/List;
 	METHOD a saveAllChunks (ZLnone/nv;)Z
 	METHOD c saveExtraData ()V
 	METHOD d unloadQueuedChunks ()Z
-	METHOD d generate (II)Lnone/amz;
+	METHOD d getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
@@ -14181,10 +14232,10 @@ CLASS none/aoc net/minecraft/world/gen/LevelGeneratorEnd
 		ARG 0 chunkProvider
 		ARG 1 chunkX
 		ARG 2 chunkZ
-	METHOD a (Lnone/amw;Lnone/amz;II)Z
+	METHOD a generateMonuments (Lnone/amw;Lnone/amz;II)Z
 		ARG 0 chunkProvider
 		ARG 1 chunk
-	METHOD a (Lnone/amz;II)V
+	METHOD a generateStructures (Lnone/amz;II)V
 		ARG 0 chunk
 	METHOD a replaceBlocks (Lnone/ant;)V
 		ARG 0 primer
@@ -14205,7 +14256,7 @@ CLASS none/aoc net/minecraft/world/gen/LevelGeneratorEnd
 		ARG 6 zSize
 	METHOD c saveExtraData ()V
 	METHOD d unloadQueuedChunks ()Z
-	METHOD d generate (II)Lnone/amz;
+	METHOD d getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
@@ -15022,18 +15073,55 @@ CLASS none/ath net/minecraft/world/storage/MapData
 	METHOD b save (Lnone/dp;)V
 		ARG 0 tagCompound
 CLASS none/atk net/minecraft/world/storage/SaveHandlerAnvil
+	METHOD <init> (Ljava/io/File;Ljava/lang/String;Z)V
+		ARG 0 saveFile
+		ARG 1 saveDirectory
+		ARG 2 savePlayers
 	METHOD a flush ()V
 	METHOD a getChunkLoader (Lnone/ann;)Lnone/ane;
+		ARG 0 dimension
 	METHOD a saveWorldInfoWithPlayer (Lnone/atp;Lnone/dp;)V
 		ARG 0 world
+		ARG 1 nbt
 CLASS none/atl net/minecraft/world/storage/SaveLoaderAnvil
+	CLASS none/atl$1
+		METHOD accept accept (Ljava/io/File;Ljava/lang/String;)Z
+			ARG 0 file
+			ARG 1 filename
 	FIELD b LOGGER Lorg/apache/logging/log4j/Logger;
+	METHOD <init> (Ljava/io/File;)V
+		ARG 0 saveFile
 	METHOD a getSaveFormatName ()Ljava/lang/String;
+	METHOD a copyMcrToMca (Ljava/io/File;Ljava/io/File;Lnone/aed;IILnone/nv;)V
+		ARG 0 saveFolder
+		ARG 1 mcrFile
+		ARG 2 biomeManager
+		ARG 3 progressState1
+		ARG 4 progressState2
+		ARG 5 progress
+	METHOD a copyMcrToMca (Ljava/io/File;Ljava/lang/Iterable;Lnone/aed;IILnone/nv;)V
+		ARG 0 saveFolder
+		ARG 1 mcrFiles
+		ARG 2 biomeManager
+		ARG 3 progressState1
+		ARG 4 progressState2
+		ARG 5 progress
+	METHOD a getMcrFiles (Ljava/io/File;Ljava/util/Collection;)V
+		ARG 0 saveFolder
+		ARG 1 files
+	METHOD a isWorldPreviousVersion (Ljava/lang/String;)Z
+		ARG 0 directory
 	METHOD a convertMapFormat (Ljava/lang/String;Lnone/nv;)Z
 	METHOD a getSaveHandler (Ljava/lang/String;Z)Lnone/atq;
+		ARG 0 saveDirectory
+		ARG 1 savePlayers
 	METHOD b getSaveList ()Ljava/util/List;
+	METHOD b isWorldOldVersion (Ljava/lang/String;)Z
+		ARG 0 directory
 	METHOD c getCurrentVersion ()I
 	METHOD d flushCache ()V
+	METHOD g saveBackup (Ljava/lang/String;)V
+		ARG 0 directory
 CLASS none/atm net/minecraft/world/LevelMulti
 	FIELD b mainLevelInstance Lnone/atp;
 	METHOD <init> (Lnone/atp;)V
@@ -15117,6 +15205,7 @@ CLASS none/ato net/minecraft/world/storage/SaveLoaderOld
 	METHOD <init> (Ljava/io/File;)V
 		ARG 0 saveFile
 	METHOD a getSaveFormatName ()Ljava/lang/String;
+	METHOD a isWorldPreviousVersion (Ljava/lang/String;)Z
 	METHOD a renameWorld (Ljava/lang/String;Ljava/lang/String;)V
 		ARG 0 directory
 		ARG 1 newName
@@ -15128,6 +15217,7 @@ CLASS none/ato net/minecraft/world/storage/SaveLoaderOld
 	METHOD a deleteFiles ([Ljava/io/File;)Z
 		ARG 0 aFiles
 	METHOD b getSaveList ()Ljava/util/List;
+	METHOD b isWorldOldVersion (Ljava/lang/String;)Z
 	METHOD c getWorld (Ljava/lang/String;)Lnone/atp;
 		ARG 0 directory
 	METHOD d flushCache ()V
@@ -15298,10 +15388,12 @@ CLASS none/atq net/minecraft/world/ISaveHandler
 CLASS none/atr net/minecraft/world/storage/InvalidSaveFolderException
 CLASS none/ats net/minecraft/world/storage/ISaveLoader
 	METHOD a getSaveFormatName ()Ljava/lang/String;
+	METHOD a isWorldPreviousVersion (Ljava/lang/String;)Z
 	METHOD a renameWorld (Ljava/lang/String;Ljava/lang/String;)V
 	METHOD a convertMapFormat (Ljava/lang/String;Lnone/nv;)Z
 	METHOD a getSaveHandler (Ljava/lang/String;Z)Lnone/atq;
 	METHOD b getSaveList ()Ljava/util/List;
+	METHOD b isWorldOldVersion (Ljava/lang/String;)Z
 	METHOD c getWorld (Ljava/lang/String;)Lnone/atp;
 	METHOD d flushCache ()V
 	METHOD d createNewSaveFile (Ljava/lang/String;)Z
@@ -17507,22 +17599,28 @@ CLASS none/bda net/minecraft/world/gen/ClientChunkCache
 		ARG 1 chunkZ
 	METHOD a getFeatureClosestToPosition (Lnone/adn;Ljava/lang/String;Lnone/ck;)Lnone/ck;
 		ARG 0 world
+		ARG 1 feature
 		ARG 2 blockPos
 	METHOD a populate (Lnone/amw;II)V
 		ARG 0 chunkProvider
 		ARG 1 chunkX
 		ARG 2 chunkZ
-	METHOD a (Lnone/amw;Lnone/amz;II)Z
+	METHOD a generateMonuments (Lnone/amw;Lnone/amz;II)Z
 		ARG 0 chunkProvider
 		ARG 1 chunk
-	METHOD a (Lnone/amz;II)V
+		ARG 2 chunkX
+		ARG 3 chunkZ
+	METHOD a generateStructures (Lnone/amz;II)V
 		ARG 0 chunk
+		ARG 1 chunkX
+		ARG 2 chunkZ
 	METHOD a provideChunk (Lnone/ck;)Lnone/amz;
 		ARG 0 blockPos
 	METHOD a getSpawnableAtPos (Lnone/pu;Lnone/ck;)Ljava/util/List;
 		ARG 0 creatureType
 		ARG 1 blockPos
 	METHOD a saveAllChunks (ZLnone/nv;)Z
+		ARG 0 alwaysTrue
 		ARG 1 progressBar
 	METHOD b deleteChunk (II)V
 		ARG 0 chunkX
@@ -17532,7 +17630,7 @@ CLASS none/bda net/minecraft/world/gen/ClientChunkCache
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD d unloadQueuedChunks ()Z
-	METHOD d generate (II)Lnone/amz;
+	METHOD d getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
