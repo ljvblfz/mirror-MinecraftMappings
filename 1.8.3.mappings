@@ -369,7 +369,7 @@ CLASS none/n net/minecraft/command/ICommandSender
 		ARG 1 value
 	METHOD c getPosition ()Lnone/ck;
 	METHOD d getVec3 ()Lnone/auj;
-	METHOD e getWorld ()Lnone/adn;
+	METHOD e getLevel ()Lnone/adn;
 	METHOD e_ getName ()Ljava/lang/String;
 	METHOD f getEntity ()Lnone/pl;
 	METHOD f_ getNameComponent ()Lnone/ev;
@@ -1294,7 +1294,7 @@ CLASS none/cr net/minecraft/util/Facing
 	METHOD m getBlockCoords ()Lnone/dg;
 	METHOD n getXRotation ()Lnone/cr;
 	METHOD p getZRotation ()Lnone/cr;
-	METHOD values values ()[Lnone/cr;
+	METHOD values ()[Lnone/cr;
 CLASS none/cs net/minecraft/dispenser/IDispenseBehavior
 	CLASS none/cs$1 IDispenseBehavior_1
 		METHOD a dispense (Lnone/cl;Lnone/zy;)Lnone/zy;
@@ -3648,10 +3648,10 @@ CLASS none/le net/minecraft/world/gen/ServerChunkCache
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD a getFeatureClosestToPosition (Lnone/adn;Ljava/lang/String;Lnone/ck;)Lnone/ck;
-		ARG 0 dimension
 		ARG 1 feature
-		ARG 2 pos
-	METHOD a populate (Lnone/amw;II)V
+		ARG 0 world
+		ARG 2 blockPos
+	METHOD a decorate (Lnone/amw;II)V
 		ARG 0 chunkProvider
 		ARG 1 chunkX
 		ARG 2 chunkZ
@@ -3666,11 +3666,11 @@ CLASS none/le net/minecraft/world/gen/ServerChunkCache
 		ARG 0 chunk
 		ARG 1 chunkX
 		ARG 2 chunkZ
-	METHOD a provideChunk (Lnone/ck;)Lnone/amz;
-		ARG 0 pos
+	METHOD a generateChunkAtBlock (Lnone/ck;)Lnone/amz;
+		ARG 0 blockPos
 	METHOD a getSpawnableAtPos (Lnone/pu;Lnone/ck;)Ljava/util/List;
 		ARG 0 creatureTypes
-		ARG 1 pos
+		ARG 1 blockPos
 	METHOD a saveAllChunks (ZLnone/nv;)Z
 		ARG 0 alwaysTrue
 		ARG 1 progress
@@ -3679,12 +3679,13 @@ CLASS none/le net/minecraft/world/gen/ServerChunkCache
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD b saveChunk (Lnone/amz;)V
+		ARG 0 chunk
 	METHOD c saveExtraData ()V
 	METHOD c loadChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD d unloadQueuedChunks ()Z
-	METHOD d getChunk (II)Lnone/amz;
+	METHOD d generate (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
@@ -5103,7 +5104,7 @@ CLASS none/pl net/minecraft/entity/Entity
 	METHOD d onCollide (Lnone/wo;)V
 		ARG 0 entityPlayer
 	METHOD d setSprinting (Z)V
-	METHOD e getWorld ()Lnone/adn;
+	METHOD e getLevel ()Lnone/adn;
 	METHOD e distanceSquared (DDD)D
 		ARG 0 xPos
 		ARG 1 yPos
@@ -13205,7 +13206,7 @@ CLASS none/amt net/minecraft/world/border/WorldBorder
 	METHOD o getTransitionSpeed ()D
 	METHOD p getWarningTime ()I
 	METHOD q getWarningDistance ()I
-CLASS none/amw net/minecraft/world/IChunkProvider
+CLASS none/amw net/minecraft/world/IChunkGenerator
 	METHOD a chunkExists (II)Z
 		ARG 0 chunkX
 		ARG 1 chunkZ
@@ -13213,11 +13214,11 @@ CLASS none/amw net/minecraft/world/IChunkProvider
 		ARG 0 level
 		ARG 1 feature
 		ARG 2 blockPos
-	METHOD a populate (Lnone/amw;II)V
+	METHOD a decorate (Lnone/amw;II)V
 		ARG 0 chunkProvider
 		ARG 1 chunkX
 		ARG 2 chunkZ
-	METHOD a generateMonuments (Lnone/amw;Lnone/amz;II)Z
+	METHOD a generateOceanMonument (Lnone/amw;Lnone/amz;II)Z
 		ARG 0 chunkProvider
 		ARG 1 chunk
 		ARG 2 chunkX
@@ -13226,7 +13227,7 @@ CLASS none/amw net/minecraft/world/IChunkProvider
 		ARG 0 chunk
 		ARG 1 chunkX
 		ARG 2 chunkZ
-	METHOD a provideChunk (Lnone/ck;)Lnone/amz;
+	METHOD a generateChunkAtBlock (Lnone/ck;)Lnone/amz;
 		ARG 0 blockCoords
 	METHOD a getSpawnableAtPos (Lnone/pu;Lnone/ck;)Ljava/util/List;
 		ARG 0 creatureType
@@ -13236,7 +13237,7 @@ CLASS none/amw net/minecraft/world/IChunkProvider
 		ARG 1 progressBar
 	METHOD c saveExtraData ()V
 	METHOD d unloadQueuedChunks ()Z
-	METHOD d getChunk (II)Lnone/amz;
+	METHOD d generate (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
@@ -13914,6 +13915,8 @@ CLASS none/anu net/minecraft/world/gen/GeneratorSettings
 			ARG 0 generationOptions
 		METHOD b getGeneratorSettings ()Lnone/anu;
 	CLASS none/anu$b GeneratorSettingsSerializer
+		METHOD a deserialize (Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnone/anu$a;
+		METHOD a serialize (Lnone/anu$a;Ljava/lang/reflect/Type;Lcom/google/gson/JsonSerializationContext;)Lcom/google/gson/JsonElement;
 	FIELD A useWaterLakes Z
 	FIELD B waterLakesChance I
 	FIELD C useLavaLakes Z
@@ -13994,7 +13997,7 @@ CLASS none/anu net/minecraft/world/gen/GeneratorSettings
 	FIELD z useRavines Z
 	METHOD <init> (Lnone/anu$a;)V
 		ARG 0 settingsFactory
-CLASS none/anv net/minecraft/world/gen/LevelGeneratorDebug
+CLASS none/anv net/minecraft/world/gen/ChunkGeneratorDebug
 	FIELD a blockList Ljava/util/List;
 	FIELD b width I
 	FIELD c length I
@@ -14007,16 +14010,20 @@ CLASS none/anv net/minecraft/world/gen/LevelGeneratorDebug
 	METHOD a getFeatureClosestToPosition (Lnone/adn;Ljava/lang/String;Lnone/ck;)Lnone/ck;
 		ARG 0 level
 		ARG 2 blockPos
-	METHOD a populate (Lnone/amw;II)V
+	METHOD a decorate (Lnone/amw;II)V
 		ARG 0 chunkProvider
 		ARG 1 chunkX
 		ARG 2 chunkZ
-	METHOD a generateMonuments (Lnone/amw;Lnone/amz;II)Z
+	METHOD a generateOceanMonument (Lnone/amw;Lnone/amz;II)Z
 		ARG 0 chunkProvider
 		ARG 1 chunk
+		ARG 2 chunkX
+		ARG 3 chunkZ
 	METHOD a generateStructures (Lnone/amz;II)V
 		ARG 0 chunk
-	METHOD a provideChunk (Lnone/ck;)Lnone/amz;
+		ARG 1 chunkX
+		ARG 2 chunkZ
+	METHOD a generateChunkAtBlock (Lnone/ck;)Lnone/amz;
 		ARG 0 blockPos
 	METHOD a getSpawnableAtPos (Lnone/pu;Lnone/ck;)Ljava/util/List;
 		ARG 0 creatureType
@@ -14028,15 +14035,15 @@ CLASS none/anv net/minecraft/world/gen/LevelGeneratorDebug
 		ARG 1 levelZ
 	METHOD c saveExtraData ()V
 	METHOD d unloadQueuedChunks ()Z
-	METHOD d getChunk (II)Lnone/amz;
+	METHOD d generate (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
 	METHOD f getName ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
-CLASS none/anw net/minecraft/world/gen/LevelGeneratorFlat
-	FIELD a level Lnone/adn;
-	FIELD b and Ljava/util/Random;
+CLASS none/anw net/minecraft/world/gen/ChunkGeneratorFlat
+	FIELD a world Lnone/adn;
+	FIELD b rand Ljava/util/Random;
 	FIELD c blockStateArray [Lnone/ama;
 	FIELD d generatorInfo Lnone/aqa;
 	FIELD e structureGenerators Ljava/util/List;
@@ -14055,16 +14062,20 @@ CLASS none/anw net/minecraft/world/gen/LevelGeneratorFlat
 	METHOD a getFeatureClosestToPosition (Lnone/adn;Ljava/lang/String;Lnone/ck;)Lnone/ck;
 		ARG 0 level
 		ARG 2 blockPos
-	METHOD a populate (Lnone/amw;II)V
+	METHOD a decorate (Lnone/amw;II)V
 		ARG 0 chunkProvider
 		ARG 1 chunkX
 		ARG 2 chunkZ
-	METHOD a generateMonuments (Lnone/amw;Lnone/amz;II)Z
+	METHOD a generateOceanMonument (Lnone/amw;Lnone/amz;II)Z
 		ARG 0 chunkProvider
 		ARG 1 chunk
+		ARG 2 chunkX
+		ARG 3 chunkZ
 	METHOD a generateStructures (Lnone/amz;II)V
 		ARG 0 chunk
-	METHOD a provideChunk (Lnone/ck;)Lnone/amz;
+		ARG 1 chunkX
+		ARG 2 chunkZ
+	METHOD a generateChunkAtBlock (Lnone/ck;)Lnone/amz;
 		ARG 0 blockPos
 	METHOD a getSpawnableAtPos (Lnone/pu;Lnone/ck;)Ljava/util/List;
 		ARG 0 creatureType
@@ -14073,13 +14084,13 @@ CLASS none/anw net/minecraft/world/gen/LevelGeneratorFlat
 		ARG 1 progressBar
 	METHOD c saveExtraData ()V
 	METHOD d unloadQueuedChunks ()Z
-	METHOD d getChunk (II)Lnone/amz;
+	METHOD d generate (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
 	METHOD f getName ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
-CLASS none/anx net/minecraft/world/gen/LevelGeneratorNether
+CLASS none/anx net/minecraft/world/gen/ChunkGeneratorNether
 	FIELD A redMushroomGenerator Lnone/aon;
 	FIELD B netherBridgeGenerator Lnone/aqj;
 	FIELD C netherCaveGenerator Lnone/anz;
@@ -14090,8 +14101,8 @@ CLASS none/anx net/minecraft/world/gen/LevelGeneratorNether
 	FIELD e noiseData3 [D
 	FIELD f noiseData4 [D
 	FIELD g noiseData5 [D
-	FIELD h level Lnone/adn;
-	FIELD i hasFeatures Z
+	FIELD h world Lnone/adn;
+	FIELD i hasStructures Z
 	FIELD j rand Ljava/util/Random;
 	FIELD k soulsandNoiseField [D
 	FIELD l gravelNoiseField [D
@@ -14110,20 +14121,37 @@ CLASS none/anx net/minecraft/world/gen/LevelGeneratorNether
 	FIELD z brownMushroomGenerator Lnone/aon;
 	METHOD <init> (Lnone/adn;ZJ)V
 		ARG 0 level
-		ARG 1 hasFeatures
+		ARG 1 hasStructures
 		ARG 2 seed
 	METHOD a chunkExists (II)Z
+		ARG 0 chunkX
+		ARG 1 chunkZ
 	METHOD a generateTerrain (IILnone/ant;)V
 		ARG 0 chunkX
 		ARG 1 chunkZ
 		ARG 2 chunkPrimer
 	METHOD a getFeatureClosestToPosition (Lnone/adn;Ljava/lang/String;Lnone/ck;)Lnone/ck;
-	METHOD a populate (Lnone/amw;II)V
-	METHOD a generateMonuments (Lnone/amw;Lnone/amz;II)Z
+		ARG 0 world
+		ARG 2 blockPos
+	METHOD a decorate (Lnone/amw;II)V
+		ARG 0 chunkGenerator
+		ARG 1 chunkX
+		ARG 2 chunkZ
+	METHOD a generateOceanMonument (Lnone/amw;Lnone/amz;II)Z
+		ARG 0 chunkGenerator
+		ARG 1 chunk
+		ARG 2 chunkX
+		ARG 3 chunkZ
 	METHOD a generateStructures (Lnone/amz;II)V
-	METHOD a provideChunk (Lnone/ck;)Lnone/amz;
+		ARG 0 chunk
+		ARG 1 chunkX
+		ARG 2 chunkZ
+	METHOD a generateChunkAtBlock (Lnone/ck;)Lnone/amz;
+		ARG 0 blockPos
 	METHOD a getSpawnableAtPos (Lnone/pu;Lnone/ck;)Ljava/util/List;
+		ARG 1 blockPos
 	METHOD a saveAllChunks (ZLnone/nv;)Z
+		ARG 1 progressBar
 	METHOD a generateNoiseField ([DIIIIII)[D
 	METHOD b replaceBlocks (IILnone/ant;)V
 		ARG 0 chunkX
@@ -14131,7 +14159,7 @@ CLASS none/anx net/minecraft/world/gen/LevelGeneratorNether
 		ARG 2 chunkPrimer
 	METHOD c saveExtraData ()V
 	METHOD d unloadQueuedChunks ()Z
-	METHOD d getChunk (II)Lnone/amz;
+	METHOD d generate (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
@@ -14144,23 +14172,29 @@ CLASS none/anz net/minecraft/world/gen/structure/StructureGenerator
 	FIELD c level Lnone/adn;
 	METHOD a generateStructureInChunk (Lnone/amw;Lnone/adn;IILnone/ant;)V
 CLASS none/aoa net/minecraft/world/gen/structure/CaveGeneratorHell
-CLASS none/aob net/minecraft/world/gen/LevelGeneratorDefault
+CLASS none/aob net/minecraft/world/gen/ChunkGeneratorDefault
 	FIELD A oceanMonumentGenerator Lnone/aql;
 	FIELD B biomesForGeneration [Lnone/adz;
 	FIELD a noiseGen5 Lnone/ard;
 	FIELD b noiseGen6 Lnone/ard;
 	FIELD c noiseGen7 Lnone/ard;
+	FIELD d noiseField3 [D
+	FIELD e noiseField1 [D
+	FIELD f noiseField2 [D
+	FIELD g noiseField6 [D
 	FIELD h rand Ljava/util/Random;
 	FIELD i noiseGen1 Lnone/ard;
 	FIELD j noiseGen2 Lnone/ard;
 	FIELD k noiseGen3 Lnone/ard;
 	FIELD l noiseGen4 Lnone/are;
-	FIELD m level Lnone/adn;
-	FIELD o levelGenerator Lnone/ads;
+	FIELD m world Lnone/adn;
+	FIELD n hasStructures Z
+	FIELD o generator Lnone/ads;
 	FIELD p densityField [D
 	FIELD q smoothingField [F
 	FIELD r generatorSettings Lnone/anu;
 	FIELD s oceanBlock Lnone/afi;
+	FIELD t biomeNoiseMap [D
 	FIELD u caveGenerator Lnone/anz;
 	FIELD v strongholdGenerator Lnone/aqp;
 	FIELD w villageGenerator Lnone/aqw;
@@ -14169,38 +14203,56 @@ CLASS none/aob net/minecraft/world/gen/LevelGeneratorDefault
 	FIELD z ravineGenerator Lnone/anz;
 	METHOD <init> (Lnone/adn;JZLjava/lang/String;)V
 		ARG 0 world
+		ARG 1 seed
+		ARG 2 hasStructures
 		ARG 3 generatorOptions
 	METHOD a chunkExists (II)Z
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD a generateDensityField (III)V
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
 	METHOD a generateTerrain (IILnone/ant;)V
 		ARG 0 chunkX
 		ARG 1 chunkZ
 		ARG 2 primer
-	METHOD a (IILnone/ant;[Lnone/adz;)V
+	METHOD a placeBiomes (IILnone/ant;[Lnone/adz;)V
+		ARG 0 chunkX
+		ARG 1 chunkZ
 		ARG 2 primer
 		ARG 3 biomeArray
 	METHOD a getFeatureClosestToPosition (Lnone/adn;Ljava/lang/String;Lnone/ck;)Lnone/ck;
-	METHOD a populate (Lnone/amw;II)V
+		ARG 0 world
+		ARG 2 blockPos
+	METHOD a decorate (Lnone/amw;II)V
+		ARG 0 chunkGenerator
 		ARG 1 chunkX
 		ARG 2 chunkZ
-	METHOD a generateMonuments (Lnone/amw;Lnone/amz;II)Z
+	METHOD a generateOceanMonument (Lnone/amw;Lnone/amz;II)Z
+		ARG 0 chunkGenerator
+		ARG 1 chunk
 		ARG 2 chunkX
 		ARG 3 chunkZ
 	METHOD a generateStructures (Lnone/amz;II)V
-	METHOD a provideChunk (Lnone/ck;)Lnone/amz;
+		ARG 0 chunk
+		ARG 1 chunkX
+		ARG 2 chunkZ
+	METHOD a generateChunkAtBlock (Lnone/ck;)Lnone/amz;
+		ARG 0 blockPos
 	METHOD a getSpawnableAtPos (Lnone/pu;Lnone/ck;)Ljava/util/List;
+		ARG 1 blockPos
 	METHOD a saveAllChunks (ZLnone/nv;)Z
+		ARG 1 progressBar
 	METHOD c saveExtraData ()V
 	METHOD d unloadQueuedChunks ()Z
-	METHOD d getChunk (II)Lnone/amz;
+	METHOD d generate (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
 	METHOD f getName ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
-CLASS none/aoc net/minecraft/world/gen/LevelGeneratorEnd
+CLASS none/aoc net/minecraft/world/gen/ChunkGeneratorEnd
 	FIELD a noiseGen4 Lnone/ard;
 	FIELD b noiseGen5 Lnone/ard;
 	FIELD c noiseData1 [D
@@ -14212,8 +14264,8 @@ CLASS none/aoc net/minecraft/world/gen/LevelGeneratorEnd
 	FIELD i noiseGen1 Lnone/ard;
 	FIELD j noiseGen2 Lnone/ard;
 	FIELD k noiseGen3 Lnone/ard;
-	FIELD l level Lnone/adn;
-	FIELD m densities [D
+	FIELD l world Lnone/adn;
+	FIELD m densityField [D
 	FIELD n biomeArray [Lnone/adz;
 	METHOD <init> (Lnone/adn;J)V
 		ARG 0 level
@@ -14228,18 +14280,22 @@ CLASS none/aoc net/minecraft/world/gen/LevelGeneratorEnd
 	METHOD a getFeatureClosestToPosition (Lnone/adn;Ljava/lang/String;Lnone/ck;)Lnone/ck;
 		ARG 0 level
 		ARG 2 blockPos
-	METHOD a populate (Lnone/amw;II)V
+	METHOD a decorate (Lnone/amw;II)V
 		ARG 0 chunkProvider
 		ARG 1 chunkX
 		ARG 2 chunkZ
-	METHOD a generateMonuments (Lnone/amw;Lnone/amz;II)Z
+	METHOD a generateOceanMonument (Lnone/amw;Lnone/amz;II)Z
 		ARG 0 chunkProvider
 		ARG 1 chunk
+		ARG 2 chunkX
+		ARG 3 chunkZ
 	METHOD a generateStructures (Lnone/amz;II)V
 		ARG 0 chunk
+		ARG 1 chunkX
+		ARG 2 chunkZ
 	METHOD a replaceBlocks (Lnone/ant;)V
 		ARG 0 primer
-	METHOD a provideChunk (Lnone/ck;)Lnone/amz;
+	METHOD a generateChunkAtBlock (Lnone/ck;)Lnone/amz;
 		ARG 0 blockPos
 	METHOD a getSpawnableAtPos (Lnone/pu;Lnone/ck;)Ljava/util/List;
 		ARG 0 creatureType
@@ -14256,7 +14312,7 @@ CLASS none/aoc net/minecraft/world/gen/LevelGeneratorEnd
 		ARG 6 zSize
 	METHOD c saveExtraData ()V
 	METHOD d unloadQueuedChunks ()Z
-	METHOD d getChunk (II)Lnone/amz;
+	METHOD d generate (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
@@ -14268,9 +14324,18 @@ CLASS none/aoj net/minecraft/world/gen/feature/TreeGeneratorBig
 CLASS none/aok net/minecraft/world/gen/feature/TreeGeneratorBirch
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
 CLASS none/aol net/minecraft/world/gen/feature/BoulderGenerator
+	FIELD a topBlock Lnone/afi;
+	METHOD <init> (Lnone/afi;I)V
+		ARG 0 boulderBlock
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
+		ARG 0 world
+		ARG 1 rand
+		ARG 2 blockPos
 CLASS none/aom net/minecraft/world/gen/feature/BonusChestGenerator
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
+		ARG 0 world
+		ARG 1 rand
+		ARG 2 blockPos
 CLASS none/aon net/minecraft/world/gen/feature/PlantGenerator
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
 CLASS none/aoo net/minecraft/world/gen/feature/CactusGenerator
@@ -14290,7 +14355,14 @@ CLASS none/aot net/minecraft/world/gen/feature/DoublePlantGenerator
 		ARG 1 random
 		ARG 2 blockPos
 CLASS none/aou net/minecraft/world/gen/feature/FeatureGenerator
+	METHOD a (Lnone/adn;Lnone/ck;Lnone/ama;)V
+		ARG 0 world
+		ARG 1 blockPos
+		ARG 2 blockState
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
+		ARG 0 world
+		ARG 1 rand
+		ARG 2 blockPos
 CLASS none/aov net/minecraft/world/gen/feature/FlowerGenerator
 	FIELD a flowerBlock Lnone/agx;
 	FIELD b flowerBlockState Lnone/ama;
@@ -14359,10 +14431,19 @@ CLASS none/apn net/minecraft/world/gen/feature/ReedGenerator
 CLASS none/apo net/minecraft/world/gen/feature/TreeGeneratorDarkOak
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
 CLASS none/app net/minecraft/world/gen/feature/BeachGenerator
+	FIELD a topBlock Lnone/afi;
+	FIELD b topBlockDepth I
+	METHOD <init> (Lnone/afi;I)V
+		ARG 0 beachBlock
+		ARG 1 beachDepth
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
+		ARG 0 world
+		ARG 1 rand
+		ARG 2 blockPos
 CLASS none/apq net/minecraft/world/gen/feature/TreeGeneratorAcacia
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
 CLASS none/apr net/minecraft/world/gen/feature/ObsidianPillarGenerator
+	FIELD a featureBlock Lnone/afi;
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
 CLASS none/aps net/minecraft/world/gen/feature/FlowingLiquidGenerator
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
@@ -17601,7 +17682,7 @@ CLASS none/bda net/minecraft/world/gen/ClientChunkCache
 		ARG 0 world
 		ARG 1 feature
 		ARG 2 blockPos
-	METHOD a populate (Lnone/amw;II)V
+	METHOD a decorate (Lnone/amw;II)V
 		ARG 0 chunkProvider
 		ARG 1 chunkX
 		ARG 2 chunkZ
@@ -17614,7 +17695,7 @@ CLASS none/bda net/minecraft/world/gen/ClientChunkCache
 		ARG 0 chunk
 		ARG 1 chunkX
 		ARG 2 chunkZ
-	METHOD a provideChunk (Lnone/ck;)Lnone/amz;
+	METHOD a generateChunkAtBlock (Lnone/ck;)Lnone/amz;
 		ARG 0 blockPos
 	METHOD a getSpawnableAtPos (Lnone/pu;Lnone/ck;)Ljava/util/List;
 		ARG 0 creatureType
@@ -17630,7 +17711,7 @@ CLASS none/bda net/minecraft/world/gen/ClientChunkCache
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD d unloadQueuedChunks ()Z
-	METHOD d getChunk (II)Lnone/amz;
+	METHOD d generate (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
@@ -19919,7 +20000,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD d getFile (Ljava/lang/String;)Ljava/io/File;
 	METHOD d setOnlineMode (Z)V
 		ARG 0 online
-	METHOD e getWorld ()Lnone/adn;
+	METHOD e getLevel ()Lnone/adn;
 	METHOD e setCanSpawnAnimals (Z)V
 	METHOD e_ getName ()Ljava/lang/String;
 	METHOD f getEntity ()Lnone/pl;
