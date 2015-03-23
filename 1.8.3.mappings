@@ -5204,10 +5204,16 @@ CLASS none/pl net/minecraft/entity/Entity
 	METHOD toString ()Ljava/lang/String;
 	METHOD u_ shouldReceiveCommandFeedback ()Z
 CLASS none/pn net/minecraft/entity/EntityRegistry
-	CLASS none/pn$a
+	CLASS none/pn$a EntityColors
 		FIELD a entityId I
+		FIELD b spawnEggColor1 I
+		FIELD c spawnEggColor2 I
 		FIELD d killStat Lnone/mx;
 		FIELD e killedByStat Lnone/mx;
+		METHOD <init> (III)V
+			ARG 0 id
+			ARG 1 spawnEggColor1
+			ARG 2 spawnEggColor2
 	FIELD a COLOR_MAP Ljava/util/Map;
 	FIELD b LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD c NAME_TO_CLASS Ljava/util/Map;
@@ -5215,24 +5221,42 @@ CLASS none/pn net/minecraft/entity/EntityRegistry
 	FIELD e ID_TO_CLASS Ljava/util/Map;
 	FIELD f CLASS_TO_ID Ljava/util/Map;
 	FIELD g NAME_TO_ID Ljava/util/Map;
-	METHOD a getClass2 (I)Ljava/lang/Class;
+	METHOD a doAllTheNothings ()V
+	METHOD a getEntityClass (I)Ljava/lang/Class;
 		ARG 0 id
+	METHOD a createEntity (ILnone/adn;)Lnone/pl;
+		ARG 0 entityId
+		ARG 1 world
 	METHOD a registerEntity (Ljava/lang/Class;Ljava/lang/String;I)V
 		ARG 0 clazz
 		ARG 1 name
 		ARG 2 id
-	METHOD a registerEntity (Ljava/lang/Class;Ljava/lang/String;III)V
+	METHOD a registerColoredEntity (Ljava/lang/Class;Ljava/lang/String;III)V
 		ARG 0 clazz
 		ARG 1 name
 		ARG 2 id
-		ARG 3 color1
-		ARG 4 color2
-	METHOD a spawnEntity (Ljava/lang/String;Lnone/adn;)Lnone/pl;
+		ARG 3 spawnEggColor1
+		ARG 4 spawnEggColor2
+	METHOD a getEntityId (Ljava/lang/String;)I
 		ARG 0 name
+	METHOD a createEntity (Ljava/lang/String;Lnone/adn;)Lnone/pl;
+		ARG 0 name
+		ARG 1 world
+	METHOD a createEntity (Lnone/dp;Lnone/adn;)Lnone/pl;
+		ARG 0 nbt
+		ARG 1 world
+	METHOD a getEntityId (Lnone/pl;)I
+		ARG 0 entity
 	METHOD a isEntityOfType (Lnone/pl;Ljava/lang/String;)Z
+		ARG 0 entity
+		ARG 1 name
+	METHOD b getNotAbstractEntityNames ()Ljava/util/List;
 	METHOD b getName (I)Ljava/lang/String;
 		ARG 0 id
 	METHOD b isValidEntity (Ljava/lang/String;)Z
+		ARG 0 name
+	METHOD b getEntityName (Lnone/pl;)Ljava/lang/String;
+		ARG 0 entity
 CLASS none/pp net/minecraft/util/EntityPredicates
 	CLASS none/pp$1 EntityAlivePredicate
 	CLASS none/pp$2 EntityNotRiddenPredicate
