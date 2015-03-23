@@ -13345,9 +13345,9 @@ CLASS none/amy net/minecraft/world/chunk/EmptyChunk
 		ARG 0 blockEnt
 	METHOD a getBlockAt (Lnone/ck;)Lnone/afi;
 		ARG 0 blockPos
-	METHOD a setLightAt (Lnone/ck;I)I
+	METHOD a getBrightestLight (Lnone/ck;I)I
 		ARG 0 blockPos
-		ARG 1 lightLevel
+		ARG 1 skyLightDampeningTerm
 	METHOD a setBlockEntityAt (Lnone/ck;Lnone/akx;)V
 		ARG 0 blockPos
 		ARG 1 blockEnt
@@ -13463,9 +13463,9 @@ CLASS none/amz net/minecraft/world/chunk/Chunk
 		ARG 3 chunkZ
 	METHOD a getBlockAt (Lnone/ck;)Lnone/afi;
 		ARG 0 location
-	METHOD a setLightAt (Lnone/ck;I)I
+	METHOD a getBrightestLight (Lnone/ck;I)I
 		ARG 0 blockPos
-		ARG 1 lightValue
+		ARG 1 skyLightDampeningTerm
 	METHOD a getBiome (Lnone/ck;Lnone/aed;)Lnone/adz;
 		ARG 0 blockPos
 		ARG 1 biomeManager
