@@ -3648,8 +3648,8 @@ CLASS none/le net/minecraft/world/gen/ServerChunkCache
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD a getFeatureClosestToPosition (Lnone/adn;Ljava/lang/String;Lnone/ck;)Lnone/ck;
-		ARG 1 feature
 		ARG 0 world
+		ARG 1 feature
 		ARG 2 blockPos
 	METHOD a decorate (Lnone/amw;II)V
 		ARG 0 chunkProvider
@@ -9410,7 +9410,7 @@ CLASS none/ads net/minecraft/world/Generator
 CLASS none/adt net/minecraft/world/LightType
 	FIELD a SKY Lnone/adt;
 	FIELD b BLOCK Lnone/adt;
-	FIELD c id I
+	FIELD c defaultValue I
 	METHOD <init> (Ljava/lang/String;II)V
 		ARG 0 name
 CLASS none/adw net/minecraft/world/ChunkCache
