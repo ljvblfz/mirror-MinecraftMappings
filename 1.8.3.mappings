@@ -3585,7 +3585,7 @@ CLASS none/lc net/minecraft/world/WorldManager
 		ARG 0 entity
 	METHOD a playLevelEvent (Lnone/wo;ILnone/ck;I)V
 	METHOD a playSoundToNearExcept (Lnone/wo;Ljava/lang/String;DDDFF)V
-	METHOD b notifyLightSet (ILnone/ck;I)V
+	METHOD b setBlockDestruction (ILnone/ck;I)V
 	METHOD b sendBlockBreakProgress (Lnone/ck;)V
 	METHOD b onEntityRemoved (Lnone/pl;)V
 		ARG 0 entity
@@ -3715,12 +3715,14 @@ CLASS none/lf net/minecraft/world/WorldServer
 		ARG 2 delayTicks
 	METHOD a onEntityAdded (Lnone/pl;)V
 	METHOD a createExplosion (Lnone/pl;DDDFZZ)Lnone/adj;
+	METHOD a updateEntity (Lnone/pl;Z)V
 	METHOD a tickPending (Z)Z
 	METHOD a saveLevel (ZLnone/nv;)V
 	METHOD aI isInMainThread ()Z
 	METHOD aj setDebugLevelSettings ()V
 	METHOD b initialize ()Lnone/adn;
 	METHOD b initializeSpawn (Lnone/adq;)V
+	METHOD b doAllTheNothing (Lnone/ck;Lnone/afi;II)V
 	METHOD b onEntityRemoved (Lnone/pl;)V
 	METHOD c tick ()V
 	METHOD c sendEvent (Lnone/ck;Lnone/afi;II)V
@@ -8870,13 +8872,17 @@ CLASS none/adn net/minecraft/world/World
 		ARG 6 tagCompound
 	METHOD a playSoundAtLocation (DDDLjava/lang/String;FF)V
 	METHOD a playSoundEffect (DDDLjava/lang/String;FFZ)V
-	METHOD a (F)I
+	METHOD a getSkylightReduction (F)I
 		ARG 0 weight
 	METHOD a getEntity (I)Lnone/pl;
 		ARG 0 id
 	METHOD a getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
+	METHOD a getRandom (III)Ljava/util/Random;
+		ARG 0 seedPart1
+		ARG 1 seedPart2
+		ARG 2 seedPart3
 	METHOD a markBlocksDirtyVertical (IIII)V
 		ARG 0 levelX
 		ARG 1 levelZ
@@ -8890,7 +8896,9 @@ CLASS none/adn net/minecraft/world/World
 		ARG 4 maxLevelY
 		ARG 5 maxLevelZ
 		ARG 6 ignoreEmptyChunk
-	METHOD a (IILnone/amz;)V
+	METHOD a updateSoundAndLights (IILnone/amz;)V
+		ARG 0 blockXOffset
+		ARG 1 blockZOffset
 		ARG 2 chunk
 	METHOD a checkChunkExists (IIZ)Z
 		ARG 0 chunkX
@@ -8901,16 +8909,24 @@ CLASS none/adn net/minecraft/world/World
 	METHOD a spawnParticle (IZDDDDDD[I)V
 	METHOD a setGameTime (J)V
 		ARG 0 time
+	METHOD a countEntitiesExceptMobsRequiringPersistence (Ljava/lang/Class;)I
+		ARG 0 entityType
 	METHOD a getEntities (Ljava/lang/Class;Lcom/google/common/base/Predicate;)Ljava/util/List;
+		ARG 0 entityType
+		ARG 1 predicate
 	METHOD a (Ljava/lang/Class;Ljava/lang/String;)Lnone/atf;
 		ARG 0 worldData
 	METHOD a getEntities (Ljava/lang/Class;Lnone/auh;)Ljava/util/List;
+		ARG 0 entityType
 		ARG 1 aaBB
 	METHOD a getEntities (Ljava/lang/Class;Lnone/auh;Lcom/google/common/base/Predicate;)Ljava/util/List;
+		ARG 0 entityType
 		ARG 1 aaBB
-	METHOD a (Ljava/lang/Class;Lnone/auh;Lnone/pl;)Lnone/pl;
-		ARG 1 aaBB
-		ARG 2 ent
+		ARG 2 predicate
+	METHOD a findEntityNearest (Ljava/lang/Class;Lnone/auh;Lnone/pl;)Lnone/pl;
+		ARG 0 entityType
+		ARG 1 queryBox
+		ARG 2 entity
 	METHOD a getPlayerEntityByName (Ljava/lang/String;)Lnone/wo;
 		ARG 0 name
 	METHOD a (Ljava/lang/String;Lnone/atf;)V
@@ -8920,6 +8936,7 @@ CLASS none/adn net/minecraft/world/World
 	METHOD a addBlockEntities (Ljava/util/Collection;)V
 		ARG 0 blockEntities
 	METHOD a addLevelAccess (Lnone/adp;)V
+		ARG 0 access
 	METHOD a setLevelInitialized (Lnone/adq;)V
 		ARG 0 levelSettings
 	METHOD a checkBlockIsValidAttachmentSurface (Lnone/adr;Lnone/ck;)Z
@@ -8944,13 +8961,15 @@ CLASS none/adn net/minecraft/world/World
 	METHOD a addBlockEntity (Lnone/akx;)Z
 		ARG 0 blockEnt
 	METHOD a isInsideBorder (Lnone/amt;Lnone/pl;)Z
+		ARG 0 border
+		ARG 1 entity
 	METHOD a (Lnone/amz;Z)Ljava/util/List;
 		ARG 0 chunk
 	METHOD a checkBlockRangeIsInLevel (Lnone/aqf;)Z
 		ARG 0 sBB
 	METHOD a (Lnone/aqf;Z)Ljava/util/List;
 		ARG 0 sBB
-	METHOD a (Lnone/auh;)Ljava/util/List;
+	METHOD a getBlockCollisionBoxes (Lnone/auh;)Ljava/util/List;
 		ARG 0 aaBB
 	METHOD a isAnyMaterialInRegion (Lnone/auh;Lnone/arn;)Z
 		ARG 0 aaBB
@@ -8959,9 +8978,9 @@ CLASS none/adn net/minecraft/world/World
 		ARG 0 aaBB
 		ARG 1 material
 		ARG 2 ent
-	METHOD a (Lnone/auh;Lnone/pl;)Z
+	METHOD a hasNoEntitiesInUnelatedTo (Lnone/auh;Lnone/pl;)Z
 		ARG 0 aaBB
-		ARG 1 ent
+		ARG 1 entity
 	METHOD a (Lnone/auj;Lnone/auh;)F
 		ARG 0 vec
 		ARG 1 aaBB
@@ -8987,9 +9006,9 @@ CLASS none/adn net/minecraft/world/World
 		ARG 2 flag
 	METHOD a playRecord (Lnone/ck;Ljava/lang/String;)V
 		ARG 0 blockPos
-	METHOD a (Lnone/ck;Lnone/adt;)I
+	METHOD a getCalculatedLightAt (Lnone/ck;Lnone/adt;)I
 		ARG 0 blockPos
-		ARG 1 ceiling
+		ARG 1 lightType
 	METHOD a isBlockTickPending (Lnone/ck;Lnone/afi;)Z
 		ARG 0 blockPos
 		ARG 1 block
@@ -9036,11 +9055,11 @@ CLASS none/adn net/minecraft/world/World
 	METHOD a getWatchersInRange (Lnone/pl;D)Lnone/wo;
 		ARG 0 ent
 		ARG 1 radius
-	METHOD a (Lnone/pl;DDDFZ)Lnone/adj;
+	METHOD a createExplosion (Lnone/pl;DDDFZ)Lnone/adj;
 		ARG 0 ent
 	METHOD a createExplosion (Lnone/pl;DDDFZZ)Lnone/adj;
 		ARG 0 ent
-	METHOD a (Lnone/pl;F)Lnone/auj;
+	METHOD a getWeatherSomethingVec (Lnone/pl;F)Lnone/auj;
 		ARG 0 rent
 		ARG 1 time
 	METHOD a playSoundAtEntity (Lnone/pl;Ljava/lang/String;FF)V
@@ -9048,10 +9067,13 @@ CLASS none/adn net/minecraft/world/World
 	METHOD a (Lnone/pl;Lnone/auh;)Ljava/util/List;
 		ARG 0 ent
 		ARG 1 aaBB
-	METHOD a (Lnone/pl;Lnone/auh;Lcom/google/common/base/Predicate;)Ljava/util/List;
-		ARG 1 aaBB
-	METHOD a (Lnone/pl;Z)V
+	METHOD a findEntitiesExcept (Lnone/pl;Lnone/auh;Lcom/google/common/base/Predicate;)Ljava/util/List;
+		ARG 0 entity
+		ARG 1 queryBox
+		ARG 2 predicate
+	METHOD a updateEntity (Lnone/pl;Z)V
 		ARG 0 ent
+		ARG 1 doUpdate
 	METHOD a playLevelEvent (Lnone/wo;ILnone/ck;I)V
 		ARG 0 entityPlayer
 		ARG 2 blockPos
@@ -9060,7 +9082,7 @@ CLASS none/adn net/minecraft/world/World
 	METHOD a (Lnone/wo;Lnone/ck;)Z
 		ARG 0 entPlayer
 		ARG 1 blockPos
-	METHOD a (Lnone/wo;Lnone/ck;Lnone/cr;)Z
+	METHOD a putOutFacingFire (Lnone/wo;Lnone/ck;Lnone/cr;)Z
 		ARG 0 entPlayer
 		ARG 1 blockPos
 		ARG 2 facing
@@ -9078,7 +9100,7 @@ CLASS none/adn net/minecraft/world/World
 		ARG 1 posY
 		ARG 2 posZ
 		ARG 3 range
-	METHOD b (F)F
+	METHOD b getLightSomethingFactor (F)F
 		ARG 0 weight
 	METHOD b setSkylightReduction (I)V
 		ARG 0 skylightReduction
@@ -9086,28 +9108,37 @@ CLASS none/adn net/minecraft/world/World
 		ARG 0 levelX
 		ARG 1 levelZ
 	METHOD b markBlockRangeForRenderUpdate (IIIIII)V
+		ARG 0 xmin
+		ARG 1 ymin
+		ARG 2 zmin
+		ARG 3 xmax
+		ARG 4 ymax
+		ARG 5 zmax
 	METHOD b playLevelEvent (ILnone/ck;I)V
 		ARG 1 blockPos
 	METHOD b setDayTime (J)V
 		ARG 0 dayTime
 	METHOD b getPlayers (Ljava/lang/Class;Lcom/google/common/base/Predicate;)Ljava/util/List;
+		ARG 0 playerType
+		ARG 1 predicate
 	METHOD b loadEntitiesInBulk (Ljava/util/Collection;)V
 		ARG 0 entCollection
 	METHOD b getPlayerEntityByUUID (Ljava/util/UUID;)Lnone/wo;
 		ARG 0 uuid
 	METHOD b removeLevelAccess (Lnone/adp;)V
+		ARG 0 access
 	METHOD b getLightAt (Lnone/adt;Lnone/ck;)I
 		ARG 0 ceiling
 		ARG 1 blockPos
-	METHOD b (Lnone/akx;)V
+	METHOD b addBlockEntity (Lnone/akx;)V
 		ARG 0 blockEnt
 	METHOD b checkBlockRangeIsInLevel (Lnone/aqf;Z)Z
 		ARG 0 sBB
 		ARG 1 rflag
-	METHOD b (Lnone/auh;)Z
+	METHOD b hasNoEntitiesIn (Lnone/auh;)Z
 		ARG 0 aaBB
-	METHOD b (Lnone/auh;Lnone/arn;)Z
-		ARG 0 aaBB
+	METHOD b hasLiquidIn (Lnone/auh;Lnone/arn;)Z
+		ARG 0 queryBox
 		ARG 1 material
 	METHOD b getBiomeAt (Lnone/ck;)Lnone/adz;
 		ARG 0 blockCoords
@@ -9117,10 +9148,10 @@ CLASS none/adn net/minecraft/world/World
 	METHOD b updateNonDebugNeighborBlocks (Lnone/ck;Lnone/afi;)V
 		ARG 0 blockPos
 		ARG 1 block
-	METHOD b (Lnone/ck;Lnone/afi;II)V
+	METHOD b doAllTheNothing (Lnone/ck;Lnone/afi;II)V
 		ARG 0 blockPos
 		ARG 1 block
-	METHOD b (Lnone/ck;Lnone/akx;)V
+	METHOD b setBlockEntityChunkModified (Lnone/ck;Lnone/akx;)V
 		ARG 0 blockPos
 		ARG 1 blockEnt
 	METHOD b markBlockRangeForRenderUpdate (Lnone/ck;Lnone/ck;)V
@@ -9129,14 +9160,14 @@ CLASS none/adn net/minecraft/world/World
 	METHOD b isSidePowered (Lnone/ck;Lnone/cr;)Z
 		ARG 0 blockPos
 		ARG 1 facing
-	METHOD b (Lnone/ck;Z)Z
+	METHOD b breakBlock (Lnone/ck;Z)Z
 		ARG 0 blockPos
 		ARG 1 dropItems
 	METHOD b onEntityRemoved (Lnone/pl;)V
 		ARG 0 ent
-	METHOD b (Lnone/pl;Lnone/auh;)Ljava/util/List;
+	METHOD b findEntitiesExcept (Lnone/pl;Lnone/auh;)Ljava/util/List;
 		ARG 0 ent
-		ARG 1 aaBB
+		ARG 1 queryBox
 	METHOD c tick ()V
 	METHOD c calculateCelestialAngle (F)F
 		ARG 0 time
@@ -9145,12 +9176,12 @@ CLASS none/adn net/minecraft/world/World
 	METHOD c isChunkInRangeOfSpawn (II)Z
 		ARG 0 chunkX
 		ARG 1 chunkZ
-	METHOD c (ILnone/ck;I)V
+	METHOD c setBlockDestruction (ILnone/ck;I)V
 		ARG 1 blockPos
 	METHOD c unloadEntitiesInBulk (Ljava/util/Collection;)V
 		ARG 0 entCollection
-	METHOD c checkLightFor (Lnone/adt;Lnone/ck;)Z
-		ARG 0 ceiling
+	METHOD c updateLightingAt (Lnone/adt;Lnone/ck;)Z
+		ARG 0 lightType
 		ARG 1 blockPos
 	METHOD c checkBlocksCollision (Lnone/auh;)Z
 		ARG 0 aaBB
@@ -9169,7 +9200,7 @@ CLASS none/adn net/minecraft/world/World
 		ARG 0 blockPos
 	METHOD c addEntity (Lnone/pl;)Z
 		ARG 0 ent
-	METHOD d (F)F
+	METHOD d getCelestialAngleTimesTwoPi (F)F
 		ARG 0 time
 	METHOD d setLastLightningBoltTime (I)V
 		ARG 0 time
@@ -9180,8 +9211,9 @@ CLASS none/adn net/minecraft/world/World
 	METHOD d updateBlock (Lnone/ck;Lnone/afi;)V
 		ARG 0 blockPos
 		ARG 1 block
-	METHOD d (Lnone/ck;Z)Z
+	METHOD d isSolidBlock (Lnone/ck;Z)Z
 		ARG 0 blockPos
+		ARG 1 defaultValue
 	METHOD d spawn (Lnone/pl;)Z
 		ARG 0 ent
 	METHOD e getCloudColor (F)Lnone/auj;
@@ -9226,7 +9258,7 @@ CLASS none/adn net/minecraft/world/World
 		ARG 0 blockPos
 	METHOD j getRainStrength (F)F
 		ARG 0 weight
-	METHOD j (Lnone/ck;)Z
+	METHOD j canSeeSkyOrSeaLevel (Lnone/ck;)Z
 		ARG 0 blockPos
 	METHOD k createChunkCache ()Lnone/amw;
 	METHOD k setRainStrength (F)V
@@ -9253,7 +9285,7 @@ CLASS none/adn net/minecraft/world/World
 		ARG 0 blockPos
 	METHOD t removeBlockEntity (Lnone/ck;)V
 		ARG 0 blockPos
-	METHOD u (Lnone/ck;)Z
+	METHOD u blockSideAtLeastOne (Lnone/ck;)Z
 		ARG 0 blockPos
 	METHOD v getBiomeManager ()Lnone/aed;
 	METHOD v canBlockFreezeCheck (Lnone/ck;)Z
@@ -9307,7 +9339,7 @@ CLASS none/adp net/minecraft/world/IWorldAccess
 		ARG 4 z
 		ARG 5 volume
 		ARG 6 pitch
-	METHOD b notifyLightSet (ILnone/ck;I)V
+	METHOD b setBlockDestruction (ILnone/ck;I)V
 		ARG 1 blockPos
 	METHOD b sendBlockBreakProgress (Lnone/ck;)V
 		ARG 0 blockPos
@@ -13347,7 +13379,7 @@ CLASS none/amy net/minecraft/world/chunk/EmptyChunk
 		ARG 0 blockPos
 	METHOD a getBrightestLight (Lnone/ck;I)I
 		ARG 0 blockPos
-		ARG 1 skyLightDampeningTerm
+		ARG 1 lightLevel
 	METHOD a setBlockEntityAt (Lnone/ck;Lnone/akx;)V
 		ARG 0 blockPos
 		ARG 1 blockEnt
@@ -18494,7 +18526,7 @@ CLASS none/bfs net/minecraft/client/renderers/LevelRenderer
 	METHOD a onEntityAdded (Lnone/pl;)V
 	METHOD a playLevelEvent (Lnone/wo;ILnone/ck;I)V
 	METHOD a playSoundToNearExcept (Lnone/wo;Ljava/lang/String;DDDFF)V
-	METHOD b notifyLightSet (ILnone/ck;I)V
+	METHOD b setBlockDestruction (ILnone/ck;I)V
 	METHOD b sendBlockBreakProgress (Lnone/ck;)V
 	METHOD b onEntityRemoved (Lnone/pl;)V
 	METHOD j tick ()V
