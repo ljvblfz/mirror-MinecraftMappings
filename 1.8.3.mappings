@@ -9294,7 +9294,7 @@ CLASS none/adn net/minecraft/world/World
 	METHOD w canBlockFreezeWithoutCheck (Lnone/ck;)Z
 		ARG 0 blockPos
 	METHOD x getMoonPhase ()I
-	METHOD x checkLight (Lnone/ck;)Z
+	METHOD x updateLightingAt (Lnone/ck;)Z
 		ARG 0 blockPos
 	METHOD y getCurrentMoonPhaseFactor ()F
 	METHOD y getPowerEmittedFromSolidBlockAt (Lnone/ck;)I
