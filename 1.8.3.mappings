@@ -369,7 +369,7 @@ CLASS none/n net/minecraft/command/ICommandSender
 		ARG 1 value
 	METHOD c getPosition ()Lnone/ck;
 	METHOD d getVec3 ()Lnone/auj;
-	METHOD e getLevel ()Lnone/adn;
+	METHOD e getWorld ()Lnone/adn;
 	METHOD e_ getName ()Ljava/lang/String;
 	METHOD f getEntity ()Lnone/pl;
 	METHOD f_ getNameComponent ()Lnone/ev;
@@ -1294,7 +1294,7 @@ CLASS none/cr net/minecraft/util/Facing
 	METHOD m getBlockCoords ()Lnone/dg;
 	METHOD n getXRotation ()Lnone/cr;
 	METHOD p getZRotation ()Lnone/cr;
-	METHOD values ()[Lnone/cr;
+	METHOD values values ()[Lnone/cr;
 CLASS none/cs net/minecraft/dispenser/IDispenseBehavior
 	CLASS none/cs$1 IDispenseBehavior_1
 		METHOD a dispense (Lnone/cl;Lnone/zy;)Lnone/zy;
@@ -4164,8 +4164,32 @@ CLASS none/nb net/minecraft/stats/Stats
 CLASS none/nd
 	METHOD delegate ()Ljava/util/Set;
 CLASS none/nf net/minecraft/entity/EntitySet
-	FIELD c entitySet Ljava/util/Set;
+	CLASS none/nf$1
+		METHOD iterator iterator ()Ljava/util/Iterator;
+	FIELD a allClasses Ljava/util/Set;
+	FIELD b entitiesByClass Ljava/util/Map;
+	FIELD c entityClasses Ljava/util/Set;
+	FIELD d entityClass Ljava/lang/Class;
+	FIELD e entities Ljava/util/List;
+	METHOD <init> (Ljava/lang/Class;)V
+		ARG 0 entityClass
+	METHOD a addClassAndMigrateEntities (Ljava/lang/Class;)V
+		ARG 0 entityClass
+	METHOD a add (Ljava/lang/Object;Ljava/lang/Class;)V
+		ARG 0 entity
+		ARG 1 entityType
+	METHOD add add (Ljava/lang/Object;)Z
+		ARG 0 entity
+	METHOD b addClassIfAssignable (Ljava/lang/Class;)Ljava/lang/Class;
+		ARG 0 entityClass
 	METHOD c getEntities (Ljava/lang/Class;)Ljava/lang/Iterable;
+		ARG 0 entityType
+	METHOD contains contains (Ljava/lang/Object;)Z
+		ARG 0 entity
+	METHOD iterator iterator ()Ljava/util/Iterator;
+	METHOD remove remove (Ljava/lang/Object;)Z
+		ARG 0 entity
+	METHOD size size ()I
 CLASS none/nh
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
 CLASS none/nj net/minecraft/util/JsonUtils
@@ -5104,7 +5128,7 @@ CLASS none/pl net/minecraft/entity/Entity
 	METHOD d onCollide (Lnone/wo;)V
 		ARG 0 entityPlayer
 	METHOD d setSprinting (Z)V
-	METHOD e getLevel ()Lnone/adn;
+	METHOD e getWorld ()Lnone/adn;
 	METHOD e distanceSquared (DDD)D
 		ARG 0 xPos
 		ARG 1 yPos
@@ -8956,7 +8980,7 @@ CLASS none/adn net/minecraft/world/World
 		ARG 0 blockPos
 		ARG 1 block
 		ARG 2 excludedFacing
-	METHOD a (Lnone/ck;Lnone/akx;)V
+	METHOD a setBlockEntity (Lnone/ck;Lnone/akx;)V
 		ARG 0 blockPos
 		ARG 1 blockEnt
 	METHOD a setBlockState (Lnone/ck;Lnone/ama;)Z
@@ -20000,7 +20024,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD d getFile (Ljava/lang/String;)Ljava/io/File;
 	METHOD d setOnlineMode (Z)V
 		ARG 0 online
-	METHOD e getLevel ()Lnone/adn;
+	METHOD e getWorld ()Lnone/adn;
 	METHOD e setCanSpawnAnimals (Z)V
 	METHOD e_ getName ()Ljava/lang/String;
 	METHOD f getEntity ()Lnone/pl;
