@@ -2227,7 +2227,7 @@ CLASS none/er net/minecraft/util/MessageDeserializer2
 		ARG 0 channelHandlerContext
 		ARG 1 byteBuf
 CLASS none/es net/minecraft/util/MessageSerializer2
-CLASS none/et net/minecraft/chat/BaseComponent
+CLASS none/et net/minecraft/chat/AbstractChatComponent
 	CLASS none/et$1 ChatComponentStyle_1
 		METHOD a getIterator (Lnone/ev;)Ljava/util/Iterator;
 	CLASS none/et$2 ChatComponentStyle_2
@@ -9497,7 +9497,7 @@ CLASS none/adx net/minecraft/world/ScheduledBlockTick
 CLASS none/ady net/minecraft/world/biome/BiomeBeach
 	METHOD <init> (I)V
 		ARG 0 biomeID
-CLASS none/adz net/minecraft/world/biome/Biome
+CLASS none/adz net/minecraft/world/biome/AbstractBiome
 	CLASS none/adz$1 BiomeGenBaseSwitchCreatureType
 		FIELD a search [I
 	CLASS none/adz$a HeightData
@@ -12811,7 +12811,7 @@ CLASS none/akw net/minecraft/block/entity/BlockEntityBeacon
 	METHOD q_ getMaxStackSize ()I
 	METHOD s getMaxRenderDistanceSq ()D
 	METHOD y_ getDescriptionPacket ()Lnone/fg;
-CLASS none/akx net/minecraft/block/entity/BlockEntity
+CLASS none/akx net/minecraft/block/entity/AbstractBlockEntity
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD b world Lnone/adn;
 	FIELD c blockPos Lnone/ck;
@@ -14689,7 +14689,7 @@ CLASS none/aqj net/minecraft/world/gen/structure/NetherFortressGenerator
 			ARG 1 rand
 			ARG 2 chunkX
 			ARG 3 chunkZ
-CLASS none/aqk net/minecraft/world/gen/structure/ComponentNetherFortress
+CLASS none/aqk net/minecraft/world/gen/structure/NetherFortressComponents
 	CLASS none/aqk$a ComponentNetherBridgeCrossing3
 		METHOD a addComponentParts (Lnone/adn;Ljava/util/Random;Lnone/aqf;)Z
 		METHOD a buildComponent (Lnone/aqu;Ljava/util/List;Ljava/util/Random;)V
@@ -14841,7 +14841,7 @@ CLASS none/aqq net/minecraft/world/gen/structure/StrongholdComponents
 	FIELD d strongholdComponentType Ljava/lang/Class;
 	FIELD e STRONGHOLD_STONES Lnone/aqq$k;
 	METHOD a registerComponents ()V
-CLASS none/aqr net/minecraft/world/gen/structure/StructureFeatureGenerator
+CLASS none/aqr net/minecraft/world/gen/structure/AbstractStructureFeatureGenerator
 CLASS none/aqs net/minecraft/world/gen/structure/StructureIO
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
 	METHOD a registerComponent (Ljava/lang/Class;Ljava/lang/String;)V
@@ -14854,7 +14854,7 @@ CLASS none/aqt net/minecraft/world/storage/FeaturesData
 		ARG 0 tagCompound
 	METHOD b save (Lnone/dp;)V
 		ARG 0 tagCompound
-CLASS none/aqu net/minecraft/world/gen/structure/StructureComponent
+CLASS none/aqu net/minecraft/world/gen/structure/AbstractStructureComponent
 	FIELD l boundingBox Lnone/aqf;
 	FIELD m facing Lnone/cr;
 	METHOD a getXWithOffset (II)I
@@ -14868,7 +14868,7 @@ CLASS none/aqu net/minecraft/world/gen/structure/StructureComponent
 	METHOD b getZWithOffset (II)I
 	METHOD b fillCurrentPositionBlocksDownwards (Lnone/adn;Lnone/ama;IIILnone/aqf;)V
 	METHOD d getYWithOffset (I)I
-CLASS none/aqv net/minecraft/world/gen/structure/StructureStart
+CLASS none/aqv net/minecraft/world/gen/structure/AbstractStructureStart
 	FIELD a components Ljava/util/LinkedList;
 	FIELD b boundingBox Lnone/aqf;
 	FIELD c chunkX I
@@ -16911,7 +16911,7 @@ CLASS none/axu net/minecraft/client/gui/GuiRenameWorld
 	METHOD b initGui ()V
 	METHOD e updateScreen ()V
 	METHOD m onGuiClosed ()V
-CLASS none/axv net/minecraft/client/gui/GuiScreen
+CLASS none/axv net/minecraft/client/gui/AbstractGuiScreen
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD g SPLITTER Lcom/google/common/base/Splitter;
 	FIELD i eventButton I
@@ -17053,7 +17053,7 @@ CLASS none/ayk net/minecraft/client/gui/GuiControls
 	METHOD b initGui ()V
 	METHOD b mouseMovedOrUp (III)V
 	METHOD k handleMouseInput ()V
-CLASS none/aym net/minecraft/client/gui/GuiContainer
+CLASS none/aym net/minecraft/client/gui/AbstractGuiContainer
 	FIELD B returningStackTime J
 	FIELD C returningStack Lnone/zy;
 	FIELD a inventoryTextures Lnone/jz;
@@ -17157,7 +17157,7 @@ CLASS none/ayv net/minecraft/client/gui/GuiContainerCreative
 CLASS none/ayw net/minecraft/client/gui/GuiDispenser
 	METHOD a drawGuiContainerBackgroundLayer (FII)V
 	METHOD b drawGuiContainerForegroundLayer (II)V
-CLASS none/ayx net/minecraft/client/renderers/InventoryEffectRenderer
+CLASS none/ayx net/minecraft/client/renderers/AbstractInventoryEffectRenderer
 	METHOD a drawScreen (IIF)V
 	METHOD b initGui ()V
 CLASS none/ayy net/minecraft/util/EnchantmentWordPicker
@@ -17266,7 +17266,7 @@ CLASS none/azp net/minecraft/client/gui/GuiSelectResourcePack
 	METHOD k handleMouseInput ()V
 CLASS none/azu net/minecraft/client/gui/GuiResourcePackAvailableList
 	METHOD e getTitle ()Ljava/lang/String;
-CLASS none/azv net/minecraft/client/gui/GuiResourcePackList
+CLASS none/azv net/minecraft/client/gui/AbstractGuiResourcePackList
 	METHOD b getListItemCount ()I
 	METHOD b getSlot (I)Lnone/awe$a;
 	METHOD d getScrollbarHorizontalPosition ()I
@@ -18523,7 +18523,7 @@ CLASS none/bfo net/minecraft/client/renderers/PlayerRenderer
 	FIELD d heldItemStack Lnone/zy;
 	FIELD g entityRenderer Lnone/biv;
 	FIELD h itemRenderer Lnone/bji;
-CLASS none/bfs net/minecraft/client/renderers/LevelRenderer
+CLASS none/bfs net/minecraft/client/renderers/WorldRenderer
 	FIELD B entityOutlineShader Lnone/bls;
 	FIELD P renderDistance I
 	FIELD Y useVBO Z
@@ -18536,7 +18536,7 @@ CLASS none/bfs net/minecraft/client/renderers/LevelRenderer
 	FIELD h minecraft Lnone/avf;
 	FIELD i textureManager Lnone/bmk;
 	FIELD j renderManager Lnone/biv;
-	FIELD k levelClient Lnone/bdc;
+	FIELD k worldClient Lnone/bdc;
 	FIELD s vertexFormat Lnone/bmv;
 	FIELD z blockDestroyStageSprites [Lnone/bmj;
 	METHOD a reload ()V
@@ -18646,16 +18646,16 @@ CLASS none/bgs
 		FIELD c FIRST_PERSON Lnone/bgs$b;
 		FIELD d HEAD Lnone/bgs$b;
 		FIELD e GUI Lnone/bgs$b;
-CLASS none/bhb net/minecraft/client/renderers/BlockEntityBannerRenderer
+CLASS none/bhb net/minecraft/client/renderers/blockentity/BlockEntityBannerRenderer
 	FIELD d BANNER_BASE_PNG Lnone/jz;
 	FIELD e modelBanner Lnone/bav;
 	METHOD a render (Lnone/akv;DDDFI)V
 	METHOD a render (Lnone/akx;DDDFI)V
-CLASS none/bhc net/minecraft/client/renderers/BlockEntityBeaconRenderer
+CLASS none/bhc net/minecraft/client/renderers/blockentity/BlockEntityBeaconRenderer
 	FIELD c BEACON_BEAM_PNG Lnone/jz;
 	METHOD a render (Lnone/akw;DDDFI)V
 	METHOD a render (Lnone/akx;DDDFI)V
-CLASS none/bhd net/minecraft/client/renderers/BlockEntityRenderer
+CLASS none/bhd net/minecraft/client/renderers/blockentity/BlockEntityRenderer
 	FIELD a instance Lnone/bhd;
 	FIELD e textureManager Lnone/bmk;
 	FIELD f level Lnone/adn;
@@ -18668,7 +18668,7 @@ CLASS none/bhd net/minecraft/client/renderers/BlockEntityRenderer
 	METHOD a render (Lnone/akx;DDDF)V
 	METHOD a render (Lnone/akx;DDDFI)V
 	METHOD b getDetailsRendererForBlockEntity (Lnone/akx;)Lnone/bhe;
-CLASS none/bhe net/minecraft/client/renderers/BlockEntityDetailsRenderer
+CLASS none/bhe net/minecraft/client/renderers/blockentity/AbstractBlockEntityRenderer
 	FIELD a DESTROY_STAGE_PNGS [Lnone/jz;
 	FIELD b blockEntityRenderer Lnone/bhd;
 	METHOD a render (Lnone/akx;DDDFI)V
@@ -18676,7 +18676,7 @@ CLASS none/bhe net/minecraft/client/renderers/BlockEntityDetailsRenderer
 	METHOD a bindTexture (Lnone/jz;)V
 	METHOD b getLevel ()Lnone/adn;
 	METHOD c getFontRenderer ()Lnone/avo;
-CLASS none/bhf net/minecraft/client/renderers/BlockEntityChestRenderer
+CLASS none/bhf net/minecraft/client/renderers/blockentity/BlockEntityChestRenderer
 	FIELD c TRAPPED_DOUBLE_PNG Lnone/jz;
 	FIELD d CHRISTMAS_DOUBLE_PNG Lnone/jz;
 	FIELD e CHEST_DOUBLE_PNG Lnone/jz;
@@ -18685,27 +18685,27 @@ CLASS none/bhf net/minecraft/client/renderers/BlockEntityChestRenderer
 	FIELD h CHEST_PNG Lnone/jz;
 	METHOD a render (Lnone/akx;DDDFI)V
 	METHOD a render (Lnone/akz;DDDFI)V
-CLASS none/bhg net/minecraft/client/renderers/BlockEntityEnchantmentTableRenderer
+CLASS none/bhg net/minecraft/client/renderers/blockentity/BlockEntityEnchantmentTableRenderer
 	FIELD c ENCHANTING_TABLE_BOOK_PNG Lnone/jz;
 	METHOD a render (Lnone/akx;DDDFI)V
 	METHOD a render (Lnone/alf;DDDFI)V
-CLASS none/bhh net/minecraft/client/renderers/BlockEntityEnderChestRenderer
+CLASS none/bhh net/minecraft/client/renderers/blockentity/BlockEntityEnderChestRenderer
 	FIELD c ENDER_PNG Lnone/jz;
 	FIELD d modelSingleChest Lnone/bba;
 	METHOD a render (Lnone/akx;DDDFI)V
 	METHOD a render (Lnone/alg;DDDFI)V
-CLASS none/bhi net/minecraft/client/renderers/BlockEntityMobSpawnerRenderer
+CLASS none/bhi net/minecraft/client/renderers/blockentity/BlockEntityMobSpawnerRenderer
 	METHOD a render (Lnone/akx;DDDFI)V
 	METHOD a render (Lnone/alm;DDDFI)V
-CLASS none/bhj net/minecraft/client/renderers/BlockEntityPistonRenderer
+CLASS none/bhj net/minecraft/client/renderers/blockentity/BlockEntityPistonRenderer
 	METHOD a render (Lnone/akx;DDDFI)V
 	METHOD a render (Lnone/alv;DDDFI)V
-CLASS none/bhk net/minecraft/client/renderers/BlockEntitySignRenderer
+CLASS none/bhk net/minecraft/client/renderers/blockentity/BlockEntitySignRenderer
 	FIELD c SIGN_PNG Lnone/jz;
 	FIELD d modelSign Lnone/bby;
 	METHOD a render (Lnone/akx;DDDFI)V
 	METHOD a render (Lnone/alo;DDDFI)V
-CLASS none/bhl net/minecraft/client/renderers/BlockEntitySkullRenderer
+CLASS none/bhl net/minecraft/client/renderers/blockentity/BlockEntitySkullRenderer
 	FIELD d SKELETON_PNG Lnone/jz;
 	FIELD e WITHER_SKELETON_PNG Lnone/jz;
 	FIELD f ZOMBIE_PNG Lnone/jz;
@@ -18713,7 +18713,7 @@ CLASS none/bhl net/minecraft/client/renderers/BlockEntitySkullRenderer
 	METHOD a render (Lnone/akx;DDDFI)V
 	METHOD a render (Lnone/alp;DDDFI)V
 	METHOD a setBlockEntityRenderer (Lnone/bhd;)V
-CLASS none/bhm net/minecraft/client/renderers/BlockEntityEndPortalRenderer
+CLASS none/bhm net/minecraft/client/renderers/blockentity/BlockEntityEndPortalRenderer
 	FIELD d END_SKY_PNG Lnone/jz;
 	FIELD e END_PORTAL_PNG Lnone/jz;
 	METHOD a render (Lnone/akx;DDDFI)V
@@ -18722,21 +18722,25 @@ CLASS none/bht
 	METHOD a getDisplayListID (Lnone/adg;Lnone/bhr;)I
 CLASS none/bhu net/minecraft/client/renderers/BlockRenderer
 	FIELD c aabb Lnone/auh;
-	FIELD d level Lnone/adn;
-	FIELD e levelRenderer Lnone/bfs;
+	FIELD d world Lnone/adn;
+	FIELD e worldRenderer Lnone/bfs;
 	FIELD f blockPos Lnone/ck;
 	FIELD l matrixBuffer Ljava/nio/FloatBuffer;
 	FIELD m vbos [Lnone/bmu;
+	METHOD <init> (Lnone/adn;Lnone/bfs;Lnone/ck;I)V
+		ARG 0 world
+		ARG 1 worldRenderer
+		ARG 2 blockPos
 	METHOD a setBlockPos (Lnone/ck;)V
 	METHOD b getVBO (I)Lnone/bmu;
 	METHOD j getBlockPos ()Lnone/ck;
-CLASS none/bih net/minecraft/client/renderers/RenderArmorStand
+CLASS none/bih net/minecraft/client/renderers/entity/RenderArmorStand
 	FIELD a ARMOR_STAND_PNG Lnone/jz;
 	METHOD a getTextureLocation (Lnone/pl;)Lnone/jz;
 	METHOD a rotateCorpse (Lnone/ps;FFF)V
 	METHOD a getTextureLocation (Lnone/un;)Lnone/jz;
 	METHOD b getModel ()Lnone/bbp;
-CLASS none/bii net/minecraft/client/renderers/RenderArrow
+CLASS none/bii net/minecraft/client/renderers/entity/RenderArrow
 	FIELD a ARROW_PNG Lnone/jz;
 	METHOD a getTextureLocation (Lnone/pl;)Lnone/jz;
 	METHOD a getTextureLocation (Lnone/wr;)Lnone/jz;
@@ -18803,7 +18807,7 @@ CLASS none/biv net/minecraft/client/renderers/EntityRenderer
 	METHOD a renderEntityWithPosYaw (Lnone/pl;DDDFF)Z
 	METHOD a renderEntityWithPosYaw (Lnone/pl;DDDFFZ)Z
 	METHOD c getFontRenderer ()Lnone/avo;
-CLASS none/biw net/minecraft/client/renderers/Render
+CLASS none/biw net/minecraft/client/renderers/AbstractRender
 	FIELD a SHADOW_PNG Lnone/jz;
 	FIELD b renderer Lnone/biv;
 	METHOD a getLevel ()Lnone/adn;
@@ -19628,7 +19632,7 @@ CLASS none/bow
 	METHOD equals (Ljava/lang/Object;)Z
 	METHOD hashCode ()I
 	METHOD toString getFullName ()Ljava/lang/String;
-CLASS none/bpb net/minecraft/client/audio/PositionedSound
+CLASS none/bpb net/minecraft/client/audio/AbstractPositionedSound
 CLASS none/bph net/minecraft/sound/EnumSoundType
 	FIELD a MASTER Lnone/bph;
 	FIELD b MUSIC Lnone/bph;
