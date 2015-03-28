@@ -4479,8 +4479,8 @@ CLASS none/ny net/minecraft/util/StringUtil
 	METHOD b isNullOrEmpty (Ljava/lang/String;)Z
 		ARG 0 s
 CLASS none/ob net/minecraft/util/WeightedRandom
-	CLASS none/ob$a Weighted
-		FIELD a weight I
+	CLASS none/ob$a Item
+		FIELD a itemWeight I
 		METHOD <init> (I)V
 			ARG 0 itemWeightIn
 	METHOD a getTotalWeight (Ljava/util/Collection;)I
@@ -4492,6 +4492,34 @@ CLASS none/ob net/minecraft/util/WeightedRandom
 		ARG 1 coll
 	METHOD a getRandomItem (Ljava/util/Random;Ljava/util/Collection;I)Lnone/ob$a;
 		ARG 1 coll
+CLASS none/oc net/minecraft/util/WeightedRandomChestContent
+	FIELD b itemID Lnone/zy;
+	FIELD c minChanceToGenerate I
+	FIELD d maxChanceToGenerate I
+	METHOD <init> (Lnone/zx;IIII)V
+		ARG 0 item
+		ARG 1 itemMeta
+		ARG 2 minChance
+		ARG 3 maxChance
+		ARG 4 itemWeight
+	METHOD <init> (Lnone/zy;III)V
+		ARG 0 stack
+		ARG 1 minChance
+		ARG 2 maxChance
+		ARG 3 itemWeight
+	METHOD a addToList (Ljava/util/List;[Lnone/oc;)Ljava/util/List;
+		ARG 0 initialList
+		ARG 1 itemsToAdd
+	METHOD a generateDispenserContents (Ljava/util/Random;Ljava/util/List;Lnone/ald;I)V
+		ARG 0 rand
+		ARG 1 contentList
+		ARG 2 dispenser
+		ARG 3 maxItems
+	METHOD a generateChestContents (Ljava/util/Random;Ljava/util/List;Lnone/oh;I)V
+		ARG 0 rand
+		ARG 1 contentList
+		ARG 2 chestInv
+		ARG 3 maxItems
 CLASS none/oe net/minecraft/util/TaskQueue
 	METHOD a runTask (Ljava/lang/Runnable;)Lcom/google/common/util/concurrent/ListenableFuture;
 		ARG 0 task
@@ -14456,18 +14484,31 @@ CLASS none/aon net/minecraft/world/gen/feature/PlantGenerator
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
 CLASS none/aoo net/minecraft/world/gen/feature/CactusGenerator
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
+		ARG 0 world
+		ARG 1 rand
+		ARG 2 startPos
 CLASS none/aoq net/minecraft/world/gen/feature/ClayGenerator
+	FIELD a clayBlock Lnone/afi;
+	FIELD b radius I
+	METHOD <init> (I)V
+		ARG 0 radius
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
+		ARG 0 world
+		ARG 1 rand
+		ARG 2 centerPos
 CLASS none/aor net/minecraft/world/gen/feature/DeadBushGenerator
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
+		ARG 0 world
+		ARG 1 rand
+		ARG 2 startPos
 CLASS none/aos net/minecraft/world/gen/feature/SandstoneWellGenerator
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
-CLASS none/aot net/minecraft/world/gen/feature/DoublePlantGenerator
-	FIELD a variant Lnone/agj$b;
-	METHOD a setVariant (Lnone/agj$b;)V
-		ARG 0 variant
+CLASS none/aot net/minecraft/world/gen/feature/TallPlantGenerator
+	FIELD a type Lnone/agj$b;
+	METHOD a setType (Lnone/agj$b;)V
+		ARG 0 type
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
-		ARG 0 level
+		ARG 0 world
 		ARG 1 random
 		ARG 2 blockPos
 CLASS none/aou net/minecraft/world/gen/feature/FeatureGenerator
@@ -14532,7 +14573,13 @@ CLASS none/aph net/minecraft/world/gen/feature/TreeGeneratorMega
 CLASS none/api net/minecraft/world/gen/feature/MelonsGenerator
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
 CLASS none/apj net/minecraft/world/gen/feature/DungeonGenerator
+	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
+	FIELD b spawnMonsterTypes [Ljava/lang/String;
+	FIELD c chestItems Ljava/util/List;
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
+		ARG 0 world
+		ARG 1 random
+		ARG 2 spawnPos
 CLASS none/apk net/minecraft/world/gen/feature/MineralDepositGenerator
 	FIELD a oreBlockState Lnone/ama;
 	FIELD b maxSpawnHeight I
