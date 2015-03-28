@@ -9666,11 +9666,11 @@ CLASS none/adz net/minecraft/world/biome/Biome
 		ARG 0 rand
 		ARG 1 blockPos
 	METHOD a placeBlocksInBiome (Lnone/adn;Ljava/util/Random;Lnone/ant;IID)V
-		ARG 0 level
+		ARG 0 world
 		ARG 1 rand
-		ARG 2 chunkPrimer
-		ARG 3 levelX
-		ARG 4 levelZ
+		ARG 2 primer
+		ARG 3 xAbs
+		ARG 4 zAbs
 		ARG 5 grassCutoff
 	METHOD a decorate (Lnone/adn;Ljava/util/Random;Lnone/ck;)V
 		ARG 0 level
@@ -9690,11 +9690,11 @@ CLASS none/adz net/minecraft/world/biome/Biome
 	METHOD b getRandomGrassGenerator (Ljava/util/Random;)Lnone/aou;
 		ARG 0 rand
 	METHOD b replaceBlocks (Lnone/adn;Ljava/util/Random;Lnone/ant;IID)V
-		ARG 0 level
+		ARG 0 world
 		ARG 1 rand
-		ARG 2 chunkPrimer
-		ARG 3 levelX
-		ARG 4 levelZ
+		ARG 2 primer
+		ARG 3 xAbs
+		ARG 4 zAbs
 		ARG 5 grassCutoff
 	METHOD b getGrassColorAt (Lnone/ck;)I
 		ARG 0 blockPos
@@ -11516,7 +11516,7 @@ CLASS none/agw net/minecraft/block/BlockFire
 	METHOD l registerBurnables ()V
 	METHOD m getBlockRenderMode ()Lnone/adg;
 CLASS none/agx net/minecraft/block/BlockFlower
-	CLASS none/agx$a EnumFlowerType
+	CLASS none/agx$a FlowerTypes
 		FIELD a DANDELION Lnone/agx$a;
 		FIELD b POPPY Lnone/agx$a;
 		FIELD c BLUE_ORCHID Lnone/agx$a;
@@ -11527,13 +11527,13 @@ CLASS none/agx net/minecraft/block/BlockFlower
 		FIELD h WHITE_TULIP Lnone/agx$a;
 		FIELD i PINK_TULIP Lnone/agx$a;
 		FIELD j OXEYE_DAISY Lnone/agx$a;
-		FIELD l flowerBlockColor Lnone/agx$b;
-		METHOD a getFlowerBlockColor ()Lnone/agx$b;
+		FIELD l flowerColor Lnone/agx$b;
+		METHOD a getFlowerColor ()Lnone/agx$b;
 		METHOD a getByBlockColorAndID (Lnone/agx$b;I)Lnone/agx$a;
 			ARG 1 id
 		METHOD d getLocalizableName ()Ljava/lang/String;
 		METHOD l getName ()Ljava/lang/String;
-	CLASS none/agx$b EnumFlowerBlockColor
+	CLASS none/agx$b FlowerColors
 		FIELD a YELLOW Lnone/agx$b;
 		FIELD b RED Lnone/agx$b;
 		METHOD a getFlowerBlock ()Lnone/agx;
@@ -11544,7 +11544,7 @@ CLASS none/agx net/minecraft/block/BlockFlower
 	METHOD a addCreativeStackTo (Lnone/zx;Lnone/za;Ljava/util/List;)V
 	METHOD c getMetadataForBlockState (Lnone/ama;)I
 	METHOD e initPropertyManager ()Lnone/amb;
-	METHOD l getFlowerBlockColor ()Lnone/agx$b;
+	METHOD l getFlowerColor ()Lnone/agx$b;
 	METHOD n getType ()Lnone/amp;
 CLASS none/agy net/minecraft/block/BlockFlowerPot
 	CLASS none/agy$a EnumFlowerPotContent
@@ -12111,7 +12111,7 @@ CLASS none/aiy net/minecraft/block/BlockRail
 	METHOD e initPropertyManager ()Lnone/amb;
 	METHOD n getShapeProperty ()Lnone/amp;
 CLASS none/aiz net/minecraft/block/BlockRedFlower
-	METHOD l getFlowerBlockColor ()Lnone/agx$b;
+	METHOD l getFlowerColor ()Lnone/agx$b;
 CLASS none/aja net/minecraft/block/BlockRedSandstone
 	CLASS none/aja$a EnumRedSandstoneType
 		FIELD a DEFAULT Lnone/aja$a;
@@ -12780,7 +12780,7 @@ CLASS none/akt net/minecraft/block/BlockCarpet
 	METHOD e initPropertyManager ()Lnone/amb;
 	METHOD j updateTargetingHitbox ()V
 CLASS none/aku net/minecraft/block/BlockYellowFlower
-	METHOD l getFlowerBlockColor ()Lnone/agx$b;
+	METHOD l getFlowerColor ()Lnone/agx$b;
 CLASS none/akv net/minecraft/block/entity/BlockEntityBanner
 	CLASS none/akv$a
 		FIELD J BRICKS Lnone/akv$a;
@@ -13670,7 +13670,7 @@ CLASS none/amz net/minecraft/world/chunk/Chunk
 	METHOD m processRelightChecks ()V
 	METHOD n queueRelightChecks ()V
 	METHOD o isChunkLoaded ()Z
-	METHOD p getLevel ()Lnone/adn;
+	METHOD p getWorld ()Lnone/adn;
 	METHOD q getHeightMap ()[I
 	METHOD r getBlockEntityMap ()Ljava/util/Map;
 	METHOD s getEntityStore ()[Lnone/nf;
