@@ -9551,10 +9551,15 @@ CLASS none/adz net/minecraft/world/biome/Biome
 		FIELD b COLD Lnone/adz$b;
 		FIELD c MEDIUM Lnone/adz$b;
 		FIELD d WARM Lnone/adz$b;
-	CLASS none/adz$c SpawnList
+	CLASS none/adz$c SpawnMob
 		FIELD b entityMobClass Ljava/lang/Class;
+		FIELD c minCount I
+		FIELD d maxCount I
 		METHOD <init> (Ljava/lang/Class;III)V
 			ARG 0 entityMobClass
+			ARG 1 weight
+			ARG 2 minCount
+			ARG 3 maxCount
 	FIELD A FROZEN_RIVER Lnone/adz;
 	FIELD B ICE_PLAINS Lnone/adz;
 	FIELD C ICE_MOUNTAINS Lnone/adz;
