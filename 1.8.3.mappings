@@ -13340,7 +13340,7 @@ CLASS none/amt net/minecraft/world/border/WorldBorder
 	METHOD o getTransitionSpeed ()D
 	METHOD p getWarningTime ()I
 	METHOD q getWarningDistance ()I
-CLASS none/amw net/minecraft/world/IChunkGenerator
+CLASS none/amw net/minecraft/world/gen/IChunkGenerator
 	METHOD a chunkExists (II)Z
 		ARG 0 chunkX
 		ARG 1 chunkZ
@@ -15377,7 +15377,7 @@ CLASS none/atm net/minecraft/world/WorldMulti
 	METHOD a getNbtTagCompound ()Lnone/dp;
 	METHOD a setSpawnX (I)V
 	METHOD a setName (Ljava/lang/String;)V
-	METHOD a setGenerator (Lnone/ads;)V
+	METHOD a setDimensionType (Lnone/ads;)V
 	METHOD a setSpawnPoint (Lnone/ck;)V
 	METHOD a cloneNbtTagCompound (Lnone/dp;)Lnone/dp;
 	METHOD a setDifficulty (Lnone/ok;)V
@@ -15410,7 +15410,7 @@ CLASS none/atm net/minecraft/world/WorldMulti
 	METHOD r getGameMode ()Lnone/adq$a;
 	METHOD s hasMapFeatures ()Z
 	METHOD t isHardcoreModeEnabled ()Z
-	METHOD u getGenerator ()Lnone/ads;
+	METHOD u getDimensionType ()Lnone/ads;
 	METHOD v areCommandsAllowed ()Z
 	METHOD w isInitialized ()Z
 	METHOD x getGameRules ()Lnone/adl;
@@ -15541,8 +15541,8 @@ CLASS none/atp net/minecraft/world/WorldInfo
 		ARG 0 gameType
 	METHOD a applyLevelSettings (Lnone/adq;)V
 		ARG 0 levelSettings
-	METHOD a setGenerator (Lnone/ads;)V
-		ARG 0 generator
+	METHOD a setDimensionType (Lnone/ads;)V
+		ARG 0 dimensionType
 	METHOD a addToCrashReport (Lnone/c;)V
 		ARG 0 crashReportCategory
 	METHOD a setSpawnPoint (Lnone/ck;)V
@@ -15617,13 +15617,13 @@ CLASS none/atp net/minecraft/world/WorldInfo
 	METHOD r getGameMode ()Lnone/adq$a;
 	METHOD s hasMapFeatures ()Z
 	METHOD t isHardcoreModeEnabled ()Z
-	METHOD u getGenerator ()Lnone/ads;
+	METHOD u getDimensionType ()Lnone/ads;
 	METHOD v areCommandsAllowed ()Z
 	METHOD w isInitialized ()Z
 	METHOD x getGameRules ()Lnone/adl;
 	METHOD y getDifficulty ()Lnone/ok;
 	METHOD z isDifficultyLocked ()Z
-CLASS none/atq net/minecraft/world/ISaveHandler
+CLASS none/atq net/minecraft/world/storage/ISaveHandler
 	METHOD a flush ()V
 	METHOD a getFileFromName (Ljava/lang/String;)Ljava/io/File;
 	METHOD a getChunkLoader (Lnone/ann;)Lnone/ane;
