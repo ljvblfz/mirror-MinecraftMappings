@@ -3701,7 +3701,7 @@ CLASS none/lf net/minecraft/world/WorldServer
 	FIELD M tickNextTick Ljava/util/TreeSet;
 	FIELD V tickNow Ljava/util/List;
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD b chunkCache Lnone/le;
+	FIELD b serverChunkCache Lnone/le;
 	FIELD c disableSaving Z
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnone/atq;Lnone/atp;ILnone/nu;)V
 		ARG 2 level
@@ -17890,7 +17890,7 @@ CLASS none/bdb net/minecraft/client/multiplayer/PlayerControllerMP
 	METHOD a windowClick (IIIILnone/wo;)Lnone/zy;
 	METHOD a setGameType (Lnone/adq$a;)V
 CLASS none/bdc net/minecraft/world/WorldClient
-	FIELD b chunkCache Lnone/bda;
+	FIELD b clientChunkCache Lnone/bda;
 	METHOD <init> (Lnone/bcz;Lnone/adq;ILnone/ok;Lnone/nu;)V
 		ARG 1 worldSettings
 		ARG 2 dimensionId
