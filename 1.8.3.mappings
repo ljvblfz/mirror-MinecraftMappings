@@ -4478,9 +4478,20 @@ CLASS none/ny net/minecraft/util/StringUtil
 		ARG 0 s
 	METHOD b isNullOrEmpty (Ljava/lang/String;)Z
 		ARG 0 s
-CLASS none/ob
+CLASS none/ob net/minecraft/util/WeightedRandom
 	CLASS none/ob$a Weighted
 		FIELD a weight I
+		METHOD <init> (I)V
+			ARG 0 itemWeightIn
+	METHOD a getTotalWeight (Ljava/util/Collection;)I
+		ARG 0 coll
+	METHOD a getRandomItem (Ljava/util/Collection;I)Lnone/ob$a;
+		ARG 0 coll
+	METHOD a getRandomItem (Ljava/util/Random;Ljava/util/Collection;)Lnone/ob$a;
+		ARG 0 rand
+		ARG 1 coll
+	METHOD a getRandomItem (Ljava/util/Random;Ljava/util/Collection;I)Lnone/ob$a;
+		ARG 1 coll
 CLASS none/oe net/minecraft/util/TaskQueue
 	METHOD a runTask (Ljava/lang/Runnable;)Lcom/google/common/util/concurrent/ListenableFuture;
 		ARG 0 task
@@ -11286,12 +11297,12 @@ CLASS none/agi net/minecraft/block/BlockDoor
 	METHOD k getMobilityFlag ()I
 	METHOD l getDoorItem ()Lnone/zx;
 	METHOD m getBlockRenderMode ()Lnone/adg;
-CLASS none/agj net/minecraft/block/BlockDoublePlant
+CLASS none/agj net/minecraft/block/BlockTallPlant
 	CLASS none/agj$a EnumDoublePlantHalf
 		FIELD a UPPER Lnone/agj$a;
 		FIELD b LOWER Lnone/agj$a;
 		METHOD l getName ()Ljava/lang/String;
-	CLASS none/agj$b EnumDoublePlantVariant
+	CLASS none/agj$b TallPlantTypes
 		FIELD a SUNFLOWER Lnone/agj$b;
 		FIELD b SYRINGA Lnone/agj$b;
 		FIELD c GRASS Lnone/agj$b;
@@ -12470,7 +12481,7 @@ CLASS none/akc net/minecraft/block/BlockStoneSlab
 	METHOD c getMetadataForBlockState (Lnone/ama;)I
 	METHOD e initPropertyManager ()Lnone/amb;
 CLASS none/akd net/minecraft/block/BlockTallGrass
-	CLASS none/akd$a EnumFoliageType
+	CLASS none/akd$a TallGrassTypes
 		FIELD a DEAD_BUSH Lnone/akd$a;
 		FIELD b GRASS Lnone/akd$a;
 		FIELD c FERN Lnone/akd$a;
@@ -14556,7 +14567,7 @@ CLASS none/apt net/minecraft/world/gen/feature/TreeGeneratorSpruce
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
 CLASS none/apu net/minecraft/world/gen/feature/TreeGeneratorSwamp
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
-CLASS none/apv net/minecraft/world/gen/feature/FoliageGenerator
+CLASS none/apv net/minecraft/world/gen/feature/TallGrassGenerator
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
 CLASS none/apw net/minecraft/world/gen/feature/TreeGeneratorSmall
 	FIELD c metaWood I
