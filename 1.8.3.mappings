@@ -4353,24 +4353,25 @@ CLASS none/nt net/minecraft/util/MathHelper
 	FIELD a SQRT_TWO F
 	FIELD b SIN_LOOKUP [F
 	FIELD c LOG_BASE_TWO_DE_BRUIJN_MULTIPLY_BIT_POSITION [I
-	METHOD a squareRoot (D)F
+	METHOD a sqrt (D)F
 		ARG 0 value
-	METHOD a findMaxAbsoluteValue (DD)D
+	METHOD a max_abs (DD)D
 		ARG 0 value1
 		ARG 1 value2
-	METHOD a fitToRange (DDD)D
+	METHOD a clamp (DDD)D
 		ARG 0 value
 		ARG 1 min
 		ARG 2 max
 	METHOD a sin (F)F
 		ARG 0 value
-	METHOD a fitToRange (FFF)F
+	METHOD a isAlmostZero (FF)Z
+	METHOD a clamp (FFF)F
 		ARG 0 value
 		ARG 1 min
 		ARG 2 max
-	METHOD a absoluteValue (I)I
+	METHOD a abs (I)I
 		ARG 0 value
-	METHOD a fitToRange (III)I
+	METHOD a clamp (III)I
 		ARG 0 value
 		ARG 1 min
 		ARG 2 max
@@ -4402,43 +4403,55 @@ CLASS none/nt net/minecraft/util/MathHelper
 		ARG 0 random
 		ARG 1 min
 		ARG 2 max
-	METHOD a average ([J)D
+	METHOD a (Lnone/dg;)J
+		ARG 0 vec
+	METHOD a avg ([J)D
 		ARG 0 valuesArray
-	METHOD b truncateToInt (D)I
+	METHOD b truncate (D)I
 		ARG 0 value
-	METHOD b interpolate (DDD)D
+	METHOD b lerp (DDD)D
 		ARG 0 lowValue
 		ARG 1 highValue
 		ARG 2 fraction
 	METHOD b cos (F)F
 		ARG 0 value
+	METHOD b floatToColor (FFF)I
+		ARG 0 red
+		ARG 1 green
+		ARG 2 blue
 	METHOD b roundUpToNearestPowerOfTwo (I)I
 		ARG 0 value
-	METHOD c floorDoubleToInt (D)I
+	METHOD b colorToInt (III)I
+		ARG 0 red
+		ARG 1 green
+		ARG 2 blue
+	METHOD c floor (D)I
 		ARG 0 value
-	METHOD c squareRoot (F)F
+	METHOD c sqrt (F)F
 		ARG 0 value
-	METHOD c logBaseTwo (I)I
+	METHOD c log_two (I)I
 		ARG 0 value
-	METHOD d floorDoubleToLong (D)J
+	METHOD d floor_long (D)J
 		ARG 0 value
-	METHOD d floorFloatToInt (F)I
+	METHOD d floor (F)I
 		ARG 0 value
 	METHOD d isPowerOfTwo (I)Z
 		ARG 0 value
-	METHOD e absoluteValueRoundToInt (D)I
+	METHOD e abs_round (D)I
 		ARG 0 value
-	METHOD e absoluteValue (F)F
+	METHOD e abs (F)F
 		ARG 0 value
 	METHOD e logBaseTwoDeBruijnFormula (I)I
 		ARG 0 value
-	METHOD f ceilingDoubleToInt (D)I
-	METHOD f ceilingFloatToInt (F)I
+	METHOD f ceil (D)I
+		ARG 0 value
+	METHOD f ceil (F)I
 		ARG 0 value
 	METHOD g convertDoubleToPositive180ToNegative180 (D)D
 		ARG 0 value
 	METHOD g convertFloatToPositive180ToNegative180 (F)F
 		ARG 0 value
+	METHOD h fractional (D)D
 CLASS none/nu net/minecraft/profiler/Profiler
 	CLASS none/nu$a ProfilerEntry
 		FIELD a sectionPercent D
@@ -10407,7 +10420,7 @@ CLASS none/afi net/minecraft/block/Block
 	FIELD r isOpaque Z
 	FIELD s opacity I
 	FIELD t transparent Z
-	FIELD u lightEmmisionLevel I
+	FIELD u brightness I
 	FIELD v canClimbOver Z
 	FIELD w hardness F
 	FIELD x explosionResistance F
@@ -10743,7 +10756,7 @@ CLASS none/afi net/minecraft/block/Block
 	METHOD o checkIsOpaque ()Z
 	METHOD p getOpacity ()I
 	METHOD q isTransparent ()Z
-	METHOD r getLightEmmisionLevel ()I
+	METHOD r getBrightness ()I
 	METHOD s canClimbOver ()Z
 	METHOD t getMaterial ()Lnone/arn;
 	METHOD u isFullSolidCube ()Z
@@ -17871,11 +17884,11 @@ CLASS none/bda net/minecraft/world/gen/ClientChunkCache
 	METHOD a saveAllChunks (ZLnone/nv;)Z
 		ARG 0 alwaysTrue
 		ARG 1 progressBar
-	METHOD b deleteChunk (II)V
+	METHOD b unloadChunk (II)V
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD c saveExtraData ()V
-	METHOD c createChunk (II)Lnone/amz;
+	METHOD c loadChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD d unloadQueuedChunks ()Z
