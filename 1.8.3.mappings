@@ -8905,7 +8905,7 @@ CLASS none/adn net/minecraft/world/World
 	METHOD F getSeaLevel ()I
 	METHOD F isBlockWater (Lnone/ck;)Z
 		ARG 0 blockPos
-	METHOD G getGenerator ()Lnone/ads;
+	METHOD G getDimensionType ()Lnone/ads;
 	METHOD H sendQuittingDisconnectingPacket ()V
 	METHOD I checkSessionLock ()V
 	METHOD J getSeed ()J
@@ -9164,8 +9164,8 @@ CLASS none/adn net/minecraft/world/World
 		ARG 3 range
 	METHOD b getLightSomethingFactor (F)F
 		ARG 0 weight
-	METHOD b setSkylightReduction (I)V
-		ARG 0 skylightReduction
+	METHOD b setSeaLevel (I)V
+		ARG 0 seaLevel
 	METHOD b getChunkMinimumHeight (II)I
 		ARG 0 levelX
 		ARG 1 levelZ
@@ -9456,7 +9456,7 @@ CLASS none/adq net/minecraft/world/WorldSettings
 	METHOD i areCommandsAllowed ()Z
 	METHOD j getGeneratorOptions ()Ljava/lang/String;
 CLASS none/adr net/minecraft/world/IBlockAccess
-	METHOD G getGenerator ()Lnone/ads;
+	METHOD G getDimensionType ()Lnone/ads;
 	METHOD W hasExtendedLevels ()Z
 	METHOD a getPowerTransmittedFromLocationFacing (Lnone/ck;Lnone/cr;)I
 		ARG 0 blockPos
@@ -9527,7 +9527,7 @@ CLASS none/adw net/minecraft/world/ChunkCache
 		ARG 1 pos1
 		ARG 2 pos2
 		ARG 3 radius
-	METHOD G getGenerator ()Lnone/ads;
+	METHOD G getDimensionType ()Lnone/ads;
 	METHOD W hasExtendedLevels ()Z
 	METHOD a getLightForExt (Lnone/adt;Lnone/ck;)I
 		ARG 0 ceiling
