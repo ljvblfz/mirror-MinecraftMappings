@@ -3666,7 +3666,7 @@ CLASS none/le net/minecraft/world/gen/ServerChunkCache
 		ARG 0 chunk
 		ARG 1 chunkX
 		ARG 2 chunkZ
-	METHOD a generateChunkAtBlock (Lnone/ck;)Lnone/amz;
+	METHOD a getChunkAtBlock (Lnone/ck;)Lnone/amz;
 		ARG 0 blockPos
 	METHOD a getSpawnableAtPos (Lnone/pu;Lnone/ck;)Ljava/util/List;
 		ARG 0 creatureTypes
@@ -3685,7 +3685,7 @@ CLASS none/le net/minecraft/world/gen/ServerChunkCache
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD d unloadQueuedChunks ()Z
-	METHOD d generate (II)Lnone/amz;
+	METHOD d getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
@@ -3948,16 +3948,24 @@ CLASS none/ly net/minecraft/server/ServerConfigurationManager
 	FIELD g DATE_FORMAT Ljava/text/SimpleDateFormat;
 	FIELD h server Lnet/minecraft/server/MinecraftServer;
 	FIELD i players Ljava/util/List;
+	FIELD j playerUUIDMap Ljava/util/Map;
 	FIELD k bannedPlayers Lnone/md;
 	FIELD l bannedIPs Lnone/lv;
 	FIELD m ops Lnone/lz;
 	FIELD n whitelist Lnone/mf;
+	FIELD p playerData Lnone/atz;
+	FIELD r viewRadius I
 	FIELD s gameMode Lnone/adq$a;
+	METHOD <init> (Lnet/minecraft/server/MinecraftServer;)V
+		ARG 0 theServer
+	METHOD a setViewRadius (I)V
+		ARG 0 viewRadius
 	METHOD a getPlayer (Ljava/lang/String;)Lnone/lg;
 	METHOD a getRejectionMessage (Ljava/net/SocketAddress;Lcom/mojang/authlib/GameProfile;)Ljava/lang/String;
 	METHOD a getPlayerFromUuid (Ljava/util/UUID;)Lnone/lg;
 	METHOD a setGameMode (Lnone/adq$a;)V
 		ARG 0 gameMode
+	METHOD a joinPlayer (Lnone/el;Lnone/lg;)V
 	METHOD a broadcastMessage (Lnone/ev;)V
 	METHOD a sendPacketToAll (Lnone/fg;)V
 	METHOD a setPacketToAllPlayersInDimension (Lnone/fg;I)V
@@ -3976,6 +3984,7 @@ CLASS none/ly net/minecraft/server/ServerConfigurationManager
 	METHOD o getCurrentPlayerCount ()I
 	METHOD p getMaxPlayers ()I
 	METHOD q getAvailablePlayerDat ()[Ljava/lang/String;
+	METHOD s getViewRadius ()I
 	METHOD t getPlayerNbt ()Lnone/dp;
 	METHOD u kickAllPlayers ()V
 CLASS none/lz net/minecraft/network/ListOps
@@ -13374,8 +13383,8 @@ CLASS none/amw net/minecraft/world/gen/IChunkGenerator
 		ARG 0 chunk
 		ARG 1 chunkX
 		ARG 2 chunkZ
-	METHOD a generateChunkAtBlock (Lnone/ck;)Lnone/amz;
-		ARG 0 blockCoords
+	METHOD a getChunkAtBlock (Lnone/ck;)Lnone/amz;
+		ARG 0 blockPos
 	METHOD a getSpawnableAtPos (Lnone/pu;Lnone/ck;)Ljava/util/List;
 		ARG 0 creatureType
 		ARG 1 blockPos
@@ -13384,7 +13393,7 @@ CLASS none/amw net/minecraft/world/gen/IChunkGenerator
 		ARG 1 progressBar
 	METHOD c saveExtraData ()V
 	METHOD d unloadQueuedChunks ()Z
-	METHOD d generate (II)Lnone/amz;
+	METHOD d getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
@@ -14185,7 +14194,7 @@ CLASS none/anv net/minecraft/world/gen/ChunkGeneratorDebug
 		ARG 0 chunk
 		ARG 1 chunkX
 		ARG 2 chunkZ
-	METHOD a generateChunkAtBlock (Lnone/ck;)Lnone/amz;
+	METHOD a getChunkAtBlock (Lnone/ck;)Lnone/amz;
 		ARG 0 blockPos
 	METHOD a getSpawnableAtPos (Lnone/pu;Lnone/ck;)Ljava/util/List;
 		ARG 0 creatureType
@@ -14197,7 +14206,7 @@ CLASS none/anv net/minecraft/world/gen/ChunkGeneratorDebug
 		ARG 1 levelZ
 	METHOD c saveExtraData ()V
 	METHOD d unloadQueuedChunks ()Z
-	METHOD d generate (II)Lnone/amz;
+	METHOD d getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
@@ -14237,7 +14246,7 @@ CLASS none/anw net/minecraft/world/gen/ChunkGeneratorFlat
 		ARG 0 chunk
 		ARG 1 chunkX
 		ARG 2 chunkZ
-	METHOD a generateChunkAtBlock (Lnone/ck;)Lnone/amz;
+	METHOD a getChunkAtBlock (Lnone/ck;)Lnone/amz;
 		ARG 0 blockPos
 	METHOD a getSpawnableAtPos (Lnone/pu;Lnone/ck;)Ljava/util/List;
 		ARG 0 creatureType
@@ -14246,7 +14255,7 @@ CLASS none/anw net/minecraft/world/gen/ChunkGeneratorFlat
 		ARG 1 progressBar
 	METHOD c saveExtraData ()V
 	METHOD d unloadQueuedChunks ()Z
-	METHOD d generate (II)Lnone/amz;
+	METHOD d getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
@@ -14308,7 +14317,7 @@ CLASS none/anx net/minecraft/world/gen/ChunkGeneratorNether
 		ARG 0 chunk
 		ARG 1 chunkX
 		ARG 2 chunkZ
-	METHOD a generateChunkAtBlock (Lnone/ck;)Lnone/amz;
+	METHOD a getChunkAtBlock (Lnone/ck;)Lnone/amz;
 		ARG 0 blockPos
 	METHOD a getSpawnableAtPos (Lnone/pu;Lnone/ck;)Ljava/util/List;
 		ARG 1 blockPos
@@ -14321,7 +14330,7 @@ CLASS none/anx net/minecraft/world/gen/ChunkGeneratorNether
 		ARG 2 chunkPrimer
 	METHOD c saveExtraData ()V
 	METHOD d unloadQueuedChunks ()Z
-	METHOD d generate (II)Lnone/amz;
+	METHOD d getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
@@ -14400,7 +14409,7 @@ CLASS none/aob net/minecraft/world/gen/ChunkGeneratorDefault
 		ARG 0 chunk
 		ARG 1 chunkX
 		ARG 2 chunkZ
-	METHOD a generateChunkAtBlock (Lnone/ck;)Lnone/amz;
+	METHOD a getChunkAtBlock (Lnone/ck;)Lnone/amz;
 		ARG 0 blockPos
 	METHOD a getSpawnableAtPos (Lnone/pu;Lnone/ck;)Ljava/util/List;
 		ARG 1 blockPos
@@ -14408,7 +14417,7 @@ CLASS none/aob net/minecraft/world/gen/ChunkGeneratorDefault
 		ARG 1 progressBar
 	METHOD c saveExtraData ()V
 	METHOD d unloadQueuedChunks ()Z
-	METHOD d generate (II)Lnone/amz;
+	METHOD d getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
@@ -14457,7 +14466,7 @@ CLASS none/aoc net/minecraft/world/gen/ChunkGeneratorEnd
 		ARG 2 chunkZ
 	METHOD a replaceBlocks (Lnone/ant;)V
 		ARG 0 primer
-	METHOD a generateChunkAtBlock (Lnone/ck;)Lnone/amz;
+	METHOD a getChunkAtBlock (Lnone/ck;)Lnone/amz;
 		ARG 0 blockPos
 	METHOD a getSpawnableAtPos (Lnone/pu;Lnone/ck;)Ljava/util/List;
 		ARG 0 creatureType
@@ -14474,7 +14483,7 @@ CLASS none/aoc net/minecraft/world/gen/ChunkGeneratorEnd
 		ARG 6 zSize
 	METHOD c saveExtraData ()V
 	METHOD d unloadQueuedChunks ()Z
-	METHOD d generate (II)Lnone/amz;
+	METHOD d getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
@@ -17876,7 +17885,7 @@ CLASS none/bda net/minecraft/world/gen/ClientChunkCache
 		ARG 0 chunk
 		ARG 1 chunkX
 		ARG 2 chunkZ
-	METHOD a generateChunkAtBlock (Lnone/ck;)Lnone/amz;
+	METHOD a getChunkAtBlock (Lnone/ck;)Lnone/amz;
 		ARG 0 blockPos
 	METHOD a getSpawnableAtPos (Lnone/pu;Lnone/ck;)Ljava/util/List;
 		ARG 0 creatureType
@@ -17892,7 +17901,7 @@ CLASS none/bda net/minecraft/world/gen/ClientChunkCache
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD d unloadQueuedChunks ()Z
-	METHOD d generate (II)Lnone/amz;
+	METHOD d getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
 	METHOD e canSave ()Z
@@ -20084,7 +20093,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD ab currentTimeMillis J
 	FIELD b commandManager Lnone/m;
 	FIELD c theProfiler Lnone/nu;
-	FIELD d levels [Lnone/lf;
+	FIELD d worlds [Lnone/lf;
 	FIELD e serverproxy Ljava/net/Proxy;
 	FIELD f currentTask Ljava/lang/String;
 	FIELD g percentDone I
@@ -20092,7 +20101,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD i timeOfLastDimensionTick [[J
 	FIELD j queue Ljava/util/Queue;
 	FIELD k LOGGER Lorg/apache/logging/log4j/Logger;
-	FIELD l instance Lnet/minecraft/server/MinecraftServer;
+	FIELD l theServer Lnet/minecraft/server/MinecraftServer;
 	FIELD m anvilConverterForAnvilFile Lnone/ats;
 	FIELD n usageSnooper Lnone/os;
 	FIELD p tickables Ljava/util/List;
