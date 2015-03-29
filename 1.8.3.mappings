@@ -8696,26 +8696,47 @@ CLASS none/acz net/minecraft/entity/IMerchant
 	METHOD b_ getRecipes (Lnone/wo;)Lnone/adb;
 	METHOD v_ getTradingPlayer ()Lnone/wo;
 CLASS none/ada net/minecraft/village/MerchantRecipe
-	FIELD a itemToBuy Lnone/zy;
-	FIELD b secondItemToBuy Lnone/zy;
-	FIELD c itemToSell Lnone/zy;
-	FIELD d toolUses I
+	FIELD a itemPaid Lnone/zy;
+	FIELD b secondItemPaid Lnone/zy;
+	FIELD c itemSold Lnone/zy;
+	FIELD d uses I
 	FIELD e maxTradeUses I
 	FIELD f shouldGiveXpReward Z
-	METHOD a getItemToBuy ()Lnone/zy;
-	METHOD a incrementMaxTradeUsesOf (I)V
+	METHOD <init> (Lnone/zy;Lnone/zx;)V
+		ARG 0 paidItem
+		ARG 1 soldItem
+	METHOD <init> (Lnone/zy;Lnone/zy;)V
+		ARG 0 paidItem
+		ARG 1 soldItem
+	METHOD <init> (Lnone/zy;Lnone/zy;Lnone/zy;)V
+		ARG 0 paidItem
+		ARG 1 paidItem2
+		ARG 2 soldItem
+	METHOD <init> (Lnone/zy;Lnone/zy;Lnone/zy;II)V
+		ARG 0 itemPaid
+		ARG 1 secondItemPaid
+		ARG 2 soldItem
+		ARG 3 initialTradeUses
+		ARG 4 maxTradeAmount
+	METHOD a getPaidItem ()Lnone/zy;
+	METHOD a increaseMaxTradeUses (I)V
 	METHOD a readFromTags (Lnone/dp;)V
 		ARG 0 nbt
-	METHOD b getSecondItemToBuy ()Lnone/zy;
-	METHOD c hasSecondItemToBuy ()Z
-	METHOD d getItemToSell ()Lnone/zy;
-	METHOD e getToolUses ()I
+	METHOD b getSecondPaidItem ()Lnone/zy;
+	METHOD c hasSecondPaidItem ()Z
+	METHOD d getItemSold ()Lnone/zy;
+	METHOD e getTradeUses ()I
 	METHOD f getMaxTradeUses ()I
-	METHOD g incrementToolUses ()V
+	METHOD g incrementTradeUses ()V
+	METHOD h tradeDepleted ()Z
+	METHOD i useUpTrade ()V
 	METHOD j shouldGiveXpReward ()Z
 	METHOD k writeToTags ()Lnone/dp;
 CLASS none/adb net/minecraft/village/MerchantRecipeList
 	METHOD a getAsNbt ()Lnone/dp;
+	METHOD a readFromNbt (Lnone/dp;)V
+	METHOD a writeToPacket (Lnone/en;)V
+	METHOD b processPacket (Lnone/en;)Lnone/adb;
 CLASS none/add net/minecraft/command/server/CommandBlockSender
 	FIELD a DATE_FORMAT Ljava/text/SimpleDateFormat;
 	FIELD b successCount I
@@ -16536,6 +16557,7 @@ CLASS none/avj net/minecraft/client/LoadingScreenRenderer
 	FIELD a progressBarMessage Ljava/lang/String;
 	FIELD b minecraft Lnone/avf;
 	FIELD c progressActionName Ljava/lang/String;
+	FIELD d lastProgressBarUpdateTime J
 	METHOD <init> (Lnone/avf;)V
 		ARG 0 minecraft
 	METHOD a setProgressBarPercentage (I)V
