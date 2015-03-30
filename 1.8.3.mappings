@@ -3695,6 +3695,9 @@ CLASS none/le net/minecraft/world/gen/ServerChunkCache
 	METHOD f getName ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
 CLASS none/lf net/minecraft/world/WorldServer
+	CLASS none/lf$1
+		METHOD a (Lnone/ps;)Z
+			ARG 0 entity
 	CLASS none/lf$a QueuedBlockEventList
 	FIELD I minecraftServer Lnet/minecraft/server/MinecraftServer;
 	FIELD J entityTracker Lnone/lb;
@@ -3702,8 +3705,12 @@ CLASS none/lf net/minecraft/world/WorldServer
 	FIELD L lastSyncedTickNextTick Ljava/util/Set;
 	FIELD M tickNextTick Ljava/util/TreeSet;
 	FIELD N entities Ljava/util/Map;
+	FIELD O areAllPlayersSleeping Z
+	FIELD P noPlayersTickCounter I
+	FIELD Q theEndObsidianThings Lnone/adv;
 	FIELD R mobSpawner Lnone/adu;
 	FIELD S queuedBlockEventList [Lnone/lf$a;
+	FIELD T qeuedBlockEventListBufferToggle I
 	FIELD U CHEST_CONTENTS Ljava/util/List;
 	FIELD V tickNow Ljava/util/List;
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
@@ -3717,10 +3724,27 @@ CLASS none/lf net/minecraft/world/WorldServer
 		ARG 3 dimensionId
 		ARG 4 profiler
 	METHOD a saveWorldData ()V
+	METHOD a getBlockEntities (IIIIII)Ljava/util/List;
+		ARG 0 minBlockX
+		ARG 1 minBlockY
+		ARG 2 minBlockZ
+		ARG 3 maxBlockX
+		ARG 4 maxBlockY
+		ARG 5 maxBlockZ
 	METHOD a runTask (Ljava/lang/Runnable;)Lcom/google/common/util/concurrent/ListenableFuture;
 		ARG 0 runnable
+	METHOD a getEntity (Ljava/util/UUID;)Lnone/pl;
+		ARG 0 uuid
+	METHOD a processQueuedBlockEvent (Lnone/adf;)Z
+		ARG 0 event
 	METHOD a setWorldInfoInitialized (Lnone/adq;)V
 		ARG 0 levelSettings
+	METHOD a getScheduledBlockTicks (Lnone/amz;Z)Ljava/util/List;
+		ARG 0 chunk
+	METHOD a getScheduledBlockTicks (Lnone/aqf;Z)Ljava/util/List;
+		ARG 0 queryBox
+	METHOD a getRainfallHeightPosConsideringEntities (Lnone/ck;)Lnone/ck;
+		ARG 0 pos
 	METHOD a isBlockTickPending (Lnone/ck;Lnone/afi;)Z
 		ARG 0 blockPos
 		ARG 1 block
@@ -3734,12 +3758,29 @@ CLASS none/lf net/minecraft/world/WorldServer
 		ARG 2 delayTicks
 		ARG 3 priority
 	METHOD a onEntityAdded (Lnone/pl;)V
+		ARG 0 entity
 	METHOD a createExplosion (Lnone/pl;DDDFZZ)Lnone/adj;
 	METHOD a updateEntity (Lnone/pl;Z)V
+		ARG 0 entity
+	METHOD a isSpawnable (Lnone/pu;Lnone/adz$c;Lnone/ck;)Z
+		ARG 0 creatureType
+		ARG 1 spawnMob
+		ARG 2 pos
+	METHOD a getRandomMobSpawn (Lnone/pu;Lnone/ck;)Lnone/adz$c;
+		ARG 0 creatureType
+		ARG 1 pos
+	METHOD a isBlockProtected (Lnone/wo;Lnone/ck;)Z
+		ARG 0 player
+		ARG 1 pos
 	METHOD a tickPending (Z)Z
 	METHOD a saveLevel (ZLnone/nv;)V
+		ARG 1 progress
 	METHOD aI isInMainThread ()Z
+	METHOD ag stopRain ()V
+	METHOD ah canSpawnNPCs ()Z
+	METHOD ai canSpawnAnimals ()Z
 	METHOD aj setDebugLevelSettings ()V
+	METHOD ak processQueuedBlockEvents ()V
 	METHOD b initialize ()Lnone/adn;
 	METHOD b initializeSpawn (Lnone/adq;)V
 	METHOD b scheduleBlockTickForced (Lnone/ck;Lnone/afi;II)V
@@ -3748,6 +3789,7 @@ CLASS none/lf net/minecraft/world/WorldServer
 		ARG 2 timeDelta
 		ARG 3 priority
 	METHOD b onEntityRemoved (Lnone/pl;)V
+		ARG 0 entity
 	METHOD c tick ()V
 	METHOD c sendEvent (Lnone/ck;Lnone/afi;II)V
 		ARG 0 pos
@@ -3755,16 +3797,25 @@ CLASS none/lf net/minecraft/world/WorldServer
 		ARG 2 eventParam1
 		ARG 3 eventParam2
 	METHOD c addEntity (Lnone/pl;)Z
+		ARG 0 entity
+	METHOD d updateAllPlayersSleeping ()V
+	METHOD e wakeUpPlayers ()V
 	METHOD f areAllPlayersAsleep ()Z
 	METHOD g setDefaultSpawnPoint ()V
 	METHOD h tickBlocks ()V
 	METHOD i tickEntities ()V
+	METHOD j resetNoPlayersTickCounter ()V
 	METHOD k createChunkCache ()Lnone/amw;
+	METHOD l generateBonusChests ()V
+	METHOD m getSpawnPos ()Lnone/ck;
+	METHOD n saveChunkExtraData ()V
 	METHOD o flush ()V
 	METHOD p updateWeather ()V
 	METHOD q getRenderDistanceChunks ()I
 	METHOD r getMinecraftServer ()Lnet/minecraft/server/MinecraftServer;
 	METHOD s getEntityTracker ()Lnone/lb;
+	METHOD t getPlayerManager ()Lnone/ld;
+	METHOD u getTheEndObsidianThings ()Lnone/adv;
 CLASS none/lg net/minecraft/entity/player/EntityPlayerMP
 	FIELD a netServerHandler Lnone/ln;
 	FIELD bH LOGGER Lorg/apache/logging/log4j/Logger;
@@ -9104,11 +9155,11 @@ CLASS none/adn net/minecraft/world/World
 	METHOD a isEntityInsideWorldBorder (Lnone/amt;Lnone/pl;)Z
 		ARG 0 border
 		ARG 1 entity
-	METHOD a (Lnone/amz;Z)Ljava/util/List;
+	METHOD a getScheduledBlockTicks (Lnone/amz;Z)Ljava/util/List;
 		ARG 0 chunk
 	METHOD a checkBlockRangeIsInWorld (Lnone/aqf;)Z
 		ARG 0 sBB
-	METHOD a (Lnone/aqf;Z)Ljava/util/List;
+	METHOD a getScheduledBlockTicks (Lnone/aqf;Z)Ljava/util/List;
 		ARG 0 sBB
 	METHOD a getBlockCollisionBoxes (Lnone/auh;)Ljava/util/List;
 		ARG 0 aaBB
@@ -9220,7 +9271,7 @@ CLASS none/adn net/minecraft/world/World
 		ARG 2 blockPos
 	METHOD a playSoundAtPlayer (Lnone/wo;Ljava/lang/String;FF)V
 		ARG 0 entPlayer
-	METHOD a (Lnone/wo;Lnone/ck;)Z
+	METHOD a isBlockProtected (Lnone/wo;Lnone/ck;)Z
 		ARG 0 entPlayer
 		ARG 1 blockPos
 	METHOD a putOutFacingFire (Lnone/wo;Lnone/ck;Lnone/cr;)Z
@@ -9341,6 +9392,7 @@ CLASS none/adn net/minecraft/world/World
 		ARG 0 blockPos
 	METHOD c addEntity (Lnone/pl;)Z
 		ARG 0 ent
+	METHOD d updateAllPlayersSleeping ()V
 	METHOD d getCelestialAngleTimesTwoPi (F)F
 		ARG 0 time
 	METHOD d setLastLightningBoltTime (I)V
@@ -9606,6 +9658,20 @@ CLASS none/adu net/minecraft/world/MobSpawner
 	METHOD a spawnMobs (Lnone/lf;ZZZ)I
 		ARG 0 worldServer
 	METHOD a canSpawnMobAt (Lnone/pt$a;Lnone/adn;Lnone/ck;)Z
+CLASS none/adv net/minecraft/world/TheEndObsidianThings
+	CLASS none/adv$a TimedBlockPos
+		FIELD c time J
+		METHOD <init> (Lnone/adv;Lnone/ck;J)V
+			ARG 1 pos
+			ARG 2 time
+	FIELD a worldServer Lnone/lf;
+	FIELD c blockPositions Lnone/nr;
+	METHOD a doObsidianThingsNearEntity (Lnone/pl;)Z
+		ARG 0 entity
+	METHOD a stopEntityInEndAndDoObsidianThings (Lnone/pl;F)V
+		ARG 0 entity
+	METHOD b (Lnone/pl;F)Z
+		ARG 0 entity
 CLASS none/adw net/minecraft/world/ChunkCache
 	FIELD a chunkX I
 	FIELD b chunkZ I
@@ -20287,6 +20353,7 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD a setDifficultyForAllLevels (Lnone/ok;)V
 	METHOD a addServerStatsToSnooper (Lnone/os;)V
 	METHOD a saveAllLevels (Z)V
+	METHOD aH getWorldBorderSize ()I
 	METHOD aI isInMainThread ()Z
 	METHOD aJ getMaxLevelHeight ()I
 	METHOD a_ outputPercentRemaining (Ljava/lang/String;I)V
