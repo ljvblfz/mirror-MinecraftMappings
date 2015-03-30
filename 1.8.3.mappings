@@ -137,7 +137,7 @@ CLASS none/f net/minecraft/crash/CrashReportException
 		ARG 0 crashLogger
 	METHOD a getCrashLogger ()Lnone/b;
 CLASS none/g net/minecraft/chat/AllowedCharacters
-	FIELD a ALLOWED_CHARACTERS [C
+	FIELD a ILLEGAL_IN_FILENAME [C
 	METHOD a isAllowed (C)Z
 		ARG 0 c
 	METHOD a filter (Ljava/lang/String;)Ljava/lang/String;
@@ -4705,6 +4705,7 @@ CLASS none/ox net/minecraft/util/damageSource/DamageSource
 	METHOD b indirectMagic (Lnone/pl;Lnone/pl;)Lnone/ox;
 	METHOD b getDeathMessage (Lnone/ps;)Lnone/ev;
 		ARG 0 entity
+	METHOD c ()Z
 	METHOD e getIgnoresArmor ()Z
 	METHOD h isStarvationDamage ()Z
 	METHOD j getDamager ()Lnone/pl;
@@ -16517,6 +16518,7 @@ CLASS none/avi net/minecraft/client/settings/GameSettings
 	FIELD as keyBindStreamCommercial Lnone/avc;
 	FIELD at keyBindStreamToggleMic Lnone/avc;
 	FIELD au keyBindHotbar [Lnone/avc;
+	FIELD av editableKeyBindList [Lnone/avc;
 	FIELD aw minecraft Lnone/avf;
 	FIELD ax difficulty Lnone/ok;
 	FIELD ay showHeadsUpDisplay Z
@@ -17371,6 +17373,9 @@ CLASS none/azp net/minecraft/client/gui/GuiSelectResourcePack
 	METHOD b initGui ()V
 	METHOD b mouseMovedOrUp (III)V
 	METHOD k handleMouseInput ()V
+CLASS none/azq
+	FIELD a minecraft Lnone/avf;
+	FIELD c RESOURCE_PACKS_PNG Lnone/jz;
 CLASS none/azu net/minecraft/client/gui/GuiResourcePackAvailableList
 	METHOD e getTitle ()Ljava/lang/String;
 CLASS none/azv net/minecraft/client/gui/GuiResourcePackList
@@ -18738,6 +18743,7 @@ CLASS none/bgg
 		FIELD j FLIP_SOUTH Lnone/bgg$d;
 		FIELD k FLIP_WEST Lnone/bgg$d;
 		FIELD l FLIP_EAST Lnone/bgg$d;
+	METHOD a tesselateBlockModel (Lnone/adr;Lnone/bor;Lnone/ama;Lnone/ck;Lnone/bfe;Z)Z
 CLASS none/bgm
 	CLASS none/bgm$c cmg
 	FIELD a GSON_BUILDER Lcom/google/gson/Gson;
@@ -18753,6 +18759,22 @@ CLASS none/bgs
 		FIELD c FIRST_PERSON Lnone/bgs$b;
 		FIELD d HEAD Lnone/bgs$b;
 		FIELD e GUI Lnone/bgs$b;
+CLASS none/bgy
+	CLASS none/bgy$a Builder
+		FIELD a nameBlockVariant Lnone/amp;
+		FIELD b namePostDangle Ljava/lang/String;
+		FIELD c hiddenProperties Ljava/util/List;
+		METHOD a build ()Lnone/bgy;
+		METHOD a setNameDangle (Ljava/lang/String;)Lnone/bgy$a;
+		METHOD a setNameVariant (Lnone/amp;)Lnone/bgy$a;
+		METHOD a setHiddenProperties ([Lnone/amp;)Lnone/bgy$a;
+	FIELD a nameBlockVariant Lnone/amp;
+	FIELD c namePostDangle Ljava/lang/String;
+	FIELD d hiddenProperties Ljava/util/List;
+	METHOD <init> (Lnone/amp;Ljava/lang/String;Ljava/util/List;)V
+		ARG 0 nameBlockVariant
+		ARG 1 nameDangle
+		ARG 2 hiddenProperties
 CLASS none/bhb net/minecraft/client/renderers/blockentity/BlockEntityBannerRenderer
 	FIELD d BANNER_BASE_PNG Lnone/jz;
 	FIELD e modelBanner Lnone/bav;
@@ -19638,7 +19660,7 @@ CLASS none/bnl net/minecraft/client/resources/IResourcePackReader
 	METHOD b getFilename ()Ljava/lang/String;
 	METHOD b hasResourceLocation (Lnone/jz;)Z
 	METHOD c getSupported ()Ljava/util/Set;
-CLASS none/bnm net/minecraft/client/resource/ResourceNotFoundException
+CLASS none/bnm net/minecraft/client/resources/ResourceNotFoundException
 	METHOD <init> (Ljava/io/File;Ljava/lang/String;)V
 		ARG 0 resourcePackFile
 		ARG 1 resource
@@ -19659,6 +19681,7 @@ CLASS none/bnn net/minecraft/client/resources/ResourcePackRepository
 	METHOD a fetchResourcePack (Ljava/lang/String;Ljava/lang/String;)Lcom/google/common/util/concurrent/ListenableFuture;
 		ARG 1 hash
 CLASS none/bno net/minecraft/client/resources/SimpleReloadableResourceManager
+	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
 	METHOD a registerReloadListener (Lnone/bnk;)V
 CLASS none/bnp
 	METHOD d getName ()Ljava/lang/String;
@@ -19739,6 +19762,10 @@ CLASS none/bow
 	METHOD equals (Ljava/lang/Object;)Z
 	METHOD hashCode ()I
 	METHOD toString getFullName ()Ljava/lang/String;
+CLASS none/box
+	CLASS none/box$a
+		FIELD d particle Lnone/bmj;
+		METHOD a setParticle (Lnone/bmj;)Lnone/box$a;
 CLASS none/bpb net/minecraft/client/audio/PositionedSound
 CLASS none/bph net/minecraft/sound/EnumSoundType
 	FIELD a MASTER Lnone/bph;
