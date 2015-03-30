@@ -3695,18 +3695,30 @@ CLASS none/le net/minecraft/world/gen/ServerChunkCache
 	METHOD f getName ()Ljava/lang/String;
 	METHOD g getLoadedChunkCount ()I
 CLASS none/lf net/minecraft/world/WorldServer
+	CLASS none/lf$a QueuedBlockEventList
 	FIELD I minecraftServer Lnet/minecraft/server/MinecraftServer;
 	FIELD J entityTracker Lnone/lb;
+	FIELD K playerManager Lnone/ld;
 	FIELD L lastSyncedTickNextTick Ljava/util/Set;
 	FIELD M tickNextTick Ljava/util/TreeSet;
+	FIELD N entities Ljava/util/Map;
+	FIELD R mobSpawner Lnone/adu;
+	FIELD S queuedBlockEventList [Lnone/lf$a;
+	FIELD U CHEST_CONTENTS Ljava/util/List;
 	FIELD V tickNow Ljava/util/List;
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD b serverChunkCache Lnone/le;
 	FIELD c disableSaving Z
+	FIELD d zombieSpawner Lnone/th;
 	METHOD <init> (Lnet/minecraft/server/MinecraftServer;Lnone/atq;Lnone/atp;ILnone/nu;)V
+		ARG 0 server
+		ARG 1 saveHandler
 		ARG 2 level
+		ARG 3 dimensionId
+		ARG 4 profiler
 	METHOD a saveWorldData ()V
 	METHOD a runTask (Ljava/lang/Runnable;)Lcom/google/common/util/concurrent/ListenableFuture;
+		ARG 0 runnable
 	METHOD a setWorldInfoInitialized (Lnone/adq;)V
 		ARG 0 levelSettings
 	METHOD a isBlockTickPending (Lnone/ck;Lnone/afi;)Z
@@ -3738,6 +3750,10 @@ CLASS none/lf net/minecraft/world/WorldServer
 	METHOD b onEntityRemoved (Lnone/pl;)V
 	METHOD c tick ()V
 	METHOD c sendEvent (Lnone/ck;Lnone/afi;II)V
+		ARG 0 pos
+		ARG 1 block
+		ARG 2 eventParam1
+		ARG 3 eventParam2
 	METHOD c addEntity (Lnone/pl;)Z
 	METHOD f areAllPlayersAsleep ()Z
 	METHOD g setDefaultSpawnPoint ()V
@@ -4376,7 +4392,7 @@ CLASS none/nt net/minecraft/util/MathHelper
 	FIELD c LOG_BASE_TWO_DE_BRUIJN_MULTIPLY_BIT_POSITION [I
 	METHOD a sqrt (D)F
 		ARG 0 value
-	METHOD a max_abs (DD)D
+	METHOD a absMax (DD)D
 		ARG 0 value1
 		ARG 1 value2
 	METHOD a clamp (DDD)D
@@ -4392,35 +4408,36 @@ CLASS none/nt net/minecraft/util/MathHelper
 		ARG 2 max
 	METHOD a abs (I)I
 		ARG 0 value
+	METHOD a intFloorDiv (II)I
 	METHOD a clamp (III)I
 		ARG 0 value
 		ARG 1 min
 		ARG 2 max
-	METHOD a parseStringToDouble (Ljava/lang/String;D)D
+	METHOD a getDouble (Ljava/lang/String;D)D
 		ARG 0 value
 		ARG 1 failureDefaultValue
 	METHOD a findMaxDoubleParseString (Ljava/lang/String;DD)D
 		ARG 0 value
 		ARG 1 failureDefaultValue
 		ARG 2 value2
-	METHOD a parseStringToInt (Ljava/lang/String;I)I
+	METHOD a getInt (Ljava/lang/String;I)I
 		ARG 0 value
 		ARG 1 failureDefaultValue
-	METHOD a findMaxIntParseString (Ljava/lang/String;II)I
+	METHOD a getInt (Ljava/lang/String;II)I
 		ARG 0 value
 		ARG 1 failureDefaultValue
 		ARG 2 value2
 	METHOD a getUUID (Ljava/util/Random;)Ljava/util/UUID;
 		ARG 0 random
-	METHOD a getRandomDouble (Ljava/util/Random;DD)D
+	METHOD a nextDouble (Ljava/util/Random;DD)D
 		ARG 0 random
 		ARG 1 min
 		ARG 2 max
-	METHOD a getRandomFloat (Ljava/util/Random;FF)F
+	METHOD a nextFloat (Ljava/util/Random;FF)F
 		ARG 0 random
 		ARG 1 min
 		ARG 2 max
-	METHOD a getRandomInt (Ljava/util/Random;II)I
+	METHOD a nextInt (Ljava/util/Random;II)I
 		ARG 0 random
 		ARG 1 min
 		ARG 2 max
@@ -4428,9 +4445,9 @@ CLASS none/nt net/minecraft/util/MathHelper
 		ARG 0 vec
 	METHOD a avg ([J)D
 		ARG 0 valuesArray
-	METHOD b truncate (D)I
+	METHOD b fastFloor (D)I
 		ARG 0 value
-	METHOD b lerp (DDD)D
+	METHOD b clampedLerp (DDD)D
 		ARG 0 lowValue
 		ARG 1 highValue
 		ARG 2 fraction
@@ -4440,7 +4457,7 @@ CLASS none/nt net/minecraft/util/MathHelper
 		ARG 0 red
 		ARG 1 green
 		ARG 2 blue
-	METHOD b roundUpToNearestPowerOfTwo (I)I
+	METHOD b smallestEncompassingPowerOfTwo (I)I
 		ARG 0 value
 	METHOD b colorToInt (III)I
 		ARG 0 red
@@ -4450,15 +4467,16 @@ CLASS none/nt net/minecraft/util/MathHelper
 		ARG 0 value
 	METHOD c sqrt (F)F
 		ARG 0 value
-	METHOD c log_two (I)I
+	METHOD c log2 (I)I
 		ARG 0 value
-	METHOD d floor_long (D)J
+	METHOD c roundUp (II)I
+	METHOD d lfloor (D)J
 		ARG 0 value
 	METHOD d floor (F)I
 		ARG 0 value
 	METHOD d isPowerOfTwo (I)Z
 		ARG 0 value
-	METHOD e abs_round (D)I
+	METHOD e absFloor (D)I
 		ARG 0 value
 	METHOD e abs (F)F
 		ARG 0 value
@@ -4468,9 +4486,9 @@ CLASS none/nt net/minecraft/util/MathHelper
 		ARG 0 value
 	METHOD f ceil (F)I
 		ARG 0 value
-	METHOD g convertDoubleToPositive180ToNegative180 (D)D
+	METHOD g wrapDegreesToPosNeg180 (D)D
 		ARG 0 value
-	METHOD g convertFloatToPositive180ToNegative180 (F)F
+	METHOD g wrapDegreesToPosNeg180 (F)F
 		ARG 0 value
 	METHOD h fractional (D)D
 CLASS none/nu net/minecraft/profiler/Profiler
@@ -5976,6 +5994,17 @@ CLASS none/sq net/minecraft/entity/ai/GoalFollowEntity
 	METHOD a ()Z
 CLASS none/sr
 	METHOD a ()Z
+CLASS none/th net/minecraft/world/ZombieSpawner
+	FIELD a world Lnone/adn;
+	FIELD g x I
+	FIELD h y I
+	FIELD i z I
+	METHOD <init> (Lnone/adn;)V
+		ARG 0 world
+	METHOD a update ()V
+	METHOD a getSpawnPos (Lnone/ck;)Lnone/auj;
+		ARG 0 pos
+	METHOD c spawnZombie ()Z
 CLASS none/ti net/minecraft/world/storage/VillagesData
 	FIELD b level Lnone/adn;
 	METHOD a getNameForDimension (Lnone/ann;)Ljava/lang/String;
@@ -8774,6 +8803,22 @@ CLASS none/ade net/minecraft/entity/SpawnLogic
 	METHOD c onUpdate ()V
 	METHOD f getEntityID ()Ljava/lang/String;
 	METHOD g arePlayersWithinRequiredRange ()Z
+CLASS none/adf net/minecraft/world/QueuedBlockEvent
+	FIELD a pos Lnone/ck;
+	FIELD b block Lnone/afi;
+	FIELD c eventParam1 I
+	FIELD d eventParam2 I
+	METHOD <init> (Lnone/ck;Lnone/afi;II)V
+		ARG 0 pos
+		ARG 1 block
+		ARG 2 eventParam1
+		ARG 3 eventParam2
+	METHOD a getPos ()Lnone/ck;
+	METHOD b getEventParam1 ()I
+	METHOD c getEventParam2 ()I
+	METHOD d getBlock ()Lnone/afi;
+	METHOD equals (Ljava/lang/Object;)Z
+		ARG 0 other
 CLASS none/adg net/minecraft/client/renderers/BlockLayer
 	FIELD a SOLID Lnone/adg;
 	FIELD b CUTOUT_MIPPED Lnone/adg;
@@ -9528,6 +9573,17 @@ CLASS none/adt net/minecraft/world/LightType
 	FIELD c defaultValue I
 	METHOD <init> (Ljava/lang/String;II)V
 		ARG 0 name
+CLASS none/adu net/minecraft/world/MobSpawner
+	FIELD a seventeenSquared I
+	FIELD b coords Ljava/util/Set;
+	METHOD a getRandomBlockPosAboveSurface (Lnone/adn;II)Lnone/ck;
+		ARG 0 world
+		ARG 1 chunkX
+		ARG 2 chunkZ
+	METHOD a spawnMobs (Lnone/adn;Lnone/adz;IIIILjava/util/Random;)V
+	METHOD a spawnMobs (Lnone/lf;ZZZ)I
+		ARG 0 worldServer
+	METHOD a canSpawnMobAt (Lnone/pt$a;Lnone/adn;Lnone/ck;)Z
 CLASS none/adw net/minecraft/world/ChunkCache
 	FIELD a chunkX I
 	FIELD b chunkZ I
