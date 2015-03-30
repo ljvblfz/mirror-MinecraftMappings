@@ -3710,9 +3710,17 @@ CLASS none/lf net/minecraft/world/WorldServer
 	METHOD a setWorldInfoInitialized (Lnone/adq;)V
 		ARG 0 levelSettings
 	METHOD a isBlockTickPending (Lnone/ck;Lnone/afi;)Z
+		ARG 0 blockPos
+		ARG 1 block
 	METHOD a scheduleBlockTick (Lnone/ck;Lnone/afi;I)V
+		ARG 0 blockPos
+		ARG 1 block
+		ARG 2 timeDelta
 	METHOD a scheduleBlockTick (Lnone/ck;Lnone/afi;II)V
+		ARG 0 blockPos
+		ARG 1 block
 		ARG 2 delayTicks
+		ARG 3 priority
 	METHOD a onEntityAdded (Lnone/pl;)V
 	METHOD a createExplosion (Lnone/pl;DDDFZZ)Lnone/adj;
 	METHOD a updateEntity (Lnone/pl;Z)V
@@ -3722,7 +3730,11 @@ CLASS none/lf net/minecraft/world/WorldServer
 	METHOD aj setDebugLevelSettings ()V
 	METHOD b initialize ()Lnone/adn;
 	METHOD b initializeSpawn (Lnone/adq;)V
-	METHOD b doAllTheNothing (Lnone/ck;Lnone/afi;II)V
+	METHOD b scheduleBlockTickForced (Lnone/ck;Lnone/afi;II)V
+		ARG 0 blockPos
+		ARG 1 block
+		ARG 2 timeDelta
+		ARG 3 priority
 	METHOD b onEntityRemoved (Lnone/pl;)V
 	METHOD c tick ()V
 	METHOD c sendEvent (Lnone/ck;Lnone/afi;II)V
@@ -9232,7 +9244,7 @@ CLASS none/adn net/minecraft/world/World
 	METHOD b updateNonDebugNeighborBlocks (Lnone/ck;Lnone/afi;)V
 		ARG 0 blockPos
 		ARG 1 block
-	METHOD b doAllTheNothing (Lnone/ck;Lnone/afi;II)V
+	METHOD b scheduleBlockTickForced (Lnone/ck;Lnone/afi;II)V
 		ARG 0 blockPos
 		ARG 1 block
 	METHOD b setBlockEntityChunkModified (Lnone/ck;Lnone/akx;)V
@@ -9574,9 +9586,22 @@ CLASS none/adw net/minecraft/world/ChunkCache
 CLASS none/adx net/minecraft/world/ScheduledBlockTick
 	FIELD a blockPos Lnone/ck;
 	FIELD b scheduledTime J
+	FIELD c priority I
+	FIELD d nextId J
 	FIELD e block Lnone/afi;
+	FIELD f id J
+	METHOD <init> (Lnone/ck;Lnone/afi;)V
+		ARG 0 blockPos
+		ARG 1 block
 	METHOD a getBlock ()Lnone/afi;
+	METHOD a setPriority (I)V
+		ARG 0 val
 	METHOD a setScheduledTime (J)Lnone/adx;
+		ARG 0 val
+	METHOD a compare (Lnone/adx;)I
+		ARG 0 other
+	METHOD equals (Ljava/lang/Object;)Z
+		ARG 0 other
 CLASS none/ady net/minecraft/world/biome/BiomeBeach
 	METHOD <init> (I)V
 		ARG 0 biomeID
