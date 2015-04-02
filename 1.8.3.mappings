@@ -2128,7 +2128,7 @@ CLASS none/en net/minecraft/network/PacketBuffer
 	METHOD order ()Ljava/nio/ByteOrder;
 	METHOD order (Ljava/nio/ByteOrder;)Lio/netty/buffer/ByteBuf;
 		ARG 0 byteOrder
-	METHOD readBoolean ()Z
+	METHOD readBoolean readBoolean ()Z
 	METHOD readByte ()B
 	METHOD readBytes (I)Lio/netty/buffer/ByteBuf;
 	METHOD readBytes (Lio/netty/buffer/ByteBuf;)Lio/netty/buffer/ByteBuf;
@@ -2137,15 +2137,15 @@ CLASS none/en net/minecraft/network/PacketBuffer
 	METHOD readBytes (Ljava/io/OutputStream;I)Lio/netty/buffer/ByteBuf;
 	METHOD readBytes (Ljava/nio/ByteBuffer;)Lio/netty/buffer/ByteBuf;
 	METHOD readBytes (Ljava/nio/channels/GatheringByteChannel;I)I
-	METHOD readBytes ([B)Lio/netty/buffer/ByteBuf;
+	METHOD readBytes readBytes ([B)Lio/netty/buffer/ByteBuf;
 	METHOD readBytes ([BII)Lio/netty/buffer/ByteBuf;
 	METHOD readChar ()C
 	METHOD readDouble ()D
 	METHOD readFloat ()F
-	METHOD readInt ()I
+	METHOD readInt readInt ()I
 	METHOD readLong ()J
 	METHOD readMedium ()I
-	METHOD readShort ()S
+	METHOD readShort readShort ()S
 	METHOD readSlice (I)Lio/netty/buffer/ByteBuf;
 	METHOD readUnsignedByte ()S
 	METHOD readUnsignedInt ()J
@@ -2188,7 +2188,7 @@ CLASS none/en net/minecraft/network/PacketBuffer
 	METHOD toString (Ljava/nio/charset/Charset;)Ljava/lang/String;
 	METHOD unwrap ()Lio/netty/buffer/ByteBuf;
 	METHOD writableBytes ()I
-	METHOD writeBoolean (Z)Lio/netty/buffer/ByteBuf;
+	METHOD writeBoolean writeBoolean (Z)Lio/netty/buffer/ByteBuf;
 	METHOD writeByte (I)Lio/netty/buffer/ByteBuf;
 	METHOD writeBytes (Lio/netty/buffer/ByteBuf;)Lio/netty/buffer/ByteBuf;
 	METHOD writeBytes (Lio/netty/buffer/ByteBuf;I)Lio/netty/buffer/ByteBuf;
@@ -2196,15 +2196,15 @@ CLASS none/en net/minecraft/network/PacketBuffer
 	METHOD writeBytes (Ljava/io/InputStream;I)I
 	METHOD writeBytes (Ljava/nio/ByteBuffer;)Lio/netty/buffer/ByteBuf;
 	METHOD writeBytes (Ljava/nio/channels/ScatteringByteChannel;I)I
-	METHOD writeBytes ([B)Lio/netty/buffer/ByteBuf;
+	METHOD writeBytes writeBytes ([B)Lio/netty/buffer/ByteBuf;
 	METHOD writeBytes ([BII)Lio/netty/buffer/ByteBuf;
 	METHOD writeChar (I)Lio/netty/buffer/ByteBuf;
 	METHOD writeDouble (D)Lio/netty/buffer/ByteBuf;
 	METHOD writeFloat (F)Lio/netty/buffer/ByteBuf;
-	METHOD writeInt (I)Lio/netty/buffer/ByteBuf;
+	METHOD writeInt writeInt (I)Lio/netty/buffer/ByteBuf;
 	METHOD writeLong (J)Lio/netty/buffer/ByteBuf;
 	METHOD writeMedium (I)Lio/netty/buffer/ByteBuf;
-	METHOD writeShort (I)Lio/netty/buffer/ByteBuf;
+	METHOD writeShort writeShort (I)Lio/netty/buffer/ByteBuf;
 	METHOD writeZero (I)Lio/netty/buffer/ByteBuf;
 	METHOD writerIndex ()I
 	METHOD writerIndex (I)Lio/netty/buffer/ByteBuf;
@@ -2786,19 +2786,65 @@ CLASS none/go net/minecraft/network/play/packet/clientbound/PacketKeepAlive
 	METHOD a handle (Lnone/eq;)V
 	METHOD b write (Lnone/en;)V
 CLASS none/gp net/minecraft/network/play/packet/clientbound/PacketChunkData
-	CLASS none/gp$a S21PacketChunkData_Extracted
+	CLASS none/gp$a Sections
 		FIELD a data [B
-		FIELD b dataSize I
+		FIELD b sectionFlags I
+	FIELD a x I
+	FIELD b z I
+	FIELD c sections Lnone/gp$a;
+	FIELD d shouldUnloadChunk Z
+	METHOD <init> (Lnone/amz;ZI)V
+		ARG 0 chunk
+		ARG 1 shouldUnloadChunk
+		ARG 2 sectionFlags
+	METHOD a getData ()[B
+	METHOD a calculateDataSize (IZZ)I
+		ARG 0 numSections
+		ARG 1 hasSky
+		ARG 2 shouldUnloadChunk
+	METHOD a makeData (Lnone/amz;ZZI)Lnone/gp$a;
+		ARG 0 chunk
+		ARG 1 shouldUnloadChunk
+		ARG 2 hasSky
+		ARG 3 sectionFlags
 	METHOD a read (Lnone/en;)V
+		ARG 0 buf
 	METHOD a handle (Lnone/eq;)V
+	METHOD a handle (Lnone/fk;)V
+		ARG 0 client
+	METHOD a copyData ([B[BI)I
+		ARG 0 in
+		ARG 1 out
+		ARG 2 outPos
+	METHOD b getX ()I
 	METHOD b write (Lnone/en;)V
+		ARG 0 buf
+	METHOD c getZ ()I
+	METHOD d getSectionFlags ()I
+	METHOD e getShouldUnloadChunk ()Z
 CLASS none/gq net/minecraft/network/play/packet/clientbound/PacketMapChunkBulk
+	FIELD a x [I
+	FIELD b y [I
+	FIELD c data [Lnone/gp$a;
+	FIELD d hasSky Z
+	METHOD <init> (Ljava/util/List;)V
+		ARG 0 chunks
 	METHOD a getChunkCount ()I
 	METHOD a getX (I)I
+		ARG 0 index
 	METHOD a read (Lnone/en;)V
+		ARG 0 buf
 	METHOD a handle (Lnone/eq;)V
+	METHOD a handle (Lnone/fk;)V
+		ARG 0 client
 	METHOD b getY (I)I
+		ARG 0 index
 	METHOD b write (Lnone/en;)V
+		ARG 0 buf
+	METHOD c getData (I)[B
+		ARG 0 index
+	METHOD d getDataSize (I)I
+		ARG 0 index
 CLASS none/gr net/minecraft/network/play/packet/clientbound/PacketEffect
 	METHOD a read (Lnone/en;)V
 	METHOD a handle (Lnone/eq;)V
@@ -3590,6 +3636,8 @@ CLASS none/lc net/minecraft/world/WorldManager
 	METHOD b onEntityRemoved (Lnone/pl;)V
 		ARG 0 entity
 CLASS none/ld net/minecraft/server/management/PlayerManager
+	CLASS none/ld$a
+		FIELD f sectionFlags I
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD b worldServer Lnone/lf;
 	FIELD c players Ljava/util/List;
