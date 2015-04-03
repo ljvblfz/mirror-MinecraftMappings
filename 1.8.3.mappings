@@ -2786,25 +2786,25 @@ CLASS none/go net/minecraft/network/play/packet/clientbound/PacketKeepAlive
 	METHOD a handle (Lnone/eq;)V
 	METHOD b write (Lnone/en;)V
 CLASS none/gp net/minecraft/network/play/packet/clientbound/PacketChunkData
-	CLASS none/gp$a Sections
+	CLASS none/gp$a EncodedChunk
 		FIELD a data [B
 		FIELD b sectionFlags I
 	FIELD a x I
 	FIELD b z I
-	FIELD c sections Lnone/gp$a;
-	FIELD d shouldUnloadChunk Z
+	FIELD c encodedChunk Lnone/gp$a;
+	FIELD d isFirstTime Z
 	METHOD <init> (Lnone/amz;ZI)V
 		ARG 0 chunk
-		ARG 1 shouldUnloadChunk
+		ARG 1 isFirstTime
 		ARG 2 sectionFlags
 	METHOD a getData ()[B
 	METHOD a calculateDataSize (IZZ)I
 		ARG 0 numSections
 		ARG 1 hasSky
-		ARG 2 shouldUnloadChunk
-	METHOD a makeData (Lnone/amz;ZZI)Lnone/gp$a;
+		ARG 2 isFirstTime
+	METHOD a encodeChunk (Lnone/amz;ZZI)Lnone/gp$a;
 		ARG 0 chunk
-		ARG 1 shouldUnloadChunk
+		ARG 1 isFirstTime
 		ARG 2 hasSky
 		ARG 3 sectionFlags
 	METHOD a read (Lnone/en;)V
@@ -2821,7 +2821,7 @@ CLASS none/gp net/minecraft/network/play/packet/clientbound/PacketChunkData
 		ARG 0 buf
 	METHOD c getZ ()I
 	METHOD d getSectionFlags ()I
-	METHOD e getShouldUnloadChunk ()Z
+	METHOD e isFirstTime ()Z
 CLASS none/gq net/minecraft/network/play/packet/clientbound/PacketMapChunkBulk
 	FIELD a x [I
 	FIELD b y [I
