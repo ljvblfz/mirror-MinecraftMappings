@@ -9100,7 +9100,7 @@ CLASS none/adn net/minecraft/world/World
 	METHOD U getHeight ()I
 	METHOD V getActualHeight ()I
 	METHOD W hasExtendedLevels ()Z
-	METHOD X getSeaLevel ()D
+	METHOD X getHorizonLevel ()D
 	METHOD Y getCurrentDate ()Ljava/util/Calendar;
 	METHOD Z getScoreboardManager ()Lnone/aup;
 	METHOD a getWatchersInRange (DDDD)Lnone/wo;
