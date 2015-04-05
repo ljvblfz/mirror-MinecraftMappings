@@ -8946,6 +8946,7 @@ CLASS none/adg net/minecraft/client/renderers/BlockLayer
 	FIELD c CUTOUT Lnone/adg;
 	FIELD d TRANSLUCENT Lnone/adg;
 	FIELD e name Ljava/lang/String;
+	METHOD values values ()[Lnone/adg;
 CLASS none/adh net/minecraft/world/ChunkCoordIntPair
 	FIELD a chunkX I
 	FIELD b chunkZ I
@@ -9728,8 +9729,8 @@ CLASS none/adw net/minecraft/world/ChunkCache
 	FIELD e world Lnone/adn;
 	METHOD <init> (Lnone/adn;Lnone/ck;Lnone/ck;I)V
 		ARG 0 world
-		ARG 1 pos1
-		ARG 2 pos2
+		ARG 1 minPos
+		ARG 2 maxPos
 		ARG 3 radius
 	METHOD G getDimensionType ()Lnone/ads;
 	METHOD W hasExtendedLevels ()Z
@@ -18485,6 +18486,11 @@ CLASS none/bfa
 	METHOD i getLock ()Lnone/oo;
 	METHOD r_ isLocked ()Z
 CLASS none/bfe net/minecraft/client/renderers/BufferBuilder
+	CLASS none/bfe$a VertexFormatWithInts
+		FIELD c vertexFormat Lnone/bmv;
+		METHOD <init> (Lnone/bfe;[ILnone/bmv;)V
+			ARG 2 vertexFormat
+		METHOD c getVertexFormat ()Lnone/bmv;
 	FIELD a byteBuffer Ljava/nio/ByteBuffer;
 	FIELD b rawIntBuffer Ljava/nio/IntBuffer;
 	FIELD d rawFloatBuffer Ljava/nio/FloatBuffer;
@@ -18551,11 +18557,33 @@ CLASS none/bfe net/minecraft/client/renderers/BufferBuilder
 CLASS none/bff net/minecraft/client/renderers/LevelVertexBufferUploader
 	CLASS none/bff$1
 		FIELD a VALUES [I
-CLASS none/bfg
-	FIELD f AIR Lnone/ama;
+CLASS none/bfg net/minecraft/world/OverriddenBlockStatesChunkCache
+	FIELD f DEFAULT_BLOCK_STATE Lnone/ama;
+	FIELD g pos Lnone/ck;
+	FIELD h combinedLight [I
+	FIELD i blockStates [Lnone/ama;
+	METHOD <init> (Lnone/adn;Lnone/ck;Lnone/ck;I)V
+		ARG 0 world
+		ARG 1 posMin
+		ARG 2 posMax
+		ARG 3 radius
 	METHOD b getCombinedLight (Lnone/ck;I)I
+		ARG 0 pos
+		ARG 1 defaultVal
+	METHOD c getOriginalBlockStateAt (Lnone/ck;)Lnone/ama;
+		ARG 0 pos
+	METHOD e getBlockStateIndex (Lnone/ck;)I
+		ARG 0 pos
 	METHOD p getBlockStateAt (Lnone/ck;)Lnone/ama;
+		ARG 0 pos
 	METHOD s getBlockEntityAt (Lnone/ck;)Lnone/akx;
+		ARG 0 pos
+CLASS none/bfh net/minecraft/client/renderers/BlockLayerBufferBuilders
+	FIELD a bufferBuilders [Lnone/bfe;
+	METHOD a getBufferBuilder (I)Lnone/bfe;
+		ARG 0 blockLayerId
+	METHOD a getBufferBuilder (Lnone/adg;)Lnone/bfe;
+		ARG 0 blockLayer
 CLASS none/bfk net/minecraft/client/renderers/EnumBlockVertices
 	CLASS none/bfk$a FacingId
 		FIELD a SOUTH I
@@ -18831,9 +18859,25 @@ CLASS none/bfo net/minecraft/client/renderers/PlayerRenderer
 	FIELD g entityRenderer Lnone/biv;
 	FIELD h itemRenderer Lnone/bji;
 CLASS none/bfs net/minecraft/client/renderers/WorldRenderer
+	CLASS none/bfs$a ChunkSectionRendererWithFacings
+		FIELD a chunkSectionRenderer Lnone/bhu;
+		FIELD b facing Lnone/cr;
+		FIELD c facings Ljava/util/Set;
+		METHOD <init> (Lnone/bfs;Lnone/bhu;Lnone/cr;I)V
+			ARG 1 chunkSectionRenderer
+			ARG 2 facing
+	FIELD A frameBuffer Lnone/bfx;
 	FIELD B entityOutlineShader Lnone/bls;
+	FIELD I xPos D
+	FIELD J yPos D
+	FIELD K zPos D
+	FIELD L pitch D
+	FIELD M yaw D
+	FIELD N chunkSectionRenderQueue Lnone/bhp;
 	FIELD P renderDistance I
 	FIELD Y useVBO Z
+	FIELD a chunkSectionRendererSource Lnone/bhv;
+	FIELD ac somethingChanged Z
 	FIELD b LOGGER Lorg/apache/logging/log4j/Logger;
 	FIELD c MOON_PHASES_PNG Lnone/jz;
 	FIELD d SUN_PNG Lnone/jz;
@@ -18844,23 +18888,50 @@ CLASS none/bfs net/minecraft/client/renderers/WorldRenderer
 	FIELD i textureManager Lnone/bmk;
 	FIELD j renderManager Lnone/biv;
 	FIELD k worldClient Lnone/bdc;
+	FIELD l chunkSectionRenderers Ljava/util/Set;
+	FIELD m chunkSectionRenderersWithFacings Ljava/util/List;
+	FIELD n blockEntities Ljava/util/Set;
+	FIELD o chunkSectionRenderers Lnone/bgb;
+	FIELD p callListId3 I
+	FIELD q callListId2 I
+	FIELD r callListId1 I
 	FIELD s vertexFormat Lnone/bmv;
+	FIELD t vbo3 Lnone/bmu;
+	FIELD u vbo2 Lnone/bmu;
+	FIELD v vbo1 Lnone/bmu;
 	FIELD z blockDestroyStageSprites [Lnone/bmj;
 	METHOD a reload ()V
 	METHOD a markBlockRangeForRenderUpdate (IIIIII)V
 	METHOD a broadcastSound (ILnone/ck;I)V
 	METHOD a addParticle (IZDDDDDD[I)V
+	METHOD a renderChunkSectionsUntil (J)V
+		ARG 0 stopTime
 	METHOD a playSound (Ljava/lang/String;DDDFF)V
 	METHOD a playRecord (Ljava/lang/String;Lnone/ck;)V
 	METHOD a renderBlockLayer (Lnone/adg;)V
+	METHOD a renderBlockLayer (Lnone/adg;DILnone/pl;)I
 	METHOD a onReload (Lnone/bnj;)V
 	METHOD a markBlockForUpdate (Lnone/ck;)V
+	METHOD a isChunkSectionCloseToBlock (Lnone/ck;Lnone/bhu;)Z
+		ARG 0 pos
+		ARG 1 chunkSectionRenderer
+	METHOD a getChunkSectionRendererNeighbor (Lnone/ck;Lnone/bhu;Lnone/cr;)Lnone/bhu;
+		ARG 0 pos
+		ARG 1 chunkSectionRenderer
+		ARG 2 facing
 	METHOD a onEntityAdded (Lnone/pl;)V
+	METHOD a renderWorld (Lnone/pl;DLnone/bib;IZ)V
+	METHOD a renderEntities (Lnone/pl;Lnone/bib;F)V
+		ARG 0 entity
 	METHOD a playLevelEvent (Lnone/wo;ILnone/ck;I)V
 	METHOD a playSoundToNearExcept (Lnone/wo;Ljava/lang/String;DDDFF)V
+	METHOD b loadEntityOutlineShader ()V
 	METHOD b setBlockDestruction (ILnone/ck;I)V
 	METHOD b sendBlockBreakProgress (Lnone/ck;)V
 	METHOD b onEntityRemoved (Lnone/pl;)V
+	METHOD c renderFrameBuffer ()V
+	METHOD d isGoodFrameBufferAndSpectator ()Z
+	METHOD e clearChunkSectionRenderers ()V
 	METHOD j tick ()V
 	METHOD n initBlockDestroyStageSprites ()V
 CLASS none/bfx net/minecraft/client/shader/FrameBuffer
@@ -18913,6 +18984,37 @@ CLASS none/bfy net/minecraft/client/renderers/Tessellator
 CLASS none/bfz
 	METHOD a loadBufferPointers ()V
 CLASS none/bga
+CLASS none/bgb net/minecraft/client/renderers/ChunkSectionRenderers
+	FIELD a worldRenderer Lnone/bfs;
+	FIELD b world Lnone/adn;
+	FIELD c numYBlockRenderers I
+	FIELD d numXBlockRenderers I
+	FIELD e numZBlockRenderers I
+	FIELD f blockRenderers [Lnone/bhu;
+	METHOD <init> (Lnone/adn;ILnone/bfs;Lnone/bhv;)V
+		ARG 0 world
+		ARG 1 viewDistance
+		ARG 2 worldRenderer
+		ARG 3 chunkSectionRendererSource
+	METHOD a cleanupRenderers ()V
+	METHOD a setRendererPositions (DD)V
+		ARG 0 x
+		ARG 1 z
+	METHOD a initRendererCounts (I)V
+		ARG 0 viewDistance
+	METHOD a getRendererBlockCoord (III)I
+		ARG 2 rendererIndex
+	METHOD a resetRenderers (IIIIII)V
+		ARG 0 minBlockX
+		ARG 1 minBlockY
+		ARG 2 minBlockZ
+		ARG 3 maxBlockX
+		ARG 4 maxBlockY
+		ARG 5 maxBlockZ
+	METHOD a setRenderers (Lnone/bhv;)V
+		ARG 0 chunkSectionRendererSource
+	METHOD a getRenderer (Lnone/ck;)Lnone/bhu;
+		ARG 0 pos
 CLASS none/bge
 	FIELD b gameSettings Lnone/avi;
 	METHOD a tryTesselateBlock (Lnone/ama;Lnone/ck;Lnone/adr;Lnone/bfe;)Z
@@ -19041,23 +19143,184 @@ CLASS none/bhm net/minecraft/client/renderers/blockentity/BlockEntityEndPortalRe
 	FIELD d END_SKY_PNG Lnone/jz;
 	FIELD e END_PORTAL_PNG Lnone/jz;
 	METHOD a render (Lnone/akx;DDDFI)V
-CLASS none/bht
+CLASS none/bho net/minecraft/client/renderers/ChunkSectionRunnablesManager
+	CLASS none/bho$a Enum2
+	CLASS none/bho$b Enum1
+	FIELD a chunkSectionRenderer Lnone/bhu;
+	FIELD b lock Ljava/util/concurrent/locks/ReentrantLock;
+	FIELD c runnables Ljava/util/List;
+	FIELD d enum1Val Lnone/bho$b;
+	FIELD e blockLayerBufferBuilders Lnone/bfh;
+	FIELD g enum2Val Lnone/bho$a;
+	FIELD h shouldRunImmediately Z
+	METHOD <init> (Lnone/bhu;Lnone/bho$b;)V
+		ARG 0 chunkSectionRenderer
+		ARG 1 enum1Val
+	METHOD a getEnum2Val ()Lnone/bho$a;
+	METHOD a addRunnable (Ljava/lang/Runnable;)V
+		ARG 0 val
+	METHOD a setBlockLayerBufferBuilders (Lnone/bfh;)V
+		ARG 0 val
+	METHOD a setEnum2Val (Lnone/bho$a;)V
+		ARG 0 val
+	METHOD b getChunkSectionRenderer ()Lnone/bhu;
+	METHOD d getBlockLayerBufferBuilders ()Lnone/bfh;
+	METHOD e runRunnables ()V
+	METHOD f getLock ()Ljava/util/concurrent/locks/ReentrantLock;
+	METHOD g getEnum1Val ()Lnone/bho$b;
+	METHOD h shouldRunImmediately ()Z
+CLASS none/bhp net/minecraft/client/renderers/ChunkSectionRenderQueue
+	FIELD a log Lorg/apache/logging/log4j/Logger;
+	FIELD b threadFactory Ljava/util/concurrent/ThreadFactory;
+	FIELD d chunkSectionRunnablesManagerQueue Ljava/util/concurrent/BlockingQueue;
+	FIELD f levelVertexBufferUploader Lnone/bff;
+	FIELD h tasks Ljava/util/Queue;
+	METHOD a getDebugString ()Ljava/lang/String;
+	METHOD a runTasksUntil (J)Z
+		ARG 0 stopTime
+	METHOD a moveChunkSectionToBackOfRenderingQueue (Lnone/bhu;)Z
+		ARG 0 chunkSectionRenderer
+	METHOD b ()V
+	METHOD c queueChunkSectionRender (Lnone/bhu;)Z
+		ARG 0 chunkSectionRenderer
+	METHOD e runUntilEmpty ()V
+CLASS none/bhr net/minecraft/client/renderers/BlockLayerFlagsAndBlockEntities
+	CLASS none/bhr$1
+		METHOD a setBlockLayerFlag1On (Lnone/adg;)V
+		METHOD a isFacingPairFlagOn (Lnone/cr;Lnone/cr;)Z
+		METHOD c setBlockLayerFlag2 (Lnone/adg;)V
+	FIELD a ALL_FACING_PAIR_FLAGS_OFF Lnone/bhr;
+	FIELD b blockLayerFlags1 [Z
+	FIELD c blockLayerFlags2 [Z
+	FIELD d allBlockLayerFlag1sOff Z
+	FIELD e blockEntities Ljava/util/List;
+	FIELD f facingPairFlags Lnone/bhy;
+	FIELD g vertexFormatWithInts Lnone/bfe$a;
+	METHOD a areAllBlockLayerFlag1sOff ()Z
+	METHOD a setBlockLayerFlag1On (Lnone/adg;)V
+		ARG 0 layer
+	METHOD a addBlockEntitiy (Lnone/akx;)V
+		ARG 0 blockEntity
+	METHOD a setVertexFormatWithInts (Lnone/bfe$a;)V
+		ARG 0 val
+	METHOD a setFacingPairFlags (Lnone/bhy;)V
+		ARG 0 val
+	METHOD a isFacingPairFlagOn (Lnone/cr;Lnone/cr;)Z
+		ARG 0 a
+		ARG 1 b
+	METHOD b getBlockEntities ()Ljava/util/List;
+	METHOD b isBlockLayerFlag1Off (Lnone/adg;)Z
+		ARG 0 layer
+	METHOD c getVertexFormatWithInts ()Lnone/bfe$a;
+	METHOD c setBlockLayerFlag2 (Lnone/adg;)V
+		ARG 0 layer
+	METHOD d isBlockLayerFlag2On (Lnone/adg;)Z
+		ARG 0 layer
+CLASS none/bhs net/minecraft/client/renderers/DisplayListChunkSectionRendererCreator
+	METHOD a getBlockRenderer (Lnone/adn;Lnone/bfs;Lnone/ck;I)Lnone/bhu;
+CLASS none/bht net/minecraft/client/renderers/DisplayListChunkSectionRenderer
 	FIELD d displayListID I
+	METHOD a cleanup ()V
 	METHOD a getDisplayListID (Lnone/adg;Lnone/bhr;)I
-CLASS none/bhu net/minecraft/client/renderers/BlockRenderer
+CLASS none/bhu net/minecraft/client/renderers/ChunkSectionRenderer
+	FIELD a numChunkUpdates I
+	FIELD b blockLayerFlagsAndBlockEntities Lnone/bhr;
 	FIELD c aabb Lnone/auh;
 	FIELD d world Lnone/adn;
 	FIELD e worldRenderer Lnone/bfs;
-	FIELD f blockPos Lnone/ck;
+	FIELD f minBlockPos Lnone/ck;
+	FIELD g lock1 Ljava/util/concurrent/locks/ReentrantLock;
+	FIELD h lock2 Ljava/util/concurrent/locks/ReentrantLock;
+	FIELD j blockEntities Ljava/util/Set;
+	FIELD k unusedInt I
 	FIELD l matrixBuffer Ljava/nio/FloatBuffer;
 	FIELD m vbos [Lnone/bmu;
+	FIELD n unusedInt2 I
+	FIELD o needsBuilding Z
+	FIELD p blockPosNeighbors Ljava/util/EnumMap;
 	METHOD <init> (Lnone/adn;Lnone/bfs;Lnone/ck;I)V
 		ARG 0 world
 		ARG 1 worldRenderer
 		ARG 2 blockPos
+		ARG 3 unusedInt
+	METHOD a cleanup ()V
+	METHOD a (FFFLnone/bho;)V
+		ARG 3 runnablesManager
+	METHOD a setUnusedInt2 (I)Z
+		ARG 0 val
+	METHOD a initBuilder (Lnone/bfe;Lnone/ck;)V
+		ARG 0 builder
+		ARG 1 pos
+	METHOD a setBlockLayerFlagsAndBlockEntities (Lnone/bhr;)V
+		ARG 0 val
 	METHOD a setBlockPos (Lnone/ck;)V
+		ARG 0 pos
+	METHOD a getBlockPosNeighbor (Lnone/cr;)Lnone/ck;
+		ARG 0 facing
+	METHOD a setNeedsBuilding (Z)V
+		ARG 0 val
+	METHOD b renderBlocks (FFFLnone/bho;)V
 	METHOD b getVBO (I)Lnone/bmu;
+		ARG 0 vboIndex
+	METHOD c getLock1 ()Ljava/util/concurrent/locks/ReentrantLock;
+	METHOD e createRunnablesManager ()Lnone/bho;
+	METHOD f multMatrixBuffer ()V
+	METHOD g getBlockLayerFlagsAndBlockEntities ()Lnone/bhr;
+	METHOD h turnOffFacingPairFlags ()V
 	METHOD j getBlockPos ()Lnone/ck;
+	METHOD l needsBuilding ()Z
+	METHOD m calculateMatrixBuffer ()V
+CLASS none/bhv net/minecraft/client/renderers/IChunkSectionRendererSource
+	METHOD a getBlockRenderer (Lnone/adn;Lnone/bfs;Lnone/ck;I)Lnone/bhu;
+		ARG 0 world
+		ARG 1 worldRenderer
+		ARG 2 pos
+CLASS none/bhw net/minecraft/client/renderers/ChunkSectionRendererCreator
+	METHOD a getBlockRenderer (Lnone/adn;Lnone/bfs;Lnone/ck;I)Lnone/bhu;
+		ARG 0 world
+		ARG 1 worldRenderer
+		ARG 2 pos
+		ARG 3 viewDistance
+CLASS none/bhx net/minecraft/client/renderers/ChunkSectionFacingCalculator
+	FIELD a one I
+	FIELD b sixteen I
+	FIELD c twofiftysix I
+	FIELD d bitSet Ljava/util/BitSet;
+	FIELD e indices [I
+	FIELD f numFlagsOff I
+	METHOD a getFacingPairFlags ()Lnone/bhy;
+	METHOD a getFacingsAt (I)Ljava/util/Set;
+		ARG 0 index
+	METHOD a getPosIndex (III)I
+		ARG 0 x
+		ARG 1 y
+		ARG 2 z
+	METHOD a getChunkEdgeFacings (ILjava/util/Set;)V
+		ARG 0 index
+		ARG 1 facings
+	METHOD a moveIndexInDirection (ILnone/cr;)I
+		ARG 0 index
+		ARG 1 facing
+	METHOD a setFlagOnAt (Lnone/ck;)V
+		ARG 0 pos
+	METHOD b getFacingsAt (Lnone/ck;)Ljava/util/Set;
+		ARG 0 pos
+	METHOD c getPosIndex (Lnone/ck;)I
+		ARG 0 val
+CLASS none/bhy net/minecraft/util/FacingPairFlags
+	FIELD a numValues I
+	FIELD b bitSet Ljava/util/BitSet;
+	METHOD a setFlagOnForAllPairs (Ljava/util/Set;)V
+		ARG 0 facings
+	METHOD a isFlagSet (Lnone/cr;Lnone/cr;)Z
+		ARG 0 a
+		ARG 1 b
+	METHOD a setFlag (Lnone/cr;Lnone/cr;Z)V
+		ARG 0 a
+		ARG 1 b
+		ARG 2 val
+	METHOD a setAllFlags (Z)V
+		ARG 0 val
 CLASS none/bih net/minecraft/client/renderers/entity/RenderArmorStand
 	FIELD a ARMOR_STAND_PNG Lnone/jz;
 	METHOD a getTextureLocation (Lnone/pl;)Lnone/jz;
@@ -19708,6 +19971,7 @@ CLASS none/bmm net/minecraft/client/texture/TextureUtil
 CLASS none/bmn net/minecraft/client/texture/ITickable
 	METHOD e tick ()V
 CLASS none/bmo net/minecraft/client/texture/ITickableTexture
+CLASS none/bmt net/minecraft/client/renderers/VertexFormats
 CLASS none/bmu net/minecraft/client/renderers/vertex/VBO
 	FIELD a bufferID I
 	FIELD b vertexFormat Lnone/bmv;
@@ -20218,6 +20482,7 @@ CLASS none/bqt net/minecraft/client/renderers/OpenGlHelper
 	FIELD K GL_OPERAND1_ALPHA I
 	FIELD L GL_OPERAND2_ALPHA I
 	FIELD N openGL21Capability Z
+	FIELD O hasFrameBuffersAndShaders Z
 	FIELD R GL_ARRAY_BUFFER I
 	FIELD S GL_STATIC_DRAW I
 	FIELD T framebufferSupportReason I
