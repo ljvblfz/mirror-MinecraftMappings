@@ -9273,6 +9273,7 @@ CLASS none/adn net/minecraft/world/World
 	METHOD a tryPlaceBlock (Lnone/ck;Lnone/ama;I)Z
 		ARG 0 blockPos
 		ARG 1 blockState
+		ARG 2 updateFlag
 	METHOD a checkBlockRangeIsInWorld (Lnone/ck;Lnone/ck;)Z
 		ARG 0 minBlockCoords
 		ARG 1 maxBlockCoords
@@ -11941,7 +11942,7 @@ CLASS none/aho net/minecraft/block/BlockHopper
 	METHOD l getComparatorInput (Lnone/adn;Lnone/ck;)I
 	METHOD m getBlockRenderMode ()Lnone/adg;
 CLASS none/ahp net/minecraft/block/BlockHugeMushroom
-	CLASS none/ahp$a EnumHugeMushroomVariant
+	CLASS none/ahp$a HugeMushroomVariant
 		FIELD a NORTH_WEST Lnone/ahp$a;
 		FIELD b NORTH Lnone/ahp$a;
 		FIELD c NORTH_EAST Lnone/ahp$a;
@@ -11955,6 +11956,7 @@ CLASS none/ahp net/minecraft/block/BlockHugeMushroom
 		FIELD k ALL_INSIDE Lnone/ahp$a;
 		FIELD l ALL_OUTSIDE Lnone/ahp$a;
 		FIELD m ALL_STEM Lnone/ahp$a;
+		METHOD a getVariant (I)Lnone/ahp$a;
 		METHOD l getName ()Ljava/lang/String;
 	FIELD a variant Lnone/amn;
 	METHOD a getBlockStateForMetadata (I)Lnone/ama;
@@ -14757,7 +14759,10 @@ CLASS none/aot net/minecraft/world/gen/feature/TallPlantGenerator
 		ARG 1 random
 		ARG 2 blockPos
 CLASS none/aou net/minecraft/world/gen/feature/FeatureGenerator
-	METHOD a (Lnone/adn;Lnone/ck;Lnone/ama;)V
+	FIELD a notifyNeighbors Z
+	METHOD <init> (Z)V
+		ARG 0 notifyNeighbors
+	METHOD a placeBlockAndNotify (Lnone/adn;Lnone/ck;Lnone/ama;)V
 		ARG 0 world
 		ARG 1 blockPos
 		ARG 2 blockState
@@ -14795,7 +14800,13 @@ CLASS none/aoz net/minecraft/world/gen/feature/NetherLavaGenerator
 		ARG 1 rand
 		ARG 2 blockPos
 CLASS none/apa net/minecraft/world/gen/feature/HugeMushroomGenerator
+	FIELD a mushroomBlock Lnone/afi;
+	METHOD <init> (Lnone/afi;)V
+		ARG 0 mushroomBlock
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
+		ARG 0 world
+		ARG 1 rand
+		ARG 2 pos
 CLASS none/apb net/minecraft/world/gen/feature/IcePathGenerator
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
 CLASS none/apc net/minecraft/world/gen/feature/IceSpikeGenerator
@@ -14839,8 +14850,8 @@ CLASS none/apn net/minecraft/world/gen/feature/ReedGenerator
 CLASS none/apo net/minecraft/world/gen/feature/TreeGeneratorDarkOak
 	METHOD b generate (Lnone/adn;Ljava/util/Random;Lnone/ck;)Z
 CLASS none/app net/minecraft/world/gen/feature/BeachGenerator
-	FIELD a topBlock Lnone/afi;
-	FIELD b topBlockDepth I
+	FIELD a beachBlock Lnone/afi;
+	FIELD b beachDepth I
 	METHOD <init> (Lnone/afi;I)V
 		ARG 0 beachBlock
 		ARG 1 beachDepth
