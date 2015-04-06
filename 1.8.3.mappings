@@ -18146,21 +18146,52 @@ CLASS none/bdb net/minecraft/client/multiplayer/PlayerControllerMP
 	METHOD a windowClick (IIIILnone/wo;)Lnone/zy;
 	METHOD a setGameType (Lnone/adq$a;)V
 CLASS none/bdc net/minecraft/world/WorldClient
+	FIELD I minecraft Lnone/avf;
+	FIELD J updatedChunks Ljava/util/Set;
+	FIELD a netHandler Lnone/bcz;
 	FIELD b clientChunkCache Lnone/bda;
+	FIELD c spawnedEntities Ljava/util/Set;
+	FIELD d entityQueue Ljava/util/Set;
 	METHOD <init> (Lnone/bcz;Lnone/adq;ILnone/ok;Lnone/nu;)V
+		ARG 0 netHandler
 		ARG 1 worldSettings
 		ARG 2 dimensionId
+		ARG 3 difficulty
+		ARG 4 profiler
 	METHOD H sendQuittingDisconnectingPacket ()V
+	METHOD a updateEntityLists ()V
 	METHOD a playSoundEffect (DDDLjava/lang/String;FFZ)V
 	METHOD a getEntity (I)Lnone/pl;
+		ARG 0 entityId
+	METHOD a apparentlyDoesNothing (IIIIII)V
+	METHOD a replaceEntity (ILnone/pl;)V
+		ARG 0 entityId
+		ARG 1 entity
+	METHOD a setScoreboardManager (Lnone/aup;)V
+		ARG 0 val
 	METHOD a addLevelInfoToCrashReport (Lnone/b;)Lnone/c;
 	METHOD a playSoundEffect (Lnone/ck;Ljava/lang/String;FFZ)V
 	METHOD a onEntityAdded (Lnone/pl;)V
+		ARG 0 entity
+	METHOD b doRandomBarrierEffects (III)V
+	METHOD b loadOrUnloadChunk (IIZ)V
+		ARG 0 chunkX
+		ARG 1 chunkZ
+		ARG 2 shouldLoad
 	METHOD b setDayTime (J)V
+		ARG 0 time
+	METHOD b tryPlaceBlock (Lnone/ck;Lnone/ama;)Z
+		ARG 0 pos
+		ARG 1 blockState
 	METHOD b onEntityRemoved (Lnone/pl;)V
+		ARG 0 entity
 	METHOD c tick ()V
 	METHOD d spawn (Lnone/pl;)Z
+		ARG 0 entity
+	METHOD e removeEntityById (I)Lnone/pl;
+		ARG 0 entityId
 	METHOD e removeEntity (Lnone/pl;)V
+		ARG 0 entity
 	METHOD h tickBlocks ()V
 	METHOD k createChunkCache ()Lnone/amw;
 	METHOD p updateWeather ()V
