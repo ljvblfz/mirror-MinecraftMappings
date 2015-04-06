@@ -3732,7 +3732,7 @@ CLASS none/le net/minecraft/world/gen/ServerChunkCache
 	METHOD c loadChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
-	METHOD d unloadQueuedChunks ()Z
+	METHOD d tick ()Z
 	METHOD d getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
@@ -13612,7 +13612,7 @@ CLASS none/amw net/minecraft/world/gen/IChunkGenerator
 		ARG 0 alwaysTrue
 		ARG 1 progressBar
 	METHOD c saveExtraData ()V
-	METHOD d unloadQueuedChunks ()Z
+	METHOD d tick ()Z
 	METHOD d getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
@@ -14425,7 +14425,7 @@ CLASS none/anv net/minecraft/world/gen/ChunkGeneratorDebug
 		ARG 0 levelX
 		ARG 1 levelZ
 	METHOD c saveExtraData ()V
-	METHOD d unloadQueuedChunks ()Z
+	METHOD d tick ()Z
 	METHOD d getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
@@ -14474,7 +14474,7 @@ CLASS none/anw net/minecraft/world/gen/ChunkGeneratorFlat
 	METHOD a saveAllChunks (ZLnone/nv;)Z
 		ARG 1 progressBar
 	METHOD c saveExtraData ()V
-	METHOD d unloadQueuedChunks ()Z
+	METHOD d tick ()Z
 	METHOD d getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
@@ -14549,7 +14549,7 @@ CLASS none/anx net/minecraft/world/gen/ChunkGeneratorNether
 		ARG 1 chunkZ
 		ARG 2 chunkPrimer
 	METHOD c saveExtraData ()V
-	METHOD d unloadQueuedChunks ()Z
+	METHOD d tick ()Z
 	METHOD d getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
@@ -14636,7 +14636,7 @@ CLASS none/aob net/minecraft/world/gen/ChunkGeneratorDefault
 	METHOD a saveAllChunks (ZLnone/nv;)Z
 		ARG 1 progressBar
 	METHOD c saveExtraData ()V
-	METHOD d unloadQueuedChunks ()Z
+	METHOD d tick ()Z
 	METHOD d getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
@@ -14702,7 +14702,7 @@ CLASS none/aoc net/minecraft/world/gen/ChunkGeneratorEnd
 		ARG 5 ySize
 		ARG 6 zSize
 	METHOD c saveExtraData ()V
-	METHOD d unloadQueuedChunks ()Z
+	METHOD d tick ()Z
 	METHOD d getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
@@ -18134,7 +18134,7 @@ CLASS none/bda net/minecraft/world/gen/ClientChunkCache
 	METHOD c loadChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
-	METHOD d unloadQueuedChunks ()Z
+	METHOD d tick ()Z
 	METHOD d getChunk (II)Lnone/amz;
 		ARG 0 chunkX
 		ARG 1 chunkZ
