@@ -19186,14 +19186,18 @@ CLASS none/bhm net/minecraft/client/renderers/blockentity/BlockEntityEndPortalRe
 	FIELD e END_PORTAL_PNG Lnone/jz;
 	METHOD a render (Lnone/akx;DDDFI)V
 CLASS none/bho net/minecraft/client/renderers/ChunkSectionRunnablesManager
-	CLASS none/bho$a Enum2
+	CLASS none/bho$a State
+		FIELD a PENDING Lnone/bho$a;
+		FIELD b COMPILING Lnone/bho$a;
+		FIELD c UPLOADING Lnone/bho$a;
+		FIELD d BUILT Lnone/bho$a;
 	CLASS none/bho$b Enum1
 	FIELD a chunkSectionRenderer Lnone/bhu;
 	FIELD b lock Ljava/util/concurrent/locks/ReentrantLock;
 	FIELD c runnables Ljava/util/List;
 	FIELD d enum1Val Lnone/bho$b;
 	FIELD e blockLayerBufferBuilders Lnone/bfh;
-	FIELD g enum2Val Lnone/bho$a;
+	FIELD g RendererState Lnone/bho$a;
 	FIELD h shouldRunImmediately Z
 	METHOD <init> (Lnone/bhu;Lnone/bho$b;)V
 		ARG 0 chunkSectionRenderer
@@ -19205,7 +19209,9 @@ CLASS none/bho net/minecraft/client/renderers/ChunkSectionRunnablesManager
 		ARG 0 val
 	METHOD a setEnum2Val (Lnone/bho$a;)V
 		ARG 0 val
+	METHOD a setBlockLayerFlagsAndBlockEntities (Lnone/bhr;)V
 	METHOD b getChunkSectionRenderer ()Lnone/bhu;
+	METHOD c getBlockLayerFlagsAndBlockEntities ()Lnone/bhr;
 	METHOD d getBlockLayerBufferBuilders ()Lnone/bfh;
 	METHOD e runRunnables ()V
 	METHOD f getLock ()Ljava/util/concurrent/locks/ReentrantLock;
