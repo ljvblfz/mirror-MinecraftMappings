@@ -1122,9 +1122,9 @@ CLASS none/ck net/minecraft/util/BlockPos
 		METHOD o getY ()I
 		METHOD p getZ ()I
 	FIELD a ZEROED Lnone/ck;
-	FIELD c BITS_Z I
-	FIELD d BITS_Y I
-	FIELD e BITS_X I
+	FIELD c BITS_X I
+	FIELD d BITS_Z I
+	FIELD e BITS_Y I
 	FIELD f BITSHIFT_Y I
 	FIELD g BITSHIFT_X I
 	FIELD h X_BITMASK J
