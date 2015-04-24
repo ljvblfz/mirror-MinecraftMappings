@@ -4607,13 +4607,13 @@ CLASS none/nu net/minecraft/profiler/Profiler
 	FIELD e currentSectionPath Ljava/lang/String;
 	FIELD f profileMap Ljava/util/Map;
 	METHOD a clearProfiling ()V
-	METHOD a addSection (Ljava/lang/String;)V
+	METHOD a startSection (Ljava/lang/String;)V
 		ARG 0 section
 	METHOD b endSection ()V
 	METHOD b getProfileData (Ljava/lang/String;)Ljava/util/List;
 		ARG 0 section
 	METHOD c getSectionName ()Ljava/lang/String;
-	METHOD c startSection (Ljava/lang/String;)V
+	METHOD c addSection (Ljava/lang/String;)V
 		ARG 0 section
 CLASS none/nv net/minecraft/util/IProgressBar
 	METHOD a setProgressBarPercentage (I)V
