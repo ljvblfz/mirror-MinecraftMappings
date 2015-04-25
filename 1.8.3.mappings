@@ -150,6 +150,11 @@ CLASS none/h net/minecraft/util/Util
 		FIELD d OSX Lnone/h$a;
 		FIELD e UNKNOWN Lnone/h$a;
 		FIELD f OSTypes [Lnone/h$a;
+	FIELD a processors Ljava/lang/String;
+	METHOD a getProcessors ()Ljava/lang/String;
+	METHOD a submitTask (Ljava/util/concurrent/FutureTask;Lorg/apache/logging/log4j/Logger;)Ljava/lang/Object;
+		ARG 0 task
+		ARG 1 logger
 	METHOD b getOSName ()Lnone/h$a;
 CLASS none/i net/minecraft/command/IOpMessageSender
 	METHOD a sendOpMessage (Lnone/n;Lnone/l;ILjava/lang/String;[Ljava/lang/Object;)V
