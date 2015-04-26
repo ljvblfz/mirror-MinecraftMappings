@@ -13928,15 +13928,15 @@ CLASS none/amz net/minecraft/world/chunk/Chunk
 	METHOD y setFullSkylightUpdate ()V
 CLASS none/ana net/minecraft/world/chunk/storage/ChunkSection
 	FIELD a yLocation I
-	FIELD b numBlocksInSection I
-	FIELD c numBlocksInChunk I
+	FIELD b blockCount I
+	FIELD c tickableBlockCount I
 	FIELD d blockDataArray [C
 	FIELD e blockLightArray Lnone/amx;
 	FIELD f skyLightArray Lnone/amx;
 	METHOD <init> (IZ)V
 		ARG 0 yLocation
 		ARG 1 hasSky
-	METHOD a isSectionEmpty ()Z
+	METHOD a isEmpty ()Z
 	METHOD a getBlockStateAt (III)Lnone/ama;
 		ARG 0 localX
 		ARG 1 localY
@@ -13955,7 +13955,7 @@ CLASS none/ana net/minecraft/world/chunk/storage/ChunkSection
 		ARG 0 nibbleArray
 	METHOD a setBlockDataArray ([C)V
 		ARG 0 newDataArray
-	METHOD b isNotEmpty ()Z
+	METHOD b hasTickableBlocks ()Z
 	METHOD b getBlockAt (III)Lnone/afi;
 		ARG 0 localX
 		ARG 1 localY
