@@ -16550,6 +16550,11 @@ CLASS none/avf net/minecraft/main/Minecraft
 		ARG 0 worldName
 	METHOD a displayGuiScreen (Lnone/axv;)V
 	METHOD a setCrashReporter (Lnone/b;)V
+	METHOD a setWorld (Lnone/bdc;)V
+		ARG 0 world
+	METHOD a setWorld (Lnone/bdc;Ljava/lang/String;)V
+		ARG 0 world
+		ARG 1 loadingMessage
 	METHOD a setServerData (Lnone/bdf;)V
 	METHOD a addServerStatsToSnooper (Lnone/os;)V
 	METHOD a setViewEntity (Lnone/pl;)V
