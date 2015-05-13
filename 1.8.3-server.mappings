@@ -4009,7 +4009,7 @@ CLASS none/mu net/minecraft/stats/tn
 	METHOD h register ()Lnone/mx;
 CLASS none/mv net/minecraft/stats/StatItem
 	FIELD a item Lnone/zx;
-CLASS none/mw
+CLASS none/mw net/minecraft/stats/ServerStatManager
 	FIELD b LOGGER Lorg/apache/logging/log4j/Logger;
 CLASS none/mx net/minecraft/stats/Stat
 	CLASS none/mx$1 StatNumberFormatter
@@ -4040,6 +4040,8 @@ CLASS none/mx net/minecraft/stats/Stat
 	METHOD k getCriteria ()Lnone/auv;
 	METHOD toString ()Ljava/lang/String;
 CLASS none/my net/minecraft/stats/StatFormatter
+CLASS none/mz net/minecraft/stats/StatWrapper
+CLASS none/na net/minecraft/stat/JsonSerializableStatistic
 CLASS none/nb net/minecraft/stats/Stats
 	FIELD A animalsBred Lnone/mx;
 	FIELD B playerKills Lnone/mx;
@@ -4087,7 +4089,8 @@ CLASS none/nb net/minecraft/stats/Stats
 	METHOD c initMineBlockStats ()V
 	METHOD d initUseItemStats ()V
 	METHOD e initBreakItemStats ()V
-CLASS none/nd
+CLASS none/nc net/minecraft/stats/StatManager
+CLASS none/nd net/minecraft/stats/AcheivementSet
 	METHOD delegate ()Ljava/util/Set;
 CLASS none/nf net/minecraft/entity/EntitySet
 	CLASS none/nf$1
@@ -4116,7 +4119,7 @@ CLASS none/nf net/minecraft/entity/EntitySet
 	METHOD remove remove (Ljava/lang/Object;)Z
 		ARG 0 entity
 	METHOD size size ()I
-CLASS none/nh
+CLASS none/nh net/minecraft/network/Encryption
 	FIELD a LOGGER Lorg/apache/logging/log4j/Logger;
 CLASS none/nj net/minecraft/util/JsonUtils
 	METHOD a elemToString (Lcom/google/gson/JsonElement;Ljava/lang/String;)Ljava/lang/String;
@@ -4166,7 +4169,8 @@ CLASS none/nj net/minecraft/util/JsonUtils
 	METHOD t getArrayByKey (Lcom/google/gson/JsonObject;Ljava/lang/String;)Lcom/google/gson/JsonArray;
 		ARG 0 obj
 		ARG 1 key
-CLASS none/nk
+CLASS none/nk net/minecraft/util/HTTPUtils
+	FIELD a executor Lcom/google/common/util/concurrent/ListeningExecutorService;
 	FIELD c LOGGER Lorg/apache/logging/log4j/Logger;
 CLASS none/nl net/minecraft/util/CaseInsensitiveHashMap
 	FIELD a wrapped Ljava/util/Map;
@@ -4189,6 +4193,11 @@ CLASS none/nl net/minecraft/util/CaseInsensitiveHashMap
 		ARG 0 key
 	METHOD size ()I
 	METHOD values ()Ljava/util/Collection;
+CLASS none/nn net/minecraft/util/IntToObjectMap
+	CLASS none/nn$a Entry
+		FIELD a key I
+		FIELD b value Ljava/lang/Object;
+		FIELD c next Lnone/nn$a;
 CLASS none/np net/minecraft/network/EventLoopFactory
 	FIELD a eventLoop Ljava/lang/Object;
 	FIELD b isCreated Z
@@ -4240,6 +4249,8 @@ CLASS none/nr net/minecraft/util/LongHashMap
 		ARG 0 key
 	METHOD f hashKey (J)I
 		ARG 0 key
+CLASS none/ns net/minecraft/json/ChatTypeAdapterFactory
+	METHOD create create (Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;
 CLASS none/nt net/minecraft/util/MathHelper
 	FIELD a SQRT_TWO F
 	FIELD b SIN_LOOKUP [F
@@ -14597,6 +14608,7 @@ CLASS none/ass net/minecraft/world/gen/layer/GenLayerZoom
 		ARG 1 source
 		ARG 2 zoomLevel
 CLASS none/asv net/minecraft/entity/ai/pathing/Path
+	FIELD a points [Lnone/asw;
 CLASS none/asw net/minecraft/entity/ai/pathing/PathPoint
 	FIELD a x I
 	FIELD b y I
@@ -15394,6 +15406,16 @@ CLASS none/auw net/minecraft/scoreboard/criteria/StatCriteria
 	FIELD j stat Lnone/mx;
 	METHOD <init> (Lnone/mx;)V
 		ARG 0 stat
+CLASS com/google/gson/JsonElement com/google/gson/JsonElement
+CLASS com/google/gson/TypeAdapter com/google/gson/TypeAdapter
+CLASS com/google/gson/TreeTypeAdapter
+	CLASS com/google/gson/TreeTypeAdapter$SingleTypeFactory
+		METHOD create create (Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;
+CLASS org/apache/logging/log4j/Logger org/apache/logging/log4j/Logger
+CLASS com/google/gson/internal/Excluder
+	METHOD create create (Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;
+CLASS com/google/gson/TypeAdapterFactory
+	METHOD create create (Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;
 CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	FIELD A canSpawnAnimals Z
 	FIELD B canSpawnNPCs Z
@@ -15546,3 +15568,41 @@ CLASS net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 	METHOD x getDataDirectory ()Ljava/io/File;
 	METHOD y systemExitNow ()V
 	METHOD z onTick ()V
+CLASS com/google/common/collect/ForwardingSet com/google/common/collect/ForwardingSet
+CLASS com/google/gson/internal/bind/TypeAdapters
+	CLASS com/google/gson/internal/bind/TypeAdapters$22
+		METHOD create create (Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;
+	CLASS com/google/gson/internal/bind/TypeAdapters$26
+		METHOD create create (Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;
+	CLASS com/google/gson/internal/bind/TypeAdapters$27
+		METHOD create create (Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;
+	CLASS com/google/gson/internal/bind/TypeAdapters$28
+		METHOD create create (Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;
+	CLASS com/google/gson/internal/bind/TypeAdapters$29
+		METHOD create create (Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;
+	CLASS com/google/gson/internal/bind/TypeAdapters$30
+		METHOD create create (Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;
+	CLASS com/google/gson/internal/bind/TypeAdapters$31
+		METHOD create create (Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;
+CLASS com/google/gson/internal/bind/DateTypeAdapter
+	CLASS com/google/gson/internal/bind/DateTypeAdapter$1
+		METHOD create create (Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;
+CLASS com/google/gson/internal/bind/TimeTypeAdapter
+	CLASS com/google/gson/internal/bind/TimeTypeAdapter$1
+		METHOD create create (Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;
+CLASS com/google/gson/internal/bind/ArrayTypeAdapter
+	CLASS com/google/gson/internal/bind/ArrayTypeAdapter$1
+		METHOD create create (Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;
+CLASS com/google/gson/internal/bind/ObjectTypeAdapter
+	CLASS com/google/gson/internal/bind/ObjectTypeAdapter$1
+		METHOD create create (Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;
+CLASS com/google/gson/internal/bind/SqlDateTypeAdapter
+	CLASS com/google/gson/internal/bind/SqlDateTypeAdapter$1
+		METHOD create create (Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;
+CLASS com/google/gson/internal/bind/MapTypeAdapterFactory
+	METHOD create create (Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;
+CLASS com/google/common/util/concurrent/ListeningExecutorService com/google/common/util/concurrent/ListeningExecutorService
+CLASS com/google/gson/internal/bind/CollectionTypeAdapterFactory
+	METHOD create create (Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;
+CLASS com/google/gson/internal/bind/ReflectiveTypeAdapterFactory
+	METHOD create create (Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;
