@@ -165,7 +165,7 @@ none/bjv:none/bmm
 none/bfl$l:none/bho$l
 none/cm$b:none/cm$b
 none/akg:none/alr
-none/aci:none/adj
+none/aci:none/adn
 none/dx:none/dx
 none/lv:none/lx
 none/bcl:none/bel
@@ -2531,6 +2531,7 @@ none/bqj$a:
 :none/bro$a
 :none/bjd$a
 :none/arj$a
+:none/adj
 :none/ana$a
 :none/beo
 :none/arz$4
@@ -2558,7 +2559,6 @@ none/bqj$a:
 :none/biy$a
 :none/apa
 :none/alm
-:none/adn
 :none/ary
 :none/asw
 :none/bmo$a
