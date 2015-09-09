@@ -3397,6 +3397,7 @@ CLASS none/kl net/minecraft/scoreboard/ServerScoreboardManager
 		ARG 0 objective
 CLASS none/kn net/minecraft/server/gui/IUpdatePlayerListBox
 	METHOD c update ()V
+CLASS none/kp net/minecraft/server/DedicatedMinecraftServer
 CLASS none/ky net/minecraft/world/WorldServerDemo
 CLASS none/kz net/minecraft/demo/GameSessionDemo
 	METHOD <init> (Lnone/adn;)V
